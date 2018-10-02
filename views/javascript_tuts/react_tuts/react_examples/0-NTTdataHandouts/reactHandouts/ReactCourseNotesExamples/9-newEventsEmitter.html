@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic component example for React.js and JSX</title>
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  </head>
+  <body>
+	<div id='content'></div>
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script type="text/babel">
+    /* Seen something similar with the parent callback example shown earlier */
+	class App extends React.Component{
+	  constructor() {
+	    super();
+	    this.state = {
+	      exam: {
+	        title: "Pro. Scrum Master (PSM)",
+	        provider: "scrum.org",
+	        passmark: 85
+	      }
+	    }
+	  }
+	  
+	  render() {
+	    return React.createElement('div', null, [
+	      React.createElement('h1', null, "CPD exams"),
+		      React.createElement(CPD, {
+		        exam: this.state.exam,
+		        dumbdownexam: () => {
+		          let exam = this.state.exam;
+		          this.setState({exam:{...exam, passmark: exam.passmark-1 }})
+		        }
+		      })
+	    ]);
+	  }
+	};
+	 
+	const CPD = (props) => 
+	  React.createElement('div', null, [
+	    React.createElement('button', {
+	      onClick: () => props.dumbdownexam(props.exam)
+	    }, "Dumb down: " + props.exam.title)
+	  ]);
+
+	ReactDOM.render(React.createElement(App),
+	  document.getElementById('content')
+	)
+	</script>	
+  </body>
+</html>

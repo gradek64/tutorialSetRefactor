@@ -1,0 +1,16 @@
+
+		1) run npm install 
+		2) open a new xml and start making template by commands:
+
+			xml:tab === starts new xml file
+			chapter:tab === srats new chapter loop
+			inner:tab === starts new sectino inner loop;
+
+		3) run gulp to render your page;
+
+		Important: to make xml command working as custom snippet you need to disable emmet restriction by:
+
+		preffrences->package-settings->Emmet->settings user
+
+
+				"disabled_single_snippet_for_scopes": "text.xml" 

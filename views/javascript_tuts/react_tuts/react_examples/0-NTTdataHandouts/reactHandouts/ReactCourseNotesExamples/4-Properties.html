@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic component example for React.js and JSX</title>
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  </head>
+  <body>
+	<div id='content'></div>
+    <script src="build/react.development.js"></script>
+    <script src="build/react-dom.development.js"></script>
+    <script src="build/babel.min.js"></script>
+    <script type="text/babel">
+		class Greet extends React.Component{
+			render(){
+					return <div><h2>hello {this.props.firstName} {this.props.lastName}</h2></div>;
+					}
+			};
+			
+		Greet.defaultProps = {
+					firstName:'Jill',
+					lastName:'Clarke',
+					initials: {one:'x', 
+							   two:'y'}
+						  };
+						  
+		ReactDOM.render(<Greet firstName='Edgar' initials={{two:'g'}} />,document.getElementById('content'));
+
+	</script>	
+  </body>
+</html>

@@ -1,0 +1,39 @@
+	
+	 	
+		1) install SublimeLinter3 via package control (skip to 2 if install - check CMD+SHIFT+p -> list packages)
+		1a) install Sublime eslint SublimeLinter-eslint (https://github.com/roadhump/SublimeLinter-eslint#plugin-installation)
+			by installing node package first globally:
+
+				npm install -g jshint
+		2) install Sublime-contrib-eslint in package control
+		
+			INSTALL BABEL 
+
+		1) Ensure that you have substituted the correct version lock for eslint and babel-eslint into this command 
+				(those have to be setup in your root project so INSTALLED LOCALLY)
+
+			npm install eslint@3.x babel-eslint@7 --save-dev
+		
+		2) create .eslintrc file for configuration
+
+				{
+  					"extends": "google",
+  					"parser": "babel-eslint",	
+  					"rules": {
+    						// Additional, per-project rules.	..
+  					  "require-jsdoc": 0
+  				} 
+		3) go to Sublime -> Preferences -> Package Settings -> SublimeLinter -> Settings and make sure you have this:
+	
+			"syntax_map": {
+ 				 "JavaScript (Babel)": "javascript",
+			}	
+		
+		4) install Babel through Package Control
+		4) you need to setup all .js files set up to (babel) javascript by :
+					
+				Syntax -> apply to all - javascript (babel);
+		5) set up linting for Sublime-contrib-eslint plugin settings as background (it seems to only work on background setting not onSAVE)
+			
+
+			

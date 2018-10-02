@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React Redux wrapper</title>
+    <!--
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/5.0.5/react-redux.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.6.0/redux.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+// The Provider component will be our root component
+// It connects our app to the store
+const {Provider} = ReactRedux;
+
+// The App component is the root of our app itself.
+var App = (props) => 
+  <div>
+    <h1>Tomb of the Ancients</h1>
+    <HeroContainer></HeroContainer>
+  </div>
+
+// Hero is a presentational (dumb) component 
+// that recieves a hero as a prop and renders it
+var Hero = (props) => 
+  <div className="hero">
+    <h2>{props.hero.name}</h2>
+    <pre>
+      {JSON.stringify(props, null, 2)}
+    </pre>
+    <button onClick={
+      () => store.dispatch({
+        type:"DAMAGE_HERO", 
+        value: 1
+      })
+    }>
+      Damage
+    </button>
+    <button onClick={
+      () => store.dispatch({
+        type:"HEAL_HERO", 
+        value: 10
+      })
+    }>
+      Heal
+    </button>
+  </div>
+
+// A container (smart) component, that gets heros 
+// from the store, and passes them as props to the 
+// Heros component
+var HeroContainer = ReactRedux.connect(
+  (state) => ({hero: state.hero})
+)(Hero);
+
+// The initial state for the app
+const initialState = {
+  hero: {
+    name: "Haldane Goodguy", 
+    type: "Swordsman", 
+    maxHp: 36, 
+    hp: 36, 
+    armour: 33, 
+    attack:12
+  },
+  monster: {
+    name: "Vlad the Bad", 
+    type: "Necromancer", 
+    maxHp: 300, 
+    hp: 300, 
+    armour: 28, 
+    attack:2
+  }
+}
+
+// The reducer that handles state changes 
+const reducer = (state=initialState, action) => {
+  switch (action.type) {
+    case "DAMAGE_HERO":
+      return { ...state, hero: {...state.hero, hp:(state.hero.hp - action.value)} }
+    case "HEAL_HERO": {
+      let hero = {...state.hero, hp: state.hero.hp + action.value }
+      if (hero.hp > hero.maxHp) { hero.hp = hero.maxHp }
+      return { ...state, hero: hero }
+    }
+      
+    default:
+      return state    
+  }
+}
+
+const store = Redux.createStore(reducer);
+
+store.subscribe(() =>
+  console.log(store.getState())
+)
+
+ReactDOM.render(<Provider store={store}><App></App> </Provider>, document.getElementById('app'));
+
+// function Greet1(props) {
+//     return <div><h2>hello {props.data} it is {props.moredata}</h2></div>;
+// }
+      
+// ReactDOM.render(<Greet1 data='jill' moredata={Date()}/>,document.getElementById('app'));
+    </script>
+
+  </body>
+</html>

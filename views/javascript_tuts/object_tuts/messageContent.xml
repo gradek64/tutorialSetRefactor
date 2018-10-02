@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <chapters>
+ 	<chapter>
+ 	   <subject>Object in general</subject>
+ 	    <content>
+ 	        <paragraph>
+ 	            <info>Object in general</info>
+ 	            <example>
+-------------- Object ES5 -------------
+
+const jane = {
+   name: 'Jane',
+   likes: 'ice-cream',
+
+   describe: function () {
+       return 'Person named '+this.name;
+   }
+};
+
+-------------- Object ES6 -------------
+const name =  'Jane';
+const likes = 'ice-cream';
+const jane = {
+   name,
+   likes,
+
+   describe () {
+       return 'Person named '+this.name;
+   }
+};
+-------------- Object.keys(jane); --------
+
+ //return array of keys
+
+--------------objName.hasOwnProperty(prop)-----------
+
+//exclude any inherited (prototypal) method only own properties
+
+objName.hasOwnProperty(prop); //true or false;
+
+-------------- converting object to String -------------
+
+
+  var bjj = {gaga:"gaga",gag:2}
+
+  JSON.sringify(bjj)      //return "{"gaga:":"gaga","gag":2}"
+
+
+
+-------------- converting String to Object -------------
+
+  str= "{"gaga:":"gaga","gag":2}""
+
+  JSON.parse(str);      
+
+  //return {gaga:"gaga",gag:2};
+---------------------------
+
+               </example>
+ 	        </paragraph>
+ 	    </content>
+ 	</chapter>
+ 	<chapter>
+ 	    <subject>looping through Object</subject>
+ 	    <content>
+ 	        <subtitle>Object.keys.forEach(callback)</subtitle>
+ 	        <paragraph>
+ 	            <info>Object.keys.forEach(callback)</info>
+ 	            <example>
+
+------------- Object.keys(objName)----------------
+ returns array of keys;
+
+------------- Object.keys(objName).forEach(value,key,index){}----------------
+  
+const jane = {
+   name: 'Jane',
+   likes: 'ice-cream',
+
+   describe: function () {
+       return 'Person named '+this.name;
+   }
+};
+
+changeValues = ['Greg','indian food'];
+
+------------- loop and change values ----------------
+
+  Object.keys(jane).forEach((e,i)=>{
+      if(changeValues[i]){
+        jane[e] = changeValues[i];
+      }
+  });
+  console.log(jane);
+
+----------------------------------------------------
+ 	            </example>
+ 	        </paragraph>
+ 	        <subtitle>for (var key in Object) loop</subtitle>
+ 	        <paragraph>
+ 	            <info>
+for (var key in Object):
+				//this method requires checking for Object.hasOwnProperty(key) cause it will loop through prototype properties and methods as well;	
+ 	            </info>
+ 	            <example>
+
+-------object ---------------
+const jane = {
+   name: 'Jane',
+   likes: 'ice-cream',
+
+   describe: function () {
+       return 'Person named '+this.name;
+   }
+};
+------------- for (var key in jane) -------------
+//this method requires checking for Object.hasOwnProperty(key) cause it will loop through prototype properties and methods;
+
+
+for (var key in jane) {
+    if( jane.hasOwnProperty(key) ){
+        console.log(key);
+    }
+} 
+----------------------------------------------------
+ 	            </example>
+ 	        </paragraph>
+ 	    </content>
+ 	</chapter>
+	<chapter>
+	    <subject>Ways to copy Object</subject>
+	    <content>
+	        <subtitle>by looping throuh and assing properties and methods</subtitle>
+	        <paragraph>
+	            <info>by looping throuh and assing properties and methods: 
+	            	old-school way of copying object;
+
+                /*
+                    Important:
+
+                    using  for (key in originalObj) {} loop or Object.assign({},orinalObject) wont make nested object {a:{b:'nested to a'}}
+                    independend so making changes to original nested object it will affect orinal object and vice-versa; 
+
+                */
+	            </info>
+	            <example>
+------------- object -------------
+
+let objCopy = {};
+let originalObj = {prop1:3,prop2:'Greg',method(){ return this.prop1},}
+
+------------- for (key in originalObj) ----------------
+
+for (key in originalObj) {
+   if( originalObj.hasOwnProperty(key) ){
+      objCopy[key] = originalObj[key]; // copies each property to the objCopy object except prototype;
+   }
+}
+-----------------------------
+	            </example>
+	        </paragraph>
+	        <subtitle>Object.assign({}, orginalObj)</subtitle>
+	        <paragraph>
+	            <info>Object.assign({}, orginalObj):
+				this will make 'shalow copy' so if there is a nested object it wont be exclude from original object
+				only top level structure will be independent.
+	            </info>
+	            <example>
+--------------------Object ---------------- 
+
+const jane = {
+   name: 'Jane',
+   likes: 'ice-cream',
+      jobs: {
+          job1:'Plumber',
+          job2:'part-time teacher',
+      }
+   
+};
+
+--------------------Object.assign({}, jane)----------------
+
+const objectAssignCopy = Object.assign({}, jane);
+
+-------------------- prove that changes to nested object will affect both objects----------------
+//change to copy;
+objectAssignCopy.jobs.job1 = 'Front-end Developer';
+
+console.log(objectAssignCopy.jobs.job1) //'Front-end Developer';
+console.log(jane.jobs.job1) //'Front-end Developer';
+-----------------------------
+	            </example>
+	        </paragraph>
+	        <subtitle>Object.assign() join objects</subtitle>
+	        <paragraph>
+	            <info>Object.assign(obj, {prop:newProperty}) joins object</info>
+	            <example>
+--------------------Object ---------------- 
+
+const jane = {
+   name: 'Jane',
+   likes: 'ice-cream',
+      jobs: {
+          job1:'Plumber',
+          job2:'part-time teacher',
+      }
+   
+};
+
+--------------------Object.assign(obj, {prop:newProperty})----------------
+
+const joinObj = Object.assign(jane, {newProperty:'I am a new Property'});	
+console.log(joinObj);
+
+------------------------------------
+	            </example>
+	        </paragraph>
+	        <subtitle>ES6 spread operator</subtitle>
+	        <paragraph>
+	            <info>ES6 spread operator (still shallow copy)</info>
+	            <example>
+-----------------------clonedObj = { ...obj1 } ------------------------
+
+var obj1 = { foo: 'baz', y: 13 , c:{ y:45 }, };
+var obj2 = { set: 'set', x: 17 };
+
+-----------------------clonedObj = { ...obj1 } ------------------------
+
+var clonedObj = { ...obj1 };
+
+-----------------------mergedObjObj = { ...obj1 } ------------------------
+
+var mergedObj = { ...obj1, ...obj2 };
+
+-------------------------check if nested object are affected when changes are made in copied instances------------;
+
+obj1.c.y = 66;
+console.log(obj1.c.y); //66
+console.log(clonedObj.c.y); //66
+
+----------- so the problem preveils even in ES6 copying method , nested object are not related to copies but to original object.------
+
+	            </example>
+	        </paragraph>
+	    </content>
+	</chapter>
+	<chapter>
+       <subject>Destrurcture assigment in Object</subject>
+       <content>
+           <subtitle>Destrurcture assigment in Object</subtitle>
+           <paragraph>
+               <info>
+                //left side is assigned to the right side 
+
+                let {name,surname}={name:'Greg',surname:'Gil'}
+                let {name,surname}={}
+      
+               </info>
+               <example>
+--------------------left side is assigned to the right side----------
+
+let {first,last} = { first: 'Jane', last: 'Doe' };
+
+--------------------Now U have access to individual var first and last ----------
+
+console.log(first);
+console.log(last);
+
+--------------------what if you dont have values assign;--------------------
+
+let {first1,last2} = {};
+console.log(first1); //undefined
+console.log(last2);  //undefined
+
+-------------------- assign default values as below --------------------
+
+let {first3='Greg',last4='Gil'} = {};
+console.log(first3); //Greg
+console.log(last4);  //Gil
+
+-------------------- override you default with the first example---------------
+
+let {first3='Greg',last4='Gil', job = 'Developer'} = { first3: 'Jane', last4: 'Doe' };
+console.log(first3); //Jane
+console.log(last4);  //Doe
+console.log(job);  //Developer (which is default value);
+
+--------------------but you could skip defaults as well--------------------
+
+let {first,last} = { first: 'Jane', last: 'Doe' };
+let obj = {first,last}
+console.log(first);
+console.log(last);
+console.log(obj);
+--------------------------------------------------------------------------------
+</example>
+           </paragraph>
+           <subtitle>Object assigment with complex data</subtitle>
+           <paragraph>
+               <info>Object assigment with complex data</info>
+               <example>
+----------------  combination of data that are represented in variables as default values;----------------
+
+let {set3='set3',set4 = {setter:'setter',order:4}, set5=[5,5,5,5] , set6 = false  } = {};
+
+console.log(set3);
+console.log(set4);
+console.log(set5);
+console.log(set6);
+
+---------------- you can easily combine them together by (merge objects) ----------------
+
+const allSets = {set3,set4,set5,set6}
+console.log(allSets);
+
+---------------- ---------------- update set5 with new values ---------------- ----------------
+
+const newWinningNumbers = [57,64,646,464];
+let {set3='set3',set4 = {setter:'setter',order:4}, set5=[5,5,5,5] , set6 = false  } = {set5:[...newWinningNumbers]};
+console.log(set5);
+
+---------------- ----------------nested structure ---------------- ----------------
+
+let data = {data:'initialData'};
+let {datas=data} = {}; //assign default
+console.log(datas); //{data:'initialData'};
+//rewrite data object 
+data.data = 'see';
+console.log(data); //{data:'see'};
+
+---------------- -------------------------------- -------------------------------- ----------------
+
+
+               </example>
+           </paragraph>
+           <subtitle>ES6 object function declaration shorthand</subtitle>
+           <paragraph>
+               <info>ES6 object function declaration:
+                ES6 comes with new function declaration which is the same as ES6 classes function declarion but on Object not Class yet.</info>
+               <example>
+ ---------------- -------------------------------- ES5---------------- --------------------------------
+ var myObj = {
+      method:function(){
+          console.log("'this' belongs to:"+ this);
+
+          ['greg','Libby'].forEach(function(){
+          //this keyword loosing its refference to Object, lexical scope is gone and becomes Window
+              console.log("'callback this' belongs to:"+ this); 
+          });
+      }
+ };
+
+ ---------------- -------------------------------- ES6 ---------------- ---------
+
+ const outsideArray = [1,2,3,4];
+ const outsidefunction = () => 'I am outside return arrow function';
+
+ const myObjectCom = {
+        method:outsidefunction,
+        arraySetterNormal:outsideArray,
+        arraySetterSpread:[...outsideArray],
+        insidefunction () {
+            console.log(`this tell me who U are : ${this}`);
+        },
+        insidefunction2 () {
+
+            ['greg','Libby'].forEach(()=>{
+            //with arrow function this keyword is not loosing its refference to Object, lexical scope is preserved and it is object
+              console.log("'callback this' belongs to:"+ this);
+          });
+        },
+
+ }
+
+---------------- --------------- assign function name as dynamic feature; ---------------- ---------------
+
+function dynamicFunctionName () {
+    return 'dynamic_name';
+}
+
+const myObj = {
+  // Set property name equal to return value of dynamicFunctionName function
+    [dynamicFunctionName ()] () {
+      return 'set';
+    },
+    ['stringFunctionName'] () {
+      return 'stringFunctionName';
+    }
+};
+
+---------------- ------------------------------------------------
+
+
+               </example>
+           </paragraph>
+       </content>
+   </chapter>
+	<chapter>
+	    <subject>Obeject get and set function</subject>
+	    <content>
+	       <subtitle>Object set value()</subtitle>
+	       <paragraph>
+	           <info>simply sets value() . Notice even it is a method U dont use parenthesis for setting the value 
+              obj.setValue = value; </info>
+	           <example>
+---------------object-----------------
+
+const language = {
+  set current(name) {
+    this.log.push(name);
+  },
+  log: []
+}              
+---------------set value (notice even it is method dont use parenthesis)-----------------
+
+language.current = 'EN';
+console.log(language.log); // ['EN']
+
+---------------set value (notice even it is method dont use parenthesis)-----------------
+
+language.current = 'FA';
+console.log(language.log); // ['EN', 'FA'];
+--------------------------------
+
+	           </example>
+	       </paragraph>
+         <subtitle>Object.defineProperty(originalObj, 'setProperty', { set: function(x) { this.originalProperty = x / 2; } });</subtitle>
+         <paragraph>
+             <info>allows you to difine property (as set type) in a function that could do some logic beofore returning a value of set</info>
+             <example>
+---------------object-----------------
+
+var originalObj = {originalProperty: 0};
+
+---------------Object.defineProperty---------------
+
+Object.defineProperty(originalObj, 'setProperty', { set: function(x) { this.originalProperty = x / 2; } });
+
+--------------- Runs the setter, which assigns 10 / 2 (5) to the 'originalProperty' ---------------
+
+originalObj.setProperty = 10; 
+console.log(originalObj.originalProperty) // 5
+
+------------------------------------------------------------
+             </example>
+         </paragraph>
+         <subtitle>use variable to set setter()  set [expr](v)</subtitle>
+         <paragraph>
+             <info> set [expr](v) where expr = 'value' </info>
+             <example>
+---------------object-----------------
+
+var expr = 'foo';
+
+var obj = {
+  baz: 'bar',
+  set [expr](v) { this.baz = v; }
+};
+
+---------------check object-----------------
+
+console.log(obj.baz); // "bar"
+obj.foo = 'baz';      // run the setter
+console.log(obj.baz); // "baz"
+-------------------------------
+
+             </example>
+         </paragraph>
+          <subtitle>get value() and set value() together</subtitle>
+         <paragraph>
+             <info> usually they are being used together</info>
+             <example>
+---------------object-----------------
+
+var obj = {
+  a: 7,
+  get value() { 
+    return this.a + 1;
+  },
+  set value(x) {
+    this.a = x / 2;
+  }
+ };
+
+---------------check object-----------------
+
+//get
+console.log(obj.value); // 8
+//set
+obj.value = 50;
+console.log(obj.value); // 25
+-------------------------------
+
+             </example>
+         </paragraph>
+	    </content>
+	</chapter>
+ </chapters>

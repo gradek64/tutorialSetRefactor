@@ -1,0 +1,18 @@
+<snippet>
+    <!-- Optional: Tab trigger to activate the snippet 
+            ${0}; = cursor in the end the last tab 
+            ${1},${2}.. number of tabs key hit
+
+        -->
+    <content><![CDATA[
+<paragraph>
+    <info>${2}</info>
+    <example>${0}</example>
+</paragraph>]]></content>
+    <!-- Optional: Tab trigger to activate the snippet -->
+    <tabTrigger>inner</tabTrigger>
+    <!-- Optional: Scope the tab trigger will be active in (this case only js files)-->
+    <scope>text.xml</scope>
+    <!-- Optional: Description to show in the menu -->
+    <description>My Fancy Template Snippet</description>
+</snippet>

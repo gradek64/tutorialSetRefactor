@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS positioning</title>
+    <link rel="stylesheet" href="bootstrap_files/bootstrap.min.css">
+    <script src="bootstrap_files/jquery.min.js"></script>
+    <script src="bootstrap_files/bootstrap.min.js"></script>
+</head>
+<style>
+    .wrapper {
+        position: relative;
+        border: 1px dotted gray;
+    }
+</style>
+
+<body>
+    <div class="container-fluid" style="max-width: 1000px;margin: 0 auto;">
+        <div class="row">
+            <h1>CSS weird selectors</h1>
+            <section class="part">
+                <h3 class="bg-primary">parent selector div > p </h3>
+
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+		          <a data-toggle="collapse" href="#css-selectors-1">About:</a>
+		        </h4>
+                        </div>
+                        <div id="css-selectors-1" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <h4 style="color:red;border: 1px dashed blue;line-height: 46px;padding: 20px;">Parent selector has simple rule , it will <em>select every element</em> in this case <mark>&#8249;p&#8250;</mark> as long as its parent is <mark>&#8249;div&#8250;</mark>. <em>The order doesnt matter</em> and it will select all children which are  <mark>&#8249;p&#8250;</mark> elements</h4>
+                            </div>
+                            <div class="panel-footer">
+                                <h3>Example below</h3>
+                                <style>
+                                    .parent-selector div {
+                                        border: 1px solid green;
+                                        padding: 20px
+                                    }
+                                    
+                                    .parent-selector div > p {
+                                        border: 1px dotted gray;
+                                        color: orange;
+                                    }
+                                </style>
+                                </head>
+
+                                <body>
+
+                                    <div class="parent-selector">
+                                        <div>
+                                            <span>div</span>
+                                            <p>I am p element inside div so I am selected</p>
+                                            <p>I am p element inside div so I am selected</p>
+                                            <div>
+                                                <span>div</span>
+                                                <p style="margin-left:10px;">I am nested p element inside div so I am selected</p>
+                                                <p style="margin-left:10px;">I am nested p element inside div so I am selected</p>
+                                                <section>
+                                                    <p>I am p element but my parent is section not styled though</p>
+                                                </section>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <span>div</span>
+                                            <p>I am p element inside div so I am selected</p>
+                                            <span><p>I will not be styled. I am span element </p></span>
+                                        </div>
+
+                                        <section>
+                                            <p>I am p elemeb but my parent is section not styled though</p>
+                                        </section>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="bg-primary"> + (neihbour or next-to ) selector div + p </h3>
+
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+		  		          <a data-toggle="collapse" href="#css-selectors-2">About:</a>
+		  		        </h4>
+                            </div>
+                            <div id="css-selectors-2" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <h4 style="color:red;border: 1px dashed blue;line-height: 46px;padding: 20px;">Plus selector has simple rule , it will <em>only select first</em> neighbour in this case <mark>&#8249;p&#8250;</mark> first p element and only first one !  <mark>&#8249;div&#8250;</mark>.
+		  		        </div>
+		  		        <div class="panel-footer">
+		  		        <h3>Example below: div.plus-selector div + p  </h3>
+		  					<style>
+		  					.plus-selector div {border: 1px solid green;padding: 20px}
+		  					.plus-selector div + p {
+		  					    border:1px dotted gray;
+		  					    color:orange;
+		  					}
+		  					</style>
+		  					</head>
+		  					<body>
+
+		  					<div class="plus-selector">
+		  							<div>
+		  								<span>div</span>
+		  							 	<p>I am p element inside div so I am not selected</p>
+		  							  	<p>I am p element inside div so I am not selected</p>
+
+		  							</div>
+		  							 <p style="margin-left:10px;">I am p element and I am the closet to the div so I am selected</p>
+		  							 <p style="margin-left:10px;">I am p element but I am second neighbour to the so I am not selected</p>
+
+		  							<div>
+		  								<span>div</span>
+		  								<p>I am p element inside div so I am not selected</p>
+		  							  	<span><p>I will not be styled. I am span element </p></span>
+		  							</div>
+		  							<section>i am section not selected</section>
+		  							<p>I am p but my nighbour is section not seleted ONLY FIRST ELEMENT AFTER DIV</p>
+		  							<p>I am p element and I am second neigbour even though I am first p in the row I am not selected ONLY FIRST ELEMENT AFTER DIV</p>
+		  					</div>
+		  		      		</div>
+		  		    	</div>
+		  		    </div>
+		  	 <h3 class="bg-primary"> tildo selector div ~ p </h3>
+
+		  		<div class="panel-group">
+		  		    <div class="panel panel-default">
+		  		      <div class="panel-heading">
+		  		        <h4 class="panel-title">
+		  		          <a data-toggle="collapse" href="#css-selectors-3">About:</a>
+		  		        </h4>
+                                </div>
+                                <div id="css-selectors-3" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <h4 style="color:red;border: 1px dashed blue;line-height: 46px;padding: 20px;">Tildo selector is similar to plus selector ,but it will select all neighbours in this case <mark>&#8249;p&#8250;</mark> all p elements once plus selector only will select FIRST Neighbour and only FIRST <mark>&#8249;div&#8250;</mark>.
+		  		        </div>
+		  		        <div class="panel-footer">
+		  		        <h3>Example below</h3>
+		  					<style>
+		  					.tildo-selector div {border: 1px solid green;padding: 20px}
+		  					.tildo-selector div ~ p {
+		  					    border:1px dotted gray;
+		  					    color:orange;
+		  					}
+		  					</style>
+		  					</head>
+		  					<body>
+
+		  					<div class="tildo-selector">
+		  							<div>
+		  								<span>div</span>
+		  							 	<p>I am p element inside div so I am not selected</p>
+		  							  	<p>I am p element inside div so I am not selected</p>
+
+		  							</div>
+		  							 <p style="margin-left:10px;">I am p element and I am the closet to the div so I am selected</p>
+		  							 <p style="margin-left:10px;">I am p element but I am second neighbour to the so I am not selected</p>
+
+		  							<div>
+		  								<span>div</span>
+		  								<div>nested div</div>
+		  								<p>I am nested p element and my neihbor is div so I am seleted</p>
+		  							  	<span><p>I will not be styled. I am span element </p></span>
+		  							</div>
+		  							<section>i am section not selected</section>
+		  							<p>I am p element and I am first neigbour but I will be selected</p>
+		  							<p>I am p element and I am second neigbour but I will be selected</p>
+		  					</div>
+		  		      		</div>
+		  		    	</div>
+		  		    </div>
+			
+		</div>
+	</div>
+
+</body>
+</html>

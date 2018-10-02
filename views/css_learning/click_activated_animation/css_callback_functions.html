@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <meta charset="UTF-8">
+    <title>title</title>
+
+    <style type="text/css">
+    /* Most of the heart's CSS came from the Shapes of CSS  */
+    /* https://css-tricks.com/examples/ShapesOfCSS/          */
+    .heart {
+      position: relative;
+      width: 100px;
+      height: 90px;
+      margin: 30px;
+      
+      -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+      -o-transform: scale(1);
+      -moz-transform: scale(1);
+      transform: scale(1);
+      -webkit-transform-origin: center center;
+      -moz-transform-origin: center center;
+      -ms-transform-origin: center center;
+      -o-transform-origin: center center;
+      transition: all 1s; 
+    }
+    .heart.css {  
+      -webkit-animation-delay:1s;
+      -moz-animation-delay:1s;
+      -ms-animation-delay:1s;
+      -o-animation-delay:1s;
+      animation-dely:1s;
+    }
+    .heart.animated {
+      -webkit-animation: pulsate 3s ease infinite alternate ;
+      -moz-animation: pulsate 3s ease infinite alternate;
+      -ms-animation: pulsate 3s ease infinite alternate;
+      -o-animation: pulsate 3s ease infinite alternate;
+      animation: pulsate 3s ease infinite alternate; 
+    }
+
+    .paused{
+        -webkit-animation-play-state:paused;
+        -moz-animation-play-state:paused;
+        -o-animation-play-state:paused; 
+        animation-play-state:paused;
+    }
+    .heart:before,
+    .heart:after { 
+      position: absolute; 
+      content: "";
+      left: 50px;
+      top: 0;
+      width: 50px;
+      height: 80px;
+      background: red;
+      -moz-border-radius: 50px 50px 0 0;
+      border-radius: 50px 50px 0 0;
+      -webkit-transform: rotate(-45deg);
+         -moz-transform: rotate(-45deg);
+          -ms-transform: rotate(-45deg);
+           -o-transform: rotate(-45deg);
+              transform: rotate(-45deg);
+      -webkit-transform-origin: 0 100%;
+         -moz-transform-origin: 0 100%;
+          -ms-transform-origin: 0 100%;
+           -o-transform-origin: 0 100%;
+              transform-origin: 0 100%;
+    }
+    .heart:after {
+      left: 0;
+      -webkit-transform: rotate(45deg);
+         -moz-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+           -o-transform: rotate(45deg);
+              transform: rotate(45deg);
+      -webkit-transform-origin: 100% 100%;
+         -moz-transform-origin: 100% 100%;
+          -ms-transform-origin: 100% 100%;
+           -o-transform-origin: 100% 100%;
+              transform-origin :100% 100%;
+    }
+    .heart.css:hover {
+      -webkit-transform: scale(2);
+      -moz-transform: scale(2);
+      -ms-transform: scale(2);
+      -o-transform: scale(2);
+      transform: scale(2);
+      -webkit-animation:'';
+      -moz-animation:none;
+      -ms-animation:'';
+      -o-animation:'';
+      animation:'';
+    }
+
+    @keyframes pulsate {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+    @-webkit-keyframes pulsate {
+      0% { -webkit-transform: scale(1); }
+      50% { -webkit-transform: scale(1.3); }
+      100% { -webkit-transform: scale(1); }
+    }
+    @-moz-keyframes pulsate {
+      0% { -moz-transform: scale(1); }
+      50% { -moz-transform: scale(1.3); }
+      100% { -moz-transform: scale(1); }  
+    }
+    @-ms-keyframes pulsate {
+      0% { -ms-transform: scale(1); }
+      50% { -ms-transform: scale(1.3); }
+      100% { -ms-transform: scale(1); }  
+    }
+    @-o-keyframes pulsate {
+      0% { -o-transform: scale(1); }
+      50% { -o-transform: scale(1.3); }
+      100% { -o-transform: scale(1); }  
+    }	
+    </style>
+ </head>
+<body>
+<script src="https://code.jquery.com/jquery-2.0.0.js"></script>
+
+<h3>Pure CSS</h3>
+<div class='heart animated css'></div> 
+
+<h3>With Javascript</h3>
+<div class='heart animated paused'></div> 
+
+<script>
+	var heart = document.getElementsByClassName('heart')[1],
+	    pfx = ["webkit", "moz", "MS", "o",""],
+	    hovered = false;
+
+
+
+	
+
+  function registerAnimationStart(e) {
+      console.log(e);
+  }
+  function registerAnimationIteration(e) {
+      console.log(e);
+  }
+  function registerAnimationEnd(e) {
+      console.log(e);
+  }
+	function addEventPrefix(eventType,eventhandler){
+      var t,type,el = document.createElement("div");
+
+      var prefix = {
+        "animation"      : "", //this property is most likely going to be the case for most browser so need to first;
+        "OAnimation"     : "o",
+        "MozAnimation"   : "",
+        "msAnimation"    : "ms",
+        "WebkitAnimation": "webkit",
+      }
+
+      for (t in prefix){
+        if (el.style[t] !== undefined){
+
+          //convert array values to oposite boolean
+          type = !prefix[t] ? eventType.toLowerCase() : prefix[t]+eventType;
+
+          //element.style.animation = "3s linear 1s pulsate";
+
+
+          //return will teminate the loop ! so it wont check more if found one match
+          return { prefix:type, 
+                  handler:eval(eventhandler) //window[eventhandler];
+                 }
+          
+          //return typeof prefix[t] ==  "undefined" ? eventType : prefix[t]+eventType;
+        }
+      }
+  }
+
+
+//element.addEventListener(type, callback, false);
+var eventToAdd = ['AnimationStart','AnimationIteration',"AnimationEnd"];
+
+eventToAdd.map(function(eventType){
+
+    var prefix = addEventPrefix(eventType,"register"+eventType);
+    heart.addEventListener(prefix.prefix,prefix.handler,false);
+
+});
+
+
+
+
+// Start the animation with JavaScript
+function startAnimation() {
+    x.style.WebkitAnimation = "mymove 4s 2"; // Code for Chrome, Safari and Opera
+    x.style.animation = "mymove 4s 2";       // Standard syntax
+}
+
+
+
+
+	function AnimationListenerRepeat() {
+	    if(hovered)
+	    { 
+	      heart.classList.remove('animated'); 
+	      heart.style.webkitTransform = 'scale(2)';
+	      heart.style.MozTransform = 'scale(2)';
+	      heart.style.msTransform = 'scale(2)';
+	      heart.style.OTransform = 'scale(2)';
+	      heart.style.transform = 'scale(2)';
+	    }
+	}
+
+	function TransitionListener() {
+	  if(!hovered)
+	  {
+	    heart.classList.add('animated');
+	  }
+	}
+
+
+	heart.onmouseover = function() {
+	  hovered = true;
+	}
+	heart.onmouseout = function() {
+	  setTimeout(function() { hovered = false; }, 500);
+	  PrefixedEvent(heart, "TransitionEnd", TransitionListener);
+	  heart.style.webkitTransform = 'scale(1)';
+	  heart.style.MozTransform = 'scale(1)';
+	  heart.style.msTransform = 'scale(1)';
+	  heart.style.OTransform = 'scale(1)';
+	  heart.style.transform = 'scale(1)';  
+	}
+</script>
+
+ </body>
+</html>

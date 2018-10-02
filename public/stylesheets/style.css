@@ -1,0 +1,78 @@
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #394c55;
+  color:white;
+}
+a {
+  text-decoration: none;
+  color:inherit;
+}
+
+/* search section*/
+.header-search {
+  border: 1px dotted blue;
+  background-color: #394043;
+
+}
+
+.header-search input {
+  font-size: 20px;
+  text-align: center;
+  margin: 0 auto;
+  width: 50%;
+  border: 3px solid orange;
+  width: 100%;
+}
+.seach-input-container {
+  display: table; /*to make width fit the content */
+  margin:0 auto;
+  width: 70%;
+  padding: 2%;
+}
+
+/*list tuts section */
+
+.list-tuts {
+  flex: 4;
+  border: 1px dotted red;
+  overflow: scroll;
+}
+.wrap-list {
+  height: 0; /*trick to fill content of parent flex:2*/
+  width:70%;
+  margin:0 auto; 
+}
+.list-tuts ul {
+  list-style-type: none;
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 800;
+  display: block;
+  padding: 10px 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.list-tuts ul  ul{ 
+    padding-left: 20px;
+    color:rgba(255,255,255,0.7);
+  }
+
+.list-tuts ul li{ 
+   margin:10px;
+  }
+/*footer */
+
+.footer {
+  flex: 1;
+    border: 1px dotted red;
+      background-color: #394043
+
+
+}

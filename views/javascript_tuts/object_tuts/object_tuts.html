@@ -1,0 +1,657 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">  
+  <title>tutorial === Layout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/tutorial.css">
+  <link rel="stylesheet" href="css/tooltip.css">
+</head>
+<body translate="no">
+<div class="l-site">
+  <div class="l-nav">
+    <nav class="nav">
+      <input type="text" placeholder="Search" id="search">
+      <div style="clear: both;"></div>
+      <!-- nunjucks loop-->
+            
+<ul class="links">
+<!--list-tag-->
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts">Object in general</a><span class="tooltiptext">Object in general</span>
+                 
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts">looping through Object</a><span class="tooltiptext">looping through Object</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>Object.keys.forEach(callback)</a><span class="tooltiptext">Object.keys.forEach(callback)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>for (var key in Object) loop</a><span class="tooltiptext">for (var key in Object) loop</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts">Ways to copy Object</a><span class="tooltiptext">Ways to copy Object</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>by looping throuh and assing properties and methods</a><span class="tooltiptext">by looping throuh and assing properties and methods</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>Object.assign({}, orginalObj)</a><span class="tooltiptext">Object.assign({}, orginalObj)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>Object.assign() join objects</a><span class="tooltiptext">Object.assign() join objects</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>ES6 spread operator</a><span class="tooltiptext">ES6 spread operator</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts">Destrurcture assigment in Object</a><span class="tooltiptext">Destrurcture assigment in Object</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>Destrurcture assigment in Object</a><span class="tooltiptext">Destrurcture assigment in Object</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>Object assigment with complex data</a><span class="tooltiptext">Object assigment with complex data</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>ES6 object function declaration shorthand</a><span class="tooltiptext">ES6 object function declaration shorthand</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts">Obeject get and set function</a><span class="tooltiptext">Obeject get and set function</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>Object set value()</a><span class="tooltiptext">Object set value()</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>Object.defineProperty(originalObj, &#39;setProperty&#39;, { set: function(x) { this.originalProperty = x / 2; } });</a><span class="tooltiptext">Object.defineProperty(originalObj, &#39;setProperty&#39;, { set: function(x) { this.originalProperty = x / 2; } });</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>use variable to set setter()  set [expr](v)</a><span class="tooltiptext">use variable to set setter()  set [expr](v)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>get value() and set value() together</a><span class="tooltiptext">get value() and set value() together</span>
+                        
+                    </ul>
+                
+      </li>
+    
+<!--end-list-tag-->
+</ul>
+
+       <!-- nunjucks loop-->
+    </nav>
+  </div>
+  <div class="l-page">
+    <div class="menu">
+      <div class="menu-hamburger"></div>
+    </div>
+      <!-- nunjucks loop-->
+          
+<div class="sectionWrapper">
+  <div class="sectionContainer">
+   
+      
+      <section  class="band band-b activeSection"  class="band band-b">
+          <h1> Object in general </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>Object in general</p>
+                  <div class="codeWraper">
+                    <code>-------------- Object ES5 -------------
+
+const jane = {
+   name: &#39;Jane&#39;,
+   likes: &#39;ice-cream&#39;,
+
+   describe: function () {
+       return &#39;Person named &#39;+this.name;
+   }
+};
+
+-------------- Object ES6 -------------
+const name =  &#39;Jane&#39;;
+const likes = &#39;ice-cream&#39;;
+const jane = {
+   name,
+   likes,
+
+   describe () {
+       return &#39;Person named &#39;+this.name;
+   }
+};
+-------------- Object.keys(jane); --------
+
+ //return array of keys
+
+--------------objName.hasOwnProperty(prop)-----------
+
+//exclude any inherited (prototypal) method only own properties
+
+objName.hasOwnProperty(prop); //true or false;
+
+-------------- converting object to String -------------
+
+
+  var bjj = {gaga:&quot;gaga&quot;,gag:2}
+
+  JSON.sringify(bjj)      //return &quot;{&quot;gaga:&quot;:&quot;gaga&quot;,&quot;gag&quot;:2}&quot;
+
+
+
+-------------- converting String to Object -------------
+
+  str= &quot;{&quot;gaga:&quot;:&quot;gaga&quot;,&quot;gag&quot;:2}&quot;&quot;
+
+  JSON.parse(str);      
+
+  //return {gaga:&quot;gaga&quot;,gag:2};
+---------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> looping through Object </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>Object.keys.forEach(callback)</p>
+                  <div class="codeWraper">
+                    <code>------------- Object.keys(objName)----------------
+ returns array of keys;
+
+------------- Object.keys(objName).forEach(value,key,index){}----------------
+  
+const jane = {
+   name: &#39;Jane&#39;,
+   likes: &#39;ice-cream&#39;,
+
+   describe: function () {
+       return &#39;Person named &#39;+this.name;
+   }
+};
+
+changeValues = [&#39;Greg&#39;,&#39;indian food&#39;];
+
+------------- loop and change values ----------------
+
+  Object.keys(jane).forEach((e,i)=&gt;{
+      if(changeValues[i]){
+        jane[e] = changeValues[i];
+      }
+  });
+  console.log(jane);
+
+----------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>for (var key in Object):
+				//this method requires checking for Object.hasOwnProperty(key) cause it will loop through prototype properties and methods as well;</p>
+                  <div class="codeWraper">
+                    <code>-------object ---------------
+const jane = {
+   name: &#39;Jane&#39;,
+   likes: &#39;ice-cream&#39;,
+
+   describe: function () {
+       return &#39;Person named &#39;+this.name;
+   }
+};
+------------- for (var key in jane) -------------
+//this method requires checking for Object.hasOwnProperty(key) cause it will loop through prototype properties and methods;
+
+
+for (var key in jane) {
+    if( jane.hasOwnProperty(key) ){
+        console.log(key);
+    }
+} 
+----------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> Ways to copy Object </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>by looping throuh and assing properties and methods: 
+	            	old-school way of copying object;
+
+                /*
+                    Important:
+
+                    using  for (key in originalObj) {} loop or Object.assign({},orinalObject) wont make nested object {a:{b:&#39;nested to a&#39;}}
+                    independend so making changes to original nested object it will affect orinal object and vice-versa; 
+
+                */</p>
+                  <div class="codeWraper">
+                    <code>------------- object -------------
+
+let objCopy = {};
+let originalObj = {prop1:3,prop2:&#39;Greg&#39;,method(){ return this.prop1},}
+
+------------- for (key in originalObj) ----------------
+
+for (key in originalObj) {
+   if( originalObj.hasOwnProperty(key) ){
+      objCopy[key] = originalObj[key]; // copies each property to the objCopy object except prototype;
+   }
+}
+-----------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>Object.assign({}, orginalObj):
+				this will make &#39;shalow copy&#39; so if there is a nested object it wont be exclude from original object
+				only top level structure will be independent.</p>
+                  <div class="codeWraper">
+                    <code>--------------------Object ---------------- 
+
+const jane = {
+   name: &#39;Jane&#39;,
+   likes: &#39;ice-cream&#39;,
+      jobs: {
+          job1:&#39;Plumber&#39;,
+          job2:&#39;part-time teacher&#39;,
+      }
+   
+};
+
+--------------------Object.assign({}, jane)----------------
+
+const objectAssignCopy = Object.assign({}, jane);
+
+-------------------- prove that changes to nested object will affect both objects----------------
+//change to copy;
+objectAssignCopy.jobs.job1 = &#39;Front-end Developer&#39;;
+
+console.log(objectAssignCopy.jobs.job1) //&#39;Front-end Developer&#39;;
+console.log(jane.jobs.job1) //&#39;Front-end Developer&#39;;
+-----------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>Object.assign(obj, {prop:newProperty}) joins object</p>
+                  <div class="codeWraper">
+                    <code>--------------------Object ---------------- 
+
+const jane = {
+   name: &#39;Jane&#39;,
+   likes: &#39;ice-cream&#39;,
+      jobs: {
+          job1:&#39;Plumber&#39;,
+          job2:&#39;part-time teacher&#39;,
+      }
+   
+};
+
+--------------------Object.assign(obj, {prop:newProperty})----------------
+
+const joinObj = Object.assign(jane, {newProperty:&#39;I am a new Property&#39;});	
+console.log(joinObj);
+
+------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
+                  <p>ES6 spread operator (still shallow copy)</p>
+                  <div class="codeWraper">
+                    <code>-----------------------clonedObj = { ...obj1 } ------------------------
+
+var obj1 = { foo: &#39;baz&#39;, y: 13 , c:{ y:45 }, };
+var obj2 = { set: &#39;set&#39;, x: 17 };
+
+-----------------------clonedObj = { ...obj1 } ------------------------
+
+var clonedObj = { ...obj1 };
+
+-----------------------mergedObjObj = { ...obj1 } ------------------------
+
+var mergedObj = { ...obj1, ...obj2 };
+
+-------------------------check if nested object are affected when changes are made in copied instances------------;
+
+obj1.c.y = 66;
+console.log(obj1.c.y); //66
+console.log(clonedObj.c.y); //66
+
+----------- so the problem preveils even in ES6 copying method , nested object are not related to copies but to original object.------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> Destrurcture assigment in Object </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>//left side is assigned to the right side 
+
+                let {name,surname}={name:&#39;Greg&#39;,surname:&#39;Gil&#39;}
+                let {name,surname}={}</p>
+                  <div class="codeWraper">
+                    <code>--------------------left side is assigned to the right side----------
+
+let {first,last} = { first: &#39;Jane&#39;, last: &#39;Doe&#39; };
+
+--------------------Now U have access to individual var first and last ----------
+
+console.log(first);
+console.log(last);
+
+--------------------what if you dont have values assign;--------------------
+
+let {first1,last2} = {};
+console.log(first1); //undefined
+console.log(last2);  //undefined
+
+-------------------- assign default values as below --------------------
+
+let {first3=&#39;Greg&#39;,last4=&#39;Gil&#39;} = {};
+console.log(first3); //Greg
+console.log(last4);  //Gil
+
+-------------------- override you default with the first example---------------
+
+let {first3=&#39;Greg&#39;,last4=&#39;Gil&#39;, job = &#39;Developer&#39;} = { first3: &#39;Jane&#39;, last4: &#39;Doe&#39; };
+console.log(first3); //Jane
+console.log(last4);  //Doe
+console.log(job);  //Developer (which is default value);
+
+--------------------but you could skip defaults as well--------------------
+
+let {first,last} = { first: &#39;Jane&#39;, last: &#39;Doe&#39; };
+let obj = {first,last}
+console.log(first);
+console.log(last);
+console.log(obj);
+--------------------------------------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>Object assigment with complex data</p>
+                  <div class="codeWraper">
+                    <code>----------------  combination of data that are represented in variables as default values;----------------
+
+let {set3=&#39;set3&#39;,set4 = {setter:&#39;setter&#39;,order:4}, set5=[5,5,5,5] , set6 = false  } = {};
+
+console.log(set3);
+console.log(set4);
+console.log(set5);
+console.log(set6);
+
+---------------- you can easily combine them together by (merge objects) ----------------
+
+const allSets = {set3,set4,set5,set6}
+console.log(allSets);
+
+---------------- ---------------- update set5 with new values ---------------- ----------------
+
+const newWinningNumbers = [57,64,646,464];
+let {set3=&#39;set3&#39;,set4 = {setter:&#39;setter&#39;,order:4}, set5=[5,5,5,5] , set6 = false  } = {set5:[...newWinningNumbers]};
+console.log(set5);
+
+---------------- ----------------nested structure ---------------- ----------------
+
+let data = {data:&#39;initialData&#39;};
+let {datas=data} = {}; //assign default
+console.log(datas); //{data:&#39;initialData&#39;};
+//rewrite data object 
+data.data = &#39;see&#39;;
+console.log(data); //{data:&#39;see&#39;};
+
+---------------- -------------------------------- -------------------------------- ----------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>ES6 object function declaration:
+                ES6 comes with new function declaration which is the same as ES6 classes function declarion but on Object not Class yet.</p>
+                  <div class="codeWraper">
+                    <code>---------------- -------------------------------- ES5---------------- --------------------------------
+ var myObj = {
+      method:function(){
+          console.log(&quot;&#39;this&#39; belongs to:&quot;+ this);
+
+          [&#39;greg&#39;,&#39;Libby&#39;].forEach(function(){
+          //this keyword loosing its refference to Object, lexical scope is gone and becomes Window
+              console.log(&quot;&#39;callback this&#39; belongs to:&quot;+ this); 
+          });
+      }
+ };
+
+ ---------------- -------------------------------- ES6 ---------------- ---------
+
+ const outsideArray = [1,2,3,4];
+ const outsidefunction = () =&gt; &#39;I am outside return arrow function&#39;;
+
+ const myObjectCom = {
+        method:outsidefunction,
+        arraySetterNormal:outsideArray,
+        arraySetterSpread:[...outsideArray],
+        insidefunction () {
+            console.log(`this tell me who U are : ${this}`);
+        },
+        insidefunction2 () {
+
+            [&#39;greg&#39;,&#39;Libby&#39;].forEach(()=&gt;{
+            //with arrow function this keyword is not loosing its refference to Object, lexical scope is preserved and it is object
+              console.log(&quot;&#39;callback this&#39; belongs to:&quot;+ this);
+          });
+        },
+
+ }
+
+---------------- --------------- assign function name as dynamic feature; ---------------- ---------------
+
+function dynamicFunctionName () {
+    return &#39;dynamic_name&#39;;
+}
+
+const myObj = {
+  // Set property name equal to return value of dynamicFunctionName function
+    [dynamicFunctionName ()] () {
+      return &#39;set&#39;;
+    },
+    [&#39;stringFunctionName&#39;] () {
+      return &#39;stringFunctionName&#39;;
+    }
+};
+
+---------------- ------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> Obeject get and set function </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>simply sets value() . Notice even it is a method U dont use parenthesis for setting the value 
+              obj.setValue = value;</p>
+                  <div class="codeWraper">
+                    <code>---------------object-----------------
+
+const language = {
+  set current(name) {
+    this.log.push(name);
+  },
+  log: []
+}              
+---------------set value (notice even it is method dont use parenthesis)-----------------
+
+language.current = &#39;EN&#39;;
+console.log(language.log); // [&#39;EN&#39;]
+
+---------------set value (notice even it is method dont use parenthesis)-----------------
+
+language.current = &#39;FA&#39;;
+console.log(language.log); // [&#39;EN&#39;, &#39;FA&#39;];
+--------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>allows you to difine property (as set type) in a function that could do some logic beofore returning a value of set</p>
+                  <div class="codeWraper">
+                    <code>---------------object-----------------
+
+var originalObj = {originalProperty: 0};
+
+---------------Object.defineProperty---------------
+
+Object.defineProperty(originalObj, &#39;setProperty&#39;, { set: function(x) { this.originalProperty = x / 2; } });
+
+--------------- Runs the setter, which assigns 10 / 2 (5) to the &#39;originalProperty&#39; ---------------
+
+originalObj.setProperty = 10; 
+console.log(originalObj.originalProperty) // 5
+
+------------------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>set [expr](v) where expr = &#39;value&#39;</p>
+                  <div class="codeWraper">
+                    <code>---------------object-----------------
+
+var expr = &#39;foo&#39;;
+
+var obj = {
+  baz: &#39;bar&#39;,
+  set [expr](v) { this.baz = v; }
+};
+
+---------------check object-----------------
+
+console.log(obj.baz); // &quot;bar&quot;
+obj.foo = &#39;baz&#39;;      // run the setter
+console.log(obj.baz); // &quot;baz&quot;
+-------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
+                  <p>usually they are being used together</p>
+                  <div class="codeWraper">
+                    <code>---------------object-----------------
+
+var obj = {
+  a: 7,
+  get value() { 
+    return this.a + 1;
+  },
+  set value(x) {
+    this.a = x / 2;
+  }
+ };
+
+---------------check object-----------------
+
+//get
+console.log(obj.value); // 8
+//set
+obj.value = 50;
+console.log(obj.value); // 25
+-------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+  
+    <section class="band band-b activeSection">
+      <h1></h1>
+
+      
+
+
+
+        
+
+    </section>
+  
+  </div>
+</div>
+
+       <!-- nunjucks loop-->
+  </div>
+</div>
+<script src="scripts/nav-links.js"></script>
+<script src="scripts/tooltips_links_over.js"></script>
+<script src="scripts/search_nav.js"></script>
+ </body></html>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <chapters>
+   <chapter>
+       <subject>check if type of string or number</subject>
+       <content>
+           <paragraph>
+               <info>check if it string</info>
+               <example>
+                const str = 'I am a string'
+                 
+                // 1. type of string 
+                typeof str === 'string';
+
+
+                //2.to String method on Object  
+                Object.prototype.toString.call(str) === "[object String]"
+
+               </example>
+           </paragraph>
+           <paragraph>
+               <info>is a Number type</info>
+               <example>
+                  const num = 12;
+                  
+                  //1;
+                  Number.isInteger(num);
+
+                  //2 
+                  !isNaN(num)
+
+                  //3 
+                  Object.prototype.toString.call(num) === "[object Number]"
+
+                  //4
+                  typeof num === "number"
+               </example>
+           </paragraph>
+       </content>
+   </chapter>
+   <chapter>
+       <subject>String methods()</subject>
+       <content>
+           <paragraph>
+               <info>some of the string methods</info>
+               <example>
+                 
+
+          
+            ----------changing to lower or upper case----------
+
+            1 'string'.toLowerCase()   = coverts all characters to lowercase 
+
+            2 'string'.toUpperCase()  = coverts all characters to Uppercase
+
+
+
+            ----------finding index of character----------
+
+            3 'string'.indexOf(string)  = find FIRST ocurance of word returning its INDEX
+              
+            3a 'string'.search('string'); = find FIRST ocurance of word returning its INDEX
+
+            4 'string'.lastIndexOf('string') = find LAST ocurance of word returning its INDEX
+
+
+
+            
+            ----------Extracting,slicing -------------
+
+            5 'string'.slice([index-optional,end-index-optional]) = will slice your text according to start-index, end-index
+
+            6 'string'.substring([index-optional,end-index-optional]); will slice your text according to start-index,end-index
+
+            6a 'string'.substr(start-inedex,length); will slice your text according to start-index,length-to-extract
+
+            6b 'string'.trim()   = removes white space at the beginnig and end of the string if any;
+
+
+
+
+            ----------Replace part of the text based on text or Regex----------
+
+            7 'string'.replace("original world","replacing world");
+
+            7a 'string'.replace(/regex/,"replacing world",);\
+
+
+            ----------concatenate text----------
+
+            8 'string'.concat(string2);
+
+            8a same as "string1" + "string2";
+
+
+            ----------converting to Array----------
+
+            9 'string'.split(",") = Convert string to Array based on coma seperator;
+
+            9a 'string'.split(/[ ,-]+/); Convert string to Array based on regex expresion; (you can specify multiple seperators with regex);
+
+            10 eval(['string_array',1]) =  Converts to Array if you have right array-like string "['array',"like","string"]";
+
+
+            -------------- converting to Object -------------
+            
+            10 str= '{"gaga:":"gaga","gag":2}'
+
+            JSON.parse(str);      
+
+            //retuns {gaga:"gaga",gag:2}; 
+
+               </example>
+           </paragraph>
+       </content>
+   </chapter>
+ </chapters>

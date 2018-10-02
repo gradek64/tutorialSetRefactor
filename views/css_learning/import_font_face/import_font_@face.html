@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>import font CSS </title>
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+</head>
+<body>
+
+	<h3>.woff and .ttf/otf are the font formats that are supported to all broswer so stick to those !</h3>
+	<p class="localFont">this font is stored in local files and imported by</p>
+	<p class="googleFont">this font is linked to google fonts database</p>
+	<p class="googleFontImport">this font is linked to google fonts by @import</p>
+	<p class="googleFontStandardWayLink">this font is linked to google fonts by standar link tag no @import or @font-face required</p>
+	<code>
+
+	</code>
+
+
+	<style>
+			
+		@font-face {
+
+			font-family: Libre_Barcode;
+    		src: local('Libre Barcode 39 Text Regular'), local('LibreBarcode39Text-Regular'), url(https://fonts.gstatic.com/s/librebarcode39text/v3/O4inMvtTcDsw_GI-nhT1ni2KyhR4Gp7Y4OQ1Ij1FzWuglnMp3_3A8V8Ai8YosRtX.woff2) format('woff2');
+
+		}
+
+		@font-face {
+    		 font-family: Painter_font;
+    		src: url(./local_font_import/Painter_PERSONAL_USE_ONLY.ttf); 
+
+		}
+
+
+
+		/*another way of adding font is by *import statement*/
+		@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+		
+		/* @import statement will build @font-face for you really clever*/
+
+
+
+
+
+
+	 	/*apply font by its font-family:name to the elemnt*/
+
+	 	p.localFont {
+	 		font-family: Painter_font;
+	 		font-size:20px;
+	 	}
+
+	 	p.googleFont {
+	 		font-family: Libre_Barcode;
+	 		font-size:20px;
+	 	}
+
+	 	p.googleFontImport {
+	 		font-family: 'Indie Flower', cursive;
+	 		font-size:20px;
+	 	}
+
+
+	 	p.googleFontStandardWayLink {
+	 		font-family: 'Lobster', cursive;
+	 		font-size:20px;
+	 	}
+
+	</style>
+
+</body>
+</html>

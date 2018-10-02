@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="flex-container">
+       <div class="header-search">
+        <div class="seach-input-container">
+            <input type="text" id='search' name="searchTerm" placeholder="Seach term" />
+        </div>
+       </div>
+       <div class="list-tuts">
+        <div class="wrap-list">
+          <ul class="links">
+            <% include gulp-tuts-page-generator/src/partials/_all_tuts_lists.html %>
+          </ul>
+        </div>
+       </div>
+    </div>
+    <script src="scripts/search_nav.js"></script>
+  </body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS positioning</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+	
+	  	.wrapper {
+	  		position: relative;
+	  		border:1px dotted gray;
+	  	}
+	  	
+</style>
+<body>
+	<div class="container-fluid" style="max-width: 1000px;margin: 0 auto;">
+ <div class="row">
+
+	<section class="part">
+	
+
+		  	
+			
+
+		 
+			<h1>CSS positioning</h1>
+			<section class="part">
+				<h3 class="bg-primary">display:inline</h3>
+
+				<div class="panel-group">
+				    <div class="panel panel-default">
+				      <div class="panel-heading">
+				        <h4 class="panel-title">
+				          <a data-toggle="collapse" href="#css1">About:</a>
+				        </h4>
+				      </div>
+				      <div id="css1" class="panel-collapse collapse">
+				        <div class="panel-body">
+				        	The default value for elements. Think of elements like <mark>&#8249;code&#8250;</mark>,<mark>&#8249;span&#8250;</mark>, <mark>&#8249;emn&#8250;</mark>, or <mark>&#8249;b&#8250;</mark> or <mark>&#8249;a&#8250;</mark> . Those tags are always displyad in line and it wont break a line unleas you will use <mark>&#8249;br&#8250;</mark> width and hegiht is IGNORED! if applied to block elements as <mark>&#8249;fiv&#8250;</mark>or <mark>&#8249;p&#8250;</mark> the will act as <mark>&#8249;span&#8250;</mark> margin-bottom and margin-top will be also IGNORED !. inline element wont break a line and the text will jump to the next line if container is too small.
+				        </div>
+				        <div class="panel-footer">Example below</div>
+				      </div>
+				    </div>
+				  </div><!--panel group-->
+
+				<div class="panel-group bg-primary">
+				    <div class="panel panel-default">
+				      <div class="panel-heading">
+				        <h4 class="panel-title">
+				          <span class="glyphicon glyphicon-circle-arrow-down" data-toggle="collapse" data-target="#collapse1">CSS (example below)</span>
+				        </h4>
+				      </div>
+				      <div id="collapse1" class="panel-collapse collapse">
+				        <div class="panel-body">
+				        	<div class="jumbotron">
+    					  	<h4>CSS</h4>
+    					    <code style="white-space: pre-line;">
+    					  	span.inline {
+    							<del>display: inline</del> /* it is already there by default*/;
+    							<del>width:40px;</del> /*ignored*/
+    							<del>height:40px;</del> /*ignored*/
+    							border: 2px dashed darkgrey;
+    							<del>margin-top:40px;</del> /*ignored*/
+    							<del>margin-bottom:40px;</del> /*ignored*/
+    							margin-left:4px;
+    							margin-right:50px; /*works*/
+    					  	}<br>
+    					  	div.inline {
+    					  		display:inline;
+    							<del>width:40px;</del> /*ignored*/
+    							<del>height:40px;</del> /*ignored*/
+    							<del>margin-bottom:5%</del> /*ignored*/;
+    							<del>margin-top:5%</del> /*ignored*/;
+    							border: 2px dashed darkgrey;
+    							margin-left:4px;
+    							margin-right:50px; /*works*/
+    					  	}
+    					  </code>
+    					  </div>
+				        </div>
+				      </div>
+				    </div>
+				  </div><!--panel group-->
+
+				  <style>
+				  	div.inline {
+				  		display:inline;
+						width:40%;
+						height:40px;
+						border: 2px dashed darkgrey;
+						margin:20px;
+						margin-left:4px;
+					}
+					span.inline {
+				  		display:inline;
+						width:40%;
+						height:40px;
+						border: 2px dashed pink;
+						margin:20px;
+						margin-left:4px;
+						margin-top:5px;
+				  }
+				  </style>
+
+				  <!--2  inline-block -->
+
+				 <div style="border:2px dashed orange; height: 200px;">
+				 	<div>
+					  	<div class="inline">div: display:inline div: display:inlinediv: display:inline</div><div class="inline">div: display:inline div: display:inline div: display:inline</div><div class="inline">div: display:inline div: display:inline div: display:inline</div>
+				 	</div>
+				 	<div >
+				 		<span class="inline">span: display:inline span: display:inlinespan: display:inline</span><span class="inline">span: display:inline span: display:inlinespan: display:inline</span><span class="inline">span: display:inline span: display:inlinespan: display:inline</span>
+				 	</div>
+				 </div>
+
+				  <h3 class="bg-primary">display:inline-block</h3>
+
+				<div class="panel-group">
+				    <div class="panel panel-default">
+				      <div class="panel-heading">
+				        <h4 class="panel-title">
+				          <a data-toggle="collapse" href="#about2">About:</a>
+				        </h4>
+				      </div>
+				      <div id="about2" class="panel-collapse collapse">
+				        <div class="panel-body">
+				        	inline-block element will be set in row (next to each other) and width and hight , margin-top and bottom will be contrary to display:inline. if the content is bigger than it inline-block contaier it will jump to the next row wit entire block (container): it acts as display:block but inline. By default it will display element on top. it will respect vertical-align:middle,bottom, top if applied.
+				        </div>
+				        <div class="panel-footer">Example below</div>
+				      </div>
+				    </div>
+				  </div><!--panel group-->
+
+				<div class="panel-group bg-primary">
+				    <div class="panel panel-default">
+				      <div class="panel-heading">
+				        <h4 class="panel-title">
+				          <span class="glyphicon glyphicon-circle-arrow-down" data-toggle="collapse" data-target="#css2">CSS (example below)</span>
+				        </h4>
+				      </div>
+				      <div id="css2" class="panel-collapse collapse">
+				        <div class="panel-body">
+				        	<div class="jumbotron">
+    					  	<h4>CSS</h4>
+    					    <code style="white-space: pre-line;">
+    					  	  	span.inline-block ,em.inline-block{
+		  	  					  		display:  inline-block;
+		  	  					  		width: 120px;
+		  	  					  		height: 220px;
+		  	  							padding: 3px;
+		  	  							border: 2px solid darkgrey;
+		  	  							margin:2px;
+		  	  					  }
+		  	  					  	div.inline-block {
+		  	  					  		display:  inline-block;
+		  	  							padding: 3px;
+		  	  							border: 2px solid pink;
+		  	  							width: 40%;
+		  	  							margin:2px;
+		  	  					  }
+
+									/*no need to for width and height it will adjust to content*/
+
+									/* by default it will make a small gap between elements */
+
+									/* by default content will be set to top (expected)*/
+
+									/* entire element will be set to the bottom*/
+							  }
+    					  </code>
+    					  </div>
+				        </div>
+				      </div>
+				    </div>
+				  </div><!--panel group-->
+
+				  <style>
+
+
+				  	span.inline-block ,em.inline-block{
+				  		display:  inline-block;
+				  		width: 120px;
+				  		height: 220px;
+						padding: 3px;
+						border: 2px solid darkgrey;
+						margin:2px;
+				  }
+				  	div.inline-block {
+				  		display:  inline-block;
+						padding: 3px;
+						border: 2px solid darkgrey;
+						width: 40%;
+						margin:2px;
+				  }
+				  </style>
+
+
+				   <div style="border:2px dashed orange; height: 400px;">
+				 	<div>
+					  	<div class="inline-block">div: display:-block div: display:-blockdiv: display:-block</div><div class="inline-block">div: display:inline-block div: display:inline-block div: display:inline-block</div><div class="inline-block">div: display:inline-block div: display:inline-block div: display:inline-block</div>
+				 	</div>
+				 	<div >
+				 		<span class="inline-block">span: display:inline-block span: display:inline-blockspan: display:inline-block</span><span class="inline-block">span: display:inline-block span: display:inline-blockspan: display:inline-block</span><span class="inline-block">span: display:inline-block span: display:inline-blockspan: display:inline-block</span>
+				 	</div>
+				 </div>
+				  </div>
+
+				  <!--display:inline black with vertical allign -->
+
+				  <h3 class="bg-primary">display:inline-block</h3>
+				  <h4 style="padding-left: 20px;">with vertical alligment</h4>
+
+				  <div class="panel-group bg-primary">
+				    <div class="panel panel-default">
+				      <div class="panel-heading">
+				        <h4 class="panel-title">
+				          <span class="glyphicon glyphicon-circle-arrow-down" data-toggle="collapse" data-target="#css4">top leading</span>
+				        </h4>
+				      </div>
+				      <div id="css4" class="panel-collapse collapse">
+				        <div class="panel-body">
+				        			  <style>
+
+
+				        			  	div.inline-block1 ,p.inline-block1 ,span.inline-block1 {
+				        			  		display:  inline-block;
+				        					padding: 0;
+				        					border: 2px solid darkgrey;
+				        					width: 16%;
+				        					padding:0 20px 0 20px;
+				        					margin:0px;
+				        					color:green;
+				        			  }
+
+				        			  </style>
+				        	
+				        	 		 <div class="wrapper">
+				        				  	<div class="inline-block1" style="vertical-align: middle;">
+				        				  		I am middle group but the leading is from top gang so I need to listen to him ;( so I am at the top<kbd>vertical-align:middle</kbd>
+				        				  	</div>
+				        				    <div class="inline-block1" style="vertical-align: top;">I in on top group I am alignment to container dont care about who is the tallest of us<kbd>vertical-align:top</kbd>
+				        					</div>
+				        					
+				        				  	<div class="inline-block1" style="vertical-align: top">
+				        				  		  	<br>addtional text next line<br>addtional text next line<br>addtional text: 
+				        				  			<kbd>I am the tallest and I am set to vertical-align: top</kbd>
+				        				  			<kbd>my height dectates the rest middle is ignored cause I am telling only top</kbd>
+				        				  			<br>addtional text next line<br>addtional text next line<br>addtional text: 
+				        				  			<br>addtional text next line<br>addtional text next line<br>addtional text: 
+				        				  	</div>
+				        				  	<p class="inline-block1" style="vertical-align: middle;">vertical-align:top is the highest one so I need to listen to him so I am on top there is no middle taller that him ;( not my group<kbd>vertical-align:middle</kbd>
+				        				  	</p>
+				        				  	<span class="inline-block1" style="vertical-align: bottom;">I am in bottom group I am good mate with top and by I dont care aboout others alligment anyway cause I bottom to container<kbd>vertical-align:bottom</kbd>
+				        				  	</span>
+				        		 		</div>
+				        	  		</div>
+				        </div>
+				      </div>
+				  </div><!--panel group-->
+
+				  <div class="panel-group bg-primary">
+				    <div class="panel panel-default">
+				      <div class="panel-heading">
+				        <h4 class="panel-title">
+				          <span class="glyphicon glyphicon-circle-arrow-down" data-toggle="collapse" data-target="#css5">middle leading</span>
+				        </h4>
+				      </div>
+				      <div id="css5" class="panel-collapse collapse">
+				        <div class="panel-body">
+				        			  <style>
+
+
+				        			  	div.inline-block1 ,p.inline-block1 ,span.inline-block1 {
+				        			  		display:  inline-block;
+				        					padding: 0;
+				        					border: 2px solid darkgrey;
+				        					width: 16%;
+				        					padding:0 20px 0 20px;
+				        					margin:0px;
+				        					color:green;
+				        			  }
+
+				        			  </style>
+				        	
+				        	 		 <div class="wrapper">
+				        				  	<div class="inline-block1" style="vertical-align: middle;">
+				        				  		I am middle group but the leading is from middle gang so I am lucky so I will take middle height of my middle mate<kbd>vertical-align:middle</kbd>
+				        				  	</div>
+				        				    <div class="inline-block1" style="vertical-align: top;">I in on top group I am alignment to container dont care about who is the tallest of us<kbd>vertical-align:top</kbd>
+				        					</div>
+				        					
+				        				  	<div class="inline-block1" style="vertical-align: middle">
+				        				  		  	<br>addtional text next line<br>addtional text next line<br>addtional text: 
+				        				  			<kbd>I am the tallest and I am set to vertical-align: middle</kbd>
+				        				  			<kbd>my height dectates the rest middle my height so they are set to my middle height</kbd>
+				        				  			<br>addtional text next line<br>addtional text next line<br>addtional text: 
+				        				  			<br>addtional text next line<br>addtional text next line<br>addtional text: 
+				        				  	</div>
+				        				  	<p class="inline-block1" style="vertical-align: middle;">vertical-align:middle is the highest one so I need to listen to him so it is my group so I will take middle hight of him<kbd>vertical-align:middle</kbd>
+				        				  	</p>
+				        				  	<span class="inline-block1" style="vertical-align: bottom;">I am in bottom group I am good mate with top and by I dont care aboout others alligment anyway cause I bottom to container<kbd>vertical-align:bottom</kbd>
+				        				  	</span>
+				        		 		</div>
+				        	  		</div>
+				        </div>
+			
+				    </div>
+				  </div><!--panel group-->
+				  <div class="panel-group bg-primary">
+				    <div class="panel panel-default">
+				      <div class="panel-heading">
+				        <h4 class="panel-title">
+				          <span class="glyphicon glyphicon-circle-arrow-down" data-toggle="collapse" data-target="#css6">bottom leading</span>
+				        </h4>
+				      </div>
+				      <div id="css6" class="panel-collapse collapse">
+				        <div class="panel-body">
+				        			  <style>
+
+
+				        			  	div.inline-block1 ,p.inline-block1 ,span.inline-block1 {
+				        			  		display:  inline-block;
+				        			  		/* padding: 0; */
+				        			  		/* border: 2px solid darkgrey; */
+				        			  		width: 16%;
+				        			  		padding:0 20px 0 20px;
+				        			  		/* margin:0px; */
+				        			  		/* color:green; */
+				        			  }
+
+				        			  </style>
+				        	
+				        	 		 <div class="wrapper">
+				        				  	<div class="inline-block1" style="vertical-align: middle;">
+				        				  		vertical-align:middle is the highest one is bottom so I need to listen to him so I am down 
+				        				  		<kbd>vertical-align:middle</kbd>
+				        				  	</div>
+				        				    <div class="inline-block1" style="vertical-align: top;">I in on top group I am alignment to container dont care about who is the tallest of us<kbd>vertical-align:top</kbd>
+				        					</div>
+				        					
+				        				  	<div class="inline-block1" style="vertical-align: bottom">
+				        				  		  	<br>addtional text next line<br>addtional text next line<br>addtional text: 
+				        				  			<kbd>I am the tallest and I am set to vertical-align: bottom</kbd>
+				        				  			<kbd>my height dectates the rest middle has to listen to me</kbd>
+				        				  			<br>
+				        				  			<br>
+				        				  			<br>addtional text next line<br>addtional text next line<br>addtional text: 
+				        				  			<br>addtional text next line<br>addtional text next line<br>addtional text: 
+				        				  	</div>
+				        				  	<p class="inline-block1" style="vertical-align: middle;">vertical-align:middle is the highest one is bottom so I need to listen to him so I am down <kbd>vertical-align:middle</kbd>
+				        				  	</p>
+				        				  	<span class="inline-block1" style="vertical-align: bottom;">I am in bottom group I am good mate with top and by I dont care aboout others alligment anyway cause I bottom to container<kbd>vertical-align:bottom</kbd>
+				        				  	</span>
+				        		 		</div>
+				        	  		</div>
+				        </div>
+				      
+				    </div>
+				  </div><!--panel group-->
+
+
+				  				  <h3 class="bg-primary">floating float:left</h3>
+
+				  				<div class="panel-group">
+				  				    <div class="panel panel-default">
+				  				      <div class="panel-heading">
+				  				        <h4 class="panel-title">
+				  				          <a data-toggle="collapse" href="#about4">About: floating</a>
+				  				        </h4>
+				  				      </div>
+				  				      <div id="about4" class="panel-collapse collapse">
+				  				        <div class="panel-body">
+				  				        	floting element dont have <kbd>height</kbd>, so you need to clear float by <code>clear:both</code> after the last element, that could be achieved in 2 ways: <br>
+				  				        		(1) by appling empty <code>div style="clear: both"</code>as last element<br>
+				  				        		(2) or by appling sudo class::after to the container <kbd>examples below...</kbd>
+
+				  				        		<h5>vertical aligmnet</h5>
+				  				        		<p>just because everythign is floating you can not use vertical align: cause <kbd>height</kbd> dont exist to vertically allign elements margin needs to be used or line-height (but line height wont work for muliple text lines)</p>
+
+				  				        		Also floated elements will only occupied the spaces needed for its content, diffrent to block element that are taking entire space from its container;
+				  				        </div>
+				  				        <div class="panel-footer">Example below</div>
+				  				      </div>
+				  				    </div>
+				  				  </div><!--panel group-->
+
+				  			
+
+				  				  <style>
+				  
+				  				  	div.floating {
+				  				  		float:left;
+				  						padding: 3px;
+				  						border: 2px solid darkgrey;
+				  						width: 40%;
+				  		
+				  				  }
+				  				  </style>
+				  				  <h5 class="bg-warning"> div style="clear:both"</h5>
+				  				  <div class="wrapper" style="margin-bottom: 50px;">
+						  				  	<div class="floating">div: display:block,padding: 3px;border: 2px solid darkgrey;margin:2px;
+						  				  	</div>
+						  				    <div class="floating">div: display:block,padding: 3px;border: 2px solid darkgrey;
+						  						margin:2px;<br>addtional text next line<br>addtional text next line<<br>addtional text next line/<br>addtional text next line
+						  					</div>
+						  					<div style="clear: both;">I am clearing float clear:both</div>
+						  		  </div>
+
+				  				  <style>
+				  
+				  				  	div.wrapperAfter div:last-child {
+				  				  		border:1px solid red;
+
+				  				    }
+				  				    .clearfixes:after { 
+				  				       content: "."; 
+				  				       visibility: hidden; 
+				  				       display: block; 
+				  				       height: 0; 
+				  				       clear: both;
+				  				    }
+				  				  </style>
+
+				  				  <h5 class="bg-warning">method containerElement:after </h5>
+				  				  				<div class="panel-group bg-primary">
+				  				  				    <div class="panel panel-default">
+				  				  				      <div class="panel-heading">
+				  				  				        <h4 class="panel-title">
+				  				  				          <span class="glyphicon glyphicon-circle-arrow-down" data-toggle="collapse" data-target="#collapseAfter">CSS (example below)</span>
+				  				  				        </h4>
+				  				  				      </div>
+				  				  				      <div id="collapseAfter" class="panel-collapse collapse">
+				  				  				        <div class="panel-body">
+				  				  				        	<div class="jumbotron">
+				  				      					  	<h4>CSS</h4>
+				  				      					    <code style="white-space: pre-line;">
+]
+  					  					  				    .clearfixes:after { 
+  					  					  				       content: "."; 
+  					  					  				       visibility: hidden; 
+  					  					  				       display: block; 
+  					  					  				       height: 0; 
+  					  					  				       clear: both;
+  					  					  				    }
+
+				  				      					  </code>
+				  				      					  </div>
+				  				  				        </div>
+				  				  				      </div>
+				  				  				    </div>
+				  				  				  </div><!--panel group-->
+				  				  <div class="wrapperAfter clearfixes" style="margin-bottom: 50px;border: 1px dotted green;">
+				  				  		<div class="floating">div: display:block,padding: 3px;border: 2px solid darkgrey;margin:2px;
+				  				  		</div>
+				  				    	<div class="floating ">div: display:block,padding: 3px;border: 2px solid darkgrey;
+				  						margin:2px;<br>addtional text next line<br>additional text next line<br>addtional text next line/<br>addtional text next line
+				  						</div>
+				  						
+				  				 </div>
+
+		</div>
+
+
+
+
+				  
+				  
+
+				  
+
+
+
+			</section>
+		</div>
+	</div>
+	
+</body>
+</html>

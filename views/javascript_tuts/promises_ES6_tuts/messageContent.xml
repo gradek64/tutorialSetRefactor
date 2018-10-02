@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <chapters>
+   <chapter>
+       <subject>ES6 promise</subject>
+       <content>
+           <subtitle>new Promise((reject,resolve)=>{})</subtitle>
+           <paragraph>
+               <info>new Promise((reject,resolve)=>{}) are the way to preform async javascript which is neccesarry for http requests</info>
+               <example>
+----------------new Promise ------------------------------
+
+new Promise( (resolve,reject) => {
+
+      var xhttp2 = new XMLHttpRequest();
+      const countryCode = "PL";
+      xhttp2.onreadystatechange = (e)=> {
+          if (e.target.readyState == 4 &amp;&amp; e.target.status == 200) {
+             const data = JSON.parse(e.target.responseText);
+
+             resolve(data);
+
+          }else if (e.target.readyState == 4 ){
+            const error = 'Something got wrong in between';
+
+            reject(error);
+          }
+      };
+      xhttp2.open("GET", `http://puzzle.mead.io/puzzle?wordCount=${wordCount}`, true);
+      xhttp2.send();
+  })
+};
+
+-------------response---------------
+
+xhttp2.then((response)=>{
+  console.log(response)// should be data
+}).catch((error)=>{
+  console.log(error)  //if comes back with error
+})
+
+------------------------------------------------------------
+
+               </example>
+           </paragraph>
+           <subtitle>chaining promises</subtitle>
+           <paragraph>
+               <info>chaining promises:
+                    allows to chain promises or methods that return value in .then((data)=>data) structure </info>
+               <example>
+
+--------------------chaining promises-------------------------
+
+const promiseChain = new Promise(function(resolve, reject) {
+
+setTimeout(() => resolve(2), 1000);
+
+}).then(function(value) {
+
+  //method that return value;
+  return value * 2;
+
+}).then(function(value) { // (**)
+
+
+//return a Promise 
+return new Promise((resolve, reject) => {
+  setTimeout(() => resolve(value * 2), 1000);
+});
+
+}).then(function(result) {
+
+//final result;
+console.log(result); // 8
+
+});
+---------------------------------------------------------------------------
+               </example>
+           </paragraph>
+       <subtitle>async function</subtitle>
+       <paragraph>
+           <info>async function:
+            always returns a promise; so inside body tags you need either: return a value or return a promise;
+           </info>
+           <example>
+  ------------------------------ async function-------------------------------
+
+  const processData = async () => {};
+  processData() //return Promise {resolved>: undefined}
+
+  //1. async metod return a value
+  const processData = async () => {
+    return 'value from async'
+
+    //or error 
+    setTimeout(() => {
+        throw new Error('Something got messed up!')
+    }, 1000);
+   
+  };
+
+  //obtain data from promise so .then()
+  processData()
+  .then((data)=>{
+        console.log(data);
+  })
+  .catch((er)=>{
+        console.log(er)
+  });
+
+ ------------------------ async method return a Promise---------------
+
+    return new Promise((resolve,reject)=>{
+        resolve('I am resolve promise');
+    });
+  };
+  
+  processDataPromise().then((data)=>{
+      console.log(data);
+  });
+
+-----------------------------------------------------------------------------
+
+           </example>
+       </paragraph>
+       <subtitle>async function with await</subtitle>
+       <paragraph>
+           <info>async function with await:
+            async function can live independly (as we saw example above) but await is alway in pair with async function, mean you can not use await 
+            without declaring async function first. 'await' expect either promise or return method.
+           </info>
+ <example>
+  ------------------------------ await feature  ------------------------------
+    
+  const promiseSet = new Promise(function(resolve, reject) {setTimeout(() => resolve('promise is resolved'), 1000); });
+
+  const processDataPromise = async () => {
+    const promiseResponse = await promiseSet;
+    console.log('await',promiseResponse);
+
+    //return asyn method 
+    return 'async response'
+  };
+
+  //call it async and expect promise back;
+  processDataPromise().then((data)=>{
+      console.log('async',data);
+  });
+
+------------------------------------------------------------
+           </example>
+       </paragraph>
+       <subtitle>chaining await feature in async function</subtitle>
+       <paragraph>
+           <info>chaining await feature in async function:
+            just like you chain promise you can chain await feature in async function since await procede a promise or return type function;
+           </info>
+           <example>
+--------------- async and await------------------------------
+
+ const addNumbers = (num) => new Promise(function(resolve, reject) {setTimeout(() => resolve(num + 2), 1000); });
+
+ const processDataPromiseChain = async () => {
+   let promiseResponse = await addNumbers(2);
+   //chain await call promiseResponse again;
+   promiseResponse = await addNumbers(promiseResponse);
+   //and again
+   promiseResponse = await addNumbers(promiseResponse);
+   //now chain return method;
+   const returnMethod = (promiseResponse) => promiseResponse + 2
+   
+   //finaly return a result ot async method (which is promise);
+   return returnMethod(promiseResponse);
+ };
+
+ //call it async and expect promise back;
+ processDataPromiseChain().then((data)=>{
+     console.log('async',data);
+ });
+
+ ------------------------------------------------------------
+
+           </example>
+       </paragraph>
+    </content>
+   </chapter>
+   <chapter>
+       <subject>test</subject>
+       <content>
+           <paragraph>
+               <info>test</info>
+               <example>test</example>
+           </paragraph>
+       </content>
+   </chapter>
+ </chapters>

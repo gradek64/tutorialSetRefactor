@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <chapters>
+   <chapter>
+       <subject>ES6 import and export in browser</subject>
+       <content>
+           <subtitle>ES6 import and export in browser files</subtitle>
+           <paragraph>
+               <info>Create main.js in a script folder as below that have import and react and react-dom </info>
+               <example>
+--------------------scripts/main.js------------------------
+'use strict';
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const title = 'My Minimal React Webpack Babel Setup is set';
+
+ReactDOM.render(
+  <div>{title}</div>,
+  document.getElementById('app')
+);
+
+
+ --------------------index.html------------------------
+ //for runing bundle.js in a browser;
+
+ &lt;!DOCTYPE html>
+ &lt;html lang="en">
+ &lt;head>
+  &lt;meta charset="UTF-8">
+  &lt;title>browserify outcome&lt;/title>
+ &lt;/head>
+ &lt;body>
+ &lt;script src="bundle.js">&lt;/script>
+ &lt;/body>
+ &lt;/html>
+
+ ------------------ ------------------ ------------------
+
+               </example>
+           </paragraph>
+           <subtitle>ES6 import and export in browser setup</subtitle>
+           <paragraph>
+               <info>
+                 ES6 import and export in browser: 
+                 Some of the features of ES6 dont work directly in browser just yet. Therefore we need use transpilers and compilers to make it work.Below Is is simple set up using:
+                 1) babel-cli = transpiler to ES5 or node.js code in command line
+                 2) babel-preset-env = preset needed for transpiling could be diffrent as react etc.
+                 2) babel-preset-react = preset needed for transpiling react into ES5 node.
+                 3) browserify = compiler of node.js code to use in browser, allows to use module.exports and require(modules) features in a browser
+               </info>
+               <example>
+--------------- project set up ---------------
+
+npm init -f //start package.json with defaults 
+
+--------------- install babel-cli ---------------
+
+//babel-cli to use in command line only for this example
+
+npm i babel-cli --save or -S (to list in dependencies);
+
+--------------------------------------------------
+
+               </example>
+           </paragraph>
+           <subtitle>install babel preset</subtitle>
+           <paragraph>
+               <info>npm i babel-preset-env -S 
+               it will traspile your ES6 code into node.js code if you use export/import module feature (require in node.js)
+               npm i babel-preset-react -S it will transpile react code into node.js code with require features 
+               </info>
+               <example>
+--------------- install babel presets---------------
+
+npm i babel-preset-env -S 
+npm i babel-preset-react -S 
+
+--------------------------------------------------
+               </example>
+           </paragraph>
+           <subtitle>use presets in your package.json </subtitle>
+           <paragraph>
+               <info>U need to use preset previously installed. U could also make separte file called .babelrc as :
+
+                --------------- .babelrc file as option---------------
+
+                {
+                  "presets": ["env","react"]
+                }
+                --------------------------------------------------
+
+                but it is possible to set it in package.json so why not ;P
+
+               </info>
+               <example>
+--------------- package.json part---------------
+
+"babel": {
+    "presets": [
+      "env", "react"
+    ]
+}
+--------------------------------------------------
+               </example>
+           </paragraph>
+           <subtitle>run your babel command for traspiling to ES5</subtitle>
+           <paragraph>
+               <info>In this exaple we going to run evertying in command line but in real project you would use gulp, grunt or node commands in package.json</info>
+               <example>
+--------------- run bubel for folder scripts ---------------
+
+//using local install babel ./node_modules/.bin/babel
+
+./node_modules/.bin/babel  ./scripts --experimental --source-maps-inline -d ./lib
+
+--------------------------------------------------
+
+               </example>
+           </paragraph>
+           <subtitle>run browserfy</subtitle>
+           <paragraph>
+               <info>run browserfy to the main file:
+               now we have traspiled version of files so it is time to compile main.js and run in browser
+             </info>
+               <example> 
+----run browserify only on main.js (since the other depend on it exporting) ----
+
+//using local install browserify ./node_modules/.bin/browserify
+
+./node_modules/.bin/browserify lib/main.js -o bundle.js
+
+----------------run bundle.js in browser ----------------------
+
+open index.html 
+
+//full example folder: simple_setup
+
+---------------- ---------------- ----------------
+            </example>
+           </paragraph>
+       </content>
+   </chapter>
+   <chapter>
+       <subject>React Components</subject>
+       <content>
+           <subtitle>Functional Component no JSX</subtitle>
+           <paragraph>
+               <info>Functional Component is a stateless component that calls a function that returns either jsx or React.create() element</info>
+               <example>
+------------------Functional Component no jsx by-------------------------
+
+React.createElement(HTMLElement,{ name: props.name },"content" or children);
+
+const FunctionalComponent = (props) => {
+      return React.createElement(
+        "p",
+        { name: props.name },
+        "I am functional component"
+      );
+  };
+} 
+
+ReactDOM.render(<FunctionalComponent name="Greg" />,document.getElementById('app'));
+
+
+               </example>
+           </paragraph>
+           <subtitle>Functional Component with JSX</subtitle>
+           <paragraph>
+               <info>Functional compoent in again Stateless compoents that accepts props as function argument and returns JSX syntax</info>
+               <example>
+------------------------- Functional Stateless component-----------
+
+ const FunctionalComponent = (props) => &lt;p>I am functional component&lt;/p>
+
+ReactDOM.render(&lt;FunctionalComponent name="Greg" />,document.getElementById('app'));
+
+-----------------------------------------------------------------
+               </example>
+           </paragraph>
+                  <subtitle>React Components: Statefull Classes</subtitle>
+                  <paragraph>
+                      <info>StateFull Class Component: it creates a component that accpets props and allows you to define 'state' and ref. Use only if you need that you need to change the state. You dont need to use JSX but it is preferable.</info>
+                      <example>
+                        
+class Hello extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={value:0}
+  }
+  render() {
+    return &lt;div>Hello {this.props.toWhat} &lt;/div>;
+  }
+}
+
+ReactDOM.render(
+  &lt;Hello toWhat="World" />,
+  document.getElementById('root')
+);
+                      </example>
+                  </paragraph>
+       </content>
+   </chapter>
+  <chapter>
+      <subject>JSX syntax</subject>
+      <content>
+          <subtitle>JSX single line</subtitle>
+          <paragraph>
+              <info>JSX could be set on single line and it needs {variable,js expresion} to interpolate that into syntax</info>
+              <example>
+---------------- jsx single Line--------------
+
+  const info = 'info';
+  const fn = value=> `myValue ${value}`
+
+  const jsxExample = &lt;div>{info} {fn('set')} {5+5} &lt;/div>
+
+  ReactDOM.render(
+    jsxExample,
+    document.getElementById('root')
+  );
+------------------------------------------------
+              </example>
+          </paragraph>
+          <subtitle>JSX multiple line</subtitle>
+          <paragraph>
+              <info>for clarity JSX could and should be set on multiple lines with () and it accepts {variable,js expresion} to interpolate that into syntax</info>
+              <example>
+---------------- jsx multiple Line needs () parenthesis--------------
+
+const info = 'info';
+const fn = value=> `myValue ${value}`
+
+const jsxExample = (
+                    &lt;div>
+                      {info}
+                      {fn('set')} 
+                      {5+5} 
+                    &lt;/div>
+                    );
+
+ReactDOM.render(
+  jsxExample,
+  document.getElementById('root')
+);
+------------------------------------------------
+              </example>
+          </paragraph>
+          <subtitle>JSX nesting</subtitle>
+          <paragraph>
+              <info>U could nest your jsx and render them into one jsx</info>
+              <example>
+---------------- jsx multiple Line--------------
+
+const nestAndRenderArray = [1,2,3,4];
+//create jsx outside
+const outside = nestAndRenderArray.map( arrEl => &lt;p key={arrEl+3} > myElements: {arrEl} &lt;/p>);
+
+const jsxExample = (
+            &lt;div>
+                &lt;div>
+                    {&lt;p>{5+5}&lt;/p>}
+                 &lt;/div>
+                      {   nestAndRenderArray.map( arrEl =>
+                            &lt;p key={arrEl} > myElements: {arrEl} &lt;/p>)
+                      }
+                &lt;div>
+                    {outside}
+                &lt;/div>
+            &lt;/div>
+        );
+
+ReactDOM.render(
+  jsxExample,
+  document.getElementById('root')
+);
+------------------------------------------------
+
+
+
+              </example>
+          </paragraph>
+      </content>
+  </chapter>
+ </chapters>

@@ -1,0 +1,191 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">  
+  <title>tutorial === Layout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/tutorial.css">
+  <link rel="stylesheet" href="css/tooltip.css">
+</head>
+<body translate="no">
+<div class="l-site">
+  <div class="l-nav">
+    <nav class="nav">
+      <input type="text" placeholder="Search" id="search">
+      <div style="clear: both;"></div>
+      <!-- nunjucks loop-->
+            
+<ul class="links">
+<!--list-tag-->
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/string_tuts">check if type of string or number</a><span class="tooltiptext">check if type of string or number</span>
+                 
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/string_tuts">String methods()</a><span class="tooltiptext">String methods()</span>
+                 
+      </li>
+    
+<!--end-list-tag-->
+</ul>
+
+       <!-- nunjucks loop-->
+    </nav>
+  </div>
+  <div class="l-page">
+    <div class="menu">
+      <div class="menu-hamburger"></div>
+    </div>
+      <!-- nunjucks loop-->
+          
+<div class="sectionWrapper">
+  <div class="sectionContainer">
+   
+      
+      <section  class="band band-b activeSection"  class="band band-b">
+          <h1> check if type of string or number </h1> 
+          
+              <div class="band-container first" part="part-1">
+                <div class="band-inner">
+
+                  <p>check if it string</p>
+                  <div class="codeWraper">
+                    <code>const str = &#39;I am a string&#39;
+                 
+                // 1. type of string 
+                typeof str === &#39;string&#39;;
+
+
+                //2.to String method on Object  
+                Object.prototype.toString.call(str) === &quot;[object String]&quot;</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container " part="part-2">
+                <div class="band-inner">
+
+                  <p>is a Number type</p>
+                  <div class="codeWraper">
+                    <code>const num = 12;
+                  
+                  //1;
+                  Number.isInteger(num);
+
+                  //2 
+                  !isNaN(num)
+
+                  //3 
+                  Object.prototype.toString.call(num) === &quot;[object Number]&quot;
+
+                  //4
+                  typeof num === &quot;number&quot;</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> String methods() </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>some of the string methods</p>
+                  <div class="codeWraper">
+                    <code>----------changing to lower or upper case----------
+
+            1 &#39;string&#39;.toLowerCase()   = coverts all characters to lowercase 
+
+            2 &#39;string&#39;.toUpperCase()  = coverts all characters to Uppercase
+
+
+
+            ----------finding index of character----------
+
+            3 &#39;string&#39;.indexOf(string)  = find FIRST ocurance of word returning its INDEX
+              
+            3a &#39;string&#39;.search(&#39;string&#39;); = find FIRST ocurance of word returning its INDEX
+
+            4 &#39;string&#39;.lastIndexOf(&#39;string&#39;) = find LAST ocurance of word returning its INDEX
+
+
+
+            
+            ----------Extracting,slicing -------------
+
+            5 &#39;string&#39;.slice([index-optional,end-index-optional]) = will slice your text according to start-index, end-index
+
+            6 &#39;string&#39;.substring([index-optional,end-index-optional]); will slice your text according to start-index,end-index
+
+            6a &#39;string&#39;.substr(start-inedex,length); will slice your text according to start-index,length-to-extract
+
+            6b &#39;string&#39;.trim()   = removes white space at the beginnig and end of the string if any;
+
+
+
+
+            ----------Replace part of the text based on text or Regex----------
+
+            7 &#39;string&#39;.replace(&quot;original world&quot;,&quot;replacing world&quot;);
+
+            7a &#39;string&#39;.replace(/regex/,&quot;replacing world&quot;,);\
+
+
+            ----------concatenate text----------
+
+            8 &#39;string&#39;.concat(string2);
+
+            8a same as &quot;string1&quot; + &quot;string2&quot;;
+
+
+            ----------converting to Array----------
+
+            9 &#39;string&#39;.split(&quot;,&quot;) = Convert string to Array based on coma seperator;
+
+            9a &#39;string&#39;.split(/[ ,-]+/); Convert string to Array based on regex expresion; (you can specify multiple seperators with regex);
+
+            10 eval([&#39;string_array&#39;,1]) =  Converts to Array if you have right array-like string &quot;[&#39;array&#39;,&quot;like&quot;,&quot;string&quot;]&quot;;
+
+
+            -------------- converting to Object -------------
+            
+            10 str= &#39;{&quot;gaga:&quot;:&quot;gaga&quot;,&quot;gag&quot;:2}&#39;
+
+            JSON.parse(str);      
+
+            //retuns {gaga:&quot;gaga&quot;,gag:2};</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+  
+    <section class="band band-b activeSection">
+      <h1></h1>
+
+      
+
+
+
+        
+
+    </section>
+  
+  </div>
+</div>
+
+       <!-- nunjucks loop-->
+  </div>
+</div>
+<script src="scripts/nav-links.js"></script>
+<script src="scripts/tooltips_links_over.js"></script>
+<script src="scripts/search_nav.js"></script>
+ </body></html>

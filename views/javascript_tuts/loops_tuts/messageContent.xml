@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <chapters>
+   <chapter>
+       <subject>for loop</subject>
+       <content>
+           <subtitle>for loop</subtitle>
+           <paragraph>
+               <info>for loop</info>
+               <example>
+---------------------loop upwards--------------------------
+
+for(  var i = 0;  i>=10 ; i++  ){}
+
+------------------loop backwards------------------   
+
+// for(var i = 10;i>5;i--){}  prints numbers 10,9,8,7,6,
+
+------------------loop backwards shorthand------------------
+
+// for(var i = 10; i ; i--){}  
+
+prints numbers 10,9,8,7,6,5,4,3,2,1 when you specify i then it knows that i reaches from 10 to the end (1); 
+
+--------------------------------------------------------------
+               </example>
+           </paragraph>
+           <subtitle>for loop (multiple nested loops)</subtitle>
+           <paragraph>
+               <info>
+                 For loop accepts more the one variable to loop through, so for the limit i&lt;50; for i interator it will be valid (accesable) for the rest of variables as well(j,n), very good feature for specifying every second , third ..etc element in one go.
+               </info>
+               <example>
+--------------with multiply variable-----------------------
+
+ for (i=0,j=1; i &lt; 50; i++, j = i+1){
+   console.log("variable i........: " + i);
+   console.log("variable j.....: " + j);
+   
+ }
+
+ ---exercise find even numbers in the loop-----------------
+
+ for (i=0,j=1; i &lt; 50; i++, j = i%2==0? i : undefined){
+   
+   console.log("variable i........: " + i);
+     if(j){
+          console.log("variable j.....: " + j);
+     }
+
+ }
+ ------------------------------------------------------------
+
+               </example>
+           </paragraph>
+           <subtitle>for loop multiply variables shuffle array (summary)</subtitle>
+           <paragraph>
+               <info>or loop multiple variables can be used for randomizing array content</info>
+               <example>
+ -------------------randomize array in loop -------------------
+
+ const cards =['first','second','third','forth','finth'];
+
+ for(  var j, x, i = cards.length;i;j = parseInt(Math.random() * i), x = cards[--i], cards[i] = cards[j], cards[j] = x){
+            console.log(cards);   
+ }
+  
+
+-------------------swap array in loop -------------------
+ the same could be achived in simple loop below it is about SWAP array values:
+
+ var set = ['one','two','three'];
+ var current = 0;
+ for(var i = 0; i&lt;set.length;i++){
+   var ran = Math.floor(Math.random()*set.length);
+   initial = set[i];
+   //assign current to random;
+   set[i]=set[ran];
+   //assign random current 
+   set[ran]=initial; //so they swap places
+ }
+ console.log(set);
+
+ ------------------------------------------------------------
+               </example>
+           </paragraph>
+       </content>
+   </chapter>
+   <chapter>
+       <subject>while loop</subject>
+       <content>
+           <subtitle>while loop</subtitle>
+           <paragraph>
+               <info>while loop it will work as long as condition in while() is defined, true or has a value , it will stop if it undefined,null or 0;</info>
+               <example>
+                 
+ ------------------------the best example ever ----------------
+
+ var set2 = 4;
+ while(set2--){console.log(set2)}; //it stops when gets to 0;
+
+ ----------so this could be nicely used for arrays loop-------
+
+ var arr = ['one', 'two', 'three'];
+ var set = arr.length;
+ while(set--){
+    console.log(arr[set])
+ }
+
+ var arr = ['one', 'two', 'three'];
+ var set = arr.length;
+
+ while(set){
+    set--;
+    console.log(arr[set])
+ }
+
+
+ -------------inetracting upwards----------------
+
+ var arr = ['one', 'two', 'three'];
+ var i = 0;
+  
+ ----------as long as arr[i] is defined so it has value-----
+
+ while(arr[i]){
+  console.log(arr[i]);
+  i++;
+ }
+
+ ------------------------------------------------------------------------
+               </example>
+           </paragraph>
+           <subtitle>while loop with break</subtitle>
+           <paragraph>
+               <info>while loop with break:
+                 Any loop (for,while) can be terminated by break statment
+                 while(condition) will terminate if condition is false, undifinded, null or 0 value but even if the condition is set we can break it the loop by:
+               </info>
+               <example>
+--------------break the loop---------------------------
+
+var value = 3;
+while(value){
+ if(value==1) break;
+ console.log('value',value);
+ value--;
+}
+
+//same with for loop;
+var value = 3;
+for(value;value;value--){
+ if(value==1) break;
+ console.log('value',value)
+}
+------------------------------------------------------------
+               </example>
+           </paragraph>
+       </content>
+   </chapter>
+   <chapter>
+       <subject>loops in function body</subject>
+       <content>
+           <paragraph>
+               <info>loops in function body:
+                any function can be terminted by return statament them same could be done in any loop that is nested in function body</info>
+               <example>
+--------------break means return funciton ---------------------------
+
+var len = 5;
+var breakMe = function(){
+
+while(len){
+ if(len==2) return;
+ console.log(len);
+ len--;
+}
+}(); 
+console.log(breakMe);
+------------  ------------  ------------  ------------  ------------
+               </example>
+           </paragraph>
+       </content>
+   </chapter>
+ </chapters>

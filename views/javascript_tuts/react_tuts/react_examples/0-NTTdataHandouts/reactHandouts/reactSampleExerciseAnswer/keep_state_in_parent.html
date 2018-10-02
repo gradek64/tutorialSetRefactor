@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>React and JSON exercise</title>
+	<style>
+		body {
+			margin: 0;
+			width: 100%;
+		}
+
+		* {
+			font-family: arial;
+		}
+
+		#container {
+			color: black;
+			display: block;
+			margin: 0 auto;
+			width: 95%;
+		}
+
+		#container h3 {
+			font-size: 2rem;
+			margin: 50px 0;
+			text-align: center;
+		}
+
+		#news {
+			display: grid;
+			grid-template-columns: 1fr;
+			grid-gap: 20px;
+		}
+
+		@media screen and (min-width: 640px) {
+			#news {
+				grid-template-columns: 1fr 1fr;
+			}
+		}
+
+		@media screen and (min-width: 960px) {
+			#news {
+				grid-template-columns: 1fr 1fr 1fr 1fr;
+			}
+		}
+
+		#container .panel h3 {
+			font-size: 1rem;
+			margin: 5px 0;
+			overflow: hidden;
+			text-align: left;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			max-width: 250px;
+		}
+
+		.panel img {
+			border: 1px solid #666;
+			max-height: 250px;
+			width: 100%;
+		}
+
+		.panel {
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			box-shadow: 0 0 10px 2px #f1f1f1;
+			padding: 10px;
+		}
+
+		.btn-like {
+			background: blue;
+			color: #fff;
+			margin: 0 0 0 10px;
+			padding: 4px 10px;
+		}
+
+
+		.btn-fav {
+			background: red;
+			color: #fff;
+			margin: 0 0 0 10px;
+			padding: 4px 10px;
+		}
+
+		.btn-fav--isActive {
+			background: green;
+		}
+	</style>
+	<script type="text/javascript" src="json2.js"></script>
+
+	<script src="build/react.development.js"></script>
+	<script src="build/react-dom.development.js"></script>
+	<script src="build/babel.min.js"></script>
+
+</head>
+
+<body>
+	<div id='container'>
+		<h3> Today's flickr feed</h3>
+		<div id='news'></div>
+	</div>
+	<script type="text/javascript">  
+		var myArray;
+
+		var myfeed = function (json) {
+			myArray = json.items;
+		}  
+	</script>
+
+	<script src="http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=myfeed&format=json&tags=cars">
+	</script>
+
+	<script type="text/babel">
+	function init(data){
+
+		class NewsComp extends React.Component {
+			constructor (props) {
+				super(props)
+
+				this.state = {
+					favourite: localStorage.getItem('storedFav') || ''
+				}
+			}
+			
+			componentDidMount() {
+				window.addEventListener("beforeunload", this.beforeClose);
+			}	
+
+			componentWillUnmount(){
+				window.removeEventListener("beforeunload", this.beforeClose);
+			}
+
+			beforeClose = () => {
+				localStorage.setItem('storedFav',this.state.favourite);
+			}
+
+			setFav = (url) => {
+				const value = url;
+				
+				this.setState(prevState => (prevState.favourite === value) 
+						? {favourite: null}
+						: {favourite: value}
+				)
+			}
+			
+			render(){
+				const { news } = this.props;
+				return(
+					<React.Fragment>
+					{news.map((item,i) => {
+						const active = (item.media.m === this.state.favourite) ? true : false 
+						return <Panel key={i} item={item} setFav={this.setFav} active={active}/>						
+					})}
+					</React.Fragment>
+				)
+			}
+		}
+
+		class Panel extends React.Component {
+			constructor(props) {
+				super(props);
+				this.state = {
+					likes : 0
+				}
+			}
+
+			likeClick = () => this.setState({ likes : this.state.likes + 1});
+
+			render() {
+				const { item } = this.props;
+
+				return (
+					<div className="panel">
+						<h3>{item.title}</h3>
+						<p><small>{item.author}</small></p>
+						<p><small>{item.date_taken}</small></p>
+						<img src={item.media.m} alt={item.title} />
+						<div>
+							<span className="likes">{this.state.likes}</span>	
+							<button
+								className="btn-like"
+								onClick={() => this.likeClick()}
+							>
+								Like
+							</button>
+							<button
+								className={["btn-fav",
+									this.props.active ? "btn-fav--isActive" : ""].join(" ")}
+								onClick={() => this.props.setFav(item.media.m)}>
+								favourite
+							</button>
+						</div>
+					</div>
+				)
+			}
+		}
+
+		Panel.defaultProps = {
+			item:  {
+				title: "title",
+				author: "anon",
+				tags: "tags",
+				date_taken: "default",
+				media: {m: ""}
+			}
+		}
+		
+
+		ReactDOM.render(
+      <NewsComp news={data} />,
+        document.getElementById('news')
+    );
+
+	};
+
+	init(myArray);
+
+	</script>
+</body>
+
+</html>

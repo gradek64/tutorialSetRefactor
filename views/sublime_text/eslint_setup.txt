@@ -1,0 +1,4 @@
+
+		1) you can set eslint linter globally with generic rules by:
+
+			npm i -g eslint 

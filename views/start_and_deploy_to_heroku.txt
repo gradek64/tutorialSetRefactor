@@ -1,0 +1,39 @@
+	
+		1) download heroku-cli for terminal usage 
+
+		2) to make sure it is installed : heroku -v 
+		
+		3) heroku login (command)
+	
+		4) heroku apps (list all your apps)
+
+		5) start your git repository : git init and push it 
+
+		6) show your remotes: git remote -v 
+
+			at this point you should only have 2 remotes set up:
+
+			origin	https://github.com/gradek64/portfolio.git (fetch)
+			origin	https://github.com/gradek64/portfolio.git (push)
+
+		7) U need to create your app on heroic by:
+		
+			heroku apps:create portfolio-set
+
+		7a) list your heroku apps;
+
+			heroku apps
+
+		
+	       8) you need to add you heroku remote repository as well to be able to push to heroku therefore: 
+
+			heroku git:remote -a  portfolio-set
+
+		8a) list now your all repositories you should have additional for heroku
+
+			heroku	https://git.heroku.com/portfolio-set.git (fetch)
+			heroku	https://git.heroku.com/portfolio-set.git (push)
+			origin	https://github.com/gradek64/portfolio.git (fetch)
+			origin	https://github.com/gradek64/portfolio.git (push)
+		
+	       9) now push to heroku by: git push -f heroku master

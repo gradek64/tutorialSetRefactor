@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CSS3 Selectors</title>
+</head>
+<body>
+
+
+<style type="text/css">
+	
+	div.bg { background-color: orange;}
+	code {
+		white-space: pre;
+	}
+
+</style>
+
+</body>
+
+			
+
+			
+
+			<div id="container" style="border:1px dotted #ccc">
+			<p style="background-color:green"><h2 style="color:orange">descendant selector X Y (div ul)</h2>It will select descendant (nested) element</p>
+
+			<div class="bg"><code>
+				
+				#container ul {
+					    background-color: yellow;
+					}
+
+			</code></div>
+
+			<div  style="background-color:#ccc">
+			   <p> My paragraph here. </p>
+			   <ul>
+			      <li> List Item 1</li>
+			      <li> List Item 2</li>
+			   </ul>
+
+			   <ul>
+			      <li class="warning">Something went Wrong </li>
+			      <li> List Item 4</li>
+			   </ul>   
+			</div>
+
+			</div>
+
+			<style type="text/css">
+					#container ul {
+					    background-color: yellow;
+					}
+
+			</style>
+	
+			<!--adjacent selector. ( ul + p ) first p to the selector proceeding -->
+
+			<div id="container2" style="border:1px dotted #ccc">
+				  <p style="background-color:green"><h2 style="color:orange">adjacent selector. ( ul + p )</h2><p style="font-size:18px">It will select only the element that is immediately preceded by the former element. next() to first selectd next after ul that is p</p></p></p>
+
+
+				  <div class="bg"><code>
+				  	
+					#example2 ul + p {
+			   	      color: red;
+			   	   }
+
+				  </code></div>
+
+					<div id="example2" style="background-color:#ccc">
+						
+					      <ul>
+					         <li>li </li>
+					      </ul>
+
+					      <p> paragaph </p>
+					      <p> paragaph </p>
+
+					      <ul>
+					         <li> li </li>
+					         
+					      </ul>
+
+					      <p> paragaph </p>
+					      <p> paragaph </p>
+					</div>				  
+			   </div>
+
+			   <style type="text/css">
+			   	
+			   	 #example2 ul + p {
+			   	     color: red;
+			   	 }
+			   </style>
+
+			   <!-- only one depth of selection m( ul > li  ) (deosent include nested elements of the same elements ul > li )-->
+
+			   <div style="border:1px dotted #ccc">
+				  <p style="background-color:green"><h2 style="color:orange">modified standard selector (X > Y )</h2><p style="font-size:18px">it will select only first child of selection (depth 0) and one child of li </p></p></p>
+
+
+
+				  <div class="bg"><code>
+
+				  	div#example3 > ul > li{
+				  				border:1px solid green;
+				  	}
+
+				  </code></div>
+
+					<div id="example3" style="background-color:#ccc">
+						
+					    <ul>
+					          <li> List Item</li>
+					          <li> Child selectd in div#example3 > ul  </li>
+
+					          <li> List Item
+									<ul>
+									          <li> this is not selectd cause it it nested ul > li </li>
+									          <li> this is not selectd cause it it nested ul > li  </li>
+									</ul>
+							   </li>
+					          <li> List Item </li>
+					    </ul>
+					    
+					</div>				  
+			   </div>
+
+			   <style type="text/css">
+			   	
+			   	div#example3 > ul > li{
+			   	  border:1px solid green;
+			   	}
+
+
+			   </style>
+				
+
+			   <!--This sibling combinator  ( ul ~ p ) every p to the selector proceeding, less strict that ul + p (only first p) -->
+
+				   <div style="border:1px dotted #ccc">
+					  <p style="background-color:green"><h2 style="color:orange">modified standard selector (X ~ Y )</h2><p style="font-size:18px">however, it's less strict. While an adjacent selector (ul + p) will only select the first element that is immediately preceded by the former selector, this one is more generalized. It will select, referring to our example above, any p elements, as long as they follow a ul.</p></p></p>
+
+
+					  <div class="bg"><code>
+
+					  	
+					  	div#example4 ul ~ p { /*u can only use one sibling combinator it wont work it there is more + > or ~ */
+					  	  border: 3px solid green;
+					  	}
+
+					  </code></div>
+
+						<div id="example4" style="background-color:#ccc">
+							
+						    <ul>
+
+						           <ul>
+						               <li> Child selectd in div#example3 > ul </li>
+						               <li> 
+											<ul>
+											    <li>   <p>I am first selection by ul ~ p</p> </li>
+											    <li>  <p>I am first selection by ul ~ p</p> </li>
+											 </ul>
+											  <p>I am first selection by ul ~ p</p>
+											  <p>I am first selection by ul ~ p</p>
+						               </li>
+						            </ul>
+						         	<p>I am first selection by ul ~ p</p>
+						         	<p>I am second selection by ul ~ p</p>
+						         	<p>I am third ...so on  selection by ul ~ p (every p next to proceeding ul)</p>
+						    </ul>
+						</div>				  
+				   </div>
+
+				   <style type="text/css">
+				   	
+				   	div#example4 ul ~ p { /*u can only use one sibling combinator it wont work it there is more + > or ~ */
+				   	  border: 3px solid green;
+				   	}
+
+
+				   </style>
+
+
+
+				      <!--attribute selector ( a[title] ) select with title attribute  -->
+
+				   	   <div style="border:1px dotted #ccc">
+				   		  <p style="background-color:green"><h2 style="color:orange">attribute selector (a[title])</h2><p style="font-size:18px">Referred to as an attributes selector, in our example above, this will only select the anchor tags that have a title attribute.</p></p></p>
+
+
+				   		  <div class="bg"><code>
+
+				   		  
+				   		  	div#example5 a[title] {
+				   		     	color: green;
+				   		  	}
+
+				   		  </code></div>
+
+				   			<div id="example5" style="background-color:#ccc">
+				   				
+				   			    <p> Lorem ipsum dolor sit amet, <a href="#" title="Some title">consectetur</a> adipisicing elit, sed do eiusmod tempor. </p>
+				   			         <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+				   			         <p> Lorem ipsum dolor sit amet, consectetur <a href="#">adipisicing</a> elit, sed do eiusmod tempor. </p>
+				   			         <a href="#" title="Some title">consectetur</a> adipisicing elit, sed do eiusmod tempor. </p>
+				   			      </div>
+				   			</div>				  
+				   	   </div>
+
+				   	   <style type="text/css">
+				   	   	
+						div#example5 a[title] {
+						   color: green;
+						}
+
+
+				   	   </style>
+
+
+
+				   	         <!--attribute selector name( a[title="greg"] ) select with title attribute  -->
+
+				   	      	   <div style="border:1px dotted #ccc">
+				   	      		  <p style="background-color:green"><h2 style="color:orange">attribute selector (a[title="value"])</h2><p style="font-size:18px">Referred to as an attributes selector value, in our example above, this will only select the anchor tags that have a title attribute title="greg".</p></p></p>
+
+				   	      		  <div class="bg"><code>
+
+				   	      		  
+				   	      		  	div#example6 a[title="greg"] {
+				   	      		  			color: green;
+				   	      		  	}
+
+				   	      		  </code></div>
+
+				   	      			<div id="example6" style="background-color:#ccc">
+				   	      				
+				   	      			    <p> Lorem ipsum dolor sit amet, <a href="#" title="Some title">consectetur</a> adipisicing elit, sed do eiusmod tempor. </p>
+				   	      			         <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor. </p>
+				   	      			         <p> Lorem ipsum dolor sit amet, consectetur <a href="#">adipisicing</a> elit, sed do eiusmod tempor. </p>
+				   	      			         <a href="#" title="greg">consectetur</a> only this anchor is selected; </p>
+				   	      			      </div>
+				   	      			</div>				  
+				   	      	   </div>
+
+				   	      	   <style type="text/css">
+				   	      	   	
+				   	   		div#example6 a[title="greg"] {
+				   	   		   color: green;
+				   	   		}
+
+
+				   	      	   </style>
+
+
+
+				   	      	         <!--p::after or p:after or p::before or p:before -->
+
+				   	      	      	   <div style="border:1px dotted #ccc">
+				   	      	      		  <p style="background-color:green"><h2 style="color:orange">p::after or p:after or p::before or p:before </h2><p style="font-size:18px">you can add conent before and after tag.</p></p></p>
+
+
+				   	      	      		  <div class="bg"><code>
+
+
+				   	      	      		  	div#example7 p:before {
+				   	      	      		  	   
+				   	      	      		  	   content: "{{";
+				   	      	      		  	}
+
+				   	      	      		  	div#example7 p:after  {
+				   	      	      		  	   content: "}}";
+				   	      	      		  	}
+
+				   	      	      		  </code></div>
+
+				   	      	      			<div id="example7" style="background-color:#ccc">
+				   	      	      				
+				   	      	      			    <p> this is my code in brackets </p>
+				   	      	      			      </div>
+				   	      	      			</div>				  
+				   	      	      	   </div>
+
+				   	      	      <style type="text/css">
+				   	      	      	   	
+				   	      	   		div#example7 p:before {
+				   	      	   		   
+				   	      	   		   content: "{{";
+				   	      	   		}
+
+				   	      	   		div#example7 p:after  {
+				   	      	   		   content: "}}";
+				   	      	   		}
+
+
+				   	      	     </style>
+
+
+				   	      	        <!--nth-child(2n+2) -->
+
+				   	      	     	   <div style="border:1px dotted #ccc">
+				   	      	     		  <p style="background-color:green"><h2 style="color:orange">nth-child(2n+2) select every second element from the un-order list</h2></p>
+
+				   	      	     		  <div class="bg"><code>
+											
+
+											#example8 ul li:nth-child(2n+2) {  
+											  color: red;
+											}
+
+
+				   	      	     		  </code></div>
+
+				   	      	     			<div id="example8" style="background-color:#ccc">
+				   	      	     				<ul>
+				   	      	     					<li>li element</li>
+				   	      	     					<li>li element</li>
+				   	      	     					<li>li element</li>
+				   	      	     					<li>li element</li>
+				   	      	     					<li>li element</li>
+				   	      	     					<li>li element</li>
+				   	      	     					<li>li element</li>
+				   	      	     					<li>li element</li>
+				   	      	     					<li>li element</li>
+				   	      	     					<li>li element</li>
+				   	      	     				</ul>
+				   	      	     			</div>	
+
+				   	      	     	   </div>
+			
+
+							<style type="text/css">
+								
+								#example8 ul li:nth-child(2n+2) {  
+								  color: red;
+								}
+							</style>	
+
+
+</html>

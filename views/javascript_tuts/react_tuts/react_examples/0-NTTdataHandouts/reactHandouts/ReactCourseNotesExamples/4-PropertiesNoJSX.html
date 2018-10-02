@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic component example for React.js and JSX</title>
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  </head>
+  <body>
+	<div id='content'></div>
+    <script src="build/react.development.js"></script>
+    <script src="build/react-dom.development.js"></script>
+    <script>
+		  (function(){
+		  	'use strict';
+		  	//no jsx
+
+			function Greet(props) { 
+			   return React.createElement('div', null, 
+			    React.createElement('h2', null, "Name: " + props.firstName + " " + props.lastName),
+			  );
+			}
+
+			Greet.defaultProps = {
+					firstName:'Jill',
+					lastName:'Clarke'
+			};
+
+			ReactDOM.render(React.createElement(Greet, {firstName:'Fred'}),document.getElementById('content'));
+			
+		  })();
+	</script>	
+  </body>
+</html>

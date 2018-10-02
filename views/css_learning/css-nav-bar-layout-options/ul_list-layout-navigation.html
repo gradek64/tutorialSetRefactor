@@ -1,0 +1,397 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Distributed Horizontal Menu</title>
+<meta name="generator" content="PSPad editor, www.pspad.com">
+<style type="text/css">
+
+
+
+
+<style>
+			.nav-container2 {
+				border:5px solid red;
+				display: table;
+				height: 200px;
+			}
+			.variance {
+				display: table-cell;
+				border:1px solid green;
+				vertical-align: middle;
+			}
+			.menu2 {
+				width: 100%;
+				display: table-cell;
+				border:3px solid orange;
+				vertical-align: middle;
+			}
+
+			ul.list {
+				border:5px solid red;
+				display: table;
+				margin: 0 auto;
+				padding: 0;
+			}
+			ul.list li {
+				list-style: none;
+				display: table-cell;
+
+			}
+
+			.total {
+				display: table-cell;
+				border:1px solid green;
+				min-width: 120px;
+				vertical-align: middle;
+				
+			}
+						.total  p {
+							width: 80%;
+							margin: 0 auto;
+						}
+
+
+		</style>
+</head>
+<body>
+	<div class="container" style="border:1px dotted green;border-radius:5px;">
+		3 ways to center content vertically
+		<ul>
+			<li>display:table-cell vertical-align:middle</li>
+			<li>display:inline-block with vertical-align:middle (with one element leading takes entire height)</li>
+			<li>float:left and right with height and line-height set to the same value</li>
+		</ul>
+	</div>
+	<h2>Method1 :  display:table</h2>
+<div class="info">
+	<p>Content wrapped by: sides: display: table-cell</p>
+	<p>Content wrapped by: middle: display: table-cell; width:100%; ul-list :display:table for wraping content and margin:0 auto;</p>
+	<p>Content wrapped by: sides: display: table-cell</p>
+</div>
+
+<!--container -->
+<div class="nav-container2">
+	<!--element 1 -->
+    <div class="variance">display:table-cell</div>
+	<!--element 2 -->
+    <div class="menu2">
+    		<ul class="list">
+			    		<li><a href="#">Home</a></li>
+	    		 		<li><a href="#">Collections</a></li>
+	    		 		<li><a href="#">About&nbsp;Us</a></li>
+	    		 		<li><a href="#">Stockists</a></li>
+	    		 		<li><a href="#">Trade&nbsp;Enquiries</a></li>
+	    		 		<li><a href="#">Press</a></li>
+	    		 		<li class="last"><a href="#">Contact&nbsp;Us</a></li>
+
+    		</ul>
+    </div>
+	<!--element 3 -->
+    <div class="variance">display:table-cell</div>
+</div>
+
+
+<style>
+			.nav-container3 {
+				border:5px solid red;
+				display: table;
+				height: 200px;
+			}
+			.variance1 {
+				display: table-cell;
+				border:1px solid green;
+				vertical-align: middle;
+			}
+			.menu3 {
+				width: 100%;
+				display: table-cell;
+				border:3px solid orange;
+				vertical-align: middle;
+			}
+
+					ul.nav {
+						margin:auto;
+						list-style:none;
+						padding:0 10px;
+						min-width:40em;
+						width:90%;
+						/*overflow:hidden*/;/* trick 1 -- allows you to hide the oversize margin on li:lasct-child element*/
+						text-align:justify; /* tick 2 this is one is supper cool , when the li:lasct-child drops to the next line or (its :after value to!) the rest of the element will spread out evenly to justify content of the line */
+						background-color:#fff;
+						font-size:100%;
+						line-height:3em;
+						height:3em;
+						/*min-width: 785px;*/ /* you need to find break point as weel :(*/
+						border: 1px dashed green;
+					}
+
+					ul.nav li { display:inline; border:1px solid orange;}
+
+					ul.nav li:last-child { margin-right:100%;border:3px solid red; } /*trick 3 You need to give a oversise margin to the last element so it will drop down and makes all other element to fit on the line */
+
+					ul.nav li a {
+						display:inline-block;
+						line-height:3em;
+						vertical-align:middle;
+						text-decoration:none;
+						text-transform:uppercase;
+					}
+					ul.nav li:last-child:after{content:"\\00a0"; visibility: hidden;} /* trick 4 ...wait we dont want the last elemnt to drop down , there we need to give its :after element a content so he will drop out not the element itsleft , We will sucrifice him ;)*/
+
+			.total1 {
+				display: table-cell;
+				border:1px solid green;
+				min-width: 120px;
+				vertical-align: middle;
+				
+			}
+						.total1  p {
+							width: 80%;
+							margin: 0 auto;
+						}
+
+
+		</style>
+
+
+<div style="text-align: center;">
+<span> this is </span>
+<span style="margin-right: 100%"> this is </span>
+</div>
+		<h2>Method2: display: table text-align:justify</h2>
+		<h4>Flexible menu list with justify content text-align:justify</h4>
+		<h4>the same as above but with additional: text align:justify for streching space between li</h4>
+		<h2>Info about display:table</h2>
+		<p>display table as container will wrap your content to the width of how much it needs (it wont take 100% if content doesnt need it) </p>
+		<p>display:table-cell it will wrap the content and start displayin them in the row as cell you can aslo use vertical-aligment:middle, top, bottom</p>
+		<h4>advantage: it will adapt to any content and position vertically and horizontally easilly</h4>
+		<h4>advantage: it will take entirey hight no need to set up height at all</h4>
+		<h4>advantage: it will for any browser </h4>
+		<h4>disadvantage: it is old-fasion way of displaying data that could be advantage at the same time</h4>
+<!--container -->
+<div class="nav-container3">
+	<!--element 1 -->
+    <div class="variance1">display:table-cell</div>
+	<!--element 2 -->
+    <div class="menu3">
+    		<ul class="nav">
+    				<li><a href="#">Home Home Home</a></li>
+    				<li><a href="#">Collections</a></li>
+    				<li><a href="#">About&nbsp;Us</a></li>
+    				<li><a href="#">Stockists</a></li>
+    				<li><a href="#">Trade&nbsp;Enquiries</a></li>
+    				<li><a href="#">Press</a></li>
+    				<li><a href="#">Contact&nbsp;Us</a></li>
+    		</ul>
+    </div>
+	<!--element 3 -->
+    <div class="total1"><p>this is paragraph</p></div>
+</div>
+
+<style>
+
+#navcontainer {
+	height: 50px;
+	border: 1px dotted green;
+}	
+#navcontainer ul {
+margin: 0;
+padding: 0;
+height: 50px;
+line-height: 50px;
+list-style-type: none;
+text-align: center; /*centers the content of the ul list*/
+border: 1px dashed green;
+width: auto;/* display: table; */}
+
+#navcontainer ul li {border: 1px solid black;display: inline;}
+#navcontainer ul li:last-child  {
+	border: 1px dotted green;
+}
+
+#navcontainer ul li a
+{/*text-decoration: none;*/padding: .2em 1em;}
+
+#navcontainer ul li a:hover
+{
+color: #fff;
+background-color: #369;
+}
+
+#navcontainer .side {
+	float:left ;
+	height: 100%;
+	line-height: 50px;
+}
+#navcontainer div:nth-child(2) {
+	float:right ;
+	height: 100%;
+	line-height: 50px;
+}
+</style>
+<br>
+<br>
+<h2>Method3: float:left and right  text-align:center</h2>
+<h4>Flexible menu list with justify content text-align:center</h4>
+<div class="info">
+	<p>Content wrapped by: sides: float:left;width:20px; height:50px; line-height:50px;</p>
+	<p>Content wrapped by: sides: float:right;width:20px; height:50px; line-height:50px;</p>
+	<p>Content wrapped by: middle: takes 100% by default height:50px; line-height:50px; for vertical alligment</p>
+	<h4>disadvantage: it needs height set in pixesl and line-height for vertical alligment of the same height</h4>
+</div>
+
+
+
+
+<div id="navcontainer">
+<div class="side">float:left;width:20px;</div>
+<div>float:right;width:20px;</div>
+<ul>
+<li><a href="#">Milk</a></li>
+<li><a href="#">Eggs</a></li>
+<li><a href="#">Cheese</a></li>
+<li><a href="#">Vegetables</a></li>
+<li><a href="#">Vegetables</a></li>
+<li><a href="#">Vegetables</a></li>
+<li><a href="#">Vegetables</a></li>
+<li><a href="#">Fruit</a></li>
+</ul>
+</div>
+
+
+
+
+
+<style>
+	
+#navcontaineInlineBlock {
+	width: 100%;
+	border: 1px dashed green;
+	font-size: 0px;
+	height: 50px;
+}
+
+#navcontaineInlineBlock #setHeight{
+	height: 100%;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+
+#navcontaineInlineBlock .left , #navcontaineInlineBlock .right {
+	width: 10%;
+	min-width: 200px;
+	font-size: 16px;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+#navcontaineInlineBlock .ulContainer {
+		vertical-align: middle;
+		display: inline-block;
+		width: 70%;
+}
+
+#navcontaineInlineBlock ul {
+	margin: 0 auto;
+	padding: 0;
+	border: 1px solid yellow;
+	font-size: 16px;
+	display: table
+}
+
+#navcontaineInlineBlock ul li {
+	display: inline;
+	margin:0;
+}
+</style>
+
+<h4>display:inline-block with vertical-align: middle;</h4>
+<h3>Markup</h3>
+<div class="info">
+	<p>Content wrapped by: main div: div height:100%; vertical-align:middle (this is the highest inline block that dictates vertical alignment)</p>
+	<p>Content wrapped by: sides: width:10% vertical-align:middle</p>
+	<p>Content wrapped by: middle: width:70%; vertical-align:middle ul display table for wrapping content</p>
+	<p>Content wrapped by: sides: width:10% vertical-align:middle</p>
+	<h4>advantage: it dosent need height in pixels it takes percantage</h4>
+	<h4>disadvantage: it needs addtional markup as main div above that takes entire container height and dictates vertitical alignment, changed here it will change for the rest inline-block elements</h4>
+	<h4>disadvantage: width has to be calculated in sass to prevent collapsing once changer window size</h4>
+</div>
+
+
+
+
+
+<p style="color:red;">this wont work since middle element has to be set to percentage that is calcutated from its parent</p>
+<div id="navcontaineInlineBlock">
+<div id="setHeight"></div>
+<div class="right">I am on right</div>
+<div class="ulContainer">
+	
+	<ul>
+	<li><a href="#">Milk</a></li>
+	<li><a href="#">Eggs</a></li>
+	<li><a href="#">Cheese</a></li>
+	<li><a href="#">Vegetables</a></li>
+	<li><a href="#">Vegetables</a></li>
+	<li><a href="#">Vegetables</a></li>
+	<li><a href="#">Vegetables</a></li>
+	<li><a href="#">Fruit</a></li>
+	</ul>
+
+</div>
+<div class="left">I am on left</div>
+</div>
+
+
+<br>
+<br>
+<h2>stackig list that takes width of the text inside li element</h2>
+<h4>display:table will wrap up your content</h4>
+<div class="info">
+	<p>Content wrapped by: middle: content is wrapped up display:table;text-align: center;</p>
+	<h4>advatage: content is automatically set to the width of the conent</h4>
+</div>
+
+<style>
+	#navcontainerStack {
+		width: 100%;
+		border: 1px dashed green;
+		font-size: 0px;
+	}
+
+	#navcontainerStack ul {
+		display: table;
+		text-align: center;
+		margin: 0 auto;
+		padding: 0;
+		border: 1px solid yellow; 
+		font-size: 16px;
+		list-style: none;
+	}
+
+	#navcontainerStack ul li {
+		margin:0;
+	}
+	</style>
+</style>
+
+<div id="navcontainerStack">
+<ul>
+<li><a href="#">Milk</a></li>
+<li><a href="#">Eggs</a></li>
+<li><a href="#">Cheese</a></li>
+<li><a href="#">Vegetables</a></li>
+<li><a href="#">Vegetables</a></li>
+<li><a href="#">Vegetables</a></li>
+<li><a href="#">Vegetables</a></li>
+<li><a href="#">Fruit</a></li>
+</ul>
+</div>
+
+
+
+
+</body>
+</html>

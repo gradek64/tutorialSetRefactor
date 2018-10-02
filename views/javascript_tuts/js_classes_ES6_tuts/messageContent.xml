@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <chapters>
+   <chapter>
+       <subject>Object.prototype and Object.constructor</subject>
+       <content>
+           <subtitle>Object.prototype and Object.constructor</subtitle>
+              <paragraph>
+                  <info>Protototype is not the same as __proto__ proterty. Only Native Object have prototype Object.protototype, Array.protototype. Also the Instance of Furnction has  prototype therefore they could be chain to other object Prototype in javascript inheritance (delegation). 
+                  </info>
+                  <example>
+                    //any instance of Function; 
+                    const functionInstance = function(){};
+                    //it has its own prototype
+                    console.log(functionInstance.prototype);
+                    //this prototype has one default property which is constructor which is the function itsleft;
+                    console.log(functionInstance.prototype.constructor);
+                  </example>
+              </paragraph>
+              <subtitle>JavaScript classes are functions as constructors</subtitle>
+              <paragraph>
+                  <info>
+                    
+                    When U ceate a class in jabascript you simply create a new Function. Since every instance of function in javascript has protototype and protototype.constructor (aiming to the same function) you can chain them to other object passing prototype values.
+                  </info>
+                  <example>
+                   //any instance of Function; 
+                    const functionInstance = function(){};
+                    //it has its own prototype
+                    console.log(functionInstance.prototype);
+                    //this prototype has one default property which is constructor which is the function itself;
+                    console.log(functionInstance.prototype.constructor);
+
+                    //add more properties to the funcionInstance.prototype;
+                    functionInstance.prototype.name = 'greg'
+                    functionInstance.prototype.breed = 'human'
+                    functionInstance.prototype.likes = function(what){return what + 'doing' };
+
+                     /*
+
+                        to make it consistent and make sure that prototype comming from 
+
+                        Object.getPrototypeOf(functionInstance); is the same as:
+                        functionInstance.prototype and the same with constructor
+
+                        functionInstance.constructor === functionInstance.prototype.constructor;
+
+                        We need to initialize this function with a 'new' keword which and introduction to Classes in javascript;
+
+                     */
+
+                     Object.getPrototypeOf(functionInstance) === functionInstance.prototype //false
+                     //and constructor 
+                     functionInstance.constructor === functionInstance.prototype.constructor;
+
+
+                     /* to make main Object.prototype equals to instanceFunction.prototype U need to use 'new' keword\
+
+                         explanation in next section;
+                     */
+
+                     
+                  </example>
+              </paragraph>
+              <subtitle>functions and function constructors</subtitle>
+              <paragraph>
+                  <info>
+                      functions and function constructors. Every funciton can be constructor. To make function a constructor you need to call it 
+                      with a new Keyword. Next section explain what that does in details.
+
+                  </info>
+                  <example>
+                    //simple function;
+                    function SimpleF() {};
+
+                    SimpleF(); //undefined;
+
+                    //but if you call this function with new keyword;
+                    new SimpleF(); 
+
+                    //it will return SimpleF as object which is a class;
+
+                    //Class SimpleF constructor;
+                    SimpleF.prototype.constructor;
+                    //you can attach properties and methods to it:
+                    SimpleF.prototype.name = 'greg';
+                    SimpleF.prototype.getName = function({name}={}){return name ? name : this.name; };
+
+                    //since it is a class you can initiate it 
+                    const initClass = new SimpleF();
+
+                    //find out defult name;
+                    initClass.getName(); //greg;
+                    //give name;
+                    initClass.getName({name:'phil'}); //phil;
+
+                  </example>
+              </paragraph>
+              <subtitle>what that keyword 'new' does ?</subtitle>
+              <paragraph>
+                  <info>
+                   new keyword does few things:
+                     1. bind Obj.getPrototype(functionInstance) = functionInstance.prototype //wasnt the case above
+                     2. binds functionInstance.constructor === functionInstance.prototype.constructor; //wasnt the case before
+
+                     so the class intance has the same prototype as Class itslelf we deal with the same object. Classes are function in javascript that have
+                     constructors that craated this function and prototype set to this function as well.
+
+                  </info>
+                  <example>
+ //any instance of Function; 
+const Class = function(){};
+//it has its own prototype
+console.log(Class.prototype);
+//this prototype has one default property which is constructor which is the function itsleft;
+console.log(Class.prototype.constructor);
+
+//add more properties to the funcionInstance.prototype;
+Class.prototype.name = 'greg'
+Class.prototype.breed = 'human'
+Class.prototype.likes = function(what){return what + 'doing' };
+
+//instance of Class 
+const classInstance = new Class();
+
+ /*
+
+      Now prototype coming from the classInstance is the same as Class.prototype itselt 
+      (it wasnt the case without 'new' keyword);
+      Object.getPrototypeOf(classInstance) === Class.prototype // true
+    
+      the same with constructor they match up;  
+      classInstance.constructor === Class.prototype.constructor; //true;
+ */
+           
+                  </example>
+              </paragraph>
+       </content>
+   </chapter>
+   <chapter>
+       <subject>inheritance between simple Objects</subject>
+       <content>
+          <paragraph>
+              <info>Object.setPrototypeOf(obj,Class.prototype);
+                Any Object can inherit from Class or other Object as long as the Object you are inherit from has prototype value. 
+                Then the prototype value can be attached to any object.
+             </info>
+              <example>
+              //example 
+               //any instance of Function; 
+              const Class = function(){};
+              //it has its own prototype
+              console.log(Class.prototype);
+              //this prototype has one default property which is constructor which is the function itsleft;
+              console.log(Class.prototype.constructor);
+
+              //add more properties to the funcionInstance.prototype;
+              Class.prototype.name = 'greg'
+              Class.prototype.breed = 'human'
+              Class.prototype.likes = function(what){return what + 'doing' };
+
+              //instance of Class 
+              const classInstance = new Class();
+
+              //any object can inherit from Class.prototype 
+
+              //any instance of simple Object 
+              const obj = {};
+
+              //assign prototype 
+              Object.setPrototypeOf(obj,Class.prototype);
+
+              //check if prototypes match and constructors;
+              Object.getPrototypeOf(obj) === Class.prototype; //true
+              obj.constructor === Class.prototype.constructor; //true
+
+              //check if object indeed iherit from Class.prototype;
+              obj.name //return 
+              obj.breed //return 'human'
+              
+             </example>
+            </paragraph>
+       </content>
+   </chapter>
+    <chapter>
+             <subject>inheritance between classes</subject>
+             <content>
+              <subtitle>Object.setPrototypeOf(classInstance1,Class.prototype)</subtitle>
+              <paragraph>
+                  <info>inheritance between classes: 
+
+                        so prototype of one class become prototype of another class by:
+
+                        Object.setPrototypeOf(classInstance1,Class.prototype);
+
+                        in the way those match:
+
+                    Object.getPrototypeOf(classInstance) === Object.getPrototypeOf(classInstance1) //true
+                    classInstance.constructor === classInstance1.constructor //true
+                  </info>
+                  <example> 
+               //any instance of Function; 
+               const Class = function(){};
+               //it has its own prototype
+               console.log(Class.prototype);
+               //this prototype has one default property which is constructor which is the function itsleft;
+               console.log(Class.prototype.constructor);
+
+               //add more properties to the funcionInstance.prototype;
+               Class.prototype.name = 'greg'
+               Class.prototype.breed = 'human'
+               Class.prototype.likes = function(what){return what + 'doing' };
+
+               //instance of Class 
+               const classInstance = new Class();
+
+               //any object can inherit from Class.prototype including another class
+
+               const Class1 = function(){};
+               //it has its own prototype
+               console.log(Class1.prototype);
+               //this prototype has one default property which is constructor which is the function itsleft;
+               console.log(Class1.prototype.constructor);
+
+               //add more properties to the funcionInstance.prototype;
+               Class1.prototype.name1 = 'greg'
+               Class1.prototype.breed1 = 'human'
+               Class1.prototype.likes1 = function(what){return what + 'doing' };
+
+               //instance of Class1 
+               const classInstance1 = new Class1();
+
+               /*
+                 assign prototype 
+               */ 
+               Object.setPrototypeOf(classInstance1,Class.prototype);
+
+               //check if prototypes match and constructors;
+               Object.getPrototypeOf(classInstance) === Object.getPrototypeOf(classInstance1) //true
+               classInstance.constructor === classInstance1.constructor //true
+
+               //check if object indeed iherit from Class.prototype;
+               classInstance1.name //return 'greg'
+               classInstance1.breed //return 'human'
+             </example>
+              </paragraph>
+               <subtitle>let classInstance = Object.create(Class.prototype)</subtitle>
+               <paragraph>
+                   <info>inheritance between classes: 
+
+                         so prototype of one class become prototype of another class by:
+
+                          classInstance1 = Object.create(Class.prototype);
+
+                         in the way those match:
+
+                     Object.getPrototypeOf(classInstance) === Object.getPrototypeOf(classInstance1) //true
+                     classInstance.constructor === classInstance1.constructor //true</info>
+                   <example> 
+                //any instance of Function; 
+                const Class = function(){};
+                //it has its own prototype
+                console.log(Class.prototype);
+                //this prototype has one default property which is constructor which is the function itsleft;
+                console.log(Class.prototype.constructor);
+
+                //add more properties to the funcionInstance.prototype;
+                Class.prototype.name = 'greg'
+                Class.prototype.breed = 'human'
+                Class.prototype.likes = function(what){return what + 'doing' };
+
+                //instance of Class 
+                const classInstance = new Class();
+
+                //any object can inherit from Class.prototype including another class
+
+                const Class1 = function(){};
+                //it has its own prototype
+                console.log(Class1.prototype);
+                //this prototype has one default property which is constructor which is the function itsleft;
+                console.log(Class1.prototype.constructor);
+
+                //add more properties to the funcionInstance.prototype;
+                Class1.prototype.name1 = 'greg'
+                Class1.prototype.breed1 = 'human'
+                Class1.prototype.likes1 = function(what){return what + 'doing' };
+
+                //instance of Class1 
+                let classInstance1 = new Class1();
+
+                /*
+                  assign prototype by Object.create()
+                */
+
+                classInstance1 = Object.create(Class.prototype);
+
+
+                //check if prototypes match and constructors;
+                Object.getPrototypeOf(classInstance) === Object.getPrototypeOf(classInstance1) //true
+                classInstance.constructor === classInstance1.constructor //true
+
+                //check if object indeed iherit from Class.prototype;
+                classInstance1.name //return  'greg'
+                classInstance1.breed //return 'human'
+              </example>
+               </paragraph>
+             </content>
+   </chapter>
+   <chapter>
+       <subject>Class.call(this, ConstructorParam1, ConstructorParam1 )</subject>
+       <content>
+           <paragraph>
+               <info>Class.call(this, ConstructorParam1, ConstructorParam1 );
+                 Class properties passed to another Class properties
+                const Class = function(name, surname){
+                  this.name = name;
+                  this.surname = surname;
+                };
+
+               You can pass native class properties (not the one on prototype chain) but the one defined wiht this.property = property
+               to another class by calling this class as below in anther class constructor:
+                AnotherClass = function(){
+                  //if you Class has contructor;
+                  //const Class = function(name, surname);
+                  Class.call(this, ConstructorParam1, ConstructorParam1 ) 
+                }
+               </info>
+               <example>
+                //class with native properties;
+                const Class = function(name, surname){
+                  this.name = name;
+                  this.surname = surname;
+                };
+
+                //anotherClass that takes Class native properties;
+                const AnoherClass = function(...arg){
+                  //default values
+                  Class.call(this,'greg', 'gil') 
+                };  
+
+                const default = new AnoherClass();
+
+                const AnoherClassSet = function(name,surname){
+                  //default values
+                  Class.call(this,name, surname);
+                };
+
+                const setValues = new AnoherClassSet('mark','cohen');
+               </example>
+           </paragraph>
+       </content>
+   </chapter>
+   <chapter>
+       <subject>ES6 class</subject>
+       <content>
+           <subtitle>extends and super();</subtitle>
+           <paragraph>
+               <info>extends and super();
+
+                super() :will call its super class properties (imporaant thos class are not on prototype object means chain); so you dont inherit them 
+                you just call them so U can use them in child Class this is eqwiewalent es ES5
+
+                      super(name, surname) === Class.call(this,name,surname);
+
+                extends Class : is the way to inhertit classes in prototype chain , but only methods are chained (on prototype objects) there is not default 
+                properties chained to the prototype object.
+
+
+               </info>
+               <example>
+                 class Food {
+                     constructor (name, calories) {
+                         this.name = name;
+                         this.calories = calories;
+                     }
+
+                     getName () {
+                         return `${this.name}`
+                     }
+
+                     print () {
+                       console.log( this.toString() );
+                     }
+                 }
+
+                 class FatFreeFood extends Food {
+
+                     constructor (name, calories, category) {
+                         super(name,calories);
+                         this.category = category;
+                     }
+
+                     print () {
+
+                         super.print(); //call super class method
+
+                         console.log(`Would you look at that -- ${this.name} has no fat!`);
+                     }
+
+                 }
+
+                 //initiate FatFreeFood;
+                 const fat_free_yogurt = new FatFreeFood('Greek Yogurt', 16, 'Lean food');
+
+               </example>
+           </paragraph>
+           <subtitle>Class static method() </subtitle>
+           <paragraph>
+               <info>Class static method() 
+
+                  it is a mehod that is only available on the Class definition itslef not on instance of the class;
+                  Therefore to access static method you dont need to initiate it.
+
+               </info>
+               <example>
+                 class Food {
+
+                      // Adding a static method
+                      static describe () {
+                        console.log('"Food" is a data type for storing macronutrient information.');
+                       }
+
+                      normalMethod () {
+                          return this;
+                      }
+                 };
+
+                 Food.describe() //return '"Food" is a data type....
+                 Food.normalMethod() //return error it needs instance of a class first (new Food());
+
+               </example>
+           </paragraph>
+           <subtitle>Class get value() and set value() methods</subtitle>
+           <paragraph>
+               <info>Class get value() and set value() methods:
+                  just like in any object you can use functionality or get value() and set value() methods on Class instance.
+               </info>
+               <example>
+
+                 class Person{
+                     
+                     get name(){ return this.label }
+                     set name(value){ this.label = value }
+                 };
+
+                 const person = new Person();
+                 person.name //undefined;
+                 person.name = 'greg';
+                 person.name //return greg;
+
+               </example>
+           </paragraph>
+       </content>
+   </chapter>
+ </chapters>
