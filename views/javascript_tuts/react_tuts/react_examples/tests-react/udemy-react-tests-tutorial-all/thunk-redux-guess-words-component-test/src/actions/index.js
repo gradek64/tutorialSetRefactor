@@ -1,3 +1,6 @@
+import { getLetterMatchCount } from '../helperFunctions';
+
+
 export const actionTypes = {
     CORRECT_GUESS : 'CORRECT_GUESS',
     GUESS_WORD : 'GUESS_WORD'
@@ -13,8 +16,37 @@ export function correctGuess() {
 *
 */
 
-export guessWord = (guessWord) => {
-  return function(dispath,getState)  {
+export const guessWord = (guessWord) => {
 
-  }
-}
+    /*
+      *@here we use thunk which is nested function that
+      *@has access to dispatch method and to state in its arguments;
+    */
+    return function(dispath,getState)  {
+
+        // get a current Store state;
+        const secretWord = getState().guessWords.secretWord;
+        const letterMatchCount = getLetterMatchCount(guessWord,secretWord);
+
+        //change store state for guessWordReducer;
+        dispath({
+            type:actionTypes.GUESS_WORD,
+            payload:{ guessWord, letterMatchCount }
+        });
+        /*
+          *@if guess word is a secret word 
+          *@then change success state that resides in successReducer
+        */
+        if(secretWord === guessWord){
+            dispath({
+                type:actionTypes.CORRECT_GUESS,
+            });
+        }
+
+
+        console.log(getState());
+        console.log(getState().success.success);
+
+
+    };
+};

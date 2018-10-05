@@ -4,10 +4,13 @@
 */
 
 import { createStore, applyMiddleware } from 'redux';
-import rootReducer from '../reducers';
 import { middlewares }from '../store';
+import { combineReducers } from 'redux';
 
-export const storeFactory = (initialState) => {
+
+export const storeFactory = (initialState, reducer ) => {
+    const rootReducer =  combineReducers(reducer);
     const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
+
     return createStoreWithMiddleware(rootReducer,initialState);
 };

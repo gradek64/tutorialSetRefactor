@@ -9,7 +9,8 @@ import { actionTypes } from '../actions';
 */
 const initialState = {
     success: false,
-    setter:false,
+    grab:'true',
+    name:[{gg:'greg'}],
 };
 export default (state = initialState, action={})=> {
     switch(action.type){

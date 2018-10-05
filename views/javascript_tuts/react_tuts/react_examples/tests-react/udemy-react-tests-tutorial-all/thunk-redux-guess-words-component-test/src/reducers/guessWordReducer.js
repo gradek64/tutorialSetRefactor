@@ -8,14 +8,17 @@ import { actionTypes } from '../actions';
  *@return {array} - new guess Word state
 */
 const initialState = {
-    secretWord: false,
-    setter:false,
+    secretWord:'party',
+    guessedWords:[{
+        guessedWord:'guessedWord',
+        letterMachCount: 0
+    }],
 };
 export default (state = initialState, action={})=> {
     switch(action.type){
-    case(actionTypes.CORRECT_GUESS):
+    case(actionTypes.GUESS_WORD):
         state.success = true;
-        return state;
+        return {...state, guessedWords:[action.payload]};
 
     default:
         return state;
