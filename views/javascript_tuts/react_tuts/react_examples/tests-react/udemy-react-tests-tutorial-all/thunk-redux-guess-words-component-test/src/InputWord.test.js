@@ -6,8 +6,9 @@ import InputWord from './InputWord';
 import successReducer from './reducers/successReducer';
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
+const initialState = {success: false };
 
-const setup = (initialState={ grab: false , success: false }) => {
+const setup = (initialState) => {
 
     /*
       *@U can inititiate your store with data diffrent to initial by
@@ -22,16 +23,15 @@ const setup = (initialState={ grab: false , success: false }) => {
         grab:successReducer, 
         success:successReducer
     });
+    
     //dive method allows you to go inside InputWord render 
-    console.log(store.getState());
     const InputWordComponent = shallow(<InputWord store={store} />).dive();
     return InputWordComponent;
 };
 
-setup();
 describe('render InputWord component', () => {
-    test('',()=>{});
-    /*test('compoent renders without errors',()=>{
+  
+    test('compoent renders without errors',()=>{
         const component = setup().find('[data-test="InputWord-component"]');
         expect(component.length).toBe(1);
     });
@@ -59,5 +59,5 @@ describe('render InputWord component', () => {
             const buttonBox = updateStore.find('[data-test=\'button-box\']');
             expect(buttonBox.length).toBe(1);
         });
-    });*/
+    });
 });

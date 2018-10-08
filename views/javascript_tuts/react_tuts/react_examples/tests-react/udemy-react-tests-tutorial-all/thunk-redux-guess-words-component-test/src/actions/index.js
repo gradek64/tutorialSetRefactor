@@ -24,15 +24,22 @@ export const guessWord = (guessWord) => {
     */
     return function(dispath,getState)  {
 
+
+        console.log('getState().secretWord;',getState());
         // get a current Store state;
+
+
         const secretWord = getState().guessWords.secretWord;
         const letterMatchCount = getLetterMatchCount(guessWord,secretWord);
 
         //change store state for guessWordReducer;
+
+        console.log('store in dispath:',dispath);
         dispath({
             type:actionTypes.GUESS_WORD,
             payload:{ guessWord, letterMatchCount }
         });
+        
         /*
           *@if guess word is a secret word 
           *@then change success state that resides in successReducer
@@ -42,10 +49,6 @@ export const guessWord = (guessWord) => {
                 type:actionTypes.CORRECT_GUESS,
             });
         }
-
-
-        console.log(getState());
-        console.log(getState().success.success);
 
 
     };

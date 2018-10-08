@@ -18,7 +18,10 @@ export default (state = initialState, action={})=> {
     switch(action.type){
     case(actionTypes.GUESS_WORD):
         state.success = true;
-        return {...state, guessedWords:[action.payload]};
+        console.log('...state',...state);
+        console.log('action.payload',action.payload);
+        return state;
+        //return {...state, guessedWords:[action.payload]};
 
     default:
         return state;

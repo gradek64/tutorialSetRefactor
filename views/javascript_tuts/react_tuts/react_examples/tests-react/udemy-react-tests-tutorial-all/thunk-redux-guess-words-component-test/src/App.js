@@ -9,6 +9,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <InputWord success={true}/>
                 <Congrats success={false}/>
                 <GuessWords guessWords={[
                     { guessWord:'train',letterMatchCount:3},

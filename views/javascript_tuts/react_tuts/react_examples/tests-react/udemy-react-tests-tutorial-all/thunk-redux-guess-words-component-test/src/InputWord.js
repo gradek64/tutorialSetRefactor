@@ -1,11 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import store from './store';
+import { guessWord } from './actions';
 
 class InputWord extends React.Component {
-    render(){
 
-        const contens = this.props.success ? 
+    constructor(props){
+        super(props);
+        this.textInput = React.createRef();
+        this.onWordSubmit = this.onWordSubmit.bind(this);
+    }
+    onWordSubmit(){
+        const guessWordInput = this.textInput.current.value;
+        this.props.guessWord(guessWordInput);
+    }
+    render(){
+        console.log(this.props);
+        const contens = this.props.success===true ? 
             null :
             (
                 <form>
@@ -14,12 +25,15 @@ class InputWord extends React.Component {
                         id='input-box'
                         type='text'
                         placeholder='enter word'
+                        ref={this.textInput}
                     />
                     <button
                         data-test='button-box'
                         id='button-box'
                         type='button'
                         placeholder='enter word'
+                        onClick={this.onWordSubmit}
+
                     >
                     Submit
                     </button>
@@ -39,6 +53,8 @@ const mapStoreToProps = (store) => {
     * as the one used in store (direct mapping);
     */
 
+    console.log(store);
+
     return store;
 };
-export default connect(mapStoreToProps)(InputWord);
+export default connect(mapStoreToProps,{guessWord})(InputWord);

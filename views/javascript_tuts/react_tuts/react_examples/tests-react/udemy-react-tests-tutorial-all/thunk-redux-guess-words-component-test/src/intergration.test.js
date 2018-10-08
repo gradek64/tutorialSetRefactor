@@ -5,16 +5,15 @@ import guessWordReducer from './reducers/guessWordReducer';
 
 
 describe('guess word action dispacher',()=>{
-    const initialState = {
-        secretWord:'party',
-        /* guessedWords:[{
-            guessedWord:'guessedWord',
-            letterMachCount: 0
-        }]*/
-    };
-    const secretWord = 'greg';
-    const unsuccessGuessWord = 'train';
+   
     describe('no guess words',()=>{
+        const noGuessState = {
+            secretWord:'party',
+            guessedWords:[{
+                guessedWord:'aGuessedWord',
+                letterMachCount: 2
+            }]
+        };
         let store;
         beforeEach(()=>{
 
@@ -23,21 +22,21 @@ describe('guess word action dispacher',()=>{
               *@them dont core store with mock data at all 
               *@just make sure have default initial data set up.
             */
-            // store = storeFactory(initialState, guessWordReducer);
+
+            store = storeFactory( noGuessState, {
+                secretWord:guessWordReducer, 
+                guessedWords:guessWordReducer
+            });
+
 
         });
-        test('update state correclty f or unsuccessful word',()=>{
+        test('update store state correctlty if or unsuccessful word',()=>{
             //dispatch event for unsuccessful word;
-            /*store.dispatch(guessWord(unsuccessGuessWord));
-            const storeAfterAcion = store.getState();
-            const expectedState = {
-                ...initialState,
-                guessedWords:[{
-                    guessedWord:unsuccessGuessWord,
-                    letterMachCount: 3
-               }], 
-            };*/
-            // expect(newState).toEqual(expectedState);
+            console.log(noGuessState.guessedWords[0].guessedWord);
+            store.dispatch(guessWord(noGuessState.guessedWords[0].guessedWord));
+            //check store;
+            //const storeAfterAction = store.getState();
+            //expect(storeAfterAction).toEqual(noGuessState);
         });
         test('update state correclty for guessed word',()=>{
 
