@@ -61,7 +61,7 @@ describe('guess word action dispacher',()=>{
             //dispatch event for unsuccessful word;
             store.dispatch(guessWord(dispachWordTest));
             //check store for reducer U are testing;
-            console.log('storeAfterAction', store.getState().guessWords);
+            //console.log('storeAfterAction', store.getState().guessWords);
             const storeAfterAction = store.getState().guessWords;
             expect(storeAfterAction).toEqual(expectedState);
         });

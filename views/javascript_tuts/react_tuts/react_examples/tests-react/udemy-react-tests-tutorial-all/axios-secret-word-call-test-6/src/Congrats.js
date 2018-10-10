@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { getSecretWord } from './actions';
+
+
 
 const Congrats = (props)=> {
 
@@ -13,7 +16,13 @@ const Congrats = (props)=> {
             </div>
         );
     }else {*/ 
-    return <div data-test='Congrats-message'>message: { props.ss } </div>;
+    return (
+        <div data-test='Congrats-message'>
+            <h2> Congrats messsage </h2>
+            <button 
+                onClick = { ()=>{props.getSecretWord();} }
+            >launchAPI</button>
+        </div>);
     //}
 };
 
@@ -28,10 +37,10 @@ const mapStoreToProps = (store) => {
     * as the one used in store (direct mapping);
     */
     console.log('whole store', store);
-    return {
-        ss:store.success.grab
-    };
+    return store.success;
 };
 
-export default connect(mapStoreToProps)(Congrats);
+export default connect(mapStoreToProps,{
+    getSecretWord
+})(Congrats);
 

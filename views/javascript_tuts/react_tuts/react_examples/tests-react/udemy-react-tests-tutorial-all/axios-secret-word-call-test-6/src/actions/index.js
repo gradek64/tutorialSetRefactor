@@ -1,9 +1,11 @@
 import { getLetterMatchCount } from '../helperFunctions';
+import secretWordService from '../services/secretWordService';
 
 
 export const actionTypes = {
     CORRECT_GUESS : 'CORRECT_GUESS',
-    GUESS_WORD : 'GUESS_WORD'
+    GUESS_WORD : 'GUESS_WORD',
+    SET_SECRET_WORD: 'SET_SECRET_WORD',
 };
 
 export function correctGuess() {
@@ -50,5 +52,18 @@ export const guessWord = (guessWord) => {
         }
 
 
+    };
+};
+
+export const getSecretWord = () => {
+    return async (dispatch)  => {
+        const response = await secretWordService().getSecretWord;
+        dispatch({
+            type: actionTypes.SET_SECRET_WORD,
+            //in axios the response is linked to object : data 
+            payload:response.data,
+        });
+
+        
     };
 };

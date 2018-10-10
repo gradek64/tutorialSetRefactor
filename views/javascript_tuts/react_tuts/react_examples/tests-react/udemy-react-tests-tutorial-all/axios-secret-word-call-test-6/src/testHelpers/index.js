@@ -12,3 +12,7 @@ export const storeFactory = (initialState) => {
     const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
     return createStoreWithMiddleware(rootReducer,initialState);
 };
+
+export const axiosMock = {
+    get: jest.fn(() => Promise.resolve({ data: {} }))
+};
