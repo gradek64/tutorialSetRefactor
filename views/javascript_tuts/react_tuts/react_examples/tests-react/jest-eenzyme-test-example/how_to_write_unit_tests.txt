@@ -1,7 +1,0 @@
-	1. For this test we are using JEST abd ENZYME with AirBnb specification 
-	
-		npm npm i --save-dev enzyme 
-
-		and adapter to your version 
-
-		npm i --save-dev enzyme-adapter-react-16

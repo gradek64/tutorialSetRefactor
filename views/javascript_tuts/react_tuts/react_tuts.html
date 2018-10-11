@@ -64,6 +64,34 @@
                 
       </li>
     
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/react_tuts">JEST and ENZYME  setup</a><span class="tooltiptext">JEST and ENZYME  setup</span>
+                 
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/react_tuts">JEST and ENZYME testing (functions)</a><span class="tooltiptext">JEST and ENZYME testing (functions)</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/react_tuts" partition>by implementing original function for test</a><span class="tooltiptext">by implementing original function for test</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/react_tuts" partition>testing with mock function js.fn();</a><span class="tooltiptext">testing with mock function js.fn();</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/react_tuts" partition>mock function with return value</a><span class="tooltiptext">mock function with return value</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/react_tuts" partition>mock function with promise return</a><span class="tooltiptext">mock function with promise return</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/react_tuts">Mock a module with jest.mock</a><span class="tooltiptext">Mock a module with jest.mock</span>
+                 
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/react_tuts">jest.spyOn to mock a funtion but later restore its original implementation</a><span class="tooltiptext">jest.spyOn to mock a funtion but later restore its original implementation</span>
+                 
+      </li>
+    
 <!--end-list-tag-->
 </ul>
 
@@ -350,6 +378,291 @@ ReactDOM.render(
               </div>
             
 
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> JEST and ENZYME  setup </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>JEST and ENZYME setup</p>
+                  <div class="codeWraper">
+                    <code>//to start testing with Enzyme and JEST you need to install those packages saved in dev dependencies;
+
+                      npm i  enzyme enzyme-adapter-react-16 jest babel-jest -D and also in your package.json you  need this bit for trasnpiling 
+
+                      &quot;babel&quot;: {
+                          &quot;presets&quot;: [
+                            &quot;env&quot;,
+                            &quot;react&quot;
+                          ]
+                        },
+
+                        so U also need those : npm i babel-preset-env babel-preset-react -S
+
+                        example: react_tuts/react_examples/tests-react/jest-testing-function-mocks</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> JEST and ENZYME testing (functions) </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>the most common way of testing functionality of the method is simply run the method and 
+                expect to give you back what is declared in function body (method has to be return type!) for that</p>
+                  <div class="codeWraper">
+                    <code>----------------------- math.js helpers ----------------
+export const add      = (a, b) =&gt; a + b;
+export const subtract = (a, b) =&gt; b - a;
+---------------------------------------------------------
+
+----------------------- app.js (math helpers implementation) ----------------
+export const doAdd      = (a, b) =&gt; math.add(a, b);
+export const doSubtract = (a, b) =&gt; math.subtract(a, b);
+-----------------------------------------------------------------------------
+
+--------------- now testing those implemenations --------------------------
+import * as app from &quot;./app&quot;;
+import * as math from &quot;./math&quot;;
+
+/*
+  *@test base function
+  *@by running it
+*/
+test(&quot;calls math.add&quot;, () =&gt; {
+    const add = math.add(1,2)
+    expect(add).toBe(3)
+})
+/*
+  *@test higher-order function
+  *@by running it
+*/
+test(&quot;calls app.doAdd&quot;, () =&gt; {
+    const appAdd = app.doAdd(1,2)
+    expect(appAdd).toBe(3)
+})
+----------------------------------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>if data is complex in a funtion and you might be intrested only in the outcome (as promise to API call) we can mock function</p>
+                  <div class="codeWraper">
+                    <code>----------------------- math.js helpers ----------------
+export const add      = (a, b) =&gt; a + b;
+export const subtract = (a, b) =&gt; b - a;
+---------------------------------------------------------
+
+----------------------- app.js (math helpers implementation) ----------------
+export const doAdd      = (a, b) =&gt; math.add(a, b);
+export const doSubtract = (a, b) =&gt; math.subtract(a, b);
+-----------------------------------------------------------------------------
+
+
+/*
+  *@we can assing our function to js.fn()
+  *@what gives them new functionality, they are no longer original function;
+*/  
+
+/*
+
+
+math.add = jest.fn()
+app.doAdd = jest.fn() 
+
+/*
+*@now our function can be called as below;
+*@the old functionality is gone;
+*/
+
+//assign to mock 
+-----------
+const mathNew = math.add(&quot;new staff&quot;)
+const appNew = app.doAdd( &quot;I am cool&quot;)
+-------------
+
+//math.add
+expect(mathNew).toBeUndefined()
+expect(math.add).toHaveBeenCalled()
+expect(math.add).toHaveBeenCalledTimes(1)
+expect(math.add).toHaveBeenCalledWith(&quot;new staff&quot;)
+
+//app.doAdd
+expect(appNew).toBeUndefined()
+expect(app.doAdd).toHaveBeenCalled()
+expect(app.doAdd).toHaveBeenCalledTimes(1)
+expect(app.doAdd).toHaveBeenCalledWith(&quot;I am cool&quot;)</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>One function is assign to mock we can make it a return a value, this patern is very usefull when We want to mock API call that returns a JSON file</p>
+                  <div class="codeWraper">
+                    <code>----------------------- math.js helpers ----------------
+export const add      = (a, b) =&gt; a + b;
+export const subtract = (a, b) =&gt; b - a;
+---------------------------------------------------------
+
+----------------------- app.js (math helpers implementation) ----------------
+export const doAdd      = (a, b) =&gt; math.add(a, b);
+export const doSubtract = (a, b) =&gt; math.subtract(a, b);
+-----------------------------------------------------------------------------
+                
+/*
+*@assignning mocks to the functions of return type ;
+*@
+*/
+
+math.add = jest.fn().mockImplementation( () =&gt; &quot;some Value&quot; );
+//other syntax;
+app.doAdd = jest.fn()
+app.doAdd.mockReturnValue(&quot;bar value&quot;)
+
+/*
+*@testing function with mock return 
+*@
+*/
+
+//math.add
+expect(math.add()).toBe(&quot;some Value&quot;)
+//app.doAdd
+expect(app.doAdd()).toBe(&quot;bar value&quot;)</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
+                  <p>we can mock our function to return a promise as below:</p>
+                  <div class="codeWraper">
+                    <code>----------------------- math.js helpers ----------------
+export const add      = (a, b) =&gt; a + b;
+export const subtract = (a, b) =&gt; b - a;
+---------------------------------------------------------
+
+----------------------- app.js (math helpers implementation) ----------------
+export const doAdd      = (a, b) =&gt; math.add(a, b);
+export const doSubtract = (a, b) =&gt; math.subtract(a, b);
+-----------------------------------------------------------------------------
+                
+/*
+*@assignning mocks to the functions that return promise;
+*@
+*/
+
+math.add = jest.fn().mockImplementation(() =&gt; Promise.resolve(&quot;promise resolve&quot;))
+math.devide = jest.fn().mockImplementation((value) =&gt; Promise.reject(value))
+//other syntax;
+app.doAdd = jest.fn()
+app.doAdd.mockResolvedValue(&quot;bar&quot;)
+//reject other syntax;
+math.devide = jest.fn()
+app.doAdd.mockRejectedValue(&quot;rejected&quot;);
+
+/*
+*@now our function can be called as below;
+*@the old functionality is gone now our function returns above values that resolves in promise resolved;
+*/
+
+//math.add
+expect(math.add()).resolves.toBe(&quot;promise resolve&quot;)
+expect(app.doAdd()).resolves.toBe(&quot;bar&quot;)
+expect(math.devide(&quot;rejected&quot;)).rejects.toBe(&quot;rejected&quot;)
+
+-----------------------------------------------------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> Mock a module with jest.mock </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>you can automatically assing mock functions to all function from the moduele by jest.mock();</p>
+                  <div class="codeWraper">
+                    <code>----------------------- math.js helpers ----------------
+export const add      = (a, b) =&gt; a + b;
+export const subtract = (a, b) =&gt; b - a;
+---------------------------------------------------------
+
+describe(&quot;use js.mock() for all exported fn&quot;,() =&gt; {
+// Set all module functions to jest.fn
+  jest.mock(&quot;./helpers/math&quot;)
+
+  test(&quot;using js.mock() for mocking all exported functions from the module&quot;, ()=&gt;{
+
+      //pick any function from module set to mock and call it;
+      math.add(&quot;add&quot;)
+      expect(math.add).toHaveBeenCalledWith(&quot;add&quot;)
+  })
+})</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> jest.spyOn to mock a funtion but later restore its original implementation </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>jest.spyOn() to mock a funtion but later restore its original implementation later in the same test by mockFn.mockRestore()</p>
+                  <div class="codeWraper">
+                    <code>----------------------- math.js helpers ----------------
+ export const add      = (a, b) =&gt; a + b;
+ export const subtract = (a, b) =&gt; b - a;
+ ---------------------------------------------------------
+
+ describe(&quot;use js.spyOn() to mock function and then restore original implementation&quot;,()=&gt;{
+     const addMock = jest.spyOn(math, &quot;add&quot;)
+
+     // override the implementation
+     addMock.mockImplementation(() =&gt; &quot;mock&quot;)
+     expect(app.doAdd(1, 2)).toEqual(&quot;mock&quot;)
+
+     // restore the original implementation
+     addMock.mockRestore()
+     expect(app.doAdd(1, 2)).toEqual(3)
+ })</code>
+                  </div>
+                </div>
+              </div>
             
 
       </section>

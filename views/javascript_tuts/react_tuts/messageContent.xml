@@ -283,4 +283,256 @@ ReactDOM.render(
           </paragraph>
       </content>
   </chapter>
+  <chapter>
+      <subject>JEST and ENZYME  setup</subject>
+      <content>
+          <paragraph>
+              <info>JEST and ENZYME setup</info>
+              <example>
+
+                      //to start testing with Enzyme and JEST you need to install those packages saved in dev dependencies;
+
+                      npm i  enzyme enzyme-adapter-react-16 jest babel-jest -D and also in your package.json you  need this bit for trasnpiling 
+
+                      "babel": {
+                          "presets": [
+                            "env",
+                            "react"
+                          ]
+                        },
+
+                        so U also need those : npm i babel-preset-env babel-preset-react -S
+
+                        example: react_tuts/react_examples/tests-react/jest-testing-function-mocks
+
+              </example>
+          </paragraph>
+      </content>
+  </chapter>
+  <chapter>
+      <subject>JEST and ENZYME testing (functions) </subject>
+      <content>
+          <subtitle>by implementing original function for test</subtitle>
+          <paragraph>
+              <info>the most common way of testing functionality of the method is simply run the method and 
+                expect to give you back what is declared in function body (method has to be return type!) for that</info>
+              <example>
+----------------------- math.js helpers ----------------
+export const add      = (a, b) => a + b;
+export const subtract = (a, b) => b - a;
+---------------------------------------------------------
+
+----------------------- app.js (math helpers implementation) ----------------
+export const doAdd      = (a, b) => math.add(a, b);
+export const doSubtract = (a, b) => math.subtract(a, b);
+-----------------------------------------------------------------------------
+
+--------------- now testing those implemenations --------------------------
+import * as app from "./app";
+import * as math from "./math";
+
+/*
+  *@test base function
+  *@by running it
+*/
+test("calls math.add", () => {
+    const add = math.add(1,2)
+    expect(add).toBe(3)
+})
+/*
+  *@test higher-order function
+  *@by running it
+*/
+test("calls app.doAdd", () => {
+    const appAdd = app.doAdd(1,2)
+    expect(appAdd).toBe(3)
+})
+----------------------------------------------------------------------------
+              </example>
+          </paragraph>
+          <subtitle>testing with mock function js.fn();</subtitle>
+          <paragraph>
+              <info>if data is complex in a funtion and you might be intrested only in the outcome (as promise to API call) we can mock function</info>
+              <example>
+----------------------- math.js helpers ----------------
+export const add      = (a, b) => a + b;
+export const subtract = (a, b) => b - a;
+---------------------------------------------------------
+
+----------------------- app.js (math helpers implementation) ----------------
+export const doAdd      = (a, b) => math.add(a, b);
+export const doSubtract = (a, b) => math.subtract(a, b);
+-----------------------------------------------------------------------------
+
+
+/*
+  *@we can assing our function to js.fn()
+  *@what gives them new functionality, they are no longer original function;
+*/  
+
+/*
+
+
+math.add = jest.fn()
+app.doAdd = jest.fn() 
+
+/*
+*@now our function can be called as below;
+*@the old functionality is gone;
+*/
+
+//assign to mock 
+-----------
+const mathNew = math.add("new staff")
+const appNew = app.doAdd( "I am cool")
+-------------
+
+//math.add
+expect(mathNew).toBeUndefined()
+expect(math.add).toHaveBeenCalled()
+expect(math.add).toHaveBeenCalledTimes(1)
+expect(math.add).toHaveBeenCalledWith("new staff")
+
+//app.doAdd
+expect(appNew).toBeUndefined()
+expect(app.doAdd).toHaveBeenCalled()
+expect(app.doAdd).toHaveBeenCalledTimes(1)
+expect(app.doAdd).toHaveBeenCalledWith("I am cool")          
+
+              </example>
+          </paragraph>
+          <subtitle>mock function with return value</subtitle>
+          <paragraph>
+              <info>One function is assign to mock we can make it a return a value, this patern is very usefull when We want to mock API call that returns a JSON file</info>
+              <example>
+----------------------- math.js helpers ----------------
+export const add      = (a, b) => a + b;
+export const subtract = (a, b) => b - a;
+---------------------------------------------------------
+
+----------------------- app.js (math helpers implementation) ----------------
+export const doAdd      = (a, b) => math.add(a, b);
+export const doSubtract = (a, b) => math.subtract(a, b);
+-----------------------------------------------------------------------------
+                
+/*
+*@assignning mocks to the functions of return type ;
+*@
+*/
+
+math.add = jest.fn().mockImplementation( () => "some Value" );
+//other syntax;
+app.doAdd = jest.fn()
+app.doAdd.mockReturnValue("bar value")
+
+/*
+*@testing function with mock return 
+*@
+*/
+
+//math.add
+expect(math.add()).toBe("some Value")
+//app.doAdd
+expect(app.doAdd()).toBe("bar value")
+
+
+
+              </example>
+          </paragraph>
+                    <subtitle>mock function with promise return</subtitle>
+                    <paragraph>
+                        <info>we can mock our function to return a promise as below:</info>
+                        <example>
+----------------------- math.js helpers ----------------
+export const add      = (a, b) => a + b;
+export const subtract = (a, b) => b - a;
+---------------------------------------------------------
+
+----------------------- app.js (math helpers implementation) ----------------
+export const doAdd      = (a, b) => math.add(a, b);
+export const doSubtract = (a, b) => math.subtract(a, b);
+-----------------------------------------------------------------------------
+                
+/*
+*@assignning mocks to the functions that return promise;
+*@
+*/
+
+math.add = jest.fn().mockImplementation(() => Promise.resolve("promise resolve"))
+math.devide = jest.fn().mockImplementation((value) => Promise.reject(value))
+//other syntax;
+app.doAdd = jest.fn()
+app.doAdd.mockResolvedValue("bar")
+//reject other syntax;
+math.devide = jest.fn()
+app.doAdd.mockRejectedValue("rejected");
+
+/*
+*@now our function can be called as below;
+*@the old functionality is gone now our function returns above values that resolves in promise resolved;
+*/
+
+//math.add
+expect(math.add()).resolves.toBe("promise resolve")
+expect(app.doAdd()).resolves.toBe("bar")
+expect(math.devide("rejected")).rejects.toBe("rejected")
+
+-----------------------------------------------------------------------------------------------
+
+                        </example>
+                    </paragraph>
+      </content>
+  </chapter>
+  <chapter>
+      <subject>Mock a module with jest.mock</subject>
+      <content>
+        <paragraph>
+          <info>you can automatically assing mock functions to all function from the moduele by jest.mock();</info>
+          <example>
+----------------------- math.js helpers ----------------
+export const add      = (a, b) => a + b;
+export const subtract = (a, b) => b - a;
+---------------------------------------------------------
+
+describe("use js.mock() for all exported fn",() => {
+// Set all module functions to jest.fn
+  jest.mock("./helpers/math")
+
+  test("using js.mock() for mocking all exported functions from the module", ()=>{
+
+      //pick any function from module set to mock and call it;
+      math.add("add")
+      expect(math.add).toHaveBeenCalledWith("add")
+  })
+})
+          </example>
+      </paragraph>      
+    </content>
+  </chapter>
+  <chapter>
+      <subject>jest.spyOn to mock a funtion but later restore its original implementation </subject>
+      <content>
+        <paragraph>
+            <info>jest.spyOn() to mock a funtion but later restore its original implementation later in the same test by mockFn.mockRestore()</info>
+            <example>
+ ----------------------- math.js helpers ----------------
+ export const add      = (a, b) => a + b;
+ export const subtract = (a, b) => b - a;
+ ---------------------------------------------------------
+
+ describe("use js.spyOn() to mock function and then restore original implementation",()=>{
+     const addMock = jest.spyOn(math, "add")
+
+     // override the implementation
+     addMock.mockImplementation(() => "mock")
+     expect(app.doAdd(1, 2)).toEqual("mock")
+
+     // restore the original implementation
+     addMock.mockRestore()
+     expect(app.doAdd(1, 2)).toEqual(3)
+ })
+            </example>
+        </paragraph>
+      </content>
+  </chapter>
  </chapters>
