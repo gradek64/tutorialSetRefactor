@@ -14,6 +14,14 @@ class App extends Component {
         super(props);
         this.props = props;
     }
+    componentDidMount(){
+        const { getSecretWord } = this.props;
+        /*
+        *@launch your secrete word from axios
+        *@using getSecretWord store action;
+        */
+        getSecretWord();
+    }
     render() {
 
         /*
@@ -21,13 +29,16 @@ class App extends Component {
           *@ commponent is props
         */
 
-        const { success, guessWords, secretWord ,submitWord} = this.props;
+        const { success, guessWords , secretWord, submitWord} = this.props;
         const { collectionOfGuesses } = guessWords;
-
-        console.log('this.props',this.props);
-
+        /*
+          *@get secret word in view 
+          *@and distructure to get only the part U need;
+        */
+        const { hiddenWord } = secretWord;
         return (
             <div className="App">
+                <h2> my secret word cheeat: { hiddenWord  }</h2>
                 <Congrats success={ success.success }/>
                 <InputWord success={ success.success } guessWord = { submitWord }/>
                 <GuessWords guessWords={ collectionOfGuesses } />
@@ -46,8 +57,8 @@ const mapStoreToProps = (store) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         submitWord: (word) => dispatch(guessWord(word)),
-        correctGuess,
-        getSecretWord
+        correctGuess, //is not being used in view just for refference not sure it is good practice;
+        getSecretWord: () => dispatch(getSecretWord()),
     };
 };
 export default connect(mapStoreToProps, mapDispatchToProps)(App);
