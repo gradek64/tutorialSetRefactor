@@ -1,4 +1,5 @@
 import React from "react";
+import SearchBox from "./SearchBox/SearchBoxComponent";
 
 /***********
 
@@ -32,11 +33,14 @@ const withSimpleState = defaultState => BaseComponent => {
     }
     render() {
       return (
-        <BaseComponent
-          {...this.props}
-          stateValue={this.state.value}
-          stateHandler={this.updateState}
-        />
+        <div>
+          <SearchBox eventHandler={this.updateState} />
+          <BaseComponent
+            {...this.props}
+            stateValue={this.state.value}
+            stateHandler={this.updateState}
+          />
+        </div>
       );
     }
   };
@@ -51,9 +55,8 @@ const withSimpleState = defaultState => BaseComponent => {
  BASE COMPONENT number in stack: 4
  the action for state comes from this compoent up to the component lader up to TOP STATE COMPONENT
 ***/
-const renderDisplayList = ({ list, stateHandler }) => (
+const renderDisplayList = ({ list }) => (
   <div>
-    <input type="text" onInput={e => stateHandler(e.target.value)} />
     {list.map(char => (
       <div key={char.name}>
         <div>Character: {char.name}</div>
