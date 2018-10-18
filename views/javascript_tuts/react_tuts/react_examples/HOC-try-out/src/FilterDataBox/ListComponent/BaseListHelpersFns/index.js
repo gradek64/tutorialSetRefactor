@@ -8,15 +8,36 @@
  FilteredList FUNCTION number in stack: 2
  list and state Value given i\n props;
 ***/
-const filteringFn = ({ list, stateValue }) => {
-  return {
-    list: list.filter(char =>
-      char.name
-        .concat(char.side)
-        .toLowerCase()
-        .includes(stateValue)
-    )
-  };
+
+let updatedList;
+import { sortASC, sortDESC } from "../../helpers";
+const manipulateListFns = ({ list, letterSearch, filter }) => {
+  switch (filter) {
+    case "sortASC":
+      if (updatedList) {
+        list = updatedList;
+      }
+      return {
+        list: sortASC(list, "name")
+      };
+    case "sortDESC":
+      if (updatedList) {
+        list = updatedList;
+      }
+      return {
+        list: sortDESC(list, "name")
+      };
+    case "search":
+      updatedList = list.filter(char =>
+        char.name
+          .concat(char.side)
+          .toLowerCase()
+          .includes(letterSearch)
+      );
+      return {
+        list: updatedList
+      };
+  }
 };
 
-export { filteringFn };
+export { manipulateListFns };

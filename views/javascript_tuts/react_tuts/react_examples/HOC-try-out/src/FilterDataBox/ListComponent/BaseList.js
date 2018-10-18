@@ -14,7 +14,7 @@
  ****/
 
 import React from "react";
-import { filteringFn } from "./BaseListHelpersFns";
+import { manipulateListFns } from "./BaseListHelpersFns";
 
 const renderDisplayList = ({ list }) => (
   <div>
@@ -29,7 +29,7 @@ const renderDisplayList = ({ list }) => (
 
 /*
     
-    This Component is static once is consctructed from [...filteringFn] and [...renderDisplayList]
+    This Component is static one is consctructed from [...manipulateListFns] and [...renderDisplayList]
     then is ready to be passed to our Top HoC for state change
 
 */
@@ -41,6 +41,8 @@ const withTransformProps = mapperFunc => BaseComponent => baseProps => {
   const transformedProps = mapperFunc(baseProps);
   return <BaseComponent {...transformedProps} />;
 };
-const ListWithFilters = withTransformProps(filteringFn)(renderDisplayList);
+const ListWithTransformation = withTransformProps(manipulateListFns)(
+  renderDisplayList
+);
 
-export { ListWithFilters };
+export { ListWithTransformation };

@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBox from "./SearchBox/SearchBoxComponent";
 import DropDownSelect from "./DropDownSelect/DropDownSelect";
-import { ListWithFilters } from "./ListComponent/BaseList";
+import { ListWithTransformation } from "./ListComponent/BaseList";
 
 /***********
 
@@ -18,23 +18,39 @@ import { ListWithFilters } from "./ListComponent/BaseList";
   *@this component is responsible for logic only 
   *@it has state functionality pass down to Base Component
 */
-const withSimpleState = BaseComponent => {
+const withSimpleState = TransformedBaseComponent => {
   return class WithSimpleState extends React.Component {
     constructor(props) {
       super(props);
-      this.state = { value: "" };
-      this.updateState = this.updateState.bind(this);
+      this.state = {
+        sortBy: "sortASC",
+        value: ""
+      };
+      this.searchText = this.searchText.bind(this);
+      this.sortBy = this.sortBy.bind(this);
     }
-    updateState(valueSet) {
-      console.log(valueSet);
-      this.setState({ value: valueSet.toLowerCase() });
+    searchText(value) {
+      this.setState({
+        sortBy: "search",
+        value: value.toLowerCase()
+      });
+    }
+    sortBy(sortValue) {
+      this.setState({
+        sortBy: sortValue,
+        value: ""
+      });
     }
     render() {
       return (
         <div>
-          <SearchBox eventHandler={this.updateState} />
-          <DropDownSelect eventHandler={this.updateState} />
-          <BaseComponent {...this.props} stateValue={this.state.value} />
+          <SearchBox eventHandler={this.searchText} />
+          <DropDownSelect eventHandler={this.sortBy} />
+          <TransformedBaseComponent
+            {...this.props}
+            letterSearch={this.state.value}
+            filter={this.state.sortBy}
+          />
         </div>
       );
     }
@@ -50,6 +66,6 @@ const withSimpleState = BaseComponent => {
   *@Our state component needs our Base compoenent to be passed with the filters applied to it\
   *@
 */
-const FilteredListSearch = withSimpleState(ListWithFilters);
+const FilteredListSearch = withSimpleState(ListWithTransformation);
 
 export default FilteredListSearch;

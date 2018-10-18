@@ -5,10 +5,8 @@ const DropDownSelect = ({ eventHandler }) => (
       eventHandler(e.target.value);
     }}
   >
-    <option value="volvo">Volvo</option>
-    <option value="saab">Saab</option>
-    <option value="mercedes">Mercedes</option>
-    <option value="audi">Audi</option>
+    <option value="sortASC">Sort ASC</option>
+    <option value="sortDESC">Sort DESC</option>
   </select>
 );
 
