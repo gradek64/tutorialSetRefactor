@@ -6,7 +6,7 @@ import * as ListRenderComponent from "./HOC_simple_all_logic_seperated";
 import HOCWithState from "./HOC_with_state";
 
 //Search box example;
-import SearchBoxExample from "./FilterDataBox/filterBox";
+import SearchBoxExample from "./FilterDataBox/ListTopManagement";
 
 import "./assets/scss/app.scss";
 
