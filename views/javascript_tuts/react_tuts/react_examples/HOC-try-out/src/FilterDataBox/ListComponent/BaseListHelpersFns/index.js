@@ -10,7 +10,7 @@
 ***/
 
 let updatedList;
-import { sortASC, sortDESC } from "../../helpers";
+import * as fnHelpers from "../../helpers";
 const manipulateListFns = ({ list, letterSearch, filter }) => {
   switch (filter) {
     case "sortASC":
@@ -18,14 +18,14 @@ const manipulateListFns = ({ list, letterSearch, filter }) => {
         list = updatedList;
       }
       return {
-        list: sortASC(list, "name")
+        list: fnHelpers.sortASC(list, "name")
       };
     case "sortDESC":
       if (updatedList) {
         list = updatedList;
       }
       return {
-        list: sortDESC(list, "name")
+        list: fnHelpers.sortDESC(list, "name")
       };
     case "search":
       updatedList = list.filter(char =>
