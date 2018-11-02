@@ -10,6 +10,10 @@ views/gulp-tuts-page-generator/*/node_modules
 views/gulp-tuts-page-generator/*/*/node_modules
 views/gulp-tuts-page-generator/*/*/*/node_modules
 views/gulp-tuts-page-generator/*/*/*/*/node_modules
+views/views/udemy_modern_js_examples/*/node_modules
+views/views/udemy_modern_js_examples/*/*/node_modules
+views/views/udemy_modern_js_examples/*/*/*/node_modules
+views/udemy_modern_js_examples/react-add-expense-app-redux/node_modules
 views/javascript_tuts/react_tuts/react_examples/*/node_modules
 views/javascript_tuts/react_tuts/react_examples/*/*/node_modules
 views/javascript_tuts/react_tuts/react_examples/*/*/*/node_modules
