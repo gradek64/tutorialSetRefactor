@@ -17,7 +17,8 @@
 			Terminal (launch terminal from current project)
 		2) All plugins usually comes with github intructions so follow them 
 		3) Linting comes from ESLint very powerfull linter that could be (should) be 
-		installed globally to work for every file edited.
+		installed globally to work for every file edited. Globally means you need to intall in your root directory 
+    so here: /Users/gilgrz where last one is your user name, create a package.json file by npm init -f (default) and install npm i eslint@latest , sublime will find your eslint here
 		4) to make eslint work globally you need to set up this file in your home directory 
 			.eslintrc This file can be initiate by eslint -init 
 		5) make sure U got those npm pacakages installed globally for Sublime to lint all files 
