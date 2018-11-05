@@ -408,7 +408,9 @@ const classInstance = new Class();
                <info> The class property syntax is a Stage 3 proposal so it’s not part of the official JS spec yet.
                 Thefore You need an additional configuration to make it work, as expalained before. First you need to start with npm install:
 
-                      npm install --save-exac @babel/plugin-proposal-class-properties
+                      npm install --save-exac @babel/plugin-proposal-class-properties@7.1.0
+
+                      (it will save exact version witout ^7.1.0 or ~7.1.0)
 
                </info>
                <example>
