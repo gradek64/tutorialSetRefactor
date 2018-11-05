@@ -516,64 +516,75 @@ const classInstance = new Class();
                   <p>The class property syntax is a Stage 3 proposal so it’s not part of the official JS spec yet.
                 Thefore You need an additional configuration to make it work, as expalained before. First you need to start with npm install:
 
-                      npm install --save-exac @babel/plugin-proposal-class-properties</p>
+                      npm install --save-exac @babel/plugin-proposal-class-properties@7.1.0
+
+                      (it will save exact version witout ^7.1.0 or ~7.1.0)</p>
                   <div class="codeWraper">
                     <code>-------sample (raeact) js file ---------------------
-                  class App extends React.Component {
-                    state = {
-                      loggedIn: false,
-                      currentState: &quot;not-panic&quot;,
-                      someDefaultThing: this.props.whatever
-                    }
+class App extends React.Component {
+state = {
+  loggedIn: false,
+  currentState: &quot;not-panic&quot;,
+  someDefaultThing: this.props.whatever
+}
 
-                    render() {
-                      // whatever you like
-                    }
-                  }
-                  //Then you need to configure linter, package.json or .babel.rc file
+render() {
+  // whatever you like
+}
+}
+//Then you need to configure linter, package.json or .babel.rc file
 
-                  --------------------- .babelrc ------------------------------------
-                  {
-                    &quot;plugins&quot;: [&quot;@babel/plugin-proposal-class-properties&quot;]
-                  }
+--------------------- .babelrc ------------------------------------
+{
+  &quot;presets&quot;: [
+    &quot;env&quot;,
+    &quot;react&quot;
+  ],
+  &quot;plugins&quot;: [
+    &quot;transform-class-properties&quot;,
+    &quot;transform-object-rest-spread&quot;,
+    &quot;@babel/plugin-proposal-class-properties&quot;
+  ]
+}
 
-                  -------------------- (or if not above) package.json----------------
-                  {
-                    &quot;plugins&quot;: [
-                      [&quot;@babel/plugin-proposal-class-properties&quot;, { &quot;loose&quot;: true }]
-                    ]
-                  }
-                  //When true, class properties are compiled to use an assignment expression instead of Object.defineProperty, default to false when omited.
+-------------------- (or if not above) package.json----------------
+{
+&quot;plugins&quot;: [
+  [&quot;@babel/plugin-proposal-class-properties&quot;, { &quot;loose&quot;: true }]
+]
+}
+//When true, class properties are compiled to use an assignment expression instead of Object.defineProperty, default to false when omited.
 
-                  ------------- (or) with node file ---------------------------------
-                  require(&quot;@babel/core&quot;).transform(&quot;code&quot;, {
-                    plugins: [&quot;@babel/plugin-proposal-class-properties&quot;]
-                  });
-                  -----------------------------------------------------------------
+------------- (or) with node file ---------------------------------
+require(&quot;@babel/core&quot;).transform(&quot;code&quot;, {
+plugins: [&quot;@babel/plugin-proposal-class-properties&quot;]
+});
+-----------------------------------------------------------------
 
-                  ------------NOW Linter configuration for not throwing error for new syntax-----------
 
-                  ------------ .lintrc ---------------------
-                  {
-                    &quot;parser&quot;: &quot;babel-eslint&quot;,
+------------NOW Linter configuration for not throwing error for new syntax-----------
 
-                    &quot;parserOptions&quot;: {
-                      &quot;ecmaVersion&quot;: 6,
-                      &quot;sourceType&quot;: &quot;module&quot;
-                    },
+------------ .lintrc ---------------------
+{
+&quot;parser&quot;: &quot;babel-eslint&quot;,
 
-                    &quot;env&quot;: {
-                      &quot;browser&quot;: true,
-                      &quot;node&quot;: true,
-                      &quot;es6&quot;: true
-                    },
+&quot;parserOptions&quot;: {
+  &quot;ecmaVersion&quot;: 6,
+  &quot;sourceType&quot;: &quot;module&quot;
+},
 
-                    &quot;ecmaFeatures&quot;: {
-                      &quot;classes&quot;: true
-                    }
-                  }
+&quot;env&quot;: {
+  &quot;browser&quot;: true,
+  &quot;node&quot;: true,
+  &quot;es6&quot;: true
+},
 
-                  ---------------------------------------------</code>
+&quot;ecmaFeatures&quot;: {
+  &quot;classes&quot;: true
+}
+}
+
+---------------------------------------------</code>
                   </div>
                 </div>
               </div>

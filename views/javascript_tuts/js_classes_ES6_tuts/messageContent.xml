@@ -431,7 +431,15 @@ render() {
 
 --------------------- .babelrc ------------------------------------
 {
-"plugins": ["@babel/plugin-proposal-class-properties"]
+  "presets": [
+    "env",
+    "react"
+  ],
+  "plugins": [
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    "@babel/plugin-proposal-class-properties"
+  ]
 }
 
 -------------------- (or if not above) package.json----------------
