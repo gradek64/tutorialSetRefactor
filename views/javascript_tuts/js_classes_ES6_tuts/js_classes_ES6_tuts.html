@@ -58,6 +58,8 @@
                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts" partition>extends and super();</a><span class="tooltiptext">extends and super();</span>
                            
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts" partition>ES7 class Syntax</a><span class="tooltiptext">ES7 class Syntax</span>
+                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts" partition>Class static method()</a><span class="tooltiptext">Class static method()</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts" partition>Class get value() and set value() methods</a><span class="tooltiptext">Class get value() and set value() methods</span>
@@ -511,6 +513,74 @@ const classInstance = new Class();
               <div class="band-container partition " part="part-2">
                 <div class="band-inner">
 
+                  <p>The class property syntax is a Stage 3 proposal so it’s not part of the official JS spec yet.
+                Thefore You need an additional configuration to make it work, as expalained before. First you need to start with npm install:
+
+                      npm install --save-exac @babel/plugin-proposal-class-properties</p>
+                  <div class="codeWraper">
+                    <code>-------sample (raeact) js file ---------------------
+                  class App extends React.Component {
+                    state = {
+                      loggedIn: false,
+                      currentState: &quot;not-panic&quot;,
+                      someDefaultThing: this.props.whatever
+                    }
+
+                    render() {
+                      // whatever you like
+                    }
+                  }
+                  //Then you need to configure linter, package.json or .babel.rc file
+
+                  --------------------- .babelrc ------------------------------------
+                  {
+                    &quot;plugins&quot;: [&quot;@babel/plugin-proposal-class-properties&quot;]
+                  }
+
+                  -------------------- (or if not above) package.json----------------
+                  {
+                    &quot;plugins&quot;: [
+                      [&quot;@babel/plugin-proposal-class-properties&quot;, { &quot;loose&quot;: true }]
+                    ]
+                  }
+                  //When true, class properties are compiled to use an assignment expression instead of Object.defineProperty, default to false when omited.
+
+                  ------------- (or) with node file ---------------------------------
+                  require(&quot;@babel/core&quot;).transform(&quot;code&quot;, {
+                    plugins: [&quot;@babel/plugin-proposal-class-properties&quot;]
+                  });
+                  -----------------------------------------------------------------
+
+                  ------------NOW Linter configuration for not throwing error for new syntax-----------
+
+                  ------------ .lintrc ---------------------
+                  {
+                    &quot;parser&quot;: &quot;babel-eslint&quot;,
+
+                    &quot;parserOptions&quot;: {
+                      &quot;ecmaVersion&quot;: 6,
+                      &quot;sourceType&quot;: &quot;module&quot;
+                    },
+
+                    &quot;env&quot;: {
+                      &quot;browser&quot;: true,
+                      &quot;node&quot;: true,
+                      &quot;es6&quot;: true
+                    },
+
+                    &quot;ecmaFeatures&quot;: {
+                      &quot;classes&quot;: true
+                    }
+                  }
+
+                  ---------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
                   <p>Class static method() 
 
                   it is a mehod that is only available on the Class definition itslef not on instance of the class;
@@ -534,7 +604,7 @@ const classInstance = new Class();
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-3">
+              <div class="band-container partition " part="part-4">
                 <div class="band-inner">
 
                   <p>Class get value() and set value() methods:
