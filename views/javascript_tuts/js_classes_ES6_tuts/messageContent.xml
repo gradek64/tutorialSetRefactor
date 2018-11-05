@@ -459,7 +459,7 @@ plugins: ["@babel/plugin-proposal-class-properties"]
 
 ------------NOW Linter configuration for not throwing error for new syntax-----------
 
------------- .lintrc ---------------------
+------------ .eslintrc ---------------------
 {
 "parser": "babel-eslint",
 
