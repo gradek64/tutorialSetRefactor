@@ -412,63 +412,64 @@ const classInstance = new Class();
 
                </info>
                <example>
-                
-                  -------sample (raeact) js file ---------------------
-                  class App extends React.Component {
-                    state = {
-                      loggedIn: false,
-                      currentState: "not-panic",
-                      someDefaultThing: this.props.whatever
-                    }
 
-                    render() {
-                      // whatever you like
-                    }
-                  }
-                  //Then you need to configure linter, package.json or .babel.rc file
+-------sample (raeact) js file ---------------------
+class App extends React.Component {
+state = {
+  loggedIn: false,
+  currentState: "not-panic",
+  someDefaultThing: this.props.whatever
+}
 
-                  --------------------- .babelrc ------------------------------------
-                  {
-                    "plugins": ["@babel/plugin-proposal-class-properties"]
-                  }
+render() {
+  // whatever you like
+}
+}
+//Then you need to configure linter, package.json or .babel.rc file
 
-                  -------------------- (or if not above) package.json----------------
-                  {
-                    "plugins": [
-                      ["@babel/plugin-proposal-class-properties", { "loose": true }]
-                    ]
-                  }
-                  //When true, class properties are compiled to use an assignment expression instead of Object.defineProperty, default to false when omited.
+--------------------- .babelrc ------------------------------------
+{
+"plugins": ["@babel/plugin-proposal-class-properties"]
+}
 
-                  ------------- (or) with node file ---------------------------------
-                  require("@babel/core").transform("code", {
-                    plugins: ["@babel/plugin-proposal-class-properties"]
-                  });
-                  -----------------------------------------------------------------
+-------------------- (or if not above) package.json----------------
+{
+"plugins": [
+  ["@babel/plugin-proposal-class-properties", { "loose": true }]
+]
+}
+//When true, class properties are compiled to use an assignment expression instead of Object.defineProperty, default to false when omited.
 
-                  ------------NOW Linter configuration for not throwing error for new syntax-----------
+------------- (or) with node file ---------------------------------
+require("@babel/core").transform("code", {
+plugins: ["@babel/plugin-proposal-class-properties"]
+});
+-----------------------------------------------------------------
 
-                  ------------ .lintrc ---------------------
-                  {
-                    "parser": "babel-eslint",
 
-                    "parserOptions": {
-                      "ecmaVersion": 6,
-                      "sourceType": "module"
-                    },
+------------NOW Linter configuration for not throwing error for new syntax-----------
 
-                    "env": {
-                      "browser": true,
-                      "node": true,
-                      "es6": true
-                    },
+------------ .lintrc ---------------------
+{
+"parser": "babel-eslint",
 
-                    "ecmaFeatures": {
-                      "classes": true
-                    }
-                  }
+"parserOptions": {
+  "ecmaVersion": 6,
+  "sourceType": "module"
+},
 
-                  ---------------------------------------------
+"env": {
+  "browser": true,
+  "node": true,
+  "es6": true
+},
+
+"ecmaFeatures": {
+  "classes": true
+}
+}
+
+---------------------------------------------
 
 
                </example>
