@@ -1,9 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+//custom
+import ES7ClassSyntaxSupport from "./ES7-class-syntax";
 
 const jsx = (
   <div>
-    <h1>works</h1>
+    <h1>{"works"}</h1>
+    <ES7ClassSyntaxSupport />
   </div>
 );
 

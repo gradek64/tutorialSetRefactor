@@ -17,6 +17,8 @@ const starWarsChars = [
   { name: "Palpatine", side: "dark" }
 ];
 
+console.log("HOCWithState", HOCWithState);
+
 ReactDOM.render(
   <HOCWithState list={starWarsChars} side={"light"} />,
   document.getElementById("app")
