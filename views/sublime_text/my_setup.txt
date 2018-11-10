@@ -19,16 +19,42 @@
 		3) Linting comes from ESLint very powerfull linter that could be (should) be 
 		installed globally to work for every file edited. Globally means you need to intall in your root directory 
     so here: /Users/gilgrz where last one is your user name, create a package.json file by npm init -f (default) and install npm i eslint@latest , sublime will find your eslint here
+
+      ESLINT setup
+
+      IMPORTANT: eslint can be setup 
+      locally (rules apply only to the specific directory) or 
+      globally (rules apply to any directory that doesnt have .eslintrc set in your directory) so it uses global 
+      rules (from home directory)
+
+      Eslint traverse up the folder untill finds .eslintrc
+
+
 		4) to make eslint work globally you need to set up this file in your home directory 
 			.eslintrc This file can be initiate by eslint -init 
 		5) make sure U got those npm pacakages installed globally for Sublime to lint all files 
-				 babel-eslint@9.0.0
-				├── csslint@1.0.5
-				├── eslint@5.5.0
-				├── eslint-config-google@0.10.0
-				├── eslint-plugin-react@7.11.1
-				├── eslint_d@7.1.0
-				├── gulp-cli@2.0.1
-				├── npm@6.4.1
-				└── sass-lint@1.12.1
+				 ├── eslint@5.9.0
+         └── eslint-plugin-react@7.11.1
+      with that configuration U will get support for react linting in every directory , and this will work with your
+      ESLint-formatter 
+    6) let say you want to support, lint more features from eslint, thefore you can install eslint locally and change .eslinrc rules to apply for local files in your directory (where node_modeules are) so install that combination
+        ├── eslint@4.19.1
+        └── eslint-plugin-react@7.11.1
+        └── babel-eslint@8.2.6
+      we are installing locally babel-eslint cause we need extra features coming from babel linting as class-properties stage 3 that allows set classes with shorthands classproperty = 'something'
+    6a) when U run you eslint --init locally make sure to add that line in .eslintrc
+      "extends": "eslint:recommended",
+      "parser": "babel-eslint",
+      "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+      },
+      
+
+
+
+
 					
