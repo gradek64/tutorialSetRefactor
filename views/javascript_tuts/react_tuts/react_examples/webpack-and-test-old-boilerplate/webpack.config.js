@@ -90,6 +90,7 @@ const config = {
     stats: "errors-only",
     open: true
   },
+  plugins: [new ExtractTextPlugin({ filename: "style.css" })],
 
   devtool: "inline-source-map"
 };
