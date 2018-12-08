@@ -3,8 +3,61 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/font-awesome-4.7.0/css/font-awesome.min.css' />
   </head>
   <body>
+    <style type="text/css">
+      .sideMenu {
+        position: absolute;
+        top:0;
+        left:0;
+         min-width: 90px;
+        height: 105%;
+        background-color: green;
+
+      }
+      .menuContent {
+        list-style: none;
+        margin:0 auto;
+        padding: 0;
+        width: 80%;
+
+      }
+      .menuContent li {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        background-color: #3ac357 ;
+        border-radius: 50%;
+        text-align: center;
+        margin:10px 0 10px 0;
+
+      }
+       .menuContent li:first-child {
+        margin-top:40px;
+       }
+       .menuContent li span {
+         word-wrap: break-word;
+       }
+    </style>
+    <!-- side menu -->
+    <div class="sideMenu">
+      <ul class='menuContent'>
+        <% for(var i=0; i<links.length; i++) {%>
+            <a href='<%= links[i] %>'>
+              <li>
+              <i class="fa fa-css3" aria-hidden="true"></i>
+               <span> CSS tuts</span>
+              </li>
+            </a>
+      <% } %>
+      <ul>
+    </div>
+    <!-- side menu -->
+
     <div class="flex-container">
        <div class="header-search">
         <div class="seach-input-container">

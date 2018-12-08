@@ -1,0 +1,92 @@
+<!-- index.nunjucks -->
+{% extends "tutorial_layout.nunjucks" %}
+{% import '_global_variables.html' as globals %}
+
+
+{% block links %}  
+<ul class="links">
+<!--list-tag-->
+    {% for chapter in chapters.chapter %}
+      <li class="nav-primary tooltip"><a href="{{ globals.tuts_path }}">{{chapter.subject}}</a><span class="tooltiptext">{{chapter.subject}}</span>
+                 {% if chapter.content.subtitle %} 
+                    <ul class="linksNested">
+                       {% for subtitle in chapter.content.subtitle %}   
+                          <li class="nav-primary tooltip"><a href="{{ globals.tuts_path }}" partition>{{subtitle}}</a><span class="tooltiptext">{{subtitle}}</span>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+      </li>
+    {% endfor %}
+<!--end-list-tag-->
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="sectionWrapper">
+  <div class="sectionContainer">
+   {% for chapter in chapters.chapter %}
+      {% set index = 0 %}
+      <section {% if loop.first ==true %} class="band band-b activeSection" {% endif %} {% if loop.first ==false %} class="band band-b" {% endif %}class="band band-b">
+          <h1> {{chapter.subject}} </h1> 
+          {% for paragraph in chapter.content.paragraph %}
+              <div class="band-container{%if chapter.content.subtitle%} partition{% endif %} {% if loop.first ==true %}first{% endif %}" part="part-{{ loop.index }}">
+                <div class="band-inner">
+
+                  <p>{{paragraph.info}}</p>
+                  <div class="codeWraper">
+                    <code>{{paragraph.example}}</code>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+
+            {% if chapter.content.paragraph.info %}
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>{{chapter.content.paragraph.info}}</p>
+                  <div class="codeWraper">
+                    <code>{{chapter.content.paragraph.example}}</code>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+
+      </section>
+  {% endfor %}
+  {% if chapters.chapter %}
+    <section class="band band-b activeSection">
+      <h1>{{chapters.chapter.subject}}</h1>
+
+      {% for paragraph in chapters.chapter.content.paragraph %}
+          <div class="band-container">
+            <div class="band-inner">
+
+              <p>{{paragraph.info}}</p>
+              <div class="codeWraper">
+                <code>{{paragraph.example}}</code>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+
+
+        {% if chapters.chapter.content.paragraph %}
+          <div class="band-container">
+            <div class="band-inner">
+              <p>{{chapters.chapter.content.paragraph.info}}</p>
+              <div class="codeWraper">
+                <code>{{chapters.chapter.content.paragraph.example}}</code>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+    </section>
+  {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+
