@@ -6,7 +6,7 @@ var router = express.Router();
 router.get("/", function(req, res, next) {
   res.render("index", {
     title: "Express",
-    links: ["/views/css_learning", "/views/css_learning"]
+    links: ["/views/css_learning", "/views/css_learning2"]
   });
 });
 
