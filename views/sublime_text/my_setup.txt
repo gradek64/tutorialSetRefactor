@@ -14,6 +14,8 @@
 			SublimeLinter (sublime framework for linting packages)
 			SublimeLinter-csslint
 			SublimeLinter-jshint
+      SassBeautify (formats scss files after saving like (ESLint Formater);
+      HTML-CSS-JS Prettify (amazig for formating any file extension , disable js formater since I am using ESLINT formater in package settings)
 			Terminal (launch terminal from current project)
 		2) All plugins usually comes with github intructions so follow them 
 		3) Linting comes from ESLint very powerfull linter that could be (should) be 

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>flex examples</title>
+</head>
+<style>
+.flex {
+    display: flex;
+    direction: row;
+    align-items: flex-start;
+    margin: 5px;
+    border-bottom: 2px solid green;
+}
+
+.box {
+    padding: 20px;
+    border: 2px solid rgb(96, 139, 168);
+    border-radius: 5px;
+    background-color: rgba(96, 139, 168, .2);
+}
+
+.flexContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    border: 1px solid green;
+}
+
+.flexContainerSelf {
+    display: flex;
+    width: 50%;
+    height: 400px;
+    border: 1px solid green;
+}
+
+.flexContainerCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 400px;
+    border: 1px solid green;
+}
+
+
+.flexContainerCenter .box {
+    flex: 0 0 0;
+    width: 100px;
+    height: 100px;
+}
+
+.flexContainerAlignContent {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+    height: 400px;
+    align-content: center;
+    border: 1px solid green;
+}
+
+.flexContainerAlignContentColumn .box,
+.flexContainerAlignContent .box {
+    flex: 1 1 100px;
+}
+
+.flexContainerAlignContentColumn {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 400px;
+    width: 500px;
+    align-content: center;
+    border: 1px solid green;
+}
+
+.flexContainerJustify {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 500px;
+    border: 1px solid green;
+}
+
+.flexContainerJustify .box {
+    /*reset flex*/
+    flex: 0 0 50px;
+}
+
+.flexContainerJustifyColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 500px;
+    width: 500px;
+    border: 1px solid green;
+}
+
+.flexContainerJustifyColumn .box {
+    /*reset flex*/
+    flex: 0 0 50px;
+}
+</style>
+
+<body>
+    <h2 style="width: 100%;text-align: center;font-family: arial;">controling <span style="color: red">container position</span> with align-content and justify-content</h2>
+    <div class="flex">
+        <div class="styles">
+            <code style="white-space: pre-wrap;">
+
+        {
+            /*
+              when you have content flooding on next row you can control 
+
+              **** the distribution of space between the rows *****
+
+              align-content: center 
+              align-content: flex-start (default)
+              align-content: flex-end 
+              align-content: space-between 
+              align-content: space-around
+              align-content: space-evenly
+
+            */
+
+            display: flex;
+            <span style="color:red">flex-direction: row;</span>;
+            <span style="color:red">align-content: center</span>;
+            <span style="color:red">flex-flow: row wrap;</span>;
+            /*height has to be more that all items can fit*/
+            <span style="color:red">height:400px</span>;
+            border: 1px solid green;
+        }
+          </code>
+        </div>
+        <div class="flexContainerAlignContent">
+            <div class="box">One</div>
+            <div class="box">Two</div>
+            <div class="box">Three</div>
+            <div class="box">Four</div>
+            <div class="box">Five</div>
+            <div class="box">Six</div>
+            <div class="box">Seven</div>
+            <div class="box">Eight</div>
+        </div>
+    </div>
+    <div class="flex">
+        <div class="styles">
+            <code style="white-space: pre-wrap;">
+
+        {
+            /*
+              when you have content flooding on next row you can control 
+              
+              **** the distribution of space between the rows *****
+
+              align-content: center 
+              align-content: flex-start (default)
+              align-content: flex-end 
+              align-content: space-between 
+              align-content: space-around
+              align-content: space-evenly
+
+            */
+
+            display: flex;
+            <span style="color:red">flex-direction: column;</span>;
+            <span style="color:red">align-content: center</span>;
+            /*width has to be more that all items can fit*/
+            <span style="color:red">width: 500px</span>;
+            <span style="text-decoration: line-through;"> flex-flow: row wrap;</span>
+            <span style="color:red">flex-wrap:wrap</span>;
+            border: 1px solid green;
+        }
+          </code>
+        </div>
+        <div class="flexContainerAlignContentColumn">
+            <div class="box">One</div>
+            <div class="box">Two</div>
+            <div class="box">Three</div>
+            <div class="box">Four</div>
+            <div class="box">Five</div>
+            <div class="box">Six</div>
+            <div class="box">Seven</div>
+            <div class="box">Eight</div>
+        </div>
+    </div>
+    <h2 style="width: 100%;text-align: center;font-family: arial;">controling container position along main axis (x-axis in math) or horizontal in common language introducing : justify-content</h2>
+    <div class="flex">
+        <div class="styles">
+            <code style="white-space: pre-wrap;">
+
+      {
+          
+          display: flex;
+          <span style="color:red">flex-direction: row;</span>;
+          <span style="color:red"> justify-content: flex-end;</span>;
+          /*width has to be more that all items can fit*/
+          <span style="color:red">width: 500px</span>;
+          border: 1px solid green;
+
+
+          /*all children have to have space in the container in a row*/
+      }
+        </code>
+        </div>
+        <div class="flexContainerJustify">
+            <div class="box">One</div>
+            <div class="box">Two</div>
+            <div class="box">Three</div>
+        </div>
+    </div>
+    <div class="flex">
+        <div class="styles">
+            <code style="white-space: pre-wrap;">
+
+      {
+          
+          display: flex;
+          <span style="color:red">flex-direction: column;</span>;
+          <span style="color:red">justify-content: center</span>;
+          /*height has to be more that all items can fit*/
+          <span style="color:red">height: 500px</span>;
+          border: 1px solid green;
+
+
+          /*all children have to have space in the container in a row*/
+      }
+        </code>
+        </div>
+        <div class="flexContainerJustifyColumn">
+            <div class="box">One</div>
+            <div class="box">Two</div>
+            <div class="box">Three</div>
+        </div>
+    </div>
+    <h2 style="width: 100%;text-align: center;font-family: arial;">controling <span style="color: red">children position</span> with align-items and align-itself</h2>
+    <div class="flex">
+        <div class="styles">
+            <code style="white-space: pre-wrap;">
+
+        {
+            display: flex;
+            flex-direction: column;
+            <span style="color:red">align-items: center</span>;
+            justify-content: center;
+            border: 1px solid green;
+        }
+          </code>
+        </div>
+        <div class="flexContainer">
+            <p>I am paragraph with no styling</p>
+            <img src="./pirate.svg" width="75" alt="Example image" />
+            <span>I am span with no styling</span>
+        </div>
+    </div>
+    <div class="flex">
+        <div class="styles">
+            <code style="white-space: pre-wrap;">
+
+        {
+            display: flex;
+            flex-direction: column;
+            <span style="color:red">align-items: center</span>;
+            <span style="color:red">justify-content: center;</span>;
+            border: 1px solid green;
+        }
+          </code>
+        </div>
+        <div class="flexContainerCenter">
+            <div class="box">One</div>
+        </div>
+    </div>
+    <h2>facts</h2>
+    <ul>
+        <li>children height is streched to container hight if no align-items are applied</li>
+        <li>children width is streched to container width if no align-items are applied and flex-direction:column</li>
+    </ul>
+    <div class="flex">
+        <div class="styles">
+            <code style="white-space: pre-wrap;">
+
+
+              /* controling individual items(children) */
+              by align-self;
+
+        {
+            <span style="color:red">display: flex;</span>;
+            /*addtional for spacing*/
+            <span style="color:red">height: 300px;</span>;
+            <span style="color:red">width: 400px;</span>;
+            border: 1px solid green;
+
+           /*child*/
+            <span style="color:red">align-selt:flex-end</span>;
+        }
+          </code>
+        </div>
+        <div class="flexContainerSelf">
+            <div class="box">One</div>
+            <div class="box" style="align-self: flex-end;">Two</div>
+            <div class="box">Three</div>
+        </div>
+    </div>
+    <div class="flex">
+        <div class="styles">
+            <code style="white-space: pre-wrap;">
+
+
+              /* controling individual items(children) */
+              by align-self;
+
+        {
+        <span style="color:red">display: flex;</span>;
+        <span style="color:red">flex-diretion:column</span>;
+        /*addtional for spacing*/
+        <span style="color:red">height: 300px;</span>;
+        <span style="color:red">width: 400px;</span>;
+        border: 1px solid green;
+
+           /*child*/
+            <span style="color:red">align-selt:flex-end</span>;
+        }
+          </code>
+        </div>
+        <div class="flexContainerSelf" style="flex-direction:column">
+            <div class="box">One</div>
+            <div class="box" style="align-self: flex-end;">Two</div>
+            <div class="box">Three</div>
+        </div>
+    </div>
+    <h3 style="border: 1px dotted green;text-align: center;">situation changes if you aplied aling-items to container , all children width and height adjust to their content, streching is gone for any of the children</h3>
+    <div class="flex">
+        <div class="styles">
+            <code style="white-space: pre-wrap;">
+
+
+              /* controling individual items(children) */
+              by align-self;
+
+        {
+        <span style="color:red">display: flex;</span>;
+        <span style="color:red">flex-direction:column</span>;
+        <span style="color:red">align-items:flex-start</span>;
+        /*addtional for spacing*/
+        <span style="color:red">height: 300px;</span>;
+        <span style="color:red">width: 400px;</span>;
+        border: 1px solid green;
+
+           /*child*/
+            <span style="color:red">align-selt:flex-end</span>;
+        }
+          </code>
+        </div>
+        <div class="flexContainerSelf" style="flex-direction:column; align-items:flex-start;">
+            <div class="box">One</div>
+            <div class="box" style="align-self: flex-end;">Two</div>
+            <div class="box">Three</div>
+        </div>
+    </div>
+</body>
+
+</html>

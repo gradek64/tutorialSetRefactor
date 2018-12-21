@@ -1,0 +1,46 @@
+1) After instalation you might want to adjust some of the default features of the sasBeautify package by going:
+Sublime text-> preferneces-> Packages Settings -> SassBeautify -> Settings User 
+
+Paste that code accordingly
+
+
+{
+  // How many spaces to use for each level of indentation. "t" means use hard tabs.
+  "indent": 2,
+  // Convert underscores to dashes.
+  "dasherize": false,
+  // Output the old-style ":prop val" property syntax. Only meaningful when generating Sass.
+  "old": false,
+
+  /*
+      to find out your path run and paste it in path:'path'
+
+        echo $PATH
+
+  */
+
+
+  // Custom environment PATH.
+  "path": "/Users/gilgrz/.rvm/gems/ruby-2.5.3/bin:/Users/gilgrz/.rvm/gems/ruby-2.5.3@global/bin:/Users/gilgrz/.rvm/rubies/ruby-2.5.3/bin:/Users/gilgrz/.gem/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/gilgrz/.rvm/bin",
+
+/*
+      to find out your gems path run the paste it in gemPath:'gempath'
+
+        echo $GEM_PATH
+
+  */
+
+
+  // Custom environment GEM_PATH.
+  "gemPath": "/Users/gilgrz/.rvm/gems/ruby-2.5.3:/Users/gilgrz/.rvm/gems/ruby-2.5.3@global",
+  // Beautify the sass file after saving it?
+  "beautifyOnSave": true,
+  // Keep "inline" comments inline?
+  "inlineComments": false,
+  // Add a new line between selectors?
+  "newlineBetweenSelectors": false,
+  // Use single quotes everywhere
+  "useSingleQuotes": true
+}
+
+2) you need to have sass node installed globally
