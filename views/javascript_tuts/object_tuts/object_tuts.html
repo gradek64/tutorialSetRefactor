@@ -56,6 +56,8 @@
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>Object assigment with complex data</a><span class="tooltiptext">Object assigment with complex data</span>
                            
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>Update object properties dynamically</a><span class="tooltiptext">Update object properties dynamically</span>
+                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>ES6 object function declaration shorthand</a><span class="tooltiptext">ES6 object function declaration shorthand</span>
                         
                     </ul>
@@ -455,6 +457,25 @@ console.log(data); //{data:&#39;see&#39;};
               </div>
             
               <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>--&gt; to update object properties in one cycle you need 
+                to use loop and [property]:value</p>
+                  <div class="codeWraper">
+                    <code>---------------- -------------------------------- -------------------------------- ----------------
+
+let obj = [];
+
+[&#39;prop1&#39;,&#39;prop2&#39;].forEach((property,index) =&gt; {
+  obj.push(  {[property]:index} );
+});
+
+---------------- -------------------------------- -------------------------------- ----------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
                 <div class="band-inner">
 
                   <p>ES6 object function declaration:

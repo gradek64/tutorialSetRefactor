@@ -333,6 +333,23 @@ console.log(data); //{data:'see'};
 
                </example>
            </paragraph>
+           <subtitle>Update object properties dynamically</subtitle>
+           <paragraph>
+               <info>--> to update object properties in one cycle you need 
+                to use loop and [property]:value </info>
+               <example>
+---------------- -------------------------------- -------------------------------- ----------------
+
+let obj = [];
+
+['prop1','prop2'].forEach((property,index) => {
+  obj.push(  {[property]:index} );
+});
+
+---------------- -------------------------------- -------------------------------- ----------------
+
+               </example>
+           </paragraph>
            <subtitle>ES6 object function declaration shorthand</subtitle>
            <paragraph>
                <info>ES6 object function declaration:
