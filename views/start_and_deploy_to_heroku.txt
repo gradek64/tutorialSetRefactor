@@ -40,3 +40,5 @@
 			origin	https://github.com/gradek64/portfolio.git (push)
 		
 	       9) now push to heroku by: git push -f heroku master
+
+	       10) heroku open (opens online apllication in the browser)

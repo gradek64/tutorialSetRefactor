@@ -28,11 +28,13 @@
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/function_tuts" partition>Function.prototype.call() on JS build-in Objects</a><span class="tooltiptext">Function.prototype.call() on JS build-in Objects</span>
                            
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/function_tuts" partition>Function.prototype.apply()</a><span class="tooltiptext">Function.prototype.apply()</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/function_tuts" partition>Function.prototype.apply() or function.apply()</a><span class="tooltiptext">Function.prototype.apply() or function.apply()</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/function_tuts" partition>Function.prototype.apply() in JS build-in Objects</a><span class="tooltiptext">Function.prototype.apply() in JS build-in Objects</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/function_tuts" partition>Function.prototype.bind()</a><span class="tooltiptext">Function.prototype.bind()</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/function_tuts" partition>fn.bind(object,arg1,arg2,...)</a><span class="tooltiptext">fn.bind(object,arg1,arg2,...)</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/function_tuts" partition>Function.prototype.bind() in JS build-in Objects</a><span class="tooltiptext">Function.prototype.bind() in JS build-in Objects</span>
                         
@@ -83,15 +85,21 @@
                   <p>is function ? check 
               Function is an object that inherits prototype from Native Object. Function can be contructors with the new keyword. Function instances hold prototype property and that is why you can create classes in javascript</p>
                   <div class="codeWraper">
-                    <code>var myFuncion = function(){
-                console.log(this);
-              }
+                    <code>-------------------------------------  ---------------------------------------
 
-              //type of 
-              console.log(typeof myFuncion);
 
-              //intance of Function 
-              console.log(myFuncion instanceof Function);</code>
+var myFuncion = function(){
+  console.log(this);
+}
+
+//type of 
+console.log(typeof myFuncion);
+
+//intance of Function 
+console.log(myFuncion instanceof Function);
+
+
+-------------------------------------  ----------------------------------------</code>
                   </div>
                 </div>
               </div>
@@ -108,16 +116,22 @@
 
                   <p>object.method.call( objectAttachToThis ,param1, param2...);
 
-                  object (window,Array,custom...) that has method, is executed on diffrent object (objectAttachToThis )that will become available in inside that function {body} and could be called with params if that method was declared to have params.</p>
+                  object (window,Array,custom...) that has method, is executed on diffrent object (objectAttachToThis )that will become available in inside that function {body} and could be called with params if that method was declared to have params. It will execute the function once it is declared call(), contrary to bind()</p>
                   <div class="codeWraper">
-                    <code>const objectAttachToThis = {name:&#39;Greg&#39;, role:&#39;front-end&#39;};
+                    <code>------------------------------------- call(objectAttachToThis ,param1, param2...) ----------------------------------------
 
-                    window.whatDoYouDo = function(company){
-                        console.log(&#39;I am &#39;+ this.name + &#39;and I happend to do &#39; + this.role + &#39;in &#39; + company);
-                        console.log(&#39;who is this&#39; ,this );
-                    }
 
-                    window.whatDoYouDo.call( objectAttachToThis ,&#39;New company&#39;); //takes object, argument(s) for function;</code>
+const objectAttachToThis = {name:&#39;Greg&#39;, role:&#39;front-end&#39;};
+
+window.whatDoYouDo = function(company){
+    console.log(&#39;I am &#39;+ this.name + &#39;and I happend to do &#39; + this.role + &#39;in &#39; + company);
+    console.log(&#39;who is this&#39; ,this );
+}
+
+window.whatDoYouDo.call( objectAttachToThis ,&#39;New company&#39;); //takes object, argument(s) for function;
+
+
+------------------------------------- call(objectAttachToThis ,param1, param2...) ----------------------------------------</code>
                   </div>
                 </div>
               </div>
@@ -129,13 +143,32 @@
                             array.forEach(function(e,i){}) takes parameter as function 
                             array.indexof(&#39;value&#39;) takes value as parameter</p>
                   <div class="codeWraper">
-                    <code>/* forEach will also work for NodeList , no need to convert to array Array.from(NodeList)*/
+                    <code>------------------------------------- call(objectAttachToThis ,param1, param2...) ----------------------------------------
 
-                        const arr = [&#39;a&#39;,&#39;b&#39;, &#39;c&#39;]; 
-                        Array.prototype.forEach.call(arr,(e,i)=&gt;{arr[i]= `${e}${i}`}) === arr.forEach((e,i)=&gt;{arr[i]= `${e}${i}`});
 
-                        const arrValue = [&#39;a&#39;,&#39;b&#39;, &#39;c&#39;]; 
-                        Array.prototype.indexOf.call(arrValue,&#39;b&#39;) === arrValue.indexOf(&#39;b&#39;);</code>
+  /* forEach will also work for NodeList , no need to convert to array Array.from(NodeList)*/
+
+
+  -------------- forEach method takes argument as function so the param1 is a function ----------------------
+
+  const arr = [&#39;a&#39;,&#39;b&#39;, &#39;c&#39;]; 
+  Array.prototype.forEach.call(arr,(e,i)=&gt;{arr[i]= `${e}${i}`}) 
+
+  -------- is the same as below ----------------
+
+  === arr.forEach((e,i)=&gt;{arr[i]= `${e}${i}`});
+
+-------------- index of method takes argument as string, number something singlular  ----------------------
+
+
+  const arrValue = [&#39;a&#39;,&#39;b&#39;, &#39;c&#39;]; 
+  Array.prototype.indexOf.call(arrValue,&#39;b&#39;) //prints 1
+
+  -------- is the same as below ----------------
+
+  arrValue.indexOf(&#39;b&#39;) //prints 1
+
+-------------------------------------  ----------------------------------------</code>
                   </div>
                 </div>
               </div>
@@ -145,7 +178,7 @@
 
                   <p>object.method.apply( objectAttachToThis ,[param1, param2...]);
 
-                            apply() is the same as call() but params are set in Array;</p>
+                            apply() is the same as call() but params are set in Array, it will execute the function once is declared apply(), , contrary to bind()</p>
                   <div class="codeWraper">
                     <code>const objectAttachToThis = {name:&#39;Greg&#39;, role:&#39;front-end&#39;};
 
@@ -166,13 +199,27 @@
                                        array.forEach(function(e,i){}) takes parameter as function 
                                        array.indexof(&#39;value&#39;) takes value as parameter</p>
                   <div class="codeWraper">
-                    <code>/* forEach will also work for NodeList , no need to convert to array Array.from(NodeList)*/
+                    <code>------------------------------------- bind(object) ----------------------------------------
 
-                                   const arr = [&#39;a&#39;,&#39;b&#39;, &#39;c&#39;]; 
-                                   Array.prototype.forEach.apply(arr,[(e,i)=&gt;{arr[i]= `${e}${i}`}]) === arr.forEach((e,i)=&gt;{arr[i]= `${e}${i}`}]);
+     /*comment: forEach will also work for NodeList , no need to convert to array Array.from(NodeList)*/
 
-                                   const arrValue = [&#39;a&#39;,&#39;b&#39;, &#39;c&#39;]; 
-                                   Array.prototype.indexOf.apply(arrValue,[&#39;b&#39;]) === arrValue.indexOf(&#39;b&#39;);</code>
+------------------------------------- quick way for changing array content (old school) ----------------------------------------
+
+     const arr = [&#39;a&#39;,&#39;b&#39;, &#39;c&#39;]; 
+1 -------------------one way ---------
+
+     Array.prototype.forEach.apply(arr,[(e,i)=&gt;{arr[i]= `${e}${i}`}]);
+
+-----------is the same as----------
+
+    arr.forEach((e,i)=&gt;{arr[i]= `${e}${i}`}]);
+
+2 -------------------attached to .indexOf  ---------
+
+     const arrValue = [&#39;a&#39;,&#39;b&#39;, &#39;c&#39;]; 
+       Array.prototype.indexOf.apply(arrValue,[&#39;b&#39;]) === arrValue.indexOf(&#39;b&#39;);
+
+------------------------------------- bind(object) ----------------------------------------</code>
                   </div>
                 </div>
               </div>
@@ -184,15 +231,23 @@
 
                             bind() it will bind a specific object as  &#39;this&#39; keyword reference inside that function {body}, but in that case it wont call it ! it will just bind and wait for you to call it;</p>
                   <div class="codeWraper">
-                    <code>const objectAttachToThis = {name:&#39;Greg&#39;, role:&#39;front-end&#39;};
+                    <code>------------------------------------- bind(object) ----------------------------------------
 
-                               window.whatDoYouDo = function(company){
-                                   console.log(&#39;I am &#39;+ this.name + &#39;and I happend to do &#39; + this.role + &#39;in &#39; + company);
-                                   console.log(&#39;who is this&#39; , this );
-                               }
+ const objectAttachToThis = {name:&#39;Greg&#39;, role:&#39;front-end&#39;};
 
-                               const binder = window.whatDoYouDo.bind( objectAttachToThis );
-                               //now call;
+ window.whatDoYouDo = function(company){
+
+    //this now is bind to objectAttachToThis not the widow where this funciton originally started;
+
+     console.log(&#39;I am &#39;+ this.name + &#39;and I happend to do &#39; + this.role + &#39;in &#39; + company);
+     console.log(&#39;who is this&#39; , this );
+ }
+------------------------------------- bind(object) ----------------------------------------
+
+ const binder = window.whatDoYouDo.bind( objectAttachToThis );
+
+------------------------------------- call binded function with an argument that takes  ----------------------------------------
+
                                binder(&#39;New company&#39;);</code>
                   </div>
                 </div>
@@ -201,17 +256,55 @@
               <div class="band-container partition " part="part-6">
                 <div class="band-inner">
 
+                  <p>.bind(object,arg1,arg2,...) bind takes addtional arguments so if you bind your function with some object you can also included(bind) arguments that will stay with the function, they can not be overriden, example below:</p>
+                  <div class="codeWraper">
+                    <code>------------------------------------- bind(object) ----------------------------------------
+
+ const objectAttachToThis = {name:&#39;Greg&#39;, role:&#39;front-end&#39;};
+
+ window.whatDoYouDo = function(company){
+
+    //this now is bind to objectAttachToThis not the widow where this funciton originally started;
+
+     console.log(&#39;I am &#39;+ this.name + &#39;and I happend to do &#39; + this.role + &#39;in &#39; + company);
+     console.log(&#39;who is this&#39; , this );
+ }
+------------------------------------- bind(object) and attach argument ----------------------------------------
+
+ const binder = window.whatDoYouDo.bind( objectAttachToThis, &#39;some company&#39; );
+
+------------------------------------- call binded function with an argument bounde  ----------------------------------------
+
+                 binder(); //prints ...some company
+
+------------------------------------- call same binded function with a new argument ----------------------------------------
+
+                 binder(&#39;a new company&#39;); //still prints ...some company, cause this argument is bound and can not be overridden
+
+------------------------------------- ------------------------------------- -------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-7">
+                <div class="band-inner">
+
                   <p>bind() within core javascript object</p>
                   <div class="codeWraper">
-                    <code>/* forEach() 
-                                      bind() it wont work for forEach(callback) function since it needs callback for every interaction 
-                                      but bind() will only bind but not execute callback (different to above) 
-                                   */
+                    <code>--------------------------------------
 
-                                                              
-                                   const arrValue = [&#39;a&#39;,&#39;b&#39;, &#39;c&#39;]; 
-                                   const binderValue = Array.prototype.indexOf.bind(arrValue)
-                                   binderValue(&#39;b&#39;) === arrValue.indexOf(&#39;b&#39;);</code>
+/* forEach() 
+  bind() it wont work for forEach(callback) function since it needs callback for every interaction 
+  but bind() will only bind but not execute callback (different to above) 
+*/
+
+                          
+const arrValue = [&#39;a&#39;,&#39;b&#39;, &#39;c&#39;]; 
+const binderValue = Array.prototype.indexOf.bind(arrValue);
+//now you can exucute 
+binderValue(&#39;b&#39;) === 1 //true
+
+--------------------------------------</code>
                   </div>
                 </div>
               </div>
@@ -230,27 +323,31 @@
 
                   <p>passing values</p>
                   <div class="codeWraper">
-                    <code>// ES5
-                 function myFunc(opts) {
-                   var name = opts.name;
-                   var age = opts.age;
+                    <code>--------------------------------------
 
-                   return {name:name,age:age}
-                 }
+// ES5
+function myFunc(opts) {
+var name = opts.name;
+var age = opts.age;
 
-                 myFunc({ name: &#39;John&#39;, age: 25 });
+return {name:name,age:age}
+}
 
-                 // ES6
-                 function myFuncES6( {name,age} ) { //U can see what properties are there;
-                   var name = name;
-                   var age = age;
+myFunc({ name: &#39;John&#39;, age: 25 });
 
-                   return {name,age} //shorhand for {name:name,age:age}
-                 }
+// ES6
+function myFuncES6( {name,age} ) { //U can see what properties are there;
+var name = name;
+var age = age;
 
-                 //ES6 shorter 
-                 const myFuncES6 = ( {name,age} )=&gt;{ return {name,age} };
-                 myFuncES6({ name: &#39;John&#39;, age: 25 });</code>
+return {name,age} //shorhand for {name:name,age:age}
+}
+
+--------ES6 shorter------
+
+const myFuncES6 = ( {name,age} )=&gt;{ return {name,age} };
+myFuncES6({ name: &#39;John&#39;, age: 25 });
+--------------------------------------</code>
                   </div>
                 </div>
               </div>
@@ -260,30 +357,34 @@
 
                   <p>Destructring in functions (default values) ES6 desctructiring introduces new syntax for default values in function arguments being passed.</p>
                   <div class="codeWraper">
-                    <code>//ES5
-                function myFuncES5(opts, name = &#39;Default Frank&#39;) {
-                  var name = opts.name || name ;
-                  var age = opts.age;
+                    <code>--------------------------------------
 
-                  return `Yo, I happend to be ${name} of age of ${age} `;
-                }
+//ES5
+function myFuncES5(opts, name = &#39;Default Frank&#39;) {
+var name = opts.name || name ;
+var age = opts.age;
 
-                myFuncES5({ age: 25 });
+return `Yo, I happend to be ${name} of age of ${age} `;
+}
 
-                //ES6
-                function myFuncES6( {age, name = &#39;Default Frank ES6&#39;}={} ) {
-                  let name = name; //no need for checking of undefined;
-                  let  age = age;
+myFuncES5({ age: 25 });
 
-                  return `Yo, I happend to be ${name} of age of ${age} `;
-                }
+//ES6
+function myFuncES6( {age, name = &#39;Default Frank ES6&#39;}={} ) {
+let name = name; //no need for checking of undefined;
+let  age = age;
 
-                myFuncES6({ age: 25 });
+return `Yo, I happend to be ${name} of age of ${age} `;
+}
 
-                //ES6 shorter (if U dont need to modify passing values);
-                const  myFuncES6short = ( {age, name = &#39;Default Frank ES6&#39;}={} ) =&gt; `Yo, I happend to be ${name} of age of ${age}`
+myFuncES6({ age: 25 });
 
-                myFuncES6short({ age: 25 });</code>
+//ES6 shorter (if U dont need to modify passing values);
+const  myFuncES6short = ( {age, name = &#39;Default Frank ES6&#39;}={} ) =&gt; `Yo, I happend to be ${name} of age of ${age}`
+
+myFuncES6short({ age: 25 });
+
+--------------------------------------</code>
                   </div>
                 </div>
               </div>
@@ -293,28 +394,32 @@
 
                   <p>Destructring in functions (default values) with temporary object properties, allows you to attached temporary properties to the object availabale in the function body</p>
                   <div class="codeWraper">
-                    <code>//ES6
-                 function myFuncES6_3( {age:oldEnough, name:quteName = &#39;Default Frank ES6&#39;}={} ) {
-                   var name = quteName; //no need for checking of undefined;
-                   var age = oldEnough;
+                    <code>--------------------------------------
 
-                   return `Yo, I happend to be ${quteName} of age of ${oldEnough}`;
-                 }
+//ES6
+function myFuncES6_3( {age:oldEnough, name:quteName = &#39;Default Frank ES6&#39;}={} ) {
+ var name = quteName; //no need for checking of undefined;
+ var age = oldEnough;
 
-                 myFuncES6_3({ age: 25 });
+ return `Yo, I happend to be ${quteName} of age of ${oldEnough}`;
+}
 
-                 //ES6 shorter (skip declaration in function body);
-                  function myFuncES6_4( {age:oldEnough, name:quteName = &#39;Default Frank ES6&#39;}={} ) {
-                    return `Yo, I happend to be ${quteName} of age of ${oldEnough} `;
-                  }
+myFuncES6_3({ age: 25 });
 
-                 myFuncES6_3({ age: 25 });
+//ES6 shorter (skip declaration in function body);
+function myFuncES6_4( {age:oldEnough, name:quteName = &#39;Default Frank ES6&#39;}={} ) {
+  return `Yo, I happend to be ${quteName} of age of ${oldEnough} `;
+}
 
-                //ES6 even shorter
-                const myFuncES6_5 = ( {age:oldEnough, name:quteName = &#39;Default Frank ES6&#39;}={} ) 
-                =&gt; `Yo, I happend to be ${quteName} of age of ${oldEnough} `
+myFuncES6_3({ age: 25 });
 
-                myFuncES6_5({ age: 25 });</code>
+//ES6 even shorter
+const myFuncES6_5 = ( {age:oldEnough, name:quteName = &#39;Default Frank ES6&#39;}={} ) 
+=&gt; `Yo, I happend to be ${quteName} of age of ${oldEnough} `
+
+myFuncES6_5({ age: 25 });
+
+--------------------------------------</code>
                   </div>
                 </div>
               </div>
@@ -324,54 +429,58 @@
 
                   <p>ES6 closure syntax</p>
                   <div class="codeWraper">
-                    <code>//ES5
-                function ES5Closure() {
-                    var outsideScope = &#39;I am outside scope&#39;;
-                    this.prop = outsideScope;
+                    <code>--------------------------------------
 
-                    function innerfunction() {
+//ES5
+function ES5Closure() {
+var outsideScope = &#39;I am outside scope&#39;;
+this.prop = outsideScope;
 
-                       //it is avaliable since block for starts above 
-                       console.log(outsideScope); 
-                       /* it is avalailable since we use arraw function so dont bind this to 
-                       curent function body*/
-                       console.log(&#39;this.prop&#39;, this.prop); //udefinded cause this is binded to current function body;
+function innerfunction() {
 
-                        return &#39;innerfunction&#39;;
-                    }
+   //it is avaliable since block for starts above 
+   console.log(outsideScope); 
+   /* it is avalailable since we use arraw function so dont bind this to 
+   curent function body*/
+   console.log(&#39;this.prop&#39;, this.prop); //udefinded cause this is binded to current function body;
 
-                    return { 
-                      outsideScope:outsideScope, 
-                      innerfunction:innerfunction
-                    };
-                };
+    return &#39;innerfunction&#39;;
+}
 
-                ES5Closure().innerfunction();
+return { 
+  outsideScope:outsideScope, 
+  innerfunction:innerfunction
+};
+};
 
-
-                 //ES6
-                 const ES6Closure = () =&gt; {
-                     const outsideScope = &#39;I am outside scope&#39;;
-                     this.prop = outsideScope;
-
-                     const innerfunction = () =&gt; {
-
-                        //it is avaliable since block for starts above 
-                        console.log(outsideScope); 
-                        /* it is avalailable since we use arraw function so dont bind this to 
-                        curent function body*/
-                        console.log(&#39;this.prop&#39;, this.prop); 
+ES5Closure().innerfunction();
 
 
-                         return &#39;innerfunction&#39;;
-                     }
+//ES6
+const ES6Closure = () =&gt; {
+ const outsideScope = &#39;I am outside scope&#39;;
+ this.prop = outsideScope;
 
-                      
+ const innerfunction = () =&gt; {
 
-                     return { outsideScope, innerfunction };
-                 };
+    //it is avaliable since block for starts above 
+    console.log(outsideScope); 
+    /* it is avalailable since we use arraw function so dont bind this to 
+    curent function body*/
+    console.log(&#39;this.prop&#39;, this.prop); 
 
-                 ES6Closure().innerfunction();</code>
+
+     return &#39;innerfunction&#39;;
+ }
+
+  
+
+ return { outsideScope, innerfunction };
+};
+
+ES6Closure().innerfunction();
+
+--------------------------------------</code>
                   </div>
                 </div>
               </div>
