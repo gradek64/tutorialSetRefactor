@@ -1,0 +1,301 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">  
+  <title>tutorial === Layout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/tutorial.css">
+  <link rel="stylesheet" href="css/tooltip.css">
+</head>
+<body translate="no">
+<div class="l-site">
+  <div class="l-nav">
+    <nav class="nav">
+      <input type="text" placeholder="Search" id="search">
+      <div style="clear: both;"></div>
+      <!-- nunjucks loop-->
+            
+<ul class="links">
+<!--list-tag-->
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/date_object_tuts">new Date()</a><span class="tooltiptext">new Date()</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/date_object_tuts" partition>new Date() means current date</a><span class="tooltiptext">new Date() means current date</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/date_object_tuts" partition>new Data(values)</a><span class="tooltiptext">new Data(values)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/date_object_tuts" partition>Date object methods</a><span class="tooltiptext">Date object methods</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/date_object_tuts" partition>how many days in a month ?</a><span class="tooltiptext">how many days in a month ?</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/date_object_tuts">Retrive saved Date</a><span class="tooltiptext">Retrive saved Date</span>
+                 
+      </li>
+    
+<!--end-list-tag-->
+</ul>
+
+       <!-- nunjucks loop-->
+    </nav>
+  </div>
+  <div class="l-page">
+    <div class="menu">
+      <div class="menu-hamburger"></div>
+    </div>
+      <!-- nunjucks loop-->
+          
+<div class="sectionWrapper">
+  <div class="sectionContainer">
+   
+      
+      <section  class="band band-b activeSection"  class="band band-b">
+          <h1> new Date() </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>Date object always needs be initiated with constuctuor new Date() without any params it will create current date as below;</p>
+                  <div class="codeWraper">
+                    <code>---------------------new Date();--------------------------
+
+new Date();
+
+//prints
+Thu Jan 17 2019 11:53:15 GMT+0000 (Greenwich Mean Time)</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>by passing values to the constructor you can specify What date you want to generate , you need to follow coma based arguments to get correct outcome</p>
+                  <div class="codeWraper">
+                    <code>--------------new Date([year])-----------------------
+
+ new Date(1982);
+
+ //prints 
+ Thu Jan 01 1970 01:00:01 GMT+0100 (Greenwich Mean Time)
+
+--------------new Date([year],[monthIndex])-----------------------
+//month index are from 0 to 11 where 0 is January and 11 is December;
+
+ new Date(1982,6);
+
+//prints
+Thu Jul 01 1982 00:00:00 GMT+0100 (British Summer Time)
+
+--------------new Date([year],[monthIndex][day])-----------------------
+//month index are from 0 to 11 where 0 is January and 11 is December;
+
+ new Date(1982,6,24);
+
+//prints
+Thu Jul 24 1982 00:00:00 GMT+0100 (British Summer Time)
+
+--------------new Date([year],[monthIndex][day])-----------------------
+//month index are from 0 to 11 where 0 is January and 11 is December;
+
+ new Date(1982,6,24);
+
+//prints
+Sat Jul 24 1982 00:00:00 GMT+0100 (British Summer Time)
+
+--------------new Date([year],[monthIndex][day][hours])-----------------------
+
+new Date(1982,6,24,23);
+
+//prints
+Sat Jul 24 1982 23:00:00 GMT+0100 (British Summer Time)
+
+--------------new Date([year],[monthIndex][day][hours][minutes][seconds])-----------------------
+
+new Date(1982,6,24,5,30,23,2);
+//prints
+Sat Jul 24 1982 05:30:23 GMT+0100 (British Summer Time)
+
+
+ ------------------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>Date methods supports quite a few methods, those are the most usefull, becuse you can specify what date format you actually want not the deufalt weird one;</p>
+                  <div class="codeWraper">
+                    <code>----------- today `s date ---------
+
+new Date();
+
+//happend to be 
+Thu Jan 17 2019 12:20:34 GMT+0000 (Greenwich Mean Time)
+
+
+
+ -------------------new Date().getMonth()-------------------
+ Returns the day of the month (from 1-31)
+
+    const day = new Date().getDate() 
+    //prints 17
+
+ -------------------new Date().getFullYear()-------------------
+ Returns the month
+
+    const month = new Date().getMonth() 
+    //prints 0 which index for January
+
+ -------------------new Date().getFullYear()-------------------
+ Returns the year
+
+    const year = new Date().getFullYear() 
+    //prints 2019
+
+  -------------------new Date().getHours()()-------------------
+Returns the hour (from 0-23)
+
+    const hours = new Date().getHours()() 
+    //prints 12
+
+ -------------------new Date().getMinutes()-------------------
+Returns the minutes (from 0-59)
+
+    const minutes = new Date().getMinutes() 
+    //prints 45
+
+ -------------------new Date().getSeconds()-------------------
+Returns the seconds (from 0-59)
+const seconds = new Date().getSeconds() 
+    
+    //prints 4
+
+-------------------------construct your own day format---------------- 
+
+cosnt datFormat = `${day} ${month}, ${year}, local time:${hours}:${minutes}:${seconds}`
+
+-----------------------------------------------------------------
+
+The best solution U would get with moment library though cause it could be a bit fidlly doint it on your own !
+
+----------------------------------------------------------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
+                  <p>while loop it will work as long as condition in while() is defined, true or has a value , it will stop if it undefined,null or 0;</p>
+                  <div class="codeWraper">
+                    <code>------------------------the best example ever ----------------
+
+ new Date(2019).getDate()
+
+ //print 1 (year)
+
+  new Date(2019,12).getDate()
+
+ //print 1 (month)
+
+   new Date(2019,12,0).getDate()
+
+ //print 31 day in in month of December
+
+
+
+--------------- ----- -----  explanation ---- ----- ----- ----------------
+
+new Date(2019,12)
+
+//prints 
+Wed Jan 01 2020 00:00:00 GMT+0000 (Greenwich Mean Time) 
+//because we are saying give me date for 2019 month 12 at 0:00 (default not specified) what calculates to next day January 2020 at 00:00:00 midnight
+
+
+new Date(2019,12,0)
+
+//prints 
+Tue Dec 31 2019 00:00:00 GMT+0000 (Greenwich Mean Time) //this time we specify time so we get 31 of december 
+
+//so to get how many days U will need 
+
+new Date(2019,12,0).getDate();
+
+//prints 31 
+
+
+ ------------------------------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> Retrive saved Date </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>Lets say you saved in database or somwhere a date object as const creationDate = new Date(); now U want to retrived this date, this is how below;</p>
+                  <div class="codeWraper">
+                    <code>--------------- save today date -------------
+
+const creationDate = new Date();
+
+//saves as a String as below
+Thu Jan 17 2019 13:15:48 GMT+0000 (Greenwich Mean Time)
+
+-------------- find out what date was the creation date---------------
+
+--year--
+creationDate.getFullYear();
+--day--
+creationDate.getDate();
+--hours--
+date.getHours()
+--minutes--
+date.getMinutes()
+--seconds--
+date.getSeconds()</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+  
+    <section class="band band-b activeSection">
+      <h1></h1>
+
+      
+
+
+
+        
+
+    </section>
+  
+  </div>
+</div>
+
+       <!-- nunjucks loop-->
+  </div>
+</div>
+<script src="scripts/nav-links.js"></script>
+<script src="scripts/tooltips_links_over.js"></script>
+<script src="scripts/search_nav.js"></script>
+ </body></html>

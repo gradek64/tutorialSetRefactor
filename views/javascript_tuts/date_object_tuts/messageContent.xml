@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <chapters>
+   <chapter>
+       <subject>new Date()</subject>
+       <content>
+           <subtitle>new Date() means current date</subtitle>
+           <paragraph>
+               <info>Date object always needs be initiated with constuctuor new Date() without any params it will create current date as below;</info>
+               <example>
+---------------------new Date();--------------------------
+
+new Date();
+
+//prints
+Thu Jan 17 2019 11:53:15 GMT+0000 (Greenwich Mean Time)
+
+               </example>
+           </paragraph>
+           <subtitle>new Data(values)</subtitle>
+           <paragraph>
+               <info>
+                 by passing values to the constructor you can specify What date you want to generate , you need to follow coma based arguments to get correct outcome
+               </info>
+               <example>
+--------------new Date([year])-----------------------
+
+ new Date(1982);
+
+ //prints 
+ Thu Jan 01 1970 01:00:01 GMT+0100 (Greenwich Mean Time)
+
+--------------new Date([year],[monthIndex])-----------------------
+//month index are from 0 to 11 where 0 is January and 11 is December;
+
+ new Date(1982,6);
+
+//prints
+Thu Jul 01 1982 00:00:00 GMT+0100 (British Summer Time)
+
+--------------new Date([year],[monthIndex][day])-----------------------
+//month index are from 0 to 11 where 0 is January and 11 is December;
+
+ new Date(1982,6,24);
+
+//prints
+Thu Jul 24 1982 00:00:00 GMT+0100 (British Summer Time)
+
+--------------new Date([year],[monthIndex][day])-----------------------
+//month index are from 0 to 11 where 0 is January and 11 is December;
+
+ new Date(1982,6,24);
+
+//prints
+Sat Jul 24 1982 00:00:00 GMT+0100 (British Summer Time)
+
+--------------new Date([year],[monthIndex][day][hours])-----------------------
+
+new Date(1982,6,24,23);
+
+//prints
+Sat Jul 24 1982 23:00:00 GMT+0100 (British Summer Time)
+
+--------------new Date([year],[monthIndex][day][hours][minutes][seconds])-----------------------
+
+new Date(1982,6,24,5,30,23,2);
+//prints
+Sat Jul 24 1982 05:30:23 GMT+0100 (British Summer Time)
+
+
+ ------------------------------------------------------------
+
+               </example>
+           </paragraph>
+           <subtitle>Date object methods</subtitle>
+           <paragraph>
+               <info>Date methods supports quite a few methods, those are the most usefull, becuse you can specify what date format you actually want not the deufalt weird one;</info>
+               <example>
+
+----------- today `s date ---------
+
+new Date();
+
+//happend to be 
+Thu Jan 17 2019 12:20:34 GMT+0000 (Greenwich Mean Time)
+
+
+
+ -------------------new Date().getMonth()-------------------
+ Returns the day of the month (from 1-31)
+
+    const day = new Date().getDate() 
+    //prints 17
+
+ -------------------new Date().getFullYear()-------------------
+ Returns the month
+
+    const month = new Date().getMonth() 
+    //prints 0 which index for January
+
+ -------------------new Date().getFullYear()-------------------
+ Returns the year
+
+    const year = new Date().getFullYear() 
+    //prints 2019
+
+  -------------------new Date().getHours()()-------------------
+Returns the hour (from 0-23)
+
+    const hours = new Date().getHours()() 
+    //prints 12
+
+ -------------------new Date().getMinutes()-------------------
+Returns the minutes (from 0-59)
+
+    const minutes = new Date().getMinutes() 
+    //prints 45
+
+ -------------------new Date().getSeconds()-------------------
+Returns the seconds (from 0-59)
+const seconds = new Date().getSeconds() 
+    
+    //prints 4
+
+-------------------------construct your own day format---------------- 
+
+cosnt datFormat = `${day} ${month}, ${year}, local time:${hours}:${minutes}:${seconds}`
+
+-----------------------------------------------------------------
+
+The best solution U would get with moment library though cause it could be a bit fidlly doint it on your own !
+
+----------------------------------------------------------------------------------------------------
+
+               </example>
+           </paragraph>
+           <subtitle>how many days in a month ?</subtitle>
+           <paragraph>
+               <info>while loop it will work as long as condition in while() is defined, true or has a value , it will stop if it undefined,null or 0;</info>
+               <example>
+                 
+ ------------------------the best example ever ----------------
+
+ new Date(2019).getDate()
+
+ //print 1 (year)
+
+  new Date(2019,12).getDate()
+
+ //print 1 (month)
+
+   new Date(2019,12,0).getDate()
+
+ //print 31 day in in month of December
+
+
+
+--------------- ----- -----  explanation ---- ----- ----- ----------------
+
+new Date(2019,12)
+
+//prints 
+Wed Jan 01 2020 00:00:00 GMT+0000 (Greenwich Mean Time) 
+//because we are saying give me date for 2019 month 12 at 0:00 (default not specified) what calculates to next day January 2020 at 00:00:00 midnight
+
+
+new Date(2019,12,0)
+
+//prints 
+Tue Dec 31 2019 00:00:00 GMT+0000 (Greenwich Mean Time) //this time we specify time so we get 31 of december 
+
+//so to get how many days U will need 
+
+new Date(2019,12,0).getDate();
+
+//prints 31 
+
+
+ ------------------------------------------------------------------------
+               </example>
+           </paragraph>          
+       </content>
+   </chapter>
+   <chapter>
+       <subject>Retrive saved Date</subject>
+       <content>
+           <paragraph>
+               <info>Lets say you saved in database or somwhere a date object as const creationDate = new Date(); now U want to retrived this date, this is how below;</info>
+               <example>
+
+--------------- save today date -------------
+
+const creationDate = new Date();
+
+//saves as a String as below
+Thu Jan 17 2019 13:15:48 GMT+0000 (Greenwich Mean Time)
+
+-------------- find out what date was the creation date---------------
+
+--year--
+creationDate.getFullYear();
+--day--
+creationDate.getDate();
+--hours--
+date.getHours()
+--minutes--
+date.getMinutes()
+--seconds--
+date.getSeconds()
+               </example>
+           </paragraph>
+       </content>
+   </chapter>
+ </chapters>
