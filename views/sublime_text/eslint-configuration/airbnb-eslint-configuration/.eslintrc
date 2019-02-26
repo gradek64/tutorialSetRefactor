@@ -1,0 +1,51 @@
+{
+    "extends": "airbnb",
+    "env":
+    {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "parserOptions":
+    {
+        "ecmaFeatures":
+        {
+            "jsx": true
+        },
+        "ecmaVersion": 2018
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules":
+    {
+        "indent": [
+            "error",
+            4
+        ],
+        "react/jsx-filename-extension": [1,
+        {
+            "extensions": [".js", ".jsx"]
+        }],
+        "comma-dangle": "warn",
+        "no-unused-vars": [
+            "error",
+            {
+                "vars": "local",
+                "args": "none"
+            }
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            1,
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ]
+    }
+}
