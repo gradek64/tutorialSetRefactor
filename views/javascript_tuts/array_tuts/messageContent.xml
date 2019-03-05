@@ -30,8 +30,7 @@ myArray  = [1,2,3]
       <content>
       <subtitle>by simple Constructor SPARSE array: Array(number) or Array(arg,arg....)</subtitle>
       <paragraph>
-          <info>SPARSE array is a array with empty pockets. Array(number) doesnt need a 'new' keyword it will an array with empty entries. Array(5) will
-            create an array as :[,,,,,] This could be handy an example below:</info>
+          <info>SPARSE array is a array with empty pockets. Array(number) doesnt need a 'new' keyword will make an array with empty entries. Array(5) will creates this [,,,,,] This could be handy an example below:</info>
           <example>
 /*********************************************/
 
@@ -39,8 +38,8 @@ myArray  = [1,2,3]
 
   /*
 
-  look the diffrence Array(5) create an array of 5xempty this will be skiped by any
-  Array method as map, forEach... 
+    look the diffrence Array(5) create an array of 5xempty this will be skiped by any
+     Array method as map, forEach... 
 
   */
     Array(5).map((e,n)=>n) //still (5 x empty) nothing to interate on !
@@ -62,10 +61,11 @@ myArray  = [1,2,3]
 
 
 //this it will fill array first with undefined
-Array.apply(Array(5)) //crates [ 5 x undefined]; (not empty) so we got something ot interate on!
+Array.apply( null, Array(5) ) //crates [ 5 x undefined]; (not empty) so we got something ot interate on!
 
-Array.apply(null, Array(5)).map((e,n)=>n) same as  Array(0, 1, 2, 3, 4);
+Array.apply(null, Array(5) ).map((e,n)=>n) same as  Array(0, 1, 2, 3, 4);
 
+//and the exmple above same result
 Array(5).fill('').map((e,n)=>n) same as  Array(1, 2, 3, 4, 5);
 
 
