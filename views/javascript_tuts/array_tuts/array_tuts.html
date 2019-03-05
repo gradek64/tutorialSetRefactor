@@ -20,6 +20,18 @@
                  
       </li>
     
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/array_tuts">Ways of creating arrays</a><span class="tooltiptext">Ways of creating arrays</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/array_tuts" partition>by simple Constructor SPARSE array: Array(number) or Array(arg,arg....)</a><span class="tooltiptext">by simple Constructor SPARSE array: Array(number) or Array(arg,arg....)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/array_tuts" partition>by Function.proototype.apply: Array.apply(null, Array(number))</a><span class="tooltiptext">by Function.proototype.apply: Array.apply(null, Array(number))</span>
+                        
+                    </ul>
+                
+      </li>
+    
       <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/array_tuts">Array methods()</a><span class="tooltiptext">Array methods()</span>
                  
       </li>
@@ -169,6 +181,65 @@ myArray  = [1,2,3]
                   </div>
                 </div>
               </div>
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> Ways of creating arrays </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>SPARSE array is a array with empty pockets. Array(number) doesnt need a &#39;new&#39; keyword it will an array with empty entries. Array(5) will
+            create an array as :[,,,,,] This could be handy an example below:</p>
+                  <div class="codeWraper">
+                    <code>/*********************************************/
+
+  //Lest say you need to create an Array of 5 pocket each fill with numbers from 1,5 
+
+  /*
+
+  look the diffrence Array(5) create an array of 5xempty this will be skiped by any
+  Array method as map, forEach... 
+
+  */
+    Array(5).map((e,n)=&gt;n) //still (5 x empty) nothing to interate on !
+
+  //but if we fill array first and then we can interate on it
+   Array(5).fill(&#39;&#39;).map((e,n)=&gt;n) same as Array(1, 2, 3, 4, 5);
+
+
+/*********************************************/</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>Array.apply inherits this method from Function.prototype like any other Object so it will apply Array Constructor to the array itselft so it creates an array (outcome similar to above)</p>
+                  <div class="codeWraper">
+                    <code>/*********************************************/
+
+//Lets say you need to create an Array of 5 pocket each fill with numbers from 1,5 
+
+
+//this it will fill array first with undefined
+Array.apply(Array(5)) //crates [ 5 x undefined]; (not empty) so we got something ot interate on!
+
+Array.apply(null, Array(5)).map((e,n)=&gt;n) same as  Array(0, 1, 2, 3, 4);
+
+Array(5).fill(&#39;&#39;).map((e,n)=&gt;n) same as  Array(1, 2, 3, 4, 5);
+
+
+/*********************************************/</code>
+                  </div>
+                </div>
+              </div>
+            
+
             
 
       </section>
