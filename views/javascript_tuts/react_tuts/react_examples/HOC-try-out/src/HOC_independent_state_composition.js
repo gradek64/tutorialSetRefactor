@@ -10,10 +10,13 @@ import React from "react";
 
 
 *************/
-
-const withTransformProps = mapperFunc => BaseComponent => baseProps => {
-  const transformedProps = mapperFunc(baseProps);
-  return <BaseComponent {...transformedProps} />;
+// (props) => {} this bit is functional component
+const withTransformProps = mapperFunc => ReactComponent => props => {
+  console.log("baseProps", props);
+  console.log("ReactComponent", ReactComponent);
+  const transformedProps = mapperFunc(props);
+  //insted of jsx we are returning component cause its HOC
+  return <ReactComponent {...transformedProps} />;
 };
 
 /*
@@ -52,7 +55,7 @@ const withSimpleState = defaultState => BaseComponent => {
  BASE COMPONENT number in stack: 4
  the action for state comes from this compoent up to the component lader up to TOP STATE COMPONENT
 ***/
-const renderDisplayList = ({ list, stateHandler, otherSide }) => (
+const renderDisplayListBase = ({ list, stateHandler, otherSide }) => (
   <div>
     <button onClick={() => stateHandler(otherSide)}>Switch</button>
     {list.map(char => (
@@ -65,19 +68,28 @@ const renderDisplayList = ({ list, stateHandler, otherSide }) => (
 );
 
 /*
-  *@this is our logic for filtering function 
-  *@as name implies it will filter our data based on state
-  *@ from its wrapper it needs list, state, and click event Handler
+  *@notice that we need to export component
+  *@ alternativeComponentCall(renderDisplayList) method will export 
+  *@ component notice this bit (props) => {} is the same as renderDisplayList component  (props) => ()
 */
+//this part is  component   (props) => {
+const alternativeComponentCall = ReactComponent => props => {
+  console.log("SimpleDisplayList props", props);
+  /*
+    *@props are given once our component is executed
+    *@<SimpleDisplayList list={list} />
+  */
+  //here we return compoent instead of jsx since it is HOC
+  return <ReactComponent {...props} />;
+};
+const SimpleDisplayList = alternativeComponentCall(renderDisplayListBase);
+export { SimpleDisplayList };
 
 /****
- FilteredList FUNCTION number in stack: 2
+ withTransformProps FUNCTION number in stack: 1 returns function;
 ***/
 const filteringFn = withTransformProps(({ list, stateValue, stateHandler }) => {
-  console.log("stateValue", stateValue);
   const otherSide = stateValue === "dark" ? "light" : "dark";
-
-  console.log("otherSide", otherSide);
   return {
     stateHandler,
     otherSide,
@@ -85,27 +97,33 @@ const filteringFn = withTransformProps(({ list, stateValue, stateHandler }) => {
   };
 });
 
-/****
- BaseComponentFiltered COMPONENT with filtered appleid to it, number in stack: 3
- it will return our BASE COMPONENT with all funtionality needed for state 
- ****/
-
-//the second part of withTransformProps function requires BASE COMPONENT to be passed;
-const BaseComponentFiltered = filteringFn(renderDisplayList);
-
 /*
-    
-    The above Component is static once is consctructed from [...filteringFn] and [...renderDisplayList]
-    then is ready to be passed to our Top HoC for state change
-
+  *@filteringFn is composed of this executed function withTransformProps() so the return value of 
+  *@ withTransformProps() is available to FilteringFN
+  *@ filteringFn = withTransformProps();
 */
 
-//console.log('BaseComponentFiltered', BaseComponentFiltered);
+/****
+ filteringFn FUNCTION number in stack: 2 returns component;
+***/
+//the second part of withTransformProps function requires BASE COMPONENT to be passed;
+const BaseComponentFiltered = filteringFn(renderDisplayListBase);
+
+/*
+      it could be written like this:
+  
+      BaseComponentFiltered = withTransformProps( ()=>{ passedMethod } ) (renderDisplayList)
+
+      but insted it is shorhanded and usesed outcome of
+      const  outcomeofwithTransformProps =   withTransformProps( ()=>{ passedMethod } );
+
+      BaseComponentFiltered = outcomeofwithTransformProps(renderDisplayList)
+*/
 
 /****
  TOP HOC component that holds logic for state ,  number in stack: 1
  U need to export it to top HOC , this component will take our FILTERED COMPONEMT and it get exported for rendering
 ***/
-const ToggleableFilteredList = withSimpleState("dark")(BaseComponentFiltered);
+const ToggleableFilteredList = withSimpleState("dark")(renderDisplayListBase);
 
 export default ToggleableFilteredList;

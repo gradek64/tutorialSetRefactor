@@ -31,10 +31,13 @@ ReactDOM.render(
   <ListRenderComponent.Set2 list={starWarsChars} />,
   document.getElementById("app2")
 );
-ReactDOM.render(
-  <StateCompositionComponent list={starWarsChars} />,
-  document.getElementById("app3")
+const jsx = (
+  <div>
+    <StateCompositionComponent list={starWarsChars} />
+  </div>
 );
+
+ReactDOM.render(jsx, document.getElementById("app3"));
 ReactDOM.render(
   <SearchBoxExample list={starWarsChars} />,
   document.getElementById("app4")
