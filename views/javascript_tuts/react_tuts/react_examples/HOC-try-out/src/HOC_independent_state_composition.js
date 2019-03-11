@@ -124,6 +124,6 @@ const BaseComponentFiltered = filteringFn(renderDisplayListBase);
  TOP HOC component that holds logic for state ,  number in stack: 1
  U need to export it to top HOC , this component will take our FILTERED COMPONEMT and it get exported for rendering
 ***/
-const ToggleableFilteredList = withSimpleState("dark")(renderDisplayListBase);
+const ToggleableFilteredList = withSimpleState("dark")(BaseComponentFiltered);
 
 export default ToggleableFilteredList;

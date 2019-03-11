@@ -16,7 +16,7 @@
 import React from "react";
 import { manipulateListFns } from "./BaseListHelpersFns";
 
-const renderDisplayList = ({ list }) => (
+const RenderDisplayList = ({ list }) => (
   <div>
     {list.map(char => (
       <div key={char.name}>
@@ -35,14 +35,16 @@ const renderDisplayList = ({ list }) => (
 */
 /*
   *@export Render display list as Funtional Component with logic for filtering 
-  *@
+  *@There are 2 ways of doing it sending component as funciton arg or use it directly
+  *@all it matters is to return a component List the result is the same with bot approaches
 */
-const withTransformProps = mapperFunc => BaseComponent => baseProps => {
-  const transformedProps = mapperFunc(baseProps);
-  return <BaseComponent {...transformedProps} />;
+//const withTransformProps = helperFunc => BaseComponent => baseProps => {
+const withTransformProps = helperFunc => baseProps => {
+  const transformedProps = helperFunc(baseProps);
+  //return <BaseComponent {...transformedProps} />;
+  return <RenderDisplayList {...transformedProps} />;
 };
-const ListWithTransformation = withTransformProps(manipulateListFns)(
-  renderDisplayList
-);
+//const ListWithTransformation = withTransformProps(manipulateListFns)(RenderDisplayList);
+const ListWithTransformation = withTransformProps(manipulateListFns);
 
 export { ListWithTransformation };
