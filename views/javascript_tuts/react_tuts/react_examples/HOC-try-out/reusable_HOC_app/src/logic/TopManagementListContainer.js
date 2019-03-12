@@ -2,6 +2,7 @@ import React from "react";
 import EnhancedList from "../functional/ListComponents/EnhancedList";
 import Simplebutton from "../functional/Simplebutton";
 import ToogleButton from "../functional/Togglebutton";
+import DropDown from "../functional/DropDown";
 import SearchBox from "../functional/SearchBox";
 
 /** *********
@@ -19,7 +20,15 @@ import SearchBox from "../functional/SearchBox";
   *@this component is responsible for logic only
   *@it has state functionality pass down to Base Component
 */
-const withSimpleState = EnhancedListComp => {
+const styles = {
+  list: {
+    listStyleType: "none",
+    backgroundColor: "white",
+    margin: 0,
+    padding: 0
+  }
+};
+const withSimpleState = classes => EnhancedListComp => {
   {
     /* the class below is needed for table logic as search, filters etc... */
   }
@@ -51,6 +60,7 @@ const withSimpleState = EnhancedListComp => {
       }));
     }
     sortBy(sortValue) {
+      console.log("sort By", sortValue);
       this.setState(state => ({
         ...state,
         sortBy: sortValue,
@@ -58,6 +68,7 @@ const withSimpleState = EnhancedListComp => {
       }));
     }
     render() {
+      console.log("classes", classes);
       return (
         <React.Fragment>
           <div className="tableHeader">
@@ -78,6 +89,35 @@ const withSimpleState = EnhancedListComp => {
               toggleLabels={["ASC", "DESC"]}
               values={["sortASC", "sortDESC"]}
             />
+            <div
+              style={{
+                width: "10%",
+                display: "inline-block",
+                backgroundColor: "white"
+              }}
+            >
+              {/* DropDown is composed with Togglebutton that
+                requires action so U need to specify an empty method */}
+              <DropDown label="DropDown">
+                <ul style={classes.list}>
+                  <li>
+                    <Simplebutton
+                      action={this.sortBy}
+                      value="sortDESC"
+                      label="sortDESC"
+                    />
+                  </li>
+                  <li>
+                    {" "}
+                    <Simplebutton
+                      action={this.sortBy}
+                      value="sortASC"
+                      label="sortASC"
+                    />
+                  </li>
+                </ul>
+              </DropDown>
+            </div>
           </div>
           <div>
             <EnhancedListComp
@@ -94,6 +134,6 @@ const withSimpleState = EnhancedListComp => {
   };
 };
 
-const FilteredListSearch = withSimpleState(EnhancedList);
+const FilteredListSearch = withSimpleState(styles)(EnhancedList);
 
 export default FilteredListSearch;
