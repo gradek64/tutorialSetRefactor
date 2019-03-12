@@ -1,11 +1,7 @@
-const sortASC = (array, property) =>
+const sortASC = array =>
   array.sort((a, b) => {
-    let x, y;
-    if (property) {
-      (x = a[property].toUpperCase()), (y = b[property].toUpperCase());
-    } else {
-      (x = a.toUpperCase()), (y = b.toUpperCase());
-    }
+    const x = a.toString().toUpperCase();
+    const y = b.toString().toUpperCase();
 
     if (x > y) {
       return 1; // y will be before x;
@@ -18,14 +14,10 @@ const sortASC = (array, property) =>
     return 0;
   });
 
-const sortDESC = (array, property) =>
+const sortDESC = array =>
   array.sort((a, b) => {
-    let x, y;
-    if (property) {
-      (x = a[property].toUpperCase()), (y = b[property].toUpperCase());
-    } else {
-      (x = a.toUpperCase()), (y = b.toUpperCase());
-    }
+    const x = a.toString().toUpperCase();
+    const y = b.toString().toUpperCase();
 
     if (x > y) {
       return -1; // x will be before x;

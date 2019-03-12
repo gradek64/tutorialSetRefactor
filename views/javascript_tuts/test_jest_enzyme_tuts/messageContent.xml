@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapters>
+    <chapter>
+        <subject>install jest</subject>
+        <content>
+            <subtitle>npm i jest</subtitle>
+            <paragraph>
+                <info>jest is a testing platform ceated by facebook and covers most of the cases for testing react applications</info>
+                <example>
+                    install JEST by 
+
+                          npm i jest@20.0.4 (this version works with webpack 3 and babel6) latest version needs update on webpack and babel
+
+                  --------to run-----------
+
+                  npm test (it will look for filenames with test in a name);
+
+                  --------to run with watch mode-----
+
+                  npm test --watch 
+
+
+                   ------------ to run a simple test ================                   
+                   const add = (a,b)=> a + b;
+
+                   test('should add two numbers'.; ()=> {
+                    const result = add(3,4)
+                    //asserstion 
+                    expect(result).toBe(7);
+                   });
+                   ----------------------------------      
+                </example>
+            </paragraph>
+            <subtitle>testing Objects and arrays</subtitle>
+            <paragraph>
+                <info>in javascript {}==={} or []===[] are always false , the key is to test what is inside and array or object properties as below</info>
+                <example>
+                    --------------------2 objects-------------------------
+
+                    const obj1 = {name:'Greg'}
+                    const obj2 = {name:'Greg'}
+
+                    obj1===obj2 //false
+                    JSON.stringify(obj1)===JSON.stringify(obj2) //true we comparing to strings
+
+                    //jest 
+                    describe('Objects are the same', () => {
+                      test('have all the same properties', () => {
+                        expect(obj1).toEqual(obj2);
+                      });
+                    });
+
+                    
+                    ---------------------------------------------------------------------------
+                </example>
+            </paragraph>
+            <subtitle>async function</subtitle>
+            <paragraph>
+                <info>async function:
+                    always returns a promise; so inside body tags you need either: return a value or return a promise;
+                </info>
+                <example>
+                    ------------------------------ async function-------------------------------
+                    const processData = async () => {};
+                    processData() //return Promise {resolved>: undefined}
+                    //1. async metod return a value
+                    const processData = async () => {
+                    return 'value from async'
+                    //or error
+                    setTimeout(() => {
+                    throw new Error('Something got messed up!')
+                    }, 1000);
+                    };
+                    //obtain data from promise so .then()
+                    processData()
+                    .then((data)=>{
+                    console.log(data);
+                    })
+                    .catch((er)=>{
+                    console.log(er)
+                    });
+                    ------------------------ async method return a Promise---------------
+                    return new Promise((resolve,reject)=>{
+                    resolve('I am resolve promise');
+                    });
+                    };
+                    processDataPromise().then((data)=>{
+                    console.log(data);
+                    });
+                    -----------------------------------------------------------------------------
+                </example>
+            </paragraph>
+            <subtitle>async function with await</subtitle>
+            <paragraph>
+                <info>async function with await:
+                    async function can live independly (as we saw example above) but await is alway in pair with async function, mean you can not use await
+                    without declaring async function first. 'await' expect either promise or return method.
+                </info>
+                <example>
+                    ------------------------------ await feature ------------------------------
+                    const promiseSet = new Promise(function(resolve, reject) {setTimeout(() => resolve('promise is resolved'), 1000); });
+                    const processDataPromise = async () => {
+                    const promiseResponse = await promiseSet;
+                    console.log('await',promiseResponse);
+                    //return asyn method
+                    return 'async response'
+                    };
+                    //call it async and expect promise back;
+                    processDataPromise().then((data)=>{
+                    console.log('async',data);
+                    });
+                    ------------------------------------------------------------
+                </example>
+            </paragraph>
+            <subtitle>chaining await feature in async function</subtitle>
+            <paragraph>
+                <info>chaining await feature in async function:
+                    just like you chain promise you can chain await feature in async function since await procede a promise or return type function;
+                </info>
+                <example>
+                    --------------- async and await------------------------------
+                    const addNumbers = (num) => new Promise(function(resolve, reject) {setTimeout(() => resolve(num + 2), 1000); });
+                    const processDataPromiseChain = async () => {
+                    let promiseResponse = await addNumbers(2);
+                    //chain await call promiseResponse again;
+                    promiseResponse = await addNumbers(promiseResponse);
+                    //and again
+                    promiseResponse = await addNumbers(promiseResponse);
+                    //now chain return method;
+                    const returnMethod = (promiseResponse) => promiseResponse + 2
+                    //finaly return a result ot async method (which is promise);
+                    return returnMethod(promiseResponse);
+                    };
+                    //call it async and expect promise back;
+                    processDataPromiseChain().then((data)=>{
+                    console.log('async',data);
+                    });
+                    ------------------------------------------------------------
+                </example>
+            </paragraph>
+        </content>
+    </chapter>
+    <chapter>
+        <subject>Promise.all( [array or promises] ) sequeance of promises</subject>
+        <content>
+            <paragraph>
+                <info>Promise.all([promise1,promise2, ...]) is a way of executing promises in the sequence so they are being executed asynchronously, one finishes, the next one starts and so on and so on ...</info>
+                <example>
+------------------------ 3 promisse executed one after another------------------
+
+var promise1 = Promise.resolve(3);
+var promise2 = 42;
+var promise3 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 100, 'foo');
+});
+
+//execute promise one ater another;
+
+Promise.all([promise1, promise2, promise3]).then((values) => {
+    console.log(values);
+});
+
+// expected output: Array [3, 42, "foo"]
+
+-----------------------------------------------------------------------
+                </example>
+            </paragraph>
+        </content>
+    </chapter>
+</chapters>
