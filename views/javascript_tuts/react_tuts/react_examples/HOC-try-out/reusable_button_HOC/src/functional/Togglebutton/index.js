@@ -19,13 +19,12 @@ true or false , that could be used in other componenst as Simple button */
       render={(toggleMethod, toggle) => (
         <SimpleButton
           label={`${props.label} ${
-            toggle ? props.stateLabels[0] : props.stateLabels[1]
+            toggle ? props.toggleLabels[0] : props.toggleLabels[1]
           }`}
           action={() => {
             toggleMethod(toggle);
-            props.action(toggle);
+            props.action(toggle ? props.values[0] : props.values[1]);
           }}
-          value="value"
         />
       )}
     />
@@ -34,7 +33,8 @@ true or false , that could be used in other componenst as Simple button */
 
 ToggleSimpleButton.propTypes = {
   label: PropTypes.string.isRequired,
-  stateLabels: PropTypes.instanceOf(Array).isRequired,
+  toggleLabels: PropTypes.instanceOf(Array).isRequired,
+  values: PropTypes.instanceOf(Array).isRequired,
   action: PropTypes.instanceOf(Function).isRequired
 };
 

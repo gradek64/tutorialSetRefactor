@@ -19,6 +19,9 @@ const SimpleButton = ({ label, action, value }) => (
 SimpleButton.propTypes = {
   label: PropTypes.string.isRequired,
   action: PropTypes.instanceOf(Function).isRequired,
-  value: PropTypes.string.isRequired
+  value: PropTypes.string
+};
+SimpleButton.defaultProps = {
+  value: ""
 };
 export default SimpleButton;

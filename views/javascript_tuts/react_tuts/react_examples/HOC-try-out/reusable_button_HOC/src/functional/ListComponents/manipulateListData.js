@@ -12,25 +12,32 @@
 import * as fnHelpers from "../../utilityMethods/sorting";
 
 let updatedList;
-const manipulateListFns = ({ list }) => {
-  return { list };
-
+/* eslint-disable-next-line object-curly-newline */
+const manipulateListFns = ({
+  list,
+  letterSearch,
+  sortBy,
+  filter: filterSide,
+  action
+}) => {
+  /* console.log('action', action);
+  console.log('sortBy', sortBy);
+  console.log('filter', filterSide);
+  console.log('letterSearch', letterSearch); */
   switch (action) {
-    case "sort":
+    case "sortBy":
       if (updatedList) {
         list = updatedList;
       }
       return {
         list: fnHelpers[sortBy](list, "name")
       };
-    case "filterDark":
-    case "filterLight":
-      updatedList = list.filter(term => fnHelpers.filter(term));
+    case "filter":
+      updatedList = list.filter(({ side }) => side === filterSide);
       return {
         list: updatedList
       };
     case "search":
-      console.log("....letterSearch", letterSearch);
       updatedList = list.filter(char =>
         char.name
           .concat(char.side)

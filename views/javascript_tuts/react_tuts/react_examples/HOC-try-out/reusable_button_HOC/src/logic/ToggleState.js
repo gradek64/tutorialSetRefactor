@@ -7,8 +7,6 @@ class ToggleState extends React.Component {
   };
   toggle = toggle => {
     this.setState({ toggle: !toggle });
-
-    console.log("toggle", toggle);
   };
 
   render() {

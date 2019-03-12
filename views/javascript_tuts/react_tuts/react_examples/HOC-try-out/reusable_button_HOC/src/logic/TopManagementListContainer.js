@@ -37,28 +37,23 @@ const withSimpleState = EnhancedListComp => {
       this.sortBy = this.sortBy.bind(this);
     }
     searchText(searchValue) {
-      this.setState(
-        state => ({
-          ...state,
-          action: "search",
-          searchValue: searchValue.toLowerCase()
-        }),
-        () => {
-          console.log("this.state", this.state);
-        }
-      );
+      this.setState(state => ({
+        ...state,
+        action: "search",
+        searchValue: searchValue.toLowerCase()
+      }));
     }
     filterSide(filterby) {
       this.setState(state => ({
-        filter: filterby,
         ...state,
+        filter: filterby,
         action: "filter"
       }));
     }
     sortBy(sortValue) {
       this.setState(state => ({
-        sortBy: sortValue,
         ...state,
+        sortBy: sortValue,
         action: "sortBy"
       }));
     }
@@ -79,8 +74,9 @@ const withSimpleState = EnhancedListComp => {
             />
             <ToogleButton
               action={this.sortBy}
-              label="toggle"
-              stateLabels={["in", "out"]}
+              label="sort"
+              toggleLabels={["ASC", "DESC"]}
+              values={["sortASC", "sortDESC"]}
             />
           </div>
           <div>
