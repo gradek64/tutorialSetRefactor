@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SimpleButton from '../Simplebutton/index';
 import ToggleState from '../../logic/ToggleState';
-
 /*
   *@ToggleState is class componet that holds only logic and uses
   *@props.render method to exposed its renderMethod and toglle state
