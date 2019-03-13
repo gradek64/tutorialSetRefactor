@@ -9,7 +9,7 @@
                 <example>
 ================ test folder structure  __tests__ ================
 
-      Intresting fact if you create folder named : src/__tests__ jest will automatically detect that and uses this foler for running test on files.js inside , beside their names , no need to include filename.test.js it coudl be skipped
+      Intresting fact if you create folder named : src/__tests__ jest will automatically detect that and uses this foler for running test on files.js inside , beside their names , no need to include filename.test.js it could be skipped
 
 ================ ================ ================      
                 </example>

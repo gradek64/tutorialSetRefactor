@@ -20,6 +20,8 @@
                   
                     <ul class="linksNested">
                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>naming and Folder convention</a><span class="tooltiptext">naming and Folder convention</span>
+                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>instaling JEST</a><span class="tooltiptext">instaling JEST</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>testing Objects and arrays</a><span class="tooltiptext">testing Objects and arrays</span>
@@ -32,9 +34,9 @@
                   
                     <ul class="linksNested">
                           
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>Snapshot testing using JEST and ENZYME</a><span class="tooltiptext">Snapshot testing using JEST and ENZYME</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>Snapshot testing using only JEST react-test-renderer no event handlers support</a><span class="tooltiptext">Snapshot testing using only JEST react-test-renderer no event handlers support</span>
                            
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>Snapshot testing using only JEST</a><span class="tooltiptext">Snapshot testing using only JEST</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>Snapshot testing using JEST and ENZYME with event handlers support</a><span class="tooltiptext">Snapshot testing using JEST and ENZYME with event handlers support</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>geg</a><span class="tooltiptext">geg</span>
                         
@@ -64,9 +66,23 @@
               <div class="band-container partition first" part="part-1">
                 <div class="band-inner">
 
+                  <p>U should create a sepearte folder for your test that follows the same structure as your src directory</p>
+                  <div class="codeWraper">
+                    <code>================ test folder structure  __tests__ ================
+
+      Intresting fact if you create folder named : src/__tests__ jest will automatically detect that and uses this foler for running test on files.js inside , beside their names , no need to include filename.test.js it could be skipped
+
+================ ================ ================</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
                   <p>jest is a testing framework ceated by facebook and covers most of the cases for testing react applications</p>
                   <div class="codeWraper">
-                    <code>install JEST by 
+                    <code>================ install JEST by ================
 
       npm i jest@20.0.4 (this version works with webpack 3 and babel6) latest version needs update on webpack and babel
 
@@ -93,7 +109,7 @@ expect(result).toBe(7);
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-2">
+              <div class="band-container partition " part="part-3">
                 <div class="band-inner">
 
                   <p>in javascript {}==={} or []===[] are always false , the key is to test what is inside and array or object properties as below</p>
@@ -131,13 +147,86 @@ test(&#39;have all the same properties&#39;, () =&gt; {
               <div class="band-container partition first" part="part-1">
                 <div class="band-inner">
 
+                  <p>There is a small package a 
+                  npm package called &#39;react-test-renderer&#39; for making your component snapshots. No need for Enzyme. BUT
+                  in only creates static snapshot it doesnt allow to test clicks, mouse events etc.</p>
+                  <div class="codeWraper">
+                    <code>[object Object]</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
                   <p>Before U need &#39;Enzyme&#39; Airbnb product that is created to enhance testing for React, it uses addtional selectors and enables Snapshot testing, it needs special adapters to work with JEST</p>
                   <div class="codeWraper">
                     <code>================ instaling enzyme ================
 
-npm i --save-dev enzyme enzyme-adapter-react-16
+npm i --save-dev 
+enzyme@3.0.0 
+enzyme-adapter-react-16@1.0.0 
+enzyme-to-json@3.0.1 (package that allows you to render clean snapshot containing just Component JSX)
+raf@3.3.2  (U need natitve request animation frame that is default in browser since IE 10 but we need that in testing enviroment )
 
-================example snapshot test with enzyme ================
+================ configuration needed for Enzyme 3 ================
+
+create a file for JEST configuration in a root of your project;
+
+================ ================ ================ ================
+
+----------------------root/jest.configuration.json--------------
+
+{
+  &quot;setupFiles&quot;:[
+    &quot;raf/polyfill&quot;,
+    &quot;&lt;rootDir&gt;/enzyme.configuration.js&quot;
+  ]
+}
+
+
+//update to the file to have clean snapshot set without importing enzyme-to-json in every file
+//so use that version 
+{
+    &quot;setupFiles&quot;: [
+        &quot;raf/polyfill&quot;,
+        &quot;&lt;rootDir&gt;/enzyme.configuration.js&quot;
+    ],
+    &quot;snapshotSerializers&quot;: [
+        &quot;enzyme-to-json/serializer&quot;
+    ]
+}
+
+================ ================ ================ ================
+
+create a file for ENZYME configuration in a root directory;
+
+================ ================ ================ ================
+
+----------------------root/enzyme.configuration.js--------------
+
+import Enzyme from &#39;enzyme&#39;;
+import Adapter from &#39;enzyme-adapter-react-16&#39;;
+
+Enzyme.configure({ adapter: new Adapter() });
+
+
+================ ================ ================ ================
+
+update your package.json with a path for jest configuration
+
+================ ================ ================ ================
+
+----------------------root/package.json--------------
+
+&quot;scripts&quot;: {
+    &quot;test&quot;: &quot;jest --config=jest.configuration.json&quot;
+  },
+
+
+---------------------------------------------------------------
+
+
 
               import React from &#39;react&#39;;
 import { shallow } from &#39;enzyme&#39;;
@@ -152,17 +241,6 @@ describe(&#39;MyComponent&#39;, () =&gt; {
 });
 
 ================ ================ ================</code>
-                  </div>
-                </div>
-              </div>
-            
-              <div class="band-container partition " part="part-2">
-                <div class="band-inner">
-
-                  <p>now U can use
-                  npm package called &#39;react-test-renderer&#39; for making your component snapshots. No need for Enzyme.</p>
-                  <div class="codeWraper">
-                    <code>[object Object]</code>
                   </div>
                 </div>
               </div>
