@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const SearchBox = ({ eventHandler, placeholder }) => (
   <input
@@ -11,10 +11,10 @@ const SearchBox = ({ eventHandler, placeholder }) => (
 );
 SearchBox.propTypes = {
   eventHandler: PropTypes.instanceOf(Function).isRequired,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
 };
 SearchBox.defaultProps = {
-  placeholder: ""
+  placeholder: '',
 };
 
 export default SearchBox;

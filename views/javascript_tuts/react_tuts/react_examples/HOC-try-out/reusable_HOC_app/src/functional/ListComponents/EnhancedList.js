@@ -1,6 +1,12 @@
-import React from "react";
-import PureList from "./DisplayList";
-import { manipulateListFns } from "./manipulateListData";
+import React from 'react';
+import PureList from './DisplayList';
+import { manipulateListFns } from './manipulateListData';
+
+/*
+  *@this Component is resposible of extending baseList component but
+  it will transform/change props according to the action given from the parent Component
+  as filering,sorting etc..
+*/
 
 /*
   *@There is 2 wasy of making your EnhancedCompoent (component that changes is baseComponent)
@@ -9,7 +15,7 @@ import { manipulateListFns } from "./manipulateListData";
 */
 
 // const withTransformProps = helperFunc => BaseComponent => baseProps => {
-const withTransformProps = helperFunc => props => {
+const withTransformProps = helperFunc => (props) => {
   const transformedProps = helperFunc(props);
   return <PureList {...transformedProps} />;
 };

@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const style = {
-  color: "green",
-  borderColor: "green"
+  color: 'green',
+  borderColor: 'green',
 };
 const SimpleButton = ({ label, action, value }) => (
   <button
@@ -19,9 +19,9 @@ const SimpleButton = ({ label, action, value }) => (
 SimpleButton.propTypes = {
   label: PropTypes.string.isRequired,
   action: PropTypes.instanceOf(Function).isRequired,
-  value: PropTypes.string
+  value: PropTypes.string,
 };
 SimpleButton.defaultProps = {
-  value: ""
+  value: '',
 };
 export default SimpleButton;

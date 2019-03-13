@@ -1,11 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
+
+/*
+  *@this is very clever class all it does it provides logic for toggling (state of true or false)
+  and expose it toggleMethod and toggle state in props.render to other components
+  *@
+*/
 
 class ToggleState extends React.Component {
   state = {
-    toggle: false
+    toggle: false,
   };
-  toggle = toggle => {
+  toggle = (toggle) => {
     this.setState({ toggle: !toggle });
   };
 
@@ -18,7 +24,7 @@ class ToggleState extends React.Component {
 }
 
 ToggleState.propTypes = {
-  render: PropTypes.func.isRequired
+  render: PropTypes.func.isRequired,
 };
 
 export default ToggleState;

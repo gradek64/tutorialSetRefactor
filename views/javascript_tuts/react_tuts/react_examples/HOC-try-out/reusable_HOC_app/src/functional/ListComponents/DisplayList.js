@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 /*
   *@this is presentional component
@@ -17,7 +17,7 @@ const RenderDisplayList = ({ list }) => (
   </div>
 );
 RenderDisplayList.propTypes = {
-  list: PropTypes.instanceOf(Array).isRequired
+  list: PropTypes.instanceOf(Array).isRequired,
 };
 
 export default RenderDisplayList;

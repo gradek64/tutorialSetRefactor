@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import SimpleButton from '../Simplebutton/index';
 import ToggleState from '../../logic/ToggleState';
 /*
-  *@ToggleState is class componet that holds only logic and uses
-  *@props.render method to exposed its renderMethod and toglle state
+  *@ToggleState is class component that holds only logic and uses
+  *@props.render method to exposed its renderMethod and toggle state
   *@SimpleButton is extending ToggleState (using its logic) and then whole thing (ToggleState and Simple button)
   *@is wrapped in ToggleSimpleButton functional component that is expoerted outside and takes props for SingleButton
 */
