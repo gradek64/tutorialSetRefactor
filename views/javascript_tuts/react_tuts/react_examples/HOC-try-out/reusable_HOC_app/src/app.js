@@ -1,19 +1,19 @@
-import React from "react";
-import ReactDOM from "react-dom";
-// custom
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import TopManagementListContainer from "./logic/TopManagementListContainer";
+// custom
+import TopManagementListContainer from './logic/TopManagementListContainer';
 
 // sample data;
 
 const starWarsChars = [
-  { name: "Luke", side: "light" },
-  { name: "Darth Vader", side: "dark" },
-  { name: "Obi-wan Kenobi", side: "light" },
-  { name: "Palpatine", side: "dark" }
+  { name: 'Luke', side: 'light' },
+  { name: 'Darth Vader', side: 'dark' },
+  { name: 'Obi-wan Kenobi', side: 'light' },
+  { name: 'Palpatine', side: 'dark' },
 ];
 
-const buttonActionClick = state => {
+const buttonActionClick = (state) => {
   console.log(state);
 };
 
@@ -26,4 +26,4 @@ const jsx = (
   </div>
 );
 
-ReactDOM.render(jsx, document.getElementById("app"));
+ReactDOM.render(jsx, document.getElementById('app'));

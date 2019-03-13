@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 const style = {
   position: 'absolute',
-  backgroundColor: 'pink',
   top: '0',
   left: '0',
   width: '100%',

@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "build:dev": "webpack",
-    "test": "jest"
+    "test": "jest --config=jest.configuration.json"
   },
   "dependencies": {
     "babel-cli": "6.24.1",
@@ -26,17 +26,22 @@
     "react": "16.8.4",
     "react-dom": "16.8.4",
     "react-router-dom": "4.1.2",
+    "react-test-renderer": "^16.0.0",
     "recompose": "^0.30.0",
     "sass-loader": "6.0.6",
     "style-loader": "0.18.2"
   },
   "devDependencies": {
     "babel-eslint": "8.2.6",
+    "enzyme": "^3.0.0",
+    "enzyme-adapter-react-16": "^1.0.0",
+    "enzyme-to-json": "^3.0.1",
     "eslint": "4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.1",
     "eslint-plugin-react": "^7.4.0",
+    "raf": "^3.3.2",
     "webpack": "3.1.0",
     "webpack-dev-server": "2.5.1"
   }

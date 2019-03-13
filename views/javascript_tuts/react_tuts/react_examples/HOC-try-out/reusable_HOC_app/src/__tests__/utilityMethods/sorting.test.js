@@ -1,4 +1,4 @@
-import { sortASC, sortDESC } from './sorting';
+import { sortASC, sortDESC } from '../../utilityMethods/sorting';
 
 test('is sorting ASC', () => {
   const result = sortASC(['b', 'c', 4, 'a', 1]);

@@ -1,170 +1,197 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapters>
     <chapter>
-        <subject>install jest</subject>
+        <subject>Basics of JEST Framework</subject>
         <content>
-            <subtitle>npm i jest</subtitle>
+          <subtitle>naming and Folder convention</subtitle>
             <paragraph>
-                <info>jest is a testing platform ceated by facebook and covers most of the cases for testing react applications</info>
+                <info>U should create a sepearte folder for your test that follows the same structure as your src directory</info>
                 <example>
-                    install JEST by 
+================ test folder structure  __tests__ ================
 
-                          npm i jest@20.0.4 (this version works with webpack 3 and babel6) latest version needs update on webpack and babel
+      Intresting fact if you create folder named : src/__tests__ jest will automatically detect that and uses this foler for running test on files.js inside , beside their names , no need to include filename.test.js it coudl be skipped
 
-                  --------to run-----------
+================ ================ ================      
+                </example>
+            </paragraph>
+            <subtitle>instaling JEST</subtitle>
+            <paragraph>
+                <info>jest is a testing framework ceated by facebook and covers most of the cases for testing react applications</info>
+                <example>
+================ install JEST by ================
 
-                  npm test (it will look for filenames with test in a name);
+      npm i jest@20.0.4 (this version works with webpack 3 and babel6) latest version needs update on webpack and babel
 
-                  --------to run with watch mode-----
+================ to run ================
 
-                  npm test --watch 
+npm test (it will look for filenames with test in a name);
+
+================ to run with watch mode ================
+
+npm test --watch 
 
 
-                   ------------ to run a simple test ================                   
-                   const add = (a,b)=> a + b;
+================ to run a simple test ================ 
 
-                   test('should add two numbers'.; ()=> {
-                    const result = add(3,4)
-                    //asserstion 
-                    expect(result).toBe(7);
-                   });
-                   ----------------------------------      
+const add = (a,b)=> a + b;
+
+test('should add two numbers'.; ()=> {
+const result = add(3,4)
+//asserstion 
+expect(result).toBe(7);
+});
+================ ================ ================      
                 </example>
             </paragraph>
             <subtitle>testing Objects and arrays</subtitle>
             <paragraph>
                 <info>in javascript {}==={} or []===[] are always false , the key is to test what is inside and array or object properties as below</info>
                 <example>
-                    --------------------2 objects-------------------------
+================ 2 objects ================ 
 
-                    const obj1 = {name:'Greg'}
-                    const obj2 = {name:'Greg'}
+const obj1 = {name:'Greg'}
+const obj2 = {name:'Greg'}
 
-                    obj1===obj2 //false
-                    JSON.stringify(obj1)===JSON.stringify(obj2) //true we comparing to strings
+obj1===obj2 //false
+JSON.stringify(obj1)===JSON.stringify(obj2) //true we comparing to strings
 
-                    //jest 
-                    describe('Objects are the same', () => {
-                      test('have all the same properties', () => {
-                        expect(obj1).toEqual(obj2);
-                      });
-                    });
+//jest 
+describe('Objects are the same', () => {
+test('have all the same properties', () => {
+  expect(obj1).toEqual(obj2);
+});
+});
 
-                    
-                    ---------------------------------------------------------------------------
-                </example>
-            </paragraph>
-            <subtitle>async function</subtitle>
-            <paragraph>
-                <info>async function:
-                    always returns a promise; so inside body tags you need either: return a value or return a promise;
-                </info>
-                <example>
-                    ------------------------------ async function-------------------------------
-                    const processData = async () => {};
-                    processData() //return Promise {resolved>: undefined}
-                    //1. async metod return a value
-                    const processData = async () => {
-                    return 'value from async'
-                    //or error
-                    setTimeout(() => {
-                    throw new Error('Something got messed up!')
-                    }, 1000);
-                    };
-                    //obtain data from promise so .then()
-                    processData()
-                    .then((data)=>{
-                    console.log(data);
-                    })
-                    .catch((er)=>{
-                    console.log(er)
-                    });
-                    ------------------------ async method return a Promise---------------
-                    return new Promise((resolve,reject)=>{
-                    resolve('I am resolve promise');
-                    });
-                    };
-                    processDataPromise().then((data)=>{
-                    console.log(data);
-                    });
-                    -----------------------------------------------------------------------------
-                </example>
-            </paragraph>
-            <subtitle>async function with await</subtitle>
-            <paragraph>
-                <info>async function with await:
-                    async function can live independly (as we saw example above) but await is alway in pair with async function, mean you can not use await
-                    without declaring async function first. 'await' expect either promise or return method.
-                </info>
-                <example>
-                    ------------------------------ await feature ------------------------------
-                    const promiseSet = new Promise(function(resolve, reject) {setTimeout(() => resolve('promise is resolved'), 1000); });
-                    const processDataPromise = async () => {
-                    const promiseResponse = await promiseSet;
-                    console.log('await',promiseResponse);
-                    //return asyn method
-                    return 'async response'
-                    };
-                    //call it async and expect promise back;
-                    processDataPromise().then((data)=>{
-                    console.log('async',data);
-                    });
-                    ------------------------------------------------------------
-                </example>
-            </paragraph>
-            <subtitle>chaining await feature in async function</subtitle>
-            <paragraph>
-                <info>chaining await feature in async function:
-                    just like you chain promise you can chain await feature in async function since await procede a promise or return type function;
-                </info>
-                <example>
-                    --------------- async and await------------------------------
-                    const addNumbers = (num) => new Promise(function(resolve, reject) {setTimeout(() => resolve(num + 2), 1000); });
-                    const processDataPromiseChain = async () => {
-                    let promiseResponse = await addNumbers(2);
-                    //chain await call promiseResponse again;
-                    promiseResponse = await addNumbers(promiseResponse);
-                    //and again
-                    promiseResponse = await addNumbers(promiseResponse);
-                    //now chain return method;
-                    const returnMethod = (promiseResponse) => promiseResponse + 2
-                    //finaly return a result ot async method (which is promise);
-                    return returnMethod(promiseResponse);
-                    };
-                    //call it async and expect promise back;
-                    processDataPromiseChain().then((data)=>{
-                    console.log('async',data);
-                    });
-                    ------------------------------------------------------------
+
+================ ================ ================
                 </example>
             </paragraph>
         </content>
     </chapter>
     <chapter>
-        <subject>Promise.all( [array or promises] ) sequeance of promises</subject>
+       <subject>Snapshot testing</subject>
         <content>
+            <subtitle>Snapshot testing using only JEST react-test-renderer no event handlers support</subtitle>
             <paragraph>
-                <info>Promise.all([promise1,promise2, ...]) is a way of executing promises in the sequence so they are being executed asynchronously, one finishes, the next one starts and so on and so on ...</info>
+                <info>There is a small package a 
+                  npm package called 'react-test-renderer' for making your component snapshots. No need for Enzyme. BUT
+                  in only creates static snapshot it doesnt allow to test clicks, mouse events etc.</info>
                 <example>
------------------------- 3 promisse executed one after another------------------
+                  
+================ instaling react-test-renderer ================
 
-var promise1 = Promise.resolve(3);
-var promise2 = 42;
-var promise3 = new Promise((resolve, reject) => {
-  setTimeout(resolve, 100, 'foo');
+npm i react-test-renderer@16.0.0 (U need this version if you work with React 16.* )
+
+================ example snapshot with JEST react-test-renderer no event handlers   ================
+
+import React from 'react';
+import Link from '../Link.react';
+import renderer from 'react-test-renderer';
+
+it('renders correctly', () => {
+  const tree = renderer
+    .create(<Link page="http://www.facebook.com">Facebook</Link>)
+    .toJSON();
+  expect(tree).toMatchSnapshot();
 });
 
-//execute promise one ater another;
+================ ================ ================
 
-Promise.all([promise1, promise2, promise3]).then((values) => {
-    console.log(values);
-});
-
-// expected output: Array [3, 42, "foo"]
-
------------------------------------------------------------------------
                 </example>
             </paragraph>
+      <subtitle>Snapshot testing using JEST and ENZYME with event handlers support</subtitle>
+      <paragraph>
+          <info>Before U need 'Enzyme' Airbnb product that is created to enhance testing for React, it uses addtional selectors and enables Snapshot testing, it needs special adapters to work with JEST</info>
+          <example>
+            
+================ instaling enzyme ================
+
+npm i --save-dev 
+enzyme@3.0.0 
+enzyme-adapter-react-16@1.0.0 
+enzyme-to-json@3.0.1 (package that allows you to render clean snapshot containing just Component JSX)
+raf@3.3.2  (U need natitve request animation frame that is default in browser since IE 10 but we need that in testing enviroment )
+
+================ configuration needed for Enzyme 3 ================
+
+create a file for JEST configuration in a root of your project;
+
+================ ================ ================ ================
+
+----------------------root/jest.configuration.json--------------
+
+{
+  "setupFiles":[
+    "raf/polyfill",
+    "&lt;rootDir>/enzyme.configuration.js"
+  ]
+}
+
+
+//update to the file to have clean snapshot set without importing enzyme-to-json in every file
+//so use that version 
+{
+    "setupFiles": [
+        "raf/polyfill",
+        "&lt;rootDir>/enzyme.configuration.js"
+    ],
+    "snapshotSerializers": [
+        "enzyme-to-json/serializer"
+    ]
+}
+
+================ ================ ================ ================
+
+create a file for ENZYME configuration in a root directory;
+
+================ ================ ================ ================
+
+----------------------root/enzyme.configuration.js--------------
+
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
+
+
+================ ================ ================ ================
+
+update your package.json with a path for jest configuration
+
+================ ================ ================ ================
+
+----------------------root/package.json--------------
+
+"scripts": {
+    "test": "jest --config=jest.configuration.json"
+  },
+
+
+---------------------------------------------------------------
+
+
+
+              import React from 'react';
+import { shallow } from 'enzyme';
+import MyComponent from './MyComponent';
+
+describe('MyComponent', () => {
+  it('should render correctly in "debug" mode', () => {
+    const component = shallow(&lt;MyComponent debug />);
+  
+    expect(component).toMatchSnapshot();
+  });
+});
+
+================ ================ ================
+
+          </example>
+      </paragraph>
+      <subtitle>geg</subtitle>
+      <paragraph>
+          <info>geg</info>
+          <example>gege</example>
+      </paragraph>
         </content>
     </chapter>
 </chapters>
