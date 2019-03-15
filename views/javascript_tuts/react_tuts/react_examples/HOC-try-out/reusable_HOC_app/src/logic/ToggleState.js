@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
   and expose it toggleMethod and toggle state in props.render to other components
   *@
 */
-
 class ToggleState extends React.Component {
   state = {
     toggle: false,

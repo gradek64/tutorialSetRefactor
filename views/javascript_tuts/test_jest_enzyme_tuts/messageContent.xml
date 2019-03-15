@@ -26,10 +26,17 @@
 
 npm test (it will look for filenames with test in a name);
 
+
+================ run only one test as  ================
+
+npm test -- -t 'react Fragement' 
+
+will run this test('react Fragement', () => {}) so the discription of the test matters
+
+
 ================ to run with watch mode ================
 
 npm test --watch 
-
 
 ================ to run a simple test ================ 
 
@@ -71,7 +78,7 @@ test('have all the same properties', () => {
     <chapter>
        <subject>Snapshot testing</subject>
         <content>
-            <subtitle>Snapshot testing using only JEST react-test-renderer no event handlers support</subtitle>
+            <subtitle>react-test-renderer from JEST no event handlers support</subtitle>
 <paragraph>
 <info>There is a small package a 
   npm package called 'react-test-renderer' for making your component snapshots. No need for Enzyme. BUT
@@ -90,7 +97,7 @@ import renderer from 'react-test-renderer';
 
 it('renders correctly', () => {
   const tree = renderer
-    .create(<Link page="http://www.facebook.com">Facebook</Link>)
+    .create(&lt;Link page="http://www.facebook.com">Facebook&lt;/Link&gt;)
     .toJSON();
   expect(tree).toMatchSnapshot();
 });
@@ -99,16 +106,18 @@ it('renders correctly', () => {
 
                 </example>
             </paragraph>
-      <subtitle>Snapshot testing using JEST and ENZYME with event handlers support</subtitle>
+      <subtitle>ENZYME Configuration</subtitle>
       <paragraph>
-          <info>Before U need 'Enzyme' Airbnb product that is created to enhance testing for React, it uses addtional selectors and enables Snapshot testing, it needs special adapters to work with JEST</info>
+          <info>Before U need 'Enzyme' Airbnb product that is created to enhance testing for React, it uses addtional selectors and enables Snapshot testing, it needs special adapters to work with JEST
+          ENZYME allows you to add event handlers of any types to your shallow wrappers.
+          </info>
           <example>
             
 ================ instaling enzyme ================
 
 npm i --save-dev 
 enzyme@3.0.0 
-enzyme-adapter-react-16@1.0.0 
+enzyme-adapter-react-16@1.7.1  (at least 1.7.* needed for react 16.8.4 with hooks)
 enzyme-to-json@3.0.1 (package that allows you to render clean snapshot containing just Component JSX)
 raf@3.3.2  (U need natitve request animation frame that is default in browser since IE 10 but we need that in testing enviroment )
 
@@ -184,6 +193,145 @@ describe('MyComponent', () => {
 });
 
 ================ ================ ================
+
+          </example>
+      </paragraph>
+      <subtitle>Event simulators</subtitle>
+      <paragraph>
+          <info>Enzyme allows you to simulate events , could be any event as onLoad, click etc.. U need to find DOM element first and attach simulate as U would event as addEbentListener</info>
+          <example>
+================ test click event and the outcome ================
+
+
+
+//u need to mock your event handler method ( more about mocking in next section)
+const eventHandlerCalled = jest.fn(); 
+
+const value = 'myValue';
+const wrapper = shallow(&lt;SearchBox
+  label="label"
+  // e below is not a real event so if you need to use e.target.value you need to mock it
+  eventHandler={e => (eventHandlerCalled(value))}
+/&gt;);
+
+// here we simulate onInput that needs to have event.target.value in handler method so we do;
+wrapper.find('input').at(0).simulate('input', { target: { value } });
+
+// fucntion is called after click;
+expect(eventHandlerCalled).toHaveBeenCalledWith(value);
+
+
+
+
+================  ================  ================  ================ 
+          </example>
+      </paragraph>
+      <subtitle>shallow testing</subtitle>
+      <paragraph>
+          <info>shallow testing allows U to render a component on one level , that means any tested components wont be rendered to the snapshot. It donsnt need any addtional library beside deafault jest and enzyme configuration.</info>
+          <example>
+================= example of shalow Enzyme method to Snapshot =================
+
+import React from 'react';
+import { shallow } from 'enzyme';
+
+// component for snapshot test;
+import SimpleButton from '../../../functional/Simplebutton';
+
+test('renders correctly', () => {
+  const wrapper = shallow(&lt;SimpleButton label="label" action={() => {}} /&gt;);
+  expect(wrapper).toMatchSnapshot();
+});
+
+================ ================ ================ ================ 
+          </example>
+      </paragraph>
+      <subtitle>Full dom Rendering enzyme mount();</subtitle>
+      <paragraph>
+          <info>U might need to render nested component for full DOM rendering, for that you also need to install a separate libraray , React reccomends jsdom</info>
+          <example>
+===== To help you make up your mind, here is a list of APIs that need jsdom =======
+
+
+
+-Any browser globals like window and document
+-ReactDOM.render()
+-TestUtils.renderIntoDocument() (a shortcut for the above)
+-mount() in Enzyme
+
+
+
+
+========== example of full rending is the same as shalow but full needs mount() =========
+
+//no addtional configuration is needed Enzyme behind the scene is using jsdom , not external install nedeed;
+
+
+
+import React from 'react';
+import { shallow, mount } from 'enzyme';
+
+/*
+  *@this next line is defined in a root/jest.configuration.js
+  *@so no need to import library
+*/
+// import toJson from 'enzyme-to-json';
+
+// component for snapshot test;
+import ToggleButton from '../../../functional/Togglebutton';
+
+test('renders correctly', () => {
+  const wrapper = mount(&lt;ToggleButton
+    action={() => {}}
+    label="sort"
+    toggleLabels={['ASC', 'DESC']}
+    values={['sortASC', 'sortDESC']}
+  /&gt;);
+  expect(wrapper).toMatchSnapshot();
+});
+
+
+
+============ ============ ============ ============
+          </example>
+      </paragraph>
+      <subtitle>Full render with Jsdom</subtitle>
+      <paragraph>
+          <info>U can use jsdom framework by creating browser enviroment, if U dont want to use Enzyme mount() method</info>
+          <example>
+            
+============ pure jsdom render no enzyme (not recommended) ============
+
+import React from 'react';
+import dom from 'jsdom';
+
+test('User profile', () => {
+  let component, dom;
+
+  before((done) => {
+    let person = { FirstName:'Richard', LastName:'Kotze' };
+    component = React.render(
+      &lt;ProfileBox hint={person} />,
+      document.body,
+      () => {
+        setTimeout(done);
+      }
+    );
+  });
+
+  after((done) => {
+    React.unmountComponentAtNode(document.body);
+    setTimeout(done);
+  });
+
+  expect('should contain name', () => {
+    dom = React.findDOMNode(component);
+    dom.textContent.should.containEql('Richard Kotze');
+  });
+
+});
+
+============ ============ ============ ============
 
           </example>
       </paragraph>
