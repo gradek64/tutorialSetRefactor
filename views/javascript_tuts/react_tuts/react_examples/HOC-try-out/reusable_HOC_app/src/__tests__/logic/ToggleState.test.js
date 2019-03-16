@@ -27,15 +27,15 @@ test('It renders React.Fragement', () => {
 });
 test('toggleStates toggle from false to true and vice-versa', () => {
   const initialToggleState = wrapper.instance().state.toggle;
-  // mock toggle
-  const toggleCall = (toggle) => { wrapper.setState({ toggle: !toggle }); return null; };
 
-  // call toggle
-  toggleCall(initialToggleState);
+  // call class toggle
+  wrapper.instance().toggle(initialToggleState);
+
   const updatedToggleStateRead = wrapper.instance().state.toggle;
   expect(updatedToggleStateRead).toEqual(!initialToggleState);
 
   // and call back toggle;
-  toggleCall(updatedToggleStateRead);
+  wrapper.instance().toggle(updatedToggleStateRead);
+
   expect(wrapper.instance().state.toggle).toEqual(!updatedToggleStateRead);
 });
