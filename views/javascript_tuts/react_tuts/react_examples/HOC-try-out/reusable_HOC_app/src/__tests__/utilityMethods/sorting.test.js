@@ -1,5 +1,6 @@
 import { sortASC, sortDESC } from '../../utilityMethods/sorting';
 
+// testing
 test('is sorting ASC', () => {
   const result = sortASC(['b', 'c', 4, 'a', 1]);
   expect(result).toEqual([1, 4, 'a', 'b', 'c']);

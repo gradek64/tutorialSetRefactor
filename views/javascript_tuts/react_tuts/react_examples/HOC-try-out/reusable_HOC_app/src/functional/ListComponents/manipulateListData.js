@@ -46,7 +46,7 @@ const manipulateListFns = ({
     };
   default:
     return {
-      list: updatedList,
+      list,
     };
   }
 };

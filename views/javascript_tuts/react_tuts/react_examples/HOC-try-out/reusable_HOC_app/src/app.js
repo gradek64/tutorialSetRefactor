@@ -13,10 +13,6 @@ const starWarsChars = [
   { name: 'Palpatine', side: 'dark' },
 ];
 
-const buttonActionClick = (state) => {
-  console.log(state);
-};
-
 const jsx = (
   <div>
     <div>

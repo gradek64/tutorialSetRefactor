@@ -3,6 +3,11 @@ import { shallow } from 'enzyme';
 import { noReactFragementSupport } from '../../test_helpers';
 
 /*
+  *@This class instance and the way enzyme is getting methods and properties is by
+  *@    (class) means wrapper.instance();
+*/
+
+/*
   *@this next line is defined in a root/jest.configuration.js
   *@so no need to import library
 */

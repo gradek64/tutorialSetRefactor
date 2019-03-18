@@ -18,6 +18,7 @@ const ClickAwayListenerComp = (styles) => {
     return (
       <div
         style={styles}
+        className="pageMask"
         role="presentation"
         onClick={() => { clickAway(true); }}
         onKeyPress={handleKeyPress}

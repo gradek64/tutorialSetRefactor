@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import EnhancedList from '../functional/ListComponents/EnhancedList';
 import Simplebutton from '../functional/Simplebutton';
 import ToogleButton from '../functional/Togglebutton';
@@ -25,7 +26,7 @@ const withSimpleState = classes => (EnhancedListComp) => {
   {
     /* the class below is needed for table logic as search, filters etc... */
   }
-  return class TableStates extends React.Component {
+  class TableStates extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -61,8 +62,10 @@ const withSimpleState = classes => (EnhancedListComp) => {
     }
     render() {
       return (
-        <React.Fragment>
+        <div>
           <div className="tableHeader">
+            <h1>active filter: {this.state.filter === '' ? 'none' : this.state.filter}</h1>
+            <h1>active sortBy: {this.state.sortBy}</h1>
             <SearchBox placeholder="filter" eventHandler={this.searchText} />
             <Simplebutton
               action={this.filterSide}
@@ -119,10 +122,15 @@ const withSimpleState = classes => (EnhancedListComp) => {
               action={this.state.action}
             />
           </div>
-        </React.Fragment>
+        </div>
       );
     }
+  }
+
+  TableStates.propTypes = {
+    list: PropTypes.instanceOf(Array).isRequired,
   };
+  return TableStates;
 };
 
 const FilteredListSearch = withSimpleState(styles)(EnhancedList);

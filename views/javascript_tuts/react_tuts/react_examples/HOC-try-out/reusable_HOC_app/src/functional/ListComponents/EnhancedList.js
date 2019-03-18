@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import PureList from './DisplayList';
 import { manipulateListFns } from './manipulateListData';
 
@@ -15,9 +16,16 @@ import { manipulateListFns } from './manipulateListData';
 */
 
 // const withTransformProps = helperFunc => BaseComponent => baseProps => {
-const withTransformProps = helperFunc => (props) => {
-  const transformedProps = helperFunc(props);
-  return <PureList {...transformedProps} />;
+const withTransformProps = (helperFunc) => {
+  const withTransformPropsComp = (props) => {
+    const transformedProps = helperFunc(props);
+    return <PureList {...transformedProps} />;
+  };
+  withTransformPropsComp.propTypes = {
+    list: PropTypes.instanceOf(Array).isRequired,
+  };
+
+  return withTransformPropsComp;
 };
 // const ListWithTransformation = withTransformProps(manipulateListFns)(RenderDisplayList);
 const ListWithTransformation = withTransformProps(manipulateListFns);

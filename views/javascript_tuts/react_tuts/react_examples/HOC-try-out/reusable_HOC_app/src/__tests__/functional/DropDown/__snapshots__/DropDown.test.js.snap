@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<ToggleSimpleButton
+  label="DropDown"
+>
+  <ToggleState
+    render={[Function]}
+  >
+    <div
+      className="dropdown"
+      style={
+        Object {
+          "display": "flex",
+          "position": "relative",
+        }
+      }
+    >
+      <SimpleButton
+        action={[Function]}
+        label="DropDown"
+        value=""
+      >
+        <button
+          onClick={[Function]}
+          style={
+            Object {
+              "borderColor": "green",
+              "color": "green",
+            }
+          }
+        >
+          DropDown
+        </button>
+      </SimpleButton>
+    </div>
+  </ToggleState>
+</ToggleSimpleButton>
+`;
