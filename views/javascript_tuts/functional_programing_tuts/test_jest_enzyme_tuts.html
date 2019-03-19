@@ -1,0 +1,447 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">  
+  <title>tutorial === Layout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/tutorial.css">
+  <link rel="stylesheet" href="css/tooltip.css">
+</head>
+<body translate="no">
+<div class="l-site">
+  <div class="l-nav">
+    <nav class="nav">
+      <input type="text" placeholder="Search" id="search">
+      <div style="clear: both;"></div>
+      <!-- nunjucks loop-->
+            
+<ul class="links">
+<!--list-tag-->
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">Basics of JEST Framework</a><span class="tooltiptext">Basics of JEST Framework</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>naming and Folder convention</a><span class="tooltiptext">naming and Folder convention</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>instaling JEST</a><span class="tooltiptext">instaling JEST</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>testing Objects and arrays</a><span class="tooltiptext">testing Objects and arrays</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">Snapshot testing</a><span class="tooltiptext">Snapshot testing</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>react-test-renderer from JEST no event handlers support</a><span class="tooltiptext">react-test-renderer from JEST no event handlers support</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>ENZYME Configuration</a><span class="tooltiptext">ENZYME Configuration</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>Event simulators</a><span class="tooltiptext">Event simulators</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>shallow testing</a><span class="tooltiptext">shallow testing</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>Full dom Rendering enzyme mount();</a><span class="tooltiptext">Full dom Rendering enzyme mount();</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>Full render with Jsdom</a><span class="tooltiptext">Full render with Jsdom</span>
+                        
+                    </ul>
+                
+      </li>
+    
+<!--end-list-tag-->
+</ul>
+
+       <!-- nunjucks loop-->
+    </nav>
+  </div>
+  <div class="l-page">
+    <div class="menu">
+      <div class="menu-hamburger"></div>
+    </div>
+      <!-- nunjucks loop-->
+          
+<div class="sectionWrapper">
+  <div class="sectionContainer">
+   
+      
+      <section  class="band band-b activeSection"  class="band band-b">
+          <h1> Basics of JEST Framework </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>U should create a sepearte folder for your test that follows the same structure as your src directory</p>
+                  <div class="codeWraper">
+                    <code>================ test folder structure  __tests__ ================
+
+      Intresting fact if you create folder named : src/__tests__ jest will automatically detect that and uses this foler for running test on files.js inside , beside their names , no need to include filename.test.js it could be skipped
+
+================ ================ ================</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>jest is a testing framework ceated by facebook and covers most of the cases for testing react applications</p>
+                  <div class="codeWraper">
+                    <code>================ install JEST by ================
+
+      npm i jest@20.0.4 (this version works with webpack 3 and babel6) latest version needs update on webpack and babel
+
+================ to run ================
+
+npm test (it will look for filenames with test in a name);
+
+================ to run with watch mode ================
+
+npm test --watch 
+
+
+================ to run a simple test ================ 
+
+const add = (a,b)=&gt; a + b;
+
+test(&#39;should add two numbers&#39;.; ()=&gt; {
+const result = add(3,4)
+//asserstion 
+expect(result).toBe(7);
+});
+================ ================ ================</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>in javascript {}==={} or []===[] are always false , the key is to test what is inside and array or object properties as below</p>
+                  <div class="codeWraper">
+                    <code>================ 2 objects ================ 
+
+const obj1 = {name:&#39;Greg&#39;}
+const obj2 = {name:&#39;Greg&#39;}
+
+obj1===obj2 //false
+JSON.stringify(obj1)===JSON.stringify(obj2) //true we comparing to strings
+
+//jest 
+describe(&#39;Objects are the same&#39;, () =&gt; {
+test(&#39;have all the same properties&#39;, () =&gt; {
+  expect(obj1).toEqual(obj2);
+});
+});
+
+
+================ ================ ================</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> Snapshot testing </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>There is a small package a 
+  npm package called &#39;react-test-renderer&#39; for making your component snapshots. No need for Enzyme. BUT
+  in only creates static snapshot it doesnt allow to test clicks, mouse events etc.</p>
+                  <div class="codeWraper">
+                    <code>================ instaling react-test-renderer ================
+
+npm i react-test-renderer@16.0.0 (U need this version if you work with React 16.* )
+
+================ example snapshot with JEST react-test-renderer no event handlers   ================
+
+import React from &#39;react&#39;;
+import Link from &#39;../Link.react&#39;;
+import renderer from &#39;react-test-renderer&#39;;
+
+it(&#39;renders correctly&#39;, () =&gt; {
+  const tree = renderer
+    .create(&lt;Link page=&quot;http://www.facebook.com&quot;&gt;Facebook&lt;/Link&gt;)
+    .toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+================ ================ ================</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>Before U need &#39;Enzyme&#39; Airbnb product that is created to enhance testing for React, it uses addtional selectors and enables Snapshot testing, it needs special adapters to work with JEST
+          ENZYME allows you to add event handlers of any types to your shallow wrappers.</p>
+                  <div class="codeWraper">
+                    <code>================ instaling enzyme ================
+
+npm i --save-dev 
+enzyme@3.0.0 
+enzyme-adapter-react-16@1.7.1  (at least 1.7.* needed for react 16.8.4 with hooks)
+enzyme-to-json@3.0.1 (package that allows you to render clean snapshot containing just Component JSX)
+raf@3.3.2  (U need natitve request animation frame that is default in browser since IE 10 but we need that in testing enviroment )
+
+================ configuration needed for Enzyme 3 ================
+
+create a file for JEST configuration in a root of your project;
+
+================ ================ ================ ================
+
+----------------------root/jest.configuration.json--------------
+
+{
+  &quot;setupFiles&quot;:[
+    &quot;raf/polyfill&quot;,
+    &quot;&lt;rootDir&gt;/enzyme.configuration.js&quot;
+  ]
+}
+
+
+//update to the file to have clean snapshot set without importing enzyme-to-json in every file
+//so use that version 
+{
+    &quot;setupFiles&quot;: [
+        &quot;raf/polyfill&quot;,
+        &quot;&lt;rootDir&gt;/enzyme.configuration.js&quot;
+    ],
+    &quot;snapshotSerializers&quot;: [
+        &quot;enzyme-to-json/serializer&quot;
+    ]
+}
+
+================ ================ ================ ================
+
+create a file for ENZYME configuration in a root directory;
+
+================ ================ ================ ================
+
+----------------------root/enzyme.configuration.js--------------
+
+import Enzyme from &#39;enzyme&#39;;
+import Adapter from &#39;enzyme-adapter-react-16&#39;;
+
+Enzyme.configure({ adapter: new Adapter() });
+
+
+================ ================ ================ ================
+
+update your package.json with a path for jest configuration
+
+================ ================ ================ ================
+
+----------------------root/package.json--------------
+
+&quot;scripts&quot;: {
+    &quot;test&quot;: &quot;jest --config=jest.configuration.json&quot;
+  },
+
+
+---------------------------------------------------------------
+
+
+
+import React from &#39;react&#39;;
+import { shallow } from &#39;enzyme&#39;;
+import MyComponent from &#39;./MyComponent&#39;;
+
+describe(&#39;MyComponent&#39;, () =&gt; {
+  it(&#39;should render correctly in &quot;debug&quot; mode&#39;, () =&gt; {
+    const component = shallow(&lt;MyComponent debug /&gt;);
+  
+    expect(component).toMatchSnapshot();
+  });
+});
+
+================ ================ ================</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>Enzyme allows you to simulate events , could be any event as onLoad, click etc.. U need to find DOM element first and attach simulate as U would event as addEbentListener</p>
+                  <div class="codeWraper">
+                    <code>================ test click event and the outcome ================
+
+
+
+//u need to mock your event handler method ( more about mocking in next section)
+const eventHandlerCalled = jest.fn(); 
+
+const value = &#39;myValue&#39;;
+const wrapper = shallow(&lt;SearchBox
+  label=&quot;label&quot;
+  // e below is not a real event so if you need to use e.target.value you need to mock it
+  eventHandler={e =&gt; (eventHandlerCalled(value))}
+/&gt;);
+
+// here we simulate onInput that needs to have event.target.value in handler method so we do;
+wrapper.find(&#39;input&#39;).at(0).simulate(&#39;input&#39;, { target: { value } });
+
+// fucntion is called after click;
+expect(eventHandlerCalled).toHaveBeenCalledWith(value);
+
+
+
+
+================  ================  ================  ================</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
+                  <p>shallow testing allows U to render a component on one level , that means any tested components wont be rendered to the snapshot. It donsnt need any addtional library beside deafault jest and enzyme configuration.</p>
+                  <div class="codeWraper">
+                    <code>================= example of shalow Enzyme method to Snapshot =================
+
+import React from &#39;react&#39;;
+import { shallow } from &#39;enzyme&#39;;
+
+// component for snapshot test;
+import SimpleButton from &#39;../../../functional/Simplebutton&#39;;
+
+test(&#39;renders correctly&#39;, () =&gt; {
+  const wrapper = shallow(&lt;SimpleButton label=&quot;label&quot; action={() =&gt; {}} /&gt;);
+  expect(wrapper).toMatchSnapshot();
+});
+
+================ ================ ================ ================</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-5">
+                <div class="band-inner">
+
+                  <p>U might need to render nested component for full DOM rendering, for that you also need to install a separate libraray , React reccomends jsdom</p>
+                  <div class="codeWraper">
+                    <code>===== To help you make up your mind, here is a list of APIs that need jsdom =======
+
+
+
+-Any browser globals like window and document
+-ReactDOM.render()
+-TestUtils.renderIntoDocument() (a shortcut for the above)
+-mount() in Enzyme
+
+
+
+
+========== example of full rending is the same as shalow but full needs mount() =========
+
+//no addtional configuration is needed Enzyme behind the scene is using jsdom , not external install nedeed;
+
+
+
+import React from &#39;react&#39;;
+import { shallow, mount } from &#39;enzyme&#39;;
+
+/*
+  *@this next line is defined in a root/jest.configuration.js
+  *@so no need to import library
+*/
+// import toJson from &#39;enzyme-to-json&#39;;
+
+// component for snapshot test;
+import ToggleButton from &#39;../../../functional/Togglebutton&#39;;
+
+test(&#39;renders correctly&#39;, () =&gt; {
+  const wrapper = mount(&lt;ToggleButton
+    action={() =&gt; {}}
+    label=&quot;sort&quot;
+    toggleLabels={[&#39;ASC&#39;, &#39;DESC&#39;]}
+    values={[&#39;sortASC&#39;, &#39;sortDESC&#39;]}
+  /&gt;);
+  expect(wrapper).toMatchSnapshot();
+});
+
+
+
+============ ============ ============ ============</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-6">
+                <div class="band-inner">
+
+                  <p>U can use jsdom framework by creating browser enviroment, if U dont want to use Enzyme mount() method</p>
+                  <div class="codeWraper">
+                    <code>============ pure jsdom render no enzyme (not recommended) ============
+
+import React from &#39;react&#39;;
+import dom from &#39;jsdom&#39;;
+
+test(&#39;User profile&#39;, () =&gt; {
+  let component, dom;
+
+  before((done) =&gt; {
+    let person = { FirstName:&#39;Richard&#39;, LastName:&#39;Kotze&#39; };
+    component = React.render(
+      &lt;ProfileBox hint={person} /&gt;,
+      document.body,
+      () =&gt; {
+        setTimeout(done);
+      }
+    );
+  });
+
+  after((done) =&gt; {
+    React.unmountComponentAtNode(document.body);
+    setTimeout(done);
+  });
+
+  expect(&#39;should contain name&#39;, () =&gt; {
+    dom = React.findDOMNode(component);
+    dom.textContent.should.containEql(&#39;Richard Kotze&#39;);
+  });
+
+});
+
+============ ============ ============ ============</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+  
+    <section class="band band-b activeSection">
+      <h1></h1>
+
+      
+
+
+
+        
+
+    </section>
+  
+  </div>
+</div>
+
+       <!-- nunjucks loop-->
+  </div>
+</div>
+<script src="scripts/nav-links.js"></script>
+<script src="scripts/tooltips_links_over.js"></script>
+<script src="scripts/search_nav.js"></script>
+ </body></html>
