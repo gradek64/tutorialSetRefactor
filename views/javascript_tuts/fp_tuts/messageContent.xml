@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapters>
+    <chapter>
+        <subject>Funtional programing principles</subject>
+        <content>
+          <subtitle>pure functions</subtitle>
+            <paragraph>
+                <info>Pure functions are functions that take arguments and manipulate them and return the processed value. Javascript has some native pure functions as Math.max(5,10)</info>
+                <example>
+================ native pure function Math.max(5,10) ================
+
+//in pure functions argumens order doesnt matter and the always return the same result;
+
+Math.max(5,10) //5 
+Math.max(10,5) //5 
+
+/***
+impure function is Math.random() , 
+basically is the opposite of above it produces 'side effects' diffrent outcome 
+even though called with the same arguments
+***/
+
+Math.random()*1  //0.8364
+Math.random()*1  //0.8364
+
+//custom pure function; (works even with a negative number and positive number)
+
+const add = (a,b) => a + b;
+
+add(6,-7) //-1
+add(-7,6) //-1
+
+================ ================ ================      
+                </example>
+            </paragraph>
+            <subtitle>Immutable data</subtitle>
+            <paragraph>
+                <info>Every peace of data going into the function is not going to change original data in</info>
+                <example>
+================ E6 array methods are examples of immutable data ================
+
+============ Array.filter or find objects doesnt mutate the original array ==========
+
+const namesArray = [{name:'Greg'},{name:'Libby'}];
+
+const filterLibby = namesArray.filter(({name})=>name==='Libby');
+
+filterLibby //[{name:'Libby'}];
+namesArray  //[{name:'Greg'},{name:'Libby'}];
+
+============  map with array of numbers ============ 
+
+const arrayNumber = [1,2,3]; 
+const arrayString = arrayNumber.map(e=>`${e} pocket`); 
+
+arrayString //["1 pocket", "2 pocket", "3 pocket"]
+arrayNumber //[1,2,3] stays the same
+============ weird exeption to map with objecs ================
+
+/***
+map methods will create also a new Array, 
+UNLESS we deal with array of objects (about this in side effects);
+***/
+
+ const namesArray = [{name:'Greg'},{name:'Libby'}];
+ const addLocation = namesArray.map((item)=>{ item.location='London'; return item});
+
+ console.log(namesArray) //[{name:'Greg', location:'London'},{name:'Libby',location:'London'}];
+
+================ ================  ================ 
+     
+                </example>
+            </paragraph>
+            <subtitle>side effects</subtitle>
+            <paragraph>
+                <info>any program langauage when manipulate data it creates side effects, the key is to controled and know how to fix it as the example with Array map on objects below</info>
+                <example>
+================ looping through array of objects with map will mutate original array ================ 
+
+/***
+this is side effect if we want to use this object with the original structure;
+***/
+
+const namesArray = [{name:'Greg'},{name:'Libby'}];
+
+const addLocation = namesArray.map((item)=>{ item.location='London'; return item});
+
+==== the way arround is to create a new object with ES6 spread operator or Object.assign();======= 
+
+const namesArray = [{name:'Greg'},{name:'Libby'}];
+
+//*********************
+
+  orgObj = {some:'data'}
+  addLocation = {location:'London'}
+  IMPORTANT with Object.assign(orgObj,addLocation) is diffrent to Object.assign(addLocation,orgLocation);
+
+
+//*************** by spread operator with reduce ****/
+
+ const addLocation = namesArray.reduce((a,e)=>{ 
+  const newObj = {location:'new Location'};
+  let combined = {...e,...newObj};
+  console.log(e);
+  console.log(combined);
+  a.push(combined);
+  return a;
+ },[]);
+
+ //*************** by spread operator with map ****/
+
+ const addLocation = namesArray.map((e)=>{ 
+  const newObj = {location:'new Location'};
+  let combined = {...e,...newObj};
+  return combined;
+ });
+
+ //*************** by Object.assign(newObj, orgObj) order matters always orgObj as second arg ****/
+
+const addLocation = namesArray.reduce((a,e)=>{ 
+  const newObj = {location:'new Location'};
+  let combined = Object.assign(newObj,e)
+  console.log(e);
+  console.log(combined);
+  a.push(combined);
+  return a;
+ },[]);
+
+================ ================ ================
+                </example>
+            </paragraph>
+        </content>
+    </chapter>
+    <chapter>
+       <subject>chaning and nestingfunctions</subject>
+        <content>
+            <subtitle>chaining functions</subtitle>
+<paragraph>
+<info>one technique of executing function in sequance is to chain them so they executed from to to bottom one</info>
+<example>
+                  
+================ Chaining with external callback functions ================
+
+const getObjPropValue = (data,property)=>{ const prop = property ;return data.map((item)=>item[prop]);};
+const isNumberChain = entry=>Number.isInteger(entry)?entry:Number(entry);
+const calculateTotalChain = (a,e)=>a+e;
+
+//now chain above function together;
+
+const total2a = 
+  getObjPropValue1(data,'expenses')
+    .map(isNumberChain)
+    .reduce(calculateTotalChain,0);
+
+
+console.log(total2a);
+
+================ ================ ================
+
+                </example>
+            </paragraph>
+      <subtitle>nesting functions</subtitle>
+      <paragraph>
+          <info>one technique of executing function in sequance is to nest them so the are done from inner to outer fuctions (inner outwards); The big cons or not using nesting is the code readibility
+          </info>
+          <example>
+            
+================ nesting ================
+
+nconst getObjPropValueNEST = (data,property)=>{ const prop = property ;return data.map((item)=>item[prop]);};
+const isNumber = (data)=>data.map(entry=>Number.isInteger(entry)?entry:Number(entry));
+const calculateTotal = (data)=>data.reduce((a,e)=>a+e,0);
+
+//now execute them in order from inside out 
+const total = calculateTotal( isNumber( getObjPropValueNEST(data,'expenses') ) );
+
+console.log(total);
+
+================ ================ ================
+
+
+          </example>
+      </paragraph>
+        </content>
+    </chapter>
+    <chapter>
+      <subject>composition</subject>
+        <content>
+          <subtitle>composition pipe()</subtitle>
+          <paragraph>
+              <info>pipe will start executing from top to bottom and uses pure javascipt .reduce method for making composition possible without any addtional library</info>
+              <example>
+================ magic pipe function ================
+
+const pipe = (...fns) => x => fns.reduce((v, f) => f(v), x);
+
+=========== data to work with ===========
+
+const data = [
+  {name:'Greg', expenses:2},
+  {name:'Kate', expenses:4},
+  {name:'Mark', expenses:'1'},
+  {name:'Libbty', expenses:5},
+];
+
+================ helpers functions =============
+
+const getDataC= (prop)=>(data)=> data.map((item)=>item[prop]);
+const isNumberC = (data)=>data.map(entry=>Number.isInteger(entry)?entry:Number(entry));
+const calculateTotalC = (data)=>data.reduce((a,e)=>a+e,0);
+const addCurrency = (currency)=>(total)=>`${currency} ${total}`;
+
+=========== composition pipe ==================
+
+const totalComposePipe = pipe(
+  getDataC('expenses'),
+  isNumberC,
+  calculateTotalC,
+  addCurrency('£')
+)(data); 
+   
+=========== =========== =========== 
+              </example>
+          </paragraph>
+           <subtitle>composition compose()</subtitle>
+          <paragraph>
+              <info>pipe will start executing from bottom to top and uses pure javascipt .reduceRight method for making composition possible without any addtional library</info>
+              <example>
+================ magic compose function ================
+
+const compose = (...fns) => x => fns.reduceRight((y, f) => f(y), x);
+
+=========== data to work with ===========
+
+const data = [
+  {name:'Greg', expenses:2},
+  {name:'Kate', expenses:4},
+  {name:'Mark', expenses:'1'},
+  {name:'Libbty', expenses:5},
+];
+
+================ helpers functions =============
+
+const getDataC= (prop)=>(data)=> data.map((item)=>item[prop]);
+const isNumberC = (data)=>data.map(entry=>Number.isInteger(entry)?entry:Number(entry));
+const calculateTotalC = (data)=>data.reduce((a,e)=>a+e,0);
+const addCurrency = (currency)=>(total)=>`${currency} ${total}`;
+
+=========== composition compose ==================
+
+const totalCompose = compose(
+  addCurrency('£'),
+  calculateTotalC,
+  isNumberC,
+  getDataC('expenses')
+)(data); 
+   
+=========== =========== =========== 
+              </example>
+          </paragraph>
+        </content>
+      </chapter>
+      <chapter>
+          <subject>Imutables libraries</subject>
+          <content>
+              <paragraph>
+                  <info>if you project grows in scale and U have problems with peformance you might 
+                    consinder immutable.js (from facebook) or seamless-immutable or deep-freeze, those library make sure you never mutate you data , always work on object copies and smartly converts them for you so you dont create pure javascript objecs that take too much memory if too many (garbage collection)</info>
+                  <example>
+                    
+                    ----------- immutable.js treats objects as maps ---------
+
+
+
+                    ----------- immutable.js treats arrays as lists ---------
+
+
+
+                  </example>
+              </paragraph>
+          </content>
+      </chapter>
+</chapters>

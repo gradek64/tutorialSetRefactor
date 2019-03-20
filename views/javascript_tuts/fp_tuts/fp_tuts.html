@@ -1,0 +1,407 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">  
+  <title>tutorial === Layout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/tutorial.css">
+  <link rel="stylesheet" href="css/tooltip.css">
+</head>
+<body translate="no">
+<div class="l-site">
+  <div class="l-nav">
+    <nav class="nav">
+      <input type="text" placeholder="Search" id="search">
+      <div style="clear: both;"></div>
+      <!-- nunjucks loop-->
+            
+<ul class="links">
+<!--list-tag-->
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/fp_tuts">Funtional programing principles</a><span class="tooltiptext">Funtional programing principles</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/fp_tuts" partition>pure functions</a><span class="tooltiptext">pure functions</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/fp_tuts" partition>Immutable data</a><span class="tooltiptext">Immutable data</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/fp_tuts" partition>side effects</a><span class="tooltiptext">side effects</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/fp_tuts">chaning and nestingfunctions</a><span class="tooltiptext">chaning and nestingfunctions</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/fp_tuts" partition>chaining functions</a><span class="tooltiptext">chaining functions</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/fp_tuts" partition>nesting functions</a><span class="tooltiptext">nesting functions</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/fp_tuts">composition</a><span class="tooltiptext">composition</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/fp_tuts" partition>composition pipe()</a><span class="tooltiptext">composition pipe()</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/fp_tuts" partition>composition compose()</a><span class="tooltiptext">composition compose()</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/fp_tuts">Imutables libraries</a><span class="tooltiptext">Imutables libraries</span>
+                 
+      </li>
+    
+<!--end-list-tag-->
+</ul>
+
+       <!-- nunjucks loop-->
+    </nav>
+  </div>
+  <div class="l-page">
+    <div class="menu">
+      <div class="menu-hamburger"></div>
+    </div>
+      <!-- nunjucks loop-->
+          
+<div class="sectionWrapper">
+  <div class="sectionContainer">
+   
+      
+      <section  class="band band-b activeSection"  class="band band-b">
+          <h1> Funtional programing principles </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>Pure functions are functions that take arguments and manipulate them and return the processed value. Javascript has some native pure functions as Math.max(5,10)</p>
+                  <div class="codeWraper">
+                    <code>================ native pure function Math.max(5,10) ================
+
+//in pure functions argumens order doesnt matter and the always return the same result;
+
+Math.max(5,10) //5 
+Math.max(10,5) //5 
+
+/***
+impure function is Math.random() , 
+basically is the opposite of above it produces &#39;side effects&#39; diffrent outcome 
+even though called with the same arguments
+***/
+
+Math.random()*1  //0.8364
+Math.random()*1  //0.8364
+
+//custom pure function; (works even with a negative number and positive number)
+
+const add = (a,b) =&gt; a + b;
+
+add(6,-7) //-1
+add(-7,6) //-1
+
+================ ================ ================</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>Every peace of data going into the function is not going to change original data in</p>
+                  <div class="codeWraper">
+                    <code>================ E6 array methods are examples of immutable data ================
+
+============ Array.filter or find objects doesnt mutate the original array ==========
+
+const namesArray = [{name:&#39;Greg&#39;},{name:&#39;Libby&#39;}];
+
+const filterLibby = namesArray.filter(({name})=&gt;name===&#39;Libby&#39;);
+
+filterLibby //[{name:&#39;Libby&#39;}];
+namesArray  //[{name:&#39;Greg&#39;},{name:&#39;Libby&#39;}];
+
+============  map with array of numbers ============ 
+
+const arrayNumber = [1,2,3]; 
+const arrayString = arrayNumber.map(e=&gt;`${e} pocket`); 
+
+arrayString //[&quot;1 pocket&quot;, &quot;2 pocket&quot;, &quot;3 pocket&quot;]
+arrayNumber //[1,2,3] stays the same
+============ weird exeption to map with objecs ================
+
+/***
+map methods will create also a new Array, 
+UNLESS we deal with array of objects (about this in side effects);
+***/
+
+ const namesArray = [{name:&#39;Greg&#39;},{name:&#39;Libby&#39;}];
+ const addLocation = namesArray.map((item)=&gt;{ item.location=&#39;London&#39;; return item});
+
+ console.log(namesArray) //[{name:&#39;Greg&#39;, location:&#39;London&#39;},{name:&#39;Libby&#39;,location:&#39;London&#39;}];
+
+================ ================  ================</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>any program langauage when manipulate data it creates side effects, the key is to controled and know how to fix it as the example with Array map on objects below</p>
+                  <div class="codeWraper">
+                    <code>================ looping through array of objects with map will mutate original array ================ 
+
+/***
+this is side effect if we want to use this object with the original structure;
+***/
+
+const namesArray = [{name:&#39;Greg&#39;},{name:&#39;Libby&#39;}];
+
+const addLocation = namesArray.map((item)=&gt;{ item.location=&#39;London&#39;; return item});
+
+==== the way arround is to create a new object with ES6 spread operator or Object.assign();======= 
+
+const namesArray = [{name:&#39;Greg&#39;},{name:&#39;Libby&#39;}];
+
+//*********************
+
+  orgObj = {some:&#39;data&#39;}
+  addLocation = {location:&#39;London&#39;}
+  IMPORTANT with Object.assign(orgObj,addLocation) is diffrent to Object.assign(addLocation,orgLocation);
+
+
+//*************** by spread operator with reduce ****/
+
+ const addLocation = namesArray.reduce((a,e)=&gt;{ 
+  const newObj = {location:&#39;new Location&#39;};
+  let combined = {...e,...newObj};
+  console.log(e);
+  console.log(combined);
+  a.push(combined);
+  return a;
+ },[]);
+
+ //*************** by spread operator with map ****/
+
+ const addLocation = namesArray.map((e)=&gt;{ 
+  const newObj = {location:&#39;new Location&#39;};
+  let combined = {...e,...newObj};
+  return combined;
+ });
+
+ //*************** by Object.assign(newObj, orgObj) order matters always orgObj as second arg ****/
+
+const addLocation = namesArray.reduce((a,e)=&gt;{ 
+  const newObj = {location:&#39;new Location&#39;};
+  let combined = Object.assign(newObj,e)
+  console.log(e);
+  console.log(combined);
+  a.push(combined);
+  return a;
+ },[]);
+
+================ ================ ================</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> chaning and nestingfunctions </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>one technique of executing function in sequance is to chain them so they executed from to to bottom one</p>
+                  <div class="codeWraper">
+                    <code>================ Chaining with external callback functions ================
+
+const getObjPropValue = (data,property)=&gt;{ const prop = property ;return data.map((item)=&gt;item[prop]);};
+const isNumberChain = entry=&gt;Number.isInteger(entry)?entry:Number(entry);
+const calculateTotalChain = (a,e)=&gt;a+e;
+
+//now chain above function together;
+
+const total2a = 
+  getObjPropValue1(data,&#39;expenses&#39;)
+    .map(isNumberChain)
+    .reduce(calculateTotalChain,0);
+
+
+console.log(total2a);
+
+================ ================ ================</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>one technique of executing function in sequance is to nest them so the are done from inner to outer fuctions (inner outwards); The big cons or not using nesting is the code readibility</p>
+                  <div class="codeWraper">
+                    <code>================ nesting ================
+
+nconst getObjPropValueNEST = (data,property)=&gt;{ const prop = property ;return data.map((item)=&gt;item[prop]);};
+const isNumber = (data)=&gt;data.map(entry=&gt;Number.isInteger(entry)?entry:Number(entry));
+const calculateTotal = (data)=&gt;data.reduce((a,e)=&gt;a+e,0);
+
+//now execute them in order from inside out 
+const total = calculateTotal( isNumber( getObjPropValueNEST(data,&#39;expenses&#39;) ) );
+
+console.log(total);
+
+================ ================ ================</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> composition </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>pipe will start executing from top to bottom and uses pure javascipt .reduce method for making composition possible without any addtional library</p>
+                  <div class="codeWraper">
+                    <code>================ magic pipe function ================
+
+const pipe = (...fns) =&gt; x =&gt; fns.reduce((v, f) =&gt; f(v), x);
+
+=========== data to work with ===========
+
+const data = [
+  {name:&#39;Greg&#39;, expenses:2},
+  {name:&#39;Kate&#39;, expenses:4},
+  {name:&#39;Mark&#39;, expenses:&#39;1&#39;},
+  {name:&#39;Libbty&#39;, expenses:5},
+];
+
+================ helpers functions =============
+
+const getDataC= (prop)=&gt;(data)=&gt; data.map((item)=&gt;item[prop]);
+const isNumberC = (data)=&gt;data.map(entry=&gt;Number.isInteger(entry)?entry:Number(entry));
+const calculateTotalC = (data)=&gt;data.reduce((a,e)=&gt;a+e,0);
+const addCurrency = (currency)=&gt;(total)=&gt;`${currency} ${total}`;
+
+=========== composition pipe ==================
+
+const totalComposePipe = pipe(
+  getDataC(&#39;expenses&#39;),
+  isNumberC,
+  calculateTotalC,
+  addCurrency(&#39;£&#39;)
+)(data); 
+   
+=========== =========== ===========</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>pipe will start executing from bottom to top and uses pure javascipt .reduceRight method for making composition possible without any addtional library</p>
+                  <div class="codeWraper">
+                    <code>================ magic compose function ================
+
+const compose = (...fns) =&gt; x =&gt; fns.reduceRight((y, f) =&gt; f(y), x);
+
+=========== data to work with ===========
+
+const data = [
+  {name:&#39;Greg&#39;, expenses:2},
+  {name:&#39;Kate&#39;, expenses:4},
+  {name:&#39;Mark&#39;, expenses:&#39;1&#39;},
+  {name:&#39;Libbty&#39;, expenses:5},
+];
+
+================ helpers functions =============
+
+const getDataC= (prop)=&gt;(data)=&gt; data.map((item)=&gt;item[prop]);
+const isNumberC = (data)=&gt;data.map(entry=&gt;Number.isInteger(entry)?entry:Number(entry));
+const calculateTotalC = (data)=&gt;data.reduce((a,e)=&gt;a+e,0);
+const addCurrency = (currency)=&gt;(total)=&gt;`${currency} ${total}`;
+
+=========== composition compose ==================
+
+const totalCompose = compose(
+  addCurrency(&#39;£&#39;),
+  calculateTotalC,
+  isNumberC,
+  getDataC(&#39;expenses&#39;)
+)(data); 
+   
+=========== =========== ===========</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> Imutables libraries </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>if you project grows in scale and U have problems with peformance you might 
+                    consinder immutable.js (from facebook) or seamless-immutable or deep-freeze</p>
+                  <div class="codeWraper">
+                    <code>----------- immutable.js treats objects as maps ---------
+
+
+                    
+                    ----------- immutable.js treats arrays as lists ---------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+  
+    <section class="band band-b activeSection">
+      <h1></h1>
+
+      
+
+
+
+        
+
+    </section>
+  
+  </div>
+</div>
+
+       <!-- nunjucks loop-->
+  </div>
+</div>
+<script src="scripts/nav-links.js"></script>
+<script src="scripts/tooltips_links_over.js"></script>
+<script src="scripts/search_nav.js"></script>
+ </body></html>

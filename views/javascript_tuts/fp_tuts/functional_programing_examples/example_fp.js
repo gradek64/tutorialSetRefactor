@@ -130,7 +130,8 @@ console.log('addFunctionCurry',addFunctionCurry(1)(2)(3));//6
 
 /**************** concept of partial Application **************/
 
-//Partial applications can take as many or as few arguments a time as desired 
+//Partial applications it is a function can take as many or as few arguments a time as desired 
+//in our case it will fullfill 2 arguments and the outcome is used for the rest applications
 
 const add3 = (a,b,c)=>{
   const add2 = addFunction(a,b); //3

@@ -159,6 +159,31 @@ for (key in originalObj) {
 -----------------------------
 	            </example>
 	        </paragraph>
+          <subtitle>Object.assign(newObj, org) caution: it could mutate orginal Obj</subtitle>
+          <paragraph>
+              <info>U always need to use Object.assign() with newObject first and org object second, otherwise the org Object will be modyfied !! </info>
+              <example>
+----------------------------- Object.assign(obj1,obj2) arguments order matters -------
+
+//ALWAYS BASE OBJECT AS SECOND ARGUMENT so it is org Object in this case;
+
+const org = {name:'Greg'};
+const newObj = {newProp:'new Property'};
+const set = Object.assign(newObj, org);
+
+console.log(org) //  {name:'Greg'}
+console.log(set) //  {name:'Greg',newProp:'new Property'}
+
+//but the arguments are reversed
+const setReverse = Object.assign(org, newObj);
+
+console.log(org) //  {name:'Greg',newProp:'new Property'} !!!!
+console.log(setReverse) //  {name:'Greg',newProp:'new Property'}
+
+-------------------------- -------------------------- --------------------------
+
+              </example>
+          </paragraph>
 	        <subtitle>Object.assign({}, orginalObj)</subtitle>
 	        <paragraph>
 	            <info>Object.assign({}, orginalObj):
