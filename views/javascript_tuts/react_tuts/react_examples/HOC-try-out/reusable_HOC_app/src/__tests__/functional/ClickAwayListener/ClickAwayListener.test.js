@@ -13,7 +13,6 @@ test('disapear', async () => {
   const callback = jest.fn();
   const wrapper = shallow(<ClickAwayListener clickAway={() => { callback(true); }} />);
 
-  const pageMask = wrapper.find('.pageMask');
   wrapper.find('.pageMask').simulate('click');
   /*
     *@Idealy U want to test if <div class=pageMask /> after click
