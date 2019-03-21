@@ -36,7 +36,7 @@ will run this test('react Fragement', () => {}) so the discription of the test m
 
 ================ to run with watch mode ================
 
-npm test --watch 
+npm test -- --watch 
 
 ================ to run a simple test ================ 
 

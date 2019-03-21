@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import ReactDOM from 'react-dom';
 
 // custom
@@ -23,3 +24,8 @@ const jsx = (
 );
 
 ReactDOM.render(jsx, document.getElementById('app'));
+
+// lodash examples
+const camelCaseName = starWarsChars.map(({ name }) => _.capitalize(name));
+
+console.log(camelCaseName);
