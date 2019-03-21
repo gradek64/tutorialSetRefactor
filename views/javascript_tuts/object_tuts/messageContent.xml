@@ -139,7 +139,7 @@ for (var key in jane) {
                     Important:
 
                     using  for (key in originalObj) {} loop or Object.assign({},orinalObject) wont make nested object {a:{b:'nested to a'}}
-                    independend so making changes to original nested object it will affect orinal object and vice-versa; 
+                    therefore making changes to original nested object it will affect orinal object and vice-versa; 
 
                 */
 	            </info>
@@ -161,7 +161,7 @@ for (key in originalObj) {
 	        </paragraph>
           <subtitle>Object.assign(newObj, org) caution: it could mutate orginal Obj</subtitle>
           <paragraph>
-              <info>U always need to use Object.assign() with newObject first and org object second, otherwise the org Object will be modyfied !! </info>
+              <info>U always need to use Object.assign() with newObject first and org object second argument (newObj, orgObj), otherwise the org Object will be modyfied !! </info>
               <example>
 ----------------------------- Object.assign(obj1,obj2) arguments order matters -------
 

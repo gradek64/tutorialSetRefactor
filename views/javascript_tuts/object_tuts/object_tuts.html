@@ -38,7 +38,7 @@
                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>by looping throuh and assing properties and methods</a><span class="tooltiptext">by looping throuh and assing properties and methods</span>
                            
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>Object.assign(newObj, org) caution: it could mutate orgObj</a><span class="tooltiptext">Object.assign(newObj, org) caution: it could mutate orgObj</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>Object.assign(newObj, org) caution: it could mutate orginal Obj</a><span class="tooltiptext">Object.assign(newObj, org) caution: it could mutate orginal Obj</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/object_tuts" partition>Object.assign({}, orginalObj)</a><span class="tooltiptext">Object.assign({}, orginalObj)</span>
                            
@@ -251,7 +251,7 @@ for (var key in jane) {
                     Important:
 
                     using  for (key in originalObj) {} loop or Object.assign({},orinalObject) wont make nested object {a:{b:&#39;nested to a&#39;}}
-                    independend so making changes to original nested object it will affect orinal object and vice-versa; 
+                    therefore making changes to original nested object it will affect orinal object and vice-versa; 
 
                 */</p>
                   <div class="codeWraper">
@@ -275,24 +275,26 @@ for (key in originalObj) {
               <div class="band-container partition " part="part-2">
                 <div class="band-inner">
 
-                  <p>U always need to use Object.assign() with newObject first and org object second, otherwise the org Object will be modyfied !!</p>
+                  <p>U always need to use Object.assign() with newObject first and org object second argument (newObj, orgObj), otherwise the org Object will be modyfied !!</p>
                   <div class="codeWraper">
                     <code>----------------------------- Object.assign(obj1,obj2) arguments order matters -------
 
-                //ALWAYS BASE OBJECT AS SECOND ARGUMENT so it is org Object in this case;
+//ALWAYS BASE OBJECT AS SECOND ARGUMENT so it is org Object in this case;
 
-                const org = {name:&#39;Greg&#39;};
-                const newObj = {newProp:&#39;new Property&#39;};
-                const set = Object.assign(newObj, org);
+const org = {name:&#39;Greg&#39;};
+const newObj = {newProp:&#39;new Property&#39;};
+const set = Object.assign(newObj, org);
 
-                console.log(org) //  {name:&#39;Greg&#39;}
-                console.log(set) //  {name:&#39;Greg&#39;,newProp:&#39;new Property&#39;}
+console.log(org) //  {name:&#39;Greg&#39;}
+console.log(set) //  {name:&#39;Greg&#39;,newProp:&#39;new Property&#39;}
 
-                //but the arguments are reversed
-                const setReverse = Object.assign(org, newObj);
+//but the arguments are reversed
+const setReverse = Object.assign(org, newObj);
 
-                console.log(org) //  {name:&#39;Greg&#39;,newProp:&#39;new Property&#39;} !!!!
-                console.log(setReverse) //  {name:&#39;Greg&#39;,newProp:&#39;new Property&#39;}</code>
+console.log(org) //  {name:&#39;Greg&#39;,newProp:&#39;new Property&#39;} !!!!
+console.log(setReverse) //  {name:&#39;Greg&#39;,newProp:&#39;new Property&#39;}
+
+-------------------------- -------------------------- --------------------------</code>
                   </div>
                 </div>
               </div>

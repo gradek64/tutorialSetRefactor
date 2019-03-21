@@ -115,12 +115,9 @@ add(-7,6) //-1
 
                   <p>Every peace of data going into the function is not going to change original data in</p>
                   <div class="codeWraper">
-                    <code>================ E6 array methods are examples of immutable data ================
-
-============ Array.filter or find objects doesnt mutate the original array ==========
+                    <code>======= Array.filter or find objects doesnt mutate the original array ==========
 
 const namesArray = [{name:&#39;Greg&#39;},{name:&#39;Libby&#39;}];
-
 const filterLibby = namesArray.filter(({name})=&gt;name===&#39;Libby&#39;);
 
 filterLibby //[{name:&#39;Libby&#39;}];
@@ -155,7 +152,7 @@ UNLESS we deal with array of objects (about this in side effects);
 
                   <p>any program langauage when manipulate data it creates side effects, the key is to controled and know how to fix it as the example with Array map on objects below</p>
                   <div class="codeWraper">
-                    <code>================ looping through array of objects with map will mutate original array ================ 
+                    <code>=looping through array of objects with map will mutate original array ========== 
 
 /***
 this is side effect if we want to use this object with the original structure;
@@ -165,7 +162,7 @@ const namesArray = [{name:&#39;Greg&#39;},{name:&#39;Libby&#39;}];
 
 const addLocation = namesArray.map((item)=&gt;{ item.location=&#39;London&#39;; return item});
 
-==== the way arround is to create a new object with ES6 spread operator or Object.assign();======= 
+=the way arround is to create a new object with ES6 spread operator or Object.assign();== 
 
 const namesArray = [{name:&#39;Greg&#39;},{name:&#39;Libby&#39;}];
 
@@ -223,7 +220,7 @@ const addLocation = namesArray.reduce((a,e)=&gt;{
               <div class="band-container partition first" part="part-1">
                 <div class="band-inner">
 
-                  <p>one technique of executing function in sequance is to chain them so they executed from to to bottom one</p>
+                  <p>one technique of executing function in sequance is to chain them so they executed top to bottom one</p>
                   <div class="codeWraper">
                     <code>================ Chaining with external callback functions ================
 
@@ -249,7 +246,7 @@ console.log(total2a);
               <div class="band-container partition " part="part-2">
                 <div class="band-inner">
 
-                  <p>one technique of executing function in sequance is to nest them so the are done from inner to outer fuctions (inner outwards); The big cons or not using nesting is the code readibility</p>
+                  <p>one technique of executing function in sequance is to nest them so the are done from inner to outer fuctions (inner outwards); The biggest disadvantage of using nesting is the code readibility</p>
                   <div class="codeWraper">
                     <code>================ nesting ================
 
@@ -369,13 +366,31 @@ const totalCompose = compose(
                 <div class="band-inner">
 
                   <p>if you project grows in scale and U have problems with peformance you might 
-                    consinder immutable.js (from facebook) or seamless-immutable or deep-freeze</p>
+                    consinder immutable.js (from facebook) or seamless-immutable or deep-freeze, those library make sure you never mutate you data , always work on object copies and smartly converts them for you so you dont create pure javascript objecs that take too much memory if too many (garbage collection)</p>
                   <div class="codeWraper">
                     <code>----------- immutable.js treats objects as maps ---------
+import { Map, List } from &#39;immutable&#39;;
 
 
-                    
-                    ----------- immutable.js treats arrays as lists ---------</code>
+let person = Map({
+firstName: &#39;Thomas&#39;,
+lastName: &#39;Tuts&#39;
+});
+
+person = person.set(&#39;firstName&#39;, &#39;John&#39;);
+
+person.get(&#39;firstName&#39;); // -&gt; &#39;John&#39;
+
+
+
+----------- immutable.js treats arrays as lists ---------
+
+const avengersList = Immutable.List([&#39;ironMan&#39; , &#39;captainAmerica&#39;]);
+
+// change ironMan to blackWidow
+avengersList.set(0, &#39;blackWidow&#39;);
+
+console.log(Array [&quot;blackWidow&quot;,&quot;captainAmerica&quot;]);</code>
                   </div>
                 </div>
               </div>

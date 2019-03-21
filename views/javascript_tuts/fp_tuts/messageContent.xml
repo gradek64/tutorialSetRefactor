@@ -37,12 +37,9 @@ add(-7,6) //-1
             <paragraph>
                 <info>Every peace of data going into the function is not going to change original data in</info>
                 <example>
-================ E6 array methods are examples of immutable data ================
-
-============ Array.filter or find objects doesnt mutate the original array ==========
+======= Array.filter or find objects doesnt mutate the original array ==========
 
 const namesArray = [{name:'Greg'},{name:'Libby'}];
-
 const filterLibby = namesArray.filter(({name})=>name==='Libby');
 
 filterLibby //[{name:'Libby'}];
@@ -75,7 +72,7 @@ UNLESS we deal with array of objects (about this in side effects);
             <paragraph>
                 <info>any program langauage when manipulate data it creates side effects, the key is to controled and know how to fix it as the example with Array map on objects below</info>
                 <example>
-================ looping through array of objects with map will mutate original array ================ 
+=looping through array of objects with map will mutate original array ========== 
 
 /***
 this is side effect if we want to use this object with the original structure;
@@ -85,7 +82,7 @@ const namesArray = [{name:'Greg'},{name:'Libby'}];
 
 const addLocation = namesArray.map((item)=>{ item.location='London'; return item});
 
-==== the way arround is to create a new object with ES6 spread operator or Object.assign();======= 
+=the way arround is to create a new object with ES6 spread operator or Object.assign();== 
 
 const namesArray = [{name:'Greg'},{name:'Libby'}];
 
@@ -136,7 +133,7 @@ const addLocation = namesArray.reduce((a,e)=>{
         <content>
             <subtitle>chaining functions</subtitle>
 <paragraph>
-<info>one technique of executing function in sequance is to chain them so they executed from to to bottom one</info>
+<info>one technique of executing function in sequance is to chain them so they executed top to bottom one</info>
 <example>
                   
 ================ Chaining with external callback functions ================
@@ -161,7 +158,7 @@ console.log(total2a);
             </paragraph>
       <subtitle>nesting functions</subtitle>
       <paragraph>
-          <info>one technique of executing function in sequance is to nest them so the are done from inner to outer fuctions (inner outwards); The big cons or not using nesting is the code readibility
+          <info>one technique of executing function in sequance is to nest them so the are done from inner to outer fuctions (inner outwards); The biggest disadvantage of using nesting is the code readibility
           </info>
           <example>
             
@@ -268,11 +265,30 @@ const totalCompose = compose(
                     consinder immutable.js (from facebook) or seamless-immutable or deep-freeze, those library make sure you never mutate you data , always work on object copies and smartly converts them for you so you dont create pure javascript objecs that take too much memory if too many (garbage collection)</info>
                   <example>
                     
-                    ----------- immutable.js treats objects as maps ---------
+----------- immutable.js treats objects as maps ---------
+import { Map, List } from 'immutable';
+
+
+let person = Map({
+firstName: 'Thomas',
+lastName: 'Tuts'
+});
+
+person = person.set('firstName', 'John');
+
+person.get('firstName'); // -> 'John'
 
 
 
-                    ----------- immutable.js treats arrays as lists ---------
+----------- immutable.js treats arrays as lists ---------
+
+const avengersList = Immutable.List(['ironMan' , 'captainAmerica']);
+
+// change ironMan to blackWidow
+avengersList.set(0, 'blackWidow');
+
+console.log(Array ["blackWidow","captainAmerica"]);
+
 
 
 
