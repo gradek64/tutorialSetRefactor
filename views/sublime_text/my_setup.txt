@@ -1,45 +1,95 @@
 		
 
 		1) intalled packages
-			Package Control
+			Package Control (it should work by pasting script from package control web )
+			 		|** however if it doesn't run script U can download it manually from the same
+					website and place it in Sublime Text 3/Installed Packages (it should be there by default;
+
 			linejumper (allows to jump 10 lines at once with arrows)
-			AdvancedNewFilePluging (quicly create files in directories);
+			AdvancedNewFile (quicly create files in directories);
 			compare side-by-side (allows compare 2 files side by side)
 			Babel (ES6 JSX syntax for files to pick javascript babel)
-			ES-Lint Formater (ESLint formater with ESlint ) very usefull;
+			
 			Materialize (Theme controller)
-			Side-bar Enhanecement
+			Side-bar Enhanecements (more option on right click)
 			Git-gutter (useufull plugin to see changes in git history by user);
-			SublimeLinter-contrib-eslint_d (main package for eslinter globall)
-			SublimeLinter (sublime framework for linting packages)
-			SublimeLinter-csslint
-			SublimeLinter-jshint
-      SassBeautify (formats scss files after saving like (ESLint Formater);
-      HTML-CSS-JS Prettify (amazig for formating any file extension , disable js formater since I am using ESLINT formater in package settings)
-			Terminal (launch terminal from current project)
-		2) All plugins usually comes with github intructions so follow them 
-		3) Linting comes from ESLint very powerfull linter that could be (should) be 
-		installed globally to work for every file edited. Globally means you need to intall in your root directory 
-    so here: /Users/gilgrz where last one is your user name, create a package.json file by npm init -f (default) and install npm i eslint@latest , sublime will find your eslint here
 
-      ESLINT setup
+			formating CSS and HTML
+			  HTML-CSS-JS Prettify (instruction further down the file);
+				
+			SublimeLinter-jshint (optional but Eslint is much better)
+			
+      
 
-      IMPORTANT: eslint can be setup 
-      locally (rules apply only to the specific directory) or 
-      globally (rules apply to any directory that doesnt have .eslintrc set in your directory) so it uses global 
-      rules (from home directory)
+THEMES and color schemes 
 
-      Eslint traverse up the folder untill finds .eslintrc
+	for you sublime settings have this for USER;
+
+	{
+	"color_scheme": "Packages/Materialize/schemes/Material Dracula.tmTheme",
+	"detect_indentation": false,
+	"font_size": 14,
+	"ignored_packages":
+	[
+		"JavaScript",
+		"SublimeLinter-jshint",
+		"Vintage"
+	],
+	"tab_size": 2,
+	"theme": "Material Behave.sublime-theme",
+	"translate_tabs_to_spaces": true
+}
+
+	
+1) javascript linting
+
+TO lint javascript , there are few linters to choose from:
+	
+	the most powerful with ES6 features is ESlint , but the most used before is jshint , those are separate but both part of package 
+	SublimeLinter (this packages has to be installed for both);
+
+      ESLINT setup for sublime 
+
+	1) install those npm globally or locally (if global it will work for any js file, still local setup will override)
+
+	     npm i eslint eslint_d -g
+	
+	 check what packages in global scope: npm list -g --depth 0
+
+	2) now set up rules for you eslint by creating .eslintrc (again to make general rules create your file in home directory/ or for 
+		specific project rules create file in you project root directory) so for windows: C:\Users\greg\ for mac : ~/Users/greg
+
+	run eslint --init in your home pc directory 
+
+	3) now install sublime plugins;
+	
+		SublimeLinter (sublime framework for linting packages)
+		SublimeLinter-eslint
+		SublimeLinter-contrib-eslint_d
+		Babel (packages needed for support of Javascript (Babel) ) otherwise U would only have javascript file support
+
+      ESLINT setup for react (specific project);
+	
+	1) install eslint locally with react support and babel
+
+		npm i eslint 
+		npm i eslint-plugin-react@7.11.1
+		npm i babel-eslint@8.2.6
+
+	2) create your initial .eslintrc.json file by running eslint --init 
+		then edit .eslint.json according to your project needs;
+
+	3) now install sublime plugins; (just if you dont have installed them already if you setup eslint globally as well);
+	
+		SublimeLinter (main Linter package)
+		SublimeLinter-eslint
+		SublimeLinter-contrib-eslint_d
+		Babel (packages needed for support of Javascript (Babel) ) otherwise U would only have javascript file support
+ 
 
 
-		4) to make eslint work globally you need to set up this file in your home directory 
-			.eslintrc This file can be initiate by eslint -init 
-		5) make sure U got those npm pacakages installed globally for Sublime to lint all files 
-				 ├── eslint@5.9.0
-         └── eslint-plugin-react@7.11.1
-      with that configuration U will get support for react linting in every directory , and this will work with your
-      ESLint-formatter 
-    6) let say you want to support, lint more features from eslint, thefore you can install eslint locally and change .eslinrc rules to apply for local files in your directory (where node_modeules are) so install that combination
+	SCENARIO:
+    let say you want to support, lint more features from eslint, thefore you can install eslint locally and change .eslinrc rules to apply for local files in your directory (where node_modeules are) so install that combination
         ├── eslint@4.19.1
         └── eslint-plugin-react@7.11.1
         └── babel-eslint@8.2.6
@@ -55,6 +105,125 @@
         "sourceType": "module"
       },
       
+
+2) EsLint formatter for javascript and javascript (babel)
+
+	Great thing about eslint is to set formatting (on save for example) and your code will format accordingly to your rules;
+		(it will attempt to fix your errors like single, double quotes) those it can fix basically based on the closest .eslintrc so 			local or global
+	1) install package 
+
+		ES-Lint Formater (ESLint formater with ESlint ) very usefull;
+
+	2) once Eslint-formatter is installed go to Prefferences/packages Settings/Eslint Formatter/settings 
+	
+		in A USER section override by this;
+
+		{
+		   "format_on_save": "true"
+		}
+		
+		
+
+3) Css listing and formating;
+
+		1) npm package to install globally: npm i csslint -g 
+		2) plugin to install: SublimeLinter (if don't have that already main plugin for listing)
+		3) plugin to install: SublimeLinter-cssLint
+
+4) formatting css and html package: HTML-CSS-JS Prettify -- it supports sass as well !
+
+	HTML-CSS-JS Prettify (amazing for formatting any file extension , 
+	IMPORTANT: disable js formater since I am using ESLINT formater in package settings) by:
+
+		Preferences/Package settings/HTML/CSS/JS Pretify/Plugin options -user 
+		copy from default first and amend to that to disable js formatting;
+	{
+		// Automatically format when a file is saved.
+    		"format_on_save": true,
+
+		"global_file_rules" {
+			
+			"js": //dont format js since I am using ESLint Formater;
+       			 {
+            			"allowed_file_extensions": [],
+           			  "allowed_file_syntaxes": [],
+           		          "disallowed_file_patterns": []
+        		}
+			
+			
+			"css": //dont format cs since I m using stylelint if U don't dont include part for CSS !      			
+			 {
+            			"allowed_file_extensions": [],
+           			  "allowed_file_syntaxes": [],
+           		          "disallowed_file_patterns": []
+        		}	
+		
+		}
+	}
+
+5) linting and formating css/sass/less with stylelint and postCSS (experimetanl new!!!) and very slow not worth it !
+
+	global installation of stylelint with config file .stylelintrc 
+
+	1) npm package to install globally: npm i stylelint  -g 
+	2) npm package to install globally: npm i postcss  -g
+	3) npm package to install globally: npm i postcss-sass  -g
+	3) npm package to install globally: npm i stylelint-config-standard -g (this rules has to be based in .stylelintrc directly due to issues with
+					  				path for stylefmt formatter and stylelint itself)
+	4) create file .stylelintrc.json in you home director c:\Users\Greg with this content:
+
+	{
+		"extends":"stylelint-config-standard"
+	}
+
+
+	2) plugin to install: SublimeLinter (if don't have that already main plugin for listing)
+	3) plugin to install: SublimeLinter-stylelint
+	3) plugin to install: SublimeLinter-contrib-stylelint_d
+	4) plugin to install: Sass (to enable .scss extension which is not default in sublime text) 
+
+	then if doesn't work U need to specify stylelint linter configuration in SublimeLinter Plugins settings as:
+
+	{
+	 "debug":true,
+	 "linters":{
+		"SublimeLinter-stylelint":{
+				"args:["--config","c/Users/greg/.stylelintrc"],
+				"env":"/c/Users/greg/AppData/Roaming/npm/stylelint"
+			}
+		}
+	}
+
+
+	
+
+6) CSS, SASS lifting and formating; 
+	1) npm package to install globally: npm i sass-lint  -g 
+	2) plugin to install: SublimeLinter (if don't have that already main plugin for listing)
+	3) plugin to install: SublimeLinter-contrib-sass-lint (works for css and sass)
+
+  Formatting it is already done with: HTML-CSS-JS Prettify by adding that to Preferences/Package Settings/HTML/CSS/JS Pretify/ Plugin Options-User
+
+		     "css":      			
+			 {
+            			 "allowed_file_extensions": ["css","scss","sass","less"],
+           			  "allowed_file_syntaxes": ["css","scss","less"],
+           		          "disallowed_file_patterns": []
+        		}
+	
+		//also disable multiple lines in references/Package Settings/HTML/CSS/JS Pretify/ Prettify Preferences - user 
+
+		{
+			"all": {
+				"end_with_newline":true,
+				"max_preserve_newlines":2,
+				"preserve_newlines":false
+		}
+
+
+
+
+
 
 
 
