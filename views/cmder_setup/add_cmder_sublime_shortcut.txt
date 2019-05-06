@@ -1,0 +1,7 @@
+	1) in a start menu look for : edit system enviroment variables;
+	2) got to -> edit Variables;
+	3) add New System Variable
+	3a) variable name has to be diffrent from sublime (reserved word already)
+	4) in a dilaog box fill: Variable Name:subl; Varible value C:\Program Files\Sublime text 3
+	5) edith PATH variable by: C:\Program Files\Sublime text 3
+	6) Log in and log out
