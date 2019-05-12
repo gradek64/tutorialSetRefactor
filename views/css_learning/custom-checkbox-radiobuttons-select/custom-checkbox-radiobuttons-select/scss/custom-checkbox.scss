@@ -1,0 +1,173 @@
+$border: true;
+$borderColor: green;
+$borderRadius: 5px;
+$borderThickness: 1px;
+
+$hasBgColor: true;
+$checkboxBgColor: #ccc; 
+
+$hasHover: true;
+$hoverBgColor: darken( $checkboxBgColor , 10%);
+
+$checkedTickColor: red;
+@if $border == true {
+  $checkedTickColor: $borderColor;
+}
+
+/******* ANIMATION checked with transition *****/
+
+/***
+
+ transition should be set on the original element that are you going to animate.
+ Then target that element with :checked pseudo element;
+
+ ----animate color on checked----
+ element:after {  color: #777777; transition: all ease-in-out .3s; }
+ input:checked ~ element:after {
+    color: #000000;
+}
+
+***/
+
+$fade-in-animate: false;
+$fade-in-transition: opacity 4s ease;
+
+$slide-in-animate: true;
+$slide-in-transition: opacity 0.5s ease, top 0.5s ease, left 0.5s ease;
+
+
+/*********************/
+
+
+
+/*** mixins ***/
+
+  @mixin hasBorder($border, $borderColor, $borderRadius, $borderThickness) {
+    @if $border {
+        border: $borderThickness solid $borderColor;
+        border-radius: $borderRadius;
+    } @else {
+        border: none;
+    }
+  }
+
+  @mixin hasBackgroundColor($hasBgColor, $checkboxBgColor) {
+    @if $hasBgColor {
+        background-color: $checkboxBgColor;
+    } @else {
+        background-color: transparent;
+    }
+  }
+
+  @mixin hasBackgroundColor($hasHover, $hoverBgColor) {
+    @if $hasHover {
+        background-color: $hoverBgColor;
+    }
+  }
+
+/*************/
+
+
+
+/* The container */
+label.container-checkbox {
+  display: table; //constrain size to the content
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  /*1. Hide the browser's default checkbox */
+      input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+
+          /* When the checkbox is checked */
+          &:checked {
+            /* add a blue background */
+            & ~ .checkmark {
+            
+              /* Show the checkmark when checked */
+              &:after {
+                opacity: 1;
+                top: 4px;
+                left: 8px;
+                
+              }
+            }
+          }
+      }
+  /********/
+
+/*********  2. Create a custom checkbox *************/
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  @include hasBackgroundColor($hasBgColor, $checkboxBgColor);
+  @include  hasBorder($border, $borderColor, $borderRadius, $borderThickness);
+
+
+      /* Create the checkmark/indicator (hidden when not checked) */
+      &:after {
+        content: "";
+        position: absolute;
+        opacity: 0; 
+        @if $fade-in-animate==true {
+           transition:$fade-in-transition;
+        }
+        
+      
+        /* Style the checkmark/indicator */
+
+        //animate left and top;
+        left: 8px;
+        top: 8px;
+        @if $slide-in-animate==true {
+           transition:$slide-in-transition;
+        }
+        width: 5px;
+        height: 10px;
+        border: solid $checkedTickColor;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+}
+
+/* On mouse-over, add a grey background color but those not checked*/
+&:hover input:not(:checked) {
+  & ~ .checkmark {
+     @include hasBackgroundColor($hasHover, $hoverBgColor)
+  }
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

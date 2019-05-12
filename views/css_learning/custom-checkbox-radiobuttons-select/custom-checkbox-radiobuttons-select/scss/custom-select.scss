@@ -1,0 +1,248 @@
+/*custom select*/
+select.firstSelect {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+
+  .custom-select {
+    background-image: url('../images/chevron_down.png');
+  }
+}
+
+.select-wrapper {
+  float: left;
+  display: inline-block;
+  border: 1px solid #d8d8d8;
+  background: url("../images/chevron_down.png") no-repeat right center;
+  background-position: 98% 50%;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.select-wrapper,
+.select-wrapper select {
+  width: 200px;
+  height: 26px;
+  line-height: 26px;
+}
+
+.select-wrapper:hover {
+  /* background: url("../images/chevron_down.png") no-repeat right center; */
+  border-color: #239fdb;
+}
+
+.select-wrapper .holder {
+  display: block;
+  margin: 0 35px 0 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  z-index: -1;
+}
+
+.select-wrapper select {
+  margin: 0;
+  position: absolute;
+  z-index: 2;
+  cursor: pointer;
+  outline: none;
+  opacity: 0;
+  /* CSS hacks for older browsers */
+  _noFocusLine: expression(this.hideFocus=true);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -khtml-opacity: 0;
+  -moz-opacity: 0;
+}
+
+/**3 example **/
+.select-wrap-container {
+  border: 1px solid #ccc;
+  width: 120px;
+  border-radius: 3px;
+  overflow: hidden;
+  background-color: #fafafa;
+  background: url("../images/chevron_down.png");
+  background-position: 98% 50%;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.select-wrap-container select {
+  padding: 5px 8px;
+  width: 130%;
+  height: 100%;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  background-image: none;
+  -webkit-appearance: none;
+  position: relative;
+}
+
+.select-wrap-container select option {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.select-style select:focus {
+  outline: none;
+}
+
+/*cross browser solution*/
+.select {
+  position: relative;
+  height: 47.5px;
+  background: white;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, .05);
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    right: 10px;
+    bottom: 0;
+    margin: auto;
+    border-style: solid;
+    border-width: 5px 5px 0 5px;
+    border-color: #a52c2c transparent transparent transparent;
+    pointer-events: none;
+  }
+
+  &:before {
+    width: 30px;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    background: whitesmoke;
+    content: '';
+    /** this is the key for this to work***/
+    pointer-events: none;
+  }
+
+  &:hover {
+    &:before {
+      background: #ffcfcf;
+    }
+  }
+
+  select {
+    font-size: 14px;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    background: transparent;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    outline: none;
+    padding-right: 35px;
+    padding-left: 15px;
+    border: 1px solid #a52c2c;
+    // Disable default styling on ff
+    -moz-appearance: none;
+
+    // Disable ugly ass outline on firefox 
+    &:-moz-focusring {
+      color: transparent;
+      text-shadow: 0 0 0 #000;
+    }
+
+    // Disable default styling on webkit browsers 
+    -webkit-appearance: none;
+
+    // Disable default arrow on IE 11+
+    &::-ms-expand {
+      display: none;
+    }
+
+    &:focus {
+      border-color: #63ffb4;
+    }
+  }
+}
+
+// IE 9 only 
+@media all and (min-width:0\0) and (min-resolution:.001dpcm) {
+  .select {
+    select {
+      padding-right: 0;
+    }
+
+    &:after,
+    &:before {
+      display: none;
+    }
+  }
+}
+
+// Presentation styling 
+.container {
+  width: 420px; //(° ͜ʖ°)
+  margin: auto;
+  top: 50%;
+  position: relative;
+  /*  transform: translate3d(0, -50%, 0); */
+}
+
+.container-wrapper {
+  position: relative;
+  width: 200px;
+  height: 30px;
+
+  select {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid grey;
+    box-shadow: none;
+    border-radius: 3px;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+    // Disable default styling on ff
+    -moz-appearance: none;
+
+    // Disable ugly ass outline on firefox 
+    &:-moz-focusring {
+      color: transparent;
+      text-shadow: 0 0 0 #000;
+    }
+
+    // Disable default styling on webkit browsers 
+    -webkit-appearance: none;
+
+    // Disable default arrow on IE 11+
+    &::-ms-expand {
+      display: none;
+    }
+
+    &:focus {
+      border-color: #63ffb4;
+    }
+  }
+
+  &::after {
+    position: absolute;
+    content: '';
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    background: url("../images/chevron_down.png");
+    background-position: 98% 5px;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    pointer-events: none;
+  }
+}

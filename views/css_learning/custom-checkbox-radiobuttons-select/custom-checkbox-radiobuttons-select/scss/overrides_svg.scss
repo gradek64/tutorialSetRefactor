@@ -1,0 +1,129 @@
+$badass: #bada55;
+$color-svg: #F4AF20;
+body { 
+  margin: 0;
+  background-color: $badass;
+}
+
+.wrapper {
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+    
+  > h1, > p {
+    color: #333333;
+  }
+  
+  .containerSS {
+    position: relative;
+    height: 0;
+    padding-bottom: 56.25%;
+
+    > svg {
+      position: absolute;
+      display: block;
+      
+      path {
+        stroke: darken($color-svg, 10%);
+        stroke-width: 10px;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+        stroke-dasharray: 1px, 15px;
+        fill: $color-svg;
+      }
+    }
+  }
+}
+
+.container {
+  height: 200px;
+  width: 100%;
+  position: relative;
+
+  .text {
+    position: absolute;
+    top: 0;
+    z-index: 10;
+  };
+  //clip svg external svg id 
+  .clipping-path-animation {
+    // sass-lint:disable no-color-literals
+    background-color: rgba(249, 132, 11, 0.8);
+    clip-path: url(#clipping-path-animation);
+    height: inherit;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+  };
+  //clip svg external svg id 
+  .clipping-path-TEXT {
+    // sass-lint:disable no-color-literals
+    background-color: rgba(249, 132, 11, 0.8);
+    clip-path: url(#clip-text-SVG);
+    height: inherit;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+  };
+  //clip svg external svg id 
+  .clipping-path-SVG {
+    // sass-lint:disable no-color-literals
+    background-color: rgba(249, 132, 11, 0.8);
+    clip-path: url(#clip-polygon);
+    height: inherit;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+  };
+  
+// sass-lint:disable class-name-format
+  .clipping-path-CSS {
+    // sass-lint:disable no-color-literals
+    background-color: rgba(249, 132, 11, 0.8);
+    clip-path: polygon(0 100%, 0 0, 100% 0, 80% 100%);
+    height: inherit;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+  };
+// sass-lint:enable class-name-format
+
+  .image-bg {
+    /*path */
+    background-image: url('../images/dirtBike.jpg');
+    background-position: top left; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+    height: inherit;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    /*bg-image*/
+  }
+  }
+
+  /*nav li position class*/
+  .dropdown-menu {
+    &.displayOnLeft{
+      left:auto;
+      right:0;
+    }  
+  }
+  
