@@ -20,7 +20,7 @@ true or false , that could be used in other componenst as Simple button */
           label={`${props.label} ${
             toggle ? props.toggleLabels[0] : props.toggleLabels[1]
           }`}
-          action={() => {
+          eventHandler={() => {
             toggleMethod(toggle);
             props.action(toggle ? props.values[0] : props.values[1]);
           }}

@@ -5,10 +5,10 @@ const style = {
   color: 'green',
   borderColor: 'green',
 };
-const SimpleButton = ({ label, action, value }) => (
+const SimpleButton = ({ label, eventHandler, value }) => (
   <button
     onClick={() => {
-      action(value);
+      eventHandler(value);
     }}
     style={style}
   >
@@ -18,7 +18,7 @@ const SimpleButton = ({ label, action, value }) => (
 
 SimpleButton.propTypes = {
   label: PropTypes.string.isRequired,
-  action: PropTypes.instanceOf(Function).isRequired,
+  eventHandler: PropTypes.instanceOf(Function).isRequired,
   value: PropTypes.string,
 };
 SimpleButton.defaultProps = {

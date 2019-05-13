@@ -5,7 +5,7 @@ import { manipulateListFns } from './manipulateListData';
 
 /*
   *@this Component is resposible of extending baseList component but
-  it will transform/change props according to the action given from the parent Component
+  it will transform/change props according to the actionType given from the parent Component
   as filering,sorting etc..
 */
 
@@ -18,11 +18,31 @@ import { manipulateListFns } from './manipulateListData';
 // const withTransformProps = helperFunc => BaseComponent => baseProps => {
 const withTransformProps = (helperFunc) => {
   const withTransformPropsComp = (props) => {
+    /** ** props is a object defined in propTypes
+    * */
+    console.log('props of ListWithTransformation:', props);
+
+    /*
+      pure list takes only {list:[]} but we do not validate that here;
+      It is validated in <PureList list=[] />
+    */
     const transformedProps = helperFunc(props);
     return <PureList {...transformedProps} />;
   };
+
   withTransformPropsComp.propTypes = {
     list: PropTypes.instanceOf(Array).isRequired,
+    letterSearch: PropTypes.string,
+    sortBy: PropTypes.string,
+    filter: PropTypes.string,
+    actionType: PropTypes.string,
+  };
+
+  withTransformPropsComp.defaultProps = {
+    letterSearch: '',
+    sortBy: '',
+    filter: '',
+    actionType: '',
   };
 
   return withTransformPropsComp;

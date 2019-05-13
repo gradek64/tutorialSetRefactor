@@ -13,13 +13,13 @@ const manipulateListFns = ({
   letterSearch,
   sortBy,
   filter: filterSide,
-  action,
+  actionType,
 }) => {
   /* console.log('action', action);
   console.log('sortBy', sortBy);
   console.log('filter', filterSide);
   console.log('letterSearch', letterSearch); */
-  switch (action) {
+  switch (actionType) {
   case 'sortBy':
     if (updatedList) {
       // exception you do want to muttate data that gets in;

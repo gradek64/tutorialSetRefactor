@@ -26,7 +26,7 @@ true or false , that could be used in other componenst as Simple button */
           >
             <SimpleButton
               label={props.label}
-              action={() => {
+              eventHandler={() => {
                 toggleMethod(toggle);
               }}
             />
