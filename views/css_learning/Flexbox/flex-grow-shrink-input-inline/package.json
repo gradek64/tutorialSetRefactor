@@ -1,0 +1,17 @@
+{
+  "name": "bootstrap-test",
+  "version": "1.0.0",
+  "sasslintConfig": "./sass-lint.yml",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build-css": "node-sass --include-path scss scss/flex-grow-shrink-bsline.scss css/flex-grow-shrink-bsline.css",
+    "watch-scss": "node-sass --include-path scss -w scss/flex-grow-shrink-bsline.scss css/flex-grow-shrink-bsline.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-sass": "^4.10.0"
+  }
+}

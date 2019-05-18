@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)http://clagnut.com/blog/348/ -->
+<html lang="en-gb" class="js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="author" content="Richard Rutter">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <link rel="preload" href="http://clagnut.com/fonts/Premiera-Book.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="http://clagnut.com/fonts/Ingeborg-Fat.woff2" as="font" type="font/woff2" crossorigin="">
+    
+	<script>
+	    var html = document.getElementsByTagName('html')[0];
+	    html.className = 'js';
+	</script>
+    
+    <!--css-->
+	<link rel="stylesheet" href="./How to size text using ems _ Clagnut by Richard Rutter_files/all.css" type="text/css">
+    
+    <!--rss-->
+    <link rel="alternate" type="application/rss+xml" title="Clagnut blog with summaries" href="http://clagnut.com/feeds/summaries.xml">
+	<link rel="alternate" type="application/rss+xml" title="clagnut blog full posts" href="http://clagnut.com/feeds/fullposts.xml">
+    <title>How to size text using ems | Clagnut by Richard Rutter</title>
+    
+    <meta name="description" content="Text for the screen is sized with CSS in terms of pixels, ems or keywords. Pixels is easy, keywords  are well documented. That leaves ems. I will now attempt to show you how ems can be as quick and easy to use as pixels.">
+    <meta name="keywords" content="CSS techniques,Typography,ems">
+    <meta name="author" content="Richard Rutter">  
+    
+    <!-- Twitter Card -->
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@clagnut">
+    <meta name="twitter:title" content="How to size text using ems">
+    <meta name="twitter:description" content="Text for the screen is sized with CSS in terms of pixels, ems or keywords. Pixels is easy, keywords  are well documented. That leaves ems. I will now attempt to show you how ems can be as quick and easy to use as pixels.">
+	<meta name="twitter:image" content="">
+    
+</head>
+
+<body>
+<header class="global">
+
+<div class="masthead">
+<div id="logo"><a href="http://clagnut.com/">Clagnut</a></div>
+<nav>
+<a href="http://clagnut.com/speaking">Speaking</a> <span aria-hidden="true">·</span>
+<a href="http://clagnut.com/archive">Archive</a> <span aria-hidden="true">·</span>
+<a href="http://clagnut.com/search" class="searchlink-icon" title="Search"><svg width="18" height="18" viewBox="0 0 18 18" fill="#ffffff"><path d="M6.5 1.6c2.7 0 4.9 2.2 4.9 4.9s-2.2 4.9-4.9 4.9-4.9-2.2-4.9-4.9 2.2-4.9 4.9-4.9m0-1.6C2.9 0 0 2.9 0 6.5S2.9 13 6.5 13 13 10.1 13 6.5 10.1 0 6.5 0zm6.6 11.5l4.9 4.9-1.6 1.6-4.9-4.9v-.8l.8-.8h.8z"></path></svg></a><a href="http://clagnut.com/search" class="searchlink-text">Search</a>
+</nav>
+</div> <!-- /masthead -->
+
+</header>
+
+<main>
+
+<article class="post">
+
+<header>
+
+<h1>How to size text using ems</h1>
+
+<div class="meta">
+<p class="published"><time datetime="2004-05-18T06:35:29+01:00">18th May 2004</time></p>
+<ul class="categories">
+<li><a href="http://clagnut.com/archive/typography/" title="View all posts relating to Typography.">Typography</a>,</li>
+<li><a href="http://clagnut.com/archive/css_techniques/" title="View all posts relating to CSS techniques.">CSS&nbsp;techniques</a></li></ul>
+
+</div>
+</header>
+
+
+<section>
+<div class="prose">
+<p>Text for the screen is sized with <abbr class="c2sc">CSS</abbr> in terms of pixels, ems or keywords. As most of us know, sizing with pixels is easy: get your selector and give it a <code>font-size</code> – no more thought required. Sizing with keywords is more complicated and requires a few workarounds, but you’re in luck as the techniques are <a href="http://www.alistapart.com/articles/sizematters/" title="ALA: &lt;abbr class=&#39;c2sc&#39;&gt;CSS&lt;/abbr&gt; Design – Size Matters">well documented</a>. That leaves ems. At this point people often leg it. ‘Ems are too inconsistent,’ they say, ‘they’re too hard; they never work.’ Well that may be the received wisdom, but if ever the was a case of <abbr class="c2sc" title="fear, uncertainty and doubt"><abbr class="c2sc">FUD</abbr></abbr> then this is it. I will now attempt to show you how ems can be as quick and easy to use as pixels.</p>
+
+	<h4>Why&nbsp;ems?</h4>
+
+	<p>If the world were an ideal place, we’d all use pixels. But it’s not, we have the broken browser to contend with. <abbr title="Internet Explorer"><abbr class="c2sc">IE</abbr></abbr>/Win will not allow readers to resize text that has been sized in pixels. Like it or not, your readers <strong>will</strong> want to resize text at some point. Perhaps they are short-sighted, doing a presentation, using a ridiculously high resolution laptop or simply have tired eyes. So unless you know (not think) your audience won’t be using <abbr title="Internet Explorer"><abbr class="c2sc">IE</abbr></abbr>/Win or will never wish to resize their text then pixels are not yet a viable solution.</p>
+
+	<p>Keyword-based text sizing will allow all browsers to resize text so this is a possibility, but I don’t find it gives me the precision that pixels would give me. Using ems however, allows all browsers to resize text and also provides pixel-level precision and so they tend to be my unit of choice.</p>
+
+	<h4>Get on&nbsp;with&nbsp;it</h4>
+
+	<p><abbr class="c2sc">OK</abbr> let’s dive into ems. I’ll show you, from scratch, how to size text in a document using ems. I’ll assume throughout that we are dealing with a browser set to ‘medium’ text. The default size for ‘medium’ text in all modern browsers is 16px. Our first step is to reduce this size for the entire document by setting body size to 62.5%:</p>
+
+<figure class="pre"><pre class=" language-css"><code class=" language-css"><span class="token selector">BODY</span> <span class="token punctuation">{</span><span class="token property">font-size</span><span class="token punctuation">:</span>62.5%<span class="token punctuation">}</span></code></pre></figure>
+
+	<p>This takes 16px down to 10px, which apart from being less huge is a nice round number. From now on it’s easy to think in pixels but still set sizes in terms of ems: 1em is 10px, 0.8em is 8px, 1.6em is 16px, etc. If you are laying out your document using <abbr class="c2sc">CSS</abbr> (which you are, right?) then you have probably used a few divs to group together elements. Apply text-size to these divs and your job is almost done. Consider a two column layout with header and footer:</p>
+
+<figure class="pre"><pre class=" language-css"><code class=" language-css"><span class="token selector">&lt;body&gt;
+&lt;div id="navigation"&gt; ... &lt;/div&gt;
+&lt;div id="main_content"&gt; ... &lt;/div&gt;
+&lt;div id="side_bar"&gt; ... &lt;/div&gt;
+&lt;div id="footer"&gt; ... &lt;/div&gt;
+&lt;/body&gt;
+
+#navigation</span> <span class="token punctuation">{</span><span class="token property">font-size</span><span class="token punctuation">:</span>1em<span class="token punctuation">}</span>
+<span class="token selector">#main_content</span> <span class="token punctuation">{</span><span class="token property">font-size</span><span class="token punctuation">:</span>1.2em<span class="token punctuation">}</span>
+<span class="token selector">#side_bar</span> <span class="token punctuation">{</span><span class="token property">font-size</span><span class="token punctuation">:</span>1em<span class="token punctuation">}</span>
+<span class="token selector">#footer</span> <span class="token punctuation">{</span><span class="token property">font-size</span><span class="token punctuation">:</span>0.9em<span class="token punctuation">}</span></code></pre></figure>
+
+	<p>So this would give us a document where text in the navigation and side bar is displayed at 10px, the main content is 12px and the footer is 9px. There now remains a few anomalies to sort out (you’d have to do this even if you were sizing in pixels). In Mozilla-based browsers, all heading elements in our aforementioned #main_content div will be displayed at 12px whether they are an <abbr class="c2sc">H1</abbr> or an <abbr class="c2sc">H6</abbr>, whereas other browsers show the headings at different sizes as expected. Applying text-sizes to all headings will give consistency across browsers, for example:</p>
+
+<figure class="pre"><pre class=" language-css"><code class=" language-css"><span class="token selector">H1</span> <span class="token punctuation">{</span><span class="token property">font-size</span><span class="token punctuation">:</span>2em<span class="token punctuation">}</span>  <span class="token comment">/* displayed at 24px */</span>
+<span class="token selector">H2</span> <span class="token punctuation">{</span><span class="token property">font-size</span><span class="token punctuation">:</span>1.5em<span class="token punctuation">}</span>  <span class="token comment">/* displayed at 18px */</span>
+<span class="token selector">H3</span> <span class="token punctuation">{</span><span class="token property">font-size</span><span class="token punctuation">:</span>1.25em<span class="token punctuation">}</span>  <span class="token comment">/* displayed at 15px */</span>
+<span class="token selector">H4</span> <span class="token punctuation">{</span><span class="token property">font-size</span><span class="token punctuation">:</span>1em<span class="token punctuation">}</span>  <span class="token comment">/* displayed at 12px */</span></code></pre></figure>
+
+	<p>A similar job needs to be done on forms and tables to force form controls and table cells to inherit the correct size (mainly to cater for <abbr title="Internet Explorer"><abbr class="c2sc">IE</abbr></abbr>/Win):</p>
+
+<figure class="pre"><pre class=" language-css"><code class=" language-css"><span class="token selector">INPUT, SELECT, TH, TD</span> <span class="token punctuation">{</span><span class="token property">font-size</span><span class="token punctuation">:</span>1em<span class="token punctuation">}</span></code></pre></figure>
+
+	<p>And so to the final tweak and the bit folks seem to find most tricky: dealing with nested elements. We’ve already touched upon it with our headers, but for now let’s look more closely at what’s going on. First of all we changed our body text to 10px; 75% of its default size:</p>
+
+<figure class="pre"><pre class=" language-css"><code class=" language-css">16 x 0.625 = 10</code></pre></figure>
+
+	<p>Then we said our main content should be displayed at 12px. If we did nothing, the #main_content div would be displayed at 10px because it would inherit its size from the body element – its parent. This implies that we always size text relative to the parent element when using ems:</p>
+
+<figure class="pre"><pre class=" language-css"><code class=" language-css">child pixels / parent pixels = child ems
+12 / 10 = 1.2</code></pre></figure>
+
+	<p>Next we wanted our h1 heading to be 24px. The parent to our h1 is the main_content div which we know to be 12px in size. To get our headings to be 24px we need to double that so our ems are:</p>
+
+<figure class="pre"><pre class=" language-css"><code class=" language-css">24 / 12 = 2</code></pre></figure>
+
+	<p>And so it goes on. Tricky stuff occurs where rules like this are applied:</p>
+
+<figure class="pre"><pre class=" language-css"><code class=" language-css"><span class="token selector">#main_content LI</span> <span class="token punctuation">{</span><span class="token property">font-size</span><span class="token punctuation">:</span>0.8333em<span class="token punctuation">}</span></code></pre></figure>
+
+	<p>This rule implies that all main content list items should be displayed at 10px. We use the same straight forward maths to achieve this:</p>
+
+<figure class="pre"><pre class=" language-css"><code class=" language-css">10 / 12 = 0.8333</code></pre></figure>
+
+	<p>But what happens when one list contains another? It gets smaller. Why? Because our rule actually says that any list item in the #main_content div should 0.8333 times the size of its parent. So we need another rule to prevent this ‘inherited shrinkage’:</p>
+
+<figure class="pre"><pre class=" language-css"><code class=" language-css"><span class="token selector">LI LI</span> <span class="token punctuation">{</span><span class="token property">font-size</span><span class="token punctuation">:</span>1em<span class="token punctuation">}</span></code></pre></figure>
+
+	<p>This says that any list item inside another list item should be the same size as its parent (the other list item). I normally use a whole set of child selectors to prevent confusion during development:</p>
+
+<figure class="pre"><pre class=" language-css"><code class=" language-css"><span class="token selector">LI LI, LI P, TD P, BLOCKQUOTE P</span> <span class="token punctuation">{</span><span class="token property">font-size</span><span class="token punctuation">:</span>1em<span class="token punctuation">}</span></code></pre></figure>
+
+	<p>And that’s it. When sizing text in ems there’s really one rule to remember: size text relative to its parent and use this simple calculation to do so:</p>
+
+<figure class="pre"><pre class=" language-css"><code class=" language-css">child pixels / parent pixels = child ems</code></pre></figure>
+
+	<h4>Some&nbsp;helpful&nbsp;tools</h4>
+
+	<p>Pixy’s <a href="http://www.pixy.cz/blog/favelets/">list computed styles</a> is fabulous bookmarklet which shows the cascade of calculated font sizes (or any other <abbr class="c2sc">CSS</abbr> property). <a href="http://clagnut.com/blog/340/" title="Clagnut: Mozilla &lt;abbr class=&#39;c2sc&#39;&gt;DOM&lt;/abbr&gt; Inspector">Mozilla’s <abbr title="Document Object Model"><abbr class="c2sc">DOM</abbr></abbr> Inspector</a>  is even more powerful as it allows you to see which <abbr class="c2sc">CSS</abbr> rules are affecting any given element in order of cascade priority so you can see why your text is or isn’t changing size when you expected it to.</p>
+
+	<h4>And finally… what is an&nbsp;em?</h4>
+
+	<p>Classically, an em (pronounced emm) is a typographer’s unit of horizontal spacing and is a sliding (relative) measure. One em is a distance equal to the text size. In 10 pixel type, an em is 10 pixels; in 18 pixel type it is 18 pixels. Thus 1em of padding is proportionately the same in any text size.</p>
+
+	<h4>Update:</h4>
+
+	<p>Make sure you read <a href="http://clagnut.com/blog/348/#c790">Patrick H Lauke’s comment</a> on perfecting this method for <abbr title="Internet Explorer"><abbr class="c2sc">IE</abbr></abbr>5/Win.</p></div> <!-- /.prose -->
+</section>
+
+
+
+
+
+<aside class="tags">	
+<span class="hash">#</span>
+<ul>
+	<li><a href="http://clagnut.com/search/?q=CSS+techniques" rel="tag">CSS techniques</a>, </li>
+<li><a href="http://clagnut.com/search/?q=Typography" rel="tag">Typography</a>, </li>
+<li><a href="http://clagnut.com/search/?q=ems" rel="tag">ems</a></li>
+</ul>
+		
+<p class="comment"><a href="https://twitter.com/intent/tweet?text=How%20to%20size%20text%20using%20ems%20by%20@clagnut%20http://clagnut.com/blog/348"><img src="./How to size text using ems _ Clagnut by Richard Rutter_files/icon-twitter.svg" alt="" class="icon"> Comment via Twitter</a></p>
+	
+</aside>
+
+
+
+
+<aside class="relatedposts">
+	<h2>Related Posts</h2>
+	
+		<ul class="articles"><li><article>
+					<h3><a href="http://clagnut.com/blog/1887">Centering text on the longest line</a></h3>
+					<p class="summary">The Web Typography project continues to proceed, albeit at a glacial pace. One of the reasons for the slow progress is guidelines such as this: “verse quotations should be centered on the longest line”.</p>
+					<p class="date"><time datetime="2007-02-05T10:00:00+00:00">5 February 2007</time></p>
+					</article></li>
+<li><article>
+					<h3><a href="http://clagnut.com/blog/1451">JavaScript-enhanced image replacement</a></h3>
+					<p class="summary">Most image replacement techniques work by displaying a background image of text and shifting the real text out of view which is fine unless you have images turned off. This can be addressed with some unobtrusive JavaScript.</p>
+					<p class="date"><time datetime="2005-05-12T05:58:26+01:00">12 May 2005</time></p>
+					</article></li>
+<li><article>
+					<h3><a href="http://clagnut.com/blog/84">When good type goes bad</a></h3>
+					<p class="summary">Jakob mourns the demise of the text sizing buttons IE but fails to point out that it won’t have any effect on a Windows machine if text is sized in pixels.
+
+	Microsoft have stopped giving away their free web fonts.</p>
+					<p class="date"><time datetime="2002-08-19T12:39:33+01:00">19 August 2002</time></p>
+					</article></li>
+</ul>	
+</aside>
+
+
+<aside class="next-prev">
+
+
+<ul class="articles">
+
+<li><h5 class="older">Previous</h5>
+<article>
+<h3><a href="http://clagnut.com/blog/347/" rel="prev" title="Older post">Ten questions for Andy</a></h3>
+<p class="date"><time datetime="2004-05-18T03:36:35+01:00">18 May 2004</time></p>
+</article></li>
+
+<li><h5 class="newer">Next</h5>
+<article>
+<h3><a href="http://clagnut.com/blog/349/" rel="next" title="Newer post">Fear the Pie!</a></h3>
+<p class="date"><time datetime="2004-05-21T07:13:11+01:00">21 May 2004</time></p>
+</article></li>
+</ul>
+
+</aside>
+
+</article>
+
+
+</main>
+
+
+
+<footer class="global">
+<p class="copyright">© 2002–2019 <a href="http://clagnut.com/about">Richard Rutter</a></p>
+<p class="icons">
+<a href="http://twitter.com/clagnut" class="icon"><img src="./How to size text using ems _ Clagnut by Richard Rutter_files/icon-twitter-white.svg" alt="Follow me on Twitter" title="@clagnut"></a>
+<a href="http://clagnut.com/feeds/fullposts.xml" class="icon"><img src="./How to size text using ems _ Clagnut by Richard Rutter_files/icon-rss.svg" alt="RSS Feed" title="RSS Feed"></a>
+</p>
+<nav class="colophon">Published in Brighton, UK · <a href="http://clagnut.com/colophon">Colophon</a></nav>
+</footer>
+
+<script src="./How to size text using ems _ Clagnut by Richard Rutter_files/prism.js"></script>
+
+</body></html>

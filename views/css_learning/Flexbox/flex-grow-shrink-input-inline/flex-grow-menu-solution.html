@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>menu flex solutio</title>
+    <link rel="stylesheet" type="text/css" href="./css/flex-grow-shrink-bsline.css">
+</head>
+
+<body>
+    <div class="info">
+        <h2>flex:1 is combination of flex-grow, flex-shrik and flex-basis and allows you to strech content to fill up the space as the search bar below;</h2>
+        <p>flex-grow will strech accoding to available space</p>
+        <p>flex-shring will shrink accoding to available content</p>
+        <p>flex-basis create a base width from where flex-grow and flex-shrink will work from</p>
+        <div class="commonfacts">
+            <h2>there some common settings to the flex-grow, flex-shrink, flex-basis</h2>
+            <h3>flex:1 0 200px = means element will grow with min width of 200px</h3>
+            <h3>flex:0 1 200px = means element will not grow with max width of 200px</h3>
+            <h3>flex:0 0 200px = means element will not grow and will not shrink setting fixed width:200px</h3>
+            <h3>flex:0 0 auto = means element will not grow and will not shrink and will take content width</h3>
+        </div>
+        <h6>if you can try to avoid setting height!! it is better to adding margin to the inside form/container so if U happened to add more elements U won see height restrictions</h6>
+        <div class="example">
+            <h6>this is form with set <span>height: 200px; display:flex; align-items:center</span></h6>
+            <div class="searchBar">
+                <form>
+                    <input id='search' type='text' placeholder="flex:2" />
+                    <input type='text' placeholder="flex:1" />
+                    <input type='text' placeholder="flex:1" />
+                    <button class="btn">Search</button>
+                </form>
+            </div>
+        </div>
+        <div class="example">
+            <h6>this form doesnt have HEIGHT set it has only margin set to the form no height needed;<span> display:flex; margin:10p%;</span></h6>
+            <div class="searchBarNoHeight">
+                <form>
+                    <input id='search' type='text' placeholder="flex:2" />
+                    <input type='text' placeholder="flex:1" />
+                    <input type='text' placeholder="flex:1" />
+                    <button class="btn">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="shrinkContent">
+        <h2>Understanding flex-shrink</h2>
+        <p>flex-shrink will adopt to content of the element not the remaining spaces as it is in flex-grow</p>
+        <p>the golden rule is if you have flex-shrink: 0 that means it wont shrink , if you have flex-shrink:1 then it will shrink , the best result can be used with flex-grow and flex-basis</p>
+        <div class="examples">
+            <h2>Examples below are related to the paragraph</h2>
+            <p>flex:0 0 auto means no shrink no grow set element to content;</p>
+            <div class="flexShrink">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,Lorem ipsum dolor sit amet, consectetur adipisicing elit</p><button class="btn">Search</button>
+            </div>
+            <p>flex:0 1 auto it will shrink and set max width to actual content (the one that fits in one line)/p>
+                <div class="flexShrink1">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,Lorem ipsum dolor sit amet, consectetur adipisicing elit</p><button class="btn">Search</button>
+                </div>
+                <p>flex:0 1 600px it will shink and set max width to 600px</p>
+                <div class="flexShrink2">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,Lorem ipsum dolor sit amet, consectetur adipisicing elit</p><button class="btn">Search</button>
+                </div>
+        </div>
+    </div>
+</body>
+
+</html>

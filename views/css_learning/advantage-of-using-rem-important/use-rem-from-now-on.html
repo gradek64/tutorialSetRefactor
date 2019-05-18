@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>base line center</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <h2>The great think about using rem every in a page is for scaling reason, 1rem == default browser font size!!<br>
+        Thefore set you browser size to 10px , most browser have 16px so you need around font-size: 62.5%; and that would give U a 10px as default, next use rem everywhere for paddings,margin for fonts etc so If U ever want to increase your font all you habe to do is to change default body {font-size: 100%} so it will give you back 16px;</h2>
+    <code>
+        /* body { font-size:62.5%; }
+        h1 { font-size: 2.4em; } //24px
+        p { font-size: 1.4em; } //14px
+        li { font-size: 1.4em; } //4px etc
+        }*/
+    </code>
+    <div>
+        <h3>position both elements at the same center line of the element</h3>
+        <ul>
+            <li>set both element inline-block</li>
+            <li>set vertical-align:middle</li>
+        </ul>
+        <div class="example">
+            <a>this is link that needs to be a the same base line as button next to it</a><button class="btn">Search the latest jobs</button>
+        </div>
+    </div>
+</body>
+
+</html>

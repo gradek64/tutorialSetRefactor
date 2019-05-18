@@ -1,0 +1,68 @@
+/*extras*/
+
+html {
+  /*specify default size for rem unit most browser have 16px so lets make it 10px*/
+  font-size: 62.5%;
+
+  /* body { font-size:62.5%; }
+   h1 { font-size: 2.4em; } //24px 
+   p  { font-size: 1.4em; } //14px 
+   li { font-size: 1.4em; } //4px etc
+   }*/
+}
+
+a {
+  font-size: 16px;
+  font-size: 1.6rem;
+  word-wrap: break-word;
+  white-space: pre-line;
+}
+
+.example {
+  border: 1px solid green;
+  padding: 1rem;
+}
+
+.example-inline-block a,
+.example-inline-block button {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.example-table-cell {
+  display: table;
+}
+
+.example-table-cell a {
+  max-width: 70%;
+}
+
+.example-table-cell a,
+.example-table-cell button {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.flexSetup {
+  display: flex;
+  align-items: center;
+}
+
+.flexSetup a {
+  flex: 0 1 auto;
+
+  /*means do not grow shrink after max size is smaller to actual content*/
+}
+
+.btn {
+  font-size: 2rem;
+  line-height: 2rem;
+  font-weight: 400;
+  background: #00A3AD;
+  border-radius: 8rem;
+  border: none;
+  text-shadow: none;
+  padding: 0.5rem 3rem;
+  color: white;
+  width: 20rem;
+}

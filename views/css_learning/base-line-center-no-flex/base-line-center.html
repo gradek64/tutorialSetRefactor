@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>base line center</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <h2>Couple ways of adjusting base-line to the center of the elemet without using flex align-items:center if you happened to not able to use one for the lack of older browser support</h2>
+    <div>
+        <h3>using inline-block</h3>
+        <ul>
+            <li>set both element to inline-block (atag and button)</li>
+            <li>set vertical-align:middle to both elements and voila !</li>
+            <li style="color:red;"> the flaw of that when resizing window the text wont wrap causing button to drop</li>
+            <li style="color:red;">to avoid droping You would have to assing width:% to both not great since your text could be just a few words line</li>
+        </ul>
+        <div class="example example-inline-block">
+            <a>this is link that needs to be a the same base line as button next to it, this is link that needs to be a the same base line as button next to it</a><button class="btn">Search the latest jobs</button>
+        </div>
+    </div>
+    <div>
+        <h3>using table for container and table-cell for children</h3>
+        <ul>
+            <li>set both element to table-cell (atag and button)</li>
+            <li>set vertical-align:middle to both elements and voila !</li>
+            <li>text will wrap so no element will drop</li>
+        </ul>
+        <div class="example example-table-cell">
+            <a>this is link that needs to be a the same base line as button next to it Lorem ipsum dolor sit amet</a><button class="btn">Search the latest jobs lorem</button>
+        </div>
+    </div>
+    <div>
+        <h3>using flex</h3>
+        <ul>
+            <li>set both element to table-cell (atag and button)</li>
+            <li>set vertical-align:middle to both elements and voila !</li>
+        </ul>
+        <div class="flexSetup">
+            <a>this is link that needs to be a the same base line as button next to it Lorem ipsum dolor sit amet</a><button class="btn">Search the latest jobs lorem</button>
+        </div>
+    </div>
+</body>
+
+</html>

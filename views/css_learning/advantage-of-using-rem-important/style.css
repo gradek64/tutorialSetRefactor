@@ -1,0 +1,40 @@
+/*extras*/
+
+html {
+  /*specify default size for rem unit most browser have 16px so lets make it 10px*/
+  font-size: 62.5%;
+  font-size: 100%;
+
+  /* body { font-size:62.5%; }
+   h1 { font-size: 2.4em; } //24px 
+   p  { font-size: 1.4em; } //14px 
+   li { font-size: 1.4em; } //4px etc
+   }*/
+}
+
+code {
+  white-space: pre-wrap;
+}
+
+a {
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+
+.example {
+  border: 1px solid green;
+  padding: 1rem;
+}
+
+.btn {
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 3.5rem;
+  background: #00A3AD;
+  border-radius: 8rem;
+  border: none;
+  position: static;
+  text-shadow: none;
+  padding: 0.5rem 3rem;
+  color: white;
+}

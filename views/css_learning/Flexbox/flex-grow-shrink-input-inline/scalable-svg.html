@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>scalable html</title>
+</head>
+<style>
+.content {
+  position: absolute;
+  top:0;
+  left:0;
+  width: 50%;
+  height: 100%;
+  padding:20px;
+  color: white;
+
+} 
+small {
+   text-overflow: ellipsis;
+
+     /* Required for text-overflow to do anything */
+     white-space: wrap;
+     overflow: hidden;
+}
+.wrapper {
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  text-align: center; }
+  .wrapper > h1, .wrapper > p {
+    color: #333333; }
+  .wrapper .containerSS {
+    /*position: relative;*/
+    height: inherit;
+    float: left;
+    width: 55%;
+    /*padding-left: 56.25%;*/
+  }
+  .wrapper .containerSS:last-child {
+    /*position: relative;*/
+    height: inherit;
+    float: left;
+    width: 45%;
+    max-width: 320px;
+    /*firefox fix*/
+    margin-left: -0.4px;
+  }
+  .restrainSVG {
+
+  }
+
+    .wrapper .containerSS > svg {
+      /*position: absolute;*/
+      opacity: 1;
+      display: block; }
+      .wrapper .containerSS > svg path {
+        stroke: #d6940b;
+        stroke-width: 10px;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+        stroke-dasharray: 1px, 15px;
+        fill: red; }
+
+
+        .image-bg {
+            /*path */
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            background-image: url("./images/construction-works.jpg");
+            background-position: top left;
+            /* Center the image */
+            background-repeat: no-repeat;
+            /* Do not repeat the image */
+            background-size: cover;
+            height: 360px;
+            /*bg-image*/ 
+        }
+
+</style>
+<body>
+<div class="image-bg">
+  <div class="wrapper">
+     <div class="containerSS">
+               <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+               <!--  <linearGradient id="3_opacity_stops">
+                  <stop offset="0%" style="stop-color: rgb(254, 23, 0);; stop-opacity: 1.0"/>
+                  <stop offset="80%" style="stop-color: rgb(254, 23, 0);; stop-opacity: 1.0"/>
+                  <stop offset="100%" style="stop-color: rgb(254, 23, 0);; stop-opacity: 0.8"/>
+                </linearGradient> -->
+                 <rect width="100%" height="100%" style="fill: rgb(254, 23, 0);"/>
+                </svg>
+    </div>
+    <div class="containerSS">
+               <svg class='restrainSVG' width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMinYMax slice">
+                <defs>
+                   <linearGradient id="2_opacity_stops">
+                     <stop offset="0%" style="stop-color: rgb(254, 23, 0); stop-opacity: 1.0"/>
+                     <stop offset="100%" style="stop-color: rgb(254, 23, 0); stop-opacity: 0.3"/>
+                   </linearGradient>
+                 </defs>
+                 <rect width="100%" height="100%"  style="fill: url(#2_opacity_stops);" mask="url(#rmvCir)"/>
+                 <mask id="rmvCir">
+                      <rect width="100%" height="100%" fill="white"/>
+                     <circle cx="180" cy="-30" r="160" fill="black"/>
+                 </mask>
+              </svg>
+      </div>
+    
+    </div>
+    <div class="content">
+      <h1>We help organisation to be resilent</h1>
+      <small>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      </small>
+    </div>
+    </div>
+
+</div>
+</body>
+</html>
