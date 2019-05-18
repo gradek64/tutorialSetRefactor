@@ -1,0 +1,114 @@
+$border: true;
+$borderColor: green;
+$borderThickness: 1px;
+
+$hasBgColor: true;
+$checkboxBgColor: #ccc; 
+
+$hasHover: true;
+$hoverBgColor: darken( $checkboxBgColor , 10%);
+
+$checkedTickColor: blue;
+@if $border == true {
+  $checkedTickColor: $borderColor;
+}
+
+
+/*** mixins ***/
+
+  @mixin hasBorder($border, $borderColor, $borderThickness) {
+    @if $border {
+        box-shadow: 0 0 0 $borderThickness $borderColor
+        //border: $borderThickness solid $borderColor;
+    } @else {
+        border: none;
+    }
+  }
+
+  @mixin hasBackgroundColor($hasBgColor, $checkboxBgColor) {
+    @if $hasBgColor {
+        background-color: $checkboxBgColor;
+    } @else {
+        background-color: transparent;
+    }
+  }
+
+  @mixin hasBackgroundColor($hasHover, $hoverBgColor) {
+    @if $hasHover {
+        background-color: $hoverBgColor;
+    }
+  }
+
+/*************/
+
+
+/* The container */
+.container-radio-button {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  /*1 Hide the browser's default radio button */
+    input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    /*2 Create a custom radio button */
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 25px;
+      width: 25px;
+      border-radius: 50%;
+      @include hasBackgroundColor($hasBgColor, $checkboxBgColor);
+      @include  hasBorder($border, $borderColor, $borderThickness);
+
+      /* Create the indicator (the dot/circle - hidden when not checked) */
+      &:after {
+        content: "";
+        position: absolute;
+        display: none;
+        top: 8px;
+        left: 8px;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: white; 
+      }
+    }
+
+    
+
+    /* When the radio button is checked, add a red background to .checkmark sibling*/
+      input {
+        &:checked {
+            & ~ .checkmark {
+            background-color: $checkedTickColor;
+
+                /* Show the indicator (dot/circle) when checked */
+                &:after {
+                   display: block;
+                }
+            }
+        }
+      }
+
+
+    /*3. On mouse-over, add a grey background color but only when is active*/
+    &:hover input:not(:checked) ~ .checkmark {
+       @include hasBackgroundColor($hasHover, $hoverBgColor)
+    }
+
+}
+
+

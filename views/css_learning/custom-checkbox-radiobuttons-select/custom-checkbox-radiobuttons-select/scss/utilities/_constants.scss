@@ -1,0 +1,52 @@
+//lengths
+
+$lengths-pageWidth: 1400px;
+
+//grid system;
+$grid-top-l-grid-l-margin: 120px;
+$grid-content-width: $lengths-pageWidth - 2 * $grid-top-l-grid-l-margin;
+$min-grid-content-width: 930px;
+$entire-page-width: 1400px;
+//min laptop screen 12.1 inch (800x600) it is too small though
+$min-page-width: 930px;
+$grid-gutter: 40px;
+
+//nav menu bar
+$main-nav-height: 80px;
+$main-nav-hover-bottom: 3px;
+$main-nav-hover-bottom-color: red;
+$main-nav-link-height: $main-nav-height - $main-nav-hover-bottom - 3px;
+$main-nav-font-size: 22px;
+$main-nav-font-color: #1A1A1A;
+$main-nav-color: #fff;
+
+//colors
+$colors-topNav: #000;
+$footer-color: #102129;
+$footer-font-color: #ECEEEE;
+
+//hero-banner
+$heroBanerRed: #D72D18;
+
+//hero-banner-pannel
+$panel-header-bg-color: #007D8A;
+$panel-header-font-color: #fff;
+$panel-header-font-size: 18px;
+$panel-header-padding: 20px 40px;
+$panel-content-font-size: 24px;
+
+$panel-content-line-height: 28px;
+$panel-content-paddings: 30px 40px 30px 40px;
+$panel-content-font-size: 24px;
+$panel-content-font-color: #007D8A;
+$panel-content-bg-color: #FFF;
+$border-bottom-color: #007D8A;
+//aside
+$pc-type-font-color: #737B80;
+$pc-type-margin-top:10px;
+$pc-type-font-size: 16px;
+
+
+$h-panel-bottom-border-height: 10px;
+$h-panel-bottom-border-color: #D8D8D8;
+$panel-offset-top: -84px;

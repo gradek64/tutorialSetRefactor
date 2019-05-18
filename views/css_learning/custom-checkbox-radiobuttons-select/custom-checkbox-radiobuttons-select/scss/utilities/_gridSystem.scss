@@ -1,0 +1,154 @@
+//@import 'utilities/_constants';
+.l-grid {
+
+  /*@U need to drop margin for the first child of l-grid everywhere also for l-grid-6 since is 100%*/
+  *:first-child {
+    margin-left: 0 !important;
+  }
+
+  /* width: $lengths-pageWidth - (nth($grid-top-l-grid-padding,
+2)+nth($grid-top-l-grid-padding,
+4));
+*/
+  width: 100%;
+  max-width: $grid-content-width;
+  margin: 0 auto;
+}
+
+html.lt-ie8 .l-grid {
+  float: left;
+}
+
+/*  clear floats */
+.l-grid:before,
+.l-grid:after {
+  clear: both;
+}
+
+.l-grid-1,
+.l-grid-2,
+.l-grid-3,
+.l-grid-4,
+.l-grid-5,
+.l-grid-6 {
+  float: left;
+  margin-right: 0;
+  margin-left: $grid-gutter;
+  margin-left: $grid-gutter;
+  /*
+    margin-left is a $grid-gutter: 40px; it needs to be converted to percentage to avoid droping down
+    keeps margin arond 40px and applies scroller once it gets to min-content-width around 1028px;
+*/
+  //margin-left: 3.39%;
+}
+
+.l-grid-1.odd,
+.l-grid-2.odd,
+.l-grid-3.odd,
+.l-grid-4.odd,
+.l-grid-5.odd,
+.l-grid-6.odd {
+  clear: both;
+}
+
+.l-grid .l-grid-1,
+.l-grid .l-grid-2,
+.l-grid .l-grid-3,
+.l-grid .l-grid-4,
+.l-grid .l-grid-5,
+.l-grid .l-grid-6 {
+  margin-right: 0px;
+  margin-left: $grid-gutter;
+  /*
+    margin-left is a $grid-gutter: 40px; it needs to be converted to percentage to avoid droping down
+    keeps margin arond 40px and applies scroller once it gets to min-content-width around 1028px;
+*/
+  //margin-left: 3.39%;
+}
+
+.l-grid .l-grid-6 {
+  margin-left: 0;
+}
+
+html.lt-ie7 .l-grid {
+  zoom: 1;
+  overflow: hidden;
+  margin: 0;
+}
+
+html.lt-ie7 .l-grid-1,
+html.lt-ie7 .l-grid-2,
+html.lt-ie7 .l-grid-3,
+html.lt-ie7 .l-grid-4,
+html.lt-ie7 .l-grid-5,
+html.lt-ie7 .l-grid-6 {
+  zoom: 1;
+  display: inline;
+  margin: 0 0 0 15px;
+  overflow: hidden;
+}
+
+/*-----------------
+ Column widths
+   every width - gutter (40px);
+ */
+.l-grid-1 {
+  /* width: 160px;*/
+  //width: 13.78%;
+  width: calc(17.24% - #{$grid-gutter});
+}
+
+.l-grid-2 {
+  /*width: 360px;*/
+  //width: 31%;
+  width: calc(34.48% - #{$grid-gutter});
+}
+
+.l-grid-3 {
+  //width: 560px;
+  //width: 48.25%;
+  width: calc(51.562% - #{$grid-gutter});
+}
+
+.l-grid-4 {
+  //width: 63%;
+  width: calc(69% - #{$grid-gutter});
+}
+
+.l-grid-5 {
+  // width: 960px;
+  //width: 81%;
+  width: calc(86.155% - #{$grid-gutter});
+}
+
+.l-grid-6 {
+  //width: 1160px;
+  width: 100%;
+  //width: calc(100% - #{$grid-gutter});
+  margin: 0;
+}
+
+/********* footer grid *********/
+.site-footer {
+  background-color: $footer-color;
+  padding: $grid-gutter $grid-gutter 6px;
+  //min-width: $min-grid-content-width;
+  margin: 0 auto;
+
+  .l-grid {
+    //width: $grid-content-width;
+    width: 100%;
+    max-width: $grid-content-width;
+    margin: 0 auto;
+
+    nav {
+      color: $footer-font-color;
+
+      a {
+        color: $footer-font-color;
+      }
+    }
+  }
+}
+
+/********* footer grid *********/

@@ -1,0 +1,312 @@
+/*
+  *@this needs to be wrapped in media query 
+  *@so it wont affect mobile changes
+*/
+@media only screen and (min-width: 768px) {
+  .l-grid {
+    /*@U need to drop margin for the first child of l-grid everywhere also for l-grid-6 since is 100%*/
+    /* width: $lengths-pageWidth - (nth($grid-top-l-grid-padding,
+2)+nth($grid-top-l-grid-padding,
+4));
+*/
+    width: 100%;
+    max-width: 1160px;
+    margin: 0 auto; }
+    .l-grid *:first-child {
+      margin-left: 0 !important; }
+  html.lt-ie8 .l-grid {
+    float: left; }
+  /*  clear floats */
+  .l-grid:before,
+  .l-grid:after {
+    clear: both; }
+  .l-grid-1,
+  .l-grid-2,
+  .l-grid-3,
+  .l-grid-4,
+  .l-grid-5,
+  .l-grid-6 {
+    float: left;
+    margin-right: 0;
+    margin-left: 40px;
+    margin-left: 40px;
+    /*
+    margin-left is a $grid-gutter: 40px; it needs to be converted to percentage to avoid droping down
+    keeps margin arond 40px and applies scroller once it gets to min-content-width around 1028px;
+*/ }
+  .l-grid-1.odd,
+  .l-grid-2.odd,
+  .l-grid-3.odd,
+  .l-grid-4.odd,
+  .l-grid-5.odd,
+  .l-grid-6.odd {
+    clear: both; }
+  .l-grid .l-grid-1,
+  .l-grid .l-grid-2,
+  .l-grid .l-grid-3,
+  .l-grid .l-grid-4,
+  .l-grid .l-grid-5,
+  .l-grid .l-grid-6 {
+    margin-right: 0px;
+    margin-left: 40px;
+    /*
+    margin-left is a $grid-gutter: 40px; it needs to be converted to percentage to avoid droping down
+    keeps margin arond 40px and applies scroller once it gets to min-content-width around 1028px;
+*/ }
+  .l-grid .l-grid-6 {
+    margin-left: 0; }
+  html.lt-ie7 .l-grid {
+    zoom: 1;
+    overflow: hidden;
+    margin: 0; }
+  html.lt-ie7 .l-grid-1,
+  html.lt-ie7 .l-grid-2,
+  html.lt-ie7 .l-grid-3,
+  html.lt-ie7 .l-grid-4,
+  html.lt-ie7 .l-grid-5,
+  html.lt-ie7 .l-grid-6 {
+    zoom: 1;
+    display: inline;
+    margin: 0 0 0 15px;
+    overflow: hidden; }
+  /*-----------------
+ Column widths
+   every width - gutter (40px);
+ */
+  .l-grid-1 {
+    /* width: 160px;*/
+    width: calc(17.24% - 40px); }
+  .l-grid-2 {
+    /*width: 360px;*/
+    width: calc(34.48% - 40px); }
+  .l-grid-3 {
+    width: calc(51.562% - 40px); }
+  .l-grid-4 {
+    width: calc(69% - 40px); }
+  .l-grid-5 {
+    width: calc(86.155% - 40px); }
+  .l-grid-6 {
+    width: 100%;
+    margin: 0; }
+  /********* footer grid *********/
+  .site-footer {
+    background-color: #102129;
+    padding: 40px 40px 6px;
+    margin: 0 auto; }
+    .site-footer .l-grid {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto; }
+      .site-footer .l-grid nav {
+        color: #ECEEEE; }
+        .site-footer .l-grid nav a {
+          color: #ECEEEE; }
+  /********* footer grid *********/
+  /*
+  *@wrapper it wraps entire page, even footer therefore it is not possible to apple 3 segements
+  *@as header, content, footer with their won scaling and minimum-width (around 1028 desktop wide)
+  *needs to be discused !
+*/
+  .wrapper {
+    width: 100%;
+    min-width: 930px; }
+    .wrapper .page {
+      /*
+      .main-nav li        
+
+    */
+      /*************** general rules **************/
+      /*************** end of general rules **************/
+      /*
+    hero banner
+*/ }
+      .wrapper .page #MainContentArea {
+        width: 100%; }
+        .wrapper .page #MainContentArea #content {
+          width: 100%;
+          padding: 40px !important; }
+      .wrapper .page .logo-innerDiv {
+        background-color: #ccc; }
+      .wrapper .page .main-nav {
+        height: 80px;
+        background: #fff; }
+        .wrapper .page .main-nav .main-nav-innerDiv {
+          width: 1160px; }
+          .wrapper .page .main-nav .main-nav-innerDiv > ul {
+            position: relative; }
+            .wrapper .page .main-nav .main-nav-innerDiv > ul li.main-nav-item {
+              position: static;
+              background: #fff;
+              height: 74px !important;
+              color: #1A1A1A;
+              /*
+*@font is already there in html markup with>>*@ */ }
+              .wrapper .page .main-nav .main-nav-innerDiv > ul li.main-nav-item > a {
+                width: auto;
+                height: 74px !important;
+                line-height: 69px; }
+              .wrapper .page .main-nav .main-nav-innerDiv > ul li.main-nav-item:nth-child(n+2):hover > a {
+                color: #1A1A1A;
+                border-bottom: 3px solid red; }
+              .wrapper .page .main-nav .main-nav-innerDiv > ul li.main-nav-item .link-list {
+                /*a {
+  &:after {
+    right: 0;
+    top: 100;
+    content: '>';
+    margin: 0;
+    padding: 0;
+  }
+}*/ }
+                .wrapper .page .main-nav .main-nav-innerDiv > ul li.main-nav-item .link-list font {
+                  color: inherit; }
+                .wrapper .page .main-nav .main-nav-innerDiv > ul li.main-nav-item .link-list li,
+                .wrapper .page .main-nav .main-nav-innerDiv > ul li.main-nav-item .link-list a {
+                  margin: 0;
+                  padding: 0; }
+              .wrapper .page .main-nav .main-nav-innerDiv > ul li.main-nav-item .sub-nav {
+                width: 100%;
+                left: 0;
+                top: 80px;
+                /* one item */
+                /* two items */
+                /* *:first-child:nth-last-child(2),
+*:first-child:nth-last-child(2) ~ * {
+  width: 50%;
+}*/
+                /* three items */
+                /* *:first-child:nth-last-child(3),
+*:first-child:nth-last-child(3) ~ * {
+  width: 33.3333%;
+}*/
+                /* four items */
+                /* *:first-child:nth-last-child(4),
+*:first-child:nth-last-child(4) ~ * {
+  width: 25%;
+}*/ }
+                .wrapper .page .main-nav .main-nav-innerDiv > ul li.main-nav-item .sub-nav *:first-child:nth-last-child(1) {
+                  width: 100%; }
+      .wrapper .page p,
+      .wrapper .page h1,
+      .wrapper .page h2,
+      .wrapper .page h3,
+      .wrapper .page h4,
+      .wrapper .page h5,
+      .wrapper .page h6 {
+        margin: 0;
+        padding: 0;
+        border: 0; }
+      .wrapper .page .hero-banner-wrapper {
+        background-color: #D72D18; }
+        .wrapper .page .hero-banner-wrapper .hero-banner {
+          width: 100%;
+          max-width: 1400px;
+          margin: 0 auto;
+          /*hero banner image/header section*/ }
+          .wrapper .page .hero-banner-wrapper .hero-banner .hb-header-section {
+            position: relative;
+            width: 100%;
+            height: 583px; }
+            .wrapper .page .hero-banner-wrapper .hero-banner .hb-header-section .hb-image-bg {
+              position: relative;
+              width: 100%;
+              height: 100%; }
+              .wrapper .page .hero-banner-wrapper .hero-banner .hb-header-section .hb-image-bg .whole-mask {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%; }
+                .wrapper .page .hero-banner-wrapper .hero-banner .hb-header-section .hb-image-bg .whole-mask .gadient-mask {
+                  height: inherit;
+                  float: left;
+                  width: 24%; }
+                  .wrapper .page .hero-banner-wrapper .hero-banner .hb-header-section .hb-image-bg .whole-mask .gadient-mask > svg {
+                    opacity: 1;
+                    display: block; }
+                  .wrapper .page .hero-banner-wrapper .hero-banner .hb-header-section .hb-image-bg .whole-mask .gadient-mask :nth-child(2) {
+                    height: inherit;
+                    float: left;
+                    width: 45%;
+                    max-width: 320px;
+                    /*firefox fix*/
+                    margin-left: -0.4px; }
+              .wrapper .page .hero-banner-wrapper .hero-banner .hb-header-section .hb-image-bg .image-container {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0; }
+                .wrapper .page .hero-banner-wrapper .hero-banner .hb-header-section .hb-image-bg .image-container img {
+                  float: right; }
+            .wrapper .page .hero-banner-wrapper .hero-banner .hb-header-section .hb-header-section-content {
+              position: absolute;
+              top: 140px;
+              left: calc(100% / 11);
+              max-width: 600px;
+              margin: 0 auto; }
+              .wrapper .page .hero-banner-wrapper .hero-banner .hb-header-section .hb-header-section-content h1 {
+                color: white;
+                background-color: #D72D18;
+                font-size: 63px;
+                line-height: 63px;
+                display: inline; }
+          .wrapper .page .hero-banner-wrapper .hero-banner .hb-content-section {
+            position: relative;
+            width: 100%;
+            max-width: 1160px;
+            margin-top: -84px;
+            margin-bottom: 0;
+            margin-left: auto;
+            margin-right: auto;
+            /*pannel section*/ }
+            .wrapper .page .hero-banner-wrapper .hero-banner .hb-content-section .hero-panel {
+              width: 100%;
+              border-bottom: 10px solid #D8D8D8;
+              box-shadow: 0 0 5px 2px rgba(210, 209, 209, 0.5); }
+              .wrapper .page .hero-banner-wrapper .hero-banner .hb-content-section .hero-panel .hp-header {
+                width: 100%;
+                font-size: 18px;
+                padding: 20px 40px;
+                background-color: #007D8A;
+                color: #fff; }
+              .wrapper .page .hero-banner-wrapper .hero-banner .hb-content-section .hero-panel .hp-content {
+                width: 100%;
+                line-height: 28px;
+                color: #007D8A;
+                background-color: #FFF;
+                padding: 20px 40px;
+                font-size: 24px; }
+                .wrapper .page .hero-banner-wrapper .hero-banner .hb-content-section .hero-panel .hp-content aside.type {
+                  color: #737B80;
+                  font-size: 16px;
+                  margin-top: 10px;
+                  text-transform: uppercase; }
+                .wrapper .page .hero-banner-wrapper .hero-banner .hb-content-section .hero-panel .hp-content .panel-box {
+                  position: relative;
+                  /***********
+                                        There could combination of columns with different row styling
+                                        depending how many children in a row;
+
+                                   ************/
+                  /*skip border for 3 child and more*/ }
+                  .wrapper .page .hero-banner-wrapper .hero-banner .hb-content-section .hero-panel .hp-content .panel-box .icon-wrapper {
+                    float: left;
+                    max-width: 50px;
+                    min-width: 30px; }
+                    .wrapper .page .hero-banner-wrapper .hero-banner .hb-content-section .hero-panel .hp-content .panel-box .icon-wrapper .icon {
+                      width: 100%;
+                      height: auto; }
+                  .wrapper .page .hero-banner-wrapper .hero-banner .hb-content-section .hero-panel .hp-content .panel-box .panel-with-icon {
+                    margin-left: 50px;
+                    padding-left: 10px;
+                    width: calc(100% - 50px); }
+                  .wrapper .page .hero-banner-wrapper .hero-banner .hb-content-section .hero-panel .hp-content .panel-box:not(:last-child):after {
+                    /*skip border only for the last child*/
+                    position: absolute;
+                    right: -20px;
+                    top: 0;
+                    content: ' ';
+                    width: 5px;
+                    height: 100%;
+                    background-color: rgba(216, 216, 216, 0.5); } }

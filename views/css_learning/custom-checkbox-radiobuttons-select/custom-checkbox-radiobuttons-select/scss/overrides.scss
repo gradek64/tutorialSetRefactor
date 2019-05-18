@@ -1,0 +1,321 @@
+/*
+  *@this needs to be wrapped in media query 
+  *@so it wont affect mobile changes
+*/
+@media only screen and (min-width: 768px) {
+  @import 'utilities/constants';
+  @import 'utilities/gridSystem';
+
+  /*
+  *@wrapper it wraps entire page, even footer therefore it is not possible to apple 3 segements
+  *@as header, content, footer with their won scaling and minimum-width (around 1028 desktop wide)
+  *needs to be discused !
+*/
+  .wrapper {
+    //width: $lengths-pageWidth - 2 * $grid-gutter;
+    width: 100%;
+    //needs to take whole browser width
+    //max-width: $entire-page-width;
+    min-width: $min-page-width;
+
+    //margin: 0 auto;
+    .page {
+      #MainContentArea {
+        //min-width: $lengths-pageWidth;
+        width: 100%;
+
+        #content {
+          //width: $grid-content-width;
+          width: 100%;
+          padding: 40px !important;
+          //padding: 0 0 0 $grid-gutter;
+        }
+      }
+
+      /*
+      .main-nav li        
+
+    */
+      //temporary
+      .logo-innerDiv {
+        background-color: #ccc;
+      }
+
+      .main-nav {
+        height: $main-nav-height;
+        background: $main-nav-color;
+
+        .main-nav-innerDiv {
+          width: $grid-content-width;
+
+          //only list that are immidiete child
+          &>ul {
+            position: relative;
+
+            li.main-nav-item {
+              position: static;
+              background: $main-nav-color;
+              height: $main-nav-link-height !important;
+              color: $main-nav-font-color;
+
+              &>a {
+                width: auto;
+                height: $main-nav-link-height !important;
+                line-height: $main-nav-height - $main-nav-font-size / 2;
+              }
+
+              &:nth-child(n+2):hover {
+                &>a {
+                  color: $main-nav-font-color;
+                  border-bottom: $main-nav-hover-bottom solid $main-nav-hover-bottom-color;
+                }
+              }
+
+              //experimental
+              /*
+*@font is already there in html markup with>>*@ */
+              .link-list {
+                font {
+                  color: inherit;
+                }
+
+                li,
+                a {
+                  margin: 0;
+                  padding: 0;
+                }
+
+                /*a {
+  &:after {
+    right: 0;
+    top: 100;
+    content: '>';
+    margin: 0;
+    padding: 0;
+  }
+}*/
+              }
+
+              //sub-nav;
+              .sub-nav {
+                width: 100%;
+                left: 0;
+                top: $main-nav-height;
+
+                /* one item */
+                *:first-child:nth-last-child(1) {
+                  width: 100%;
+                }
+
+                /* two items */
+                /* *:first-child:nth-last-child(2),
+*:first-child:nth-last-child(2) ~ * {
+  width: 50%;
+}*/
+                /* three items */
+                /* *:first-child:nth-last-child(3),
+*:first-child:nth-last-child(3) ~ * {
+  width: 33.3333%;
+}*/
+                /* four items */
+                /* *:first-child:nth-last-child(4),
+*:first-child:nth-last-child(4) ~ * {
+  width: 25%;
+}*/
+              }
+            }
+          }
+        }
+      }
+
+      /*************** general rules **************/
+      //no margin padding for p,h{1...6}
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+
+      /*************** end of general rules **************/
+      /*
+    hero banner
+*/
+      .hero-banner-wrapper {
+        background-color: $heroBanerRed;
+
+        .hero-banner {
+          width: 100%;
+          max-width: $entire-page-width;
+          margin: 0 auto;
+
+          /*hero banner image/header section*/
+          .hb-header-section {
+            position: relative;
+            width: 100%;
+            height: 583px;
+
+            //padding-left: calc(3 * #{$grid-gutter});
+            //hero banner image and masking
+            .hb-image-bg {
+              position: relative;
+              //background-image: url("../images/hero-banner-sample-image.png");
+              //background-position: top left;
+              //background-repeat: no-repeat;
+              //background-size: cover;
+              width: 100%;
+              height: 100%;
+
+              .whole-mask {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+
+                .gadient-mask {
+                  height: inherit;
+                  float: left;
+                  width: 24%;
+
+                  &>svg {
+                    opacity: 1;
+                    display: block;
+                  }
+
+                  //second part of the mask with svg gradient;
+                  :nth-child(2) {
+                    height: inherit;
+                    float: left;
+                    width: 45%;
+                    max-width: 320px;
+                    /*firefox fix*/
+                    margin-left: -0.4px;
+                  }
+                }
+              }
+
+              .image-container {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+
+                img {
+                  float: right;
+                }
+              }
+            }
+
+            .hb-header-section-content {
+              position: absolute;
+              top: 140px;
+              left: calc(100% / 11);
+              //max-width: $grid-content-width;
+              max-width: 600px;
+              margin: 0 auto;
+
+              h1 {
+                color: white;
+                background-color: $heroBanerRed;
+                font-size: 63px;
+                line-height: 63px;
+                display: inline;
+              }
+            }
+          }
+
+          .hb-content-section {
+            //negative margin will only work with position:relative (relative to its original position);
+            position: relative;
+            width: 100%;
+            max-width: $grid-content-width;
+            margin-top: $panel-offset-top;
+            margin-bottom: 0;
+            margin-left: auto;
+            margin-right: auto;
+
+            /*pannel section*/
+            .hero-panel {
+              width: 100%;
+              border-bottom:#{$h-panel-bottom-border-height} solid #{$h-panel-bottom-border-color};
+              box-shadow: 0 0 5px 2px rgba(210, 209, 209, 0.5);
+
+              .hp-header {
+                width: 100%;
+                font-size: $panel-header-font-size;
+                padding: $panel-header-padding;
+                background-color: $panel-header-bg-color;
+                color: $panel-header-font-color;
+              }
+
+              .hp-content {
+                width: 100%;
+                line-height: $panel-content-line-height;
+                color: $panel-content-font-color;
+                background-color: $panel-content-bg-color;
+                padding: $panel-header-padding;
+                font-size: $panel-content-font-size;
+
+                aside.type {
+                  color: $pc-type-font-color;
+                  font-size: $pc-type-font-size;
+                  margin-top: $pc-type-margin-top;
+                  text-transform: uppercase;
+                }
+
+                .panel-box {
+                  position: relative;
+
+                  //padding: $panel-content-paddings;
+                  .icon-wrapper {
+                    float: left;
+                    max-width: 50px;
+                    min-width: 30px;
+
+                    .icon {
+                      width: 100%;
+                      height: auto;
+                    }
+                  }
+
+                  .panel-with-icon {
+                    margin-left: 50px;
+                    padding-left: 10px;
+                    width: calc(100% - 50px);
+                  }
+
+                  /***********
+                                        There could combination of columns with different row styling
+                                        depending how many children in a row;
+
+                                   ************/
+                  /*skip border for 3 child and more*/
+                  // &:not(:nth-child(n+3)):after {
+                  &:not(:last-child):after {
+                    /*skip border only for the last child*/
+                    //&:not(:last-child):after {
+                    // &:after {
+                    position: absolute;
+                    right: -$grid-gutter / 2;
+                    top: 0;
+                    content: ' ';
+                    width: 5px;
+                    height: 100%;
+                    background-color: rgba($h-panel-bottom-border-color, 0.5);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

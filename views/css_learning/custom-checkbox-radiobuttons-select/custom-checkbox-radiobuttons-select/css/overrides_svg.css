@@ -1,0 +1,96 @@
+body {
+  margin: 0;
+  background-color: #bada55; }
+
+.wrapper {
+  width: 40%;
+  margin: 0 auto;
+  text-align: center; }
+  .wrapper > h1, .wrapper > p {
+    color: #333333; }
+  .wrapper .containerSS {
+    position: relative;
+    height: 0;
+    padding-bottom: 56.25%; }
+    .wrapper .containerSS > svg {
+      position: absolute;
+      display: block; }
+      .wrapper .containerSS > svg path {
+        stroke: #d6940b;
+        stroke-width: 10px;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+        stroke-dasharray: 1px, 15px;
+        fill: #F4AF20; }
+
+.container {
+  height: 200px;
+  width: 100%;
+  position: relative; }
+  .container .text {
+    position: absolute;
+    top: 0;
+    z-index: 10; }
+  .container .clipping-path-animation {
+    background-color: rgba(249, 132, 11, 0.8);
+    clip-path: url(#clipping-path-animation);
+    height: inherit;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 3; }
+  .container .clipping-path-TEXT {
+    background-color: rgba(249, 132, 11, 0.8);
+    clip-path: url(#clip-text-SVG);
+    height: inherit;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 3; }
+  .container .clipping-path-SVG {
+    background-color: rgba(249, 132, 11, 0.8);
+    clip-path: url(#clip-polygon);
+    height: inherit;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 3; }
+  .container .clipping-path-CSS {
+    background-color: rgba(249, 132, 11, 0.8);
+    clip-path: polygon(0 100%, 0 0, 100% 0, 80% 100%);
+    height: inherit;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 3; }
+  .container .image-bg {
+    /*path */
+    background-image: url("../images/dirtBike.jpg");
+    background-position: top left;
+    /* Center the image */
+    background-repeat: no-repeat;
+    /* Do not repeat the image */
+    background-size: cover;
+    height: inherit;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    /*bg-image*/ }
+
+/*nav li position class*/
+.dropdown-menu.displayOnLeft {
+  left: auto;
+  right: 0; }

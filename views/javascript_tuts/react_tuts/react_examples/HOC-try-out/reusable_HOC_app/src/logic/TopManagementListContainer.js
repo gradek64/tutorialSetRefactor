@@ -68,12 +68,12 @@ const withSimpleState = classes => (EnhancedListComp) => {
             <h1>active sortBy: {this.state.sortBy}</h1>
             <SearchBox placeholder="filter" eventHandler={this.searchText} />
             <Simplebutton
-              action={this.filterSide}
+              eventHandler={this.filterSide}
               value="dark"
               label="filter DARK side"
             />
             <Simplebutton
-              action={this.filterSide}
+              eventHandler={this.filterSide}
               value="light"
               label="filter LIGHT side"
             />
@@ -91,12 +91,12 @@ const withSimpleState = classes => (EnhancedListComp) => {
               }}
             >
               {/* DropDown is composed with Togglebutton that
-                requires action so U need to specify an empty method */}
+                requires eventHandler so U need to specify an empty method */}
               <DropDown label="DropDown">
                 <ul style={classes.list}>
                   <li>
                     <Simplebutton
-                      action={this.sortBy}
+                      eventHandler={this.sortBy}
                       value="sortDESC"
                       label="sortDESC"
                     />
@@ -104,7 +104,7 @@ const withSimpleState = classes => (EnhancedListComp) => {
                   <li>
                     {' '}
                     <Simplebutton
-                      action={this.sortBy}
+                      eventHandler={this.sortBy}
                       value="sortASC"
                       label="sortASC"
                     />
@@ -119,7 +119,7 @@ const withSimpleState = classes => (EnhancedListComp) => {
               letterSearch={this.state.searchValue}
               sortBy={this.state.sortBy}
               filter={this.state.filter}
-              action={this.state.action}
+              actionType={this.state.action}
             />
           </div>
         </div>

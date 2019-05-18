@@ -1,0 +1,6 @@
+	1) in a start menu look for : edit system enviroment variables;
+	2) got to -> edit Variables;
+	3) add New System Variable
+	4) in a dilaog box fill: Variable Name:cmder; Varible value C:\pathToCmderNoExe\Folder\Cmder
+	5) edith PATH variable by: ;C:pathtoCmderNoExe\Folder\Cmder
+	6) Log in and log out
