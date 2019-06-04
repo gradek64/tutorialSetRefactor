@@ -358,6 +358,55 @@ console.log(data); //{data:'see'};
 
                </example>
            </paragraph>
+           <subtitle>...TRICKY  Object literals in arrays and spread operator</subtitle>
+           <paragraph>
+               <info>[{object}] object in array (object literals) act diffrenty to {object} by its own once using a spread operator to relate to its content so array content and object content</info>
+               <example>
+---------------- ----------------Array of object literals ---------------- ----------------
+
+const arr1 = [{prop1:'prop1',prop2:2}];
+const arr2 = [{prop1:'prop1',prop2:4,prop3:5}];
+const arr3 = [{prop1:'prop2',prop2:8,prop5:6}];
+
+//lets merge those object literals
+
+const merge = [...arr1,...arr2]; 
+
+//the outcome is actually not a merge but  array with 2 entries;
+console.log(merge) //[{prop1: "prop1", prop2: 2}, {prop1: "prop1", prop2: 5}]
+
+
+---------------- ----------------  merging array with object literals ---------------- ----------------
+
+const merge = [...arr1,...arr2,...arr3]; 
+
+//the outcome is actually not a merge but array with 3 entries;
+console.log(merge) //[{prop1: "prop1", prop2: 2}, {prop1: "prop1", prop2: 5},{prop3:'prop2',prop4:5}]
+
+There reson why is ...arr1 is already an array with one entry so javascript treats this as [0] pocket not a object literal !;
+
+//U CAN NOT merge object literals which are in arrays it will always treat them as array not object literals;
+
+const mergeAsOneArrayAttempt = {...arr1,...arr2,...arr3};
+console.log(mergeAsOneArrayAttempt)  //[{prop1:'prop2',prop2:8,prop5:6}] only takes last array;
+
+
+---------------- ----------------  merging array CONTENT as object literals ---------------- ----------------
+
+
+//BUT THERE IS A TRICK !
+U need to refer to array content not the array itself!
+
+const mergeAsOneArrayContent = [{...arr1[0],...arr2[0],...arr3[0]}];
+console.log(mergeAsOneArrayContent) //[{ prop1: "prop2", prop2: 8 ,prop3: 5, prop5: 6} ]
+
+U can do it cause ...arr1[0] === {prop1:'prop1',prop2:2} //so it is like merging object not arrays...
+
+
+---------------- ---------------- ---------------- ----------------
+
+               </example>
+           </paragraph>
            <subtitle>Update object properties dynamically</subtitle>
            <paragraph>
                <info>--> to update object properties in one cycle you need 
