@@ -1,28 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// custom
-import ES7ClassSyntaxSupport from './ES7-class-syntax';
-import DonutClass from './donutClass';
-import PieChart from './d3/PieChart';
-import './styles.scss';
-
-// data
-import tables from './data/data.json';
-import dataProper from './data/dataProper.json';
 
 // custom imports
+import dataProper from './data/dataProper.json';
 import Legend from './functional/Legend';
-
-const levels = ['table1', 'table2'];
-
+import PieChart from './d3/PieChart';
+import './styles.scss';
 
 const getDataFromLevel = levelSet => new Promise((resolve, reject) => {
   const flattenObjectArray = levelSet.reduce((r, k) => r.concat([], dataProper[k]), []);
   // collect keys remove duplicates;
   const keys = flattenObjectArray.reduce((acc, obj) => {
-    Object.keys(obj).forEach((key, value) => {
-      Object.keys(obj).map((e, i) => !acc.includes(e) && acc.push(e));
-    });
+    Object.keys(obj).map((e, i) => !acc.includes(e) && acc.push(e));
     return acc;
   }, []);
 
@@ -64,6 +53,7 @@ class Chart extends React.Component {
   swatches = ['#17253c', '#5d9021', '#8bc18e', '#436db5']
 
   componentDidMount = () => {
+    const levels = ['table1'];
     preparePieFormatData(levels).then((pieData) => {
       this.setState({ formatedData: pieData });
     });
@@ -78,7 +68,7 @@ class Chart extends React.Component {
 
   hightlightSVG = (e, { index }) => {
     if (e.type === 'mouseenter') {
-      this.donutsPieces[index].setAttribute('stroke', 'red');
+      this.donutsPieces[index].setAttribute('stroke', '#b55193');
     }
     if (e.type === 'mouseleave') {
       this.donutsPieces[index].setAttribute('stroke', 'transparent');
@@ -93,11 +83,11 @@ class Chart extends React.Component {
           <div className="controls" >
             <h2>select data below</h2>
             <label className="container-radio-button">table1
-              <input type="radio" name="radioGroupBttns" value="table1,table2" checked="checked" onChange={this.onChangeHanlder} />
+              <input type="radio" name="radioGroupBttns" value="table1" defaultChecked onChange={this.onChangeHanlder} />
               <span className="checkmark" />
             </label>
             <label className="container-radio-button">table1&table2
-              <input type="radio" name="radioGroupBttns" value="table1" onChange={this.onChangeHanlder} />
+              <input type="radio" name="radioGroupBttns" value="table1,table2"  onChange={this.onChangeHanlder} />
               <span className="checkmark" />
             </label>
           </div>

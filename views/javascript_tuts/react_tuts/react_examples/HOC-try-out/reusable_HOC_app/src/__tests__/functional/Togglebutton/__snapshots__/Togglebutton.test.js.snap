@@ -21,18 +21,13 @@ exports[`renders correctly 1`] = `
     render={[Function]}
   >
     <SimpleButton
-      action={[Function]}
+      eventHandler={[Function]}
       label="sort DESC"
       value=""
     >
       <button
+        className="simple-button"
         onClick={[Function]}
-        style={
-          Object {
-            "borderColor": "green",
-            "color": "green",
-          }
-        }
       >
         sort DESC
       </button>

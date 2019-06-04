@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server",
-    "build:dev": "webpack"
+    "build:dev": "webpack",
+    "test": "jest --config=jest.configuration.json"
   },
   "dependencies": {
     "babel-cli": "6.24.1",
@@ -23,12 +24,15 @@
     "prop-types": "^15.7.2",
     "react": "16.8.4",
     "react-dom": "16.8.4",
-    "react-router-dom": "4.1.2",
-    "recompose": "^0.30.0",
     "sass-loader": "6.0.6",
     "style-loader": "0.18.2"
   },
   "devDependencies": {
+    "enzyme": "3.3.0",
+    "enzyme-adapter-react-16": "1.7.1",
+    "enzyme-to-json": "3.3.4",
+    "jest": "23.6.0",
+    "jest-css-modules": "1.1.0",
     "babel-eslint": "8.2.6",
     "eslint": "4.19.1",
     "eslint-config-airbnb": "^16.1.0",

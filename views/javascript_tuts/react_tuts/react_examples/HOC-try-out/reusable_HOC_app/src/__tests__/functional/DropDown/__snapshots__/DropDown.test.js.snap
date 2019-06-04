@@ -17,18 +17,13 @@ exports[`renders correctly 1`] = `
       }
     >
       <SimpleButton
-        action={[Function]}
+        eventHandler={[Function]}
         label="DropDown"
         value=""
       >
         <button
+          className="simple-button"
           onClick={[Function]}
-          style={
-            Object {
-              "borderColor": "green",
-              "color": "green",
-            }
-          }
         >
           DropDown
         </button>

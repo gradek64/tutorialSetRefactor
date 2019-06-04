@@ -2,11 +2,9 @@ import React from 'react';
 
 // custom
 import './legend.scss';
-
 const Legend = ({
   data, hoverHandler, swatches,
 }) => {
-  console.log(swatches);
   return (
     <div className="legend">
       {

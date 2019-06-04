@@ -1,16 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './simpleButton.scss';
 
-const style = {
-  color: 'green',
-  borderColor: 'green',
-};
 const SimpleButton = ({ label, eventHandler, value }) => (
   <button
+    className="simple-button"
     onClick={() => {
       eventHandler(value);
     }}
-    style={style}
   >
     {label}
   </button>

@@ -2,13 +2,8 @@
 
 exports[`renders correctly 1`] = `
 <button
+  className="simple-button"
   onClick={[Function]}
-  style={
-    Object {
-      "borderColor": "green",
-      "color": "green",
-    }
-  }
 >
   label
 </button>

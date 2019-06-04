@@ -18,12 +18,12 @@ exports[`It renders correctly 1`] = `
       placeholder="filter"
     />
     <SimpleButton
-      action={[Function]}
+      eventHandler={[Function]}
       label="filter DARK side"
       value="dark"
     />
     <SimpleButton
-      action={[Function]}
+      eventHandler={[Function]}
       label="filter LIGHT side"
       value="light"
     />
@@ -67,7 +67,7 @@ exports[`It renders correctly 1`] = `
         >
           <li>
             <SimpleButton
-              action={[Function]}
+              eventHandler={[Function]}
               label="sortDESC"
               value="sortDESC"
             />
@@ -75,7 +75,7 @@ exports[`It renders correctly 1`] = `
           <li>
              
             <SimpleButton
-              action={[Function]}
+              eventHandler={[Function]}
               label="sortASC"
               value="sortASC"
             />
@@ -86,7 +86,7 @@ exports[`It renders correctly 1`] = `
   </div>
   <div>
     <withTransformPropsComp
-      action="sortBy"
+      actionType="sortBy"
       filter=""
       letterSearch=""
       list={

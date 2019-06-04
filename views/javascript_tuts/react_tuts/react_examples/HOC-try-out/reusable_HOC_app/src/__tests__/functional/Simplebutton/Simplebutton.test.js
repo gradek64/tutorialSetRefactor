@@ -11,7 +11,7 @@ import { shallow } from 'enzyme';
 import SimpleButton from '../../../functional/Simplebutton';
 
 test('renders correctly', () => {
-  const wrapper = shallow(<SimpleButton label="label" action={() => {}} />);
+  const wrapper = shallow(<SimpleButton label="label" eventHandler={() => {}} />);
   // that would be with import of enzyme-to-json bu we got that in configuration
   // expect(toJson(wrapper)).toMatchSnapshot();
   expect(wrapper).toMatchSnapshot();
@@ -19,7 +19,7 @@ test('renders correctly', () => {
 
 test('button clicks and executed pass action method', () => {
   const actionCalled = jest.fn();
-  const wrapper = shallow(<SimpleButton label="label" action={() => (actionCalled())} />);
+  const wrapper = shallow(<SimpleButton label="label" eventHandler={() => (actionCalled())} />);
   wrapper.find('button').simulate('click');
 
   // fucntion is called after click;
