@@ -500,38 +500,32 @@ const arr3 = [{prop1:&#39;prop2&#39;,prop2:8,prop5:6}];
 
 //lets merge those object literals
 
-const merge = [...arr1,...arr2]; 
-
-//the outcome is actually not a merge but  array with 2 entries;
-console.log(merge) //[{prop1: &quot;prop1&quot;, prop2: 2}, {prop1: &quot;prop1&quot;, prop2: 5}]
-
-
----------------- ----------------  merging array with object literals ---------------- ----------------
-
 const merge = [...arr1,...arr2,...arr3]; 
 
 //the outcome is actually not a merge but array with 3 entries;
+
 console.log(merge) //[{prop1: &quot;prop1&quot;, prop2: 2}, {prop1: &quot;prop1&quot;, prop2: 5},{prop3:&#39;prop2&#39;,prop4:5}]
 
-There reson why is ...arr1 is already an array with one entry so javascript treats this as [0] pocket not a object literal !;
+
+---------------- ----- merging array with object literals ---------------- ----
 
 //U CAN NOT merge object literals which are in arrays it will always treat them as array not object literals;
 
 const mergeAsOneArrayAttempt = {...arr1,...arr2,...arr3};
+
 console.log(mergeAsOneArrayAttempt)  //[{prop1:&#39;prop2&#39;,prop2:8,prop5:6}] only takes last array;
 
 
----------------- ----------------  merging array CONTENT as object literals ---------------- ----------------
-
+---------------- ------- merging array CONTENT as object literals ---------------- -----
 
 //BUT THERE IS A TRICK !
 U need to refer to array content not the array itself!
 
 const mergeAsOneArrayContent = [{...arr1[0],...arr2[0],...arr3[0]}];
+
 console.log(mergeAsOneArrayContent) //[{ prop1: &quot;prop2&quot;, prop2: 8 ,prop3: 5, prop5: 6} ]
 
 U can do it cause ...arr1[0] === {prop1:&#39;prop1&#39;,prop2:2} //so it is like merging object not arrays...
-
 
 ---------------- ---------------- ---------------- ----------------</code>
                   </div>
