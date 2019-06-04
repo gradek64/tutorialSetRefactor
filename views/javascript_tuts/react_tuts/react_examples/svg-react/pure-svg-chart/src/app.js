@@ -83,7 +83,11 @@ class Chart extends React.Component {
           <div className="controls" >
             <h2>select data below</h2>
             <label className="container-radio-button">table1
-              <input type="radio" name="radioGroupBttns" value="table1" defaultChecked onChange={this.onChangeHanlder} />
+              <input type="radio" 
+                name="radioGroupBttns" 
+                value="table1" 
+                defaultChecked 
+                onChange={this.onChangeHanlder} />
               <span className="checkmark" />
             </label>
             <label className="container-radio-button">table1&table2
