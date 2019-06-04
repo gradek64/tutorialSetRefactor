@@ -623,16 +623,17 @@ console.log(head);// 1
                 <div class="band-inner">
 
                   <p>Array.prototype.sort() 
-                By default sorting will only work for numeric values it wont work for charackters.
+                By default sorting will only for charackters of the same Case (lower or upper not mixed).
                 It will sort ascenting</p>
                   <div class="codeWraper">
                     <code>-------------------------- array --------------------------
 
-const digits = [1.33, 4.44, 1.55, 2.45, 5];
+const charackters = [&#39;chris&#39;,&#39;aga&#39;,&#39;STEFAN&#39;,&#39;greg&#39;];
 
--------------------------- sorting ascenting numerical values --------------------------
 digits.sort();
-console.log(&#39;sorted&#39;, digits);
+//[&quot;STEFAN&quot;, &quot;aga&quot;, &quot;chris&quot;, &quot;greg&quot;] not quite what is expected;
+
+THEREFORE YOUR SAVE BET IS TO USER SORT FUNCTIONS as explain in next sections 
 
 ----------------------------------------------------</code>
                   </div>
