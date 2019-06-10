@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import User from './User';
 import FriendStatus from './FriendStatus';
 import { useFriendStatus } from './sharedLogic_hook';
@@ -12,16 +12,19 @@ const friendList = [
 
 
 const CustomHook = () => {
-  const changeUser = (name) => {
-    useFriendStatus(name);
-  };
+  const [count, setCount] = useState(0);
+  const incrementCount = () => setCount(count + 1);
+
+  console.log('gafgdgd', useFriendStatus());
+  const set = useFriendStatus(`You clicked ${count} times`);
 
   return (
     <div>
     status:
       <FriendStatus />
+      {`outcome ${set}`}
       {friendList.map(({ name }, i) => <User name={name} key={`CustomHook${i}`} />)}
-      <button type="button" onClick={changeUser}>change user</button>
+      <button type="button" onClick={incrementCount}>change user counter</button>
     </div>
   );
 };

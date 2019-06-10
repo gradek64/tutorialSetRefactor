@@ -7,7 +7,9 @@ const useFriendStatus = (name = 'Greg') => {
     /* function handleStatusChange(status) {
       setIsOnline(status.isOnline);
     } */
+
     setIsOnline(name);
+    console.log('isOnline', isOnline);
     // ChatAPI.subscribeToFriendStatus(friendID, handleStatusChange);
     return () => {
       // ChatAPI.unsubscribeFromFriendStatus(friendID, handleStatusChange);

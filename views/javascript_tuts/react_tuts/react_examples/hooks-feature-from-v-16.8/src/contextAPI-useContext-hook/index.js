@@ -35,10 +35,13 @@ const AppLocalRedux = () => {
   const [list, dispatch] = useReducer(listReducer, initialList);
 
   return (
-    <SectionContext.Provider value={{ list, dispatch }}>
-      <Info />
-      <List list={list.items} dispatch={dispatch} />
-    </SectionContext.Provider>
+    <React.Fragment>
+      {/* we have wrapper that provides state distribution in a value prop */}
+      <SectionContext.Provider value={{ list, dispatch }}>
+        <Info />
+        <List />
+      </SectionContext.Provider>
+    </React.Fragment>
   );
 };
 
