@@ -1,13 +1,13 @@
 const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
 
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   // polyfill needed fro AE11 support
   entry: ['@babel/polyfill', './src/'],
   output: {
-    path: path.join(__dirname, "public"),
-    filename: "bundle.js"
+    path: path.join(__dirname, 'public'),
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -27,15 +27,19 @@ module.exports = {
         ],
       },
       {
-        test: /\.s?css$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          'postcss-loader',
+        ],
       },
     ],
   },
   devtool: 'cheap-module-eval-source-map',
   plugins: [
     new HtmlWebPackPlugin({
-      template: './src/index.html',
+      template: './dev-server/index.html',
       filename: './index.html',
     }),
   ],
