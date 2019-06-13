@@ -50,19 +50,25 @@
                 
       </li>
     
-      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">testing functions and mocking</a><span class="tooltiptext">testing functions and mocking</span>
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">Testing original functions</a><span class="tooltiptext">Testing original functions</span>
+                 
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">MOCK functions</a><span class="tooltiptext">MOCK functions</span>
                   
                     <ul class="linksNested">
                           
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>by implementing original function for test</a><span class="tooltiptext">by implementing original function for test</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>jest.fn();</a><span class="tooltiptext">jest.fn();</span>
                            
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>testing with mock function js.fn();</a><span class="tooltiptext">testing with mock function js.fn();</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>jest.fn() with function body</a><span class="tooltiptext">jest.fn() with function body</span>
                            
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>mock function with return value</a><span class="tooltiptext">mock function with return value</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>jest mock function with function body RETURN</a><span class="tooltiptext">jest mock function with function body RETURN</span>
                            
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>mock function with promise return</a><span class="tooltiptext">mock function with promise return</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>JEST function declaration helpers mockReturnValue nad mockReturnValueOnce</a><span class="tooltiptext">JEST function declaration helpers mockReturnValue nad mockReturnValueOnce</span>
                            
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>Mock a module with jest.mock</a><span class="tooltiptext">Mock a module with jest.mock</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>Overriding Mock function based on implemenations with mockImplementation()</a><span class="tooltiptext">Overriding Mock function based on implemenations with mockImplementation()</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>Jest.fn() mock that returns promise</a><span class="tooltiptext">Jest.fn() mock that returns promise</span>
                         
                     </ul>
                 
@@ -454,9 +460,11 @@ test(&#39;User profile&#39;, () =&gt; {
   
       
       <section   class="band band-b" class="band band-b">
-          <h1> testing functions and mocking </h1> 
+          <h1> Testing original functions </h1> 
           
-              <div class="band-container partition first" part="part-1">
+
+            
+              <div class="band-container">
                 <div class="band-inner">
 
                   <p>the most common way of testing functionality of the method is simply run the method and 
@@ -497,55 +505,68 @@ test(&quot;calls app.doAdd&quot;, () =&gt; {
                 </div>
               </div>
             
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> MOCK functions </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>Every function can be assing to mock function. That way it will change its original functionality and will serve whaterver we declare in mock function body</p>
+                  <div class="codeWraper">
+                    <code>----------------- original apiService.get function -------
+
+apiService.get = (a, b) =&gt; a + b;
+
+--- Assign apiService.get to mock function (it will loose it original functionality)
+
+apiService.get = jest.fn();
+
+--jest.fn() is a normal function that doesnt return anything by default (as any js function)
+
+console.log( apiService.get() )
+//return undefined since fuction doesnt return anything
+
+
+- then JEST comes with some testing methods to verirfy function is working -
+
+//call funcion;
+apiService.get();
+
+//and expect
+expect(apiService.get).toHaveBeenCalled();
+
+
+- first call function and then test if function has been called twice with a param &#39;value&#39;-
+
+apiService.get(&#39;value&#39;);
+
+expect(apiService.get).toHaveBeenCalledTimes(2);
+expect(apiService.get).toHaveBeenCalledWith(&#39;value&#39;);
+
+
+------------------------- ---------------------- -------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
               <div class="band-container partition " part="part-2">
                 <div class="band-inner">
 
-                  <p>if data is complex in a funtion and you might be intrested only in the outcome (as promise to API call) we can mock function</p>
+                  <p>techinally you can specify or call any function inside jest.fn() funtion body</p>
                   <div class="codeWraper">
-                    <code>----------------------- math.js helpers ----------------
-export const add      = (a, b) =&gt; a + b;
-export const subtract = (a, b) =&gt; b - a;
----------------------------------------------------------
+                    <code>------------- call console once executing a mock function-----
 
------------------------ app.js (math helpers implementation) ----------------
-export const doAdd      = (a, b) =&gt; math.add(a, b);
-export const doSubtract = (a, b) =&gt; math.subtract(a, b);
------------------------------------------------------------------------------
+apiService.get = jest.fn(console.log(&#39;working&#39;));
 
 
-/*
-  *@we can assing our function to js.fn()
-  *@what gives them new functionality, they are no longer original function;
-*/  
+//call method
+apiService.get()
 
-/*
-
-
-math.add = jest.fn()
-app.doAdd = jest.fn() 
-
-/*
-*@now our function can be called as below;
-*@the old functionality is gone;
-*/
-
-//assign to mock 
------------
-const mathNew = math.add(&quot;new staff&quot;)
-const appNew = app.doAdd( &quot;I am cool&quot;)
--------------
-
-//math.add
-expect(mathNew).toBeUndefined()
-expect(math.add).toHaveBeenCalled()
-expect(math.add).toHaveBeenCalledTimes(1)
-expect(math.add).toHaveBeenCalledWith(&quot;new staff&quot;)
-
-//app.doAdd
-expect(appNew).toBeUndefined()
-expect(app.doAdd).toHaveBeenCalled()
-expect(app.doAdd).toHaveBeenCalledTimes(1)
-expect(app.doAdd).toHaveBeenCalledWith(&quot;I am cool&quot;)</code>
+---it will print to console but this is pointless cause it wont be testable cause jest.fn() do not return any value------</code>
                   </div>
                 </div>
               </div>
@@ -553,37 +574,30 @@ expect(app.doAdd).toHaveBeenCalledWith(&quot;I am cool&quot;)</code>
               <div class="band-container partition " part="part-3">
                 <div class="band-inner">
 
-                  <p>One function is assign to mock we can make it a return a value, this patern is very usefull when We want to mock API call that returns a JSON file</p>
+                  <p>jest.fn() can have function body which is a callback function jest.fn(callback) callback allows you to define what to return from function and what arguments to accept</p>
                   <div class="codeWraper">
-                    <code>----------------------- math.js helpers ----------------
-export const add      = (a, b) =&gt; a + b;
-export const subtract = (a, b) =&gt; b - a;
----------------------------------------------------------
+                    <code>-------- jest.fn() function body as  (callback with return value)-----
 
------------------------ app.js (math helpers implementation) ----------------
-export const doAdd      = (a, b) =&gt; math.add(a, b);
-export const doSubtract = (a, b) =&gt; math.subtract(a, b);
------------------------------------------------------------------------------
-                
-/*
-*@assignning mocks to the functions of return type ;
-*@
-*/
+ apiService.get = jest.fn(() =&gt; 2);
 
-math.add = jest.fn().mockImplementation( () =&gt; &quot;some Value&quot; );
-//other syntax;
-app.doAdd = jest.fn()
-app.doAdd.mockReturnValue(&quot;bar value&quot;)
+ //now call you mock
+ console.log( apiService.get()) //return 2
 
-/*
-*@testing function with mock return 
-*@
-*/
+- U can also pass arguments to your callback function -------
 
-//math.add
-expect(math.add()).toBe(&quot;some Value&quot;)
-//app.doAdd
-expect(app.doAdd()).toBe(&quot;bar value&quot;)</code>
+apiService.get = jest.fn((x) =&gt; x + 2);
+
+console.log( apiService.get(2)) //return 4
+
+ - Basically , U can do any trasformations inside your callback an then return any value you want and then verify in your acceptance criteria --
+
+apiService.get = jest.fn((x) =&gt; x + 2 * 5 * 6);
+
+--------- assertion to above -----------
+
+expect(apiService.get(2)).toBe(62);
+
+---------- ---------- ------------</code>
                   </div>
                 </div>
               </div>
@@ -591,43 +605,23 @@ expect(app.doAdd()).toBe(&quot;bar value&quot;)</code>
               <div class="band-container partition " part="part-4">
                 <div class="band-inner">
 
-                  <p>we can mock our function to return a promise as below:</p>
+                  <p>Jest comes with shorthand mock declaration that depends of your usage</p>
                   <div class="codeWraper">
-                    <code>----------------------- math.js helpers ----------------
-export const add      = (a, b) =&gt; a + b;
-export const subtract = (a, b) =&gt; b - a;
----------------------------------------------------------
+                    <code>------below is the same statement with 2 ways of declaring ------
 
------------------------ app.js (math helpers implementation) ----------------
-export const doAdd      = (a, b) =&gt; math.add(a, b);
-export const doSubtract = (a, b) =&gt; math.subtract(a, b);
------------------------------------------------------------------------------
-                
-/*
-*@assignning mocks to the functions that return promise;
-*@
-*/
+apiService.get = jest.fn(()=&gt;2) ===  apiService.getmockReturnValue(2)
 
-math.add = jest.fn().mockImplementation(() =&gt; Promise.resolve(&quot;promise resolve&quot;))
-math.devide = jest.fn().mockImplementation((value) =&gt; Promise.reject(value))
-//other syntax;
-app.doAdd = jest.fn()
-app.doAdd.mockResolvedValue(&quot;bar&quot;)
-//reject other syntax;
-math.devide = jest.fn()
-app.doAdd.mockRejectedValue(&quot;rejected&quot;);
 
-/*
-*@now our function can be called as below;
-*@the old functionality is gone now our function returns above values that resolves in promise resolved;
-*/
+------- you can specify what function return every time you call it ------
 
-//math.add
-expect(math.add()).resolves.toBe(&quot;promise resolve&quot;)
-expect(app.doAdd()).resolves.toBe(&quot;bar&quot;)
-expect(math.devide(&quot;rejected&quot;)).rejects.toBe(&quot;rejected&quot;)
+apiService.get
+.mockReturnValueOnce(10)
+.mockReturnValueOnce(10)
+.mockReturnValue(20);
 
------------------------------------------------------------------------------------------------</code>
+console.log(apiService.get());
+console.log(apiService.get());
+console.log(apiService.get());</code>
                   </div>
                 </div>
               </div>
@@ -635,24 +629,51 @@ expect(math.devide(&quot;rejected&quot;)).rejects.toBe(&quot;rejected&quot;)
               <div class="band-container partition " part="part-5">
                 <div class="band-inner">
 
-                  <p>you can automatically assing mock functions to all function from the moduele by jest.mock();</p>
+                  <p>It is possible to declrae your mock functions more than once with diffrent result or implemenation</p>
                   <div class="codeWraper">
-                    <code>----------------------- math.js helpers ----------------
-export const add      = (a, b) =&gt; a + b;
-export const subtract = (a, b) =&gt; b - a;
----------------------------------------------------------
+                    <code>------------- initial implementation ------------
 
-describe(&quot;use js.mock() for all exported fn&quot;,() =&gt; {
-// Set all module functions to jest.fn
-  jest.mock(&quot;./helpers/math&quot;)
+apiService.get = jest.fn(()=&gt;2)
 
-  test(&quot;using js.mock() for mocking all exported functions from the module&quot;, ()=&gt;{
+console.log(apiService.get()); //2
 
-      //pick any function from module set to mock and call it;
-      math.add(&quot;add&quot;)
-      expect(math.add).toHaveBeenCalledWith(&quot;add&quot;)
-  })
-})</code>
+------ override initial implemation and chain multiple overrides  ------
+apiService.get
+.mockImplementationOnce(() =&gt; 52)
+.mockImplementationOnce(() =&gt; 62)
+.mockImplementation(() =&gt; true);
+
+
+console.log(apiService.get()); //54
+console.log(apiService.get()); //62
+console.log(apiService.get()); //true
+
+------------   ------------   ------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-6">
+                <div class="band-inner">
+
+                  <p>jest.fn() can return any value so We could introduce async code and return a Promise, usefull for testing HTTP calls</p>
+                  <div class="codeWraper">
+                    <code>----------------- original apiService.get function -------
+
+apiService.get = (a, b) =&gt; a + b;
+
+--- Assign apiService.get to mock function that returns Promise (it will loose it original functionality);
+
+apiService.get = jest.fn(x =&gt; Promise.resolve(x));
+
+
+-- make your assortion in Promise callback ----
+
+  apiService.get(2).then((data) =&gt; {
+    expect(data).toBe(2);
+  });
+
+----------  -----------  --------------</code>
                   </div>
                 </div>
               </div>

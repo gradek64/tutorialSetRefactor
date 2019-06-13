@@ -1,0 +1,784 @@
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+
+.language-actionscript .de1, .actionscript .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-actionscript  {font-family:monospace;}
+.language-actionscript .imp {font-weight: bold; color: red;}
+.language-actionscript li, .actionscript .li1 {font-weight: normal; vertical-align:top;}
+.language-actionscript .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-actionscript .li2 {font-weight: bold; vertical-align:top;}
+.language-actionscript .kw1 {color: #b1b100;}
+.language-actionscript .kw2 {color: #000000; font-weight: bold;}
+.language-actionscript .kw3 {color: #0066CC;}
+.language-actionscript .co1 {color: #808080; font-style: italic;}
+.language-actionscript .co2 {color: #808080; font-style: italic;}
+.language-actionscript .coMULTI {color: #808080; font-style: italic;}
+.language-actionscript .es0 {color: #000099; font-weight: bold;}
+.language-actionscript .br0 {color: #66cc66;}
+.language-actionscript .sy0 {color: #66cc66;}
+.language-actionscript .st0 {color: #ff0000;}
+.language-actionscript .nu0 {color: #cc66cc;}
+.language-actionscript .me1 {color: #006600;}
+.language-actionscript .ln-xtra, .actionscript li.ln-xtra, .actionscript div.ln-xtra {background-color: #ffc;}
+.language-actionscript span.xtra { display:block; }
+
+.language-actionscript3 .de1, .actionscript3 .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-actionscript3  {font-family:monospace;}
+.language-actionscript3 .imp {font-weight: bold; color: red;}
+.language-actionscript3 li, .actionscript3 .li1 {font-weight: normal; vertical-align:top;}
+.language-actionscript3 .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-actionscript3 .li2 {font-weight: bold; vertical-align:top;}
+.language-actionscript3 .kw1 {color: #0033ff; font-weight: bold;}
+.language-actionscript3 .kw2 {color: #6699cc; font-weight: bold;}
+.language-actionscript3 .kw3 {color: #339966; font-weight: bold;}
+.language-actionscript3 .kw4 {color: #9900cc; font-weight: bold;}
+.language-actionscript3 .kw5 {color: #004993;}
+.language-actionscript3 .kw6 {color: #004993;}
+.language-actionscript3 .kw7 {color: #004993;}
+.language-actionscript3 .kw8 {color: #004993;}
+.language-actionscript3 .co1 {color: #009900; font-style: italic;}
+.language-actionscript3 .co2 {color: #009966; font-style: italic;}
+.language-actionscript3 .coMULTI {color: #3f5fbf;}
+.language-actionscript3 .br0 {color: #000000;}
+.language-actionscript3 .sy0 {color: #000066; font-weight: bold;}
+.language-actionscript3 .st0 {color: #990000;}
+.language-actionscript3 .nu0 {color: #000000; font-weight:bold;}
+.language-actionscript3 .me0 {color: #000000;}
+.language-actionscript3 .ln-xtra, .actionscript3 li.ln-xtra, .actionscript3 div.ln-xtra {background-color: #ffc;}
+.language-actionscript3 span.xtra { display:block; }
+
+.language-apache .de1, .apache .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-apache  {font-family:monospace;}
+.language-apache .imp {font-weight: bold; color: red;}
+.language-apache li, .apache .li1 {font-weight: normal; vertical-align:top;}
+.language-apache .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-apache .li2 {font-weight: bold; vertical-align:top;}
+.language-apache .kw1 {color: #00007f;}
+.language-apache .kw2 {color: #0000ff;}
+.language-apache .kw3 {color: #000000; font-weight:bold;}
+.language-apache .co1 {color: #adadad; font-style: italic;}
+.language-apache .es0 {color: #000099; font-weight: bold;}
+.language-apache .br0 {color: #339933;}
+.language-apache .sy0 {color: #008000;}
+.language-apache .st0 {color: #7f007f;}
+.language-apache .nu0 {color: #ff0000;}
+.language-apache .ln-xtra, .apache li.ln-xtra, .apache div.ln-xtra {background-color: #ffc;}
+.language-apache span.xtra { display:block; }
+
+.language-applescript .de1, .applescript .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-applescript  {font-family:monospace;}
+.language-applescript .imp {font-weight: bold; color: red;}
+.language-applescript li, .applescript .li1 {font-weight: normal; vertical-align:top;}
+.language-applescript .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-applescript .li2 {font-weight: bold; vertical-align:top;}
+.language-applescript .kw1 {color: #0066ff;}
+.language-applescript .kw2 {color: #ff0033;}
+.language-applescript .kw3 {color: #ff0033; font-weight: bold;}
+.language-applescript .co1 {color: #808080; font-style: italic;}
+.language-applescript .co3 {color: #ff0000;}
+.language-applescript .coMULTI {color: #808080; font-style: italic;}
+.language-applescript .es0 {color: #000000; font-weight: bold;}
+.language-applescript .br0 {color: #000000;}
+.language-applescript .sy0 {color: #000000;}
+.language-applescript .st0 {color: #009900;}
+.language-applescript .nu0 {color: #000000;}
+.language-applescript .me1 {color: #006600;}
+.language-applescript .me2 {color: #006600;}
+.language-applescript .re0 {color: #339933;}
+.language-applescript .re4 {color: #0066ff;}
+.language-applescript .ln-xtra, .applescript li.ln-xtra, .applescript div.ln-xtra {background-color: #ffc;}
+.language-applescript span.xtra { display:block; }
+
+.language-apt_sources .de1, .apt_sources .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-apt_sources  {font-family:monospace;}
+.language-apt_sources .imp {font-weight: bold; color: red;}
+.language-apt_sources li, .apt_sources .li1 {font-weight: normal; vertical-align:top;}
+.language-apt_sources .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-apt_sources .li2 {font-weight: bold; vertical-align:top;}
+.language-apt_sources .kw1 {color: #00007f;}
+.language-apt_sources .kw2 {color: #b1b100;}
+.language-apt_sources .kw3 {color: #b16000;}
+.language-apt_sources .co1 {color: #adadad; font-style: italic;}
+.language-apt_sources .re0 {color: #009900;}
+.language-apt_sources .ln-xtra, .apt_sources li.ln-xtra, .apt_sources div.ln-xtra {background-color: #ffc;}
+.language-apt_sources span.xtra { display:block; }
+
+.language-bash .de1, .bash .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-bash  {font-family:monospace;}
+.language-bash .imp {font-weight: bold; color: red;}
+.language-bash li, .bash .li1 {font-weight: normal; vertical-align:top;}
+.language-bash .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-bash .li2 {font-weight: bold; vertical-align:top;}
+.language-bash .kw1 {color: #000000; font-weight: bold;}
+.language-bash .kw2 {color: #c20cb9; font-weight: bold;}
+.language-bash .kw3 {color: #7a0874; font-weight: bold;}
+.language-bash .co0 {color: #666666; font-style: italic;}
+.language-bash .co1 {color: #800000;}
+.language-bash .co2 {color: #cc0000; font-style: italic;}
+.language-bash .co3 {color: #000000; font-weight: bold;}
+.language-bash .co4 {color: #666666;}
+.language-bash .es1 {color: #000099; font-weight: bold;}
+.language-bash .es2 {color: #007800;}
+.language-bash .es3 {color: #007800;}
+.language-bash .es4 {color: #007800;}
+.language-bash .es5 {color: #780078;}
+.language-bash .es_h {color: #000099; font-weight: bold;}
+.language-bash .br0 {color: #7a0874; font-weight: bold;}
+.language-bash .sy0 {color: #000000; font-weight: bold;}
+.language-bash .st0 {color: #ff0000;}
+.language-bash .st_h {color: #ff0000;}
+.language-bash .nu0 {color: #000000;}
+.language-bash .re0 {color: #007800;}
+.language-bash .re1 {color: #007800;}
+.language-bash .re2 {color: #007800;}
+.language-bash .re4 {color: #007800;}
+.language-bash .re5 {color: #660033;}
+.language-bash .ln-xtra, .bash li.ln-xtra, .bash div.ln-xtra {background-color: #ffc;}
+.language-bash span.xtra { display:block; }
+
+.language-cmake .de1, .cmake .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-cmake  {font-family:monospace;}
+.language-cmake .imp {font-weight: bold; color: red;}
+.language-cmake li, .cmake .li1 {font-weight: normal; vertical-align:top;}
+.language-cmake .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-cmake .li2 {font-weight: bold; vertical-align:top;}
+.language-cmake .kw1 {color: #1f3f81; font-style: bold;}
+.language-cmake .kw2 {color: #1f3f81;}
+.language-cmake .kw3 {color: #077807; font-sytle: italic;}
+.language-cmake .co1 {color: #666666; font-style: italic;}
+.language-cmake .es0 {color: #000099; font-weight: bold;}
+.language-cmake .es1 {color: #b08000;}
+.language-cmake .es2 {color: #0000cd;}
+.language-cmake .sy0 {color: #197d8b;}
+.language-cmake .st0 {color: #912f11;}
+.language-cmake .re0 {color: #b08000;}
+.language-cmake .re1 {color: #0000cd;}
+.language-cmake .ln-xtra, .cmake li.ln-xtra, .cmake div.ln-xtra {background-color: #ffc;}
+.language-cmake span.xtra { display:block; }
+
+.language-coffeescript .de1, .coffeescript .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-coffeescript  {font-family:monospace;}
+.language-coffeescript .imp {font-weight: bold; color: red;}
+.language-coffeescript li, .coffeescript .li1 {font-weight: normal; vertical-align:top;}
+.language-coffeescript .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-coffeescript .li2 {font-weight: bold; vertical-align:top;}
+.language-coffeescript .kw1 {color: #ff7700;font-weight:bold;}
+.language-coffeescript .kw2 {color: #008000;}
+.language-coffeescript .kw3 {color: #dc143c;}
+.language-coffeescript .kw4 {color: #0000cd;}
+.language-coffeescript .co1 {color: #808080; font-style: italic;}
+.language-coffeescript .coMULTI {color: #808080; font-style: italic;}
+.language-coffeescript .es0 {color: #000099; font-weight: bold;}
+.language-coffeescript .br0 {color: black;}
+.language-coffeescript .sy0 {color: #66cc66;}
+.language-coffeescript .st0 {color: #483d8b;}
+.language-coffeescript .nu0 {color: #ff4500;}
+.language-coffeescript .me1 {color: black;}
+.language-coffeescript .ln-xtra, .coffeescript li.ln-xtra, .coffeescript div.ln-xtra {background-color: #ffc;}
+.language-coffeescript span.xtra { display:block; }
+
+.language-css .de1, .css .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-css  {font-family:monospace;}
+.language-css .imp {font-weight: bold; color: red;}
+.language-css li, .css .li1 {font-weight: normal; vertical-align:top;}
+.language-css .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-css .li2 {font-weight: bold; vertical-align:top;}
+.language-css .kw1 {color: #000000; font-weight: bold;}
+.language-css .kw2 {color: #993333;}
+.language-css .co1 {color: #a1a100;}
+.language-css .co2 {color: #ff0000; font-style: italic;}
+.language-css .coMULTI {color: #808080; font-style: italic;}
+.language-css .es0 {color: #000099; font-weight: bold;}
+.language-css .es2 {color: #000099; font-weight: bold;}
+.language-css .br0 {color: #00AA00;}
+.language-css .sy0 {color: #00AA00;}
+.language-css .st0 {color: #ff0000;}
+.language-css .nu0 {color: #cc66cc;}
+.language-css .re0 {color: #cc00cc;}
+.language-css .re1 {color: #6666ff;}
+.language-css .re2 {color: #3333ff;}
+.language-css .re3 {color: #933;}
+.language-css .ln-xtra, .css li.ln-xtra, .css div.ln-xtra {background-color: #ffc;}
+.language-css span.xtra { display:block; }
+
+.language-diff .de1, .diff .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-diff  {font-family:monospace;}
+.language-diff .imp {font-weight: bold; color: red;}
+.language-diff li, .diff .li1 {font-weight: normal; vertical-align:top;}
+.language-diff .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-diff .li2 {font-weight: bold; vertical-align:top;}
+.language-diff .kw1 {color: #aaaaaa; font-style: italic;}
+.language-diff .re0 {color: #440088;}
+.language-diff .re1 {color: #991111;}
+.language-diff .re2 {color: #00b000;}
+.language-diff .re3 {color: #888822;}
+.language-diff .re4 {color: #888822;}
+.language-diff .re5 {color: #0011dd;}
+.language-diff .re6 {color: #440088;}
+.language-diff .re7 {color: #991111;}
+.language-diff .re8 {color: #00b000;}
+.language-diff .re9 {color: #888822;}
+.language-diff .ln-xtra, .diff li.ln-xtra, .diff div.ln-xtra {background-color: #ffc;}
+.language-diff span.xtra { display:block; }
+
+.language-div .de1, .div .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-div  {font-family:monospace;}
+.language-div .imp {font-weight: bold; color: red;}
+.language-div li, .div .li1 {font-weight: normal; vertical-align:top;}
+.language-div .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-div .li2 {font-weight: bold; vertical-align:top;}
+.language-div .kw1 {color: #0040b1;}
+.language-div .kw2 {color: #000000;}
+.language-div .kw3 {color: #000066; font-weight: bold;}
+.language-div .kw4 {color: #993333;}
+.language-div .co1 {color: #808080; font-style: italic;}
+.language-div .coMULTI {color: #808080; font-style: italic;}
+.language-div .br0 {color: #44aa44;}
+.language-div .sy0 {color: #44aa44;}
+.language-div .st0 {color: #ff0000;}
+.language-div .nu0 {color: #cc66cc;}
+.language-div .me0 {color: #202020;}
+.language-div .ln-xtra, .div li.ln-xtra, .div div.ln-xtra {background-color: #ffc;}
+.language-div span.xtra { display:block; }
+
+.language-dos .de1, .dos .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-dos  {font-family:monospace;}
+.language-dos .imp {font-weight: bold; color: red;}
+.language-dos li, .dos .li1 {font-weight: normal; vertical-align:top;}
+.language-dos .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-dos .li2 {font-weight: bold; vertical-align:top;}
+.language-dos .kw1 {color: #00b100; font-weight: bold;}
+.language-dos .kw2 {color: #000000; font-weight: bold;}
+.language-dos .kw3 {color: #b1b100; font-weight: bold;}
+.language-dos .kw4 {color: #0000ff; font-weight: bold;}
+.language-dos .co1 {color: #808080; font-style: italic;}
+.language-dos .co2 {color: #b100b1; font-style: italic;}
+.language-dos .co3 {color: #33cc33;}
+.language-dos .es0 {color: #ff0000; font-weight: bold;}
+.language-dos .br0 {color: #66cc66;}
+.language-dos .sy0 {color: #33cc33;}
+.language-dos .sy1 {color: #33cc33;}
+.language-dos .st0 {color: #ff0000;}
+.language-dos .nu0 {color: #cc66cc;}
+.language-dos .re0 {color: #b100b1; font-weight: bold;}
+.language-dos .re1 {color: #448844;}
+.language-dos .re2 {color: #448888;}
+.language-dos .re3 {color: #448888;}
+.language-dos .ln-xtra, .dos li.ln-xtra, .dos div.ln-xtra {background-color: #ffc;}
+.language-dos span.xtra { display:block; }
+
+.language-email .de1, .email .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-email  {font-family:monospace;}
+.language-email .imp {font-weight: bold; color: red;}
+.language-email li, .email .li1 {font-weight: normal; vertical-align:top;}
+.language-email .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-email .li2 {font-weight: bold; vertical-align:top;}
+.language-email .kw1 {color: #0000FF; font-weight: bold;}
+.language-email .kw2 {color: #000000; font-weight: bold;}
+.language-email .kw3 {color: #800000; font-weight: bold;}
+.language-email .kw4 {font-weight: bold;}
+.language-email .es0 {color: #000099; font-weight: bold;}
+.language-email .br0 {color: #66cc66;}
+.language-email .sy0 {color: #66cc66;}
+.language-email .st0 {color: #ff0000;}
+.language-email .nu0 {color: #cc66cc;}
+.language-email .sc0 {color: #000040;}
+.language-email .re1 {color: #000000; font-weight: bold;}
+.language-email .re2 {color: #0000FF;}
+.language-email .re3 {color: #008000;}
+.language-email .re4 {color: #0000FF; font-weight: bold;}
+.language-email .re5 {font-weight: bold;}
+.language-email .re6 {color: #400080;}
+.language-email .ln-xtra, .email li.ln-xtra, .email div.ln-xtra {background-color: #ffc;}
+.language-email span.xtra { display:block; }
+
+.language-html4strict .de1, .html4strict .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-html4strict  {font-family:monospace;}
+.language-html4strict .imp {font-weight: bold; color: red;}
+.language-html4strict li, .html4strict .li1 {font-weight: normal; vertical-align:top;}
+.language-html4strict .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-html4strict .li2 {font-weight: bold; vertical-align:top;}
+.language-html4strict .kw2 {color: #000000; font-weight: bold;}
+.language-html4strict .kw3 {color: #000066;}
+.language-html4strict .es0 {color: #000099; font-weight: bold;}
+.language-html4strict .br0 {color: #66cc66;}
+.language-html4strict .sy0 {color: #66cc66;}
+.language-html4strict .st0 {color: #ff0000;}
+.language-html4strict .nu0 {color: #cc66cc;}
+.language-html4strict .sc-2 {color: #404040;}
+.language-html4strict .sc-1 {color: #808080; font-style: italic;}
+.language-html4strict .sc0 {color: #00bbdd;}
+.language-html4strict .sc1 {color: #ddbb00;}
+.language-html4strict .sc2 {color: #009900;}
+.language-html4strict .ln-xtra, .html4strict li.ln-xtra, .html4strict div.ln-xtra {background-color: #ffc;}
+.language-html4strict span.xtra { display:block; }
+
+.language-html5 .de1, .html5 .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-html5  {font-family:monospace;}
+.language-html5 .imp {font-weight: bold; color: red;}
+.language-html5 li, .html5 .li1 {font-weight: normal; vertical-align:top;}
+.language-html5 .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-html5 .li2 {font-weight: bold; vertical-align:top;}
+.language-html5 .kw2 {color: #000000; font-weight: bold;}
+.language-html5 .kw3 {color: #000066;}
+.language-html5 .es0 {color: #000099; font-weight: bold;}
+.language-html5 .br0 {color: #66cc66;}
+.language-html5 .sy0 {color: #66cc66;}
+.language-html5 .st0 {color: #ff0000;}
+.language-html5 .nu0 {color: #cc66cc;}
+.language-html5 .sc-2 {color: #404040;}
+.language-html5 .sc-1 {color: #808080; font-style: italic;}
+.language-html5 .sc0 {color: #00bbdd;}
+.language-html5 .sc1 {color: #ddbb00;}
+.language-html5 .sc2 {color: #009900;}
+.language-html5 .ln-xtra, .html5 li.ln-xtra, .html5 div.ln-xtra {background-color: #ffc;}
+.language-html5 span.xtra { display:block; }
+
+.language-ini .de1, .ini .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-ini  {font-family:monospace;}
+.language-ini .imp {font-weight: bold; color: red;}
+.language-ini li, .ini .li1 {font-weight: normal; vertical-align:top;}
+.language-ini .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-ini .li2 {font-weight: bold; vertical-align:top;}
+.language-ini .co0 {color: #666666; font-style: italic;}
+.language-ini .sy0 {color: #000066; font-weight:bold;}
+.language-ini .st0 {color: #933;}
+.language-ini .re0 {color: #000066; font-weight:bold;}
+.language-ini .re1 {color: #000099;}
+.language-ini .re2 {color: #660066;}
+.language-ini .ln-xtra, .ini li.ln-xtra, .ini div.ln-xtra {background-color: #ffc;}
+.language-ini span.xtra { display:block; }
+
+.language-javascript .de1, .javascript .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-javascript  {font-family:monospace;}
+.language-javascript .imp {font-weight: bold; color: red;}
+.language-javascript li, .javascript .li1 {font-weight: normal; vertical-align:top;}
+.language-javascript .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-javascript .li2 {font-weight: bold; vertical-align:top;}
+.language-javascript .kw1 {color: #000066; font-weight: bold;}
+.language-javascript .kw2 {color: #003366; font-weight: bold;}
+.language-javascript .kw3 {color: #000066;}
+.language-javascript .kw5 {color: #FF0000;}
+.language-javascript .co1 {color: #006600; font-style: italic;}
+.language-javascript .co2 {color: #009966; font-style: italic;}
+.language-javascript .coMULTI {color: #006600; font-style: italic;}
+.language-javascript .es0 {color: #000099; font-weight: bold;}
+.language-javascript .br0 {color: #009900;}
+.language-javascript .sy0 {color: #339933;}
+.language-javascript .st0 {color: #3366CC;}
+.language-javascript .nu0 {color: #CC0000;}
+.language-javascript .me1 {color: #660066;}
+.language-javascript .ln-xtra, .javascript li.ln-xtra, .javascript div.ln-xtra {background-color: #ffc;}
+.language-javascript span.xtra { display:block; }
+
+.language-jquery .de1, .jquery .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-jquery  {font-family:monospace;}
+.language-jquery .imp {font-weight: bold; color: red;}
+.language-jquery li, .jquery .li1 {font-weight: normal; vertical-align:top;}
+.language-jquery .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-jquery .li2 {font-weight: bold; vertical-align:top;}
+.language-jquery .kw1 {color: #000066; font-weight: bold;}
+.language-jquery .kw2 {color: #003366; font-weight: bold;}
+.language-jquery .kw3 {color: #000066;}
+.language-jquery .kw4 {color: #000066;}
+.language-jquery .kw5 {color: #000066;}
+.language-jquery .kw6 {color: #000066;}
+.language-jquery .kw7 {color: #000066;}
+.language-jquery .kw8 {color: #000066;}
+.language-jquery .kw9 {color: #000066;}
+.language-jquery .kw10 {color: #000066;}
+.language-jquery .kw11 {color: #000066;}
+.language-jquery .kw12 {color: #000066;}
+.language-jquery .co1 {color: #006600; font-style: italic;}
+.language-jquery .co2 {color: #009966; font-style: italic;}
+.language-jquery .coMULTI {color: #006600; font-style: italic;}
+.language-jquery .es0 {color: #000099; font-weight: bold;}
+.language-jquery .br0 {color: #009900;}
+.language-jquery .sy0 {color: #339933;}
+.language-jquery .sy1 {color: #000066;}
+.language-jquery .st0 {color: #3366CC;}
+.language-jquery .nu0 {color: #CC0000;}
+.language-jquery .me1 {color: #660066;}
+.language-jquery .ln-xtra, .jquery li.ln-xtra, .jquery div.ln-xtra {background-color: #ffc;}
+.language-jquery span.xtra { display:block; }
+
+.language-mysql .de1, .mysql .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-mysql  {font-family:monospace;}
+.language-mysql .imp {font-weight: bold; color: red;}
+.language-mysql li, .mysql .li1 {font-weight: normal; vertical-align:top;}
+.language-mysql .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-mysql .li2 {font-weight: bold; vertical-align:top;}
+.language-mysql .kw1 {color: #990099; font-weight: bold;}
+.language-mysql .kw2 {color: #990099; font-weight: bold;}
+.language-mysql .kw3 {color: #9900FF; font-weight: bold;}
+.language-mysql .kw4 {color: #999900; font-weight: bold;}
+.language-mysql .kw5 {color: #999900; font-weight: bold;}
+.language-mysql .kw6 {color: #FF9900; font-weight: bold;}
+.language-mysql .kw7 {color: #FF9900; font-weight: bold;}
+.language-mysql .kw8 {color: #9900FF; font-weight: bold;}
+.language-mysql .kw9 {color: #9900FF; font-weight: bold;}
+.language-mysql .kw10 {color: #CC0099; font-weight: bold;}
+.language-mysql .kw11 {color: #CC0099; font-weight: bold;}
+.language-mysql .kw12 {color: #009900;}
+.language-mysql .kw13 {color: #000099;}
+.language-mysql .kw14 {color: #000099;}
+.language-mysql .kw15 {color: #000099;}
+.language-mysql .kw16 {color: #000099;}
+.language-mysql .kw17 {color: #000099;}
+.language-mysql .kw18 {color: #000099;}
+.language-mysql .kw19 {color: #000099;}
+.language-mysql .kw20 {color: #000099;}
+.language-mysql .kw21 {color: #000099;}
+.language-mysql .kw22 {color: #000099;}
+.language-mysql .kw23 {color: #000099;}
+.language-mysql .kw24 {color: #000099;}
+.language-mysql .kw25 {color: #000099;}
+.language-mysql .kw26 {color: #000099;}
+.language-mysql .kw27 {color: #00CC00;}
+.language-mysql .coMULTI {color: #808000; font-style: italic;}
+.language-mysql .co1 {color: #808080; font-style: italic;}
+.language-mysql .co2 {color: #808080; font-style: italic;}
+.language-mysql .es0 {color: #004000; font-weight: bold;}
+.language-mysql .es1 {color: #008080; font-weight: bold;}
+.language-mysql .br0 {color: #FF00FF;}
+.language-mysql .sy1 {color: #CC0099;}
+.language-mysql .sy2 {color: #000033;}
+.language-mysql .st0 {color: #008000;}
+.language-mysql .nu0 {color: #008080;}
+.language-mysql .ln-xtra, .mysql li.ln-xtra, .mysql div.ln-xtra {background-color: #ffc;}
+.language-mysql span.xtra { display:block; }
+
+.language-php .de1, .php .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-php  {font-family:monospace;}
+.language-php .imp {font-weight: bold; color: red;}
+.language-php li, .php .li1 {font-weight: normal; vertical-align:top;}
+.language-php .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-php .li2 {font-weight: bold; vertical-align:top;}
+.language-php .kw1 {color: #b1b100;}
+.language-php .kw2 {color: #000000; font-weight: bold;}
+.language-php .kw3 {color: #990000;}
+.language-php .kw4 {color: #009900; font-weight: bold;}
+.language-php .co1 {color: #666666; font-style: italic;}
+.language-php .co2 {color: #666666; font-style: italic;}
+.language-php .co3 {color: #0000cc; font-style: italic;}
+.language-php .co4 {color: #009933; font-style: italic;}
+.language-php .coMULTI {color: #666666; font-style: italic;}
+.language-php .es0 {color: #000099; font-weight: bold;}
+.language-php .es1 {color: #000099; font-weight: bold;}
+.language-php .es2 {color: #660099; font-weight: bold;}
+.language-php .es3 {color: #660099; font-weight: bold;}
+.language-php .es4 {color: #006699; font-weight: bold;}
+.language-php .es5 {color: #006699; font-weight: bold; font-style: italic;}
+.language-php .es6 {color: #009933; font-weight: bold;}
+.language-php .es_h {color: #000099; font-weight: bold;}
+.language-php .br0 {color: #009900;}
+.language-php .sy0 {color: #339933;}
+.language-php .sy1 {color: #000000; font-weight: bold;}
+.language-php .st0 {color: #0000ff;}
+.language-php .st_h {color: #0000ff;}
+.language-php .nu0 {color: #cc66cc;}
+.language-php .nu8 {color: #208080;}
+.language-php .nu12 {color: #208080;}
+.language-php .nu19 {color:#800080;}
+.language-php .me1 {color: #004000;}
+.language-php .me2 {color: #004000;}
+.language-php .re0 {color: #000088;}
+.language-php .ln-xtra, .php li.ln-xtra, .php div.ln-xtra {background-color: #ffc;}
+.language-php span.xtra { display:block; }
+
+.language-php-brief .de1, .php-brief .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-php-brief  {font-family:monospace;}
+.language-php-brief .imp {font-weight: bold; color: red;}
+.language-php-brief li, .php-brief .li1 {font-weight: normal; vertical-align:top;}
+.language-php-brief .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-php-brief .li2 {font-weight: bold; vertical-align:top;}
+.language-php-brief .kw1 {color: #b1b100;}
+.language-php-brief .kw2 {color: #000000; font-weight: bold;}
+.language-php-brief .kw3 {color: #990000;}
+.language-php-brief .co1 {color: #666666; font-style: italic;}
+.language-php-brief .co2 {color: #666666; font-style: italic;}
+.language-php-brief .co3 {color: #0000cc; font-style: italic;}
+.language-php-brief .coMULTI {color: #666666; font-style: italic;}
+.language-php-brief .es0 {color: #000099; font-weight: bold;}
+.language-php-brief .es_h {color: #000099; font-weight: bold;}
+.language-php-brief .br0 {color: #009900;}
+.language-php-brief .sy0 {color: #339933;}
+.language-php-brief .sy1 {color: #000000; font-weight: bold;}
+.language-php-brief .st0 {color: #0000ff;}
+.language-php-brief .st_h {color: #0000ff;}
+.language-php-brief .nu0 {color: #cc66cc;}
+.language-php-brief .nu8 {color: #208080;}
+.language-php-brief .nu12 {color: #208080;}
+.language-php-brief .nu19 {color:#800080;}
+.language-php-brief .me1 {color: #004000;}
+.language-php-brief .me2 {color: #004000;}
+.language-php-brief .re0 {color: #0000ff;}
+.language-php-brief .ln-xtra, .php-brief li.ln-xtra, .php-brief div.ln-xtra {background-color: #ffc;}
+.language-php-brief span.xtra { display:block; }
+
+.language-python .de1, .python .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-python  {font-family:monospace;}
+.language-python .imp {font-weight: bold; color: red;}
+.language-python li, .python .li1 {font-weight: normal; vertical-align:top;}
+.language-python .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-python .li2 {font-weight: bold; vertical-align:top;}
+.language-python .kw1 {color: #ff7700;font-weight:bold;}
+.language-python .kw2 {color: #008000;}
+.language-python .kw3 {color: #dc143c;}
+.language-python .kw4 {color: #0000cd;}
+.language-python .co1 {color: #808080; font-style: italic;}
+.language-python .coMULTI {color: #808080; font-style: italic;}
+.language-python .es0 {color: #000099; font-weight: bold;}
+.language-python .br0 {color: black;}
+.language-python .sy0 {color: #66cc66;}
+.language-python .st0 {color: #483d8b;}
+.language-python .nu0 {color: #ff4500;}
+.language-python .me1 {color: black;}
+.language-python .ln-xtra, .python li.ln-xtra, .python div.ln-xtra {background-color: #ffc;}
+.language-python span.xtra { display:block; }
+
+.language-rails .de1, .rails .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-rails  {font-family:monospace;}
+.language-rails .imp {font-weight: bold; color: red;}
+.language-rails li, .rails .li1 {font-weight: normal; vertical-align:top;}
+.language-rails .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-rails .li2 {font-weight: bold; vertical-align:top;}
+.language-rails .kw1 {color:#9966CC; font-weight:bold;}
+.language-rails .kw2 {color:#0000FF; font-weight:bold;}
+.language-rails .kw3 {color:#CC0066; font-weight:bold;}
+.language-rails .kw4 {color:#CC00FF; font-weight:bold;}
+.language-rails .kw5 {color:#5A0A0A; font-weight:bold;}
+.language-rails .co1 {color:#008000; font-style:italic;}
+.language-rails .coMULTI {color:#000080; font-style:italic;}
+.language-rails .es0 {color:#000099;}
+.language-rails .br0 {color:#006600; font-weight:bold;}
+.language-rails .sy0 {color:#006600; font-weight:bold;}
+.language-rails .st0 {color:#996600;}
+.language-rails .nu0 {color:#006666;}
+.language-rails .me1 {color:#9900CC;}
+.language-rails .re0 {color:#ff6633; font-weight:bold;}
+.language-rails .re1 {color:#0066ff; font-weight:bold;}
+.language-rails .re2 {color:#6666ff; font-weight:bold;}
+.language-rails .re3 {color:#ff3333; font-weight:bold;}
+.language-rails .ln-xtra, .rails li.ln-xtra, .rails div.ln-xtra {background-color: #ffc;}
+.language-rails span.xtra { display:block; }
+
+.language-robots .de1, .robots .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-robots  {font-family:monospace;}
+.language-robots .imp {font-weight: bold; color: red;}
+.language-robots li, .robots .li1 {font-weight: normal; vertical-align:top;}
+.language-robots .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-robots .li2 {font-weight: bold; vertical-align:top;}
+.language-robots .kw1 {color: #b1b100;}
+.language-robots .co1 {color: #808080; font-style: italic;}
+.language-robots .es0 {color: #000099; font-weight: bold;}
+.language-robots .br0 {color: #66cc66;}
+.language-robots .sy0 {color: #66cc66;}
+.language-robots .st0 {color: #ff0000;}
+.language-robots .nu0 {color: #cc66cc;}
+.language-robots .ln-xtra, .robots li.ln-xtra, .robots div.ln-xtra {background-color: #ffc;}
+.language-robots span.xtra { display:block; }
+
+.language-ruby .de1, .ruby .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-ruby  {font-family:monospace;}
+.language-ruby .imp {font-weight: bold; color: red;}
+.language-ruby li, .ruby .li1 {font-weight: normal; vertical-align:top;}
+.language-ruby .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-ruby .li2 {font-weight: bold; vertical-align:top;}
+.language-ruby .kw1 {color:#9966CC; font-weight:bold;}
+.language-ruby .kw2 {color:#0000FF; font-weight:bold;}
+.language-ruby .kw3 {color:#CC0066; font-weight:bold;}
+.language-ruby .kw4 {color:#CC00FF; font-weight:bold;}
+.language-ruby .co1 {color:#008000; font-style:italic;}
+.language-ruby .co4 {color: #cc0000; font-style: italic;}
+.language-ruby .coMULTI {color:#000080; font-style:italic;}
+.language-ruby .es0 {color:#000099;}
+.language-ruby .br0 {color:#006600; font-weight:bold;}
+.language-ruby .sy0 {color:#006600; font-weight:bold;}
+.language-ruby .st0 {color:#996600;}
+.language-ruby .nu0 {color:#006666;}
+.language-ruby .me1 {color:#9900CC;}
+.language-ruby .re0 {color:#ff6633; font-weight:bold;}
+.language-ruby .re1 {color:#0066ff; font-weight:bold;}
+.language-ruby .re2 {color:#6666ff; font-weight:bold;}
+.language-ruby .re3 {color:#ff3333; font-weight:bold;}
+.language-ruby .ln-xtra, .ruby li.ln-xtra, .ruby div.ln-xtra {background-color: #ffc;}
+.language-ruby span.xtra { display:block; }
+
+.language-sas .de1, .sas .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-sas  {font-family:monospace;}
+.language-sas .imp {font-weight: bold; color: red;}
+.language-sas li, .sas .li1 {font-weight: normal; vertical-align:top;}
+.language-sas .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-sas .li2 {font-weight: bold; vertical-align:top;}
+.language-sas .kw1 {color: #0000ff;}
+.language-sas .kw2 {color: #0000ff;}
+.language-sas .kw3 {color: #0000ff;}
+.language-sas .kw4 {color: #0000ff;}
+.language-sas .kw5 {color: #0000ff;}
+.language-sas .kw6 {color: #000080; font-weight: bold;}
+.language-sas .kw7 {color: #ff0000;}
+.language-sas .kw8 {color: #00ff00;}
+.language-sas .kw9 {color: #0000ff;}
+.language-sas .coMULTI {color: #006400; font-style: italic;}
+.language-sas .es0 {color: #000099; font-weight: bold;}
+.language-sas .br0 {color: #66cc66;}
+.language-sas .sy0 {color: #66cc66;}
+.language-sas .st0 {color: #a020f0;}
+.language-sas .nu0 {color: #2e8b57; font-weight: bold;}
+.language-sas .re0 {color: #0000ff; font-weight: bold;}
+.language-sas .re1 {color: #000080; font-weight: bold;}
+.language-sas .re2 {color: #006400; font-style: italic;}
+.language-sas .re3 {color: #006400; font-style: italic;}
+.language-sas .re4 {color: #006400; font-style: italic;}
+.language-sas .re5 {color: #ff0000; font-weight: bold;}
+.language-sas .re6 {color: #00ff00; font-style: italic;}
+.language-sas .re7 {color: #0000ff; font-style: normal;}
+.language-sas .re8 {color: #b218b2; font-weight: bold;}
+.language-sas .re9 {color: #b218b2; font-weight: bold;}
+.language-sas .ln-xtra, .sas li.ln-xtra, .sas div.ln-xtra {background-color: #ffc;}
+.language-sas span.xtra { display:block; }
+
+.language-scheme .de1, .scheme .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-scheme  {font-family:monospace;}
+.language-scheme .imp {font-weight: bold; color: red;}
+.language-scheme li, .scheme .li1 {font-weight: normal; vertical-align:top;}
+.language-scheme .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-scheme .li2 {font-weight: bold; vertical-align:top;}
+.language-scheme .kw1 {color: #b1b100;}
+.language-scheme .co1 {color: #808080; font-style: italic;}
+.language-scheme .coMULTI {color: #808080; font-style: italic;}
+.language-scheme .es0 {color: #000099; font-weight: bold;}
+.language-scheme .br0 {color: #66cc66;}
+.language-scheme .sy0 {color: #66cc66;}
+.language-scheme .st0 {color: #ff0000;}
+.language-scheme .nu0 {color: #cc66cc;}
+.language-scheme .me0 {color: #202020;}
+.language-scheme .ln-xtra, .scheme li.ln-xtra, .scheme div.ln-xtra {background-color: #ffc;}
+.language-scheme span.xtra { display:block; }
+
+.language-smarty .de1, .smarty .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-smarty  {font-family:monospace;}
+.language-smarty .imp {font-weight: bold; color: red;}
+.language-smarty li, .smarty .li1 {font-weight: normal; vertical-align:top;}
+.language-smarty .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-smarty .li2 {font-weight: bold; vertical-align:top;}
+.language-smarty .kw1 {color: #0600FF;}
+.language-smarty .kw2 {color: #008000;}
+.language-smarty .kw3 {color: #0600FF;}
+.language-smarty .kw4 {color: #804040;}
+.language-smarty .kw5 {color: #008000;}
+.language-smarty .kw6 {color: #6A0A0A;}
+.language-smarty .kw7 {color: #D36900;}
+.language-smarty .kw8 {color: #0600FF;}
+.language-smarty .coMULTI {color: #008080; font-style: italic;}
+.language-smarty .es0 {color: #000099; font-weight: bold;}
+.language-smarty .br0 {color: #D36900;}
+.language-smarty .sy0 {color: #D36900;}
+.language-smarty .st0 {color: #ff0000;}
+.language-smarty .nu0 {color: #cc66cc;}
+.language-smarty .me1 {color: #006600;}
+.language-smarty .sc1 {color: #808080; font-style: italic;}
+.language-smarty .sc2 {color: #009000;}
+.language-smarty .re0 {color: #00aaff;}
+.language-smarty .ln-xtra, .smarty li.ln-xtra, .smarty div.ln-xtra {background-color: #ffc;}
+.language-smarty span.xtra { display:block; }
+
+.language-sql .de1, .sql .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-sql  {font-family:monospace;}
+.language-sql .imp {font-weight: bold; color: red;}
+.language-sql li, .sql .li1 {font-weight: normal; vertical-align:top;}
+.language-sql .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-sql .li2 {font-weight: bold; vertical-align:top;}
+.language-sql .kw1 {color: #993333; font-weight: bold;}
+.language-sql .co1 {color: #808080; font-style: italic;}
+.language-sql .coMULTI {color: #808080; font-style: italic;}
+.language-sql .es0 {color: #000099; font-weight: bold;}
+.language-sql .br0 {color: #66cc66;}
+.language-sql .sy0 {color: #66cc66;}
+.language-sql .st0 {color: #ff0000;}
+.language-sql .nu0 {color: #cc66cc;}
+.language-sql .ln-xtra, .sql li.ln-xtra, .sql div.ln-xtra {background-color: #ffc;}
+.language-sql span.xtra { display:block; }
+
+.language-text .de1, .text .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-text  {font-family:monospace;}
+.language-text .imp {font-weight: bold; color: red;}
+.language-text li, .text .li1 {font-weight: normal; vertical-align:top;}
+.language-text .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-text .li2 {font-weight: bold; vertical-align:top;}
+.language-text .ln-xtra, .text li.ln-xtra, .text div.ln-xtra {background-color: #ffc;}
+.language-text span.xtra { display:block; }
+
+.language-whois .de1, .whois .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-whois  {font-family:monospace;}
+.language-whois .imp {font-weight: bold; color: red;}
+.language-whois li, .whois .li1 {font-weight: normal; vertical-align:top;}
+.language-whois .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-whois .li2 {font-weight: bold; vertical-align:top;}
+.language-whois .kw1 {color: #0000FF; font-weight: bold;}
+.language-whois .kw2 {color: #000080; font-weight: bold;}
+.language-whois .kw3 {color: #990000; font-weight: bold;}
+.language-whois .co1 {color: #666666; font-style: italic;}
+.language-whois .co2 {color: #666666; font-style: italic;}
+.language-whois .co3 {color: #404080;}
+.language-whois .co4 {color: #408040;}
+.language-whois .co5 {color: #408040;}
+.language-whois .co6 {color: #408040;}
+.language-whois .co7 {color: #804040;}
+.language-whois .co8 {color: #804040;}
+.language-whois .coMULTI {color: #666666; font-style: italic;}
+.language-whois .es0 {color: #000099; font-weight: bold;}
+.language-whois .es_h {color: #000099; font-weight: bold;}
+.language-whois .br0 {color: #009900;}
+.language-whois .sy0 {color: #0000FF;}
+.language-whois .nu0 {color: #000080;}
+.language-whois .re0 {color: #000088;}
+.language-whois .ln-xtra, .whois li.ln-xtra, .whois div.ln-xtra {background-color: #ffc;}
+.language-whois span.xtra { display:block; }
+
+.language-xml .de1, .xml .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-xml  {font-family:monospace;}
+.language-xml .imp {font-weight: bold; color: red;}
+.language-xml li, .xml .li1 {font-weight: normal; vertical-align:top;}
+.language-xml .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-xml .li2 {font-weight: bold; vertical-align:top;}
+.language-xml .es0 {color: #000099; font-weight: bold;}
+.language-xml .br0 {color: #66cc66;}
+.language-xml .sy0 {color: #66cc66;}
+.language-xml .st0 {color: #ff0000;}
+.language-xml .nu0 {color: #cc66cc;}
+.language-xml .sc-1 {color: #808080; font-style: italic;}
+.language-xml .sc0 {color: #00bbdd;}
+.language-xml .sc1 {color: #ddbb00;}
+.language-xml .sc2 {color: #339933;}
+.language-xml .sc3 {color: #009900;}
+.language-xml .re0 {color: #000066;}
+.language-xml .re1 {color: #000000; font-weight: bold;}
+.language-xml .re2 {color: #000000; font-weight: bold;}
+.language-xml .ln-xtra, .xml li.ln-xtra, .xml div.ln-xtra {background-color: #ffc;}
+.language-xml span.xtra { display:block; }
+
+.language-yaml .de1, .yaml .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.language-yaml  {font-family:monospace;}
+.language-yaml .imp {font-weight: bold; color: red;}
+.language-yaml li, .yaml .li1 {font-weight: normal; vertical-align:top;}
+.language-yaml .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.language-yaml .li2 {font-weight: bold; vertical-align:top;}
+.language-yaml .kw1 {font-weight: bold;}
+.language-yaml .co0 {color: #303050;background-color: #F5F5F5}
+.language-yaml .co1 {color: blue;}
+.language-yaml .co2 {font-weight: bold; color: red;}
+.language-yaml .co3 {color: green;}
+.language-yaml .co4 {color: #007F45;}
+.language-yaml .co5 {color: #7f7fFF;}
+.language-yaml .co6 {color: #FF7000;}
+.language-yaml .co7 {color: #FF45C0;}
+.language-yaml .co8 {font-weight: bold; color: #005F5F;}
+.language-yaml .sy1 {color: cyan;}
+.language-yaml .sy2 {font-weight: bold; color: brown;}
+.language-yaml .st0 {color: #CF00CF;}
+.language-yaml .ln-xtra, .yaml li.ln-xtra, .yaml div.ln-xtra {background-color: #ffc;}
+.language-yaml span.xtra { display:block; }

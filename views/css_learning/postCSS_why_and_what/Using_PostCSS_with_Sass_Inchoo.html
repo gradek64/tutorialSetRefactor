@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)https://inchoo.net/magento/magento-frontend/using-postcss-sass/ -->
+<html lang="en-US" prefix="og: http://ogp.me/ns#"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#aad475">
+  <title>Using PostCSS with Sass • Inchoo</title>
+  <link rel="profile" href="http://gmpg.org/xfn/11">
+  <link rel="pingback" href="https://inchoo.net/xmlrpc.php">
+  <link rel="shortcut icon" href="https://inchoo.net/wp-content/themes/inchoo4/favicon.ico">
+  <link rel="apple-touch-icon" href="https://inchoo.net/wp-content/themes/inchoo4/apple-touch-icon.png">
+  
+<!-- This site is optimized with the Yoast SEO plugin v9.3 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="https://inchoo.net/magento/magento-frontend/using-postcss-sass/">
+<link rel="publisher" href="https://plus.google.com/u/1/+InchooNet/posts">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Using PostCSS with Sass • Inchoo">
+<meta property="og:description" content="In this article we’ll be looking to a basic overview of PostCSS from the perspective of a developer whose current CSS development process includes use of CSS preprocessor, or in particular, Sass. If you’re a Sass user, there are a couple of approaches when starting out with PostCSS. You could make a complete switch and...">
+<meta property="og:url" content="https://inchoo.net/magento/magento-frontend/using-postcss-sass/">
+<meta property="og:site_name" content="Inchoo">
+<meta property="article:publisher" content="https://www.facebook.com/inchoo">
+<meta property="article:tag" content="css">
+<meta property="article:tag" content="frontend">
+<meta property="article:tag" content="postcss">
+<meta property="article:tag" content="sass">
+<meta property="article:section" content="Frontend">
+<meta property="article:published_time" content="2017-03-07T07:37:01+00:00">
+<meta property="article:modified_time" content="2017-03-07T15:16:09+00:00">
+<meta property="og:updated_time" content="2017-03-07T15:16:09+00:00">
+<meta property="og:image" content="https://inchoo.net/wp-content/uploads/2017/03/Sass_PostCSS.jpg">
+<meta property="og:image:secure_url" content="https://inchoo.net/wp-content/uploads/2017/03/Sass_PostCSS.jpg">
+<meta property="og:image:width" content="744">
+<meta property="og:image:height" content="294">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="In this article we’ll be looking to a basic overview of PostCSS from the perspective of a developer whose current CSS development process includes use of CSS preprocessor, or in particular, Sass. If you’re a Sass user, there are a couple of approaches when starting out with PostCSS. You could make a complete switch and...">
+<meta name="twitter:title" content="Using PostCSS with Sass • Inchoo">
+<meta name="twitter:site" content="@inchoo">
+<meta name="twitter:image" content="https://inchoo.net/wp-content/uploads/2017/03/Sass_PostCSS.jpg">
+<meta name="twitter:creator" content="@goran_kolak">
+<script src="./Using_PostCSS_with_Sass_Inchoo_files/inferredEvents.js" async=""></script><script src="./Using_PostCSS_with_Sass_Inchoo_files/1423985297716954" async=""></script><script async="" src="./Using_PostCSS_with_Sass_Inchoo_files/fbevents.js"></script><script type="text/javascript" async="" src="./Using_PostCSS_with_Sass_Inchoo_files/analytics.js"></script><script async="" src="./Using_PostCSS_with_Sass_Inchoo_files/gtm.js"></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://inchoo.net/","name":"Home"}},{"@type":"ListItem","position":2,"item":{"@id":"https://inchoo.net/blog/","name":"Blog"}},{"@type":"ListItem","position":3,"item":{"@id":"https://inchoo.net/magento/magento-frontend/using-postcss-sass/","name":"Using PostCSS with Sass"}}]}</script>
+<!-- / Yoast SEO plugin. -->
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="alternate" type="application/rss+xml" title="Inchoo » Feed" href="https://inchoo.net/feed/">
+<link rel="alternate" type="application/rss+xml" title="Inchoo » Using PostCSS with Sass Comments Feed" href="https://inchoo.net/magento/magento-frontend/using-postcss-sass/feed/">
+<link rel="stylesheet" id="wp-block-library-css" href="./Using_PostCSS_with_Sass_Inchoo_files/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="reschoo-fonts-css" href="./Using_PostCSS_with_Sass_Inchoo_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="reschoo-style-css" href="./Using_PostCSS_with_Sass_Inchoo_files/style.css" type="text/css" media="all">
+<link rel="https://api.w.org/" href="https://inchoo.net/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://inchoo.net/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://inchoo.net/wp-includes/wlwmanifest.xml"> 
+<link rel="shortlink" href="https://inchoo.net/?p=28940">
+<link rel="alternate" type="application/json+oembed" href="https://inchoo.net/wp-json/oembed/1.0/embed?url=https%3A%2F%2Finchoo.net%2Fmagento%2Fmagento-frontend%2Fusing-postcss-sass%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://inchoo.net/wp-json/oembed/1.0/embed?url=https%3A%2F%2Finchoo.net%2Fmagento%2Fmagento-frontend%2Fusing-postcss-sass%2F&amp;format=xml">
+<script async="" src="./Using_PostCSS_with_Sass_Inchoo_files/hotjar-322650.js"></script><script async="" src="./Using_PostCSS_with_Sass_Inchoo_files/modules.4457e1e0de20f8f183bb.js"></script><style type="text/css">iframe#_hjRemoteVarsFrame {display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;}</style></head>
+
+
+<body class="post-template-default single single-post postid-28940 single-format-standard" <!--="" google="" tag="" manager="" --="">
+<script>dataLayer=[{"pageType":"article","Name":"Using PostCSS with Sass","authName":"Goran Kolak","commNum":"1"}];</script>
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NDCZ4S" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NDCZ4S');</script>
+<!-- End Google Tag Manager -->
+  <header id="header" class="header">
+    <div class="header-grid">
+      <a class="header-logo" href="https://inchoo.net/" title="Inchoo" rel="home">Inchoo</a>
+      <nav id="js-menu" class="menu" role="menu">
+          <ul id="menu-header-menu" class="menu-list"><li id="menu-item-22972" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-22972"><a href="https://inchoo.net/" id="top-menu-item-home" data-event="clkAction" data-action="Top menu" data-label="Home">Home</a></li>
+<li id="menu-item-22971" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-has-children menu-item-22971"><a href="https://inchoo.net/blog/" id="top-menu-item-blog" data-event="clkAction" data-action="Top menu" data-label="Blog">Blog</a></li>
+<li id="menu-item-22966" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22966"><a href="https://inchoo.net/work/" id="top-menu-item-portfolio" data-event="clkAction" data-action="Top menu" data-label="Portfolio">Portfolio</a></li>
+<li id="menu-item-22967" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22967"><a href="https://inchoo.net/services/" id="top-menu-item-services" data-event="clkAction" data-action="Top menu" data-label="Services">Services</a></li>
+<li id="menu-item-22970" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22970"><a href="https://inchoo.net/inchoo/" id="top-menu-item-about" data-event="clkAction" data-action="Top menu" data-label="About">About</a></li>
+<li id="menu-item-22968" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22968"><a href="https://inchoo.net/contact/" id="top-menu-item-contact" data-event="clkAction" data-action="Top menu" data-label="Contact">Contact</a></li>
+</ul>      </nav>
+      <button type="button" id="js-search-trigger" class="header-btn header-btn-search"><i class="icon-search"></i><span>Search</span></button>
+      <button type="button" class="header-btn header-btn-contact" id="hire-button" onclick="location.href=&#39;https://inchoo.net/hire-us/&#39;"><i class="icon-mail"></i><span>Hire us</span></button>
+      <button type="button" id="js-menu-trigger" class="header-btn header-btn-menu"><i class="icon-menu"></i><span>Menu</span></button>
+    </div>
+  </header>
+      <nav class="blog-menu" role="menu">
+      <ul id="menu-blog-menu" class="blog-menu-list"><li id="menu-item-23223" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-23223"><a href="https://inchoo.net/blog/" id="top-menu-item-all" data-event="clkAction" data-action="Top menu" data-label="All">All</a></li>
+<li id="menu-item-22973" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor menu-item-22973"><a href="https://inchoo.net/magento/" id="top-menu-item-magento" data-event="clkAction" data-action="Top menu" data-label="Magento">Magento</a></li>
+<li id="menu-item-23259" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-23259"><a href="https://inchoo.net/magento-2/" id="top-menu-item-magento-2" data-event="clkAction" data-action="Top menu" data-label="Magento 2">Magento 2</a></li>
+<li id="menu-item-32409" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-32409"><a href="https://inchoo.net/ux-ui-design/" id="top-menu-item-ux/ui-design" data-event="clkAction" data-action="Top menu" data-label="UX/UI Design">UX/UI Design</a></li>
+<li id="menu-item-22974" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-22974"><a href="https://inchoo.net/ecommerce/" id="top-menu-item-ecommerce-talk" data-event="clkAction" data-action="Top menu" data-label="eCommerce Talk">eCommerce Talk</a></li>
+<li id="menu-item-22975" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-22975"><a href="https://inchoo.net/online-marketing/" id="top-menu-item-online-marketing" data-event="clkAction" data-action="Top menu" data-label="Online Marketing">Online Marketing</a></li>
+<li id="menu-item-22976" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-22976"><a href="https://inchoo.net/dev-talk/" id="top-menu-item-dev-talk" data-event="clkAction" data-action="Top menu" data-label="Dev Talk">Dev Talk</a></li>
+<li id="menu-item-22977" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-22977"><a href="https://inchoo.net/life-at-inchoo/" id="top-menu-item-life-at-inchoo" data-event="clkAction" data-action="Top menu" data-label="Life at Inchoo">Life at Inchoo</a></li>
+</ul>    </nav>
+    <main class="main">
+    <form class="search-form" role="search" method="get" id="js-search-form" action="https://inchoo.net/">
+        <input type="search" class="input-text search-form-input" value="" name="s" placeholder="Search here..." required="">
+    </form>
+<div class="content-single-article">
+
+      <div class="article__container">
+      
+<article id="article-28940" class="c-article post-28940 post type-post status-publish format-standard has-post-thumbnail hentry category-magento-frontend tag-css tag-frontend tag-postcss tag-sass">
+  <header class="c-article__header">
+          <h1 class="c-article__title">Using PostCSS with Sass</h1>
+        <div class="c-article__meta">
+              <span class="c-article__meta-author">By: Goran Kolak,</span>
+            <span class="c-article__meta-date">
+        Mar 07, 2017      </span>
+      <ul class="post-categories">
+	<li><a href="https://inchoo.net/magento/magento-frontend/" rel="category tag">Frontend</a></li></ul>    </div>
+  </header>
+
+        <div class="c-article__image">
+              <img src="./Using_PostCSS_with_Sass_Inchoo_files/Sass_PostCSS.jpg" title="Using PostCSS with Sass">
+            
+                </div>
+      <div class="c-article__content">
+                            <p>In this article we’ll be looking to a basic overview of <a href="https://github.com/postcss/postcss">PostCSS</a> from the perspective of a developer whose current CSS development process includes use of CSS preprocessor, or in particular, <a href="http://sass-lang.com/">Sass</a>. If you’re a Sass user, there are a couple of approaches when starting out with PostCSS. You could make a complete switch and recreate your basic preprocessing environment with PostCSS, or you could start using it as a supplement.</p>
+<p>Many of you will say that you still only rely on your favorite preprocessor, but then, it’s possible that you’re also using <a href="https://github.com/postcss/autoprefixer">Autoprefixer</a> for vendor prefixing, and guess what? In this case, you have already included PostCSS into your workflow.<span id="more-28940"></span></p>
+<h2>What exactly are we talking about?</h2>
+<p><strong>PostCSS</strong> is a tool, or basically, just an API which handles its plugins written in JavaScript.</p>
+<p>Comparing to Sass, which has a bunch of features out of the box, PostCSS comes as a blank plate, ready to be filled with the ingredients you need.</p>
+<h2>Basic Setup</h2>
+<p>Including PostCSS into your project is not a complicated process, especially if you have a basic experience of using some of the task runners, such as <a href="http://gulpjs.com/">Gulp</a> or <a href="https://gruntjs.com/">Grunt</a>.</p>
+<p>As a simple example, let’s take a look at the following gulpfile.js.</p>
+<pre class="ish"><code class="language-css">var gulp <span class="sy0">=</span> require<span class="br0">(</span><span class="st0">'gulp'</span><span class="br0">)</span><span class="sy0">,</span>
+    postcss <span class="sy0">=</span> require<span class="br0">(</span><span class="st0">'gulp-postcss'</span><span class="br0">)</span><span class="sy0">,</span>
+    autoprefixer <span class="sy0">=</span> require<span class="br0">(</span><span class="st0">'autoprefixer'</span><span class="br0">)</span><span class="sy0">;</span>
+&nbsp;
+gulp.task<span class="br0">(</span><span class="st0">'css'</span><span class="sy0">,</span> function<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span>
+  return gulp.src<span class="br0">(</span><span class="st0">'src/style.css'</span><span class="br0">)</span>
+    .pipe<span class="br0">(</span>postcss<span class="br0">(</span>
+      autoprefixer<span class="br0">(</span><span class="br0">)</span>
+    <span class="br0">)</span><span class="br0">)</span>
+    .pipe<span class="br0">(</span>gulp.dest<span class="br0">(</span><span class="st0">'dest/style.css'</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span><span class="br0">)</span><span class="sy0">;</span></code></pre>
+<p>What we see here is a two step process:</p>
+<ol>
+<li>First, we include the main PostCSS module.</li>
+<li>Next, we add PostCSS plugin(s) we want to use (which in these short example is the only one – Autoprefixer).</li>
+</ol>
+<p>Of course, like with any new gulp plugin which you include into your gulpfile.js, PostCSS module and any additional PostCSS plugin need to be installed first. This can be done in a terminal, with a simple command, familiar to all Gulp users:</p>
+<p><code>npm install gulp-postcss autoprefixer --save-dev</code></p>
+<h2>Choosing plugins</h2>
+<p>So, which plugins do we need? Well, this comes to your individual choice. For an easy start or just for supplementing your preprocessing workflow with some additional power, you will certainly gain an instant benefit with these two:</p>
+<ul>
+<li><a href="https://github.com/postcss/autoprefixer">Autoprefixer</a> – probably the most popular PostCSS plugin, used for adding required vendor prefixes. As already mentioned at the beginning, there is high chance that you’re already using this one.</li>
+<p></p><pre class="ish"><code class="language-css"><span class="re1">.box</span> <span class="br0">{</span>
+  <span class="kw1">display</span><span class="sy0">:</span> flex<span class="sy0">;</span>
+<span class="br0">}</span>
+&nbsp;
+// Result after processing
+<span class="re1">.box</span> <span class="br0">{</span>
+  <span class="kw1">display</span><span class="sy0">:</span> -webkit-box<span class="sy0">;</span>
+  <span class="kw1">display</span><span class="sy0">:</span> -webkit-flex<span class="sy0">;</span>
+  <span class="kw1">display</span><span class="sy0">:</span> -ms-flexbox<span class="sy0">;</span>
+  <span class="kw1">display</span><span class="sy0">:</span> flex<span class="sy0">;</span>
+<span class="br0">}</span></code></pre>
+<p></p>
+<li><a href="https://github.com/stylelint/stylelint">Stylelint</a> – a linting plugin useful for maintaining consistent conventions and avoiding errors in your stylesheets.</li>
+</ul>
+<p>If you want to get in more deeper and recreate your basic Sass environment, most likely you’ll also need to require the following plugins:</p>
+<ul>
+</ul><ul>
+<li><a href="https://github.com/postcss/postcss-simple-vars">Postcss-simple-vars</a> – for including Sass-like variables.</li>
+</ul>
+
+<pre class="ish"><code class="language-css">$<span class="kw1">blue</span><span class="sy0">:</span> <span class="re0">#056ef0</span><span class="sy0">;</span>
+$column<span class="sy0">:</span> <span class="re3">200px</span><span class="sy0">;</span>
+&nbsp;
+<span class="re1">.menu_link</span> <span class="br0">{</span>
+    <span class="kw1">background</span><span class="sy0">:</span> $<span class="kw1">blue</span><span class="sy0">;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> $column<span class="sy0">;</span>
+<span class="br0">}</span>
+&nbsp;
+// Result after processing
+<span class="re1">.menu_link</span> <span class="br0">{</span>
+    <span class="kw1">background</span><span class="sy0">:</span> <span class="re0">#056ef0</span><span class="sy0">;</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">200px</span><span class="sy0">;</span>
+<span class="br0">}</span></code></pre>
+<ul>
+</ul><ul>
+<li><a href="https://github.com/postcss/postcss-nested">Postcss-nested</a> – gives us a functionality of unwrapping nested rules like how Sass does it.</li>
+</ul>
+
+<pre class="ish"><code class="language-css"><span class="re1">.phone</span> <span class="br0">{</span>
+    &amp;_title <span class="br0">{</span>
+        <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">500px</span><span class="sy0">;</span>
+        <span class="co1">@media (max-width: 500px) {</span>
+            <span class="kw1">width</span><span class="sy0">:</span> <span class="kw2">auto</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+    <span class="br0">}</span>
+<span class="br0">}</span>
+&nbsp;
+// Result after processing
+<span class="re1">.phone_title</span> <span class="br0">{</span>
+    <span class="kw1">width</span><span class="sy0">:</span> <span class="re3">500px</span><span class="sy0">;</span>
+<span class="br0">}</span>
+<span class="co1">@media (max-width: 500px) {</span>
+    <span class="re1">.phone_title</span> <span class="br0">{</span>
+        <span class="kw1">width</span><span class="sy0">:</span> <span class="kw2">auto</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+<span class="br0">}</span></code></pre>
+<ul>
+</ul><ul>
+<li><a href="https://github.com/postcss/postcss-mixins">Postcss-mixins</a> – PostCSS plugin for mixins.</li>
+</ul>
+
+<pre class="ish"><code class="language-css"><span class="co1">@define-mixin icon $network, $color: blue {</span>
+    <span class="re1">.icon</span>.is-$<span class="br0">(</span>network<span class="br0">)</span> <span class="br0">{</span>
+        <span class="kw1">color</span><span class="sy0">:</span> $<span class="kw1">color</span><span class="sy0">;</span>
+        <span class="co1">@mixin-content;</span>
+    <span class="br0">}</span>
+    <span class="re1">.icon</span>.is-$<span class="br0">(</span>network<span class="br0">)</span><span class="re2">:hover </span><span class="br0">{</span>
+        <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">white</span><span class="sy0">;</span>
+        <span class="kw1">background</span><span class="sy0">:</span> $<span class="kw1">color</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="co1">@mixin icon twitter {</span>
+    <span class="kw1">background</span><span class="sy0">:</span> <span class="kw2">url</span><span class="br0">(</span><span class="co2">twt.png</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+<span class="co1">@mixin icon youtube, red {</span>
+    <span class="kw1">background</span><span class="sy0">:</span> <span class="kw2">url</span><span class="br0">(</span><span class="co2">youtube.png</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+&nbsp;
+// Result after processing
+<span class="re1">.icon</span><span class="re1">.is-twitter</span> <span class="br0">{</span>
+    <span class="kw1">color</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span>
+    <span class="kw1">background</span><span class="sy0">:</span> <span class="kw2">url</span><span class="br0">(</span><span class="co2">twt.png</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+<span class="re1">.icon</span><span class="re1">.is-twitter</span><span class="re2">:hover </span><span class="br0">{</span>
+    <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">white</span><span class="sy0">;</span>
+    <span class="kw1">background</span><span class="sy0">:</span> <span class="kw1">blue</span><span class="sy0">;</span>
+<span class="br0">}</span>
+<span class="re1">.icon</span><span class="re1">.is-youtube</span> <span class="br0">{</span>
+    <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span>
+    <span class="kw1">background</span><span class="sy0">:</span> <span class="kw2">url</span><span class="br0">(</span><span class="co2">youtube.png</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+<span class="re1">.icon</span><span class="re1">.is-youtube</span><span class="re2">:hover </span><span class="br0">{</span>
+    <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">white</span><span class="sy0">;</span>
+    <span class="kw1">background</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span>
+<span class="br0">}</span></code></pre>
+<p>One of the most interesting plugins that we’re mentioning last, is <a href="http://cssnext.io/">CSSNext</a>. This is actually a collection of plugins that, together, give us a possibility to use the latest CSS syntax today. It transforms new CSS specs into more compatible CSS without a need to waiting for browser support. CSSNext has a lot of features and some of them are:</p>
+<ul>
+<li>custom properties set &amp; @apply</li>
+<li>custom properties &amp; var()</li>
+<li>custom selectors</li>
+<li>color() function</li>
+<li>:any-link pseudo-class, etc.</li>
+</ul>
+<p>In your CSS file you can do something like this:</p>
+<pre class="ish"><code class="language-css">// Example for custom properties set &amp; <span class="co1">@apply</span>
+<span class="re2">:root </span><span class="br0">{</span>
+  --danger-theme<span class="sy0">:</span> <span class="br0">{</span>
+    <span class="kw1">color</span><span class="sy0">:</span> <span class="kw2">white</span><span class="sy0">;</span>
+    <span class="kw1">background-color</span><span class="sy0">:</span> <span class="kw2">red</span><span class="sy0">;</span>
+  <span class="br0">}</span><span class="sy0">;</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="re1">.danger</span> <span class="br0">{</span>
+  <span class="co1">@apply --danger-theme;</span>
+<span class="br0">}</span></code></pre>
+<h2>Why should you use PostCSS?</h2>
+<p>So, if you already have an effective workflow and you’re satisfied with using your favorite preprocessor for some time now, you might be still asking yourself why do I need to learn another tool (or make the switch from Sass)? What are the benefits?</p>
+<p>To answer these questions, let’s summarize some of the advantages:</p>
+<ul>
+<li><strong>Speed</strong> – even though in the meantime Sass got a significantly faster (e.g., LibSass), PostCSS is still the winner here</li>
+<li><strong>Modularity</strong> – reduces bloat; you only include the functionality that you need</li>
+<li><strong>Lightweight</strong> – with previous benefit, you get also this one</li>
+<li><strong>Immediate implementation</strong> – if you want a new functionality, you don’t have to wait for Sass to be updated; you can make it on your own</li>
+</ul>
+<p>Of course, everything’s not ideal and there are also certain drawbacks:</p>
+<ul>
+<li><strong>Increased complexity</strong> – more planning is required (e.g., plugins must be called in a specific order)</li>
+<li><strong>A different syntax</strong> (compared to Sass)</li>
+<li><strong>PostCSS processing requires valid CSS</strong></li>
+</ul>
+<h2>What’s next</h2>
+<p>It’s perfectly clear that PostCSS is all about the plugins. At the time of writing, there are more than 200 plugins available (and this number is only getting bigger). So, to go beyond the basics, you’ll need to <a href="http://postcss.parts/">search for other plugins</a> that will extend this barebones setup.</p>
+<p>Of course, if you find out that some handy functionality is missing, go ahead and solve the problem by <a href="https://css-tricks.com/want-make-postcss-plugin/">making your own PostCSS plugin</a>.</p>
+                </div>
+          
+<div class="c-share">
+  <a class="btn btn-facebook btn-social" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Finchoo.net%2Fmagento%2Fmagento-frontend%2Fusing-postcss-sass%2F" title="Facebook" onclick="javascript:window.open(this.href,&#39;&#39;,&#39;width=626,height=436,left=&#39;+((screen.width-626)/2)+&#39;,top=200,resizable=yes,scrollbars=yes&#39;);return false;">
+      <span class="icon-facebook"></span></a>
+  <a class="btn btn-twitter btn-social" href="https://twitter.com/share?url=http%3A%2F%2Finchoo.net%2Fmagento%2Fmagento-frontend%2Fusing-postcss-sass%2F&amp;text=Using+PostCSS+with+Sass" title="Twitter" onclick="javascript:window.open(this.href,&#39;&#39;,&#39;width=550,height=450,left=&#39;+((screen.width-550)/2)+&#39;,top=200,resizable=yes,scrollbars=yes&#39;);return false;">
+      <span class="icon-twitter"></span></a>
+  <a class="btn btn-twitter btn-social" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Finchoo.net%2Fmagento%2Fmagento-frontend%2Fusing-postcss-sass%2F&amp;title=Using+PostCSS+with+Sass&amp;summary=&amp;source=" onclick="javascript:window.open(this.href, &#39;&#39;, &#39;menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600&#39;);return false;">
+      <span class="icon-linkedin"></span>
+  </a>
+</div>
+
+    </article>
+      <div class="c-article-published-in">
+        <div class="c-article-published-in__categories">
+          <span>Published in:</span> <ul class="post-categories">
+	<li><a href="https://inchoo.net/magento/magento-frontend/" rel="category tag">Frontend</a></li></ul>        </div>
+        <a class="c-article-published-in__btn btn btn-green" href="https://inchoo.net/magento/magento-frontend/using-postcss-sass/#comments" title="Leave a comment"><i class="icon-comment-square"></i><span>Leave a comment</span></a>
+      </div>
+          </div>
+  
+      <div class="c-article-related">
+      
+          <div id="relatedpostswidget-3" class="widget c-article-related__container">      <h3 class="widget-title">You made it all the way down here so you must have enjoyed this post! You may also like:</h3>
+              <div class="o-article-card">
+                  
+            <a class="o-article-card__image-link" href="https://inchoo.net/magento-2/css-media-queries-magento-2/" title="CSS Media queries in Magento 2">
+              <img data-src="https://inchoo.net/wp-content/uploads/2017/07/Css_media_inchoo.jpg" class=" lazyloaded" alt="CSS Media queries in Magento 2" src="./Using_PostCSS_with_Sass_Inchoo_files/Css_media_inchoo.jpg">
+            </a>
+                       
+          <span class="o-article-card__author-img"><img alt="Goran Kolak" data-src="https://secure.gravatar.com/avatar/c891a66e77a920021f536ca4c2ab0df7?s=36&amp;d=mm&amp;r=g" data-srcset="https://secure.gravatar.com/avatar/c891a66e77a920021f536ca4c2ab0df7?s=72&amp;d=mm&amp;r=g 2x" class="avatar avatar-36 photo lazyloaded" height="36" width="36" srcset="https://secure.gravatar.com/avatar/c891a66e77a920021f536ca4c2ab0df7?s=72&amp;d=mm&amp;r=g 2x" src="./Using_PostCSS_with_Sass_Inchoo_files/c891a66e77a920021f536ca4c2ab0df7.jpeg"></span>
+          <div class="o-article-card__meta">
+                          <span>Goran Kolak</span>,
+                        <time class="o-article-card__date">Jul 11, 2017</time> 
+            | <a href="https://inchoo.net/magento-2/css-media-queries-magento-2/#comments"><i class="icon-comment-square"></i> 8</a>          </div>          
+          <h2 class="o-article-card__title h4">
+            <a href="https://inchoo.net/magento-2/css-media-queries-magento-2/" title="CSS Media queries in Magento 2">CSS Media queries in Magento 2</a>
+          </h2>          
+        </div>
+              <div class="o-article-card">
+                  
+            <a class="o-article-card__image-link" href="https://inchoo.net/dev-talk/tools/sass-output-styles/" title="Sass Output Styles">
+              <img data-src="https://inchoo.net/wp-content/uploads/2017/01/styling.jpg" class=" lazyloaded" alt="Sass Output Styles" src="./Using_PostCSS_with_Sass_Inchoo_files/styling.jpg">
+            </a>
+                       
+          <span class="o-article-card__author-img"><img alt="Vanja Devcic" data-src="https://secure.gravatar.com/avatar/f6d799829e9060d93348ad50080f0696?s=36&amp;d=mm&amp;r=g" data-srcset="https://secure.gravatar.com/avatar/f6d799829e9060d93348ad50080f0696?s=72&amp;d=mm&amp;r=g 2x" class="avatar avatar-36 photo lazyloaded" height="36" width="36" srcset="https://secure.gravatar.com/avatar/f6d799829e9060d93348ad50080f0696?s=72&amp;d=mm&amp;r=g 2x" src="./Using_PostCSS_with_Sass_Inchoo_files/f6d799829e9060d93348ad50080f0696.jpeg"></span>
+          <div class="o-article-card__meta">
+                          <a href="https://inchoo.net/author/vanja-devcic/profile/" rel="author">Vanja Devcic</a>, 
+                        <time class="o-article-card__date">Jan 24, 2017</time> 
+            | <a href="https://inchoo.net/dev-talk/tools/sass-output-styles/#comments"><i class="icon-comment-square"></i> 3</a>          </div>          
+          <h2 class="o-article-card__title h4">
+            <a href="https://inchoo.net/dev-talk/tools/sass-output-styles/" title="Sass Output Styles">Sass Output Styles</a>
+          </h2>          
+        </div>
+              <div class="o-article-card">
+                  
+            <a class="o-article-card__image-link" href="https://inchoo.net/magento/magento-frontend/getting-started-with-css-flexbox/" title="Getting started with CSS Flexbox">
+              <img data-src="https://inchoo.net/wp-content/uploads/2016/08/flexbox-01.png" class=" lazyloaded" alt="Getting started with CSS Flexbox" src="./Using_PostCSS_with_Sass_Inchoo_files/flexbox-01.png">
+            </a>
+                       
+          <span class="o-article-card__author-img"><img alt="Goran Kolak" data-src="https://secure.gravatar.com/avatar/c891a66e77a920021f536ca4c2ab0df7?s=36&amp;d=mm&amp;r=g" data-srcset="https://secure.gravatar.com/avatar/c891a66e77a920021f536ca4c2ab0df7?s=72&amp;d=mm&amp;r=g 2x" class="avatar avatar-36 photo lazyloaded" height="36" width="36" srcset="https://secure.gravatar.com/avatar/c891a66e77a920021f536ca4c2ab0df7?s=72&amp;d=mm&amp;r=g 2x" src="./Using_PostCSS_with_Sass_Inchoo_files/c891a66e77a920021f536ca4c2ab0df7.jpeg"></span>
+          <div class="o-article-card__meta">
+                          <span>Goran Kolak</span>,
+                        <time class="o-article-card__date">Aug 03, 2016</time> 
+            | <a href="https://inchoo.net/magento/magento-frontend/getting-started-with-css-flexbox/#comments"><i class="icon-comment-square"></i> 1</a>          </div>          
+          <h2 class="o-article-card__title h4">
+            <a href="https://inchoo.net/magento/magento-frontend/getting-started-with-css-flexbox/" title="Getting started with CSS Flexbox">Getting started with CSS Flexbox</a>
+          </h2>          
+        </div>
+      
+      </div>    
+        </div>
+  
+  
+<div id="comments" class="c-article-comments">
+
+      <h3 class="c-article-comments__title">
+      1 comment    </h3>
+
+    <ol class="c-article-comments__list">
+      		<li id="comment-433932" class="comment even thread-even depth-1">
+			<article id="div-comment-433932" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Using_PostCSS_with_Sass_Inchoo_files/a7a5e006e9c03c6a71262000f4615b6c.jpeg" srcset="https://secure.gravatar.com/avatar/a7a5e006e9c03c6a71262000f4615b6c?s=96&amp;d=mm&amp;r=g 2x" class="avatar avatar-48 photo" height="48" width="48">						<b class="fn"><a href="https://jumplink.eu/" rel="external nofollow" class="url">Pascal Garber</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://inchoo.net/magento/magento-frontend/using-postcss-sass/#comment-433932">
+							<time datetime="2017-03-20T13:34:09+00:00">
+								Mar 20, 2017 at 13:34							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi,<br>
+thank you very much for this nice article!<br>
+I’ve started a project with a set of SASS mixins to have browser prefixes in sass, directly.<br>
+Perhaps that is also interesting for anyone: <a href="https://github.com/JumpLinkNetwork/sass-autoprefixer" rel="nofollow">https://github.com/JumpLinkNetwork/sass-autoprefixer</a></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://inchoo.net/magento/magento-frontend/using-postcss-sass/#comment-433932" onclick="return addComment.moveForm( &quot;div-comment-433932&quot;, &quot;433932&quot;, &quot;respond&quot;, &quot;28940&quot; )" aria-label="Reply to Pascal Garber">Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+    </ol>
+
+    
+    
+  
+    	<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://inchoo.net/magento/magento-frontend/using-postcss-sass/#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="https://inchoo.net/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment" class="required">Comment</label> <textarea id="comment" name="comment" rows="8" required=""></textarea></p><p class="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: <code>&lt;a href="" title=""&gt; &lt;blockquote cite=""&gt; &lt;code&gt; &lt;del datetime=""&gt; &lt;em&gt; &lt;s&gt; &lt;strike&gt; &lt;strong&gt;</code>. You may use following syntax for source code: <code>&lt;pre&gt;&lt;code&gt;$current = "Inchoo";&lt;/code&gt;&lt;/pre&gt;</code>.</p><p class="comment-form-author"><label for="author" class="required">Name</label> <input id="author" name="author" type="text" value="" required=""></p>
+<p class="comment-form-email"><label for="email" class="required">Email</label> <input id="email" name="email" type="email" value="" required=""></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="text" value=""></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="28940" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="8946a552d0"></p>    <input type="text" id="comment_track_1" name="comment_track_1" value="" autocomplete="off" style="display: none;"><input type="text" id="" name="comment_track_2" value="42" autocomplete="off" style="display: none;">
+  <p style="display: none;"></p>			<input type="hidden" id="ak_js" name="ak_js" value="1560262827538"></form>
+			</div><!-- #respond -->
+	
+</div>
+
+
+</div>
+
+</main>
+
+      <div class="hire-us">
+  <div class="hire-us-cont">
+    <div class="hire-us-title h2">Tell us about your project</div>
+    <p class="hire-us-subtitle">Drop us a line. We'd love to know more about your project.</p>
+    <button type="button" class="btn-gray" onclick="location.href=&#39;https://inchoo.net/hire-us/&#39;"><i class="icon-mail"></i><span>Hire us</span></button>
+  </div>
+</div>
+  
+
+  <footer class="footer">
+      <div id="js-accordion" class="footer-menu__container">
+        <div class="footer-menu">
+          <div class="footer-menu__title js-accordion-toggle">Blog categories</div>
+          <ul id="menu-blog-menu-1" class="footer-menu__list js-accordion-content"><li class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-23223"><a href="https://inchoo.net/blog/" id="footer-menu-item-all" data-event="clkAction" data-action="Footer menu" data-label="All">All</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor menu-item-22973"><a href="https://inchoo.net/magento/" id="footer-menu-item-magento" data-event="clkAction" data-action="Footer menu" data-label="Magento">Magento</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-23259"><a href="https://inchoo.net/magento-2/" id="footer-menu-item-magento-2" data-event="clkAction" data-action="Footer menu" data-label="Magento 2">Magento 2</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-32409"><a href="https://inchoo.net/ux-ui-design/" id="footer-menu-item-ux/ui-design" data-event="clkAction" data-action="Footer menu" data-label="UX/UI Design">UX/UI Design</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-22974"><a href="https://inchoo.net/ecommerce/" id="footer-menu-item-ecommerce-talk" data-event="clkAction" data-action="Footer menu" data-label="eCommerce Talk">eCommerce Talk</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-22975"><a href="https://inchoo.net/online-marketing/" id="footer-menu-item-online-marketing" data-event="clkAction" data-action="Footer menu" data-label="Online Marketing">Online Marketing</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-22976"><a href="https://inchoo.net/dev-talk/" id="footer-menu-item-dev-talk" data-event="clkAction" data-action="Footer menu" data-label="Dev Talk">Dev Talk</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-22977"><a href="https://inchoo.net/life-at-inchoo/" id="footer-menu-item-life-at-inchoo" data-event="clkAction" data-action="Footer menu" data-label="Life at Inchoo">Life at Inchoo</a></li>
+</ul>        </div>
+        <div class="footer-menu">
+          <div class="footer-menu__title js-accordion-toggle">Audits</div>
+          <ul id="menu-ecommerce-audits" class="footer-menu__list js-accordion-content"><li id="menu-item-30297" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30297"><a title="SEO Audit" href="https://inchoo.net/services/seo-audit/" id="footer-menu-item-seo-audit" data-event="clkAction" data-action="Footer menu" data-label="SEO Audit">SEO Audit</a></li>
+<li id="menu-item-30298" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30298"><a title="Technical Audit" href="https://inchoo.net/services/technical-audit/" id="footer-menu-item-technical-audit" data-event="clkAction" data-action="Footer menu" data-label="Technical Audit">Technical Audit</a></li>
+<li id="menu-item-30296" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30296"><a title="Usability Audit" href="https://inchoo.net/services/ux-audit/" id="footer-menu-item-ux-audit" data-event="clkAction" data-action="Footer menu" data-label="UX Audit">UX Audit</a></li>
+<li id="menu-item-31978" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31978"><a title="PPC Audit" href="https://inchoo.net/services/ppc-audit/" id="footer-menu-item-ppc-audit" data-event="clkAction" data-action="Footer menu" data-label="PPC Audit">PPC Audit</a></li>
+<li id="menu-item-31979" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31979"><a title="Google Analytics Audit" href="https://inchoo.net/services/google-analytics-audit/" id="footer-menu-item-google-analytics-audit" data-event="clkAction" data-action="Footer menu" data-label="Google Analytics Audit">Google Analytics Audit</a></li>
+</ul>        </div>
+        <div class="footer-menu">
+          <div class="footer-menu__title js-accordion-toggle">Platforms</div>
+          <ul id="menu-choose-a-platform" class="footer-menu__list js-accordion-content"><li id="menu-item-30312" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30312"><a title="Magento – powerful, agile and flexible eCommerce platform" href="https://inchoo.net/services/magento/" id="footer-menu-item-magento" data-event="clkAction" data-action="Footer menu" data-label="Magento">Magento</a></li>
+</ul>        </div>
+        <div class="footer-menu">
+          <div class="footer-menu__title js-accordion-toggle">Magento</div>
+          <ul id="menu-magento" class="footer-menu__list js-accordion-content"><li id="menu-item-30347" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30347"><a title="Building your Magento store with Inchoo" href="https://inchoo.net/services/building-your-magento-store-with-inchoo/" id="footer-menu-item-process-of-building-a-magento-store" data-event="clkAction" data-action="Footer menu" data-label="Process of Building a Magento store">Process of Building a Magento store</a></li>
+<li id="menu-item-30348" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30348"><a href="https://inchoo.net/services/migration-magento-2/" id="footer-menu-item-migration-to-magento-2" data-event="clkAction" data-action="Footer menu" data-label="Migration to Magento 2">Migration to Magento 2</a></li>
+<li id="menu-item-33766" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-33766"><a href="https://inchoo.net/services/magento-design/" id="footer-menu-item-magento-design" data-event="clkAction" data-action="Footer menu" data-label="Magento Design">Magento Design</a></li>
+<li id="menu-item-33765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-33765"><a href="https://inchoo.net/pwa-demo/" id="footer-menu-item-pwa-for-magento" data-event="clkAction" data-action="Footer menu" data-label="PWA for Magento">PWA for Magento</a></li>
+</ul>        </div>
+        <div class="footer-menu">
+          <div class="footer-menu__title js-accordion-toggle">Marketing</div>
+          <ul id="menu-online-marketing" class="footer-menu__list js-accordion-content"><li id="menu-item-30318" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30318"><a title="PPC" href="https://inchoo.net/services/ecommerce-ppc-management/" id="footer-menu-item-ppc" data-event="clkAction" data-action="Footer menu" data-label="PPC">PPC</a></li>
+<li id="menu-item-30320" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30320"><a title="Google Shopping" href="https://inchoo.net/services/google-shopping/" id="footer-menu-item-google-shopping" data-event="clkAction" data-action="Footer menu" data-label="Google Shopping">Google Shopping</a></li>
+<li id="menu-item-30319" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30319"><a title="Google Tag Manager" href="https://inchoo.net/services/magento-advanced-analytics-google-tag-manager/" id="footer-menu-item-google-tag-manager" data-event="clkAction" data-action="Footer menu" data-label="Google Tag Manager">Google Tag Manager</a></li>
+</ul>        </div>
+        <div class="footer-menu">
+          <div class="footer-menu__title js-accordion-toggle">Featured Services</div>
+          <ul id="menu-featured" class="footer-menu__list js-accordion-content"><li id="menu-item-30323" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30323"><a title="Fastly – improve your online store performances" href="https://inchoo.net/services/fastly/" id="footer-menu-item-fastly" data-event="clkAction" data-action="Footer menu" data-label="Fastly">Fastly</a></li>
+<li id="menu-item-30321" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30321"><a title="Pimcore – product information management" href="https://inchoo.net/services/pimcore/" id="footer-menu-item-pimcore" data-event="clkAction" data-action="Footer menu" data-label="Pimcore">Pimcore</a></li>
+<li id="menu-item-31498" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31498"><a title="ShipperHQ – Managing your shipping is easy" href="https://inchoo.net/services/shipperhq/" id="footer-menu-item-shipperhq" data-event="clkAction" data-action="Footer menu" data-label="ShipperHQ">ShipperHQ</a></li>
+<li id="menu-item-30322" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30322"><a title="Klevu – a search engine like no other (and much more)" href="https://inchoo.net/services/klevu/" id="footer-menu-item-klevu" data-event="clkAction" data-action="Footer menu" data-label="Klevu">Klevu</a></li>
+</ul>        </div>
+      </div>
+
+    <div class="footer-hr__container"><hr></div>
+
+     <div class="footer-menu__container footer-menu__container--half">
+       <div class="footer-menu">
+         <div class="services-dev-cons__item-certifications services-dev-cons__item-certifications--footer">
+           <img class="lazyload" data-src="https://inchoo.net/wp-content/themes/inchoo4/images/badges/professional_solutions_partner_white.png" alt="Magento Professional Solutions Partner" width="86">
+           <img class="lazyload" data-src="https://inchoo.net/wp-content/themes/inchoo4/images/badges/badge-magento-2-solution-specialist.png" alt="Magento Solution Specialist" width="56">
+           <img class="lazyload" data-src="https://inchoo.net/wp-content/themes/inchoo4/images/badges/badge-magento-2-professional-developer.png" alt="Magento Professional Developer" width="56">
+           <img class="lazyload" data-src="https://inchoo.net/wp-content/themes/inchoo4/images/badges/badge-magento-2-professional-frontend-developer.png" alt="Magento Professional Frontend Developer" width="56">
+           <img class="lazyload" data-src="https://inchoo.net/wp-content/themes/inchoo4/images/google_premium_partner-small.png" alt="Google Premium Partner" width="126">
+         </div>
+       </div>
+       <div class="footer-menu">
+         <div class="footer-newsletter">
+           <div class="footer-newsletter__title">Newsletter</div>
+           <p class="footer-newsletter__subtitle">Sign up for our newsletter to get your dose of useful eCommerce, Magento and Inchoo news and events.</p>
+           <a class="btn btn-green" href="http://eepurl.com/dvUzzj" target="_blank" rel="noopener" title="Subscribe to our newsletter">Subscribe to our newsletter</a>
+         </div>
+       </div>
+     </div>
+
+    <div class="footer-hr__container"><hr></div>
+
+      <ul class="footer-social-list">
+        <li><a href="https://www.facebook.com/inchoo" title="Find us on Facebook" target="_blank" rel="noopener"><i class="icon-facebook"></i></a></li>
+        <li><a href="https://twitter.com/inchoo" title="Follow us on Twitter" target="_blank" rel="noopener"><i class="icon-twitter"></i></a></li>
+        <li><a href="https://www.linkedin.com/company/638004" title="Find us on LinkedIn" target="_blank" rel="noopener"><i class="icon-linkedin"></i></a></li>
+        <li><a href="https://www.instagram.com/inchoonet/" title="Find us on Instagram" target="_blank" rel="noopener"><i class=" icon-instagram"></i></a></li>
+      </ul>
+      <div class="footer-contact">
+        <a href="mailto:web@inchoo.net"><i class="icon-mail"></i> web@inchoo.net</a>
+        <a href="tel:+38531200729"><i class="icon-phone"></i> +385 31 200 729</a>
+      </div>
+      <a class="footer-back-to-top" href="https://inchoo.net/magento/magento-frontend/using-postcss-sass/#header" title="Back to top"><i class="icon-chevron-up"></i></a>
+      <div class="footer-copyright">
+        2019 © Inchoo. All rights reserved. <a href="https://inchoo.net/privacy-policy/" title="Privacy &amp; Data Protection Policy">Privacy &amp; Data Protection Policy</a>
+      </div>
+  </footer>
+  <div id="js-page-overlay" class="page-overlay"></div>
+  <div id="outdated"></div>
+  <div id="js-cookie-banner" role="dialog" aria-live="polite" class="c-cookie-banner" style="opacity: 1;">
+    <!--googleoff: all-->
+    <span class="c-cookie-banner__message">We use cookies on our website to support technical features that enhance your user experience. We also use analytics. To opt-out from analytics, <a href="https://inchoo.net/privacy-policy/" title="Click for more information">click for more information</a>.
+    </span>
+    <div class="c-cookie-banner__btn-cont">
+      <button type="button" id="js-cookie-banner__btn" class="c-cookie-banner__btn btn-green">I've read it</button>
+    </div>
+    <!--googleon: all-->
+  </div>
+  <link rel="stylesheet" id="ish-css" href="./Using_PostCSS_with_Sass_Inchoo_files/ish.css" type="text/css" media="all">
+<script type="text/javascript" src="./Using_PostCSS_with_Sass_Inchoo_files/lazysizes.min.js"></script>
+<script type="text/javascript" src="./Using_PostCSS_with_Sass_Inchoo_files/outdatedbrowser.min.js"></script>
+<script type="text/javascript" src="./Using_PostCSS_with_Sass_Inchoo_files/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="./Using_PostCSS_with_Sass_Inchoo_files/slick.min.js"></script>
+<script type="text/javascript" src="./Using_PostCSS_with_Sass_Inchoo_files/functions.js"></script>
+<script type="text/javascript" src="./Using_PostCSS_with_Sass_Inchoo_files/comment-reply.min.js"></script>
+<script type="text/javascript" src="./Using_PostCSS_with_Sass_Inchoo_files/wp-embed.min.js"></script>
+<script async="async" type="text/javascript" src="./Using_PostCSS_with_Sass_Inchoo_files/form.js"></script>
+<script type="text/javascript" src="./Using_PostCSS_with_Sass_Inchoo_files/image-comparison-slider.js"></script>
+      <script>
+        (function ($) {
+          $('#comment_track_1').hide().clone().attr({
+            name: 'comment_' + 'track_' + (3 - 1),
+            value: '42',
+            id: ''
+          }).insertAfter('#comment_track_1');
+        })(jQuery);
+      </script>
+    <script>
+(function($) {
+  $('#commentform').removeAttr('novalidate').find('*[aria-required=true]').attr('required','');
+})(jQuery);
+</script>
+
+
+<script type="text/javascript" id="">window.hj=window.hj||function(){(hj.q=hj.q||[]).push(arguments)};hj("tagRecording",["article"]);</script>	
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","//connect.facebook.net/en_US/fbevents.js");fbq("init","1423985297716954");fbq("track","PageView");</script>	
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1423985297716954&amp;ev=PageView&amp;noscript=1"></noscript>	
+<script type="text/javascript" id="">function getSelectionText(){var a="";window.getSelection?a=window.getSelection().toString():document.selection&&"Control"!=document.selection.type&&(a=document.selection.createRange().text);return a}document.addEventListener("copy",function(a){dataLayer.push({eventCategory:"TextCopy",eventAction:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventLabel:getSelectionText(),eventValue:getSelectionText().length,event:"UAevent"})});</script>
+<script type="text/javascript" id="">(function(a,c,e,f,d,b){a.hj=a.hj||function(){(a.hj.q=a.hj.q||[]).push(arguments)};a._hjSettings={hjid:322650,hjsv:5};d=c.getElementsByTagName("head")[0];b=c.createElement("script");b.async=1;b.src=e+a._hjSettings.hjid+f+a._hjSettings.hjsv;d.appendChild(b)})(window,document,"//static.hotjar.com/c/hotjar-",".js?sv\x3d");</script><div id="ads"></div><iframe name="_hjRemoteVarsFrame" title="_hjRemoteVarsFrame" id="_hjRemoteVarsFrame" src="./Using_PostCSS_with_Sass_Inchoo_files/box-90f3a29ef7448451db5af955688970d7.html" style="display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;"></iframe><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(6)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(10)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(14)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(18)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(22)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(26)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(30)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(34)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(38)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(42)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(46)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(50)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(54)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(58)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(62)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(66)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(70)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(74)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(78)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(82)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(86)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(90)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(94)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(98)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(102)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(106)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(110)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(114)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(118)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer",eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(122)/1E3),event:"UAevent"});</script>
+
+
+<script type="text/javascript" id="">fbq("trackCustom","EV: Timer",{eventAction:"TimeOnPage",eventLabel:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventValue:"10"});</script><script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer Keep-alive",eventAction:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventLabel:"Elapsed: "+Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(126)/1E3)+" sec",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(127)/1E3),event:"UAeventInteractive"});</script>
+
+
+<script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer Keep-alive",eventAction:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventLabel:"Elapsed: "+Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(131)/1E3)+" sec",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(132)/1E3),event:"UAeventInteractive"});</script>
+
+
+<script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer Keep-alive",eventAction:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventLabel:"Elapsed: "+Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(136)/1E3)+" sec",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(137)/1E3),event:"UAeventInteractive"});</script>
+
+
+<script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer Keep-alive",eventAction:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventLabel:"Elapsed: "+Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(141)/1E3)+" sec",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(142)/1E3),event:"UAeventInteractive"});</script>
+
+
+<script type="text/javascript" id="">dataLayer.push({eventCategory:"Timer Keep-alive",eventAction:"https:\/\/inchoo.net\/magento\/magento-frontend\/using-postcss-sass\/",eventLabel:"Elapsed: "+Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(150)/1E3)+" sec",eventValue:Math.floor(google_tag_manager["GTM-NDCZ4S"].macro(151)/1E3),event:"UAeventInteractive"});</script>
+
+
+</body></html>

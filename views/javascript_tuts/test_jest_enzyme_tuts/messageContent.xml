@@ -338,10 +338,9 @@ test('User profile', () => {
         </content>
     </chapter>
     <chapter>
-        <subject>testing functions and mocking</subject>
+        <subject>Testing original functions</subject>
         <content>
-         <subtitle>by implementing original function for test</subtitle>
-          <paragraph>
+           <paragraph>
               <info>the most common way of testing functionality of the method is simply run the method and 
                 expect to give you back what is declared in function body (method has to be return type!) for that</info>
               <example>
@@ -378,161 +377,164 @@ test("calls app.doAdd", () => {
 ----------------------------------------------------------------------------
               </example>
           </paragraph>
-          <subtitle>testing with mock function js.fn();</subtitle>
+        </content>
+    </chapter>
+    <chapter>
+        <subject>MOCK functions</subject>
+        <content>          
+          <subtitle>jest.fn();</subtitle>
           <paragraph>
-              <info>if data is complex in a funtion and you might be intrested only in the outcome (as promise to API call) we can mock function</info>
+              <info>Every function can be assing to mock function. That way it will change its original functionality and will serve whaterver we declare in mock function body</info>
               <example>
------------------------ math.js helpers ----------------
-export const add      = (a, b) => a + b;
-export const subtract = (a, b) => b - a;
----------------------------------------------------------
+----------------- original apiService.get function -------
 
------------------------ app.js (math helpers implementation) ----------------
-export const doAdd      = (a, b) => math.add(a, b);
-export const doSubtract = (a, b) => math.subtract(a, b);
------------------------------------------------------------------------------
+apiService.get = (a, b) => a + b;
 
+--- Assign apiService.get to mock function (it will loose it original functionality)
 
-/*
-  *@we can assing our function to js.fn()
-  *@what gives them new functionality, they are no longer original function;
-*/  
+apiService.get = jest.fn();
 
-/*
+--jest.fn() is a normal function that doesnt return anything by default (as any js function)
+
+console.log( apiService.get() )
+//return undefined since fuction doesnt return anything
 
 
-math.add = jest.fn()
-app.doAdd = jest.fn() 
+- then JEST comes with some testing methods to verirfy function is working -
 
-/*
-*@now our function can be called as below;
-*@the old functionality is gone;
-*/
+//call funcion;
+apiService.get();
 
-//assign to mock 
------------
-const mathNew = math.add("new staff")
-const appNew = app.doAdd( "I am cool")
--------------
+//and expect
+expect(apiService.get).toHaveBeenCalled();
 
-//math.add
-expect(mathNew).toBeUndefined()
-expect(math.add).toHaveBeenCalled()
-expect(math.add).toHaveBeenCalledTimes(1)
-expect(math.add).toHaveBeenCalledWith("new staff")
 
-//app.doAdd
-expect(appNew).toBeUndefined()
-expect(app.doAdd).toHaveBeenCalled()
-expect(app.doAdd).toHaveBeenCalledTimes(1)
-expect(app.doAdd).toHaveBeenCalledWith("I am cool")          
+- first call function and then test if function has been called twice with a param 'value'-
+
+apiService.get('value');
+
+expect(apiService.get).toHaveBeenCalledTimes(2);
+expect(apiService.get).toHaveBeenCalledWith('value');
+
+
+------------------------- ---------------------- -------------------------
 
               </example>
           </paragraph>
-      <subtitle>mock function with return value</subtitle>
+          <subtitle>jest.fn() with function body</subtitle>
           <paragraph>
-              <info>One function is assign to mock we can make it a return a value, this patern is very usefull when We want to mock API call that returns a JSON file</info>
+              <info>techinally you can specify or call any function inside jest.fn() funtion body</info>
               <example>
------------------------ math.js helpers ----------------
-export const add      = (a, b) => a + b;
-export const subtract = (a, b) => b - a;
----------------------------------------------------------
+------------- call console once executing a mock function-----
 
------------------------ app.js (math helpers implementation) ----------------
-export const doAdd      = (a, b) => math.add(a, b);
-export const doSubtract = (a, b) => math.subtract(a, b);
------------------------------------------------------------------------------
-                
-/*
-*@assignning mocks to the functions of return type ;
-*@
-*/
+apiService.get = jest.fn(console.log('working'));
 
-math.add = jest.fn().mockImplementation( () => "some Value" );
-//other syntax;
-app.doAdd = jest.fn()
-app.doAdd.mockReturnValue("bar value")
 
-/*
-*@testing function with mock return 
-*@
-*/
+//call method
+apiService.get()
 
-//math.add
-expect(math.add()).toBe("some Value")
-//app.doAdd
-expect(app.doAdd()).toBe("bar value")
-
+---it will print to console but this is pointless cause it wont be testable cause jest.fn() do not return any value------
 
 
               </example>
           </paragraph>
+          <subtitle>jest mock function with function body RETURN</subtitle>
+          <paragraph>
+              <info>jest.fn() can have function body which is a callback function jest.fn(callback) callback allows you to define what to return from function and what arguments to accept</info>
+              <example>
+-------- jest.fn() function body as  (callback with return value)-----
 
-                    <subtitle>mock function with promise return</subtitle>
-                    <paragraph>
-                        <info>we can mock our function to return a promise as below:</info>
-                        <example>
------------------------ math.js helpers ----------------
-export const add      = (a, b) => a + b;
-export const subtract = (a, b) => b - a;
----------------------------------------------------------
+ apiService.get = jest.fn(() => 2);
 
------------------------ app.js (math helpers implementation) ----------------
-export const doAdd      = (a, b) => math.add(a, b);
-export const doSubtract = (a, b) => math.subtract(a, b);
------------------------------------------------------------------------------
+ //now call you mock
+ console.log( apiService.get()) //return 2
+
+- U can also pass arguments to your callback function -------
+
+apiService.get = jest.fn((x) => x + 2);
+
+console.log( apiService.get(2)) //return 4
+
+ - Basically , U can do any trasformations inside your callback an then return any value you want and then verify in your acceptance criteria --
+
+apiService.get = jest.fn((x) => x + 2 * 5 * 6);
+
+--------- assertion to above -----------
+
+expect(apiService.get(2)).toBe(62);
+
+---------- ---------- ------------
+              </example>
+          </paragraph>
+          <subtitle>JEST function declaration helpers mockReturnValue nad mockReturnValueOnce</subtitle>
+          <paragraph>
+              <info>Jest comes with shorthand mock declaration that depends of your usage</info>
+              <example>
+------below is the same statement with 2 ways of declaring ------
+
+apiService.get = jest.fn(()=>2) ===  apiService.getmockReturnValue(2)
+
+
+------- you can specify what function return every time you call it ------
+
+apiService.get
+.mockReturnValueOnce(10)
+.mockReturnValueOnce(10)
+.mockReturnValue(20);
+
+console.log(apiService.get());
+console.log(apiService.get());
+console.log(apiService.get());
+
+              </example>
+          </paragraph>
+          <subtitle>Overriding Mock function based on implemenations with mockImplementation()</subtitle>
+          <paragraph>
+              <info>It is possible to declrae your mock functions more than once with diffrent result or implemenation</info>
+              <example>
                 
-/*
-*@assignning mocks to the functions that return promise;
-*@
-*/
+------------- initial implementation ------------
 
-math.add = jest.fn().mockImplementation(() => Promise.resolve("promise resolve"))
-math.devide = jest.fn().mockImplementation((value) => Promise.reject(value))
-//other syntax;
-app.doAdd = jest.fn()
-app.doAdd.mockResolvedValue("bar")
-//reject other syntax;
-math.devide = jest.fn()
-app.doAdd.mockRejectedValue("rejected");
+apiService.get = jest.fn(()=>2)
 
-/*
-*@now our function can be called as below;
-*@the old functionality is gone now our function returns above values that resolves in promise resolved;
-*/
+console.log(apiService.get()); //2
 
-//math.add
-expect(math.add()).resolves.toBe("promise resolve")
-expect(app.doAdd()).resolves.toBe("bar")
-expect(math.devide("rejected")).rejects.toBe("rejected")
+------ override initial implemation and chain multiple overrides  ------
+apiService.get
+.mockImplementationOnce(() => 52)
+.mockImplementationOnce(() => 62)
+.mockImplementation(() => true);
 
------------------------------------------------------------------------------------------------
 
-        </example>
-    </paragraph>
-    <subtitle>Mock a module with jest.mock</subtitle>
-        <paragraph>
-          <info>you can automatically assing mock functions to all function from the moduele by jest.mock();</info>
-          <example>
------------------------ math.js helpers ----------------
-export const add      = (a, b) => a + b;
-export const subtract = (a, b) => b - a;
----------------------------------------------------------
+console.log(apiService.get()); //54
+console.log(apiService.get()); //62
+console.log(apiService.get()); //true
 
-describe("use js.mock() for all exported fn",() => {
-// Set all module functions to jest.fn
-  jest.mock("./helpers/math")
+------------   ------------   ------------
+              </example>
+          </paragraph>
+          <subtitle>Jest.fn() mock that returns promise</subtitle>
+          <paragraph>
+              <info>jest.fn() can return any value so We could introduce async code and return a Promise, usefull for testing HTTP calls</info>
+              <example>
+ ----------------- original apiService.get function -------
 
-  test("using js.mock() for mocking all exported functions from the module", ()=>{
+apiService.get = (a, b) => a + b;
 
-      //pick any function from module set to mock and call it;
-      math.add("add")
-      expect(math.add).toHaveBeenCalledWith("add")
-  })
-})
-          </example>
-      </paragraph>    
-  
+--- Assign apiService.get to mock function that returns Promise (it will loose it original functionality);
+
+apiService.get = jest.fn(x => Promise.resolve(x));
+
+
+-- make your assortion in Promise callback ----
+
+  apiService.get(2).then((data) => {
+    expect(data).toBe(2);
+  });
+
+----------  -----------  --------------
+              </example>
+          </paragraph>       
         </content>
     </chapter>
      <chapter>

@@ -64,10 +64,9 @@ const apiService = () => {
 
   const send = (serviceConfig) => {
     console.log('serviceConfig', requestInterceptor(serviceConfig));
-    console.log(axios.defaults);
-    return;
+
     return axios
-      .request(requestInterceptor(config))
+      .request(requestInterceptor(serviceConfig))
       .then(responseMiddleware)
       .catch(errorInterceptor);
   };
@@ -90,7 +89,6 @@ const apiService = () => {
   const del = (path, config) => send(Object.assign({}, config, { method: 'DELETE', path }));
 
   return {
-    send,
     get,
     post,
     put,
