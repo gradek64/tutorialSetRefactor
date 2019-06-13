@@ -62,15 +62,10 @@ const apiService = () => {
     return configObject;
   };
 
-  const send = (serviceConfig) => {
-    console.log('serviceConfig', requestInterceptor(serviceConfig));
-
-    return axios
-      .request(requestInterceptor(serviceConfig))
-      .then(responseMiddleware)
-      .catch(errorInterceptor);
-  };
-
+  const send = serviceConfig => axios
+    .request(requestInterceptor(serviceConfig))
+    .then(responseMiddleware)
+    .catch(errorInterceptor);
 
   const get = (path, config) => send(Object.assign({}, config, { method: 'GET', path }));
 

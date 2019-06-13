@@ -1,31 +1,14 @@
 import apiService from './apiService';
 
-
-test('renders correctly', () => {
-  // const set = param => jest.fn(data => Promise.resolve({ data: data + param }));
-  // apiService.get = set(3);
-
-  // mock implemenation
-
-  // foo is a mock function
-  // apiService.get.mockResolvedValue('bar');
-  // console.log(apiService.get.mockResolvedValue('bar'));
-  apiService.get = jest.fn(() => Promise.resolve('bar'));
-  apiService.get.mockResolvedValue('bar').then((data) => {
-    console.log('data', data);
+const httpMethods = ['get', 'post', 'patch', 'delete', 'put'];
+test('all exposed methods exists and calls http request', () => {
+  httpMethods.forEach((method) => {
+    expect(typeof apiService[method]).toBe('function');
+    expect(apiService[method] instanceof Function).toBe(true);
+    if (typeof apiService[method]) console.log('method passed', method);
+    apiService[method] = jest.fn(() => Promise.resolve('result'));
+    apiService[method]().then((data) => {
+      expect(data).toBe('result');
+    });
   });
-
-
-  // apiService.send = jest.fn(x => 42 + x);
-  // expect(apiService.send()).toBe('some Value');
-  // console.log(apiService.get());
-
-  /* expect(apiService.get).toHaveBeenCalled();
-  apiService.get('value');
-  expect(apiService.get).toHaveBeenCalledTimes(2);
-  expect(apiService.get).toHaveBeenCalledWith('value'); */
-
-
-  // apiService.get(3).then((data) => { console.log(data); });
-  // expect(apiService.send({ prop: 'prop' })).toEqual({ prop: 'prop' });
 });
