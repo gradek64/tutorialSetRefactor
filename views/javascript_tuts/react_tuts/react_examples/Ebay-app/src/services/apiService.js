@@ -2,7 +2,7 @@ import axios from 'axios';
 // custom
 import { ENV } from '../utils/ENV';
 
-const { BASE_URL, ACCESSS_TOKEN } = ENV;
+const { BASE_URL, ACCESS_TOKEN } = ENV;
 
 const apiService = () => {
   const TIMEOUT = 30000;
@@ -47,31 +47,33 @@ const apiService = () => {
     // axios default config part of axios request no need to include in request object;
     axios.defaults.baseURL = BASE_URL || '';
     axios.defaults.headers.common['Content-Type'] = 'application/json';
-    axios.defaults.headers.common.Authorization = `Bearer ${ACCESSS_TOKEN}`;
+    axios.defaults.headers.common.Authorization = ACCESS_TOKEN;
 
     // service headers and data
-    const dataOrParams = ['GET', 'DELETE'].includes(config.method) ? 'params' : 'data';
-    const configObject = config.data
+    // const dataOrParams = ['GET', 'DELETE'].includes(config.method) ? 'params' : 'data';
+    const dataOrParams = serviceConfig.params ? 'params' : 'data';
+    /* const configObject = config.data
       ? { ...config, [dataOrParams]: config.data }
-      : { ...config };
+      : { ...config }; */
 
     if (config.serviceHeaders === undefined) {
       config.headers = {};
     }
     // conf.headers.Authorization = cookies.get('access_token');
-    return configObject;
+    return {
+      method: serviceConfig.method,
+      url: serviceConfig.path,
+      [dataOrParams]: serviceConfig[dataOrParams],
+    };
   };
 
-  const send = serviceConfig => axios
-    .request(requestInterceptor(serviceConfig))
+  const send = (serviceConfig, paramsOrData, customHeaders) => axios
+    .request(requestInterceptor(serviceConfig, paramsOrData, customHeaders))
     .then(responseMiddleware)
     .catch(errorInterceptor);
 
-  const get = (path, config) => send(Object.assign({}, config, { method: 'GET', path }));
-
-  const post = (path, data, config) => send(
-    Object.assign({}, config, { method: 'POST', path, data }),
-  );
+  const get = (path, params, customHeaders) => send({ method: 'GET', path, params }, customHeaders);
+  const post = (path, data, customHeaders) => send({ method: 'POST', path, data }, customHeaders);
 
   const put = (path, data, config) => send(
     Object.assign({}, config, { method: 'PUT', path, data }),

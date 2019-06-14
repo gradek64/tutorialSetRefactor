@@ -6,10 +6,15 @@ import api from '../services/apiService';
 
 class ProductsList extends React.Component {
   componentDidMount() {
-    // call my api service
-    api.get('greg/greg');
+    // call my api service for browser API
+    /* api.get('/item/v1|153228438937|0').then((data) => {
+      console.log('datass', data);
+    }); */
+    api.get('/item_summary/search/', { q: 'iphone', limit: '3' }).then((data) => {
+      console.log('data API', data);
+    });
     // fetch products in redux middleware redux-thunk
-    this.props.dispatch(fetchProducts());
+    // this.props.dispatch(fetchProducts());
   }
 
   render() {
