@@ -1,24 +1,49 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
+// custom
 import { fetchProducts } from '../redux/actions/products_actions';
 import api from '../services/apiService';
+import TopSearchBox from './TopSearchBox';
 
 
 class ProductsList extends React.Component {
+  state ={ searchResults: null }
+
   componentDidMount() {
     // call my api service for browser API
     /* api.get('/item/v1|153228438937|0').then((data) => {
       console.log('datass', data);
     }); */
-    api.get('/item_summary/search/', { q: 'iphone', limit: '3' }).then((data) => {
+    /* api.get('/item_summary/search/', { q: 'iphone', limit: '3' }).then((data) => {
       console.log('data API', data);
-    });
+    }); */
     // fetch products in redux middleware redux-thunk
     // this.props.dispatch(fetchProducts());
   }
 
+
+  populateSearchResults = () => {
+    const searchResult = this.searchBoxRef.current.value;
+
+    // call api with search item result
+    api.get('/item_summary/search/', { q: searchResult, limit: '3' }).then((data) => {
+      console.log('data API', data);
+      const { itemSummaries } = data.data;
+
+      console.log('itemSummaries', itemSummaries);
+      this.setState({ searchResults: itemSummaries }, () => {
+        console.log(this.state);
+      });
+    });
+  }
+
   render() {
     const { error, loading, products } = this.props;
+    const { searchResults } = this.state;
+
+    console.log(this.state);
+
 
     if (error) {
       return (
@@ -34,11 +59,31 @@ Error!
     }
 
     return (
-      <ul>
-        {products.map(product => (
-          <li key={product.id}>{product.name}</li>
-        ))}
-      </ul>
+      <React.Fragment>
+        <div>
+          {/* U need java script input refference created here to get input value */}
+          <TopSearchBox
+            populateSearchResults={this.populateSearchResults}
+            searchBoxRef={this.searchBoxRef = React.createRef()}
+          />
+          <ul>
+            {products.map(product => (
+              <li key={product.id}>{product.name}</li>
+            ))}
+          </ul>
+
+        </div>
+        {searchResults ? searchResults.map(({ image, price }, i) => (
+          <div key={`result${i}`}>
+            <img width="100" height="auto" src={image.imageUrl} />
+            <span>
+price:
+              {price.value}
+            </span>
+          </div>
+        )) : null}
+        <div />
+      </React.Fragment>
     );
   }
 }
