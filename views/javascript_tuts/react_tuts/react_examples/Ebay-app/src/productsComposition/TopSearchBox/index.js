@@ -5,11 +5,12 @@ import PropTypes from 'prop-types';
 import SearchBox from '../../functional/SearchBox';
 import SimpleButton from '../../functional/SimpleButton';
 import SearchBoxAutoSuggestion from '../../SearchAutoSuggestion';
+import './top-search-box.scss';
 
 const TopSearchBox = ({ populateSearchResults, searchBoxRef }) => (
   <div className="top-search-box">
     {/* SearchBoxAutoSuggestion is extension to SearchBox component */}
-    <SearchBoxAutoSuggestion eventHandler={populateSearchResults} searchBoxRef={searchBoxRef} />
+    <SearchBoxAutoSuggestion classSent="custom-search-size" submitHandler={populateSearchResults} searchBoxRef={searchBoxRef} />
     <SimpleButton label="Search Item" eventHandler={populateSearchResults} />
   </div>
 );

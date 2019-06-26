@@ -8,12 +8,16 @@ const SearchBox = React.forwardRef((props, searchBoxRef) => (
     id={props.id}
     ref={searchBoxRef}
     onInput={props.onInputHandler}
-    onKeyDown={(e) => { e.key === 'Enter' ? props.eventHandler() : false; }}
+    className={props.className}
+    onKeyDown={(e) => {
+      e.key === 'Enter' ? props.submitHandler() : false; props.arrowDownUpHandler(e);
+    }
+    }
   />
 ));
 export default SearchBox;
 
 SearchBox.propTypes = {
-  eventHandler: PropTypes.func.isRequired,
+  submitHandler: PropTypes.func.isRequired,
   onInputHandler: PropTypes.func.isRequired,
 };

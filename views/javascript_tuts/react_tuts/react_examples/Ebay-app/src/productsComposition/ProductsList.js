@@ -71,7 +71,10 @@ Error!
               <li key={product.id}>{product.name}</li>
             ))}
           </ul>
-
+          <p>
+this is to test clickaway
+            <a href="#">Away</a>
+          </p>
         </div>
         {searchResults ? searchResults.map(({ image, price }, i) => (
           <div key={`result${i}`}>
