@@ -23,7 +23,6 @@ class SearchAutoSuggestion extends React.Component {
   currentItemIndex = 0
 
   resetList = () => {
-    console.log('resetList');
     this.setState({ suggestions: null });
     this.currentItemIndex = 0;
   }
@@ -54,7 +53,7 @@ class SearchAutoSuggestion extends React.Component {
     if (e.key === 'ArrowUp') {
       // remove previous;
       this.removeActiveClass();
-      this.currentItemIndex > 0 ? this.currentItemIndex-- : this.currentItemIndex;
+      this.currentItemIndex > 0 ? this.currentItemIndex -= 1 : this.currentItemIndex;
       if (suggestionItems[this.currentItemIndex]) {
         suggestionItems[this.currentItemIndex].classList.add('autocomplete-active');
         searchBoxRef.current.value = suggestionItems[this.currentItemIndex].innerHTML;
@@ -68,7 +67,7 @@ class SearchAutoSuggestion extends React.Component {
         suggestionItems[this.currentItemIndex].classList.add('autocomplete-active');
         searchBoxRef.current.value = suggestionItems[this.currentItemIndex].innerHTML;
       }
-      this.currentItemIndex < suggestionItems.length - 1 ? ++this.currentItemIndex : this.currentItemIndex;
+      this.currentItemIndex < suggestionItems.length - 1 ? this.currentItemIndex += 1 : this.currentItemIndex;
     }
 
     if (e.key === 'Enter' || e.key === 'Escape') {
@@ -81,6 +80,7 @@ class SearchAutoSuggestion extends React.Component {
   onInputHandler = (e) => {
     const triggerSearchPhrase = e.target.value;
     // if it is empty then remove the suggestions
+    console.log(e.target.value);
     if (triggerSearchPhrase === '') { this.resetList(); return; }
     /* axios
       .get('http://autosug.ebaystatic.com/autosug',
@@ -96,6 +96,7 @@ class SearchAutoSuggestion extends React.Component {
         },
         })
       .then((res) => {
+        console.log('gege');
         const { data } = res;
         const [, result] = data.match(/showResults\((.*)\)/);
         const callBackRes = JSON.parse(result);
@@ -161,8 +162,12 @@ true or false , that could be used in other componenst as Simple button */
   }
 }
 
-/* SearchAutoSuggestion.propTypes = {
-  children: PropTypes.instanceOf(Object).isRequired,
-}; */
-
+SearchAutoSuggestion.propTypes = {
+  classSent: PropTypes.string,
+  submitHandler: PropTypes.func.isRequired,
+  searchBoxRef: PropTypes.instanceOf(Object).isRequired,
+};
+SearchAutoSuggestion.defaultProps = {
+  classSent: '',
+};
 export default SearchAutoSuggestion;
