@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 
 // custom
 import { fetchProducts } from '../redux/actions/products_actions';
@@ -77,13 +79,15 @@ this is to test clickaway
           </p>
         </div>
         {searchResults ? searchResults.map(({ image, price }, i) => (
-          <div key={`result${i}`}>
-            <img width="100" height="auto" src={image.imageUrl} />
-            <span>
+          <Link to={`/item/${i}`} key={`result${i}`}>
+            <div>
+              <img width="100" height="auto" src={image.imageUrl} />
+              <span>
 price:
-              {price.value}
-            </span>
-          </div>
+                {price.value}
+              </span>
+            </div>
+          </Link>
         )) : null}
         <div />
       </React.Fragment>

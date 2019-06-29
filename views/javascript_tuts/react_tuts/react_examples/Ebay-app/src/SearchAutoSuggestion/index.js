@@ -23,6 +23,7 @@ class SearchAutoSuggestion extends React.Component {
   currentItemIndex = 0
 
   resetList = () => {
+    console.log('cleaing');
     this.setState({ suggestions: null });
     this.currentItemIndex = 0;
   }
@@ -31,7 +32,7 @@ class SearchAutoSuggestion extends React.Component {
     document.addEventListener('click', this.resetList);
   }
 
-  componentDidUnMount = () => {
+  componentWillUnmount = () => {
     document.removeEventListener('click', this.resetList);
   }
 
@@ -80,7 +81,6 @@ class SearchAutoSuggestion extends React.Component {
   onInputHandler = (e) => {
     const triggerSearchPhrase = e.target.value;
     // if it is empty then remove the suggestions
-    console.log(e.target.value);
     if (triggerSearchPhrase === '') { this.resetList(); return; }
     /* axios
       .get('http://autosug.ebaystatic.com/autosug',
@@ -96,7 +96,6 @@ class SearchAutoSuggestion extends React.Component {
         },
         })
       .then((res) => {
-        console.log('gege');
         const { data } = res;
         const [, result] = data.match(/showResults\((.*)\)/);
         const callBackRes = JSON.parse(result);
@@ -126,12 +125,12 @@ true or false , that could be used in other componenst as Simple button */
         {/* initial thought to have overlay to register click but prevernts any other action on the page */}
         {/* eslint-disable max-len */}
         {/* suggestions ? <ClickAwayListener clickAway={() => { this.setState({ suggestions: null }); }} /> : null */}
-        <div className={`search-auto-suggetions ${classSent}`}>
-
+        <form className={`search-auto-suggetions ${classSent}`} autoComplete="off">
           <SearchBox
             id="results"
             className="custom-search"
             submitHandler={submitHandler}
+            onFucusHandler={this.resetList}
             onInputHandler={this.onInputHandler}
             arrowDownUpHandler={this.arrowDownUpHandler}
             ref={searchBoxRef}
@@ -150,13 +149,13 @@ true or false , that could be used in other componenst as Simple button */
                   role="presentation"
                   className="list-item"
                   onMouseEnter={this.removeActiveClass}
-                  onClick={submitHandler}
+                  onClick={() => { submitHandler(); this.resetList(); }}
                 >
                   {value}
                 </li>))}
 
             </ul>) : null}
-        </div>
+        </form>
       </React.Fragment>
     );
   }
