@@ -338,6 +338,20 @@ test('User profile', () => {
         </content>
     </chapter>
     <chapter>
+        <subject>Testing with Enzyme (cheat sheet link)</subject>
+        <content>
+            <paragraph>
+                <info>Enzyme is air bng testing platform that works like jQuery for selecting the DOM structure captured in Enyzme snapshots</info>
+                <example>
+/*Ezyme comes with lots of handy selectors which are all set in the link below*/
+
+//copy that link below and paste in browser;
+
+                </example>
+            </paragraph>
+        </content>
+    </chapter>
+    <chapter>
         <subject>Testing original functions</subject>
         <content>
            <paragraph>
