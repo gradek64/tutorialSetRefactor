@@ -70,7 +70,7 @@ const callback = i => evt => {
   //evt.stopPropagation();// U do want bubtle on this occasion ;)
 
   //comment below for production;
-  evt.preventDefault();
+  //evt.preventDefault();
   //comment above for production;
 
   //check if link is partition link

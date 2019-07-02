@@ -347,6 +347,12 @@ test('User profile', () => {
 
 //copy that link below and paste in browser;
 
+https://tutorial-set.herokuapp.com/views/javascript_tuts/test_jest_enzyme_tuts/Enzyme_cheatsheet.htm
+
+or original one here:
+
+https://devhints.io/enzyme
+
                 </example>
             </paragraph>
         </content>
@@ -527,6 +533,7 @@ console.log(apiService.get()); //true
 ------------   ------------   ------------
               </example>
           </paragraph>
+
           <subtitle>Jest.fn() mock that returns promise</subtitle>
           <paragraph>
               <info>jest.fn() can return any value so We could introduce async code and return a Promise, usefull for testing HTTP calls</info>
@@ -552,11 +559,44 @@ apiService.get = jest.fn(x => Promise.resolve(x));
         </content>
     </chapter>
      <chapter>
-      <subject>jest.spyOn to mock a funtion but later restore its original implementation </subject>
+      <subject>Mock entire modules/packages using jest.mock </subject>
       <content>
         <paragraph>
-            <info>jest.spyOn() to mock a funtion but later restore its original implementation later in the same test by mockFn.mockRestore()</info>
+            <info>sometimes you want to imoport a module as UserAuthorization  but dont want all complex validation U can just mock it and return true skipping all proccess of validation</info>
             <example>
+ ----------------------- create __mocks__ folder in yout test file ----------------
+
+//it has to be the same name as module in a path 
+
+ /------------------ __mocks__/AuthRoute.js --------------------/
+
+//your custom return on your AuthRoute module 
+export default function AuthRoute() { return true; }
+
+ /------------------ yourtest.test.js --------------------/
+
+ //import you module like you would normally 
+ import AuthRoute from './AuthRoute';
+
+ //then direct it to our mocks by:
+jest.mock('./AuthRoute');
+
+//now can use U your module in yout test 
+
+...component.find(AuthRoute)
+
+ /------------------ /
+            </example>
+        </paragraph>
+      </content>
+  </chapter>
+  <chapter>
+      <subject>Mock Object methods</subject>
+      <content>
+          <subtitle>jest.spyOn()</subtitle>
+          <paragraph>
+              <info>jest.spyOn to mock a funtion but later restore its original implementation</info>
+             <example>
  ----------------------- math.js helpers ----------------
  export const add      = (a, b) => a + b;
  export const subtract = (a, b) => b - a;
@@ -574,7 +614,66 @@ apiService.get = jest.fn(x => Promise.resolve(x));
      expect(app.doAdd(1, 2)).toEqual(3)
  })
             </example>
-        </paragraph>
+          </paragraph>
+          <subtitle>Object set get method using mock functions</subtitle>
+          <paragraph>
+              <info>U can spy on the object properties and method and even assign temporarry get and set methods as shown below. The idea is to mock function as usual but then assing that function to set and get mehtod of the object</info>
+              <example>
+----------  assign getTittle and setTitle methods----------  
+
+const getTitle = jest.fn(() => 'pizza') //return type
+const setTitle = jest.fn() //normal function no return 
+
+--------- use your mock function in get and set Object properties-------------
+
+const location = {}
+Object.defineProperty(location, 'title', {
+  get: getTitle,
+  set: setTitle
+})
+
+---------- this syntax is from Jest 22.1.0+ -------------------
+
+const location = {}
+const getTitle = jest.spyOn(location, 'title', 'get').mockImplementation(() => 'pizza')
+const setTitle = jest.spyOn(location, 'title', 'set').mockImplementation(() => {})
+
+
+----------- restore to original functions ----------
+
+---for one mock---
+
+fn.mockClear() // Clears mock usage date (fn.mock.calls, fn.mock.instances)
+fn.mockReset() // Clears and removes any mocked return values or implementations
+fn.mockRestore() // Resets and restores the initial implementation
+
+
+---------- for all mocks ----------
+
+jest.clearAllMocks()
+jest.resetAllMocks()
+jest.restoreAllMocks()
+
+
+              </example>
+          </paragraph>
+      </content>
+  </chapter>
+  <chapter>
+      <subject>run only one test</subject>
+      <content>
+          <paragraph>
+              <info>run only one specific test from CLI</info>
+              <example>
+//it has to be cofigured so if you have seperate configuration use flag: 
+--config=jest.configuration.json      
+
+//command line
+gilgrz$ /Users/gilgrz/myReactComponents/node_modules/.bin/jest -i 'AppRouter.test.js'
+
+
+              </example>
+          </paragraph>
       </content>
   </chapter>
 </chapters>

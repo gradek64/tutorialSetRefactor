@@ -78,7 +78,23 @@
                 
       </li>
     
-      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">jest.spyOn to mock a funtion but later restore its original implementation</a><span class="tooltiptext">jest.spyOn to mock a funtion but later restore its original implementation</span>
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">Mock entire modules/packages using jest.mock</a><span class="tooltiptext">Mock entire modules/packages using jest.mock</span>
+                 
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">Mock Object methods</a><span class="tooltiptext">Mock Object methods</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>jest.spyOn()</a><span class="tooltiptext">jest.spyOn()</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>Object set get method using mock functions</a><span class="tooltiptext">Object set get method using mock functions</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">run only one test</a><span class="tooltiptext">run only one test</span>
                  
       </li>
     
@@ -475,7 +491,13 @@ test(&#39;User profile&#39;, () =&gt; {
                   <div class="codeWraper">
                     <code>/*Ezyme comes with lots of handy selectors which are all set in the link below*/
 
-//copy that link below and paste in browser;</code>
+//copy that link below and paste in browser;
+
+https://tutorial-set.herokuapp.com/views/javascript_tuts/test_jest_enzyme_tuts/Enzyme_cheatsheet.htm
+
+or original one here:
+
+https://devhints.io/enzyme</code>
                   </div>
                 </div>
               </div>
@@ -710,14 +732,52 @@ apiService.get = jest.fn(x =&gt; Promise.resolve(x));
   
       
       <section   class="band band-b" class="band band-b">
-          <h1> jest.spyOn to mock a funtion but later restore its original implementation </h1> 
+          <h1> Mock entire modules/packages using jest.mock </h1> 
           
 
             
               <div class="band-container">
                 <div class="band-inner">
 
-                  <p>jest.spyOn() to mock a funtion but later restore its original implementation later in the same test by mockFn.mockRestore()</p>
+                  <p>sometimes you want to imoport a module as UserAuthorization  but dont want all complex validation U can just mock it and return true skipping all proccess of validation</p>
+                  <div class="codeWraper">
+                    <code>----------------------- create __mocks__ folder in yout test file ----------------
+
+//it has to be the same name as module in a path 
+
+ /------------------ __mocks__/AuthRoute.js --------------------/
+
+//your custom return on your AuthRoute module 
+export default function AuthRoute() { return true; }
+
+ /------------------ yourtest.test.js --------------------/
+
+ //import you module like you would normally 
+ import AuthRoute from &#39;./AuthRoute&#39;;
+
+ //then direct it to our mocks by:
+jest.mock(&#39;./AuthRoute&#39;);
+
+//now can use U your module in yout test 
+
+...component.find(AuthRoute)
+
+ /------------------ /</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> Mock Object methods </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>jest.spyOn to mock a funtion but later restore its original implementation</p>
                   <div class="codeWraper">
                     <code>----------------------- math.js helpers ----------------
  export const add      = (a, b) =&gt; a + b;
@@ -735,6 +795,74 @@ apiService.get = jest.fn(x =&gt; Promise.resolve(x));
      addMock.mockRestore()
      expect(app.doAdd(1, 2)).toEqual(3)
  })</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>U can spy on the object properties and method and even assign temporarry get and set methods as shown below. The idea is to mock function as usual but then assing that function to set and get mehtod of the object</p>
+                  <div class="codeWraper">
+                    <code>----------  assign getTittle and setTitle methods----------  
+
+const getTitle = jest.fn(() =&gt; &#39;pizza&#39;) //return type
+const setTitle = jest.fn() //normal function no return 
+
+--------- use your mock function in get and set Object properties-------------
+
+const location = {}
+Object.defineProperty(location, &#39;title&#39;, {
+  get: getTitle,
+  set: setTitle
+})
+
+---------- this syntax is from Jest 22.1.0+ -------------------
+
+const location = {}
+const getTitle = jest.spyOn(location, &#39;title&#39;, &#39;get&#39;).mockImplementation(() =&gt; &#39;pizza&#39;)
+const setTitle = jest.spyOn(location, &#39;title&#39;, &#39;set&#39;).mockImplementation(() =&gt; {})
+
+
+----------- restore to original functions ----------
+
+---for one mock---
+
+fn.mockClear() // Clears mock usage date (fn.mock.calls, fn.mock.instances)
+fn.mockReset() // Clears and removes any mocked return values or implementations
+fn.mockRestore() // Resets and restores the initial implementation
+
+
+---------- for all mocks ----------
+
+jest.clearAllMocks()
+jest.resetAllMocks()
+jest.restoreAllMocks()</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> run only one test </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>run only one specific test from CLI</p>
+                  <div class="codeWraper">
+                    <code>//it has to be cofigured so if you have seperate configuration use flag: 
+--config=jest.configuration.json      
+
+//command line
+gilgrz$ /Users/gilgrz/myReactComponents/node_modules/.bin/jest -i &#39;AppRouter.test.js&#39;</code>
                   </div>
                 </div>
               </div>
