@@ -1,0 +1,15 @@
+//to change your sass you need to have it isntall globally first node-sass module 
+
+//list all global modules 
+npm list -g --depth 0
+
+//check for specific module globally 
+
+npm ls node-sass -g
+
+if it is not istalled globally intall it
+npm i node-sass -g
+
+comes with CLI flags -o its output folder
+
+node-sass styles/* -o styles/
