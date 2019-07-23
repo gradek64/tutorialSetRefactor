@@ -1,0 +1,70 @@
+	1) Rebase is usefull if you want to organise/clean your branch as well as for catching up with a master branch
+
+		--- Organizing branch you working on -----
+	Lets say you want to commit your final work with a minimum number of commits , the once are only relevang onother words 'cherry picking'
+	thefore you need to to git rebase --interactive -i , it will allow you to squash, pick, reword etc...
+
+		git rebase -i <numbefOfCommits> to HEAD position
+	
+	that would open you default terminal with below content:
+
+		734e3c5 (HEAD -> develop) ramda practice started
+		95067ee newFile added
+		731908f (master) ramda added	
+	Those are the commits you want to change somehow to do it U need to do : git rebase -i HEAD ~3 (3 commits from HEAD position)
+
+
+		pick 731908f ramda added
+		pick 95067ee newFile added
+		pick 734e3c5 ramda practice started
+
+		# Rebase cc34f53..734e3c5 onto cc34f53 (3 commands)
+
+		# Commands:
+		# p, pick <commit> = use commit
+		# r, reword <commit> = use commit, but edit the commit message
+		# e, edit <commit> = use commit, but stop for amending
+		# s, squash <commit> = use commit, but meld into previous commit
+		# f, fixup <commit> = like "squash", but discard this commit's log message
+		# x, exec <command> = run command (the rest of the line) using shell
+		# b, break = stop here (continue rebase later with 'git rebase --continue')
+		# d, drop <commit> = remove commit
+		# l, label <label> = label current HEAD with a name
+		# t, reset <label> = reset HEAD to a label
+		# m, merge [-C <commit> | -c <commit>] <label> [# <oneline>]
+		# .       create a merge commit using the original merge commit's
+		# .       message (or the oneline, if no original merge commit was
+		# .       specified). Use -c <commit> to reword the commit message.
+
+		git will propt you with those options in the rebase file so pick the ones U neee, example below for reword and squash
+
+		r 731908f ramda added
+		s 95067ee newFile added
+		s 734e3c5 ramda practice started
+
+		commit 'ramda practice started' and 'newFile added' will be squeashed into 'ramda added' and then git will open onother file editor
+		and allows you to change last commit name cause we label 'ramda added' as r,reword commit
+		Save the file with new name and you should have this message:
+
+
+		MAC051965:my-react-components gilg$ git rebase -i HEAD~3
+		[detached HEAD a1971da] ramda tutorial started
+		 Author: Greg Gil <gilg@MAC051965.local>
+		 Date: Thu Jul 18 13:03:05 2019 +0100
+		 4 files changed, 3122 insertions(+), 3055 deletions(-)
+		 create mode 100644 src/helpers/ramda_curring.js
+		[detached HEAD cbcccdd] ramda tutorial started
+		 Author: Greg Gil <gilg@MAC051965.local>
+		 Date: Thu Jul 18 13:03:05 2019 +0100
+		 12 files changed, 3310 insertions(+), 3058 deletions(-)
+		 create mode 100644 .DS_Store
+		 create mode 100644 newFile.txt
+		 create mode 100644 src/helpers/ramda_curring.js
+		 create mode 100644 src/utils/ramdaPractice/ramdaComposition.js
+		 create mode 100644 src/utils/ramdaPractice/ramdaCurry.js
+		 create mode 100644 src/utils/ramdaPractice/ramdaObjectComparison.js
+		 create mode 100644 src/utils/ramdaPractice/ramdaObjectInteration.js
+		Successfully rebased and updated refs/heads/develop.
+
+# Rebase cc34f53..734e3c5 onto cc34f53 (3 commands)
+		

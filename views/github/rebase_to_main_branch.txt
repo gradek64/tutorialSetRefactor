@@ -1,0 +1,51 @@
+
+	git rebase CAN ONLY BE PERFORMED ON PRIVATE BRANCHES (NOT SHARED WITH ANYONE) AND THOSE WITH NO CONFLICT WITH OTHER BRANCH
+		make sure there is not connclicts if there are abort rebase by : git rebase --abort and fix conflcts 
+
+
+		
+	Lets say you want to work on the feature so you are creting feature branch from master to start with:
+
+		git checkout -b my-feature-branch
+
+	but other developers keep making changes to the master branch by either adding more commits or merging with other branches
+	that means by the time U are finish with your branch is not longer goint to be updated (it stays the same place as you created from in time)
+
+	in That case U h ave 2 options:
+
+	1) merging simple merge your branch with a master: git chekout featureBranch, git merge master
+
+	2) or rebase your branch to current master position:
+			
+			git checkout feature-branch 
+			git rebase master 
+	after this U will have this structure of commits 
+
+	(HEAD -> out-of-master) file ammended feature branch
+	a5c94b5 file added feature branch
+--------- rebase was added here---------
+	24dc665 (master) file ammended master branch
+	e326bb7 file added master branch
+------- feature-branch created at this point -------
+	cc34f53 (origin/master, origin/HEAD) package.json clean up
+		
+	so git didnt put our rebase on top of our commits insted it looked where branch derived from and from there it has put 
+	additional commits from the branch we did rebase (in this case we rebasing from master)
+
+	2) you can also use merge instead of rebase on you local branch but that would create additional commit for merge
+	
+		so: git checkout feature-branch
+		    git merge master  
+	and U will have:
+
+------addtional commit from merge-----
+	beeaf6e (HEAD -> out-of-master) Merge branch 'master' into out-of-master
+	030a677 file ammended feature branch
+	32cd281 file added feature branch
+----- commits from master added -------
+	24dc665 (master) file ammended master branch
+	e326bb7 file added master branch
+------- feature-branch created at this point -------
+	cc34f53 (origin/master, origin/HEAD) package.json clean up
+
+	so merging is not that clean but it produces more less the same outcome (but it more complicated to clean it up though;)

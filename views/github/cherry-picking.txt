@@ -1,0 +1,29 @@
+	
+	git cherry-picking <commitNumber> is a sophisticated way of getting commits from one branch to another as the name implies U would
+	only pick commits you are intrested in hence cherry-picking 
+
+	lets say you want to add commit  to master branch from any branch (git will find commit based on the number not branch name) 
+
+	so you any/develop branch has those commits:
+
+	5ca89c4 (HEAD -> develop) new-file-added
+	cbcccdd ramda tutorial started
+	cc34f53 (origin/master, origin/HEAD) package.json clean up
+
+	but U want to merge with only 'ramda tutorial started' commit so we need to cherry pick this commit hashNumber  as follows:
+
+		1) swith to master: git co master
+		2) make sure U master is up-to-date: git fecth, git pull origin master
+		3) pick the commit you want to add to master: git cherry-picking cbcccdd (hashNumber)
+		
+	now you should have this commit on top of your
+
+	1602503 (HEAD -> master) conflict resolved cherry-pick (in case you had conflict resolve them and commit changes)
+	731908f ramda added
+	cc34f53 (origin/master, origin/HEAD) package.json clean up 
+
+	Now the final step (it would be the one before but we had conflicts;) so we need to to local rebase -i --interactive
+
+	git rebase -i HEAD ~2 (rebase with 2 last commits from HEAD position)
+	
+	..just follow tutorial on rebase in rebase.txt
