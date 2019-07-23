@@ -1,4 +1,5 @@
 .DS_Store
+.eslintrc
 package-lock.json
 /node_modules
 views/javascript_tuts/*/node_modules
