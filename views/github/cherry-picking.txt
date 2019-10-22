@@ -21,9 +21,3 @@
 	1602503 (HEAD -> master) conflict resolved cherry-pick (in case you had conflict resolve them and commit changes)
 	731908f ramda added
 	cc34f53 (origin/master, origin/HEAD) package.json clean up 
-
-	Now the final step (it would be the one before but we had conflicts;) so we need to to local rebase -i --interactive
-
-	git rebase -i HEAD ~2 (rebase with 2 last commits from HEAD position)
-	
-	..just follow tutorial on rebase in rebase.txt

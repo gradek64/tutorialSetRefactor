@@ -1,0 +1,14 @@
+
+	git merge —squash allow U to merge with whatever branch you want (as master) and pick all commits from You want to merge in master and sqaush those changes into one commit on top of master : steps :
+
+		git checkout master 
+(be on the branch you want merge to )
+
+		git merge --squash 
+localBranch (branch you want merge from, apply commits from here)
+
+		git commit -m ‘changes from localBranch squash’
+
+It is a quick way of cherry-picking instead U just grab every commit from this branch and then merge
+
+The difference between git merge <branch> and git merge --squash <branch> is the first one commits and merges automatically and merge --squash needs adding files and committing manually 
