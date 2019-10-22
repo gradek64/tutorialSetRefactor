@@ -591,6 +591,241 @@ jest.mock('./AuthRoute');
       </content>
   </chapter>
   <chapter>
+        <subject>SpyOn Class methods</subject>
+        <content>
+          <subtitle>spyOn(wraper.instance(),'class method') with arrow functions</subtitle>
+          <paragraph>
+              <info>by using modern ES6 class syntax U have to test it differentlly to standard method declaration
+              Spy itself allows you to spy on single method. !! IMPORTANT !! with arrow function declaration You wont be
+              able to use enzyme click simulation, but only call class method itself</info>
+             <example>
+             ------------------------ react Class example ---------------------
+
+             class Counter extends Component {
+              state = {
+                count:0,
+              }
+              incrementCounter = () => {
+                this.setState({ count:this.state.count++ } )
+              }
+              render(){
+                button onClick={() => this.incrementCounter()} >Increment button>
+              }
+            }
+
+
+            ------------------test with spyOn --------------------------
+
+            it('should update the count by 1 once clicked', () => {
+
+              --- declare your wrapper first -----
+
+              const wrapper = shallow(Counter />);
+
+              --- assign your spy function on INSTANCE CLASS ONLY (not a wrapper)----
+                  (spyOn takes class Instance and name of the method for arrow functions)
+
+              const incrementSpyOn = jest.spyOn(
+                wrapper.instance(),
+                'incrementCounter'
+              )
+
+              ---- call instance class literally ---
+                (only this will work with arrow method declaration any onClick event will not trigger )-----
+
+              wrapper.instance().incrementCounter()
+
+
+              ----- expect increment by 1 ------
+
+              expect(wrapper.state('counter')).toBe(1);
+            });
+
+              </example>
+          </paragraph>
+          <subtitle>spyON(wraper.instance(), 'classMethod') with standard class methods</subtitle>
+          <paragraph>
+              <info>with a standard class methods, You need to bind your class functions in constructor in order
+              to make them responsive to events(eg. clicks) in jest test for click simulation.
+
+              constructor(props){
+                super(props)
+                this.method = this.method.bind(this)
+              }
+              
+              </info>
+             <example>
+             ------------------------ react Class example ---------------------
+
+             class Counter extends Component {
+              
+              contstructor(props){
+                super(props)
+                this.state = {
+                  count:0,
+                }
+                --- U have to bind your method for jest ----
+
+                this.incrementCounter = this.incrementCounter.bind(this)
+              }
+
+              incrementCounter(){
+                this.setState({ count:this.state.count++ } )
+              }
+
+              render(){
+                button onClick={() => this.incrementCounter()} >Increment button>
+              }
+            }
+
+
+
+            ------------------test with spyOn --------------------------
+
+            it('should update the count by 1 once clicked', () => {
+
+
+              --- assign your spy function on Class prototype first! ----
+                  (spyOn takes class Prototype and name of the method for standard declaration)
+
+
+              const incrementSpyOn = jest.spyOn(
+                Counter.prototype,
+                'incrementCounter'
+              )
+
+
+              -------- declare your shallow wrapper first-----
+
+              const wrapper = shallow(Counter />);
+
+
+              -------- then simulate click on wrapper child (NO NEED for class instance)-----
+
+              wrapper.find('button').simulate('click');
+
+              ------(or second way) find prop 'onClick' and execute -----
+
+              wrapper.find('button').prop('onClick')()
+
+
+
+              ----- expect increment by 1 ------
+
+              expect(wrapper.state('counter')).toBe(1);
+            });
+
+              </example>
+          </paragraph>
+          <subtitle>spyOn(wraper.instance(),'class method') with .mockImplementation(()=>'whatever')</subtitle>
+          <paragraph>
+              <info>Spy itself allows you to spy on single method. With mockImplementation()
+              on spy You can change its original implemenation and then restore it. Example below</info>
+             <example>
+            ------------------------ react Class example ---------------------
+
+             class Counter extends Component {
+              state = {
+                count:0,
+              }
+
+              add = (val1,val2) => val1 + val2
+            }
+
+
+
+            ------------------ test with spyOn --------------------------
+
+            it('should add two integers', () => {
+
+              --- declare your wrapper first -----
+
+              const wrapper = shallow(Counter />);
+
+
+              --- assign your spy function on class instance only (WRAPPER WILL not work) ----
+
+              const incrementSpyOn = jest.spyOn(
+                wrapper.instance(),
+                'add'
+              ).mockImplementation(()=>1)
+
+
+              ---- call instance class literally -----
+
+              expect(wrapper.instance().add(2,3)).toEqual(1)
+
+
+              ---------- !!! the restore original implemenation !!! -----
+
+              wrapper.instance().add.mockRestore() -- (dont put that line)
+
+
+              ---- now make sure your original implemenation works back on ----
+
+              expect(wrapper.instance().add(2,3)).toEqual(5)
+
+            });
+
+              </example>
+          </paragraph>
+           <subtitle>spyOn(wraper.instance(),'class method') with .mockImplementationOnce(()=>'whatever')</subtitle>
+          <paragraph>
+              <info>Spy itself allows you to spy on single method. With mockImplementationOnce()
+              on spy You can change its original implemenation but it will only works once no need to restore it.
+              Example below</info>
+             <example>
+            ------------------------ react Class example ---------------------
+
+             class Counter extends Component {
+              state = {
+                count:0,
+              }
+
+              add = (val1,val2) => val1 + val2
+            }
+
+
+
+            ------------------test with spyOn --------------------------
+
+            it('should add two integers', () => {
+
+
+              --- declare your wrapper first -----
+
+              const wrapper = shallow(Counter />);
+
+
+              --- assign your spy function on class instance only not a wrapper ----
+
+              const incrementSpyOn = jest.spyOn(
+                wrapper.instance(),
+                'add'
+              ).mockImplementationOnce(()=>1)
+
+
+              ---- call instance class literally -----
+
+              expect(wrapper.instance().add(2,3)).toEqual(1)
+
+
+              ----------!!!! NO NEED to the restore original implemenation !!!!-----
+
+              //wrapper.instance().add.mockRestore()
+
+
+              ----now make sure your original implemenation works back on ----
+
+              expect(wrapper.instance().add(2,3)).toEqual(5)
+
+            });
+
+              </example>
+          </paragraph>
+        </content>
+  </chapter>
+  <chapter>
       <subject>Mock Object methods</subject>
       <content>
           <subtitle>jest.spyOn()</subtitle>

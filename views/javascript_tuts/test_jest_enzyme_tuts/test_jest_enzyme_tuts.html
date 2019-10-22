@@ -82,6 +82,22 @@
                  
       </li>
     
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">SpyOn Class methods</a><span class="tooltiptext">SpyOn Class methods</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>spyOn(wraper.instance(),&#39;class method&#39;) with arrow functions</a><span class="tooltiptext">spyOn(wraper.instance(),&#39;class method&#39;) with arrow functions</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>spyON(wraper.instance(), &#39;classMethod&#39;) with standard class methods</a><span class="tooltiptext">spyON(wraper.instance(), &#39;classMethod&#39;) with standard class methods</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>spyOn(wraper.instance(),&#39;class method&#39;) with .mockImplementation(()=&gt;&#39;whatever&#39;)</a><span class="tooltiptext">spyOn(wraper.instance(),&#39;class method&#39;) with .mockImplementation(()=&gt;&#39;whatever&#39;)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>spyOn(wraper.instance(),&#39;class method&#39;) with .mockImplementationOnce(()=&gt;&#39;whatever&#39;)</a><span class="tooltiptext">spyOn(wraper.instance(),&#39;class method&#39;) with .mockImplementationOnce(()=&gt;&#39;whatever&#39;)</span>
+                        
+                    </ul>
+                
+      </li>
+    
       <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">Mock Object methods</a><span class="tooltiptext">Mock Object methods</span>
                   
                     <ul class="linksNested">
@@ -766,6 +782,251 @@ jest.mock(&#39;./AuthRoute&#39;);
                   </div>
                 </div>
               </div>
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> SpyOn Class methods </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>by using modern ES6 class syntax U have to test it differentlly to standard method declaration
+              Spy itself allows you to spy on single method. !! IMPORTANT !! with arrow function declaration You wont be
+              able to use enzyme click simulation, but only call class method itself</p>
+                  <div class="codeWraper">
+                    <code>------------------------ react Class example ---------------------
+
+             class Counter extends Component {
+              state = {
+                count:0,
+              }
+              incrementCounter = () =&gt; {
+                this.setState({ count:this.state.count++ } )
+              }
+              render(){
+                button onClick={() =&gt; this.incrementCounter()} &gt;Increment button&gt;
+              }
+            }
+
+
+            ------------------test with spyOn --------------------------
+
+            it(&#39;should update the count by 1 once clicked&#39;, () =&gt; {
+
+              --- declare your wrapper first -----
+
+              const wrapper = shallow(Counter /&gt;);
+
+              --- assign your spy function on INSTANCE CLASS ONLY (not a wrapper)----
+                  (spyOn takes class Instance and name of the method for arrow functions)
+
+              const incrementSpyOn = jest.spyOn(
+                wrapper.instance(),
+                &#39;incrementCounter&#39;
+              )
+
+              ---- call instance class literally ---
+                (only this will work with arrow method declaration any onClick event will not trigger )-----
+
+              wrapper.instance().incrementCounter()
+
+
+              ----- expect increment by 1 ------
+
+              expect(wrapper.state(&#39;counter&#39;)).toBe(1);
+            });</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>with a standard class methods, You need to bind your class functions in constructor in order
+              to make them responsive to events(eg. clicks) in jest test for click simulation.
+
+              constructor(props){
+                super(props)
+                this.method = this.method.bind(this)
+              }</p>
+                  <div class="codeWraper">
+                    <code>------------------------ react Class example ---------------------
+
+             class Counter extends Component {
+              
+              contstructor(props){
+                super(props)
+                this.state = {
+                  count:0,
+                }
+                --- U have to bind your method for jest ----
+
+                this.incrementCounter = this.incrementCounter.bind(this)
+              }
+
+              incrementCounter(){
+                this.setState({ count:this.state.count++ } )
+              }
+
+              render(){
+                button onClick={() =&gt; this.incrementCounter()} &gt;Increment button&gt;
+              }
+            }
+
+
+
+            ------------------test with spyOn --------------------------
+
+            it(&#39;should update the count by 1 once clicked&#39;, () =&gt; {
+
+
+              --- assign your spy function on Class prototype first! ----
+                  (spyOn takes class Prototype and name of the method for standard declaration)
+
+
+              const incrementSpyOn = jest.spyOn(
+                Counter.prototype,
+                &#39;incrementCounter&#39;
+              )
+
+
+              -------- declare your shallow wrapper first-----
+
+              const wrapper = shallow(Counter /&gt;);
+
+
+              -------- then simulate click on wrapper child (NO NEED for class instance)-----
+
+              wrapper.find(&#39;button&#39;).simulate(&#39;click&#39;);
+
+              ------(or second way) find prop &#39;onClick&#39; and execute -----
+
+              wrapper.find(&#39;button&#39;).prop(&#39;onClick&#39;)()
+
+
+
+              ----- expect increment by 1 ------
+
+              expect(wrapper.state(&#39;counter&#39;)).toBe(1);
+            });</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>Spy itself allows you to spy on single method. With mockImplementation()
+              on spy You can change its original implemenation and then restore it. Example below</p>
+                  <div class="codeWraper">
+                    <code>------------------------ react Class example ---------------------
+
+             class Counter extends Component {
+              state = {
+                count:0,
+              }
+
+              add = (val1,val2) =&gt; val1 + val2
+            }
+
+
+
+            ------------------ test with spyOn --------------------------
+
+            it(&#39;should add two integers&#39;, () =&gt; {
+
+              --- declare your wrapper first -----
+
+              const wrapper = shallow(Counter /&gt;);
+
+
+              --- assign your spy function on class instance only (WRAPPER WILL not work) ----
+
+              const incrementSpyOn = jest.spyOn(
+                wrapper.instance(),
+                &#39;add&#39;
+              ).mockImplementation(()=&gt;1)
+
+
+              ---- call instance class literally -----
+
+              expect(wrapper.instance().add(2,3)).toEqual(1)
+
+
+              ---------- !!! the restore original implemenation !!! -----
+
+              wrapper.instance().add.mockRestore() -- (dont put that line)
+
+
+              ---- now make sure your original implemenation works back on ----
+
+              expect(wrapper.instance().add(2,3)).toEqual(5)
+
+            });</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
+                  <p>Spy itself allows you to spy on single method. With mockImplementationOnce()
+              on spy You can change its original implemenation but it will only works once no need to restore it.
+              Example below</p>
+                  <div class="codeWraper">
+                    <code>------------------------ react Class example ---------------------
+
+             class Counter extends Component {
+              state = {
+                count:0,
+              }
+
+              add = (val1,val2) =&gt; val1 + val2
+            }
+
+
+
+            ------------------test with spyOn --------------------------
+
+            it(&#39;should add two integers&#39;, () =&gt; {
+
+
+              --- declare your wrapper first -----
+
+              const wrapper = shallow(Counter /&gt;);
+
+
+              --- assign your spy function on class instance only not a wrapper ----
+
+              const incrementSpyOn = jest.spyOn(
+                wrapper.instance(),
+                &#39;add&#39;
+              ).mockImplementationOnce(()=&gt;1)
+
+
+              ---- call instance class literally -----
+
+              expect(wrapper.instance().add(2,3)).toEqual(1)
+
+
+              ----------!!!! NO NEED to the restore original implemenation !!!!-----
+
+              //wrapper.instance().add.mockRestore()
+
+
+              ----now make sure your original implemenation works back on ----
+
+              expect(wrapper.instance().add(2,3)).toEqual(5)
+
+            });</code>
+                  </div>
+                </div>
+              </div>
+            
+
             
 
       </section>
