@@ -38,48 +38,48 @@
   </content>
   </chapter>
   <chapter>
-      <subject>Ways of creating arrays</subject>
+      <subject>file permisions</subject>
       <content>
-      <subtitle>by simple Constructor SPARSE array: Array(number) or Array(arg,arg....)</subtitle>
+      <subtitle>find it out the user (either root or any other user)</subtitle>
       <paragraph>
-          <info>SPARSE array is a array with empty pockets. Array(number) doesnt need a 'new' keyword will make an array with empty entries. Array(5) will creates this [,,,,,] This could be handy an example below:</info>
+          <info>
+           Linux can have eiher a regual user of super user(su) which is root
+          </info>
           <example>
 /*********************************************/
 
-  //Lest say you need to create an Array of 5 pocket each fill with numbers from 1,5 
+  //to find out who is logged in;
+    whoami  
+      //prints greggil
 
-  /*
+  //to change to root (super user);
+      sudo su - 
+      //whoami prints root;
 
-    look the diffrence Array(5) create an array of (5 x empty) this will be skipped by any
-     Array method as map, forEach... 
-
-  */
-    Array(5).map((e,n)=>n) //still (5 x empty) nothing to interate on !
-
-  //but if we fill array first and then we can interate on it
-   Array(5).fill('').map((e,n)=>n) same as Array(1, 2, 3, 4, 5);
+  //to chage back to regular user
+      su - greggil
+      //whoami prints root;
 
 
 /*********************************************/
           </example>
       </paragraph>
-      <subtitle>by Function.proototype.apply: Array.apply(null, Array(number))</subtitle>
+      <subtitle>changing the owner of the file/directory</subtitle>
       <paragraph>
-          <info> Array.apply inherits this method from Function.prototype like any other Object so it will apply Array Constructor to the array itselft so it creates an array (outcome similar to above)</info>
+          <info>depending who created file/directory (which user) and only that user can maninpulate (edit/delete)
+          unless you will change file/directory permisions;</info>
           <example>
 /*********************************************/
 
-//Lets say you need to create an Array of 5 pocket each fill with numbers from 1,5 
+//if the owner of the file is root then only root can change its owner 
 
+//change from root to gilg  (subdirectories stile belong to root)
 
-//this it will fill array first with undefined
-Array.apply( null, Array(5) ) //crates [ 5 x undefined]; (not empty) so we got something to interate on!
+  sudo chown gilg file/directory;
 
-Array.apply(null, Array(5) ).map((e,n)=>n) same as  Array(0, 1, 2, 3, 4);
+//change owner from root to gilg for file/direcoires with all subdirectories -R flag now belong to gilg
 
-//and the exmple above same result
-Array(5).fill('').map((e,n)=>n) same as  Array(1, 2, 3, 4, 5);
-
+sudo chown -R gilg file/directory/subdirectory;
 
 /*********************************************/
           </example>
@@ -87,58 +87,43 @@ Array(5).fill('').map((e,n)=>n) same as  Array(1, 2, 3, 4, 5);
     </content>
   </chapter>
    <chapter>
-       <subject>Array methods()</subject>
+       <subject>change file permisions</subject>
        <content>
            <paragraph>
-               <info>Array methods (most popular)</info>
+               <info>file/directory permisions can be eiher drwx = directory,read,write,execute that could be also stated in numeric
+
+0 = ---
+1 = --x
+2 = -w-
+3 = -wx
+4 = r-
+5 = r-x
+6 = rw-
+7 = rwx 
+
+</info>
                <example>
-----------------Array methods()----------------------
+---------------- add or remove file permision for owner---------------------
 
+//adds read/write/execute for the owner 
+chmod +rwx; = chmod u+rwx; (user is owner by default)
 
-//removing
-1 fruits.shift() = removes first elemnet from Array
+//removes read/write/execute for the owner 
+chmod +rwx = chmod u+rwx;
 
-2 fruits.pop(); === removes last elemnet from Array
+---------------- add or remove file permision for owner and group---------------------
 
-//adding
-3 fruits.push("Grapes");  = inserts element to end of Array;
+//adds read/write/execute for the owner and the group
+chmod ug+rwx;
+//removes read/write/execute for the owner and the group
+chmod og-rwx;
 
-4 fruits.unshift("Lemon")  === adds element to begining of the Array;
+---------------- add or remove file permision for owner and group and others---------------------
 
-//concatinating
-5 arr1.concat(arr2,arr3)  === Concatenates (joins) arr1 and arr2,arr3');
-
-//slicing and copying
-6.fruits.slice() === it will create a new Array from all elements (startIndex is 0 by default if not specified);
-
-//slicing from the end
-6a. fruits.slice(-2) === it will create a new Array from last 2 elements or original array;
-
-6b fruits.slice(1,4)  === it will create a new Array from index 1 to index 3 
-
-
-------------convert Array to string------------
-
-
-1 arr.toString();  = converts array to String with comma seperated values;
-
-2 arr.join("*") = creates String from Array seperated with * sign;
-
-2a arr.toString() = arr.join(",")  //same outcome;
-
-
-------------convert Array-like objec to regular javascirp Array ------------
-
-
-  quite a few object in Dom are "array-like" that means they are act as array but not all arrey methods can be run on them (especially Array.map() loop)
-
-  Array-like object are for example
-              NodeList = document.getElementsByTagName(), document.getElementsByClassName, document.querySelectorAll('css selector');
-              HTML collections = window.getComputedStyle(document.documentElement, '')
-
-  //to convert them in regular array you need to run call method on Array.prototype.slice
-
-  Array.prototype.slice.call(Node_list);
+//adds read/write/execute for the owner and the group and the others
+chmod ugo+rwx = chmod 777;
+//removes read/write/execute for the owner and the group and the others
+chmod ugo-rwx;
 
 ------------ ------------ ------------ ------------
               </example>
@@ -146,97 +131,125 @@ Array(5).fill('').map((e,n)=>n) same as  Array(1, 2, 3, 4, 5);
        </content>
    </chapter>
    <chapter>
-       <subject>spread Oberators in Array</subject>
+       <subject>find</subject>
        <content>
-          <subtitle>Spread oparator how it works</subtitle>
+          <subtitle>find general pattern</subtitle>
            <paragraph>
-               <info>Spread oparator it will evaluate content given and convert to array [...content]</info>
+               <info>
+               The find command will begin looking:
+               in the starting directory you specify and proceed to search through 
+               all accessible subdirectories. 
+               You may specify more than one starting directory for searching.
+               
+               find (starting directory) (matching criteria and actions);
+               </info>
                <example>
------------- ------------ it is posible to use spread operators on string (not recomended)--------
+------------ ------------  general search --------  ------------
 
- let str = "Hello";
- let arrFrom = [...str];
+------- find in directory (/ slash means root directory be aware ./ dot means current)------------
+ find ./directory/ -name 'filename' or '*wilcardCombination'
 
----------------  check outcome ------------ 
+--------------- u should always use find with flags (more predictable)------------ 
+//find all files in given directory (recursively);
+find ./scripts -type f
 
- console.log(arrFrom.constructor.name); // Array
- console.log(arrFrom); // H,e,l,l,o
+//find all directories in given directory (recursively);
+find ./scripts -type d
 
- ------------ ------------ the same outcome the proper way using array --------
+//find recursively from current all js files that have name as wilcardCombination 
+-name 'filename or *wilcardCombination' flag
+ find ./directory/ -name '*.js'
 
- the correct way (most used) is to use spraed opearator on Arrays (not strings that we convert to Arrays) cause that might bring 
- unexpected results, but just ot show it both examples print the same results;
+ //find recursively more that one directory at the time that have files
+ find ./directory/ ./directory1/ -type f
 
- let str = ["H","e","l","l","o"];
- let arrFrom = [...str];
+//combining flags (all files that size is bigger thant 1000mb and -name '*.js')
+-type f =all files
+-size +1 = bigger than 1mb
+-print = print paths
+ -name '*.js 
 
----------------  check outcome ------------ 
-
- console.log(arrFrom.constructor.name); // Array
- console.log(arrFrom); // H,e,l,l,o
-
------------- ------------------------ ------------------------ ------------
+find ./scripts -type f -size +1000 -print -name '*.js
                </example>
            </paragraph>
-           <subtitle>Spread Operator as array joiner </subtitle>
+           <subtitle>find with exclusion !(not operator)</subtitle>
            <paragraph>
-               <info>Spread Operator as array joiner:
-                    It allows to join 2 or more arrays using syntax [...arr1,..arr2,...arr3] etc;
+               <info>U can perform your search and specify what to exclude from search 
+               as !exclude with flag
+               we will operate on those flags:
+
+                ! === --not (selector)
+                -path '/*' (selector)
+                -o (logical or)
+                -prune => means exclude ussually in combination with -o 
+                [ -o -path './node_modules' -prune ] => or exclude
+
                </info>
                <example>
 
- -------------------- spread Operator as array joiner but joining String and Array (not reccomended)--------------------
+ --------------- exclude with !(not) or -not selector ------------ 
 
- let str = "Hello";
- let numbers = '123' //this is just example but very bad practice 
- let arrFrom = [...str,...numbers];
+//find all files in given directory (recursively) and exclude .txt files
+// find ./to_delete/ -type f => look for files -type f
+//! -name '*.txt' => but not ones of .txt extension
 
----------------  check outcome ------------
+find ./to_delete/ -type f ! -name '*.txt'
 
- console.log(arrFrom.constructor.name); // Array
- console.log(arrFrom); // ["H", "e", "l", "l", "o", "1", "2", "3"]
 
- --------------------spread Operator as array joiner a good practice--------------------------
 
- let str = ["H","e","l","l","o"]; //those are letters in Array to start from
- let numbers = [1,2,3] //those are cleary numbers in Array to start from
- let arrFrom = [...str,...numbers];
+//find index.* but exclude node_modules -path flag
+//find . -name 'index.*' => look for index.*
+//! -path '*/node*' => but exclude node*
 
----------------  check outcome ------------
- console.log(arrFrom.constructor.name); // Array
- console.log(arrFrom); // ["H", "e", "l", "l", "o", 1, 2, 3]
+find . -name 'index.*' ! -path '*/node*'
 
+//the same as above with -not selector !=== -not
+
+find . -name 'index*' -not -path './node_modules/*'
+
+//exclude multiple directories with -path (path has to have wild cards dir/* )
+//. ! -path './node_modules/*' => exclude from node_modules/*
+//. ! -path './constants/*' => exclude from constants/*
+//-iname "index*" => finally look for index.* name elsewhere
+
+find . ! -path './node_modules/*' ! -path './constants/*' -iname "index*"
+
+//the same as above with -not selector !=== -not
+
+find . -name 'index*' -not -path './node_modules/*' -not -path './constants/*
+
+//or more mathematic approach (too complex but proves the magic of maths)
+find . -name 'index*' -not \( -path './node_modules/*' -o -path './vendor/*' \)
+
+
+------------   exclude with -prune flag and -o (or selector) -------------------
+
+//-path './node_modules' -prune => exclude ./node_modules
+// -o -iname 'index*' => or show case insensitive for name 'index*'
+// -print => dont show paths where perform search; 
+
+find . -path './node_modules' -prune -o -type f -iname 'index*' -print
+//reverse above
+find . -type f -iname 'index*' -print -o -path './node_modules' -prune 
  ------------------------------------------------------------
 
                </example>
            </paragraph>
-           <subtitle>spread operator as array.push(); or array.unshift();</subtitle>
+           <subtitle>pipe find results</subtitle>
            <paragraph>
-               <info>spread operator as array.push(); or array.unshift();
-                     spread operator can be also used for simple array push() or array unshift() or combination of both and more down there;
+               <info>pipe allows you to combine your commands and take results from command into another and another
+               findResults (| pipe into) deleteCommand
+
+               IMPORTANT: pipe always need verb after like: grep or xargs ...
                 </info>
                <example>
-  ----------------- array -----------------
+  ----------------- find files then filter and delete them  -----------------
 
-  const numbers = [1,2,3,4];
+  //lets assume U have file1.js, file2.js , file3.js, file4.js 
+  //and U want to remove only files 2 and 3 you can find all, pipe to filter and remove
 
-  ----------------- as addNumberLast.push(5) ---------------------
+  find file*.js | grep "file[2-3]" | xargs rm
 
-  const addNumberLast = [...numbers,5];
-  
-  ----------------- as addNumberFirst.unshift(0) ---------------------
-
-  const addNumberFirst = [0,...numbers];
-
-
-  ----------------- or combination values -----------------
-
-  const addNumberCombinationValues = [0,...numbers,5,6,7];
-
-  ----------------- or combination values and spread operators -----------------
-
-  const numbersLastAdded = [8,9,10];
-  const addNumberCombinationSpreads = [0,...numbers,5,6,7,...numbersLastAdded];
 
   --------------------------------------------------------------------
                  

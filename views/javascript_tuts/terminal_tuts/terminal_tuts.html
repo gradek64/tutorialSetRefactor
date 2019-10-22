@@ -24,29 +24,29 @@
                 
       </li>
     
-      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/terminal_tuts">Ways of creating arrays</a><span class="tooltiptext">Ways of creating arrays</span>
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/terminal_tuts">file permisions</a><span class="tooltiptext">file permisions</span>
                   
                     <ul class="linksNested">
                           
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/terminal_tuts" partition>by simple Constructor SPARSE array: Array(number) or Array(arg,arg....)</a><span class="tooltiptext">by simple Constructor SPARSE array: Array(number) or Array(arg,arg....)</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/terminal_tuts" partition>find it out the user (either root or any other user)</a><span class="tooltiptext">find it out the user (either root or any other user)</span>
                            
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/terminal_tuts" partition>by Function.proototype.apply: Array.apply(null, Array(number))</a><span class="tooltiptext">by Function.proototype.apply: Array.apply(null, Array(number))</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/terminal_tuts" partition>changing the owner of the file/directory</a><span class="tooltiptext">changing the owner of the file/directory</span>
                         
                     </ul>
                 
       </li>
     
-      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/terminal_tuts">Array methods()</a><span class="tooltiptext">Array methods()</span>
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/terminal_tuts">change file permisions</a><span class="tooltiptext">change file permisions</span>
                  
       </li>
     
-      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/terminal_tuts">spread Oberators in Array</a><span class="tooltiptext">spread Oberators in Array</span>
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/terminal_tuts">find</a><span class="tooltiptext">find</span>
                   
                     <ul class="linksNested">
                           
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/terminal_tuts" partition>Spread oparator how it works</a><span class="tooltiptext">Spread oparator how it works</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/terminal_tuts" partition>find general pattern</a><span class="tooltiptext">find general pattern</span>
                            
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/terminal_tuts" partition>Spread Operator as array joiner</a><span class="tooltiptext">Spread Operator as array joiner</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/terminal_tuts" partition>find with exclusion !(not operator)</a><span class="tooltiptext">find with exclusion !(not operator)</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/terminal_tuts" partition>spread operator as array.push(); or array.unshift();</a><span class="tooltiptext">spread operator as array.push(); or array.unshift();</span>
                         
@@ -204,27 +204,26 @@
   
       
       <section   class="band band-b" class="band band-b">
-          <h1> Ways of creating arrays </h1> 
+          <h1> file permisions </h1> 
           
               <div class="band-container partition first" part="part-1">
                 <div class="band-inner">
 
-                  <p>SPARSE array is a array with empty pockets. Array(number) doesnt need a &#39;new&#39; keyword will make an array with empty entries. Array(5) will creates this [,,,,,] This could be handy an example below:</p>
+                  <p>Linux can have eiher a regual user of super user(su) which is root</p>
                   <div class="codeWraper">
                     <code>/*********************************************/
 
-  //Lest say you need to create an Array of 5 pocket each fill with numbers from 1,5 
+  //to find out who is logged in;
+    whoami  
+      //prints greggil
 
-  /*
+  //to change to root (super user);
+      sudo su - 
+      //whoami prints root;
 
-    look the diffrence Array(5) create an array of (5 x empty) this will be skipped by any
-     Array method as map, forEach... 
-
-  */
-    Array(5).map((e,n)=&gt;n) //still (5 x empty) nothing to interate on !
-
-  //but if we fill array first and then we can interate on it
-   Array(5).fill(&#39;&#39;).map((e,n)=&gt;n) same as Array(1, 2, 3, 4, 5);
+  //to chage back to regular user
+      su - greggil
+      //whoami prints root;
 
 
 /*********************************************/</code>
@@ -235,21 +234,20 @@
               <div class="band-container partition " part="part-2">
                 <div class="band-inner">
 
-                  <p>Array.apply inherits this method from Function.prototype like any other Object so it will apply Array Constructor to the array itselft so it creates an array (outcome similar to above)</p>
+                  <p>depending who created file/directory (which user) and only that user can maninpulate (edit/delete)
+          unless you will change file/directory permisions;</p>
                   <div class="codeWraper">
                     <code>/*********************************************/
 
-//Lets say you need to create an Array of 5 pocket each fill with numbers from 1,5 
+//if the owner of the file is root then only root can change its owner 
 
+//change from root to gilg  (subdirectories stile belong to root)
 
-//this it will fill array first with undefined
-Array.apply( null, Array(5) ) //crates [ 5 x undefined]; (not empty) so we got something to interate on!
+  sudo chown gilg file/directory;
 
-Array.apply(null, Array(5) ).map((e,n)=&gt;n) same as  Array(0, 1, 2, 3, 4);
+//change owner from root to gilg for file/direcoires with all subdirectories -R flag now belong to gilg
 
-//and the exmple above same result
-Array(5).fill(&#39;&#39;).map((e,n)=&gt;n) same as  Array(1, 2, 3, 4, 5);
-
+sudo chown -R gilg file/directory/subdirectory;
 
 /*********************************************/</code>
                   </div>
@@ -263,62 +261,45 @@ Array(5).fill(&#39;&#39;).map((e,n)=&gt;n) same as  Array(1, 2, 3, 4, 5);
   
       
       <section   class="band band-b" class="band band-b">
-          <h1> Array methods() </h1> 
+          <h1> change file permisions </h1> 
           
 
             
               <div class="band-container">
                 <div class="band-inner">
 
-                  <p>Array methods (most popular)</p>
+                  <p>file/directory permisions can be eiher drwx = directory,read,write,execute that could be also stated in numeric
+
+0 = ---
+1 = --x
+2 = -w-
+3 = -wx
+4 = r-
+5 = r-x
+6 = rw-
+7 = rwx</p>
                   <div class="codeWraper">
-                    <code>----------------Array methods()----------------------
+                    <code>---------------- add or remove file permision for owner---------------------
 
+//adds read/write/execute for the owner 
+chmod +rwx; = chmod u+rwx; (user is owner by default)
 
-//removing
-1 fruits.shift() = removes first elemnet from Array
+//removes read/write/execute for the owner 
+chmod +rwx = chmod u+rwx;
 
-2 fruits.pop(); === removes last elemnet from Array
+---------------- add or remove file permision for owner and group---------------------
 
-//adding
-3 fruits.push(&quot;Grapes&quot;);  = inserts element to end of Array;
+//adds read/write/execute for the owner and the group
+chmod ug+rwx;
+//removes read/write/execute for the owner and the group
+chmod og-rwx;
 
-4 fruits.unshift(&quot;Lemon&quot;)  === adds element to begining of the Array;
+---------------- add or remove file permision for owner and group and others---------------------
 
-//concatinating
-5 arr1.concat(arr2,arr3)  === Concatenates (joins) arr1 and arr2,arr3&#39;);
-
-//slicing and copying
-6.fruits.slice() === it will create a new Array from all elements (startIndex is 0 by default if not specified);
-
-//slicing from the end
-6a. fruits.slice(-2) === it will create a new Array from last 2 elements or original array;
-
-6b fruits.slice(1,4)  === it will create a new Array from index 1 to index 3 
-
-
-------------convert Array to string------------
-
-
-1 arr.toString();  = converts array to String with comma seperated values;
-
-2 arr.join(&quot;*&quot;) = creates String from Array seperated with * sign;
-
-2a arr.toString() = arr.join(&quot;,&quot;)  //same outcome;
-
-
-------------convert Array-like objec to regular javascirp Array ------------
-
-
-  quite a few object in Dom are &quot;array-like&quot; that means they are act as array but not all arrey methods can be run on them (especially Array.map() loop)
-
-  Array-like object are for example
-              NodeList = document.getElementsByTagName(), document.getElementsByClassName, document.querySelectorAll(&#39;css selector&#39;);
-              HTML collections = window.getComputedStyle(document.documentElement, &#39;&#39;)
-
-  //to convert them in regular array you need to run call method on Array.prototype.slice
-
-  Array.prototype.slice.call(Node_list);
+//adds read/write/execute for the owner and the group and the others
+chmod ugo+rwx = chmod 777;
+//removes read/write/execute for the owner and the group and the others
+chmod ugo-rwx;
 
 ------------ ------------ ------------ ------------</code>
                   </div>
@@ -330,37 +311,44 @@ Array(5).fill(&#39;&#39;).map((e,n)=&gt;n) same as  Array(1, 2, 3, 4, 5);
   
       
       <section   class="band band-b" class="band band-b">
-          <h1> spread Oberators in Array </h1> 
+          <h1> find </h1> 
           
               <div class="band-container partition first" part="part-1">
                 <div class="band-inner">
 
-                  <p>Spread oparator it will evaluate content given and convert to array [...content]</p>
+                  <p>The find command will begin looking:
+               in the starting directory you specify and proceed to search through 
+               all accessible subdirectories. 
+               You may specify more than one starting directory for searching.
+               
+               find (starting directory) (matching criteria and actions);</p>
                   <div class="codeWraper">
-                    <code>------------ ------------ it is posible to use spread operators on string (not recomended)--------
+                    <code>------------ ------------  general search --------  ------------
 
- let str = &quot;Hello&quot;;
- let arrFrom = [...str];
+------- find in directory (/ slash means root directory be aware ./ dot means current)------------
+ find ./directory/ -name &#39;filename&#39; or &#39;*wilcardCombination&#39;
 
----------------  check outcome ------------ 
+--------------- u should always use find with flags (more predictable)------------ 
+//find all files in given directory (recursively);
+find ./scripts -type f
 
- console.log(arrFrom.constructor.name); // Array
- console.log(arrFrom); // H,e,l,l,o
+//find all directories in given directory (recursively);
+find ./scripts -type d
 
- ------------ ------------ the same outcome the proper way using array --------
+//find recursively from current all js files that have name as wilcardCombination 
+-name &#39;filename or *wilcardCombination&#39; flag
+ find ./directory/ -name &#39;*.js&#39;
 
- the correct way (most used) is to use spraed opearator on Arrays (not strings that we convert to Arrays) cause that might bring 
- unexpected results, but just ot show it both examples print the same results;
+ //find recursively more that one directory at the time that have files
+ find ./directory/ ./directory1/ -type f
 
- let str = [&quot;H&quot;,&quot;e&quot;,&quot;l&quot;,&quot;l&quot;,&quot;o&quot;];
- let arrFrom = [...str];
+//combining flags (all files that size is bigger thant 1000mb and -name &#39;*.js&#39;)
+-type f =all files
+-size +1 = bigger than 1mb
+-print = print paths
+ -name &#39;*.js 
 
----------------  check outcome ------------ 
-
- console.log(arrFrom.constructor.name); // Array
- console.log(arrFrom); // H,e,l,l,o
-
------------- ------------------------ ------------------------ ------------</code>
+find ./scripts -type f -size +1000 -print -name &#39;*.js</code>
                   </div>
                 </div>
               </div>
@@ -368,30 +356,60 @@ Array(5).fill(&#39;&#39;).map((e,n)=&gt;n) same as  Array(1, 2, 3, 4, 5);
               <div class="band-container partition " part="part-2">
                 <div class="band-inner">
 
-                  <p>Spread Operator as array joiner:
-                    It allows to join 2 or more arrays using syntax [...arr1,..arr2,...arr3] etc;</p>
+                  <p>U can perform your search and specify what to exclude from search 
+               as !exclude with flag
+               we will operate on those flags:
+
+                ! === --not (selector)
+                -path &#39;/*&#39; (selector)
+                -o (logical or)
+                -prune =&gt; means exclude ussually in combination with -o 
+                [ -o -path &#39;./node_modules&#39; -prune ] =&gt; or exclude</p>
                   <div class="codeWraper">
-                    <code>-------------------- spread Operator as array joiner but joining String and Array (not reccomended)--------------------
+                    <code>--------------- exclude with !(not) or -not selector ------------ 
 
- let str = &quot;Hello&quot;;
- let numbers = &#39;123&#39; //this is just example but very bad practice 
- let arrFrom = [...str,...numbers];
+//find all files in given directory (recursively) and exclude .txt files
+// find ./to_delete/ -type f =&gt; look for files -type f
+//! -name &#39;*.txt&#39; =&gt; but not ones of .txt extension
 
----------------  check outcome ------------
+find ./to_delete/ -type f ! -name &#39;*.txt&#39;
 
- console.log(arrFrom.constructor.name); // Array
- console.log(arrFrom); // [&quot;H&quot;, &quot;e&quot;, &quot;l&quot;, &quot;l&quot;, &quot;o&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;]
 
- --------------------spread Operator as array joiner a good practice--------------------------
 
- let str = [&quot;H&quot;,&quot;e&quot;,&quot;l&quot;,&quot;l&quot;,&quot;o&quot;]; //those are letters in Array to start from
- let numbers = [1,2,3] //those are cleary numbers in Array to start from
- let arrFrom = [...str,...numbers];
+//find index.* but exclude node_modules -path flag
+//find . -name &#39;index.*&#39; =&gt; look for index.*
+//! -path &#39;*/node*&#39; =&gt; but exclude node*
 
----------------  check outcome ------------
- console.log(arrFrom.constructor.name); // Array
- console.log(arrFrom); // [&quot;H&quot;, &quot;e&quot;, &quot;l&quot;, &quot;l&quot;, &quot;o&quot;, 1, 2, 3]
+find . -name &#39;index.*&#39; ! -path &#39;*/node*&#39;
 
+//the same as above with -not selector !=== -not
+
+find . -name &#39;index*&#39; -not -path &#39;./node_modules/*&#39;
+
+//exclude multiple directories with -path (path has to have wild cards dir/* )
+//. ! -path &#39;./node_modules/*&#39; =&gt; exclude from node_modules/*
+//. ! -path &#39;./constants/*&#39; =&gt; exclude from constants/*
+//-iname &quot;index*&quot; =&gt; finally look for index.* name elsewhere
+
+find . ! -path &#39;./node_modules/*&#39; ! -path &#39;./constants/*&#39; -iname &quot;index*&quot;
+
+//the same as above with -not selector !=== -not
+
+find . -name &#39;index*&#39; -not -path &#39;./node_modules/*&#39; -not -path &#39;./constants/*
+
+//or more mathematic approach (too complex but proves the magic of maths)
+find . -name &#39;index*&#39; -not \( -path &#39;./node_modules/*&#39; -o -path &#39;./vendor/*&#39; \)
+
+
+------------   exclude with -prune flag and -o (or selector) -------------------
+
+//-path &#39;./node_modules&#39; -prune =&gt; exclude ./node_modules
+// -o -iname &#39;index*&#39; =&gt; or show case insensitive for name &#39;index*&#39;
+// -print =&gt; dont show paths where perform search; 
+
+find . -path &#39;./node_modules&#39; -prune -o -type f -iname &#39;index*&#39; -print
+//reverse above
+find . -type f -iname &#39;index*&#39; -print -o -path &#39;./node_modules&#39; -prune 
  ------------------------------------------------------------</code>
                   </div>
                 </div>
