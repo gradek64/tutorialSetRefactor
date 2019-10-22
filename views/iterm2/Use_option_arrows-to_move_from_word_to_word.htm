@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<!-- saved from url=(0090)https://coderwall.com/p/h6yfda/use-and-to-jump-forwards-backwards-words-in-iterm-2-on-os-x -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta property="current_user:id">
+
+<title>Use ⌥ ← and ⌥→ to jump forwards / backwards words in iTerm 2, on OS X</title>
+<meta name="description" content="A protip by e-dard about terminal, os x, iterm, iterm2, skip words, skip fragments, and move terminal.">
+<meta name="keywords" content="terminal, os x, iterm, iterm2, skip words, skip fragments, move terminal">
+<link rel="canonical" href="https://coderwall.com/p/h6yfda/use-and-to-jump-forwards-backwards-words-in-iterm-2-on-os-x">
+<meta property="og:title" content="Use ⌥ ← and ⌥→ to jump forwards / backwards words in iTerm 2, on OS X">
+<meta property="og:url" content="https://coderwall.com/p/h6yfda/use-and-to-jump-forwards-backwards-words-in-iterm-2-on-os-x">
+<meta property="og:site_name" content="Coderwall">
+<meta property="og:description" content="A protip by e-dard about terminal, os x, iterm, iterm2, skip words, skip fragments, and move terminal.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://coderwall-assets-0.s3.amazonaws.com/uploads/user/avatar/59564/a0c0f9fb28ae6e4a52a3d95c8f347432.jpeg">
+<meta name="twitter:title" content="Use ⌥ ← and ⌥→ to jump forwards / backwards words in iTerm 2, on OS X">
+<meta name="twitter:url" content="https://coderwall.com/p/h6yfda/use-and-to-jump-forwards-backwards-words-in-iterm-2-on-os-x">
+<meta name="twitter:site_name" content="Coderwall">
+<meta name="twitter:site" content="@coderwall">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator:id" content="16448742">
+<meta name="twitter:image" content="https://coderwall-assets-0.s3.amazonaws.com/uploads/user/avatar/59564/a0c0f9fb28ae6e4a52a3d95c8f347432.jpeg">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="author" content="https://coderwall.com/e-dard">
+<link rel="stylesheet" media="all" href="./Use_option_arrows-to_move_from_word_to_word_files/application-ceaa285de2f662efc23a4d451fcf816f3cd101ba9a9d8b641da7eeb532c916e7.css">
+<script async="" src="./Use_option_arrows-to_move_from_word_to_word_files/analytics.js"></script><script src="./Use_option_arrows-to_move_from_word_to_word_files/application-bc7a77d521dc8cec56106a5f612fec3e45116b5b0f783d0b81b28d4a31c1c5fe.js"></script><script type="text/javascript" async="" src="./Use_option_arrows-to_move_from_word_to_word_files/bsa.js"></script>
+<script src="./Use_option_arrows-to_move_from_word_to_word_files/pEaCoeG7.js"></script>
+<script src="./Use_option_arrows-to_move_from_word_to_word_files/application-2ea76e7a47b328cbbe71.js"></script>
+<meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="PlbBaUW42SFxxbJ3m1lNjvorjzkcccYeFUsXxc8Na7oBSsFuOCU5fWKESgGnmvDT4htlqNCGUZ5SKQN51MZUfQ==">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-797907-8', 'auto', {'cookieExpires': 0});
+    ga('set', 'anonymizeIp', true);
+  </script>
+
+<script>
+  document.addEventListener('turbolinks:load', function() {
+    _native.init("CVADL5QU", {
+      targetClass: 'native-js'
+    });
+  });
+</script>
+
+
+
+<link rel="stylesheet" type="text/css" href="./Use_option_arrows-to_move_from_word_to_word_files/prettify.css"><script src="./Use_option_arrows-to_move_from_word_to_word_files/CVADL5QU.json"></script><script type="text/javascript" id="_bsap_js_74f50e679004d8f4d62fec4b0f74ccf1" src="./Use_option_arrows-to_move_from_word_to_word_files/s_74f50e679004d8f4d62fec4b0f74ccf1.js" async="async"></script><script type="text/javascript" src="./Use_option_arrows-to_move_from_word_to_word_files/pro.js" id="_bsap_premium_pro"></script><script type="text/javascript" id="_bsaPRO_js" src="./Use_option_arrows-to_move_from_word_to_word_files/saved_resource" async="async"></script></head>
+<body>
+<div class="clearfix">
+<header class="border-bottom">
+<nav class="clearfix py2">
+<div class="col col-4 sm-col-3 md-col-2">
+<div class="sm-ml1">
+<a class="btn logo relative" href="https://coderwall.com/">
+<div class="absolute" style="top: 2px">
+<svg version="1.1" viewBox="0 0 20 20" width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="5" cy="5" r="1.4142" fill="#A26FF9"></circle>
+  <circle cx="10" cy="5" r="1.4142" fill="#A26FF9"></circle>
+  <circle cx="15" cy="5" r="1.4142" fill="#A26FF9"></circle>
+  <circle cx="10" cy="10" r="1.4142" fill="#A26FF9"></circle>
+  <circle cx="15" cy="10" r="1.4142" fill="#A26FF9"></circle>
+  <circle cx="15" cy="15" r="1.4142" fill="#A26FF9"></circle>
+</svg>
+
+</div>
+<div class="left font-x-lg" style="padding-left: 35px;">
+Coderwall
+</div>
+</a>
+</div>
+</div>
+<div class="col col-3 sm-col-6 md-col-8 h6">
+<a class="btn muted-until-hover xs-hide sm-mr1" href="https://coderwall.com/t/ruby/popular">Ruby</a>
+<a class="btn muted-until-hover xs-hide" href="https://coderwall.com/t/python/popular">Python</a>
+<a class="btn muted-until-hover xs-hide" href="https://coderwall.com/t/javascript/popular">JavaScript</a>
+<a class="btn muted-until-hover xs-hide sm-only-hide" href="https://coderwall.com/t/web/popular">Front-End</a>
+<a class="btn muted-until-hover xs-hide sm-only-hide" href="https://coderwall.com/t/tools/popular">Tools</a>
+<a class="btn muted-until-hover xs-hide sm-only-hide" href="https://coderwall.com/t/ios/popular">iOS</a>
+<div class="btn dropdown" style="margin-top: -3px;">
+<span class="h3 muted-until-hover">
+<i class="fa fa-sort-down relative xs-hide" style="top: -2px; margin-right: 2px;"></i>
+</span>
+<span class="muted-until-hover xs-ml3">
+<span class="xs-hide">More</span>
+Tips
+</span>
+<div class="dropdown-content bg-white mt1 py1 border z4" style="left:0">
+<a class="btn py1 muted-until-hover sm-hide" href="https://coderwall.com/t/ruby/popular">Ruby</a>
+<a class="btn py1 muted-until-hover sm-hide" href="https://coderwall.com/t/python/popular">Python</a>
+<a class="btn py1 muted-until-hover sm-hide" href="https://coderwall.com/t/javascript/popular">JavaScript</a>
+<a class="btn py1 muted-until-hover md-hide nowrap" href="https://coderwall.com/t/web/popular">Front-End</a>
+<a class="btn py1 muted-until-hover md-hide" href="https://coderwall.com/t/tools/popular">Tools</a>
+<a class="btn py1 muted-until-hover md-hide" href="https://coderwall.com/t/ios/popular">iOS</a>
+<a class="btn py1 muted-until-hover" href="https://coderwall.com/t/php/popular">PHP</a>
+<a class="btn py1 muted-until-hover" href="https://coderwall.com/t/android/popular">Android</a>
+<a class="btn py1 muted-until-hover" href="https://coderwall.com/t/dot-net/popular">.NET</a>
+<a class="btn py1 muted-until-hover" href="https://coderwall.com/t/java/popular">Java</a>
+<a class="btn py1 green md-hide" href="https://coderwall.com/jobs">Jobs</a>
+</div>
+</div>
+<a class="btn border-left xs-hide sm-only-hide" href="https://coderwall.com/jobs">
+<div class="green">Jobs</div>
+</a>
+</div>
+<div class="col col-5 sm-col-3 md-col-2">
+<div class="right pr2">
+<a class="btn btn-primary bg-purple white ml1" href="https://coderwall.com/signin">Sign In or Up</a>
+</div>
+</div>
+</nav>
+</header>
+
+
+<div class="mt1 px3">
+
+</div>
+<main>
+<div class="py2 px3"><div class="container protip" id="protip_92501" itemid="use-and-to-jump-forwards-backwards-words-in-iterm-2-on-os-x" itemscope="">
+<div class="hide"><time datetime="2019-04-17T14:14:40Z" itemprop="dateModified">April 17, 2019 14:14</time></div>
+<div class="hide" itemprop="name">h6yfda</div>
+<div class="clearfix">
+<div class="sm-col sm-col sm-col-12 md-col-8">
+<div class="clearfix mt0 mb1">
+<div class="sm-right">
+<div class="diminish inline mr1">Last Updated: April 17, 2019</div>
+<span class="xs-hide">
+·
+<div class="diminish inline mx1">
+<i class="fa fa-eye"></i>
+163.4K
+</div>
+</span>
+·
+<span class="mx1"><a href="https://coderwall.com/e-dard">e-dard</a></span>
+<div class="avatar" itemprop="image" style="background-color: #1acb2b;"><img src="./Use_option_arrows-to_move_from_word_to_word_files/a0c0f9fb28ae6e4a52a3d95c8f347432.jpeg"></div>
+</div>
+</div>
+<div class="card p1" style="border-top:solid 5px #1acb2b">
+<h1 class="mt4 mb2 center" itemprop="headline">Use  ⌥ ← and ⌥→ to jump forwards / backwards words in iTerm 2, on OS X</h1>
+<div class="center mr1" itemprop="keywords">
+<h6 class="diminish inline px1"><a href="https://coderwall.com/t/terminal/popular">terminal</a></h6>
+<h6 class="diminish inline px1"><a href="https://coderwall.com/t/os%20x/popular">os x</a></h6>
+<h6 class="diminish inline px1"><a href="https://coderwall.com/t/iterm/popular">iterm</a></h6>
+<h6 class="diminish inline px1"><a href="https://coderwall.com/t/iterm2/popular">iterm2</a></h6>
+<h6 class="diminish inline px1"><a href="https://coderwall.com/t/skip%20words/popular">skip words</a></h6>
+<h6 class="diminish inline px1"><a href="https://coderwall.com/t/skip%20fragments/popular">skip fragments</a></h6>
+<h6 class="diminish inline px1"><a href="https://coderwall.com/t/move%20terminal/popular">move terminal</a></h6>
+</div>
+<div class="content p3 mt4" itemprop="articleBody">
+<p>By default in iTerm 2, it's a pain to skip between words.</p>
+
+<p>Here's how you can configure iTerm 2 on OSX to allow you to use ⌥ ← and ⌥→ to do just that.</p>
+
+<p>First you need to set your left ⌥ key to act as an escape character.</p>
+
+<p><img src="./Use_option_arrows-to_move_from_word_to_word_files/Screen_Shot_2013-06-25_at_11.57.34.png" alt="Picture"></p>
+
+<p>Second you need to either locate the current shortcut for ⌥ ← or create a new one, in the <strong>Profile Shortcut Keys</strong>, with the following settings:</p>
+
+<ul>
+<li>Keyboard Shortcut: ⌥←</li>
+<li>Action: <em>Send Escape Sequence</em>
+</li>
+<li>Esc+: <em>b</em>
+</li>
+</ul>
+
+<p><img src="./Use_option_arrows-to_move_from_word_to_word_files/Screen_Shot_2013-06-25_at_11.59.33.png" alt="Picture"></p>
+
+<p>Third, repeat for the ⌥→ keyboard shortcut with the following settings:</p>
+
+<ul>
+<li>Keyboard Shortcut: ⌥→</li>
+<li>Action: <em>Send Escape Sequence</em>
+</li>
+<li>Esc+: <em>f</em>
+</li>
+</ul>
+
+<p>You're done! Now you can skip entire words on the command line by holding down the <strong>left</strong> ⌥ key and hitting ← or →</p>
+
+<p>To make this work for the <strong>right</strong> option key you need to set the key modifier to act as an Escape Sequence, a la the first step.</p>
+</div>
+<div class="clearfix mt1 mb3 mx2 py2">
+<div class="clearfix border-bottom" itemprop="author">
+<h4>
+Written by
+<a class="bold user" href="https://coderwall.com/e-dard" id="user_59564" itemid="59564" itemscope="" itemtype="http://schema.org/Person">
+<span class="blue" itemprop="name">Edward Robinson</span>
+</a>
+</h4>
+</div>
+<div class="clearfix mt1">
+<div class="btn btn-small pl0 mr1 mb1 xs-block">
+<div data="{&quot;heartableId&quot;:&quot;protip_92501&quot;,&quot;href&quot;:&quot;/p/h6yfda/likes&quot;,&quot;labels&quot;:[&quot;Recommend&quot;,&quot;Recommended&quot;]}" id="react-heart-button-protip_92501"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1">Recommend</span></div></div>
+</div>
+<a class="btn btn-small pl0 mb1 mr1 xs-block" href="http://twitter.com/home?status=Use++%E2%8C%A5+%E2%86%90+and+%E2%8C%A5%E2%86%92+to+jump+forwards+%2F+backwards+words+in+iTerm+2%2C+on+OS+X+by+%40eddrobinson%0A%0Ahttps%3A%2F%2Fcoderwall.com%2Fp%2Fh6yfda" target="twitter">
+<span class="fixed-space-4"><i class="fa fa-twitter aqua h4"></i></span>
+<span>Say Thanks</span>
+</a>
+<div class="btn btn-small pl0 mb1 mr1 xs-block">
+<div id="react-protip-subscribe-button"><div class="inline pointer"><span class="fixed-space-4"><i class="fa fa-bell-slash-o"></i></span>Update Notifications Off</div></div>
+</div>
+<a class="btn btn-small pl0 mb1 mr1 xs-block" href="https://coderwall.com/signup">
+<span class="fixed-space-4"><i class="fa fa-comment-o black h4"></i></span>
+Respond
+</a>
+</div>
+</div>
+<div class="clearfix">
+<div class="clearfix mt3 px2">
+<h4>
+42 Responses
+<div class="right hide">
+<div class="btn btn-small green">Add your response</div>
+</div>
+</h4>
+<div class="border-top comment inline-block mb1 py1" id="comment_7441" itemid="7441" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2013-06-26T11:01:06Z" itemprop="datePublished">June 26, 2013 11:01</time></div>
+<div class="hide" itemprop="name">7441</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #499ad5;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/890ea3e605528fb62f0e3b51866e0dc5.png">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/madpawel" itemprop="alternateName">
+madpawel
+</a>
+</div>
+<div class="content small" itemprop="text"><p>thx for the trick :)</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_7441&quot;,&quot;href&quot;:&quot;/comments/7441/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_7441" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_11378" itemid="11378" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2013-12-06T03:36:03Z" itemprop="datePublished">December 06, 2013 03:36</time></div>
+<div class="hide" itemprop="name">11378</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #b61288;">
+
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/lazybrat" itemprop="alternateName">
+lazybrat
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Very useful, thanks...</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_11378&quot;,&quot;href&quot;:&quot;/comments/11378/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_11378" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_12243" itemid="12243" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2014-01-24T16:04:17Z" itemprop="datePublished">January 24, 2014 16:04</time></div>
+<div class="hide" itemprop="name">12243</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #988c20;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/6f50a256b89d3d264a9445528541e521.jpg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/yl2chen" itemprop="alternateName">
+yl2chen
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Thank you, very useful!</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_12243&quot;,&quot;href&quot;:&quot;/comments/12243/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_12243" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_12277" itemid="12277" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2014-01-27T02:29:50Z" itemprop="datePublished">January 27, 2014 02:29</time></div>
+<div class="hide" itemprop="name">12277</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #c379b3;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/cbe57f486946b96f3e7d5187c4fced56.png">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/ephexeve" itemprop="alternateName">
+ephexeve
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Awesome! I wonder, this works in vim also (brew vim) but only ALT left, right doesn't work, do you know why? thanks!</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_12277&quot;,&quot;href&quot;:&quot;/comments/12277/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_12277" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_12406" itemid="12406" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2014-02-01T15:39:00Z" itemprop="datePublished">February 01, 2014 15:39</time></div>
+<div class="hide" itemprop="name">12406</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #b06e51;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/22a750f757d230bade8d64d15f584035.jpeg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/ealtamir" itemprop="alternateName">
+ealtamir
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Thank you. This worked well with my OSX 10.9 mac. </p>
+
+<p>1 Feb 2014</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_12406&quot;,&quot;href&quot;:&quot;/comments/12406/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_12406" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_13350" itemid="13350" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2014-03-09T18:59:40Z" itemprop="datePublished">March 09, 2014 18:59</time></div>
+<div class="hide" itemprop="name">13350</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #793631;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/b28999d37d7f19ad1750a07b87cf0afa.jpeg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/wvega" itemprop="alternateName">
+wvega
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Thank you. I spent some time looking for a solution and your trick finally fixed my problem.</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_13350&quot;,&quot;href&quot;:&quot;/comments/13350/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_13350" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_13565" itemid="13565" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2014-03-19T12:01:42Z" itemprop="datePublished">March 19, 2014 12:01</time></div>
+<div class="hide" itemprop="name">13565</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #62357a;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/b0b05407bf5fe02b6563b0fb39be46b4.jpeg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/barneycarroll" itemprop="alternateName">
+barneycarroll
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Interestingly, this doesn't work for me. <code class="prettyprint prettyprinted" style=""><span class="pln">OPTION</span><span class="pun">+</span><span class="pln">LEFT</span></code> still gives <code class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">D</span></code>, <code class="prettyprint prettyprinted" style=""><span class="pln">OPTION</span><span class="pun">+</span><span class="pln">RIGHT</span></code> still gives <code class="prettyprint prettyprinted" style=""><span class="pun">[</span><span class="pln">C</span></code>. Are there any other possible sources of conflict beyond the general keyboard settings and profile keys?</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_13565&quot;,&quot;href&quot;:&quot;/comments/13565/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_13565" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_13974" itemid="13974" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2014-04-10T10:26:11Z" itemprop="datePublished">April 10, 2014 10:26</time></div>
+<div class="hide" itemprop="name">13974</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #eb699b;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/9d4b5c7e21b439738fbdedda94314734.jpeg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/_ralph" itemprop="alternateName">
+_ralph
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Why did I allow myself to continue living without this for so long?</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_13974&quot;,&quot;href&quot;:&quot;/comments/13974/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_13974" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_14378" itemid="14378" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2014-04-30T15:26:59Z" itemprop="datePublished">April 30, 2014 15:26</time></div>
+<div class="hide" itemprop="name">14378</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #41d5f8;">
+
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/tiehx" itemprop="alternateName">
+tiehx
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Thanks. Succint and clear.</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_14378&quot;,&quot;href&quot;:&quot;/comments/14378/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_14378" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_14405" itemid="14405" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2014-05-02T08:11:15Z" itemprop="datePublished">May 02, 2014 08:11</time></div>
+<div class="hide" itemprop="name">14405</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #87a945;">
+
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/wavyx" itemprop="alternateName">
+wavyx
+</a>
+</div>
+<div class="content small" itemprop="text"><p>I would only add<br>
+alt + backspace : Send HEX "0x17"</p>
+
+<p><a href="https://code.google.com/p/iterm2/issues/detail?id=1052" rel="nofollow">https://code.google.com/p/iterm2/issues/detail?id=1052</a></p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_14405&quot;,&quot;href&quot;:&quot;/comments/14405/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_14405" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_15023" itemid="15023" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2014-06-06T03:35:21Z" itemprop="datePublished">June 06, 2014 03:35</time></div>
+<div class="hide" itemprop="name">15023</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #8bf659;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/3e52f57c4e6512a7c5a948d7f09d6503.jpg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/sanjaygit" itemprop="alternateName">
+sanjaygit
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Thanks a lot mate! I went through quite a few blogs before this one worked for me!</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_15023&quot;,&quot;href&quot;:&quot;/comments/15023/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_15023" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_15191" itemid="15191" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2014-06-17T07:51:02Z" itemprop="datePublished">June 17, 2014 07:51</time></div>
+<div class="hide" itemprop="name">15191</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #1dac12;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/9e30e530d528a000975b7c25c42118be.png">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/victormartins" itemprop="alternateName">
+victormartins
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Thanks, just what I was looking for! :)</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_15191&quot;,&quot;href&quot;:&quot;/comments/15191/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_15191" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_15817" itemid="15817" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2014-07-23T21:20:48Z" itemprop="datePublished">July 23, 2014 21:20</time></div>
+<div class="hide" itemprop="name">15817</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #04c114;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/6adf28ad9319c969cfccca9d97453359.png">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/pioneerskies" itemprop="alternateName">
+pioneerskies
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Thank you very much; just landed on a mac and it was one of the biggest pain in the neck.</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_15817&quot;,&quot;href&quot;:&quot;/comments/15817/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_15817" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_16231" itemid="16231" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2014-08-19T20:24:58Z" itemprop="datePublished">August 19, 2014 20:24</time></div>
+<div class="hide" itemprop="name">16231</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #d52c8b;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/a69ccd99c8ef0be30b5dc870d7c8e9f8.png">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/philss" itemprop="alternateName">
+philss
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Thank you very much!</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_16231&quot;,&quot;href&quot;:&quot;/comments/16231/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_16231" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_16259" itemid="16259" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2014-08-20T17:57:23Z" itemprop="datePublished">August 20, 2014 17:57</time></div>
+<div class="hide" itemprop="name">16259</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #53b035;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/74311ccfa81176b0821d5e01e40b060f.jpeg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/heypano" itemprop="alternateName">
+heypano
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Awesome</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_16259&quot;,&quot;href&quot;:&quot;/comments/16259/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_16259" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_16908" itemid="16908" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2014-09-24T20:45:45Z" itemprop="datePublished">September 24, 2014 20:45</time></div>
+<div class="hide" itemprop="name">16908</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #287cb7;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/none.jpg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/mloureiro" itemprop="alternateName">
+mloureiro
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Thanks, that saved lots of time!! :D</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_16908&quot;,&quot;href&quot;:&quot;/comments/16908/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_16908" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_17326" itemid="17326" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2014-10-22T12:57:16Z" itemprop="datePublished">October 22, 2014 12:57</time></div>
+<div class="hide" itemprop="name">17326</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #e2ee36;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/me_normal.jpg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/gmhurley" itemprop="alternateName">
+gmhurley
+</a>
+</div>
+<div class="content small" itemprop="text"><p>googled "iterm skip words"... first result and does what I need. thank you!</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_17326&quot;,&quot;href&quot;:&quot;/comments/17326/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_17326" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_17500" itemid="17500" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2014-11-05T18:58:08Z" itemprop="datePublished">November 05, 2014 18:58</time></div>
+<div class="hide" itemprop="name">17500</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #16fe09;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/none(1).jpg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/davefedele" itemprop="alternateName">
+davefedele
+</a>
+</div>
+<div class="content small" itemprop="text"><p>This is great!</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_17500&quot;,&quot;href&quot;:&quot;/comments/17500/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_17500" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_17678" itemid="17678" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2014-11-25T06:36:05Z" itemprop="datePublished">November 25, 2014 06:36</time></div>
+<div class="hide" itemprop="name">17678</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #d955e2;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/none(2).jpg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/albertoforni" itemprop="alternateName">
+albertoforni
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Thanks really helpful</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_17678&quot;,&quot;href&quot;:&quot;/comments/17678/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_17678" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_18120" itemid="18120" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2015-01-21T06:02:41Z" itemprop="datePublished">January 21, 2015 06:02</time></div>
+<div class="hide" itemprop="name">18120</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #b877b3;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/IMG_0099.JPG">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/nisanth074" itemprop="alternateName">
+nisanth074
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Thank you, saved lots of time :)</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_18120&quot;,&quot;href&quot;:&quot;/comments/18120/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_18120" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_18332" itemid="18332" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2015-02-15T23:29:25Z" itemprop="datePublished">February 15, 2015 23:29</time></div>
+<div class="hide" itemprop="name">18332</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #83b4fd;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/none(3).jpg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/stagl" itemprop="alternateName">
+stagl
+</a>
+</div>
+<div class="content small" itemprop="text"><p>fantastic! woot!</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_18332&quot;,&quot;href&quot;:&quot;/comments/18332/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_18332" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_18355" itemid="18355" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2015-02-18T23:25:15Z" itemprop="datePublished">February 18, 2015 23:25</time></div>
+<div class="hide" itemprop="name">18355</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #180694;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/none(4).jpg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/ccmcbeck" itemprop="alternateName">
+ccmcbeck
+</a>
+</div>
+<div class="content small" itemprop="text"><p>love it</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_18355&quot;,&quot;href&quot;:&quot;/comments/18355/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_18355" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_21407" itemid="21407" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2015-06-20T14:57:24Z" itemprop="datePublished">June 20, 2015 14:57</time></div>
+<div class="hide" itemprop="name">21407</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #41ccfe;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/none(5).jpg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/Michelle" itemprop="alternateName">
+Michelle
+</a>
+</div>
+<div class="content small" itemprop="text"><p>This has been driving me crazy since I switched to a Mac. Thank you SO MUCH! :) </p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_21407&quot;,&quot;href&quot;:&quot;/comments/21407/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_21407" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_21469" itemid="21469" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2015-06-24T17:47:56Z" itemprop="datePublished">June 24, 2015 17:47</time></div>
+<div class="hide" itemprop="name">21469</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #768744;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/none(6).jpg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/sjackman" itemprop="alternateName">
+sjackman
+</a>
+</div>
+<div class="content small" itemprop="text"><p>On Terminal.app: Settings-&gt;Keyboard-&gt;"Use Option as Meta key".<br>
+"Alt-." is my favourite. Repeat the last word of the previous command.</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_21469&quot;,&quot;href&quot;:&quot;/comments/21469/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_21469" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_22116" itemid="22116" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2015-07-27T14:08:47Z" itemprop="datePublished">July 27, 2015 14:08</time></div>
+<div class="hide" itemprop="name">22116</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #8df2d5;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/none(7).jpg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/djadomi" itemprop="alternateName">
+djadomi
+</a>
+</div>
+<div class="content small" itemprop="text"><p>In case anyone is still looking for a solution to this and lands here, you may need to edit your ~/.inputrc as well:</p>
+
+<pre><code class="prettyprint prettyprinted" style=""><span class="str">"\e\e[C"</span><span class="pun">:</span><span class="pln"> forward</span><span class="pun">-</span><span class="pln">word
+</span><span class="str">"\e\e[D"</span><span class="pun">:</span><span class="pln"> backward</span><span class="pun">-</span><span class="pln">word</span></code></pre></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_22116&quot;,&quot;href&quot;:&quot;/comments/22116/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_22116" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_22153" itemid="22153" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2015-08-01T09:52:35Z" itemprop="datePublished">August 01, 2015 09:52</time></div>
+<div class="hide" itemprop="name">22153</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #b69a25;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/019533bbd162b35aaf403145491843c1.png">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/meetmatt" itemprop="alternateName">
+meetmatt
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Wow! Just installed iTerm2 and can't stop admiring it! It's like the best thing that happened in my programming life since vim!</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_22153&quot;,&quot;href&quot;:&quot;/comments/22153/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_22153" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_22539" itemid="22539" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2015-08-15T13:09:48Z" itemprop="datePublished">August 15, 2015 13:09</time></div>
+<div class="hide" itemprop="name">22539</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #c46552;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/69fb63c4f6819872bf0010b24194a73a.jpeg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/hugofcampos" itemprop="alternateName">
+hugofcampos
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Thank you! =)</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_22539&quot;,&quot;href&quot;:&quot;/comments/22539/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_22539" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_22554" itemid="22554" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2015-08-18T16:43:34Z" itemprop="datePublished">August 18, 2015 16:43</time></div>
+<div class="hide" itemprop="name">22554</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #bfdd2b;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/9359760602e36ed0e43ff61a14f1812d.png">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/lazyval" itemprop="alternateName">
+lazyval
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Neat, now I finally can convert to Iterm 2! </p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_22554&quot;,&quot;href&quot;:&quot;/comments/22554/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_22554" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_22622" itemid="22622" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2015-08-25T23:38:19Z" itemprop="datePublished">August 25, 2015 23:38</time></div>
+<div class="hide" itemprop="name">22622</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #7ef5fc;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/none(8).jpg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/arcreative" itemprop="alternateName">
+arcreative
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Nevermind... was looking at "Keys" and not "Profiles &gt; Keys"</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_22622&quot;,&quot;href&quot;:&quot;/comments/22622/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_22622" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_22653" itemid="22653" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2015-08-27T20:12:42Z" itemprop="datePublished">August 27, 2015 20:12</time></div>
+<div class="hide" itemprop="name">22653</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #00d607;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/none(9).jpg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/chintamanil" itemprop="alternateName">
+chintamanil
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Nice .. <br>
+Thanks for this trick !!</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_22653&quot;,&quot;href&quot;:&quot;/comments/22653/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_22653" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_22766" itemid="22766" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2015-09-02T15:48:39Z" itemprop="datePublished">September 02, 2015 15:48</time></div>
+<div class="hide" itemprop="name">22766</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #f7f241;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/none(10).jpg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/sterlingstokes" itemprop="alternateName">
+sterlingstokes
+</a>
+</div>
+<div class="content small" itemprop="text"><p>This was the one thing that was driving me crazy when switching to iTerm. Thanks for posting!</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_22766&quot;,&quot;href&quot;:&quot;/comments/22766/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_22766" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_24833" itemid="24833" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2015-11-29T14:48:57Z" itemprop="datePublished">November 29, 2015 14:48</time></div>
+<div class="hide" itemprop="name">24833</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #65dfd4;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/0_FIUn3egI64EBHHzR5SsL3I2QoRSNeSkRLW7d3oxczOM5BdPUwDws7EIJXvDEIE5c6HMeaSSLnLQ9.jpeg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/vignesh_sk94" itemprop="alternateName">
+vignesh_sk94
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Thank you so much!</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_24833&quot;,&quot;href&quot;:&quot;/comments/24833/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_24833" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_25061" itemid="25061" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2015-12-22T15:02:21Z" itemprop="datePublished">December 22, 2015 15:02</time></div>
+<div class="hide" itemprop="name">25061</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #f17ac6;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/182ec4df5cfc9285908e29aaa0273812.jpeg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/rootux" itemprop="alternateName">
+rootux
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Beautiful and needed. thank you</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_25061&quot;,&quot;href&quot;:&quot;/comments/25061/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_25061" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_25300" itemid="25300" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2016-01-08T16:14:05Z" itemprop="datePublished">January 08, 2016 16:14</time></div>
+<div class="hide" itemprop="name">25300</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #f2390f;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/kalpesh-panchal.jpg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/panchalkalpesh" itemprop="alternateName">
+panchalkalpesh
+</a>
+</div>
+<div class="content small" itemprop="text"><p>This made me go back to Terminal (Yosemite). Total waste of time in iTerm2. <br>
+Thanks anyways for sharing this! </p>
+
+<p>K</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_25300&quot;,&quot;href&quot;:&quot;/comments/25300/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_25300" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_26351" itemid="26351" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2016-01-26T03:40:53Z" itemprop="datePublished">January 26, 2016 03:40</time></div>
+<div class="hide" itemprop="name">26351</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #b93d3c;">
+<img src="./Use_option_arrows-to_move_from_word_to_word_files/none(11).jpg">
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/nuclearspike" itemprop="alternateName">
+nuclearspike
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Why wouldn't they have this by default... I just installed iterm2 and use option-left/right all the time and if I hadn't found this page I may have scrapped it.</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_26351&quot;,&quot;href&quot;:&quot;/comments/26351/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_26351" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_27367" itemid="27367" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2016-03-16T02:45:45Z" itemprop="datePublished">March 16, 2016 02:45</time></div>
+<div class="hide" itemprop="name">27367</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #1fbffb;">
+
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/jimubao" itemprop="alternateName">
+jimubao
+</a>
+</div>
+<div class="content small" itemprop="text"><p>alternative option + f or option + b</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_27367&quot;,&quot;href&quot;:&quot;/comments/27367/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_27367" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_27401" itemid="27401" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2016-03-17T09:10:23Z" itemprop="datePublished">March 17, 2016 09:10</time></div>
+<div class="hide" itemprop="name">27401</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #87f89e;">
+
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/2075" itemprop="alternateName">
+2075
+</a>
+</div>
+<div class="content small" itemprop="text"><p>i really do not get, why this isn't preset in iterm. anyway, if you change the alt key behaviour, access to pipe | and others is gone too. so not really a solution afais?</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_27401&quot;,&quot;href&quot;:&quot;/comments/27401/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_27401" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_27457" itemid="27457" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2016-03-29T19:50:04Z" itemprop="datePublished">March 29, 2016 19:50</time></div>
+<div class="hide" itemprop="name">27457</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #9a1b6d;">
+
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/Cheshire" itemprop="alternateName">
+Cheshire
+</a>
+</div>
+<div class="content small" itemprop="text"><p>I did this and also edited my inputrc and moving left by one word works just fine but trying to skip right instead prints "ord-right". Any ideas what's going wrong here?</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_27457&quot;,&quot;href&quot;:&quot;/comments/27457/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_27457" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_28671" itemid="28671" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2017-03-03T19:33:29Z" itemprop="datePublished">March 03, 2017 19:33</time></div>
+<div class="hide" itemprop="name">28671</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #cf1906;">
+
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/slavekjurkowski" itemprop="alternateName">
+slavekjurkowski
+</a>
+</div>
+<div class="content small" itemprop="text"><p>nice!</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_28671&quot;,&quot;href&quot;:&quot;/comments/28671/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_28671" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_29173" itemid="29173" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2017-08-06T21:25:54Z" itemprop="datePublished">August 06, 2017 21:25</time></div>
+<div class="hide" itemprop="name">29173</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #296e3d;">
+
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/Olshansky" itemprop="alternateName">
+Olshansky
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Quick and easy. Thanks!</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_29173&quot;,&quot;href&quot;:&quot;/comments/29173/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_29173" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_29693" itemid="29693" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2018-02-23T13:16:49Z" itemprop="datePublished">February 23, 2018 13:16</time></div>
+<div class="hide" itemprop="name">29693</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #3e2cb9;">
+
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/mpromda" itemprop="alternateName">
+mpromda
+</a>
+</div>
+<div class="content small" itemprop="text"><p>This is such an amazingly useful trick, it really ought to be a default settings. Thanks a lot!</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_29693&quot;,&quot;href&quot;:&quot;/comments/29693/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_29693" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top comment inline-block mb1 py1" id="comment_29735" itemid="29735" itemscope="" itemtype="http://schema.org/Comment" style="width: 100%">
+<div class="hide"><time datetime="2018-03-07T07:35:44Z" itemprop="datePublished">March 07, 2018 07:35</time></div>
+<div class="hide" itemprop="name">29735</div>
+<div class="left mt1 mr2 avatar small" style="background-color: #a55020;">
+
+</div>
+<div class="overflow-hidden py0 mt0">
+<div class="clearfix">
+<div class="author" itemprop="author">
+<a class="bold black no-hover" href="https://coderwall.com/dziamid" itemprop="alternateName">
+dziamid
+</a>
+</div>
+<div class="content small" itemprop="text"><p>Isn't it a default now? I have these sequences already prefilled:<br>
+option + left: send hexcode 0x1b 0x1b 0x5b 0x44<br>
+option + right: send hexcode 0x1b 0x1b 0x5b 0x43</p></div>
+<div class="diminish mt1">
+over 1 year ago
+·
+<div data="{&quot;heartableId&quot;:&quot;comment_29735&quot;,&quot;href&quot;:&quot;/comments/29735/likes&quot;,&quot;labels&quot;:[&quot;&quot;,&quot;&quot;]}" id="react-heart-button-comment_29735" style="display:inline-block"><div class="inline pointer center purple"><span class="fixed-space-4"><i class="fa fa-heart-o purple h5"></i></span><span class="black ml1"></span></div></div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<div class="sm-col sm-col sm-col-12 md-col-4">
+<div class="native-js clearfix ml3 md-show _300x250" data-state="visible">
+<style>
+  .native-0 {
+    background-color: #FFFFFF;
+    margin-bottom: 40px;
+  }
+  
+  .native-0 .native-main {
+    color: #3c3c3c !important;
+  }
+  
+  .native-0 .native-cta {
+    color: #FFFFFF;
+    background-color: #f4364c;
+  }
+</style>
+<div class="native-0 native-flex">
+<a class="native-main" href="https://srv.buysellads.com/ads/click/x/GTND42QNCESIT27MCEYLYKQMCYBDE2QUFTYICZ3JCWSDV53WCA7IKKJKC6BIK23UCKSDVK3EHJNCLSIZ">
+<div class="native-sponsor">Sponsored by</div>
+<div class="native-title">Hotjar</div>
+<div class="native-desc">See how your visitors are really using your website.</div>
+<div class="native-footer">
+<div class="native-cta">Try it for Free</div>
+<img class="native-img" src="./Use_option_arrows-to_move_from_word_to_word_files/1546414089-hotjar-logo.png">
+</div>
+</a>
+</div>
+</div>
+
+<div class="clearfix sm-ml3 mt3 p1 pb3">
+<h5 class="mt0 mb1">
+<i class="fa fa-folder-o mr1"></i>
+Filed Under
+</h5>
+<hr>
+<div class="topic clearfix py1">
+<a href="https://coderwall.com/t/tools/popular">
+<div class="bold"><span class="translation_missing" title="translation missing: en.categories.long.tools">Tools</span></div>
+</a>
+</div>
+</div>
+<div class="clearfix sm-ml3 mt3 p1">
+<div class="clearfix">
+<div class="col col-7">
+<h5 class="mt0">
+<i class="fa fa-diamond mr1"></i>
+Awesome Job
+</h5>
+</div>
+<div class="col col-5">
+<div class="right font-sm bold">
+<a class="block" href="https://coderwall.com/jobs">
+See All Jobs
+<i class="fa fa-arrow-right"></i>
+</a>
+</div>
+</div>
+</div>
+<hr>
+<div class="mt2 font-sm">
+<a class="border--green green bold" href="https://coderwall.com/jobs/new">
+Post a job for only
+$299
+</a>
+</div>
+</div>
+<div class="clearfix ml3 mt4">
+<a target="_blank" class="link no-hover" rel="nofollow" href="https://coderwall.com/r/47/click"><img class="mt-third" alt="Thanks to our sponsor" src="./Use_option_arrows-to_move_from_word_to_word_files/47">
+</a>
+</div>
+<div class="clearfix ml3 mt4" ga-location="Protip Sidebar">
+<div class="bsap bsap_1305410" id="bsap_1305410" data-serve="CVADVK7E"><!-- no ad -->
+<script type="text/javascript" id="auto_1" class="ignoreme"> if (typeof(BSACallback) !== 'undefined') BSACallback(); </script></div>
+</div>
+<div class="native-js _native_ribbon" data-state="visible">
+<div class="native-sponsor">Sponsored by 20i — Learn More</div>
+<a class="native-flex" href="https://srv.buysellads.com/ads/click/x/GTND42QNCESIT27MCEYLYKQMCYBDK23UFTBICZ3JCWSDV2QWCWSI62QKC6BIK23UCKSDVK3EHJNCLSIZ">
+<style>
+  ._native_ribbon.native-js {
+    background: linear-gradient(-30deg, #8F8F8FE5, #8F8F8FE5 45%, #8F8F8F 45%) #fff;
+  }
+  
+   ._native_ribbon .native-details,
+   ._native_ribbon .native-sponsor,
+   ._native_ribbon .native-bsa {
+    color: #FFFFFF !important;
+  }
+  
+   ._native_ribbon .native-details:hover {
+    color: #FFFFFF !important;
+  }
+  
+   ._native_ribbon .native-cta {
+    color: #FFFFFF;
+    background-color: #FF8040;
+  }
+  
+   ._native_ribbon .native-cta:hover {
+    color: #native_cta_color_hover;
+    background-color: #EE763C;
+  }
+</style>
+<div class="native-main">
+<img class="native-img" src="./Use_option_arrows-to_move_from_word_to_word_files/1550601878-20i_logo.png">
+<div class="native-details">
+<span class="native-company">20i: independent web hosting for professionals, created by professionals.</span>
+<span class="native-desc">20i's truly white-label unlimited hosting gives you more, and it's easy to move to us using our automatic Migration Centre.</span>
+</div>
+</div>
+<span class="native-cta">Try us today for £1.</span>
+</a>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</main>
+<footer class="border-top">
+<nav class="clearfix">
+<div class="col col-4 py1 mt1">
+<a class="btn" href="https://twitter.com/coderwall" rel="nofollow" target="_blank">
+@coderwall
+<i class="fa fa-twitter fa-1x ml1"></i>
+</a>
+</div>
+<div class="col col-8 py2 mt1">
+<div class="right">
+<a class="inline-block ml1" href="https://github.com/coderwall/coderwall-next" rel="nofollow">
+<i class="fa fa-github-alt"></i>
+</a>
+<a class="inline-block ml1" href="https://coderwall.com/t/hackerdesk/popular">
+<div class="sm-show"><i class="fa fa-gift"></i></div>
+</a>
+<a class="inline-block mx1" href="https://coderwall.com/categories/application-performance-monitoring">APM product comparisons
+</a><a class="inline-block mr1" href="mailto:support@coderwall.com">
+Contact
+</a>
+<a class="inline-block mr1" href="https://coderwall.com/privacy_policy">Privacy</a>
+<a class="inline-block mr1" href="https://coderwall.com/tos">Terms</a>
+<p class="inline-block diminish inline mr1">Copyright 2019</p>
+</div>
+</div>
+<div class="col col-12 pb1"></div>
+</nav>
+</footer>
+</div>
+<div data="{&quot;currentUser&quot;:{&quot;item&quot;:null},&quot;currentProtip&quot;:{&quot;item&quot;:{&quot;id&quot;:92501,&quot;body&quot;:&quot;By default in iTerm 2, it&#39;s a pain to skip between words.\r\n\r\nHere&#39;s how you can configure iTerm 2 on OSX to allow you to use ⌥ ← and ⌥→ to do just that.\r\n\r\nFirst you need to set your left ⌥ key to act as an escape character.\r\n\r\n![Picture](https://coderwall-assets-0.s3.amazonaws.com/uploads/picture/file/1799/Screen_Shot_2013-06-25_at_11.57.34.png)\r\n\r\nSecond you need to either locate the current shortcut for ⌥ ← or create a new one, in the **Profile Shortcut Keys**, with the following settings:\r\n\r\n - Keyboard Shortcut: ⌥←\r\n - Action: *Send Escape Sequence*\r\n - Esc+: *b*\r\n\r\n![Picture](https://coderwall-assets-0.s3.amazonaws.com/uploads/picture/file/1800/Screen_Shot_2013-06-25_at_11.59.33.png)\r\n\r\nThird, repeat for the ⌥→ keyboard shortcut with the following settings:\r\n\r\n - Keyboard Shortcut: ⌥→\r\n - Action: *Send Escape Sequence*\r\n - Esc+: *f*\r\n\r\nYou&#39;re done! Now you can skip entire words on the command line by holding down the **left** ⌥ key and hitting ← or →\r\n\r\nTo make this work for the **right** option key you need to set the key modifier to act as an Escape Sequence, a la the first step.&quot;,&quot;created_at&quot;:&quot;2013-06-25T11:05:05.077Z&quot;,&quot;heartableId&quot;:&quot;protip_92501&quot;,&quot;hearts&quot;:113,&quot;html&quot;:&quot;\u003cp\u003eBy default in iTerm 2, it&#39;s a pain to skip between words.\u003c/p\u003e\n\n\u003cp\u003eHere&#39;s how you can configure iTerm 2 on OSX to allow you to use ⌥ ← and ⌥→ to do just that.\u003c/p\u003e\n\n\u003cp\u003eFirst you need to set your left ⌥ key to act as an escape character.\u003c/p\u003e\n\n\u003cp\u003e\u003cimg src=\&quot;https://coderwall-assets-0.s3.amazonaws.com/uploads/picture/file/1799/Screen_Shot_2013-06-25_at_11.57.34.png\&quot; alt=\&quot;Picture\&quot;\u003e\u003c/p\u003e\n\n\u003cp\u003eSecond you need to either locate the current shortcut for ⌥ ← or create a new one, in the \u003cstrong\u003eProfile Shortcut Keys\u003c/strong\u003e, with the following settings:\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003eKeyboard Shortcut: ⌥←\u003c/li\u003e\n\u003cli\u003eAction: \u003cem\u003eSend Escape Sequence\u003c/em\u003e\n\u003c/li\u003e\n\u003cli\u003eEsc+: \u003cem\u003eb\u003c/em\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003e\u003cimg src=\&quot;https://coderwall-assets-0.s3.amazonaws.com/uploads/picture/file/1800/Screen_Shot_2013-06-25_at_11.59.33.png\&quot; alt=\&quot;Picture\&quot;\u003e\u003c/p\u003e\n\n\u003cp\u003eThird, repeat for the ⌥→ keyboard shortcut with the following settings:\u003c/p\u003e\n\n\u003cul\u003e\n\u003cli\u003eKeyboard Shortcut: ⌥→\u003c/li\u003e\n\u003cli\u003eAction: \u003cem\u003eSend Escape Sequence\u003c/em\u003e\n\u003c/li\u003e\n\u003cli\u003eEsc+: \u003cem\u003ef\u003c/em\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eYou&#39;re done! Now you can skip entire words on the command line by holding down the \u003cstrong\u003eleft\u003c/strong\u003e ⌥ key and hitting ← or →\u003c/p\u003e\n\n\u003cp\u003eTo make this work for the \u003cstrong\u003eright\u003c/strong\u003e option key you need to set the key modifier to act as an Escape Sequence, a la the first step.\u003c/p\u003e\n&quot;,&quot;public_id&quot;:&quot;h6yfda&quot;,&quot;subscribed&quot;:false,&quot;tags&quot;:[&quot;terminal&quot;,&quot;os x&quot;,&quot;iterm&quot;,&quot;iterm2&quot;,&quot;skip words&quot;,&quot;skip fragments&quot;,&quot;move terminal&quot;],&quot;title&quot;:&quot;Use  ⌥ ← and ⌥→ to jump forwards / backwards words in iTerm 2, on OS X&quot;,&quot;upvotes&quot;:113}},&quot;comments&quot;:{&quot;items&quot;:[{&quot;id&quot;:7441,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_7441&quot;},{&quot;id&quot;:11378,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_11378&quot;},{&quot;id&quot;:12243,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_12243&quot;},{&quot;id&quot;:12277,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_12277&quot;},{&quot;id&quot;:12406,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_12406&quot;},{&quot;id&quot;:13350,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_13350&quot;},{&quot;id&quot;:13565,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_13565&quot;},{&quot;id&quot;:13974,&quot;hearts&quot;:1,&quot;heartableId&quot;:&quot;comment_13974&quot;},{&quot;id&quot;:14378,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_14378&quot;},{&quot;id&quot;:14405,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_14405&quot;},{&quot;id&quot;:15023,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_15023&quot;},{&quot;id&quot;:15191,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_15191&quot;},{&quot;id&quot;:15817,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_15817&quot;},{&quot;id&quot;:16231,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_16231&quot;},{&quot;id&quot;:16259,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_16259&quot;},{&quot;id&quot;:16908,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_16908&quot;},{&quot;id&quot;:17326,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_17326&quot;},{&quot;id&quot;:17500,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_17500&quot;},{&quot;id&quot;:17678,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_17678&quot;},{&quot;id&quot;:18120,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_18120&quot;},{&quot;id&quot;:18332,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_18332&quot;},{&quot;id&quot;:18355,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_18355&quot;},{&quot;id&quot;:21407,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_21407&quot;},{&quot;id&quot;:21469,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_21469&quot;},{&quot;id&quot;:22116,&quot;hearts&quot;:1,&quot;heartableId&quot;:&quot;comment_22116&quot;},{&quot;id&quot;:22153,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_22153&quot;},{&quot;id&quot;:22539,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_22539&quot;},{&quot;id&quot;:22554,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_22554&quot;},{&quot;id&quot;:22622,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_22622&quot;},{&quot;id&quot;:22653,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_22653&quot;},{&quot;id&quot;:22766,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_22766&quot;},{&quot;id&quot;:24833,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_24833&quot;},{&quot;id&quot;:25061,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_25061&quot;},{&quot;id&quot;:25300,&quot;hearts&quot;:1,&quot;heartableId&quot;:&quot;comment_25300&quot;},{&quot;id&quot;:26351,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_26351&quot;},{&quot;id&quot;:27367,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_27367&quot;},{&quot;id&quot;:27401,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_27401&quot;},{&quot;id&quot;:27457,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_27457&quot;},{&quot;id&quot;:28671,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_28671&quot;},{&quot;id&quot;:29173,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_29173&quot;},{&quot;id&quot;:29693,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_29693&quot;},{&quot;id&quot;:29735,&quot;hearts&quot;:0,&quot;heartableId&quot;:&quot;comment_29735&quot;}]}}" id="initial-redux-store"></div>
+
+
+</body></html>

@@ -1,0 +1,20 @@
+		
+		1. install typescript globally;
+
+			npm i typescript -g
+
+		2. write you code as console.log() and run debugger
+		(hit f5) or go to debugg/startDebugging
+		3. that would try to run you code and VS will crete hidden 
+		folder for you as .vscode/launch.json 
+			(configuration of this file shown)
+		4) convigure ts task runner for Vscode by typing
+		
+			tsc --init (in your porject folder)
+		5) now in your VS shortcut ⇧⌘ B and pick tsc:watch - tsconfig.json
+
+		6) final step is to create tasks.json file in .vscode directory 
+
+			(content of the file provided)
+		7) ⇧⌘ B and you should have script : tsc pick it and it will watch changes to your file		
+		

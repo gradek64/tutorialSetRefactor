@@ -1,0 +1,13 @@
+###### Open/close panel ########
+
+⌘⇧X - browse extensions;
+⌘\ - open/close sideBar
+^` - open/close terminal
+⌘\ - split window in 2 and more 
+⌘W - close active window
+⌘1 ⌘2 ⌘3 - switch focus between 2 or more windows
+⌘⇧P -> type toggle MiniMap -> toggle miniMap;
+
+###### navigate a file #######
+ 
+⌃G - jump to the line entered

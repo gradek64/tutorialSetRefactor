@@ -1,0 +1,8 @@
+1) Open the Command Palette (⇧⌘P) and type 'shell command' to find the Shell Command: Install 'code' command in PATH command.
+2) add below line for PATH in  your bash_profile file  for the content below:
+// ~/bash_profile content
+# path for visual studio code to launch from terminal
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+
+
