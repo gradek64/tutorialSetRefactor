@@ -1,0 +1,17 @@
+1. remove settings and configs
+
+rm -rf $HOME/Library/Application\ Support/Code
+
+// add sudo if you needed to
+// if you're using insider*
+
+sudo rm -rf $HOME/Librry/Application\ Support/Code\ -\ Insiders/
+
+2) remove all extensions
+
+rm -rf $HOME/.vscode
+
+// add sudo if you needed to
+// if you're using insider*
+
+sudo rm -rf $HOME/.vscode-insiders/

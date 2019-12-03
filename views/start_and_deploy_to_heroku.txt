@@ -6,7 +6,7 @@
 		3) heroku login (command)
 
 			login:gregigcool@gmail.com
-			pass:herokuGrzesiek64
+			pass:heroku@Grzesiek64
 	
 		4) heroku apps (list all your apps)
 
