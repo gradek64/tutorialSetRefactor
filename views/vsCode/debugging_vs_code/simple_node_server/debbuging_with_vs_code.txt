@@ -1,0 +1,16 @@
+
+	Vs code allows you to run debuggeing process by :
+		1) attach request so U will attach debugger to already running server instance 
+		2) or launch so U will launch a server from the editor 
+
+	to make your debugger setting persistent you need to create launch.js file which will be automatically created for you 
+	once you open debugger mode and follow all the prompts.
+
+	Vs code will pick server enviroment for you but in case it will not determine it you can pick from :
+
+	node, python,.net... and  chrome (front-end suppport explained in seperate article in this directory)
+
+	There are several types of attach or launch debugging which will come up one you edit this file.
+	For example for attach you can pick 'attach to process' and then vs_code allows you which application of node you want to debug on.
+
+	Also you can enable some extension for more pleasant debugging: (to be continue)

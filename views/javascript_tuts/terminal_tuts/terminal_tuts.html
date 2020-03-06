@@ -48,7 +48,7 @@
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/terminal_tuts" partition>find with exclusion !(not operator)</a><span class="tooltiptext">find with exclusion !(not operator)</span>
                            
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/terminal_tuts" partition>spread operator as array.push(); or array.unshift();</a><span class="tooltiptext">spread operator as array.push(); or array.unshift();</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/terminal_tuts" partition>pipe find results</a><span class="tooltiptext">pipe find results</span>
                         
                     </ul>
                 
@@ -418,30 +418,18 @@ find . -type f -iname &#39;index*&#39; -print -o -path &#39;./node_modules&#39; 
               <div class="band-container partition " part="part-3">
                 <div class="band-inner">
 
-                  <p>spread operator as array.push(); or array.unshift();
-                     spread operator can be also used for simple array push() or array unshift() or combination of both and more down there;</p>
+                  <p>pipe allows you to combine your commands and take results from command into another and another
+               findResults (| pipe into) deleteCommand
+
+               IMPORTANT: pipe always need verb after like: grep or xargs ...</p>
                   <div class="codeWraper">
-                    <code>----------------- array -----------------
+                    <code>----------------- find files then filter and delete them  -----------------
 
-  const numbers = [1,2,3,4];
+  //lets assume U have file1.js, file2.js , file3.js, file4.js 
+  //and U want to remove only files 2 and 3 you can find all, pipe to filter and remove
 
-  ----------------- as addNumberLast.push(5) ---------------------
+  find file*.js | grep &quot;file[2-3]&quot; | xargs rm
 
-  const addNumberLast = [...numbers,5];
-  
-  ----------------- as addNumberFirst.unshift(0) ---------------------
-
-  const addNumberFirst = [0,...numbers];
-
-
-  ----------------- or combination values -----------------
-
-  const addNumberCombinationValues = [0,...numbers,5,6,7];
-
-  ----------------- or combination values and spread operators -----------------
-
-  const numbersLastAdded = [8,9,10];
-  const addNumberCombinationSpreads = [0,...numbers,5,6,7,...numbersLastAdded];
 
   --------------------------------------------------------------------</code>
                   </div>

@@ -1,0 +1,13 @@
+
+
+	1. install moduels for ts compiler
+		npm install --save-dev typescript ts-loader source-map-loader
+
+	2. Get the type declaration files (.d.ts files) from @types for any library in use. For this project, we have React and ReactDOM.
+		
+	npm install --save @types/react @types/react-dom
+
+	3. create your tsconfig.json // allow a partial TypeScript and JavaScript codebase
+	        "allowJs": true 
+	4. now you need to change loader for ts-loader in webpac.config.file
+	5. run the bundle with: npm webpack or your script in package.json

@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "outDir": "./built",
+    "allowJs": true,
+    "checkJs": true,
+    "sourceMap": true,
+    "strictNullChecks":true
+  },
+  "include": [
+    "./sample_ts_code/**/*",
+]
+}

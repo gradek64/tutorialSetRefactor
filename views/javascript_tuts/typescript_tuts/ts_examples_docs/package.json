@@ -1,0 +1,21 @@
+{
+  "name": "vs_code_configuration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "tsc-watch": "tsc sample_ts_code/*.ts --watch",
+    "comment to tsc-fle":"// run: FILE=file.ts npm run tsc-file and execute file.js",
+    "tsc-file": "tsc sample_ts_code/$FILE.ts && node sample_ts_code/$FILE.js",
+    "comment to tsc-watch-fle":"// run: FILE=file.ts npm run tsc-watch-file",
+    "tsc-watch-file": "tsc sample_ts_code/$FILE.ts --watch", 
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^3.7.3"
+  }
+}
