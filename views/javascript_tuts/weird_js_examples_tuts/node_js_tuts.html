@@ -1,0 +1,434 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">  
+  <title>tutorial === Layout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/tutorial.css">
+  <link rel="stylesheet" href="css/tooltip.css">
+</head>
+<body translate="no">
+<div class="l-site">
+  <div class="l-nav">
+    <nav class="nav">
+      <input type="text" placeholder="Search" id="search">
+      <div style="clear: both;"></div>
+      <!-- nunjucks loop-->
+            
+<ul class="links">
+<!--list-tag-->
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts">simple express node server</a><span class="tooltiptext">simple express node server</span>
+                 
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts">execute method on object</a><span class="tooltiptext">execute method on object</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts" partition>Function.prototype.call()</a><span class="tooltiptext">Function.prototype.call()</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts" partition>Function.prototype.call() on JS build-in Objects</a><span class="tooltiptext">Function.prototype.call() on JS build-in Objects</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts" partition>Function.prototype.apply()</a><span class="tooltiptext">Function.prototype.apply()</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts" partition>Function.prototype.apply() in JS build-in Objects</a><span class="tooltiptext">Function.prototype.apply() in JS build-in Objects</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts" partition>Function.prototype.bind()</a><span class="tooltiptext">Function.prototype.bind()</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts" partition>Function.prototype.bind() in JS build-in Objects</a><span class="tooltiptext">Function.prototype.bind() in JS build-in Objects</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts">Destructring in functions (passing values)</a><span class="tooltiptext">Destructring in functions (passing values)</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts" partition>Destructring in functions (passing values)</a><span class="tooltiptext">Destructring in functions (passing values)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts" partition>Destructring in functions (default values)</a><span class="tooltiptext">Destructring in functions (default values)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts" partition>Destructring in functions (default values) with temporary object properties</a><span class="tooltiptext">Destructring in functions (default values) with temporary object properties</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts" partition>ES6 closure syntax</a><span class="tooltiptext">ES6 closure syntax</span>
+                        
+                    </ul>
+                
+      </li>
+    
+<!--end-list-tag-->
+</ul>
+
+       <!-- nunjucks loop-->
+    </nav>
+  </div>
+  <div class="l-page">
+    <div class="menu">
+      <div class="menu-hamburger"></div>
+    </div>
+      <!-- nunjucks loop-->
+          
+<div class="sectionWrapper">
+  <div class="sectionContainer">
+   
+      
+      <section  class="band band-b activeSection"  class="band band-b">
+          <h1> simple express node server </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>this is simple start up setup for node.js server with express it works on heroku as  well as localhost,
+              it needs script in package.json: start:node file.js (file your sever below) it also supports ejs engine templating</p>
+                  <div class="codeWraper">
+                    <code>--------- server.js ----------------
+
+var express = require(&#39;express&#39;);
+var app = express();
+const bodyParser = require(&#39;body-parser&#39;);
+const cors = require(&#39;cors&#39;)
+
+// process.env.PORT lets the port be set by Heroku
+  var port = process.env.PORT || 8080;
+
+// set the view engine to ejs
+  app.set(&#39;view engine&#39;, &#39;ejs&#39;);
+
+// make express look in the public directory for assets (css/js/img)
+  app.use(express.static(__dirname + &#39;/public&#39;));
+
+app.use(cors())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+// set the home page route
+app.get(&#39;/&#39;, function(req, res) {
+  //U need to specify header the bare minimum
+  res.header(&#39;Content-Type&#39;, &#39;text/html; charset=utf-8&#39;)
+  res.render(&#39;index&#39;);
+  //res.end(&#39;hi&#39;);
+});
+
+app.get(&#39;/json&#39;, (req, res) =&gt; {
+  res.header(&#39;Content-Type&#39;, &#39;application/json; charset=utf-8&#39;)
+  res.json({json:&#39;it is json response object set&#39;})
+})
+
+app.listen(port, function() {
+console.log(&#39;Our app is running on http://localhost:&#39; + port);
+});
+
+--------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> execute method on object </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>object.method.call( objectAttachToThis ,param1, param2...);
+
+                  object (window,Array,custom...) that has method, is executed on diffrent object (objectAttachToThis )that will become available in inside that function {body} and could be called with params if that method was declared to have params.</p>
+                  <div class="codeWraper">
+                    <code>const objectAttachToThis = {name:&#39;Greg&#39;, role:&#39;front-end&#39;};
+
+                    window.whatDoYouDo = function(company){
+                        console.log(&#39;I am &#39;+ this.name + &#39;and I happend to do &#39; + this.role + &#39;in &#39; + company);
+                        console.log(&#39;who is this&#39; ,this );
+                    }
+
+                    window.whatDoYouDo.call( objectAttachToThis ,&#39;New company&#39;); //takes object, argument(s) for function;</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>call() within core javascript object on examples of: 
+                            array.forEach(function(e,i){}) takes parameter as function 
+                            array.indexof(&#39;value&#39;) takes value as parameter</p>
+                  <div class="codeWraper">
+                    <code>/* forEach will also work for NodeList , no need to convert to array Array.from(NodeList)*/
+
+                        const arr = [&#39;a&#39;,&#39;b&#39;, &#39;c&#39;]; 
+                        Array.prototype.forEach.call(arr,(e,i)=&gt;{arr[i]= `${e}${i}`}) === arr.forEach((e,i)=&gt;{arr[i]= `${e}${i}`});
+
+                        const arrValue = [&#39;a&#39;,&#39;b&#39;, &#39;c&#39;]; 
+                        Array.prototype.indexOf.call(arrValue,&#39;b&#39;) === arrValue.indexOf(&#39;b&#39;);</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>object.method.apply( objectAttachToThis ,[param1, param2...]);
+
+                            apply() is the same as call() but params are set in Array;</p>
+                  <div class="codeWraper">
+                    <code>const objectAttachToThis = {name:&#39;Greg&#39;, role:&#39;front-end&#39;};
+
+                               window.whatDoYouDo = function(company){
+                                   console.log(&#39;I am &#39;+ this.name + &#39;and I happend to do &#39; + this.role + &#39;in &#39; + company);
+                                   console.log(&#39;who is this&#39; , this );
+                               }
+
+                               window.whatDoYouDo.apply( objectAttachToThis ,[&#39;New company&#39;]); //takes object, array as argument for function;</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
+                  <p>apply() within core javascript object on examples of: 
+                                       array.forEach(function(e,i){}) takes parameter as function 
+                                       array.indexof(&#39;value&#39;) takes value as parameter</p>
+                  <div class="codeWraper">
+                    <code>/* forEach will also work for NodeList , no need to convert to array Array.from(NodeList)*/
+
+                                   const arr = [&#39;a&#39;,&#39;b&#39;, &#39;c&#39;]; 
+                                   Array.prototype.forEach.apply(arr,[(e,i)=&gt;{arr[i]= `${e}${i}`}]) === arr.forEach((e,i)=&gt;{arr[i]= `${e}${i}`}]);
+
+                                   const arrValue = [&#39;a&#39;,&#39;b&#39;, &#39;c&#39;]; 
+                                   Array.prototype.indexOf.apply(arrValue,[&#39;b&#39;]) === arrValue.indexOf(&#39;b&#39;);</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-5">
+                <div class="band-inner">
+
+                  <p>const bindtoMethod = method.bind(objectAttachToThis);
+
+                            bind() it will bind a specific object as  &#39;this&#39; keyword reference inside that function {body}, but in that case it wont call it ! it will just bind and wait for you to call it;</p>
+                  <div class="codeWraper">
+                    <code>const objectAttachToThis = {name:&#39;Greg&#39;, role:&#39;front-end&#39;};
+
+                               window.whatDoYouDo = function(company){
+                                   console.log(&#39;I am &#39;+ this.name + &#39;and I happend to do &#39; + this.role + &#39;in &#39; + company);
+                                   console.log(&#39;who is this&#39; , this );
+                               }
+
+                               const binder = window.whatDoYouDo.bind( objectAttachToThis );
+                               //now call;
+                               binder(&#39;New company&#39;);</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-6">
+                <div class="band-inner">
+
+                  <p>bind() within core javascript object</p>
+                  <div class="codeWraper">
+                    <code>/* forEach() 
+                                      bind() it wont work for forEach(callback) function since it needs callback for every interaction 
+                                      but bind() will only bind but not execute callback (different to above) 
+                                   */
+
+                                                              
+                                   const arrValue = [&#39;a&#39;,&#39;b&#39;, &#39;c&#39;]; 
+                                   const binderValue = Array.prototype.indexOf.bind(arrValue)
+                                   binderValue(&#39;b&#39;) === arrValue.indexOf(&#39;b&#39;);</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> Destructring in functions (passing values) </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>passing values</p>
+                  <div class="codeWraper">
+                    <code>// ES5
+                 function myFunc(opts) {
+                   var name = opts.name;
+                   var age = opts.age;
+
+                   return {name:name,age:age}
+                 }
+
+                 myFunc({ name: &#39;John&#39;, age: 25 });
+
+                 // ES6
+                 function myFuncES6( {name,age} ) { //U can see what properties are there;
+                   var name = name;
+                   var age = age;
+
+                   return {name,age} //shorhand for {name:name,age:age}
+                 }
+
+                 //ES6 shorter 
+                 const myFuncES6 = ( {name,age} )=&gt;{ return {name,age} };
+                 myFuncES6({ name: &#39;John&#39;, age: 25 });</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>Destructring in functions (default values) ES6 desctructiring introduces new syntax for default values in function arguments being passed.</p>
+                  <div class="codeWraper">
+                    <code>//ES5
+                function myFuncES5(opts, name = &#39;Default Frank&#39;) {
+                  var name = opts.name || name ;
+                  var age = opts.age;
+
+                  return `Yo, I happend to be ${name} of age of ${age} `;
+                }
+
+                myFuncES5({ age: 25 });
+
+                //ES6
+                function myFuncES6( {age, name = &#39;Default Frank ES6&#39;}={} ) {
+                  let name = name; //no need for checking of undefined;
+                  let  age = age;
+
+                  return `Yo, I happend to be ${name} of age of ${age} `;
+                }
+
+                myFuncES6({ age: 25 });
+
+                //ES6 shorter (if U dont need to modify passing values);
+                const  myFuncES6short = ( {age, name = &#39;Default Frank ES6&#39;}={} ) =&gt; `Yo, I happend to be ${name} of age of ${age}`
+
+                myFuncES6short({ age: 25 });</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>Destructring in functions (default values) with temporary object properties, allows you to attached temporary properties to the object availabale in the function body</p>
+                  <div class="codeWraper">
+                    <code>//ES6
+                 function myFuncES6_3( {age:oldEnough, name:quteName = &#39;Default Frank ES6&#39;}={} ) {
+                   var name = quteName; //no need for checking of undefined;
+                   var age = oldEnough;
+
+                   return `Yo, I happend to be ${quteName} of age of ${oldEnough}`;
+                 }
+
+                 myFuncES6_3({ age: 25 });
+
+                 //ES6 shorter (skip declaration in function body);
+                  function myFuncES6_4( {age:oldEnough, name:quteName = &#39;Default Frank ES6&#39;}={} ) {
+                    return `Yo, I happend to be ${quteName} of age of ${oldEnough} `;
+                  }
+
+                 myFuncES6_3({ age: 25 });
+
+                //ES6 even shorter
+                const myFuncES6_5 = ( {age:oldEnough, name:quteName = &#39;Default Frank ES6&#39;}={} ) 
+                =&gt; `Yo, I happend to be ${quteName} of age of ${oldEnough} `
+
+                myFuncES6_5({ age: 25 });</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
+                  <p>ES6 closure syntax</p>
+                  <div class="codeWraper">
+                    <code>//ES5
+                function ES5Closure() {
+                    var outsideScope = &#39;I am outside scope&#39;;
+                    this.prop = outsideScope;
+
+                    function innerfunction() {
+
+                       //it is avaliable since block for starts above 
+                       console.log(outsideScope); 
+                       /* it is avalailable since we use arraw function so dont bind this to 
+                       curent function body*/
+                       console.log(&#39;this.prop&#39;, this.prop); //udefinded cause this is binded to current function body;
+
+                        return &#39;innerfunction&#39;;
+                    }
+
+                    return { 
+                      outsideScope:outsideScope, 
+                      innerfunction:innerfunction
+                    };
+                };
+
+                ES5Closure().innerfunction();
+
+
+                 //ES6
+                 const ES6Closure = () =&gt; {
+                     const outsideScope = &#39;I am outside scope&#39;;
+                     this.prop = outsideScope;
+
+                     const innerfunction = () =&gt; {
+
+                        //it is avaliable since block for starts above 
+                        console.log(outsideScope); 
+                        /* it is avalailable since we use arraw function so dont bind this to 
+                        curent function body*/
+                        console.log(&#39;this.prop&#39;, this.prop); 
+
+
+                         return &#39;innerfunction&#39;;
+                     }
+
+                      
+
+                     return { outsideScope, innerfunction };
+                 };
+
+                 ES6Closure().innerfunction();</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+  
+    <section class="band band-b activeSection">
+      <h1></h1>
+
+      
+
+
+
+        
+
+    </section>
+  
+  </div>
+</div>
+
+       <!-- nunjucks loop-->
+  </div>
+</div>
+<script src="scripts/nav-links.js"></script>
+<script src="scripts/tooltips_links_over.js"></script>
+<script src="scripts/search_nav.js"></script>
+ </body></html>

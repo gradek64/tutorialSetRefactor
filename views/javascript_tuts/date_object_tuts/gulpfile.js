@@ -25,7 +25,7 @@ gulp.task(
   ])
 );
 
-gulp.task("generate_nunjucks_config", () => {
+function generate_nunjucks_config(cb){
   const currentDir = path.basename(__dirname);
   const relativeTutsPath = path.join(
     "./javascript_tuts/tuts_all_scripts_css",
@@ -34,12 +34,13 @@ gulp.task("generate_nunjucks_config", () => {
   const writeStream = fs.createWriteStream("templates/_global_variables.html");
   writeStream.write(`{% set tuts_path = '${relativeTutsPath}' %}`);
   writeStream.end();
-});
+  cb();
+}
 
-gulp.task("nunjucks", () => {
+
+function nunjucks() {
   // Gets .html and .nunjucks files in pages
-  return (
-    gulp
+  return gulp
       .src(srcPages + "/**/*.+(html|nunjucks)")
       .pipe(
         data(function(file, cb) {
@@ -56,7 +57,9 @@ gulp.task("nunjucks", () => {
       )
       // output files in . current folder
       .pipe(gulp.dest(destFolder))
-  );
-});
+}
 
-gulp.task("default", ["generate_nunjucks_config", "nunjucks"]);
+const build = gulp.series(generate_nunjucks_config,nunjucks);
+exports.default = build;
+
+//gulp 3 version : gulp.task("default", ["generate_nunjucks_config", "nunjucks"]);

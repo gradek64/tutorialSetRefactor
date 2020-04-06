@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <script src="build/react.js"></script>
+ <script src="build/react-dom.js"></script> <!-- for newer versions -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+ <div id="myDiv1"></div>
+ <div id="myDiv2"></div>
+ <script type="text/babel">
+ var MyComponent = React.createClass({
+
+  getInitialState: function () {
+    console.log('MyComponent: 1. Running getInitialState()');
+    
+    return {
+      howManyTimesDoIHaveToAsk: 1,
+      title: 'This text will be deleted'
+    };
+  },
+
+  componentWillMount: function () {
+    console.log('MyComponent: 2. Running componentWillMount()');
+    
+     localStorage.appData = JSON.stringify(this.state);
+		 console.log(localStorage.appData);
+  },
+  
+  componentDidMount: function () {
+    console.log('MyComponent: 4. Running componentDidMount()');
+    
+    var componentDOMRepresentation = ReactDOM.findDOMNode(this);
+		console.log(componentDOMRepresentation);
+  },
+
+  componentWillUnmount: function () {
+    console.log('[MyComponent: Running componentWillUnmount()');
+    
+    localStorage.removeItem("appData");
+  },
+
+	doClick:function(){
+			this.setState({howManyTimesDoIHaveToAsk: parseInt(this.state.howManyTimesDoIHaveToAsk) + 1});
+			if (this.state.howManyTimesDoIHaveToAsk > 3){
+			   console.log(this.state.howManyTimesDoIHaveToAsk);
+			   ReactDOM.unmountComponentAtNode(document.getElementById('myDiv2'));
+//			   ReactDOM.unmountComponentAtNode(document.getElementById('jim'));
+//			   ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(this));
+			}
+		},
+		
+  render: function () {
+    console.log('MyComponent: 3. Running render()');
+    
+    return (
+        <div id='jim'><p onClick={this.doClick}>{this.state.title}</p></div>
+    ); 
+  }
+ });
+    
+    ReactDOM.render(<MyComponent />, document.getElementById('myDiv2'));
+
+ </script>
+</body>
+</html>

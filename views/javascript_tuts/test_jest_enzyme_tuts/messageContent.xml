@@ -400,6 +400,65 @@ test("calls app.doAdd", () => {
         </content>
     </chapter>
     <chapter>
+        <subject>Testing REDUX</subject>
+        <content>
+           <subtitle>redux-mock-store with thunk middleware</subtitle>
+            <paragraph>
+                <info>redux-mock-store allows you to test thunk middleware and action creators as below</info>
+                <example>
+                  
+/ --- confiture redux-mock-store --- /
+
+import configureStore from 'redux-mock-store' //ES6 modules
+const { configureStore } = require('redux-mock-store') //CommonJS
+
+const middlewares = [thunk]
+const mockStore = configureStore(middlewares)
+
+/ ------- /
+
+/ --- then simply dispatch thunk function or action creator ---- /
+
+store.dispatch(fetchData())
+
+//---------------/
+
+explanation:
+There is no need to mock action creators that return type object {type:'MY_ACTION_TYPE'} this library will automatically detects and return in store.getActions() U might only mock if action creator dont return object 
+or U want to mock entire seperate module that is part of your test code execution.
+
+                </example>
+            </paragraph>
+            <subtitle>redux-mock-store with saga middleware </subtitle>
+            <paragraph>
+                <info>redux-mock-store allows you to test thunk middleware and action creators as below</info>
+                <example>
+                  
+/ --- confiture redux-mock-store --- /
+
+import configureStore from 'redux-mock-store' //ES6 modules
+const { configureStore } = require('redux-mock-store') //CommonJS
+
+const middlewares = [thunk]
+const mockStore = configureStore(middlewares)
+
+/ ------- /
+
+/ --- then simply dispatch thunk function or action creator ---- /
+
+store.dispatch(fetchData())
+
+//---------------/
+
+explanation:
+There is no need to mock action creators that returns type object {type:'MY_ACTION_TYPE'} this library will automatically detects and return in store.getActions() U might only mock if action creator dont return object 
+or U want to mock entire seperate module that is part of your test code execution.
+
+                </example>
+            </paragraph>
+        </content>
+    </chapter>
+    <chapter>
         <subject>MOCK functions</subject>
         <content>          
           <subtitle>jest.fn();</subtitle>
@@ -562,30 +621,79 @@ apiService.get = jest.fn(x => Promise.resolve(x));
       <subject>Mock entire modules/packages using jest.mock </subject>
       <content>
         <paragraph>
-            <info>sometimes you want to imoport a module as UserAuthorization  but dont want all complex validation U can just mock it and return true skipping all proccess of validation</info>
+            <info>
+/ --------------- /
+  Sometimes you want to imoport a module as UserAuthorization  but dont want all complex validation U can just mock.
+            There are 2 ways of mocking entire module.
+      We can place our module on __MOCK__ directory , usefull for modules frequently used in tests modules  as
+ fetch, axios etc... Then once is mocked in seperate directory then it will be used throughout. 
+ Second method is to mock in testing file itself for modules used only for particular test.
+
+/ --------------- /
+</info>
             <example>
- ----------------------- create __mocks__ folder in yout test file ----------------
 
-//it has to be the same name as module in a path 
+--------- original module  modalActions.js -------
 
- /------------------ __mocks__/AuthRoute.js --------------------/
+export function showModal(children, options = {}) {
+  const { mode, type } = options
+  return (dispatch) => {
+    dispatch(setModalCancelled(false))
+    dispatch(setModalMode(mode || 'normal'))
+    dispatch(setModalChildren(children))
+    dispatch(setModalType(type || 'dialog'))
+    dispatch(openModal())
+  }
+}
+// we are intresting in mocking showModal (in practice we will mock entire module anyway cause jest will mock entire file)
 
-//your custom return on your AuthRoute module 
-export default function AuthRoute() { return true; }
+/ --------------- /
 
- /------------------ yourtest.test.js --------------------/
+ ----------------------- THERE ARE 2 WAYS OF MOCKING A MODULE ----------------
 
- //import you module like you would normally 
- import AuthRoute from './AuthRoute';
 
- //then direct it to our mocks by:
-jest.mock('./AuthRoute');
+ 1. By creating a folder __MOCKS__ and creating mock version of modalActions.js
 
-//now can use U your module in yout test 
+ / --------------- /
 
-...component.find(AuthRoute)
+ / ----- __MOCKS__/modalActions.js  ------ /
 
- /------------------ /
+const showModal = jest.fn(() => ({ type: 'MOCK_SHOW_MODAL' }))
+export { showModal }
+
+/ --------------- /
+
+/---- in any test file as countryActions.spec.js  ------ /
+
+jest.mock('../modalActions') 
+
+/ --------------- /
+
+explanation:
+Simply import original module as above => jest will know is mocked since its mock version sits under the same name 
+in __MOCKS__/modalActions.js
+
+explanation:
+Once is imported as jest.mock('../modalActions') is mocked with all method set in mock (dont need to call it either when test needs it it will run it as mock)
+
+/ ------------------------------------------- /
+
+2. By simply putting all above steps in below statement
+
+/ --------------- /
+
+/---- in any test file as countryActions.spec.js  ------ /
+
+jest.mock('../modalActions', () => ({
+  showModal: () => ({ type: 'MOCK_SHOW_MODAL' }),
+})) 
+
+/ --------------- /
+
+explanation:
+Once is imported as above is mocked with all methods set in mock callback (showModal) (dont need to call it either when test needs it it will run it as mock)
+
+/------------------ /
             </example>
         </paragraph>
       </content>

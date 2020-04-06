@@ -321,7 +321,24 @@ chmod ugo-rwx;
                all accessible subdirectories. 
                You may specify more than one starting directory for searching.
                
-               find (starting directory) (matching criteria and actions);</p>
+               find (starting directory) (matching criteria and actions);
+
+               find examples:
+               find . = find recursilvely 
+               find ./specifig = find in directory 
+               find ./specifig/filename.js = find file in directory
+               find */filename.js = find in all directories specific file
+
+               addding flags:
+
+               -type f, d = of type file or directory
+               -name, -iname = of spefic name or name case insensitive
+               -maxdepth 0 = search on current level
+               -path &#39;path&#39; = specify path
+               -prune = exlude
+               -o = or operator
+               -size +1000 = bigger that 1000mb
+               -print = is to stdout (find . === find . -print)</p>
                   <div class="codeWraper">
                     <code>------------ ------------  general search --------  ------------
 
@@ -429,6 +446,15 @@ find . -type f -iname &#39;index*&#39; -print -o -path &#39;./node_modules&#39; 
   //and U want to remove only files 2 and 3 you can find all, pipe to filter and remove
 
   find file*.js | grep &quot;file[2-3]&quot; | xargs rm
+
+
+  //find all directory on current level and copy gulpfile.js file to them 
+
+  find * -maxdepth 0 -type d -exec cp -vi test_jest_enzyme_tuts/gulpfile.js {} \;
+
+  break down:
+  find * -maxdepth 0 -type d = finds all current directories 
+  -exec cp -vi test_jest_enzyme_tuts/gulpfile.js {} \; = then execute copy test_jest_enzyme_tuts/gulpfile.js to those directories
 
 
   --------------------------------------------------------------------</code>

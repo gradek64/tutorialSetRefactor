@@ -1,0 +1,16 @@
+1 create .eslintrc with bare content 
+
+	{
+ 	 "extends": ["eslint:recommended", "prettier"]
+}	
+
+then install package 
+	npm install --save-dev eslint-config-prettier
+
+it allows you to marry them together, U shoud try do that for global setting so you dont need to set .eslint evey time and istall that package 
+
+But the best sollution is to sort it out globally so with those packages react eslint seems to be happy for minimum requirements nothing fancy
+
+├── eslint@6.8.0
+├── eslint-config-prettier@6.10.1
+├── prettier@1.19.1

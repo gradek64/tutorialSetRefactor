@@ -1,0 +1,10 @@
+1. SAGA 
+2. TEST jest with Redux,selectors,mock clearing (documentation) 
+3  server side rendering - checked in 
+4  dynamic inputs
+5  GraphQL custom API build with headers authorisation
+6  Organise terminal commands (documentation)
+7  final setup for preetier and eslint for vsCode
+8  learn PWA app (Progressive web application) a bit like mobile app
+9  make generetors documentaion 
+10 node documentation in my web tutorials

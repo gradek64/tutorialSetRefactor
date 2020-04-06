@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic component example for React.js and JSX</title>
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  </head>
+  <body>
+	<div id='root'></div>
+    <script src="build/react.development.js"></script>
+    <script src="build/react-dom.development.js"></script>
+    <script src="build/babel.min.js"></script>
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>-->
+    <script type="text/babel">
+		var pasta = [
+		  "Spicy",
+		  "Salmon",
+		  "Carbonara",
+		  "SpagBol",
+		  "Ravioli"
+		];
+
+		var App = React.createElement(
+		  'ol', 
+		  null, 
+		  pasta.map((food, i) => 
+		    React.createElement('li', {key:i}, food))
+		);
+
+		var root = document.getElementById('root');
+		
+		ReactDOM.render(App, root);
+		</script>	
+  </body>
+</html>

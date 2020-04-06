@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic component example for React.js and JSX</title>
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  </head>
+  <body>
+	<div id='content'></div>
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script type="text/babel">
+		  (function(){
+		  	'use strict';
+			
+			var Timer = React.createClass({
+				render: function(){
+						return <div style={{display:'none'}}/>;
+						},
+				componentDidMount:function(){
+						setInterval(this.props.onInterval,this.props.interval);
+				}
+			});
+
+			function toDo(){console.log('here');}	
+				
+			ReactDOM.render(<Timer onInterval={toDo} interval={1000}/>,document.getElementById('content'));
+			
+		  })();
+	</script>	
+  </body>
+</html>

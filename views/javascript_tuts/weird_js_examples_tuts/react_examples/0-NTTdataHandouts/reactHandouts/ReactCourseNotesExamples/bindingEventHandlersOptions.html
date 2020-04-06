@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic template with React.js and JSX</title>
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script type="text/babel">
+    
+class EventBindingDemo extends React.Component {
+  constructor() {
+    super()
+    this.state = { value:"" }
+    
+    /* We can bind methods to this in the constructor. This is AirBnB's recommended solution */
+    this.boundClassMethod = this.boundClassMethod.bind(this)
+    
+    /* We can assign a fat arrow function in the constructor. 
+       The value of this will be bound to the component */
+    this.fatArrowInConstructor = () => 
+      this.setState({value: this.state.value + " fatArrowInConstructor - "})
+    
+  }
+  
+  /* Class method. bound in the constructor. */
+  boundClassMethod(state) {
+    this.setState( {value: this.state.value + " boundClassMethod - "})
+  }
+  
+  /* Regular class method. This will need to be manually bound with apply 
+     each time we call it. */
+  classMethod(state) {
+    this.setState( {value: this.state.value + " classMethod - "})
+  }
+  
+  /* If we have an up-to-date version of Babel, We can assign a fat arrow function 
+     in the class body. */
+  fatArrowInClass = () => 
+    this.setState({value: this.state.value + " fatArrowInClass - "})
+  
+  render() {
+    return React.createElement('div', null, [
+      React.createElement(
+        'button', { onClick:this.boundClassMethod }, 
+        "Handle with boundClassMethod"),
+      React.createElement(
+        'button', { onClick:this.fatArrowInConstructor }, 
+        "Handle with fatArrowInConstructor"),
+      React.createElement(
+        'button', 
+        { onClick:() => this.classMethod.apply(this) }, 
+        "Handle with Regular Class Method"),
+      React.createElement(
+        'button', { onClick:this.fatArrowInClass }, 
+        "Handle with fatArrowInClass"),
+      React.createElement(
+        'button', 
+        { onClick:() => this.setState({value: this.state.value + " inline - "}) }, 
+        "Inline Fat Arrow Handler"),
+      React.createElement('p', null, this.state.value)
+    ])
+  }
+}
+
+ReactDOM.render(React.createElement(EventBindingDemo), document.getElementById('app'));
+
+    </script>
+  </body>
+</html>
