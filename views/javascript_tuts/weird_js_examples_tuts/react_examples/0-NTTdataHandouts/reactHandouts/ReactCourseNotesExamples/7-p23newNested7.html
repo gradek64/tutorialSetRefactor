@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nested components showing Child properties example for React.js and JSX</title>
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  </head>
+  <body>
+		<div id='content'></div>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types/prop-types.js"></script>
+    <script type="text/babel">
+      class Family extends React.Component{
+        getChildContext() {
+          return { theDate: Date(), 
+                    me:'jill' };
+        }
+        render() {
+          return  <Child />;
+        }
+      };
+
+      Family.childContextTypes = {
+          theDate: PropTypes.string,
+          me: PropTypes.string
+        }
+       
+      class Child extends React.Component{
+        render() {
+          return <GrandChild />;
+        }
+      };
+       
+      class GrandChild extends React.Component{
+        // we declare we want to use the property of the context
+        render() {
+          return <span>{this.context.theDate}</span>;
+        }
+      };		
+
+      GrandChild.contextTypes = {
+          theDate: PropTypes.string
+        }
+		  		
+		  ReactDOM.render(<Family />,	document.getElementById('content'));
+		
+		</script>	
+  </body>
+</html>

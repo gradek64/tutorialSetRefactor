@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
 // custom
-import ProposalClassProperties from './ES7-proposal-class-properties/ProposalClassProperties';
+import ProposalClassProperties from "./ES7-proposal-class-properties/ProposalClassProperties";
 
 const Index = () => (
   <div className="helloworld">
@@ -11,4 +11,4 @@ const Index = () => (
   </div>
 );
 
-ReactDOM.render(<Index />, document.querySelector('#root'));
+ReactDOM.render(<Index />, document.querySelector("#root"));

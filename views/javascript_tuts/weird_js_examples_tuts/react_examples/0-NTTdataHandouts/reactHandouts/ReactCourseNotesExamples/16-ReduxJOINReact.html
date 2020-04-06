@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Redux basic example (with React)</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+  </head>
+  <body>
+    <div id='wrapper'>
+    </div>
+
+    <script type="text/babel">
+    function counter(state, action) {
+        if (typeof state === 'undefined') {
+          return 0
+        }
+        switch (action.type) {
+          case 'INCREMENT':
+            return state + 1
+          case 'DECREMENT':
+            return state - 1
+          default:
+            return state
+        }
+    }
+
+    class ReduxButtons extends React.Component{
+      constructor(props) {
+          super(props);
+          this.state = {store: Redux.createStore(counter)};
+          this.state.store.subscribe(showit);
+          this.onIncrement = this.onIncrement.bind(this);
+          this.onDecrement = this.onDecrement.bind(this);
+          this.onIncrementIfOdd = this.onIncrementIfOdd.bind(this);
+          this.onIncrementAsync = this.onIncrementAsync.bind(this);
+      }
+      onIncrement() {
+          this.state.store.dispatch({ type: 'INCREMENT' });
+          //this.setState({ myAmount: this.state.myAmount + 1 });
+      }
+      onDecrement() {
+          this.state.store.dispatch({ type: 'DECREMENT' });
+          //this.setState({ myAmount: this.state.myAmount - 1 });
+      }
+      onIncrementIfOdd() {
+          if (this.state.store.getState() % 2 != 0) {
+            this.state.store.dispatch({ type: 'INCREMENT' })
+          };
+          //var calc = (this.state.myAmount%2 != 0)? this.state.myAmount + 1: this.state.myAmount;
+          //this.setState({ myAmount: calc});
+      }
+      onIncrementAsync() {
+          setTimeout(() => {
+            this.state.store.dispatch({ type: 'INCREMENT' })
+          }, 1000)
+          //setTimeout(() => {this.setState({ myAmount: this.state.myAmount + 1 })}, 1000);
+      }
+      render(){
+          return (<div>
+                Clicked: <span id="value">{this.state.store.getState().toString()}</span> times
+                <button id="increment" onClick={this.onIncrement}>+</button>
+                <button id="decrement" onClick={this.onDecrement}>-</button>
+                <button id="incrementIfOdd" onClick={this.onIncrementIfOdd}>Increment if odd</button>
+                <button id="incrementAsync" onClick={this.onIncrementAsync}>Increment async</button>
+                </div>);
+          }
+      };
+    function showit(){
+        ReactDOM.render(React.createElement(ReduxButtons, {}),document.getElementById('wrapper'));
+    }
+
+    showit();
+
+  </script> 
+
+  </body>
+</html>

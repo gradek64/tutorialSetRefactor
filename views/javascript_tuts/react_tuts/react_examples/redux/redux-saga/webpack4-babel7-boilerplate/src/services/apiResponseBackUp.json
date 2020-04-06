@@ -1,0 +1,44 @@
+{
+  "results": [
+    {
+      "gender": "female",
+      "name": { "title": "Ms", "first": "Debbie", "last": "Fletcher" },
+      "location": {
+        "street": { "number": 2141, "name": "West Street" },
+        "city": "Wexford",
+        "state": "Waterford",
+        "country": "Ireland",
+        "postcode": 89674,
+        "coordinates": { "latitude": "24.3825", "longitude": "36.3221" },
+        "timezone": { "offset": "+5:45", "description": "Kathmandu" }
+      },
+      "email": "debbie.fletcher@example.com",
+      "login": {
+        "uuid": "44dc3efe-ed7b-4571-aaf5-b6666ef7b3ca",
+        "username": "goldenpeacock463",
+        "password": "woofwoof",
+        "salt": "1EUtDePQ",
+        "md5": "4d1b677f948e6a4e6140c37679318f77",
+        "sha1": "a95dcad115be07afe610a2107e2bb164a96e6b30",
+        "sha256": "6a3e924a09472d2aff829db8bf2137e0e3652bac122b3deae5437e6ea2f589ad"
+      },
+      "dob": { "date": "1967-12-17T00:50:35.119Z", "age": 53 },
+      "registered": { "date": "2009-06-14T08:35:38.005Z", "age": 11 },
+      "phone": "071-947-1768",
+      "cell": "081-702-3254",
+      "id": { "name": "PPS", "value": "6977334T" },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/40.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/40.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/40.jpg"
+      },
+      "nat": "IE"
+    }
+  ],
+  "info": {
+    "seed": "1e141f7cf74aee8c",
+    "results": 1,
+    "page": 1,
+    "version": "1.3"
+  }
+}

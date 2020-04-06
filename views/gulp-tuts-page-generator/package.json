@@ -1,5 +1,5 @@
 {
-  "name": "views",
+  "name": "gulp-tuts-page-generator",
   "version": "1.0.0",
   "description": "",
   "main": "find_and_replace_list.js",
@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "gulp": "^3.9.1"
-  },
-  "devDependencies": {}
+    "gulp": "4.0.2"
+  }
 }

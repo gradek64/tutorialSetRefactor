@@ -1,0 +1,445 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">  
+  <title>tutorial === Layout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/tutorial.css">
+  <link rel="stylesheet" href="css/tooltip.css">
+</head>
+<body translate="no">
+<div class="l-site">
+  <div class="l-nav">
+    <nav class="nav">
+      <input type="text" placeholder="Search" id="search">
+      <div style="clear: both;"></div>
+      <!-- nunjucks loop-->
+            
+<ul class="links">
+<!--list-tag-->
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/file_scope_tuts">javascript works synchronouslly and top-level scope</a><span class="tooltiptext">javascript works synchronouslly and top-level scope</span>
+                  
+                    <ul class="linksNested">
+                       
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/file_scope_tuts">import export options</a><span class="tooltiptext">import export options</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/file_scope_tuts" partition>import an entire file;</a><span class="tooltiptext">import an entire file;</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/file_scope_tuts" partition>import as variable: Named Export</a><span class="tooltiptext">import as variable: Named Export</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/file_scope_tuts" partition>import as variable: Default Export</a><span class="tooltiptext">import as variable: Default Export</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/file_scope_tuts" partition>import as variable: Default Export and Name Export</a><span class="tooltiptext">import as variable: Default Export and Name Export</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/file_scope_tuts" partition>export all options</a><span class="tooltiptext">export all options</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/file_scope_tuts" partition>import all options</a><span class="tooltiptext">import all options</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/file_scope_tuts">ES6 import and export in browser</a><span class="tooltiptext">ES6 import and export in browser</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/file_scope_tuts" partition>ES6 import and export in browser files</a><span class="tooltiptext">ES6 import and export in browser files</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/file_scope_tuts" partition>ES6 import and export in browser setup</a><span class="tooltiptext">ES6 import and export in browser setup</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/file_scope_tuts" partition>install babel preset</a><span class="tooltiptext">install babel preset</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/file_scope_tuts" partition>use presets in your package.json</a><span class="tooltiptext">use presets in your package.json</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/file_scope_tuts" partition>run your babel command for traspiling to ES5</a><span class="tooltiptext">run your babel command for traspiling to ES5</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/file_scope_tuts" partition>run browserfy</a><span class="tooltiptext">run browserfy</span>
+                        
+                    </ul>
+                
+      </li>
+    
+<!--end-list-tag-->
+</ul>
+
+       <!-- nunjucks loop-->
+    </nav>
+  </div>
+  <div class="l-page">
+    <div class="menu">
+      <div class="menu-hamburger"></div>
+    </div>
+      <!-- nunjucks loop-->
+          
+<div class="sectionWrapper">
+  <div class="sectionContainer">
+   
+      
+      <section  class="band band-b activeSection"  class="band band-b">
+          <h1> javascript works synchronouslly and top-level scope </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>synchronouslly: means the code is being executed from top to bottom.
+                1) the code could be spread in diffrent files still is treated as one. As long it is being requeested synchronouslly. So you dont execute variavle that is not declared yet.
+                2) it will throw error if you execute code depending all the code that is not executed yet in diffrent file;
+                3) Dont relay on that technique cause you never know how long is goign to take to execute code that is in diffrent file.
+                4) top-level scope is shared between files.</p>
+                  <div class="codeWraper">
+                    <code>-------------------file1.js------------------
+
+const set1 = &#39;set1&#39;;
+console.log(set2) //error not declared yet 
+
+-------------------file2.js------------------
+
+const set1 = &#39;set2&#39;;
+console.log(set1) //return set1
+const set1 = &#39;set4&#39;;//error const already declared
+
+----------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> import export options </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>you can import entire file to another file by:</p>
+                  <div class="codeWraper">
+                    <code>-------------no expot needed since entire file is taken
+import &#39;./entireFile&#39;;
+
+----------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>Named Export:
+                you can import specific part of the files that are set as variables;</p>
+                  <div class="codeWraper">
+                    <code>--------------------file1.js------------------------
+
+import {add,multiply} from &#39;file2.js&#39;
+
+console.log(add(4,6));
+console.log(multiply(4,6));
+
+--------------------file2.js------------------------
+
+export const add = (a,b) =&gt; a+b;
+
+export let multiply = (a,b) =&gt; a*b;
+
+------------- ------------- ------------- -------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>Default Export:
+                you can import specific part of the files as set them to default , that way you dont need its name cause it is default 
+                (can take any name in import );</p>
+                  <div class="codeWraper">
+                    <code>--------------------file1.js------------------------
+//in default export you can use any name you like 
+//you can still mix default with named import as below;
+
+import someName, {add} from &#39;file2.js&#39;
+
+//usage
+console.log(someName(4,6));
+
+--------------------file2.js------------------------
+//you can still export by its name even if you use default already;
+export const add = (a,b) =&gt; a+b;
+
+//U can only have one default, but as many name Export as you wish;
+export default multiply = (a,b) =&gt; a*b;
+
+------------- ------------- ------------- -------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
+                  <p>Default Export and Named Export:
+               U can combince them together and export can be shorthanded as below:</p>
+                  <div class="codeWraper">
+                    <code>--------------------file1.js------------------------
+//in default export you can use any name you like 
+//you can still mix default with named import as below;
+
+import someName, {add} from &#39;file2.js&#39;
+
+//usage
+console.log(someName(4,6));
+
+--------------------file2.js------------------------
+//you can still export by its name even if you use default already;
+const add = (a,b) =&gt; a+b;
+
+//U can only have one default, but as many name Export as you wish;
+multiply = (a,b) =&gt; a*b;
+
+//export all 
+exportig {add, multiply as default};
+
+------------- ------------- ------------- -------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-5">
+                <div class="band-inner">
+
+                  <p>export all options</p>
+                  <div class="codeWraper">
+                    <code>-------------------------------------------- 
+export { name1, name2, …, nameN };
+export { variable1 as name1, variable2 as name2, …, nameN };
+export let name1, name2, …, nameN; // also var, const
+export let name1 = …, name2 = …, …, nameN; // also var, const
+export function FunctionName(){...}
+export class ClassName {...}
+
+export default expression;
+export default function (…) { … } // also class, function*
+export default function name1(…) { … } // also class, function*
+export { name1 as default, … };
+
+export * from …;
+export { name1, name2, …, nameN } from …;
+export { import1 as name1, import2 as name2, …, nameN } from …;
+export { default } from …;
+------------------------ ------------------------ ------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-6">
+                <div class="band-inner">
+
+                  <p>import all options</p>
+                  <div class="codeWraper">
+                    <code>-------------------------------------------- 
+
+import defaultExport from &quot;module-name&quot;;
+import * as name from &quot;module-name&quot;;
+import { export } from &quot;module-name&quot;;
+import { export as alias } from &quot;module-name&quot;;
+import { export1 , export2 } from &quot;module-name&quot;;
+import { export1 , export2 as alias2 , [...] } from &quot;module-name&quot;;
+import defaultExport, { export [ , [...] ] } from &quot;module-name&quot;;
+import defaultExport, * as name from &quot;module-name&quot;;
+import &quot;module-name&quot;;
+var promise = import(module-name);
+
+--------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> ES6 import and export in browser </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>Create 2 files (main.js, calculate.js) in a script folder as below that have import and export ES6 feature</p>
+                  <div class="codeWraper">
+                    <code>--------------------scripts/main.js------------------------
+&#39;use strict&#39;;
+
+import { sumTwo } from &#39;./calculate.js&#39;;
+
+console.log(&quot;2 + 3 = &quot;,sumTwo(2,3));
+
+
+--------------------scripts/calculate.js------------------------
+
+   function sumTwo(number1, number2){
+       return number1 + number2;
+   }
+
+   export { sumTwo };
+
+
+ --------------------index.html------------------------
+ //for runing bundle.js in a browser;
+
+ &lt;!DOCTYPE html&gt;
+ &lt;html lang=&quot;en&quot;&gt;
+ &lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;browserify outcome&lt;/title&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+ &lt;script src=&quot;bundle.js&quot;&gt;&lt;/script&gt;
+ &lt;/body&gt;
+ &lt;/html&gt;
+
+ ------------------ ------------------ ------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>ES6 import and export in browser: 
+                 Some of the features of ES6 dont work directly in browser just yet. Therefore we need use transpilers and compilers to make it work.Below Is is simple set up using:
+                 1) babel-cli = transpiler to ES5 or node.js code in command line
+                 2) babel-preset-env = preset needed for transpiling could be diffrent as react etc.
+                 3) browserify = compiler of node.js code to use in browser, allows to use module.exports and require(modules) features in a browser</p>
+                  <div class="codeWraper">
+                    <code>--------------- project set up ---------------
+
+npm init -f //start package.json with defaults 
+
+--------------- install babel-cli ---------------
+
+//babel-cli to use in command line only for this example
+
+npm i babel-cli --save or -S (to list in dependencies);
+
+--------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>npm i babel-preset-env -S 
+               it will traspile your ES6 code into node.js code if you use export/import module feature</p>
+                  <div class="codeWraper">
+                    <code>--------------- install babel preset---------------
+
+npm i babel-preset-env -S 
+
+--------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
+                  <p>U need to use preset previously installed. U could also make separte file called .babelrc as :
+
+                --------------- .babelrc file as option---------------
+
+                {
+                  &quot;presets&quot;: [&quot;env&quot;]
+                }
+                --------------------------------------------------
+
+                but it is possible to set it in package.json so why not ;P</p>
+                  <div class="codeWraper">
+                    <code>--------------- package.json part---------------
+
+&quot;babel&quot;: {
+    &quot;presets&quot;: [
+      &quot;env&quot;
+    ]
+}
+--------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-5">
+                <div class="band-inner">
+
+                  <p>In this exaple we going to run evertying in command line but in real project you would use gulp, grunt or node commands in package.json</p>
+                  <div class="codeWraper">
+                    <code>--------------- run bubel for folder scripts ---------------
+
+//using local install babel ./node_modules/.bin/babel
+
+./node_modules/.bin/babel  ./scripts --experimental --source-maps-inline -d ./lib
+
+--------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-6">
+                <div class="band-inner">
+
+                  <p>run browserfy to the main file:
+               now we have traspiled version of files so it is time to compile main.js and run in browser</p>
+                  <div class="codeWraper">
+                    <code>----run browserify only on main.js (since the other depend on it exporting) ----
+
+//using local install browserify ./node_modules/.bin/browserify
+
+./node_modules/.bin/browserify lib/main.js -o bundle.js
+
+----------------run bundle.js in browser ----------------------
+
+open index.html 
+
+//full example folder: example_import_export_ES6
+
+---------------- ---------------- ----------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+  
+    <section class="band band-b activeSection">
+      <h1></h1>
+
+      
+
+
+
+        
+
+    </section>
+  
+  </div>
+</div>
+
+       <!-- nunjucks loop-->
+  </div>
+</div>
+<script src="scripts/nav-links.js"></script>
+<script src="scripts/tooltips_links_over.js"></script>
+<script src="scripts/search_nav.js"></script>
+ </body></html>

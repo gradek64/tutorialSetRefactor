@@ -1,0 +1,664 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">  
+  <title>tutorial === Layout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/tutorial.css">
+  <link rel="stylesheet" href="css/tooltip.css">
+</head>
+<body translate="no">
+<div class="l-site">
+  <div class="l-nav">
+    <nav class="nav">
+      <input type="text" placeholder="Search" id="search">
+      <div style="clear: both;"></div>
+      <!-- nunjucks loop-->
+            
+<ul class="links">
+<!--list-tag-->
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts">Object.prototype and Object.constructor</a><span class="tooltiptext">Object.prototype and Object.constructor</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts" partition>Object.prototype and Object.constructor</a><span class="tooltiptext">Object.prototype and Object.constructor</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts" partition>JavaScript classes are functions as constructors</a><span class="tooltiptext">JavaScript classes are functions as constructors</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts" partition>functions and function constructors</a><span class="tooltiptext">functions and function constructors</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts" partition>what that keyword &#39;new&#39; does ?</a><span class="tooltiptext">what that keyword &#39;new&#39; does ?</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts">inheritance between simple Objects</a><span class="tooltiptext">inheritance between simple Objects</span>
+                 
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts">inheritance between classes</a><span class="tooltiptext">inheritance between classes</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts" partition>Object.setPrototypeOf(classInstance1,Class.prototype)</a><span class="tooltiptext">Object.setPrototypeOf(classInstance1,Class.prototype)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts" partition>let classInstance = Object.create(Class.prototype)</a><span class="tooltiptext">let classInstance = Object.create(Class.prototype)</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts">Class.call(this, ConstructorParam1, ConstructorParam1 )</a><span class="tooltiptext">Class.call(this, ConstructorParam1, ConstructorParam1 )</span>
+                 
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts">ES6 class</a><span class="tooltiptext">ES6 class</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts" partition>extends and super();</a><span class="tooltiptext">extends and super();</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts" partition>ES7 class Syntax</a><span class="tooltiptext">ES7 class Syntax</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts" partition>Class static method()</a><span class="tooltiptext">Class static method()</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/js_classes_ES6_tuts" partition>Class get value() and set value() methods</a><span class="tooltiptext">Class get value() and set value() methods</span>
+                        
+                    </ul>
+                
+      </li>
+    
+<!--end-list-tag-->
+</ul>
+
+       <!-- nunjucks loop-->
+    </nav>
+  </div>
+  <div class="l-page">
+    <div class="menu">
+      <div class="menu-hamburger"></div>
+    </div>
+      <!-- nunjucks loop-->
+          
+<div class="sectionWrapper">
+  <div class="sectionContainer">
+   
+      
+      <section  class="band band-b activeSection"  class="band band-b">
+          <h1> Object.prototype and Object.constructor </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>Protototype is not the same as __proto__ proterty. Only Native Object have prototype Object.protototype, Array.protototype. Also the Instance of Furnction has  prototype therefore they could be chain to other object Prototype in javascript inheritance (delegation).</p>
+                  <div class="codeWraper">
+                    <code>//any instance of Function; 
+                    const functionInstance = function(){};
+                    //it has its own prototype
+                    console.log(functionInstance.prototype);
+                    //this prototype has one default property which is constructor which is the function itsleft;
+                    console.log(functionInstance.prototype.constructor);</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>When U ceate a class in jabascript you simply create a new Function. Since every instance of function in javascript has protototype and protototype.constructor (aiming to the same function) you can chain them to other object passing prototype values.</p>
+                  <div class="codeWraper">
+                    <code>//any instance of Function; 
+                    const functionInstance = function(){};
+                    //it has its own prototype
+                    console.log(functionInstance.prototype);
+                    //this prototype has one default property which is constructor which is the function itself;
+                    console.log(functionInstance.prototype.constructor);
+
+                    //add more properties to the funcionInstance.prototype;
+                    functionInstance.prototype.name = &#39;greg&#39;
+                    functionInstance.prototype.breed = &#39;human&#39;
+                    functionInstance.prototype.likes = function(what){return what + &#39;doing&#39; };
+
+                     /*
+
+                        to make it consistent and make sure that prototype comming from 
+
+                        Object.getPrototypeOf(functionInstance); is the same as:
+                        functionInstance.prototype and the same with constructor
+
+                        functionInstance.constructor === functionInstance.prototype.constructor;
+
+                        We need to initialize this function with a &#39;new&#39; keword which and introduction to Classes in javascript;
+
+                     */
+
+                     Object.getPrototypeOf(functionInstance) === functionInstance.prototype //false
+                     //and constructor 
+                     functionInstance.constructor === functionInstance.prototype.constructor;
+
+
+                     /* to make main Object.prototype equals to instanceFunction.prototype U need to use &#39;new&#39; keword\
+
+                         explanation in next section;
+                     */</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>functions and function constructors. Every funciton can be constructor. To make function a constructor you need to call it 
+                      with a new Keyword. Next section explain what that does in details.</p>
+                  <div class="codeWraper">
+                    <code>//simple function;
+                    function SimpleF() {};
+
+                    SimpleF(); //undefined;
+
+                    //but if you call this function with new keyword;
+                    new SimpleF(); 
+
+                    //it will return SimpleF as object which is a class;
+
+                    //Class SimpleF constructor;
+                    SimpleF.prototype.constructor;
+                    //you can attach properties and methods to it:
+                    SimpleF.prototype.name = &#39;greg&#39;;
+                    SimpleF.prototype.getName = function({name}={}){return name ? name : this.name; };
+
+                    //since it is a class you can initiate it 
+                    const initClass = new SimpleF();
+
+                    //find out defult name;
+                    initClass.getName(); //greg;
+                    //give name;
+                    initClass.getName({name:&#39;phil&#39;}); //phil;</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
+                  <p>new keyword does few things:
+                     1. bind Obj.getPrototype(functionInstance) = functionInstance.prototype //wasnt the case above
+                     2. binds functionInstance.constructor === functionInstance.prototype.constructor; //wasnt the case before
+
+                     so the class intance has the same prototype as Class itslelf we deal with the same object. Classes are function in javascript that have
+                     constructors that craated this function and prototype set to this function as well.</p>
+                  <div class="codeWraper">
+                    <code>//any instance of Function; 
+const Class = function(){};
+//it has its own prototype
+console.log(Class.prototype);
+//this prototype has one default property which is constructor which is the function itsleft;
+console.log(Class.prototype.constructor);
+
+//add more properties to the funcionInstance.prototype;
+Class.prototype.name = &#39;greg&#39;
+Class.prototype.breed = &#39;human&#39;
+Class.prototype.likes = function(what){return what + &#39;doing&#39; };
+
+//instance of Class 
+const classInstance = new Class();
+
+ /*
+
+      Now prototype coming from the classInstance is the same as Class.prototype itselt 
+      (it wasnt the case without &#39;new&#39; keyword);
+      Object.getPrototypeOf(classInstance) === Class.prototype // true
+    
+      the same with constructor they match up;  
+      classInstance.constructor === Class.prototype.constructor; //true;
+ */</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> inheritance between simple Objects </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>Object.setPrototypeOf(obj,Class.prototype);
+                Any Object can inherit from Class or other Object as long as the Object you are inherit from has prototype value. 
+                Then the prototype value can be attached to any object.</p>
+                  <div class="codeWraper">
+                    <code>//example 
+               //any instance of Function; 
+              const Class = function(){};
+              //it has its own prototype
+              console.log(Class.prototype);
+              //this prototype has one default property which is constructor which is the function itsleft;
+              console.log(Class.prototype.constructor);
+
+              //add more properties to the funcionInstance.prototype;
+              Class.prototype.name = &#39;greg&#39;
+              Class.prototype.breed = &#39;human&#39;
+              Class.prototype.likes = function(what){return what + &#39;doing&#39; };
+
+              //instance of Class 
+              const classInstance = new Class();
+
+              //any object can inherit from Class.prototype 
+
+              //any instance of simple Object 
+              const obj = {};
+
+              //assign prototype 
+              Object.setPrototypeOf(obj,Class.prototype);
+
+              //check if prototypes match and constructors;
+              Object.getPrototypeOf(obj) === Class.prototype; //true
+              obj.constructor === Class.prototype.constructor; //true
+
+              //check if object indeed iherit from Class.prototype;
+              obj.name //return 
+              obj.breed //return &#39;human&#39;</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> inheritance between classes </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>inheritance between classes: 
+
+                        so prototype of one class become prototype of another class by:
+
+                        Object.setPrototypeOf(classInstance1,Class.prototype);
+
+                        in the way those match:
+
+                    Object.getPrototypeOf(classInstance) === Object.getPrototypeOf(classInstance1) //true
+                    classInstance.constructor === classInstance1.constructor //true</p>
+                  <div class="codeWraper">
+                    <code>//any instance of Function; 
+               const Class = function(){};
+               //it has its own prototype
+               console.log(Class.prototype);
+               //this prototype has one default property which is constructor which is the function itsleft;
+               console.log(Class.prototype.constructor);
+
+               //add more properties to the funcionInstance.prototype;
+               Class.prototype.name = &#39;greg&#39;
+               Class.prototype.breed = &#39;human&#39;
+               Class.prototype.likes = function(what){return what + &#39;doing&#39; };
+
+               //instance of Class 
+               const classInstance = new Class();
+
+               //any object can inherit from Class.prototype including another class
+
+               const Class1 = function(){};
+               //it has its own prototype
+               console.log(Class1.prototype);
+               //this prototype has one default property which is constructor which is the function itsleft;
+               console.log(Class1.prototype.constructor);
+
+               //add more properties to the funcionInstance.prototype;
+               Class1.prototype.name1 = &#39;greg&#39;
+               Class1.prototype.breed1 = &#39;human&#39;
+               Class1.prototype.likes1 = function(what){return what + &#39;doing&#39; };
+
+               //instance of Class1 
+               const classInstance1 = new Class1();
+
+               /*
+                 assign prototype 
+               */ 
+               Object.setPrototypeOf(classInstance1,Class.prototype);
+
+               //check if prototypes match and constructors;
+               Object.getPrototypeOf(classInstance) === Object.getPrototypeOf(classInstance1) //true
+               classInstance.constructor === classInstance1.constructor //true
+
+               //check if object indeed iherit from Class.prototype;
+               classInstance1.name //return &#39;greg&#39;
+               classInstance1.breed //return &#39;human&#39;</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>inheritance between classes: 
+
+                         so prototype of one class become prototype of another class by:
+
+                          classInstance1 = Object.create(Class.prototype);
+
+                         in the way those match:
+
+                     Object.getPrototypeOf(classInstance) === Object.getPrototypeOf(classInstance1) //true
+                     classInstance.constructor === classInstance1.constructor //true</p>
+                  <div class="codeWraper">
+                    <code>//any instance of Function; 
+                const Class = function(){};
+                //it has its own prototype
+                console.log(Class.prototype);
+                //this prototype has one default property which is constructor which is the function itsleft;
+                console.log(Class.prototype.constructor);
+
+                //add more properties to the funcionInstance.prototype;
+                Class.prototype.name = &#39;greg&#39;
+                Class.prototype.breed = &#39;human&#39;
+                Class.prototype.likes = function(what){return what + &#39;doing&#39; };
+
+                //instance of Class 
+                const classInstance = new Class();
+
+                //any object can inherit from Class.prototype including another class
+
+                const Class1 = function(){};
+                //it has its own prototype
+                console.log(Class1.prototype);
+                //this prototype has one default property which is constructor which is the function itsleft;
+                console.log(Class1.prototype.constructor);
+
+                //add more properties to the funcionInstance.prototype;
+                Class1.prototype.name1 = &#39;greg&#39;
+                Class1.prototype.breed1 = &#39;human&#39;
+                Class1.prototype.likes1 = function(what){return what + &#39;doing&#39; };
+
+                //instance of Class1 
+                let classInstance1 = new Class1();
+
+                /*
+                  assign prototype by Object.create()
+                */
+
+                classInstance1 = Object.create(Class.prototype);
+
+
+                //check if prototypes match and constructors;
+                Object.getPrototypeOf(classInstance) === Object.getPrototypeOf(classInstance1) //true
+                classInstance.constructor === classInstance1.constructor //true
+
+                //check if object indeed iherit from Class.prototype;
+                classInstance1.name //return  &#39;greg&#39;
+                classInstance1.breed //return &#39;human&#39;</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> Class.call(this, ConstructorParam1, ConstructorParam1 ) </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>Class.call(this, ConstructorParam1, ConstructorParam1 );
+                 Class properties passed to another Class properties
+                const Class = function(name, surname){
+                  this.name = name;
+                  this.surname = surname;
+                };
+
+               You can pass native class properties (not the one on prototype chain) but the one defined wiht this.property = property
+               to another class by calling this class as below in anther class constructor:
+                AnotherClass = function(){
+                  //if you Class has contructor;
+                  //const Class = function(name, surname);
+                  Class.call(this, ConstructorParam1, ConstructorParam1 ) 
+                }</p>
+                  <div class="codeWraper">
+                    <code>//class with native properties;
+                const Class = function(name, surname){
+                  this.name = name;
+                  this.surname = surname;
+                };
+
+                //anotherClass that takes Class native properties;
+                const AnoherClass = function(...arg){
+                  //default values
+                  Class.call(this,&#39;greg&#39;, &#39;gil&#39;) 
+                };  
+
+                const default = new AnoherClass();
+
+                const AnoherClassSet = function(name,surname){
+                  //default values
+                  Class.call(this,name, surname);
+                };
+
+                const setValues = new AnoherClassSet(&#39;mark&#39;,&#39;cohen&#39;);</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> ES6 class </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>extends and super();
+
+                super() :will call its super class properties (imporaant thos class are not on prototype object means chain); so you dont inherit them 
+                you just call them so U can use them in child Class this is eqwiewalent es ES5
+
+                      super(name, surname) === Class.call(this,name,surname);
+
+                extends Class : is the way to inhertit classes in prototype chain , but only methods are chained (on prototype objects) there is not default 
+                properties chained to the prototype object.</p>
+                  <div class="codeWraper">
+                    <code>class Food {
+                     constructor (name, calories) {
+                         this.name = name;
+                         this.calories = calories;
+                     }
+
+                     getName () {
+                         return `${this.name}`
+                     }
+
+                     print () {
+                       console.log( this.toString() );
+                     }
+                 }
+
+                 class FatFreeFood extends Food {
+
+                     constructor (name, calories, category) {
+                         super(name,calories);
+                         this.category = category;
+                     }
+
+                     print () {
+
+                         super.print(); //call super class method
+
+                         console.log(`Would you look at that -- ${this.name} has no fat!`);
+                     }
+
+                 }
+
+                 //initiate FatFreeFood;
+                 const fat_free_yogurt = new FatFreeFood(&#39;Greek Yogurt&#39;, 16, &#39;Lean food&#39;);</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>The class property syntax is a Stage 3 proposal so it’s not part of the official JS spec yet.
+                Thefore You need an additional configuration to make it work, as expalained before. First you need to start with npm install:
+
+                      npm install --save-exac @babel/plugin-proposal-class-properties@7.1.0
+
+                      (it will save exact version witout ^7.1.0 or ~7.1.0)</p>
+                  <div class="codeWraper">
+                    <code>-------sample (raeact) js file ---------------------
+class App extends React.Component {
+state = {
+  loggedIn: false,
+  currentState: &quot;not-panic&quot;,
+  someDefaultThing: this.props.whatever
+}
+
+render() {
+  // whatever you like
+}
+}
+//Then you need to configure linter, package.json or .babel.rc file
+
+--------------------- .babelrc ------------------------------------
+{
+  &quot;presets&quot;: [
+    &quot;env&quot;,
+    &quot;react&quot;
+  ],
+  &quot;plugins&quot;: [
+    &quot;transform-class-properties&quot;,
+    &quot;transform-object-rest-spread&quot;,
+    &quot;@babel/plugin-proposal-class-properties&quot;
+  ]
+}
+
+-------------------- (or if not above) package.json----------------
+{
+&quot;plugins&quot;: [
+  [&quot;@babel/plugin-proposal-class-properties&quot;, { &quot;loose&quot;: true }]
+]
+}
+//When true, class properties are compiled to use an assignment expression instead of Object.defineProperty, default to false when omited.
+
+------------- (or) with node file ---------------------------------
+require(&quot;@babel/core&quot;).transform(&quot;code&quot;, {
+plugins: [&quot;@babel/plugin-proposal-class-properties&quot;]
+});
+-----------------------------------------------------------------
+
+
+------------NOW Linter configuration for not throwing error for new syntax-----------
+
+------------ .lintrc ---------------------
+{
+&quot;parser&quot;: &quot;babel-eslint&quot;,
+
+&quot;parserOptions&quot;: {
+  &quot;ecmaVersion&quot;: 6,
+  &quot;sourceType&quot;: &quot;module&quot;
+},
+
+&quot;env&quot;: {
+  &quot;browser&quot;: true,
+  &quot;node&quot;: true,
+  &quot;es6&quot;: true
+},
+
+&quot;ecmaFeatures&quot;: {
+  &quot;classes&quot;: true
+}
+}
+
+---------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>Class static method() 
+
+                  it is a mehod that is only available on the Class definition itslef not on instance of the class;
+                  Therefore to access static method you dont need to initiate it.</p>
+                  <div class="codeWraper">
+                    <code>class Food {
+
+                      // Adding a static method
+                      static describe () {
+                        console.log(&#39;&quot;Food&quot; is a data type for storing macronutrient information.&#39;);
+                       }
+
+                      normalMethod () {
+                          return this;
+                      }
+                 };
+
+                 Food.describe() //return &#39;&quot;Food&quot; is a data type....
+                 Food.normalMethod() //return error it needs instance of a class first (new Food());</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
+                  <p>Class get value() and set value() methods:
+                  just like in any object you can use functionality or get value() and set value() methods on Class instance.</p>
+                  <div class="codeWraper">
+                    <code>class Person{
+                     
+                     get name(){ return this.label }
+                     set name(value){ this.label = value }
+                 };
+
+                 const person = new Person();
+                 person.name //undefined;
+                 person.name = &#39;greg&#39;;
+                 person.name //return greg;</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+  
+    <section class="band band-b activeSection">
+      <h1></h1>
+
+      
+
+
+
+        
+
+    </section>
+  
+  </div>
+</div>
+
+       <!-- nunjucks loop-->
+  </div>
+</div>
+<script src="scripts/nav-links.js"></script>
+<script src="scripts/tooltips_links_over.js"></script>
+<script src="scripts/search_nav.js"></script>
+ </body></html>

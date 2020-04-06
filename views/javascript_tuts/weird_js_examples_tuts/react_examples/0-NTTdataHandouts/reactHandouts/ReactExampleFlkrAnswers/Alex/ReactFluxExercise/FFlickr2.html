@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script> <!-- for newer versions -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <style>
+    html, body {
+        margin: 5px;
+        padding: 0;
+        background-color: #000;
+    }
+
+    @keyframes show {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .transition-font {
+        transition: all 0.5s;
+    }
+
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script type="text/babel">
+
+
+        var tpl = function(template, data) {
+            return template.replace(/{([^}]+)}/g, function(_, match) {
+                return data[match] || match;
+            });
+        };
+
+        var merge = function(a, b) {
+
+            if (null == a) {
+                return b;
+            }
+
+            if (null == b) {
+                return a;
+            }
+
+            Object.keys(b).forEach(function(key) {
+                a[key] = b[key];
+            });
+            return a;
+        };
+
+        var FlickrService = (() => {
+            var url = 'http://api.flickr.com/services/feeds/photos_public.gne?format=json&tags={query}&jsoncallback={consumer}';
+
+            return {
+                search: function(query, callback) {
+                    var getJSONPUrl = function(url, callback) {
+
+                        var consumerRef = '__store_consumer' + Math.round(Math.random() * 10000);
+
+                        window[consumerRef] = callback;
+                        
+                        return tpl(url, {
+                            query: query,
+                            consumer: consumerRef
+                        });
+                    };
+
+                    var load = function(url, callback) {
+                        var elem = document.createElement('script');
+                        elem.src = getJSONPUrl(url, callback);
+                        document.body.appendChild(elem);
+                    };
+
+                    load(url, callback);
+                }
+            }
+        })();
+
+        var FlickrStore = (function(transform) {
+
+            var items = null;
+            var listeners = [];
+
+            var fireListeners = function() {
+                listeners.forEach(function(fn) {
+                    fn();
+                });
+            };
+
+            FlickrService.search('puppy', function(data) {
+                items = transform(data);
+                fireListeners();
+            });
+
+            return {
+                getAll: function() {
+                    return items;
+                },
+                getFavourite: function() {
+                    try {
+                        return JSON.parse(window.localStorage.favourite)
+                    } catch (_) {
+                        return null;
+                    }
+                },
+                saveFavourite: function(item) {
+                    window.localStorage.favourite = JSON.stringify(item);
+                    fireListeners();
+                },
+                addListener: function(fn) {
+                    listeners.push(fn);
+                }
+            };
+
+        })(function(data) {
+            return data.items.map(function(item){
+                return {
+                    title: item.title,
+                    image: {
+                        m: item.media.m,
+                        l: item.media.m.replace('m.jpg','b.jpg')
+                    },
+                    id: item.link.replace(/[^0-9]/g, '')
+                };
+            });
+        });
+
+
+        var Frame = React.createClass({
+            render: function() {
+                return <div style={{
+                    position: 'absolute',
+                    border: tpl('10px solid #000'),
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0
+                }} />;
+            }
+        });
+
+        var FlickrItemBase = {
+            getDefaultProps: function() {
+                return {
+                    image: '',
+                    title: '',
+                    favourite: false
+                };
+            },
+            propTypes: function() {
+                return {
+                    image: React.PropTypes.string,
+                    title: React.PropTypes.string
+                };
+            }
+        };
+
+        var FlickrFavourite = React.createClass({
+            mixins: [FlickrItemBase],
+            render: function() {
+                return (<div style={merge({
+                    position: 'relative',
+                    border: '20px solid #000',
+                    padding: 10,
+                    width: '100%',
+                    boxSizing: 'border-box',
+                    margin: -10,
+                    background: '#000',
+                    boxShadow: '0 20px 50px #000'
+                }, this.props.style)}>
+                    <div style={{
+                        height: 400,
+                        backgroundImage: 'url(' + this.props.image.l + ')',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center center',
+                        margin: '-10px -10px 20px'
+                    }}/>
+                    <div style={{
+                        color: '#fff',
+                        fontFamily: 'sans-serif',
+                        fontSize: '1em',
+                        textShadow: '0 0 1px rgba(0,0,0,0.5)'
+                    }}>{this.props.title}</div>
+                </div>);
+            }
+        });
+
+        var FlickrItem = React.createClass({
+            mixins: [FlickrItemBase],
+            render: function() {
+                var fStyle = {
+                    position: 'absolute',
+                    bottom: 0,
+                    right: 0,
+                    top: 0,
+                    left: 0,
+                    color: '#fff',
+                    fontSize: '2em',
+                    cursor: 'pointer',
+                    background: 'rgba(0,0,0,0)',
+                    textAlign: 'center',
+                    lineHeight: '200px'
+                };
+
+                if (this.props.isFavourite) {
+                    fStyle = merge(fStyle, {
+                        fontSize: '5em',
+                        background: 'rgba(0,0,0,0.5)'
+                    });
+                }
+
+                return (
+                    <div style={{
+                        float: 'left',
+                        position: 'relative',
+                        borderCollapse: 'collapse',
+                        padding: 20,
+                        width: '33.333%',
+                        boxSizing: 'border-box',
+                        height: 200,
+                        backgroundImage: 'url(' + this.props.image.m + ')',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center center',
+                    }}>
+                        <Frame />
+                        <div className='transition-font' style={fStyle} onClick={this.props.onFavourite}>&#9733;</div>
+                    </div>
+                )
+            }
+        });
+
+        var FlickrFeed = React.createClass({
+            getStateFromStore: function() {
+                return {
+                    items: FlickrStore.getAll(),
+                    favourite: FlickrStore.getFavourite()
+                };
+            },
+            getInitialState: function() {
+                return this.getStateFromStore();
+            },
+            componentWillMount: function() {
+                FlickrStore.addListener(function() {
+                    this.setState(this.getStateFromStore());
+                }.bind(this));
+            },
+            isFavourite: function(item) {
+                return this.state.favourite && item.id == this.state.favourite.id;
+            },
+            getSaveFavouriteFn: function(id) {
+                return function() {
+                    FlickrStore.saveFavourite(id);
+                }.bind(this);
+            },
+            hasLoaded: function() {
+                return this.state.items && this.state.items.length > 0;
+            },
+            render: function() {
+                
+                var favourite = this.state.favourite && (<div>
+                        <FlickrFavourite key='fav' image={this.state.favourite.image} title={this.state.favourite.title} favourite style={{
+                            position: 'fixed',
+                            zIndex: 200
+                        }} />
+                        <div style={{
+                            height: 500
+                        }} />
+                    </div>);
+
+                var items = this.state.items && this.state.items.map(function(item, i) {
+                    return <FlickrItem key={i} image={item.image} title={item.title} onFavourite={this.getSaveFavouriteFn(item)} isFavourite={this.isFavourite(item)}/>;
+                }.bind(this));
+
+                var style = {
+                    position: 'relative',
+                    overflow: 'hidden'
+                };
+
+                if (this.hasLoaded()) {
+                    style.animation = 'show 2s linear 0s 1';
+                    style.opacity
+                } else {
+                    style.opacity = 0
+                }
+
+                return <div style={style}>
+                    {favourite}
+                    {items}
+                </div>;
+            }
+        });
+
+        ReactDOM.render(
+            <FlickrFeed />,
+            document.getElementById('container')
+        );
+
+    </script>
+  </body>
+</html>

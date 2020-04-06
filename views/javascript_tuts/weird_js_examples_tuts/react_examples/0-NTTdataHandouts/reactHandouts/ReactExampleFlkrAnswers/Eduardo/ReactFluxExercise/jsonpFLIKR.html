@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>JSON</title>
+	<style>
+	* {
+	  font-family:arial
+		}
+  	#container {
+  	  color:blue;
+    	display:block;
+    	font-size:4;
+      width: 1024px;
+      margin: 0 auto;
+      padding: 5px;
+		}
+    #news{
+      margin: 0 auto;
+    }
+    .article-panel{
+      width: 99%;
+      display: inline-block;
+      background-color: cornsilk;
+      border-radius: 10px;
+      padding: 5px
+    }
+    .article-image{
+      float: left;
+    }
+    .article-content{
+      float: left;
+      width: 80%;
+      margin-left: 5px;
+    }
+    .article-content:after{
+      float: clear;
+    }
+    .article-panel h3{
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .article-img{
+      width: 150px;
+      height: 150px;
+    }
+
+    .article-span-label{
+      font-weight: bold;
+    }
+
+	</style>
+	<script type="text/javascript" src="json2.js"></script>
+  <script src="build/react.js"></script>
+  <script src="build/react-dom.js"></script> <!-- for newer versions -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div id='div1'><h1>JSON</h1></div>
+  <hr size='2'/>
+  <div id='container'>
+      <h3> Today's images:</h3>
+      <div id='news'></div>
+  </div>
+
+
+
+  <script> 
+  myArray = [];
+    var mynews = function (json) {    
+      myArray = json.items;
+
+    }  
+
+  </script>
+
+  <script src="http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=mynews&format=json&tags=planets"></script>
+  
+  <script type="text/babel">      
+    
+  var init = function(data){
+
+    var Tile = React.createClass({
+
+      render(){
+
+      }
+    });
+
+    var NewsTile = React.createClass({
+      getInitialState: function(){
+        return {
+          likes: 0
+        };
+      },
+
+      getDefaultProps: function(){
+          return {
+            title: "title",
+            author: "author",
+            tags: "tags",
+            date_taken: "default",
+            media: {m: ""}
+          };
+        },
+        onLikeClick: function (){
+          var likes = this.state.likes;
+
+          likes++;
+
+          this.setState({
+            likes: likes
+          });
+        },
+        onFavClick: function(){
+          this.props.onFavouriteClick(this.props.article.media.m);
+        },
+      render: function(){
+
+        var favClassName = this.props.isFavourite == true ? "fa fa-star fa-2x" : "fa fa-star-o fa-2x";
+        var likeClassName = this.state.likes == 0 ? "fa fa-thumbs-o-up fa-1x" : "fa fa-thumbs-o-up fa-2x";
+
+        return (<div className="article-panel">
+            <div className="article-image"><img className="article-img" src={this.props.article.media.m} /></div>
+            <div className="article-content">
+            <h3>{this.props.article.title}</h3>
+            <p><span className="article-span-label">Author: </span>{this.props.article.author}</p>
+            <p><span className="article-span-label">Tags: </span>{this.props.article.tags}</p>
+            <p><span className="article-span-label">Date Taken: </span>{this.props.article.date_taken}</p>
+            <p><span onClick={this.onLikeClick}><i className={likeClassName}></i> {this.state.likes} likes</span></p>
+            <p><span onClick={this.onFavClick}><i className={favClassName}></i></span></p>
+            </div>
+          </div>);
+
+      }
+    });
+
+    var NewsComp = React.createClass({
+      getInitialState: function(){
+        return {
+          favouriteId: localStorage.favourite || undefined
+        };
+      },
+
+      onFavouriteClick: function(id){
+
+        localStorage.favourite = id;
+
+        this.setState({
+          favouriteId: id
+        });
+      },
+      render: function(){
+        var context = this;
+
+        return (
+          <div>
+            {_.map(this.props.news,function(item){
+              var isFavourite = context.state.favouriteId == item.media.m ? true : false;
+
+              return (<NewsTile onFavouriteClick={context.onFavouriteClick} article={item} isFavourite={isFavourite} />);
+            })}
+          </div>
+          );
+      }
+    });
+
+    ReactDOM.render(
+            <NewsComp news={data} />,
+            document.getElementById('news')
+        );
+
+  }
+
+  init(myArray);
+
+  </script>  
+</body>
+</html>
