@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)https://medium.com/media/7df7d7ced7f172e7d9315885f9918ca8 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Hello-PWA Service worker – Medium</title><meta name="description" content="Hello-PWA Service worker. GitHub Gist: instantly share code, notes, and snippets."><meta name="twitter:widgets:csp" content="on"><meta name="robots" content="noindex"><!--<base target="_blank">--><base href="." target="_blank"><style>body {text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: "ff-tisa-web-pro", Georgia, Cambria, "Times New Roman", Times, serif; font-weight: 400; color: #333332; font-size: 18px; line-height: 1.4; margin: 0; background-color: white; overflow: hidden;}iframe {max-width: 100%;}</style></head><body><style>.gist .gist-file { margin-bottom: 0 !important; }.gist { text-rendering: auto; }</style><script src="./778aa971f56311d9c276d586e55e7945.js" charset="utf-8"></script><link rel="stylesheet" href="./gist-embed-31007ea0d3bd9f80540adfbc55afc7bd.css"><div id="gist91570257" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-sw-js" class="file">
+    
+
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-javascript ">
+      
+<table class="highlight tab-size js-file-line-container" data-tab-size="8" data-paste-markdown-skip="">
+      <tbody><tr>
+        <td id="file-sw-js-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-sw-js-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> <span class="pl-s1">cacheName</span> <span class="pl-c1">=</span> <span class="pl-s">'hello-pwa'</span><span class="pl-kos">;</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-sw-js-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> <span class="pl-s1">filesToCache</span> <span class="pl-c1">=</span> <span class="pl-kos">[</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-sw-js-LC3" class="blob-code blob-code-inner js-file-line">  <span class="pl-s">'/'</span><span class="pl-kos">,</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-sw-js-LC4" class="blob-code blob-code-inner js-file-line">  <span class="pl-s">'/index.html'</span><span class="pl-kos">,</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-sw-js-LC5" class="blob-code blob-code-inner js-file-line">  <span class="pl-s">'/css/style.css'</span><span class="pl-kos">,</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-sw-js-LC6" class="blob-code blob-code-inner js-file-line">  <span class="pl-s">'/js/main.js'</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-sw-js-LC7" class="blob-code blob-code-inner js-file-line"><span class="pl-kos">]</span><span class="pl-kos">;</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-sw-js-LC8" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-sw-js-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-c">/* Start the service worker and cache all of the app's content */</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-sw-js-LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">self</span><span class="pl-kos">.</span><span class="pl-en">addEventListener</span><span class="pl-kos">(</span><span class="pl-s">'install'</span><span class="pl-kos">,</span> <span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">)</span> <span class="pl-kos">{</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-sw-js-LC11" class="blob-code blob-code-inner js-file-line">  <span class="pl-s1">e</span><span class="pl-kos">.</span><span class="pl-en">waitUntil</span><span class="pl-kos">(</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="file-sw-js-LC12" class="blob-code blob-code-inner js-file-line">    <span class="pl-s1">caches</span><span class="pl-kos">.</span><span class="pl-en">open</span><span class="pl-kos">(</span><span class="pl-s1">cacheName</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">then</span><span class="pl-kos">(</span><span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-s1">cache</span><span class="pl-kos">)</span> <span class="pl-kos">{</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="file-sw-js-LC13" class="blob-code blob-code-inner js-file-line">      <span class="pl-k">return</span> <span class="pl-s1">cache</span><span class="pl-kos">.</span><span class="pl-en">addAll</span><span class="pl-kos">(</span><span class="pl-s1">filesToCache</span><span class="pl-kos">)</span><span class="pl-kos">;</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L14" class="blob-num js-line-number" data-line-number="14"></td>
+        <td id="file-sw-js-LC14" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">}</span><span class="pl-kos">)</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L15" class="blob-num js-line-number" data-line-number="15"></td>
+        <td id="file-sw-js-LC15" class="blob-code blob-code-inner js-file-line">  <span class="pl-kos">)</span><span class="pl-kos">;</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L16" class="blob-num js-line-number" data-line-number="16"></td>
+        <td id="file-sw-js-LC16" class="blob-code blob-code-inner js-file-line"><span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L17" class="blob-num js-line-number" data-line-number="17"></td>
+        <td id="file-sw-js-LC17" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L18" class="blob-num js-line-number" data-line-number="18"></td>
+        <td id="file-sw-js-LC18" class="blob-code blob-code-inner js-file-line"><span class="pl-c">/* Serve cached content when offline */</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L19" class="blob-num js-line-number" data-line-number="19"></td>
+        <td id="file-sw-js-LC19" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">self</span><span class="pl-kos">.</span><span class="pl-en">addEventListener</span><span class="pl-kos">(</span><span class="pl-s">'fetch'</span><span class="pl-kos">,</span> <span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">)</span> <span class="pl-kos">{</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L20" class="blob-num js-line-number" data-line-number="20"></td>
+        <td id="file-sw-js-LC20" class="blob-code blob-code-inner js-file-line">  <span class="pl-s1">e</span><span class="pl-kos">.</span><span class="pl-en">respondWith</span><span class="pl-kos">(</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L21" class="blob-num js-line-number" data-line-number="21"></td>
+        <td id="file-sw-js-LC21" class="blob-code blob-code-inner js-file-line">    <span class="pl-s1">caches</span><span class="pl-kos">.</span><span class="pl-en">match</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">.</span><span class="pl-c1">request</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">then</span><span class="pl-kos">(</span><span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-s1">response</span><span class="pl-kos">)</span> <span class="pl-kos">{</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L22" class="blob-num js-line-number" data-line-number="22"></td>
+        <td id="file-sw-js-LC22" class="blob-code blob-code-inner js-file-line">      <span class="pl-k">return</span> <span class="pl-s1">response</span> <span class="pl-c1">||</span> <span class="pl-en">fetch</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">.</span><span class="pl-c1">request</span><span class="pl-kos">)</span><span class="pl-kos">;</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L23" class="blob-num js-line-number" data-line-number="23"></td>
+        <td id="file-sw-js-LC23" class="blob-code blob-code-inner js-file-line">    <span class="pl-kos">}</span><span class="pl-kos">)</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L24" class="blob-num js-line-number" data-line-number="24"></td>
+        <td id="file-sw-js-LC24" class="blob-code blob-code-inner js-file-line">  <span class="pl-kos">)</span><span class="pl-kos">;</span></td>
+      </tr>
+      <tr>
+        <td id="file-sw-js-L25" class="blob-num js-line-number" data-line-number="25"></td>
+        <td id="file-sw-js-LC25" class="blob-code blob-code-inner js-file-line"><span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span></td>
+      </tr>
+</tbody></table>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/jamesjohnson280/778aa971f56311d9c276d586e55e7945/raw/1111e941f5cf93d09bceda3ca87e4925cab9adc8/sw.js" style="float:right">view raw</a>
+        <a href="https://gist.github.com/jamesjohnson280/778aa971f56311d9c276d586e55e7945#file-sw-js">sw.js</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<script>var height = -1; var delayMs = 200; if (document) {document.domain = document.domain;}function notifyResize(height) {height = height ? height : document.documentElement.offsetHeight; var resized = false; if (window.donkey && donkey.resize) {donkey.resize(height);var elements = document.getElementsByClassName("gist-data"); for (var i = 0; i < elements.length; i++) {elements[i].style.overflow = "visible"}resized = true;}if (parent && parent._resizeIframe) {var obj = {iframe: window.frameElement, height: height}; parent._resizeIframe(obj); resized = true;}if (window.location && window.location.hash === "#amp=1" && window.parent && window.parent.postMessage) {window.parent.postMessage({sentinel: "amp", type: "embed-size", height: height}, "*");}if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.resize) {window.webkit.messageHandlers.resize.postMessage(height); resized = true;}return resized;}function maybeResize() {try {if (document.documentElement.offsetHeight != height && notifyResize()) {height = document.documentElement.offsetHeight;}delayMs = Math.min(delayMs * 2, 1000000); setTimeout(maybeResize, delayMs);} catch(error) {console.log('maybeResize error: ', error)}}maybeResize();</script></body></html>

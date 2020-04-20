@@ -1,0 +1,292 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">  
+  <title>tutorial === Layout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/tutorial.css">
+  <link rel="stylesheet" href="css/tooltip.css">
+</head>
+<body translate="no">
+<div class="l-site">
+  <div class="l-nav">
+    <nav class="nav">
+      <input type="text" placeholder="Search" id="search">
+      <div style="clear: both;"></div>
+      <!-- nunjucks loop-->
+            
+<ul class="links">
+<!--list-tag-->
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/pwa_apps_tuts">for loop</a><span class="tooltiptext">for loop</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/pwa_apps_tuts" partition>pwd</a><span class="tooltiptext">pwd</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/pwa_apps_tuts" partition>for loop (multiple nested loops)</a><span class="tooltiptext">for loop (multiple nested loops)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/pwa_apps_tuts" partition>for loop multiply variables shuffle array (summary)</a><span class="tooltiptext">for loop multiply variables shuffle array (summary)</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/pwa_apps_tuts">while loop</a><span class="tooltiptext">while loop</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/pwa_apps_tuts" partition>while loop</a><span class="tooltiptext">while loop</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/pwa_apps_tuts" partition>while loop with break</a><span class="tooltiptext">while loop with break</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/pwa_apps_tuts">loops in function body</a><span class="tooltiptext">loops in function body</span>
+                 
+      </li>
+    
+<!--end-list-tag-->
+</ul>
+
+       <!-- nunjucks loop-->
+    </nav>
+  </div>
+  <div class="l-page">
+    <div class="menu">
+      <div class="menu-hamburger"></div>
+    </div>
+      <!-- nunjucks loop-->
+          
+<div class="sectionWrapper">
+  <div class="sectionContainer">
+   
+      
+      <section  class="band band-b activeSection"  class="band band-b">
+          <h1> for loop </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>for loop</p>
+                  <div class="codeWraper">
+                    <code>---------------------loop upwards--------------------------
+
+for(  var i = 0;  i&gt;=10 ; i++  ){}
+
+------------------loop backwards------------------   
+
+// for(var i = 10;i&gt;5;i--){}  prints numbers 10,9,8,7,6,
+
+------------------loop backwards shorthand------------------
+
+// for(var i = 10; i ; i--){}  
+
+prints numbers 10,9,8,7,6,5,4,3,2,1 when you specify i then it knows that i reaches from 10 to the end (1); 
+
+--------------------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>For loop accepts more the one variable to loop through, so for the limit i&lt;50; for i interator it will be valid (accesable) for the rest of variables as well(j,n), very good feature for specifying every second , third ..etc element in one go.</p>
+                  <div class="codeWraper">
+                    <code>--------------with multiply variable-----------------------
+
+ for (i=0,j=1; i &lt; 50; i++, j = i+1){
+   console.log(&quot;variable i........: &quot; + i);
+   console.log(&quot;variable j.....: &quot; + j);
+   
+ }
+
+ ---exercise find even numbers in the loop-----------------
+
+ for (i=0,j=1; i &lt; 50; i++, j = i%2==0? i : undefined){
+   
+   console.log(&quot;variable i........: &quot; + i);
+     if(j){
+          console.log(&quot;variable j.....: &quot; + j);
+     }
+
+ }
+ ------------------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>or loop multiple variables can be used for randomizing array content</p>
+                  <div class="codeWraper">
+                    <code>-------------------randomize array in loop -------------------
+
+ const cards =[&#39;first&#39;,&#39;second&#39;,&#39;third&#39;,&#39;forth&#39;,&#39;finth&#39;];
+
+ for(  var j, x, i = cards.length;i;j = parseInt(Math.random() * i), x = cards[--i], cards[i] = cards[j], cards[j] = x){
+            console.log(cards);   
+ }
+  
+
+-------------------swap array in loop -------------------
+ the same could be achived in simple loop below it is about SWAP array values:
+
+ var set = [&#39;one&#39;,&#39;two&#39;,&#39;three&#39;];
+ var current = 0;
+ for(var i = 0; i&lt;set.length;i++){
+   var ran = Math.floor(Math.random()*set.length);
+   initial = set[i];
+   //assign current to random;
+   set[i]=set[ran];
+   //assign random current 
+   set[ran]=initial; //so they swap places
+ }
+ console.log(set);
+
+ ------------------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> while loop </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>while loop it will work as long as condition in while() is defined, true or has a value , it will stop if it undefined,null or 0;</p>
+                  <div class="codeWraper">
+                    <code>------------------------the best example ever ----------------
+
+ var set2 = 4;
+ while(set2--){console.log(set2)}; //it stops when gets to 0;
+
+ ----------so this could be nicely used for arrays loop-------
+
+ var arr = [&#39;one&#39;, &#39;two&#39;, &#39;three&#39;];
+ var set = arr.length;
+ while(set--){
+    console.log(arr[set])
+ }
+
+ var arr = [&#39;one&#39;, &#39;two&#39;, &#39;three&#39;];
+ var set = arr.length;
+
+ while(set){
+    set--;
+    console.log(arr[set])
+ }
+
+
+ -------------inetracting upwards----------------
+
+ var arr = [&#39;one&#39;, &#39;two&#39;, &#39;three&#39;];
+ var i = 0;
+  
+ ----------as long as arr[i] is defined so it has value-----
+
+ while(arr[i]){
+  console.log(arr[i]);
+  i++;
+ }
+
+ ------------------------------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>while loop with break:
+                 Any loop (for,while) can be terminated by break statment
+                 while(condition) will terminate if condition is false, undifinded, null or 0 value but even if the condition is set we can break it the loop by:</p>
+                  <div class="codeWraper">
+                    <code>--------------break the loop---------------------------
+
+var value = 3;
+while(value){
+ if(value==1) break;
+ console.log(&#39;value&#39;,value);
+ value--;
+}
+
+//same with for loop;
+var value = 3;
+for(value;value;value--){
+ if(value==1) break;
+ console.log(&#39;value&#39;,value)
+}
+------------------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> loops in function body </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>loops in function body:
+                any function can be terminted by return statament them same could be done in any loop that is nested in function body</p>
+                  <div class="codeWraper">
+                    <code>--------------break means return funciton ---------------------------
+
+var len = 5;
+var breakMe = function(){
+
+while(len){
+ if(len==2) return;
+ console.log(len);
+ len--;
+}
+}(); 
+console.log(breakMe);
+------------  ------------  ------------  ------------  ------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+  
+    <section class="band band-b activeSection">
+      <h1></h1>
+
+      
+
+
+
+        
+
+    </section>
+  
+  </div>
+</div>
+
+       <!-- nunjucks loop-->
+  </div>
+</div>
+<script src="scripts/nav-links.js"></script>
+<script src="scripts/tooltips_links_over.js"></script>
+<script src="scripts/search_nav.js"></script>
+ </body></html>

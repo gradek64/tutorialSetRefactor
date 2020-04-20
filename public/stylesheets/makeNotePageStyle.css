@@ -1,0 +1,53 @@
+.container,
+.output-area {
+  text-align: center;
+}
+
+.message-area {
+  background-color: #394043;
+}
+.output-area {
+  background-color: #394c55;
+}
+.output-area > .panel-body {
+  margin: 0 auto;
+}
+.message-area h3,
+.output-area h3 {
+  color: #2cc92d;
+}
+textarea.message-container,
+.message-container {
+  font-size: 20px;
+  text-align: center;
+  margin: 0.5rem;
+  width: 50%;
+  background-color: beige;
+  border: 3px solid orange;
+}
+textarea.message-container {
+  background-color: white;
+}
+
+.button-green {
+  background-color: #3ac357;
+  border-radius: 10px;
+  padding: 0.7rem;
+  margin: 0.7rem;
+  color: white;
+  border: 1px solid orange;
+}
+
+#table-wrapper {
+  display: table;
+}
+.content {
+  display: table-row;
+  height: 100%;
+}
+header {
+  display: table-row;
+}
+footer {
+  display: table-row;
+}

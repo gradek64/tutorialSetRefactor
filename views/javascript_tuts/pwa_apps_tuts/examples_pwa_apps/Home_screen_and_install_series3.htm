@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)https://web.dev/customize-install/ -->
+<html lang="en" class="js-focus-visible"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fff">
+    
+    
+
+    
+
+    <link rel="alternate" href="https://web.dev/feed.xml" type="application/atom+xml" data-title="web.dev feed">
+    <link rel="preconnect" href="https://www.gstatic.com/" crossorigin="">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin="">
+    <link rel="preconnect" href="https://www.google-analytics.com/" crossorigin="">
+    <link rel="stylesheet" href="./Home_screen_and_install_series3_files/css">
+    <link rel="stylesheet" href="./Home_screen_and_install_series3_files/app.css">
+    <link rel="manifest" href="https://web.dev/manifest.webmanifest">
+    
+    <link rel="shortcut icon" href="https://web.dev/images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://web.dev/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://web.dev/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://web.dev/images/apple-touch-icon.png">
+    <link rel="mask-icon" color="#0054ff" href="https://web.dev/images/safari-pinned-tab.svg">
+    <script defer="" src="./Home_screen_and_install_series3_files/firebase-app.js"></script>
+    <script defer="" src="./Home_screen_and_install_series3_files/firebase-auth.js"></script>
+    <script defer="" src="./Home_screen_and_install_series3_files/firebase-performance.js"></script>
+    
+    <meta id="firebase-firestore" value="//www.gstatic.com/firebasejs/6.6.1/firebase-firestore.js">
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-126406676-2');
+      ga('set', 'transport', 'beacon');
+      ga('set', 'dimension5', '3');
+      ga('send', 'pageview');
+    </script>
+    <script async="" src="./Home_screen_and_install_series3_files/analytics.js"></script>
+    <script type="module" src="./Home_screen_and_install_series3_files/bootstrap.js"></script>
+  <script src="./Home_screen_and_install_series3_files/default-ceafbe94.js" type="module"></script><style type="text/css">web-profile-switcher-container{-webkit-box-align:center;-ms-flex-align:center;align-items:center;display:-webkit-box;display:-ms-flexbox;display:flex;height:100%}@media (min-width:865px){web-profile-switcher-container{margin-left:16px}}.w-profile-signin{background:transparent;border:0;-webkit-box-shadow:none;box-shadow:none;color:#202124;cursor:pointer;font-family:Roboto,sans-serif;text-transform:uppercase;font-size:14px;font-weight:500;height:100%;outline:none;padding:0 8px}@media (min-width:865px){.w-profile-signin{padding:0 24px}}.w-profile-signin:hover{background-color:rgba(32,33,36,.04)}.w-profile-signin:focus{background-color:rgba(32,33,36,.12)}.w-profile-signin:active{background-color:rgba(32,33,36,.16)}web-profile-switcher{display:block;margin:0 0 0 16px}.w-profile-toggle{background:#f1f3f4;border:4px solid #fff;border-radius:50%;-webkit-box-sizing:content-box;box-sizing:content-box;display:-webkit-box;display:-ms-flexbox;display:flex;height:auto;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;min-height:32px;min-width:32px;overflow:hidden;padding:0;width:auto}.w-profile-toggle,.w-profile-toggle:active,.w-profile-toggle:focus,.w-profile-toggle:hover{-webkit-box-shadow:none;box-shadow:none}.w-profile-toggle:focus{border-color:rgba(0,0,0,.2)!important}@-webkit-keyframes w-profile-toggle__appear{0%{opacity:0}to{opacity:1}}@keyframes w-profile-toggle__appear{0%{opacity:0}to{opacity:1}}.w-profile-toggle__photo{border-radius:50%;height:32px;width:32px;-webkit-animation:w-profile-toggle__appear .45s;animation:w-profile-toggle__appear .45s}.w-profile-dialog{background:#fff;border:1px solid rgba(0,0,0,.2);border-radius:2px;-webkit-box-shadow:0 2px 10px rgba(0,0,0,.2);box-shadow:0 2px 10px rgba(0,0,0,.2);display:block;overflow:hidden;position:absolute;right:15px;top:62px}@media (min-width:481px){.w-profile-dialog{right:24px}}.w-profile-dialog__user{padding:20px}@media (min-width:321px){.w-profile-dialog__user{display:-webkit-box;display:-ms-flexbox;display:flex}}.w-profile-dialog__photo-container{-webkit-box-align:center;-ms-flex-align:center;align-items:center;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin:0 0 20px}@media (min-width:321px){.w-profile-dialog__photo-container{margin:0 20px 0 0}}.w-profile-dialog__photo{border-radius:50%;display:block;height:64px;width:64px}@media (min-width:321px){.w-profile-dialog__photo{height:96px;width:96px}}.w-profile-dialog__details{font-size:13px;line-height:normal}.w-profile-dialog__name{font-weight:500;margin-bottom:1px}.w-profile-dialog__email{color:#666;overflow:hidden;text-overflow:ellipsis}.w-profile-dialog__privacy{color:#1a73e8;display:block;margin:6px 0}.w-profile-dialog__privacy:hover{text-decoration:none}.w-profile-dialog__account{background:#4d90fe;border:1px solid #3079ed;border-radius:2px;color:#fff;display:inline-block;font:13px/28px Roboto,Noto Sans,sans-serif;margin:10px 0 0;padding:0 12px;position:relative;text-align:center;white-space:nowrap;width:100%}@media (min-width:321px){.w-profile-dialog__account{width:auto}}.w-profile-dialog__account:active,.w-profile-dialog__account:focus,.w-profile-dialog__account:hover{outline:none;text-decoration:none}.w-profile-dialog__account:after{bottom:0;content:"";left:0;pointer-events:none;position:absolute;right:0;top:0;-webkit-transition:background-color .2s,border .2s;transition:background-color .2s,border .2s;z-index:1}.w-profile-dialog__account:hover:after{background-color:hsla(0,0%,100%,.08)}.w-profile-dialog__account:focus:after{background-color:hsla(0,0%,100%,.12)}.w-profile-dialog__account:active:after{background-color:hsla(0,0%,100%,.24)}.w-profile-dialog__controls{background:#f5f5f5;border-top:1px solid rgba(0,0,0,.2);display:block;padding:10px 20px}@media (min-width:321px){.w-profile-dialog__controls{-webkit-box-align:center;-ms-flex-align:center;align-items:center;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}}.w-profile-dialog__button{background:#f8f8f8;border:1px solid #c6c6c6;border-radius:2px;-webkit-box-shadow:none;box-shadow:none;color:#666;display:block;font:13px/28px Roboto,Noto Sans,sans-serif;height:auto;margin:0;padding:0 12px;position:relative;text-align:center;text-transform:none;width:100%}@media (min-width:321px){.w-profile-dialog__button{width:auto}}.w-profile-dialog__button:not(:last-of-type){margin-bottom:8px}@media (min-width:321px){.w-profile-dialog__button:not(:last-of-type){margin:0}}.w-profile-dialog__button:focus{background:#f8f8f8;outline:none;text-decoration:none}.w-profile-dialog__button:after{bottom:0;content:"";left:0;pointer-events:none;position:absolute;right:0;top:0;-webkit-transition:background-color .2s,border .2s;transition:background-color .2s,border .2s;z-index:1}.w-profile-dialog__button:hover:after{background-color:rgba(0,0,0,.04)}.w-profile-dialog__button:focus:after{background-color:rgba(0,0,0,.08)}.w-profile-dialog__button:active:after{background-color:rgba(0,0,0,.1)}</style><style id="inert-style">
+[inert] {
+  pointer-events: none;
+  cursor: default;
+}
+
+[inert], [inert] * {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+</style><style type="text/css">body.web-side-nav--expanded,web-side-nav{overflow:hidden}web-side-nav{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:300}web-side-nav.unresolved *{display:none!important}web-side-nav:before{content:"";display:block;position:absolute;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,.4);opacity:0;will-change:opacity;-webkit-transition:opacity .2s cubic-bezier(.4,0,.2,1);transition:opacity .2s cubic-bezier(.4,0,.2,1)}web-side-nav[expanded]{pointer-events:auto;visibility:visible}web-side-nav[expanded]:before{opacity:1}.web-side-nav__container{position:relative;width:90%;max-width:268px;background:#fff;height:100%;-webkit-box-shadow:2px 0 12px rgba(0,0,0,.4);box-shadow:2px 0 12px rgba(0,0,0,.4);-webkit-transform:translateX(-110%);transform:translateX(-110%);display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;will-change:transform}web-side-nav[expanded] .web-side-nav__container{-webkit-transform:none;transform:none}web-side-nav[animatable] .web-side-nav__container,web-side-nav[expanded][animatable] .web-side-nav__container{-webkit-transition:-webkit-transform .2s cubic-bezier(.4,0,.2,1);transition:-webkit-transform .2s cubic-bezier(.4,0,.2,1);transition:transform .2s cubic-bezier(.4,0,.2,1);transition:transform .2s cubic-bezier(.4,0,.2,1),-webkit-transform .2s cubic-bezier(.4,0,.2,1)}.web-side-nav__header{-webkit-box-align:center;-ms-flex-align:center;align-items:center;display:-webkit-box;display:-ms-flexbox;display:flex;padding:16px;border-bottom:1px solid #dadce0}.web-side-nav__logo{height:30px;width:125px}.web-side-nav__hide{height:2.75rem;margin:0 10px 0 -6px;width:2.75rem}.web-side-nav__hide:before{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font:normal normal normal 24px/1 Material Icons;-webkit-font-feature-settings:"liga";font-feature-settings:"liga";text-rendering:optimizeLegibility;text-transform:none;word-wrap:normal;content:"close"}.web-side-nav__content{-webkit-box-flex:1;-ms-flex:1;flex:1;list-style:none;padding:0;margin:0;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch}.web-side-nav__link{border-bottom:1px solid #dadce0;color:#5f6368;font-size:14px;font-weight:500;padding:16px 24px}.web-side-nav__link[active]{-webkit-box-shadow:0 -2px 0 #3740ff inset;box-shadow:inset 0 -2px 0 #3740ff}.web-side-nav__link:active,.web-side-nav__link:focus,.web-side-nav__link:hover{text-decoration:none;outline:0}.web-side-nav__link:hover{background-color:rgba(32,33,36,.04)}.web-side-nav__link:focus{background-color:rgba(32,33,36,.12)}.web-side-nav__link:active{background-color:rgba(32,33,36,.16)}.web-side-nav__link[data-active]{color:#3740ff}</style><style type="text/css">web-snackbar{visibility:hidden}web-snackbar,web-snackbar .web-snackbar__surface{-webkit-box-align:center;-ms-flex-align:center;align-items:center;display:-webkit-box;display:-ms-flexbox;display:flex}web-snackbar .web-snackbar__surface{background-color:#202124;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;opacity:0;-webkit-transform:scale(.8);transform:scale(.8);width:100vw}@media (min-width:481px){web-snackbar .web-snackbar__surface{border-radius:3px;-webkit-box-shadow:0 3px 5px -1px rgba(0,0,0,.2),0 6px 10px 0 rgba(0,0,0,.14),0 1px 18px 0 rgba(0,0,0,.12);box-shadow:0 3px 5px -1px rgba(0,0,0,.2),0 6px 10px 0 rgba(0,0,0,.14),0 1px 18px 0 rgba(0,0,0,.12);min-width:344px}}@media (min-width:865px){web-snackbar .web-snackbar__surface{max-width:400px}}web-snackbar .web-snackbar__label{color:hsla(0,0%,100%,.87);font-size:.875rem;padding:14px 16px}web-snackbar .web-snackbar__actions{margin-left:0;margin-right:8px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}web-snackbar .web-snackbar__action{font-size:.875rem;color:#3fc4ff;height:auto}web-snackbar .web-snackbar__action:active,web-snackbar .web-snackbar__action:focus,web-snackbar .web-snackbar__action:hover{-webkit-box-shadow:none;box-shadow:none}web-snackbar .web-snackbar__action:hover{background:rgba(63,196,255,.08)}web-snackbar .web-snackbar__action:focus{background:rgba(63,196,255,.12)}web-snackbar .web-snackbar__action:active{background:rgba(63,196,255,.16)}web-snackbar .web-snackbar__action+.web-snackbar__action{margin-left:8px}web-snackbar[open]{visibility:visible}web-snackbar[open] .web-snackbar__surface{-webkit-transform:scale(1);transform:scale(1);opacity:1;pointer-events:auto}web-snackbar[open][animatable] .web-snackbar__surface{-webkit-transition:opacity .15s cubic-bezier(0,0,.2,1),-webkit-transform .15s cubic-bezier(0,0,.2,1);transition:opacity .15s cubic-bezier(0,0,.2,1),-webkit-transform .15s cubic-bezier(0,0,.2,1);transition:opacity .15s cubic-bezier(0,0,.2,1),transform .15s cubic-bezier(0,0,.2,1);transition:opacity .15s cubic-bezier(0,0,.2,1),transform .15s cubic-bezier(0,0,.2,1),-webkit-transform .15s cubic-bezier(0,0,.2,1)}web-snackbar[animatable]{visibility:visible}web-snackbar[animatable] .web-snackbar__surface{-webkit-transition:opacity 75ms cubic-bezier(.4,0,1,1),-webkit-transform 75ms cubic-bezier(0,0,.2,1);transition:opacity 75ms cubic-bezier(.4,0,1,1),-webkit-transform 75ms cubic-bezier(0,0,.2,1);transition:opacity 75ms cubic-bezier(.4,0,1,1),transform 75ms cubic-bezier(0,0,.2,1);transition:opacity 75ms cubic-bezier(.4,0,1,1),transform 75ms cubic-bezier(0,0,.2,1),-webkit-transform 75ms cubic-bezier(0,0,.2,1)}web-snackbar[stacked] .web-snackbar__surface{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}web-snackbar[stacked] .web-snackbar__actions{-ms-flex-item-align:end;align-self:flex-end;margin-bottom:8px}</style><style type="text/css">web-snackbar-container{bottom:0;display:block;left:0;margin:0;pointer-events:none;position:fixed;right:0;z-index:300}@media (min-width:481px){web-snackbar-container{margin:8px}}</style><style type="text/css">web-search{--web-search-animation-time:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;display:-webkit-box;display:-ms-flexbox;display:flex;height:100%;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;min-width:50%}@media (min-width:865px){web-search{--web-search-animation-time:200ms;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start}}web-search .web-search__close-btn{display:none;margin-left:8px;text-overflow:clip}web-search .web-search__close-btn,web-search .web-search__open-btn{border-radius:0;border:none;-webkit-box-shadow:none;box-shadow:none;color:#5f6368;cursor:pointer;padding:0 8px;-webkit-transition:none;transition:none;background:transparent}@media (min-width:865px){web-search .web-search__close-btn,web-search .web-search__open-btn{display:none}}web-search .web-search__close-btn:focus,web-search .web-search__close-btn:hover,web-search .web-search__open-btn:focus,web-search .web-search__open-btn:hover{background:transparent}web-search .web-search__close-btn.focus-visible,web-search .web-search__open-btn.focus-visible{-webkit-box-shadow:inset 0 0 0 1px #3fc4ff;box-shadow:inset 0 0 0 1px #3fc4ff;outline:none}web-search .web-search__open-btn:before{content:"search"}web-search .web-search__close-btn:before,web-search .web-search__open-btn:before{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font:normal normal normal 24px/1 Material Icons;-webkit-font-feature-settings:"liga";font-feature-settings:"liga";text-rendering:optimizeLegibility;text-transform:none;word-wrap:normal}web-search .web-search__close-btn:before{content:"cancel"}web-search .web-search__input-wrapper{-webkit-box-align:center;-ms-flex-align:center;align-items:center;background:#fff;color:#5f6368;display:none;height:100%;width:100%}@media (min-width:865px){web-search .web-search__input-wrapper{display:-webkit-box;display:-ms-flexbox;display:flex;max-width:calc(200% - 32px);min-width:calc(200% - 32px);-webkit-transform:translateX(calc(50% - 184px));transform:translateX(calc(50% - 184px));-webkit-transition:var(--web-search-animation-time) transform;transition:var(--web-search-animation-time) transform;width:calc(200% - 32px)}}web-search .web-search__input-wrapper:before{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font:normal normal normal 24px/1 Material Icons;-webkit-font-feature-settings:"liga";font-feature-settings:"liga";text-rendering:optimizeLegibility;text-transform:none;word-wrap:normal;content:"search";position:absolute;pointer-events:none;padding:8px}web-search .web-search__input{background:#f1f3f4;border:none;padding:8px 8px 8px 40px;width:100%;font:inherit;font-size:16px;line-height:20px;border-top-left-radius:2px;border-top-right-radius:2px}web-search .web-search__input:focus{outline:none;-webkit-box-shadow:0 2px 0 0 #3fc4ff;box-shadow:0 2px 0 0 #3fc4ff;border:none;padding:8px 8px 8px 40px}web-search .web_search__icon{position:absolute}web-search .web-search__icon:before{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font:normal normal normal 24px/1 Material Icons;-webkit-font-feature-settings:"liga";font-feature-settings:"liga";text-rendering:optimizeLegibility;text-transform:none;word-wrap:normal;content:"search"}web-search .web-search-popout{background:#fff;border-top:1px solid #ddd;-webkit-box-shadow:0 1px 2px 0 rgba(60,64,67,.3),0 2px 6px 2px rgba(60,64,67,.15);box-shadow:0 1px 2px 0 rgba(60,64,67,.3),0 2px 6px 2px rgba(60,64,67,.15);left:0;padding:16px 0;position:absolute;top:55px;width:calc(100% - 45px)}@media (min-width:865px){web-search .web-search-popout{left:32px;width:calc(100% - 32px)}}web-search .web-search-popout__heading{color:#5f6368;font-size:12px;padding:0 24px}web-search .web-search-popout__list{list-style:none;max-height:50vh;overflow:scroll}web-search .web-search-popout__link{color:#202124;display:block;padding:8px 24px}web-search .web-search-popout__link--active,web-search .web-search-popout__link:hover{background:#e8eaed}web-search[expanded] .web-search__open-btn{display:none}web-search[expanded] .web-search__input-wrapper{display:-webkit-box;display:-ms-flexbox;display:flex}@media (min-width:865px){web-search[expanded] .web-search__input-wrapper{-webkit-transform:translate(calc(-50% + 16px));transform:translate(calc(-50% + 16px))}}web-search[expanded] .web-search__close-btn{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}@media (min-width:865px){web-search[expanded] .web-search__close-btn{display:none}}</style><style type="text/css">web-question{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-flex:1;-ms-flex:1;flex:1;width:100%}.web-question__content{display:block;-webkit-box-flex:1;-ms-flex:1 1 0px;flex:1 1 0;height:0;padding:0 1.5rem 1.5rem;overflow-y:auto}@media (min-width:481px){.web-question__content{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;height:25rem}}.web-question__footer{border-top:1px solid #dadce0;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;padding:.625rem}@media (min-width:481px){.web-question__footer{padding:1rem}}.web-question__cta{overflow:visible}.web-question__cta:before{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font:normal normal normal 24px/1 Material Icons;-webkit-font-feature-settings:"liga";font-feature-settings:"liga";text-rendering:optimizeLegibility;text-transform:none;word-wrap:normal;-webkit-box-align:center;-ms-flex-align:center;align-items:center;background:#018642;border-radius:50%;color:#fff;content:"check";display:-webkit-box;display:-ms-flexbox;display:flex;font-size:18px;height:24px;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;left:calc(-24px - .5rem);opacity:0;pointer-events:none;position:absolute;top:calc(50% - 12px);-webkit-transform:scale(0);transform:scale(0);-webkit-transition:opacity .4s ease,-webkit-transform .2s ease;transition:opacity .4s ease,-webkit-transform .2s ease;transition:opacity .4s ease,transform .2s ease;transition:opacity .4s ease,transform .2s ease,-webkit-transform .2s ease;width:24px}[state=completed] .web-question__cta:before{opacity:1;-webkit-transform:scale(1);transform:scale(1)}</style><style type="text/css">web-codelab{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column;flex-flow:column}@media (min-width:865px){web-codelab{-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row;flex-flow:row}}web-codelab .w-sizer{padding:16px 32px}@media (min-width:865px){web-codelab .w-sizer.w-test{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column;flex-flow:column;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}web-codelab .w-sizer.w-test:after{content:"";background:#eb0f00;height:2px}}web-codelab .w-sizer .w-aside{margin:0}@media (min-width:865px){web-codelab .w-sizer{padding:16px;position:-webkit-sticky;position:sticky;top:65px;height:calc(100vh - 65px)}}web-codelab .web-codelab__headline{margin-top:0;margin-bottom:8px}web-codelab .web-codelab__instructions{padding:32px}@media (min-width:865px){web-codelab .web-codelab__instructions{width:600px}}web-codelab .web-codelab__glitch{-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}@media (min-width:865px){web-codelab .web-codelab__glitch{-webkit-box-ordinal-group:initial;-ms-flex-order:initial;order:0}}</style><style type="text/css">.web-modal__overflow-hidden{overflow:hidden}@-webkit-keyframes fadein{0%{opacity:0}to{opacity:1}}@keyframes fadein{0%{opacity:0}to{opacity:1}}@-webkit-keyframes scaleup{0%{-webkit-transform:scale(.8);transform:scale(.8)}to{-webkit-transform:scale(1);transform:scale(1)}}@keyframes scaleup{0%{-webkit-transform:scale(.8);transform:scale(.8)}to{-webkit-transform:scale(1);transform:scale(1)}}.web-modal{-webkit-box-align:center;-ms-flex-align:center;align-items:center;background:rgba(0,0,0,.32);bottom:0;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;left:0;opacity:0;overflow:auto;padding:1em;position:fixed;right:0;top:0;-webkit-transition:visibility 0s .15s;transition:visibility 0s .15s;visibility:hidden;z-index:275}.web-modal,.web-modal .web-modal__container{display:-webkit-box;display:-ms-flexbox;display:flex}.web-modal .web-modal__container{background:#fff;border-radius:8px;-webkit-box-shadow:0 11px 15px -7px rgba(0,0,0,.2),0 24px 38px 3px rgba(0,0,0,.14),0 9px 46px 8px rgba(0,0,0,.12);box-shadow:0 11px 15px -7px rgba(0,0,0,.2),0 24px 38px 3px rgba(0,0,0,.14),0 9px 46px 8px rgba(0,0,0,.12);-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;margin:auto;max-height:100%;max-width:35em;min-height:20em;pointer-events:auto;width:26em}.web-modal .web-modal__header{border-bottom:1px solid transparent;margin:0;padding:1.5rem 1.5rem .5rem}.web-modal .web-modal__content{-webkit-box-flex:1;-ms-flex:1;flex:1;overflow:auto;padding:0 1.5rem}.web-modal .web-modal__footer{border-top:1px solid transparent;display:grid;gap:.5rem;grid-template-columns:1fr auto;justify-items:end;padding:1rem}.web-modal .web-modal__button{height:44px}.web-modal[open]{opacity:1;-webkit-transition:visibility 0s;transition:visibility 0s;visibility:visible}.web-modal[animatable]{animation:fadein 75ms linear reverse}.web-modal[animatable][open]{-webkit-animation:fadein .15s linear;animation:fadein .15s linear}.web-modal[animatable][open] .web-modal__container{-webkit-animation:scaleup .15s cubic-bezier(0,0,.2,1),fadein 75ms linear;animation:scaleup .15s cubic-bezier(0,0,.2,1),fadein 75ms linear}.web-modal[overflow] .web-modal__footer,.web-modal[overflow] .web-modal__header{border-color:#dadce0}</style><style type="text/css">.web-assessment__launcher{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;margin:3em 0}.web-assessment__button{height:3rem}web-assessment{display:none;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}web-assessment[animatable]{animation:modal-slideup .25s ease reverse}web-assessment[animatable][open]{-webkit-animation:modal-slideup .25s ease;animation:modal-slideup .25s ease}web-assessment.unresolved *{display:none!important}@media (min-width:481px){web-assessment{display:-webkit-box;display:-ms-flexbox;display:flex;margin:5em 0!important;padding:0!important}}@-webkit-keyframes modal-slideup{0%{-webkit-transform:translateY(40%);transform:translateY(40%);opacity:0}to{-webkit-transform:none;transform:none;opacity:1}}@keyframes modal-slideup{0%{-webkit-transform:translateY(40%);transform:translateY(40%);opacity:0}to{-webkit-transform:none;transform:none;opacity:1}}.web-assessment__open,.web-assessment__open:active,.web-assessment__open:focus,.web-assessment__open:hover{background:#018642}.web-assessment__close{position:absolute;right:.5rem;top:.75rem}.web-assessment__lockup{color:#018642}.web-assessment__lockup:before{content:"school"}.web-assessment--singleton .web-assessment__header{border-bottom:1px solid #dadce0}.web-assessment__content{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1}web-assessment[animatable],web-assessment[open]{background:#fff;bottom:0;display:-webkit-box;display:-ms-flexbox;display:flex;left:0;margin:0;position:fixed;right:0;top:0;z-index:250}web-assessment[animatable] .web-assessment__header,web-assessment[open] .web-assessment__header{padding:1.5rem 3.5rem 1rem 1.5rem}web-assessment[animatable] .web-assessment__set-leader,web-assessment[open] .web-assessment__set-leader{display:none}@media (min-width:481px){.web-assessment__close,.web-assessment__launcher{display:none}.web-assessment__header{padding:1.5rem 1.5rem 1rem}}</style><style type="text/css">[data-role=option][data-submitted],[state=completed] [data-role=option]{background:#f1f3f4;border-radius:3px;cursor:auto}[data-role=option][data-correct][data-submitted]{background:rgba(1,134,66,.08);-webkit-box-shadow:inset 0 0 0 1px #018642;box-shadow:inset 0 0 0 1px #018642}.web-response__correctness-flag{color:#5f6368;display:none;padding:.1875rem 0 .5rem}[data-role=option][data-submitted] .web-response__correctness-flag,[state=completed] .web-response__correctness-flag{display:block}[data-role=option][data-submitted] .web-response__correctness-flag{color:#e51661}[data-role=option][data-submitted][data-correct] .web-response__correctness-flag{color:#018642}.web-response__option-rationale{color:#5f6368;display:none;font-size:.833em;padding:.5rem 0 0}[data-submitted] .web-response__option-rationale,[state=completed] .web-response__option-rationale{display:block}.web-response__option-rationale>:first-child{margin-top:0}.web-response__option-rationale>:last-child{margin-bottom:0}.web-response__option-rationale p{font-size:1em;line-height:1.5}.web-response__option-rationale ol>li,.web-response__option-rationale ul>li{font-size:1em}.web-response__option-rationale ol>li:before{margin-top:.25em}</style><style type="text/css">web-response-mc .web-response-mc__selector,web-response-mc input[type=radio]~.web-response-mc__selector:after{border-color:#018642}@media (hover:hover){web-response-mc .web-response-mc__input:focus~.web-response-mc__selector:before,web-response-mc .web-response-mc__option:hover .web-response-mc__selector:before{background:#e8f5e9}}web-response-mc .web-response-mc__option:active .web-response-mc__selector:before{background:#c8e6c9}web-response-mc input[type=checkbox]:checked~.web-response-mc__selector{background:#018642}.web-response-mc__option[data-submitted],[state=completed] .web-response-mc__option{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;justify-self:stretch;padding:1rem 1rem 1.5rem}[state=completed] .web-response-mc__input[disabled]~.web-response-mc__selector{background:#80868b;border-color:#80868b;-webkit-transition:none;transition:none}.web-select-group__option[data-submitted] .web-response-mc__input~.web-response-mc__selector{background:#e51661!important;border-color:#e51661!important;-webkit-transition:none;transition:none}.web-select-group__option[data-submitted][data-correct] .web-response-mc__input~.web-response-mc__selector{background:#018642!important;border-color:#018642!important;-webkit-transition:none;transition:none}.web-select-group__option[data-submitted] .web-response-mc__selector:before,[state=completed] .web-response-mc__selector:before{background:none!important}.web-select-group__option[data-submitted] .web-response-mc__input~.web-response-mc__selector:after,[state=completed] .web-response-mc__input~.web-response-mc__selector:after{border:0;content:"remove";height:auto;-webkit-transform:initial;transform:none;-webkit-transition:none;transition:none;width:auto}.web-select-group__option[data-submitted] .web-response-mc__input~.web-response-mc__selector:after{content:"clear"}.web-select-group__option[data-submitted][data-correct] .web-response-mc__input~.web-response-mc__selector:after{content:"check"}.web-select-group__option[data-submitted][disabled],[state=completed] .web-select-group__option[disabled]{pointer-events:auto}.web-select-group__option[data-submitted][disabled] .web-select-group__option-content,[state=completed] .web-select-group__option[disabled] .web-select-group__option-content{opacity:1}</style><style type="text/css">[state=completed] .web-response-tac__option-rationale{font:400 12px/1.5 Roboto,sans-serif;background:rgba(1,134,66,.08);border-radius:3px;color:#202124;display:block;line-height:1.778!important;padding:1.125rem}@media (min-width:241px){[state=completed] .web-response-tac__option-rationale{font:400 14px/1.5 Roboto,sans-serif}}@media (min-width:321px){[state=completed] .web-response-tac__option-rationale{font:400 16px/1.5 Roboto,sans-serif}}</style><style type="text/css">.web-select-group{border:0;margin:1.5rem 0;padding:0}.web-select-group__options-wrapper{display:grid;gap:1em;justify-items:start}[columns]>fieldset>.web-select-group__options-wrapper{grid-template-columns:repeat(auto-fit,minmax(30ch,1fr));justify-items:stretch}.web-select-group__option{font:400 13.5px/1.55556 Roboto,sans-serif;margin-top:27px;margin-bottom:27px;-webkit-tap-highlight-color:transparent;-webkit-box-align:center;-ms-flex-align:center;align-items:center;cursor:pointer;display:-webkit-box;display:-ms-flexbox;display:flex;line-height:1.5!important;margin:0!important;padding:0 1rem;position:relative;z-index:1}@media (min-width:241px){.web-select-group__option{font:400 15px/1.86667 Roboto,sans-serif;margin-top:31.5px;margin-bottom:31.5px}}@media (min-width:321px){.web-select-group__option{font:400 18px/1.77778 Roboto,sans-serif;margin-top:36px;margin-bottom:36px}}.w-selectgroup__option--standalone{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.web-select-group__option[disabled]{pointer-events:none}.web-select-group__option-content{-webkit-transition:opacity .12s cubic-bezier(0,0,.2,1);transition:opacity .12s cubic-bezier(0,0,.2,1)}.web-select-group__option[disabled] .web-select-group__option-content{opacity:.5}.web-select-group__input{cursor:inherit;left:0;margin:0;opacity:0;padding:0;position:absolute;top:0}.web-select-group__selector{-webkit-box-align:center;-ms-flex-align:center;align-items:center;border:2px solid #3740ff;border-radius:2px;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto;height:18px;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin:.4375rem 1.5625rem .4375rem .3125rem;position:relative;-webkit-transition:border .12s cubic-bezier(0,0,.2,1),background .12s cubic-bezier(0,0,.2,1);transition:border .12s cubic-bezier(0,0,.2,1),background .12s cubic-bezier(0,0,.2,1);width:18px}.w-selectgroup__option--standalone~.w-selectgroup__selector{margin:.4375rem}input[type=radio]~.web-select-group__selector{border-radius:50%;height:20px;margin:.375rem 1.5rem .375rem .25rem;width:20px}.w-selectgroup__option--standalone input[type=radio]~.w-selectgroup__selector{margin:.375rem}.web-select-group__selector:before{background:none;border:1px solid transparent;border-radius:50%;content:"";display:block;height:40px;left:50%;position:absolute;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transition:background .12s cubic-bezier(0,0,.2,1),border .12s cubic-bezier(0,0,.2,1);transition:background .12s cubic-bezier(0,0,.2,1),border .12s cubic-bezier(0,0,.2,1);width:40px;z-index:-1}.web-select-group__selector:after{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font:normal normal normal 24px/1 Material Icons;-webkit-font-feature-settings:"liga";font-feature-settings:"liga";text-rendering:optimizeLegibility;text-transform:none;word-wrap:normal;color:#fff;content:"";display:block;font-size:18px}input[type=radio]~.web-select-group__selector:after{border:5px solid #3740ff;border-radius:50%;height:0;-webkit-transform:scale(0);transform:scale(0);-webkit-transition:-webkit-transform .12s cubic-bezier(0,0,.2,1);transition:-webkit-transform .12s cubic-bezier(0,0,.2,1);transition:transform .12s cubic-bezier(0,0,.2,1);transition:transform .12s cubic-bezier(0,0,.2,1),-webkit-transform .12s cubic-bezier(0,0,.2,1);width:0}@media (hover:hover){.web-select-group__input:focus~.web-select-group__selector:before,.web-select-group__option:hover .web-select-group__selector:before{background:rgba(55,64,255,.11)}}.web-select-group__option:active .web-select-group__selector:before{background:rgba(55,64,255,.26)}.web-select-group__input:focus~.web-select-group__selector:before{border-color:#3740ff}.js-focus-visible .web-select-group__input:focus:not(.focus-visible)~.web-select-group__selector:before{border-color:transparent}input[type=radio]:checked~.web-select-group__selector:after{-webkit-transform:scale(1);transform:scale(1)}input[type=checkbox]:checked~.web-select-group__selector{background:#3740ff}input[type=checkbox]:checked~.web-select-group__selector:after{content:"check"}.web-select-group__input[disabled]~.web-select-group__selector{border-color:#bdc1c6}input[type=checkbox][disabled]:checked~.web-select-group__selector{background:#bdc1c6}.web-select-group__input[disabled]~.web-select-group__selector:after{border-color:#bdc1c6}</style><style type="text/css">web-tabs{-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}web-tabs,web-tabs .web-tabs__tablist{display:-webkit-box;display:-ms-flexbox;display:flex}web-tabs .web-tabs__tablist{border-bottom:1px solid #dadce0;overflow-x:auto;scroll-behavior:smooth;width:100%;scrollbar-color:#80868b transparent;scrollbar-width:thin}web-tabs .web-tabs__tablist::-webkit-scrollbar{height:10px;width:10px}web-tabs .web-tabs__tablist::-webkit-scrollbar-thumb{background:#80868b;background-clip:padding-box;border:2.5px solid transparent;border-radius:5px}web-tabs .web-tabs__tablist::-webkit-scrollbar-thumb:hover{background-color:#62676c}web-tabs .web-tabs__tablist::-webkit-scrollbar-thumb:active{background-color:#4a4e51}web-tabs .web-tabs__tablist::-webkit-scrollbar-track{background:transparent}web-tabs[overflow] .web-tabs__tablist{padding-left:3rem}web-tabs .web-tabs__tab{-webkit-tap-highlight-color:transparent;-webkit-box-align:center;-ms-flex-align:center;align-items:center;background:transparent;border:0;border-radius:3px;color:#3740ff;cursor:pointer;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;font:500 .875rem/2.25rem Roboto,sans-serif;height:56px;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;letter-spacing:1px;outline:0;padding:0 16px;position:relative;text-decoration:none;text-transform:uppercase;-webkit-transition:background-color .2s,-webkit-box-shadow .2s;transition:background-color .2s,-webkit-box-shadow .2s;transition:background-color .2s,box-shadow .2s;transition:background-color .2s,box-shadow .2s,-webkit-box-shadow .2s;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;border-radius:0;color:#000;-webkit-box-flex:1;-ms-flex:1 0 auto;flex:1 0 auto;height:3rem;margin:0;min-width:-webkit-fit-content;min-width:-moz-fit-content;min-width:fit-content;-webkit-transition:background .2s,color .2s,-webkit-box-shadow .2s;transition:background .2s,color .2s,-webkit-box-shadow .2s;transition:background .2s,box-shadow .2s,color .2s;transition:background .2s,box-shadow .2s,color .2s,-webkit-box-shadow .2s}@media (hover:hover){web-tabs .web-tabs__tab:focus,web-tabs .web-tabs__tab:hover{background:#e8f5e9}}web-tabs .web-tabs__tab:focus{-webkit-box-shadow:inset 0 0 0 1px #3740ff;box-shadow:inset 0 0 0 1px #3740ff;outline:0}web-tabs .web-tabs__tab:active{background:#c8e6c9;-webkit-box-shadow:none;box-shadow:none}web-tabs .web-tabs__tab[aria-selected=true]{color:#018642}web-tabs .web-tabs__tab:after{background:transparent;bottom:0;content:"";display:block;height:2px;left:0;position:absolute;right:0;-webkit-transition:background .2s;transition:background .2s}web-tabs .web-tabs__tab[aria-selected=true]:after{background:#018642}web-tabs .web-tabs__text-label{opacity:.6;-webkit-transition:opacity .2s;transition:opacity .2s}web-tabs .web-tabs__tab[aria-selected=true] .web-tabs__text-label{opacity:1}web-tabs .web-tabs__panel{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}web-tabs.unresolved *{display:none!important}.js-focus-visible .web-tabs__tab:focus:not(.focus-visible){-webkit-box-shadow:none;box-shadow:none}</style><style type="text/css">.web-copy-code__button{color:#202124;height:48px;margin:8px;opacity:0;position:absolute;right:0;width:48px}.web-copy-code__button:focus,.web-copy-code__button:hover{background-color:rgba(63,196,255,.2);opacity:1}.web-copy-code__button:active{background-color:rgba(63,196,255,.4);opacity:1}web-copy-code{display:block;position:relative}web-copy-code:active .web-copy-code__button,web-copy-code:focus .web-copy-code__button,web-copy-code:hover .web-copy-code__button{opacity:1}web-copy-code pre{min-height:64px}</style></head>
+  <body class="">
+    
+    <web-snackbar-container><!---->
+      <web-snackbar open="" stacked=""><!---->
+      <div class="web-snackbar__surface">
+        
+      <div class="web-snackbar__label" role="status">
+        We serve cookies on this site to analyze traffic, remember your
+        preferences, and optimize your experience.
+      </div>
+      <div class="web-snackbar__actions">
+        <a href="https://policies.google.com/technologies/cookies" class="w-button web-snackbar__action">More details</a>
+        <button class="w-button web-snackbar__action">
+          OK
+        </button>
+      </div>
+    
+      </div>
+    <!----></web-snackbar>
+    <!----></web-snackbar-container>
+    <div class="w-loading-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" hidden=""></div>
+    <web-header role="navigation">
+      <button class="w-button--icon w-button--round web-header__hamburger-btn" aria-label="Open menu">
+        <span class="w-tooltip w-tooltip--left">Open menu</span>
+      </button>
+
+      <a href="https://web.dev/" class="web-header__logo-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Site logo">
+        <img class="web-header__logo" src="./Home_screen_and_install_series3_files/lockup.svg" alt="web.dev">
+      </a>
+
+      <div class="web-header__middle">
+        <div class="web-header__links">
+          <a href="https://web.dev/learn/" class="web-header__link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Learn">
+            Learn
+          </a>
+
+          <a href="https://web.dev/measure/" class="web-header__link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Measure">
+            Measure
+          </a>
+
+          <a href="https://web.dev/blog/" class="web-header__link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Blog">
+            Blog
+          </a>
+
+          <a href="https://web.dev/about/" class="web-header__link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: About">
+            About
+          </a>
+        </div>
+        <web-search><!---->
+      <button class="web-search__open-btn" aria-label="Open search"></button>
+      <div class="web-search__input-wrapper" role="combobox" aria-owns="web-search-popout__list" aria-haspopup="listbox" aria-expanded="undefined">
+        <input class="web-search__input" type="text" role="searchbox" autocomplete="off" aria-autocomplete="list" aria-controls="web-search-popout__list" aria-label="Search" placeholder="Search">
+      </div>
+      <button class="web-search__close-btn" aria-label="Close search"></button>
+      
+        <div id="web-search-popout__list" role="listbox" aria-hidden="true"></div>
+      
+    <!----></web-search>
+      </div>
+
+      <web-profile-switcher-container><!---->
+      <button class="w-profile-signin">
+        Sign in
+      </button>
+    <!----></web-profile-switcher-container>
+    </web-header>
+
+    <web-side-nav class="" aria-hidden="true" inert=""><!---->
+      <nav class="web-side-nav__container">
+        <div class="web-side-nav__header">
+          <button data-icon="close" class="w-button--icon w-button--round web-side-nav__hide" aria-label="Close" tabindex="-1">
+            <span class="w-tooltip">Close</span>
+          </button>
+          <a href="https://web.dev/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Site logo" tabindex="-1">
+            <img class="web-side-nav__logo" src="./Home_screen_and_install_series3_files/lockup.svg" alt="web.dev">
+          </a>
+        </div>
+        <!----><a href="https://web.dev/learn/" class="web-side-nav__link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="SideNav: Learn" tabindex="-1">
+        Learn
+      </a><!----><a href="https://web.dev/measure/" class="web-side-nav__link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="SideNav: Measure" tabindex="-1">
+        Measure
+      </a><!----><a href="https://web.dev/blog/" class="web-side-nav__link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="SideNav: Blog" tabindex="-1">
+        Blog
+      </a><!----><a href="https://web.dev/about/" class="web-side-nav__link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="SideNav: About" tabindex="-1">
+        About
+      </a><!---->
+      </nav>
+    <!----></web-side-nav>
+    <main>
+      
+      <div id="content">
+        
+<title>Provide a custom install experience</title>
+
+
+<div class="guide-landing-page">
+  
+
+  
+  <web-actions actions="share|subscribe" authors="@petele"><!---->
+      <div class="w-actions">
+        <!---->
+      <a class="w-actions__fab w-actions__fab--share gc-analytics-event" data-category="web.dev" data-label="share, twitter" data-action="click" target="_blank" rel="noreferrer" href="https://twitter.com/share?url=https%3A%2F%2Fweb.dev%2Fcustomize-install%2F&amp;text=Provide+a+custom+install+experience+by+%40petele">
+        <span>Share</span>
+      </a>
+    <!---->
+      <a class="w-actions__fab w-actions__fab--subscribe gc-analytics-event" data-category="web.dev" data-label="subscribe, newsletter" data-action="click" href="https://web.dev/subscribe" target="_blank">
+        <span>Subscribe</span>
+      </a>
+    <!---->
+      </div>
+    <!----></web-actions>
+
+  
+
+
+  <div class="w-layout-container--narrow w-post-content">
+    <header class="w-article-header">
+      
+
+      <h1 class="w-article-header__headline">Provide a custom install experience</h1>
+      
+
+      
+        <div class="w-author__published">
+          <time>Feb 14, 2020</time>
+           <span class="w-author__separator">•</span> Updated <time>Feb 24, 2020</time> 
+        </div>
+      
+      
+        <div class="w-layout-container--narrow w-post-signpost">
+  <span class="w-post-signpost__title">Appears in:</span>
+  <a class="w-post-signpost__link" href="https://web.dev/progressive-web-apps/">Progressive Web Apps</a>
+</div>
+      
+
+      
+        <div class="w-authors w-mt--xl w-pt--sm">
+          
+            <div class="w-author">
+  <a href="https://web.dev/authors/petelepage">
+    <img class="w-author__image " src="./Home_screen_and_install_series3_files/petelepage.jpg" alt="Pete LePage">
+  </a>
+  <div class="w-author__info" style="display: flex; flex-direction: column; justify-content: center;">
+    <cite class="w-author__name">
+      <a class="w-author__name-link" href="https://web.dev/authors/petelepage">Pete LePage</a>
+    </cite>
+    <ul class="w-author__link-list">
+      <li class="w-author__link-listitem">
+        <a class="w-author__link" href="https://twitter.com/petele">Twitter</a>
+      </li>
+      <li class="w-author__link-listitem">
+        <a class="w-author__link" href="https://github.com/petele">GitHub</a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+          
+        </div>
+      
+    </header>
+
+    
+
+    <p>Many browsers make it possible for you to enable and promote the installation
+of your Progressive Web App (PWA) directly within the user interface of your
+PWA. Installation (sometimes formerly referred to as Add to Home Screen),
+makes it easy for users to install your PWA on their mobile or desktop device.
+Installing a PWA adds it to a user's launcher, allowing it to be run like any
+other installed app.</p>
+<figure class="w-figure w-figure--inline-right">
+  <img src="./Home_screen_and_install_series3_files/spotify-custom-install.png" alt="Install App button provided in the Spotify PWA">
+  <figcaption class="w-figcaption">
+    "Install App" button provided in the Spotify PWA
+  </figcaption>
+</figure>
+<p>Why would you want a user to install your PWA? The same reason you'd want a
+user to install your app from any app store. Users who install are your most
+engaged users. Users who install a PWA have better engagement metrics than
+casual visitors, including more repeat visits, longer time on site and
+higher conversion rates, often at parity with native app users on mobile
+devices.</p>
+<div class="w-clearfix"></div>
+<h2 id="promote-installation">Promoting installation <a class="w-headline-link" href="https://web.dev/customize-install/#promote-installation" aria-hidden="true">#</a></h2>
+<p>To indicate your Progressive Web App is installable, and to provide a custom
+in-app install flow:</p>
+<ol>
+<li>Listen for the <code>beforeinstallprompt</code> event.</li>
+<li>Save the <code>beforeinstallprompt</code> event, so it can be used to trigger the
+install flow later.</li>
+<li>Alert the user that your PWA is installable, and provide a button or other
+element to start the in-app installation flow.</li>
+</ol>
+<h3 id="beforeinstallprompt">Listen for the <code>beforeinstallprompt</code> event <a class="w-headline-link" href="https://web.dev/customize-install/#beforeinstallprompt" aria-hidden="true">#</a></h3>
+<p>If your Progressive Web App meets the required <a href="https://web.dev/install-criteria/">installation criteria</a>,
+the browser fires a <code>beforeinstallprompt</code> event. Save a reference to the
+event, and update your user interface to indicate that the user can install
+your PWA. This is highlighted below.</p>
+<web-copy-code><button class="w-button--icon w-button--round web-copy-code__button" data-icon="file_copy" aria-label="Copy code"><span class="w-tooltip w-tooltip--right" role="tooltip">Copy code</span></button><pre class="language-js"><code class="language-js"><span class="highlight-line"><span class="token keyword">let</span> deferredPrompt<span class="token punctuation">;</span></span><br><span class="highlight-line"></span><br><span class="highlight-line">window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'beforeinstallprompt'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span></span><br><span class="highlight-line">  <span class="token comment">// Prevent the mini-infobar from appearing on mobile</span></span><br><span class="highlight-line">  e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><mark class="highlight-line highlight-line-active">  <span class="token comment">// Stash the event so it can be triggered later.</span></mark><br><mark class="highlight-line highlight-line-active">  deferredPrompt <span class="token operator">=</span> e<span class="token punctuation">;</span></mark><br><mark class="highlight-line highlight-line-active">  <span class="token comment">// Update UI notify the user they can install the PWA</span></mark><br><mark class="highlight-line highlight-line-active">  <span class="token function">showInstallPromotion</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></mark><br><span class="highlight-line"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></code></pre>
+</web-copy-code><p>There are many different <a href="https://web.dev/promote-install/">patterns</a> that you can use to
+notify the user your app can be installed and provide an in-app install
+flow, for example, a button in the header, an item in the navigation menu,
+or an item in your content feed.</p>
+<div class="w-aside w-aside--caution">
+<p><strong>Caution:</strong>
+You may want to wait before showing the prompt to the user so you don't
+distract them from what they're doing. For example, if the user is in a
+check-out flow, or creating their account, let them complete that before
+prompting them.</p>
+</div>
+<h3 id="in-app-flow">In-app installation flow <a class="w-headline-link" href="https://web.dev/customize-install/#in-app-flow" aria-hidden="true">#</a></h3>
+<p>To provide in-app installation, provide a button or other interface element
+that a user can click to install your app. When the element is
+clicked, call <code>prompt()</code> on the saved <code>beforeinstallprompt</code> event (stored
+in the <code>deferredPrompt</code> variable). It shows the user a modal install dialog,
+asking them to confirm they want to install your PWA.</p>
+<web-copy-code><button class="w-button--icon w-button--round web-copy-code__button" data-icon="file_copy" aria-label="Copy code"><span class="w-tooltip w-tooltip--right" role="tooltip">Copy code</span></button><pre class="language-js"><code class="language-js">buttonInstall<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><br>  <span class="token comment">// Hide the app provided install promotion</span><br>  <span class="token function">hideMyInstallPromotion</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>  <span class="token comment">// Show the install prompt</span><br>  deferredPrompt<span class="token punctuation">.</span><span class="token function">prompt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>  <span class="token comment">// Wait for the user to respond to the prompt</span><br>  deferredPrompt<span class="token punctuation">.</span>userChoice<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">choiceResult</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><br>    <span class="token keyword">if</span> <span class="token punctuation">(</span>choiceResult<span class="token punctuation">.</span>outcome <span class="token operator">===</span> <span class="token string">'accepted'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'User accepted the install prompt'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span><br>      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'User dismissed the install prompt'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br>  <span class="token punctuation">}</span><span class="token punctuation">)</span><br><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</web-copy-code><p>The <code>userChoice</code> property is a promise that resolves with the user's choice.
+You can only call <code>prompt()</code> on the deferred event once. If the user
+dismisses it, you'll need to wait until the <code>beforeinstallprompt</code> event
+is fired again, typically immediately after the <code>userChoice</code> property
+has resolved.</p>
+<div class="w-aside w-aside--codelab">
+<p><strong>Try it!</strong>
+<a href="https://web.dev/codelab-make-installable">Make a site installable using the beforeinstallprompt event</a>.</p>
+</div>
+<h2 id="detect-install">Detect when the PWA was successfully installed <a class="w-headline-link" href="https://web.dev/customize-install/#detect-install" aria-hidden="true">#</a></h2>
+<p>You can use the <code>userChoice</code> property to determine if the user installed
+your app from within your user interface. But, if the user installs your
+PWA from the address bar or other browser component, <code>userChoice</code> won't
+help. Instead, you should listen for the <code>appinstalled</code> event. It is fired
+whenever your PWA is installed, no matter what mechanism is used to install
+your PWA.</p>
+<web-copy-code><button class="w-button--icon w-button--round web-copy-code__button" data-icon="file_copy" aria-label="Copy code"><span class="w-tooltip w-tooltip--right" role="tooltip">Copy code</span></button><pre class="language-js"><code class="language-js">window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'appinstalled'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">evt</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><br>  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'a2hs installed'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</web-copy-code><h2 id="detect-launch-type">Detect how the PWA was launched <a class="w-headline-link" href="https://web.dev/customize-install/#detect-launch-type" aria-hidden="true">#</a></h2>
+<p>The CSS <code>display-mode</code> media query indicates how the PWA was launched,
+either in a browser tab, or as an installed PWA. This makes it possible to
+apply different styles depending on how the app was launched. For example,
+always hide the install button and provide a back button when launched as an
+installed PWA.</p>
+<h3 id="update-ui-based-on-how-the-pwa-was-launched">Update UI based on how the PWA was launched <a class="w-headline-link" href="https://web.dev/customize-install/#update-ui-based-on-how-the-pwa-was-launched" aria-hidden="true">#</a></h3>
+<p>To apply a different background color for a PWA when launched as an installed
+PWA, use conditional CSS:</p>
+<web-copy-code><button class="w-button--icon w-button--round web-copy-code__button" data-icon="file_copy" aria-label="Copy code"><span class="w-tooltip w-tooltip--right" role="tooltip">Copy code</span></button><pre class="language-css"><code class="language-css"><span class="token atrule"><span class="token rule">@media</span> all and <span class="token punctuation">(</span><span class="token property">display-mode</span><span class="token punctuation">:</span> standalone<span class="token punctuation">)</span></span> <span class="token punctuation">{</span><br>  <span class="token selector">body</span> <span class="token punctuation">{</span><br>    <span class="token property">background-color</span><span class="token punctuation">:</span> yellow<span class="token punctuation">;</span><br>  <span class="token punctuation">}</span><br><span class="token punctuation">}</span></code></pre>
+</web-copy-code><h3 id="track-how-the-pwa-was-launched">Track how the PWA was launched <a class="w-headline-link" href="https://web.dev/customize-install/#track-how-the-pwa-was-launched" aria-hidden="true">#</a></h3>
+<p>To track how users launch your PWA, use <code>matchMedia()</code> to test the
+<code>display-mode</code> media query. Unfortunately, Safari on iOS doesn't support
+this yet, so you must check <code>navigator.standalone</code>, it returns a boolean
+indicating whether the browser is running in standalone mode.</p>
+<web-copy-code><button class="w-button--icon w-button--round web-copy-code__button" data-icon="file_copy" aria-label="Copy code"><span class="w-tooltip w-tooltip--right" role="tooltip">Copy code</span></button><pre class="language-js"><code class="language-js">window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'load'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><br>  <span class="token keyword">if</span> <span class="token punctuation">(</span>navigator<span class="token punctuation">.</span>standalone<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Launched: Installed (iOS)'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">matchMedia</span><span class="token punctuation">(</span><span class="token string">'(display-mode: standalone)'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>matches<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Launched: Installed'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span><br>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Launched: Browser Tab'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>  <span class="token punctuation">}</span><br><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</web-copy-code><h2 id="updating-your-app&#39;s-icon-and-name">Updating your app's icon and name <a class="w-headline-link" href="https://web.dev/customize-install/#updating-your-app&#39;s-icon-and-name" aria-hidden="true">#</a></h2>
+<h3 id="chrome-on-android">Chrome on Android <a class="w-headline-link" href="https://web.dev/customize-install/#chrome-on-android" aria-hidden="true">#</a></h3>
+<p>On Android, when your PWA is launched, Chrome will check the currently
+installed manifest against the live manifest. If an update is required, it
+will be <a href="https://developers.google.com/web/fundamentals/integration/webapks#update-webapk">queued and updated</a> once the device is plugged in and
+connected to Wi-Fi.</p>
+<h3 id="chrome-on-desktop">Chrome on Desktop <a class="w-headline-link" href="https://web.dev/customize-install/#chrome-on-desktop" aria-hidden="true">#</a></h3>
+<p>On Desktop, the manifest is not automatically updated, but this is planned for
+a future update.</p>
+
+
+    <div class="w-chips">
+      
+        <a class="w-chip" href="https://web.dev/tags/progressive-web-apps/">Progressive Web Apps</a>
+      
+    </div>
+
+    <div class="w-post-github-link w-mt--l w-mb--l">
+      <span class="w-mr--sm">
+        
+        Last updated: <time>Feb 24, 2020</time>
+        
+      </span>
+      <a href="https://github.com/GoogleChrome/web.dev/blob/master/src/site/content/en/progressive-web-apps/customize-install/index.md">
+        Improve article
+      </a>
+       
+    </div>
+
+    
+  </div>
+
+  
+    
+    <nav class="w-article-navigation">
+  <a class="w-article-navigation__link w-article-navigation__link--back  gc-analytics-event" data-category="web.dev" data-label="navigation, go back" data-action="click" href="https://web.dev/progressive-web-apps">
+    Return to all articles
+  </a>
+  <a class="w-article-navigation__link w-article-navigation__link--forward gc-analytics-event" data-category="web.dev" data-label="navigation, go forward" data-action="click" href="https://web.dev/promote-install/">
+    <div class="w-article-navigation__column">
+      <h3 class="w-article-navigation__heading">Next article</h3>
+      Patterns for promoting PWA installation
+    </div>
+  </a>
+</nav>
+  
+
+  
+  
+</div>
+
+      </div>
+    </main>
+    <footer class="w-footer">
+  <nav class="w-footer__linkboxes">
+    <ul class="w-footer__linkboxes-list">
+      <li class="w-footer__linkbox">
+        <h3 class="w-footer__linkbox-heading">Contribute</h3>
+        <ul class="w-footer__linkbox-list">
+          <li class="w-footer__linkbox-item">
+            <a href="https://github.com/GoogleChrome/web.dev/issues/new?assignees=&amp;labels=bug&amp;template=bug_report.md&amp;title=" class="w-footer__linkbox-link" data-category="Site-Wide Custom Events" data-label="Footer Link (index 1)">
+              File a bug
+            </a>
+          </li>
+          <li class="w-footer__linkbox-item">
+            <a href="https://github.com/googlechrome/web.dev" class="w-footer__linkbox-link" data-category="Site-Wide Custom Events" data-label="Footer Link (index 2)">
+              View source
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="w-footer__linkbox">
+        <h3 class="w-footer__linkbox-heading">Related content</h3>
+        <ul class="w-footer__linkbox-list">
+          <li class="w-footer__linkbox-item">
+            <a href="https://developers.google.com/web/updates/" class="w-footer__linkbox-link" data-category="Site-Wide Custom Events" data-label="Footer Link (index 1)">
+              Updates
+            </a>
+          </li>
+          <li class="w-footer__linkbox-item">
+            <a href="https://developers.google.com/web/" class="w-footer__linkbox-link" data-category="Site-Wide Custom Events" data-label="Footer Link (index 2)">
+              Web Fundamentals
+            </a>
+          </li>
+          <li class="w-footer__linkbox-item">
+            <a href="https://developers.google.com/web/showcase/" class="w-footer__linkbox-link" data-category="Site-Wide Custom Events" data-label="Footer Link (index 3)">
+              Case studies
+            </a>
+          </li>
+          <li class="w-footer__linkbox-item">
+            <a href="https://devwebfeed.appspot.com/" class="w-footer__linkbox-link" data-category="Site-Wide Custom Events" data-label="Footer Link (index 4)">
+              DevWeb Content Firehose
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="w-footer__linkbox">
+        <h3 class="w-footer__linkbox-heading">Connect</h3>
+        <ul class="w-footer__linkbox-list">
+          <li class="w-footer__linkbox-item">
+            <a href="https://www.twitter.com/@ChromiumDev" class="w-footer__linkbox-link" data-category="Site-Wide Custom Events" data-label="Footer Link (index 1)">
+              Twitter
+            </a>
+          </li>
+          <li class="w-footer__linkbox-item">
+            <a href="https://www.youtube.com/user/ChromeDevelopers" class="w-footer__linkbox-link" data-category="Site-Wide Custom Events" data-label="Footer Link (index 2)">
+              YouTube
+            </a>
+          </li>
+          <li class="w-footer__linkbox-item">
+            <a href="https://medium.com/dev-channel" class="w-footer__linkbox-link" data-category="Site-Wide Custom Events" data-label="Footer Link (index 3)">
+              Medium
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="w-footer__utility">
+    <nav class="w-footer__utility-nav">
+      <a href="https://developers.google.com/" class="w-footer__utility-logo-link" data-category="Site-Wide Custom Events" data-label="Footer Google Developers Link">
+        <img loading="lazy" width="185" height="33" class="w-footer__utility-logo" src="./Home_screen_and_install_series3_files/lockup-color.png" alt="Google Developers">
+      </a>
+      <ul class="w-footer__utility-list">
+        <li class="w-footer__utility-item">
+          <a class="w-footer__utility-link" href="https://developer.chrome.com/home" data-category="Site-Wide Custom Events" data-label="Footer Chrome Link">
+            Chrome
+          </a>
+        </li>
+        <li class="w-footer__utility-item">
+          <a class="w-footer__utility-link" href="https://firebase.google.com/" data-category="Site-Wide Custom Events" data-label="Footer Firebase Link">
+            Firebase
+          </a>
+        </li>
+        <li class="w-footer__utility-item">
+          <a class="w-footer__utility-link" href="https://cloud.google.com/" data-category="Site-Wide Custom Events" data-label="Footer Google Cloud Platform Link">
+            Google Cloud Platform
+          </a>
+        </li>
+        <li class="w-footer__utility-item">
+          <a class="w-footer__utility-link" href="https://developers.google.com/products" data-category="Site-Wide Custom Events" data-label="Footer All products Link">
+            All products
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <nav class="w-footer__utility-nav">
+      <ul class="w-footer__utility-list">
+        <li class="w-footer__utility-item
+            ">
+          <a class="w-footer__utility-link" href="https://policies.google.com/" data-category="Site-Wide Custom Events" data-label="Footer Terms and Privacy link">
+            Terms &amp; Privacy
+          </a>
+        </li>
+      </ul>
+      <div class="w-footer__license">
+        <p>
+          Except as otherwise noted, the content of this page is licensed
+          under the
+          <a href="https://creativecommons.org/licenses/by/4.0/">
+          Creative Commons Attribution 4.0 License
+          </a>, and code samples are licensed under the
+          <a href="https://www.apache.org/licenses/LICENSE-2.0">
+          Apache 2.0 License</a>. For details, see the
+          <a href="https://developers.google.com/site-policies">
+          Google Developers Site Policies</a>.
+        </p>
+      </div>
+    </nav>
+  </div>
+</footer>
+
+  
+
+</body></html>

@@ -68,6 +68,7 @@ document.querySelector(".menu").addEventListener(
 
 const callback = i => evt => {
   //evt.stopPropagation(); U do want bubtle on this occasion ;)
+  evt.preventDefault()
 
   //check if link is partition link
   sections.forEach(e => {

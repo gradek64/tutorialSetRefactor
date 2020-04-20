@@ -1,22 +1,29 @@
 .flex-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
   min-height: 100vh;
   background-color: #394c55;
-  color:white;
+  color: white;
+}
+
+.makeNoteButton {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  background-color: aqua;
 }
 a {
   text-decoration: none;
-  color:inherit;
+  color: inherit;
 }
 
 /* search section*/
 .header-search {
   border: 1px dotted blue;
   background-color: #394043;
-
 }
 
 .header-search input {
@@ -29,7 +36,7 @@ a {
 }
 .seach-input-container {
   display: table; /*to make width fit the content */
-  margin:0 auto;
+  margin: 0 auto;
   width: 70%;
   padding: 2%;
 }
@@ -43,8 +50,8 @@ a {
 }
 .wrap-list {
   height: 0; /*trick to fill content of parent flex:2*/
-  width:70%;
-  margin:0 auto; 
+  width: 70%;
+  margin: 0 auto;
 }
 .list-tuts ul {
   list-style-type: none;
@@ -59,20 +66,53 @@ a {
   white-space: nowrap;
 }
 
-.list-tuts ul  ul{ 
-    padding-left: 20px;
-    color:rgba(255,255,255,0.7);
-  }
+.list-tuts ul ul {
+  padding-left: 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
 
-.list-tuts ul li{ 
-   margin:10px;
-  }
+.list-tuts ul li {
+  margin: 10px;
+}
 /*footer */
 
 .footer {
   flex: 1;
-    border: 1px dotted red;
-      background-color: #394043
+  border: 1px dotted red;
+  background-color: #394043;
+}
 
-
+/**** front ****/
+.sideMenu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 90px;
+  height: 105%;
+  background-color: green;
+  z-index: 3;
+}
+.menuContent {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  width: 80%;
+}
+.menuContent li {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  background-color: #3ac357;
+  border-radius: 50%;
+  text-align: center;
+  margin: 10px 0 10px 0;
+}
+.menuContent li:first-child {
+  margin-top: 40px;
+}
+.menuContent li span {
+  word-wrap: break-word;
 }

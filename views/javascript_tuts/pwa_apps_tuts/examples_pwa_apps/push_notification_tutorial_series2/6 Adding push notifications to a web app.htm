@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)https://codelabs.developers.google.com/codelabs/push-notifications/index.html#6 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  
+  <title>Adding push notifications to a web app</title>
+  <link rel="stylesheet" href="./6 Adding push notifications to a web app_files/css">
+  <link rel="stylesheet" href="./6 Adding push notifications to a web app_files/icon">
+  <link rel="stylesheet" href="./6 Adding push notifications to a web app_files/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+<script src="./6 Adding push notifications to a web app_files/analytics.js"></script></head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14" environment="web" category="null"></google-codelab-analytics>
+  <google-codelab codelab-gaid="" id="push-notifications" environment="web" feedback-link="https://github.com/GoogleChromeLabs/web-push-codelab/issues" selected="6" google-codelab-ready="" codelab-title="Adding push notifications to a web app" anayltics-ready="anayltics-ready"><div id="drawer"><div class="codelab-time-container" style="display: none;"></div><div class="steps"><ol><li completed=""><a href="https://codelabs.developers.google.com/codelabs/push-notifications/index.html#0"><span class="step"><span>Overview</span></span></a></li><li completed=""><a href="https://codelabs.developers.google.com/codelabs/push-notifications/index.html#1"><span class="step"><span>Get set up</span></span></a></li><li completed=""><a href="https://codelabs.developers.google.com/codelabs/push-notifications/index.html#2"><span class="step"><span>Register a service worker</span></span></a></li><li completed=""><a href="https://codelabs.developers.google.com/codelabs/push-notifications/index.html#3"><span class="step"><span>Initialize state</span></span></a></li><li completed=""><a href="https://codelabs.developers.google.com/codelabs/push-notifications/index.html#4"><span class="step"><span>Subscribe the user</span></span></a></li><li completed=""><a href="https://codelabs.developers.google.com/codelabs/push-notifications/index.html#5"><span class="step"><span>Handle permission denied</span></span></a></li><li completed="" selected=""><a href="https://codelabs.developers.google.com/codelabs/push-notifications/index.html#6"><span class="step"><span>Handle a push event</span></span></a></li><li><a href="https://codelabs.developers.google.com/codelabs/push-notifications/index.html#7"><span class="step"><span>Notification click</span></span></a></li><li><a href="https://codelabs.developers.google.com/codelabs/push-notifications/index.html#8"><span class="step"><span>Send push messages</span></span></a></li><li><a href="https://codelabs.developers.google.com/codelabs/push-notifications/index.html#9"><span class="step"><span>Unsubscribe the user</span></span></a></li><li><a href="https://codelabs.developers.google.com/codelabs/push-notifications/index.html#10"><span class="step"><span>Finished</span></span></a></li></ol></div><div class="metadata"><a target="_blank" href="https://github.com/GoogleChromeLabs/web-push-codelab/issues"><i class="material-icons">bug_report</i> Report a mistake</a></div></div><div id="codelab-title"><div id="codelab-nav-buttons"><a href="https://codelabs.developers.google.com/" id="arrow-back"><i class="material-icons">close</i></a><a href="https://codelabs.developers.google.com/codelabs/push-notifications/index.html#" id="menu"><i class="material-icons">menu</i></a></div><h1 class="title">Adding push notifications to a web app</h1><div class="codelab-time-container" style="display: none;"></div><devsite-user></devsite-user></div><div id="main"><div id="steps"><google-codelab-step label="Overview" duration="0" step="1" style="transform: translate3d(-110%, 0px, 0px);"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">1. Overview</h2>
+        <p>Push messaging provides a simple and effective way to re-engage with your users. In this codelab, you'll learn how to add push notifications to your web app.</p>
+<h2 class="checklist" is-upgraded=""><strong>What you'll learn</strong></h2>
+<ul class="checklist">
+<li>How to subscribe and unsubscribe a user for push messaging</li>
+<li>How to handle incoming push messages</li>
+<li>How to display a notification</li>
+<li>How to respond to notification clicks</li>
+</ul>
+<h2 is-upgraded=""><strong>What you'll need</strong></h2>
+<ul>
+<li>Chrome 52 or above</li>
+<li><a href="https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb" target="_blank">Web Server for Chrome</a>, or your own web server of choice</li>
+<li>A text editor</li>
+<li>Basic knowledge of HTML, CSS, JavaScript, and Chrome DevTools</li>
+<li>The sample code (See Get set up.)</li>
+</ul>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Get set up" duration="0" step="2" style="transform: translate3d(-110%, 0px, 0px);"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">2. Get set up</h2>
+        <h2 is-upgraded=""><strong>Download the sample code</strong></h2>
+<p>You have two options for getting the sample code this codelab: </p>
+<ul>
+<li>Clone the Git repository:</li>
+</ul>
+<pre>git clone https://github.com/GoogleChrome/push-notifications.git</pre>
+<ul>
+<li>Download the ZIP file:</li>
+</ul>
+<p><a href="https://github.com/googlechrome/push-notifications/archive/master.zip" target="_blank"><paper-button class="colored" raised=""><iron-icon icon="file-download"></iron-icon>Download source code</paper-button></a></p>
+<p>If you download the source as a ZIP file, unpacking it gives you a root folder <code>push-notifications-master</code>.</p>
+<h2 is-upgraded=""><strong>Install and verify the web server</strong></h2>
+<p>Though you're free to use your own web server, this codelab is designed to work well with the Web Server for Chrome app. If you don't have that app installed yet, you can get it from the Chrome Web Store:</p>
+<p><a href="https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb" target="_blank"><paper-button class="colored" raised="">Install Web Server for Chrome</paper-button></a></p>
+<p>After installing the Web Server for Chrome app, click on the <strong>Apps</strong> shortcut on the bookmarks bar: </p>
+<p class="image-container"><img style="width: 391.00px" src="./6 Adding push notifications to a web app_files/a80b29d5e878df22.png"></p>
+<p>In the Apps window, click the Web Server icon: </p>
+<p class="image-container"><img style="width: 168.00px" src="./6 Adding push notifications to a web app_files/dc07bbc9fcfe7c5b.png"></p>
+<p>You'll see this dialog next, which allows you to configure your local web server:</p>
+<p class="image-container"><img style="width: 624.00px" src="./6 Adding push notifications to a web app_files/433870360ad308d4.png"></p>
+<p>Click the <strong>Choose folder</strong> button, and select the <code>app</code> folder in the <code>push-notifications</code> folder you downloaded. This enables you to serve your work in progress via the URL shown in the <strong>Web Server URL(s)</strong> section of the dialog.</p>
+<p>Under <strong>Options</strong>, check the box next to <strong>Automatically show index.html</strong>, as shown below:</p>
+<p class="image-container"><img style="width: 233.00px" src="./6 Adding push notifications to a web app_files/39b4e0371e9703e6.png"></p>
+<p>Then stop and restart the server by sliding the <strong>Web Server: STARTED</strong> toggle to the left and then back to the right.</p>
+<p class="image-container"><img style="width: 424.00px" src="./6 Adding push notifications to a web app_files/daefd30e8a290df5.png"></p>
+<p>Click the Web Server URL to visit your site in your web browser. You should see a page that looks like this — though your version might show 127.0.0.1:8887 as the address:</p>
+<p class="image-container"><img alt="00-push-codelab.png" style="width: 624.00px" src="./6 Adding push notifications to a web app_files/4525ec369fc2ae47.png"></p>
+<h2 is-upgraded=""><strong>Always update the service worker</strong></h2>
+<p>During development, it's helpful to ensure that your service worker is always up to date and has the latest changes.</p>
+<p>To set this up in Chrome: </p>
+<ol type="1" start="1">
+<li>Go to the <strong>Push Codelab</strong> tab.</li>
+<li>Open DevTools: Ctrl-Shift-I on Windows and Linux, Cmd-Option-I on macOS.</li>
+<li>Select the <strong>Application</strong> panel, click the <strong>Service Workers</strong> tab, and check the <strong>Update on Reload</strong> checkbox. When this checkbox is enabled, the service worker is forcibly updated every time the page reloads.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="./6 Adding push notifications to a web app_files/6b698d7c7bbf1bc0.png"></p>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Register a service worker" duration="0" step="3" style="transform: translate3d(-110%, 0px, 0px);"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">3. Register a service worker</h2>
+        <p><a href="https://github.com/GoogleChromeLabs/web-push-codelab/tree/master/completed/01-register-sw" target="_blank">Completed code</a></p>
+<p>In your <code>app</code> directory, notice that you have an empty file named <code>sw.js</code>. This file will be your service worker. For now, it can stay empty. You'll add code to it later.</p>
+<p>First, you need to register this file as your service worker.</p>
+<p>Your <code>app/index.html</code> page loads <code>scripts/main.js</code>. You register your service worker in this JavaScript file.</p>
+<p>Add the following code to <code>scripts/main.js</code>:</p>
+<pre><code><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="str">'serviceWorker'</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> navigator </span><span class="pun">&amp;&amp;</span><span class="pln"> </span><span class="str">'PushManager'</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> window</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Service Worker and Push are supported'</span><span class="pun">);</span><span class="pln">
+
+  navigator</span><span class="pun">.</span><span class="pln">serviceWorker</span><span class="pun">.</span><span class="kwd">register</span><span class="pun">(</span><span class="str">'sw.js'</span><span class="pun">)</span><span class="pln">
+  </span><span class="pun">.</span><span class="kwd">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">swReg</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Service Worker is registered'</span><span class="pun">,</span><span class="pln"> swReg</span><span class="pun">);</span><span class="pln">
+
+    swRegistration </span><span class="pun">=</span><span class="pln"> swReg</span><span class="pun">;</span><span class="pln">
+  </span><span class="pun">})</span><span class="pln">
+  </span><span class="pun">.</span><span class="kwd">catch</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">error</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">error</span><span class="pun">(</span><span class="str">'Service Worker Error'</span><span class="pun">,</span><span class="pln"> error</span><span class="pun">);</span><span class="pln">
+  </span><span class="pun">});</span><span class="pln">
+</span><span class="pun">}</span><span class="pln"> </span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  console</span><span class="pun">.</span><span class="pln">warn</span><span class="pun">(</span><span class="str">'Push messaging is not supported'</span><span class="pun">);</span><span class="pln">
+  pushButton</span><span class="pun">.</span><span class="pln">textContent </span><span class="pun">=</span><span class="pln"> </span><span class="str">'Push Not Supported'</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+<p>This code checks whether service workers and push messaging are supported by your browser. If they are supported, the code registers your <code>sw.js</code> file.</p>
+<h3 is-upgraded=""><strong>Try it out</strong></h3>
+<p>Check your changes by refreshing the <strong>Push Codelab</strong> tab in the browser.</p>
+<p>Check the console in Chrome DevTools for a <code>Service Worker is registered message</code>, like so:</p>
+<p class="image-container"><img style="width: 624.00px" src="./6 Adding push notifications to a web app_files/de3ceca91043d278.png"></p>
+<h2 is-upgraded="">Get application server keys</h2>
+<p>To work with this codelab, you need to generate application server keys. You can do this on the companion site: <a href="https://web-push-codelab.glitch.me/" target="_blank">web-push-codelab.glitch.me</a></p>
+<p>Here you can generate a public and private key pair.</p>
+<p class="image-container"><img alt="push-codelab-04-companion.png" style="width: 624.00px" src="./6 Adding push notifications to a web app_files/a1304b99e7b981dd.png"></p>
+<p>Copy your public key into <code>scripts/main.js</code> replacing the <code>&lt;Your Public Key&gt;</code> value:</p>
+<pre><code><span class="kwd">const</span><span class="pln"> applicationServerPublicKey </span><span class="pun">=</span><span class="pln"> </span><span class="str">'&lt;Your Public Key&gt;'</span><span class="pun">;</span></code></pre>
+<p>Important: You should never put your private key in your web app!</p>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Initialize state" duration="0" step="4" style="transform: translate3d(-110%, 0px, 0px);"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">4. Initialize state</h2>
+        <p><a href="https://github.com/GoogleChromeLabs/web-push-codelab/tree/master/completed/02-subscription-state" target="_blank">Completed code</a></p>
+<p>At the moment, the web app's <strong>Enable </strong>button is disabled and can't be clicked. This is because it's good practice to disable the push button by default and enable it after you know that push messaging is supported by the browser and you are able to check if the user is currently subscribed to messaging or not.<br><br>You will need to create two functions in <code>scripts/main.js</code>:</p>
+<ul>
+<li><code>initializeUI</code>, to check if the user is currently subscribed</li>
+<li><code>updateBtn</code>, to enable your button and change the text depending on whether the user is subscribed or not</li>
+</ul>
+<p>Add an  <code>initializeUI</code> function to <code>main.js</code> like this:</p>
+<pre><code><span class="kwd">function</span><span class="pln"> initializeUI</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="com">// Set the initial subscription value</span><span class="pln">
+  swRegistration</span><span class="pun">.</span><span class="pln">pushManager</span><span class="pun">.</span><span class="pln">getSubscription</span><span class="pun">()</span><span class="pln">
+  </span><span class="pun">.</span><span class="kwd">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">subscription</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    isSubscribed </span><span class="pun">=</span><span class="pln"> </span><span class="pun">!(</span><span class="pln">subscription </span><span class="pun">===</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">);</span><span class="pln">
+
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">isSubscribed</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'User IS subscribed.'</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'User is NOT subscribed.'</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    updateBtn</span><span class="pun">();</span><span class="pln">
+  </span><span class="pun">});</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+<p>Yor new method uses the <code>swRegistration</code> from the previous step, gets the <code>pushManager</code> property from it, and calls <code>getSubscription()</code> on that. </p>
+<p><code>pushManager</code>. <code>getSubscription()</code> returns a promise that resolves with the current subscription if there is one. Otherwise, it returns <code>null</code>. With this, you can check whether the user is already subscribed, set the value of <code>isSubscribed</code>, and then call <code>updateBtn()</code> to update the button.</p>
+<p>Add the <code>updateBtn()</code> function to <code>main.js</code>:</p>
+<pre><code><span class="kwd">function</span><span class="pln"> updateBtn</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">isSubscribed</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    pushButton</span><span class="pun">.</span><span class="pln">textContent </span><span class="pun">=</span><span class="pln"> </span><span class="str">'Disable Push Messaging'</span><span class="pun">;</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    pushButton</span><span class="pun">.</span><span class="pln">textContent </span><span class="pun">=</span><span class="pln"> </span><span class="str">'Enable Push Messaging'</span><span class="pun">;</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+
+  pushButton</span><span class="pun">.</span><span class="pln">disabled </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+<p>This function enables the button and changes the button text depending on whether the user is subscribed or not.</p>
+<p>The last thing to do is call <code>initializeUI()</code> when your service worker is registered in <code>main.js</code>:</p>
+<pre><code><span class="pln">navigator</span><span class="pun">.</span><span class="pln">serviceWorker</span><span class="pun">.</span><span class="kwd">register</span><span class="pun">(</span><span class="str">'sw.js'</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">.</span><span class="kwd">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">swReg</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Service Worker is registered'</span><span class="pun">,</span><span class="pln"> swReg</span><span class="pun">);</span><span class="pln">
+
+  swRegistration </span><span class="pun">=</span><span class="pln"> swReg</span><span class="pun">;</span><span class="pln">
+  initializeUI</span><span class="pun">();</span><span class="pln">
+</span><span class="pun">})</span></code></pre>
+<h3 is-upgraded=""><strong>Try it out</strong></h3>
+<p>Refresh the <strong>Push Codelab</strong> tab. You should see that the <strong>Enable Push Messaging</strong> button is now enabled (you can click it) and you should see <code>User is NOT subscribed</code> in the console.</p>
+<p class="image-container"><img style="width: 624.00px" src="./6 Adding push notifications to a web app_files/15f6375617c11974.png"></p>
+<p>As you progress through the rest of this codelab, you should see the button text change whenever you subscribe or unsubscribe.</p>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Subscribe the user" duration="0" step="5" style="transform: translate3d(-110%, 0px, 0px);"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">5. Subscribe the user</h2>
+        <p><a href="https://github.com/GoogleChromeLabs/web-push-codelab/tree/master/completed/03-subscribe" target="_blank">Completed code</a></p>
+<p>At the moment, your <strong>Enable Push Messaging</strong> button doesn't do much. Let's fix that.</p>
+<p>In the <code>initializeUI()</code> function, add a click listener for your button:</p>
+<pre><code><span class="kwd">function</span><span class="pln"> initializeUI</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  pushButton</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'click'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    pushButton</span><span class="pun">.</span><span class="pln">disabled </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">isSubscribed</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="com">// TODO: Unsubscribe user</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      subscribeUser</span><span class="pun">();</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+  </span><span class="pun">});</span><span class="pln">
+
+  </span><span class="com">// Set the initial subscription value</span><span class="pln">
+  swRegistration</span><span class="pun">.</span><span class="pln">pushManager</span><span class="pun">.</span><span class="pln">getSubscription</span><span class="pun">()</span><span class="pln">
+  </span><span class="pun">.</span><span class="kwd">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">subscription</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    isSubscribed </span><span class="pun">=</span><span class="pln"> </span><span class="pun">!(</span><span class="pln">subscription </span><span class="pun">===</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">);</span><span class="pln">
+
+    updateSubscriptionOnServer</span><span class="pun">(</span><span class="pln">subscription</span><span class="pun">);</span><span class="pln">
+
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">isSubscribed</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'User IS subscribed.'</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'User is NOT subscribed.'</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    updateBtn</span><span class="pun">();</span><span class="pln">
+  </span><span class="pun">});</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+<p>When the user clicks the button, you disable the button just to make sure the user can't click it a second time, since subscribing to push messaging can take some time.</p>
+<p>Then you call <code>subscribeUser()</code> if the user isn't currently subscribed. For this, you'll need to paste the following code into <code>scripts/main.js</code>:</p>
+<pre><code><span class="kwd">function</span><span class="pln"> subscribeUser</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">const</span><span class="pln"> applicationServerKey </span><span class="pun">=</span><span class="pln"> urlB64ToUint8Array</span><span class="pun">(</span><span class="pln">applicationServerPublicKey</span><span class="pun">);</span><span class="pln">
+  swRegistration</span><span class="pun">.</span><span class="pln">pushManager</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span><span class="pln">
+    userVisibleOnly</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">,</span><span class="pln">
+    applicationServerKey</span><span class="pun">:</span><span class="pln"> applicationServerKey
+  </span><span class="pun">})</span><span class="pln">
+  </span><span class="pun">.</span><span class="kwd">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">subscription</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'User is subscribed.'</span><span class="pun">);</span><span class="pln">
+
+    updateSubscriptionOnServer</span><span class="pun">(</span><span class="pln">subscription</span><span class="pun">);</span><span class="pln">
+
+    isSubscribed </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><span class="pln">
+
+    updateBtn</span><span class="pun">();</span><span class="pln">
+  </span><span class="pun">})</span><span class="pln">
+  </span><span class="pun">.</span><span class="kwd">catch</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">error</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">error</span><span class="pun">(</span><span class="str">'Failed to subscribe the user: '</span><span class="pun">,</span><span class="pln"> error</span><span class="pun">);</span><span class="pln">
+    updateBtn</span><span class="pun">();</span><span class="pln">
+  </span><span class="pun">});</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+<p>Let's step through what this code is doing and how it's subscribing the user for push messaging.</p>
+<p>First, you take the application server's public key, which is <a href="https://en.wikipedia.org/wiki/Base64#URL_applications" target="_blank">Base64 URL-safe encoded</a>, and convert it to a <code>UInt8Array</code>, because this is the expected input of the <code>subscribe()</code> call. The <code>urlB64ToUint8Array()</code> function is at the top of <code>scripts/main.js</code>.</p>
+<p>After you've converted the value, you call the <code>subscribe()</code> method on your service worker's <code>pushManager</code>, passing in your application server's public key and the value <code>userVisibleOnly: true</code>.</p>
+<pre><code><span class="kwd">const</span><span class="pln"> applicationServerKey </span><span class="pun">=</span><span class="pln"> urlB64ToUint8Array</span><span class="pun">(</span><span class="pln">applicationServerPublicKey</span><span class="pun">);</span><span class="pln">
+swRegistration</span><span class="pun">.</span><span class="pln">pushManager</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span><span class="pln">
+  userVisibleOnly</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">,</span><span class="pln">
+  applicationServerKey</span><span class="pun">:</span><span class="pln"> applicationServerKey
+</span><span class="pun">})</span></code></pre>
+<p>The <code>userVisibleOnly</code> parameter is an assurance that you will show a notification every time a push message is sent. Currently, this value is required and must be true.</p>
+<p>Calling <code>subscribe()</code> returns a promise that will resolve after the following steps:</p>
+<ol type="1" start="1">
+<li>The user has granted permission to display notifications.</li>
+<li>The browser has sent a network request to a push service to get the data required to generate a <code>PushSubscription</code>.</li>
+</ol>
+<p>The <code>subscribe()</code> promise will resolve with a <code>PushSubscription</code> if these steps were successful. If the user doesn't grant permission or if there is any problem subscribing the user, the promise will reject with an error. This gives you the following promise chain in your codelab:</p>
+<pre><code><span class="pln">swRegistration</span><span class="pun">.</span><span class="pln">pushManager</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span><span class="pln">
+  userVisibleOnly</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">,</span><span class="pln">
+  applicationServerKey</span><span class="pun">:</span><span class="pln"> applicationServerKey
+</span><span class="pun">})</span><span class="pln">
+</span><span class="pun">.</span><span class="kwd">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">subscription</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'User is subscribed.'</span><span class="pun">);</span><span class="pln">
+
+  updateSubscriptionOnServer</span><span class="pun">(</span><span class="pln">subscription</span><span class="pun">);</span><span class="pln">
+
+  isSubscribed </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><span class="pln">
+
+  updateBtn</span><span class="pun">();</span><span class="pln">
+
+</span><span class="pun">})</span><span class="pln">
+</span><span class="pun">.</span><span class="kwd">catch</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">err</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Failed to subscribe the user: '</span><span class="pun">,</span><span class="pln"> err</span><span class="pun">);</span><span class="pln">
+  updateBtn</span><span class="pun">();</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+<p>With this, you either get a subscription and treat the user as subscribed or catch an error and log it to the console. In both scenarios, you call <code>updateBtn()</code> to ensure that the button is re-enabled and has the appropriate text.</p>
+<p>In a real application, the function <code>updateSubscriptionOnServer()</code> is where you would send your subscription data to a backend, but for the codelab you simply display the subscription in your UI. Add the following function to <code>scripts/main.js</code>:</p>
+<pre><code><span class="kwd">function</span><span class="pln"> updateSubscriptionOnServer</span><span class="pun">(</span><span class="pln">subscription</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="com">// TODO: Send subscription to application server</span><span class="pln">
+
+  </span><span class="kwd">const</span><span class="pln"> subscriptionJson </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">querySelector</span><span class="pun">(</span><span class="str">'.js-subscription-json'</span><span class="pun">);</span><span class="pln">
+  </span><span class="kwd">const</span><span class="pln"> subscriptionDetails </span><span class="pun">=</span><span class="pln">
+    document</span><span class="pun">.</span><span class="pln">querySelector</span><span class="pun">(</span><span class="str">'.js-subscription-details'</span><span class="pun">);</span><span class="pln">
+
+  </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">subscription</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    subscriptionJson</span><span class="pun">.</span><span class="pln">textContent </span><span class="pun">=</span><span class="pln"> JSON</span><span class="pun">.</span><span class="pln">stringify</span><span class="pun">(</span><span class="pln">subscription</span><span class="pun">);</span><span class="pln">
+    subscriptionDetails</span><span class="pun">.</span><span class="pln">classList</span><span class="pun">.</span><span class="pln">remove</span><span class="pun">(</span><span class="str">'is-invisible'</span><span class="pun">);</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    subscriptionDetails</span><span class="pun">.</span><span class="pln">classList</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="str">'is-invisible'</span><span class="pun">);</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+<h3 is-upgraded=""><strong>Try it out</strong></h3>
+<p>Go to the <strong>Push Codelab</strong> tab, refresh the page, and click the button. You should see a permission prompt like this:</p>
+<p class="image-container"><img style="width: 624.00px" src="./6 Adding push notifications to a web app_files/227cea0abe03a5b4.png"></p>
+<p>If you grant the permission, you should see <code>User is subscribed</code> logged to the console. The button's text will change to <strong>Disable Push Messaging</strong>  and you'll be able to view the subscription as JSON data at the bottom of the page.</p>
+<p class="image-container"><img style="width: 624.00px" src="./6 Adding push notifications to a web app_files/8fe2b1b110f87b34.png"></p>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Handle permission denied" duration="0" step="6" style="transform: translate3d(-110%, 0px, 0px);"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">6. Handle permission denied</h2>
+        <p><a href="https://github.com/GoogleChromeLabs/web-push-codelab/tree/master/completed/04-permission-denied" target="_blank">Completed code</a></p>
+<p>One thing that you haven't handled yet is what happens if the user blocks the permission request. This needs some unique consideration because if the user blocks the permission, your web app will not be able to re-show the permission prompt and will not be able to subscribe the user. You need to at least disable the push button so the user knows it can't be used.</p>
+<p>The obvious place to handle this scenario is in the <code>updateBtn()</code> function. All you need to do is check the <code>Notification.permission</code> value, like so:</p>
+<pre><code><span class="kwd">function</span><span class="pln"> updateBtn</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="typ">Notification</span><span class="pun">.</span><span class="pln">permission </span><span class="pun">===</span><span class="pln"> </span><span class="str">'denied'</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    pushButton</span><span class="pun">.</span><span class="pln">textContent </span><span class="pun">=</span><span class="pln"> </span><span class="str">'Push Messaging Blocked'</span><span class="pun">;</span><span class="pln">
+    pushButton</span><span class="pun">.</span><span class="pln">disabled </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><span class="pln">
+    updateSubscriptionOnServer</span><span class="pun">(</span><span class="kwd">null</span><span class="pun">);</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pun">;</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+
+  </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">isSubscribed</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    pushButton</span><span class="pun">.</span><span class="pln">textContent </span><span class="pun">=</span><span class="pln"> </span><span class="str">'Disable Push Messaging'</span><span class="pun">;</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    pushButton</span><span class="pun">.</span><span class="pln">textContent </span><span class="pun">=</span><span class="pln"> </span><span class="str">'Enable Push Messaging'</span><span class="pun">;</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+
+  pushButton</span><span class="pun">.</span><span class="pln">disabled </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+<p>You know that if the permission is <code>denied</code>, then the user can't be subscribed and there is nothing more you can do, so permanently disabling the button is the best approach.</p>
+<h3 is-upgraded=""><strong>Try it out</strong></h3>
+<p>Since you've already granted permission for your web app from the previous step, you need to click the <strong>i</strong> in a circle in the URL bar and change the <strong>Notifications</strong> permission to <strong>Use global default (Ask)</strong>.</p>
+<p class="image-container"><img style="width: 624.00px" src="./6 Adding push notifications to a web app_files/8775071d7fd66432.png"></p>
+<p>After you've changed this setting, refresh the page and click the <strong>Enable Push Messaging</strong> button and select <strong>Block</strong> in the permission dialog. The button will be disabled and show the text <strong>Push Messaging Blocked</strong>.</p>
+<p class="image-container"><img style="width: 624.00px" src="./6 Adding push notifications to a web app_files/2b5314607196f4e1.png"></p>
+<p>With this change, you can now subscribe the user, having taken care of the possible permission scenarios.</p>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Handle a push event" duration="0" step="7" style="transform: translate3d(0px, 0px, 0px);" selected=""><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">7. Handle a push event</h2>
+        <p><a href="https://github.com/GoogleChromeLabs/web-push-codelab/tree/master/completed/05-push-event" target="_blank">Completed code</a></p>
+<p>Before you learn how to send a push message from your backend, you need to consider what will actually happen when a subscribed user receives a push message.</p>
+<p>When you trigger a push message, the browser receives the push message, figures out what service worker the push is for,  wakes up that service worker, and dispatches a push event. You need to listen for this event and show a notification as a result.</p>
+<p>Add the following code to your <code>sw.js</code> file:</p>
+<pre><code><span class="kwd">self</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'push'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="kwd">event</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'[Service Worker] Push Received.'</span><span class="pun">);</span><span class="pln">
+  console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">`[Service Worker] Push had this data: "${event.data.text()}"`</span><span class="pun">);</span><span class="pln">
+
+  </span><span class="kwd">const</span><span class="pln"> title </span><span class="pun">=</span><span class="pln"> </span><span class="str">'Push Codelab'</span><span class="pun">;</span><span class="pln">
+  </span><span class="kwd">const</span><span class="pln"> options </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    body</span><span class="pun">:</span><span class="pln"> </span><span class="str">'Yay it works.'</span><span class="pun">,</span><span class="pln">
+    icon</span><span class="pun">:</span><span class="pln"> </span><span class="str">'images/icon.png'</span><span class="pun">,</span><span class="pln">
+    badge</span><span class="pun">:</span><span class="pln"> </span><span class="str">'images/badge.png'</span><span class="pln">
+  </span><span class="pun">};</span><span class="pln">
+
+  </span><span class="kwd">event</span><span class="pun">.</span><span class="pln">waitUntil</span><span class="pun">(</span><span class="kwd">self</span><span class="pun">.</span><span class="pln">registration</span><span class="pun">.</span><span class="pln">showNotification</span><span class="pun">(</span><span class="pln">title</span><span class="pun">,</span><span class="pln"> options</span><span class="pun">));</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+<p>Let's step through this code. You're listening for <code>push</code> events in your service worker by adding an event listener:</p>
+<pre><code><span class="kwd">self</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'push'</span><span class="pun">,</span><span class="pln"> </span><span class="pun">...</span><span class="pln"> </span><span class="pun">);</span></code></pre>
+<p>(Unless you've played with Web Workers before, <code>self</code> is probably new. In a service worker file, <code>self</code> references the service worker itself.)</p>
+<p>When a push message is received, the event listener will be called, and you create a notification by calling <code>showNotification()</code> on the <code>registration</code> property of the service worker. <code>showNotification()</code> requires a <code>title</code>; you can also give it an <code>options</code> object to set a body message, icon, and badge. (The badge is only used on Android at the time of writing.)</p>
+<pre><code><span class="kwd">const</span><span class="pln"> title </span><span class="pun">=</span><span class="pln"> </span><span class="str">'Push Codelab'</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">const</span><span class="pln"> options </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  body</span><span class="pun">:</span><span class="pln"> </span><span class="str">'Yay it works.'</span><span class="pun">,</span><span class="pln">
+  icon</span><span class="pun">:</span><span class="pln"> </span><span class="str">'images/icon.png'</span><span class="pun">,</span><span class="pln">
+  badge</span><span class="pun">:</span><span class="pln"> </span><span class="str">'images/badge.png'</span><span class="pln">
+</span><span class="pun">};</span><span class="pln">
+</span><span class="kwd">self</span><span class="pun">.</span><span class="pln">registration</span><span class="pun">.</span><span class="pln">showNotification</span><span class="pun">(</span><span class="pln">title</span><span class="pun">,</span><span class="pln"> options</span><span class="pun">);</span></code></pre>
+<p>The last thing to cover in your <code>push</code> event handling is <code>event.waitUntil()</code>. This method takes a promise to enable the browser to keep your service worker alive and running until the promise passed in has been resolved.</p>
+<p>To make the code above a little easier to understand, you can rewrite it like so:</p>
+<pre><code><span class="kwd">const</span><span class="pln"> notificationPromise </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">self</span><span class="pun">.</span><span class="pln">registration</span><span class="pun">.</span><span class="pln">showNotification</span><span class="pun">(</span><span class="pln">title</span><span class="pun">,</span><span class="pln"> options</span><span class="pun">);</span><span class="pln">
+</span><span class="kwd">event</span><span class="pun">.</span><span class="pln">waitUntil</span><span class="pun">(</span><span class="pln">notificationPromise</span><span class="pun">);</span></code></pre>
+<p>Now that you've stepped through the push event, let's test out a push event.</p>
+<h3 is-upgraded=""><strong>Try it out</strong></h3>
+<p>With push event handling in the service worker, you can trigger a fake push event to test what happens when a message is received.</p>
+<p>In your web app, subscribe to push messaging and make sure that you see <code>User IS subscribed</code> in the console. In the <strong>Application</strong> panel in DevTools, under the <strong>Service Workers</strong> tab, click the <strong>Push</strong> button:</p>
+<p class="image-container"><img style="width: 624.00px" src="./6 Adding push notifications to a web app_files/1ee499267eeccd1c.png"></p>
+<p>After you click <strong>Push</strong>, you should see a notification like this:</p>
+<p class="image-container"><img style="width: 312.00px" src="./6 Adding push notifications to a web app_files/5ce111fa1fba03d3.png"></p>
+<p>Note: If this step doesn't work, try unregistering your service worker with the <strong>Unregister</strong> link in the DevTools Application panel, wait for the service worker to be stopped, and then reload the page.</p>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Notification click" duration="0" step="8" style="transform: translate3d(110%, 0px, 0px);"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">8. Notification click</h2>
+        <p><a href="https://github.com/GoogleChromeLabs/web-push-codelab/tree/master/completed/06-click" target="_blank">Completed code</a></p>
+<p>If you click one of these notifications, you'll notice that nothing happens. You can handle notification clicks by listening for <code>notificationclick</code> events in your service worker.</p>
+<p>Start by adding a <code>notificationclick</code> listener in <code>sw.js</code>:</p>
+<pre><code><span class="kwd">self</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'notificationclick'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="kwd">event</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'[Service Worker] Notification click received.'</span><span class="pun">);</span><span class="pln">
+
+  </span><span class="kwd">event</span><span class="pun">.</span><span class="pln">notification</span><span class="pun">.</span><span class="pln">close</span><span class="pun">();</span><span class="pln">
+
+  </span><span class="kwd">event</span><span class="pun">.</span><span class="pln">waitUntil</span><span class="pun">(</span><span class="pln">
+    clients</span><span class="pun">.</span><span class="pln">openWindow</span><span class="pun">(</span><span class="str">'https://developers.google.com/web'</span><span class="pun">)</span><span class="pln">
+  </span><span class="pun">);</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+<p>When the user clicks the notification, the <code>notificationclick</code> event listener will be called.</p>
+<p>The code first closes the notification that was clicked:</p>
+<pre><code><span class="kwd">event</span><span class="pun">.</span><span class="pln">notification</span><span class="pun">.</span><span class="pln">close</span><span class="pun">();</span></code></pre>
+<p>Then a new window or tab is opened, loading the URL <code>https://developers.google.com/web</code>. Feel free to change this. </p>
+<pre><code><span class="kwd">event</span><span class="pun">.</span><span class="pln">waitUntil</span><span class="pun">(</span><span class="pln">
+    clients</span><span class="pun">.</span><span class="pln">openWindow</span><span class="pun">(</span><span class="str">'https://developers.google.com/web/'</span><span class="pun">)</span><span class="pln">
+  </span><span class="pun">);</span></code></pre>
+<p><code>event.waitUntil()</code> ensures that the browser doesn't terminate the service worker before the new window or tab has been displayed.</p>
+<h3 is-upgraded=""><strong>Try it out</strong></h3>
+<p>Try triggering a push message in DevTools again and click the notification. You'll now see the notification close and a new tab open.</p>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Send push messages" duration="0" step="9" style="transform: translate3d(110%, 0px, 0px);"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">9. Send push messages</h2>
+        <p>You've seen that your web app is capable of showing a notification using DevTools and looked at how to close the notification with a click. The next step is to send an actual push message.</p>
+<p>Normally, this would require sending a subscription from a web page to a backend. The backend would then trigger a push message by making an API call to the endpoint in the subscription.</p>
+<p>This is out of scope for this codelab, but you can use the companion site (<a href="https://web-push-codelab.glitch.me/" target="_blank">web-push-codelab.glitch.me</a>) to trigger an actual push message. Paste the subscription at the bottom of your page:</p>
+<p class="image-container"><img style="width: 624.00px" src="./6 Adding push notifications to a web app_files/cf0e71f76cb79cc4.png"></p>
+<p>Then paste this into the companion site in the <strong>Subscription to Send To</strong> text area:</p>
+<p class="image-container"><img style="width: 624.00px" src="./6 Adding push notifications to a web app_files/a12fbfdc08233592.png"></p>
+<p>Under <strong>Text to Send</strong>, add any string you want to send with the push message. </p>
+<p>Click the <strong>Send push message</strong> button.</p>
+<p class="image-container"><img style="width: 624.00px" src="./6 Adding push notifications to a web app_files/2973c2b818ca9324.png"></p>
+<p>You should then receive a push message. The text you used will be logged to the console.</p>
+<p class="image-container"><img style="width: 624.00px" src="./6 Adding push notifications to a web app_files/75b1fedbfb7e0b99.png"></p>
+<p>This should give you a chance to test out sending and receiving data, and to manipulate notifications as a result.</p>
+<p>The companion app is just a node server that is using the <a href="https://github.com/web-push-libs/web-push" target="_blank">web-push library</a> to send messages. It's worthwhile to review the <a href="https://github.com/web-push-libs/" target="_blank">web-push-libs org on GitHub</a> to see what libraries are available to send push messages for you. This handles a lot of the details to trigger push messages.</p>
+<p>You can see all of the <a href="https://glitch.com/edit/#!/web-push-codelab" target="_blank">code for the companion site here</a>.</p>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Unsubscribe the user" duration="0" step="10" style="transform: translate3d(110%, 0px, 0px);"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">10. Unsubscribe the user</h2>
+        <p><a href="https://github.com/GoogleChromeLabs/web-push-codelab/tree/master/completed/07-unsubscribe" target="_blank">Completed code</a></p>
+<p>The one thing missing is the ability to unsubscribe a user from push. To do this you need to call <code>unsubscribe()</code> on a <code>PushSubscription</code>.</p>
+<p>Back in your <code>scripts/main.js</code> file, change the <code>pushButton</code> click listener in <code>initializeUI()</code> to the following:</p>
+<pre><code><span class="pln">pushButton</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'click'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  pushButton</span><span class="pun">.</span><span class="pln">disabled </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><span class="pln">
+  </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">isSubscribed</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    unsubscribeUser</span><span class="pun">();</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    subscribeUser</span><span class="pun">();</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+<p>Notice that you are now going to call a new function <code>unsubscribeUser()</code>. In this function, you get the current subscription and call <code>unsubscribe()</code> on it. Add the following code to <code>scripts/main.js</code>:</p>
+<pre><code><span class="kwd">function</span><span class="pln"> unsubscribeUser</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  swRegistration</span><span class="pun">.</span><span class="pln">pushManager</span><span class="pun">.</span><span class="pln">getSubscription</span><span class="pun">()</span><span class="pln">
+  </span><span class="pun">.</span><span class="kwd">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">subscription</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">subscription</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="kwd">return</span><span class="pln"> subscription</span><span class="pun">.</span><span class="pln">unsubscribe</span><span class="pun">();</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+  </span><span class="pun">})</span><span class="pln">
+  </span><span class="pun">.</span><span class="kwd">catch</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">error</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Error unsubscribing'</span><span class="pun">,</span><span class="pln"> error</span><span class="pun">);</span><span class="pln">
+  </span><span class="pun">})</span><span class="pln">
+  </span><span class="pun">.</span><span class="kwd">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    updateSubscriptionOnServer</span><span class="pun">(</span><span class="kwd">null</span><span class="pun">);</span><span class="pln">
+
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'User is unsubscribed.'</span><span class="pun">);</span><span class="pln">
+    isSubscribed </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><span class="pln">
+
+    updateBtn</span><span class="pun">();</span><span class="pln">
+  </span><span class="pun">});</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+<p>Let's step through this function.</p>
+<p>First, you get the current subscription by calling <code>getSubscription()</code>:</p>
+<pre><code><span class="pln">swRegistration</span><span class="pun">.</span><span class="pln">pushManager</span><span class="pun">.</span><span class="pln">getSubscription</span><span class="pun">()</span></code></pre>
+<p>This returns a promise that resolves with a <code>PushSubscription</code> if one exists; otherwise, it returns <code>null</code>. If there is a subscription, you call <code>unsubscribe()</code> on it, which makes the <code>PushSubscription</code> invalid.</p>
+<pre><code><span class="pln">swRegistration</span><span class="pun">.</span><span class="pln">pushManager</span><span class="pun">.</span><span class="pln">getSubscription</span><span class="pun">()</span><span class="pln">
+</span><span class="pun">.</span><span class="kwd">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">subscription</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">subscription</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="com">// TODO: Tell application server to delete subscription</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> subscription</span><span class="pun">.</span><span class="pln">unsubscribe</span><span class="pun">();</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">})</span><span class="pln">
+</span><span class="pun">.</span><span class="kwd">catch</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">error</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Error unsubscribing'</span><span class="pun">,</span><span class="pln"> error</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">})</span></code></pre>
+<p>Calling <code>unsubscribe()</code> returns a promise, since it can take some time to complete. You return that promise so the next <code>then()</code> in the chain waits for <code>unsubscribe()</code> to finish. You also add a catch handler in case calling <code>unsubscribe()</code> results in an error. After this, you can update your UI.</p>
+<pre><code><span class="pun">.</span><span class="kwd">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  updateSubscriptionOnServer</span><span class="pun">(</span><span class="kwd">null</span><span class="pun">);</span><span class="pln">
+
+  console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'User is unsubscribed.'</span><span class="pun">);</span><span class="pln">
+  isSubscribed </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><span class="pln">
+
+  updateBtn</span><span class="pun">();</span><span class="pln">
+</span><span class="pun">})</span></code></pre>
+<h3 is-upgraded=""><strong>Try it out</strong></h3>
+<p>You should be able to press <strong>Enable Push Messaging </strong>or <strong>Disable Push Messaging</strong> in your web app, and the logs will show the user being subscribed and unsubscribed.</p>
+<p class="image-container"><img style="width: 624.00px" src="./6 Adding push notifications to a web app_files/33dd89c437c17c97.png"></p>
+
+
+      </div></div></google-codelab-step><google-codelab-step label="Finished" duration="0" step="11" style="transform: translate3d(110%, 0px, 0px);"><div class="instructions"><div class="inner"><h2 is-upgraded="" class="step-title">11. Finished</h2>
+        <p>Congratulations on completing this codelab!</p>
+<p>This codelab has shown you how to get up and running with adding push notifications to your web app. If you want to learn more about what web notifications can do, <a href="https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/" target="_blank">check out theses documents</a>. </p>
+<p>If you want to deploy push notifications on your site, you may be interested in adding support for older browsers or non-standards-compliant browsers that use GCM. <a href="https://web-push-book.gauntface.com/chapter-06/01-non-standards-browsers/" target="_blank">Learn more here</a>.</p>
+<h2 is-upgraded=""><strong>Further reading</strong></h2>
+<ul>
+<li><a href="https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/" target="_blank">Web push notification</a>: documentation on web fundamentals.</li>
+<li><a href="https://github.com/web-push-libs/" target="_blank">Web push libraries</a>: web push libraries, including Node.js, PHP, Java, Python, C, and C#.</li>
+</ul>
+<h3 is-upgraded=""><strong>Relevant blog posts</strong></h3>
+<ul>
+<li><a href="https://developers.google.com/web/updates/2016/03/web-push-encryption" target="_blank">Web push payload encryption</a></li>
+<li><a href="https://developers.google.com/web/updates/2016/07/web-push-interop-wins" target="_blank">Application server keys and web push</a></li>
+<li><a href="https://developers.google.com/web/updates/2016/01/notification-actions" target="_blank">Notification actions</a></li>
+<li><a href="https://developers.google.com/web/updates/2016/03/notifications" target="_blank">Icons, close events, renotify preferences, and timestamps</a></li>
+</ul>
+
+
+      </div></div></google-codelab-step></div><div id="controls"><div id="fabs"><a href="https://codelabs.developers.google.com/codelabs/push-notifications/index.html#" id="previous-step" title="Previous step">Back</a><div class="spacer"></div><a href="https://codelabs.developers.google.com/codelabs/push-notifications/index.html#" id="next-step" title="Next step">Next</a><a href="https://codelabs.developers.google.com/" id="done" title="Codelab complete" hidden="">Done</a></div></div></div></google-codelab>
+
+  <script src="./6 Adding push notifications to a web app_files/native-shim.js"></script>
+  <script src="./6 Adding push notifications to a web app_files/custom-elements.min.js"></script>
+  <script src="./6 Adding push notifications to a web app_files/prettify.js"></script>
+  <script src="./6 Adding push notifications to a web app_files/codelab-elements.js"></script>
+
+
+
+</body></html>

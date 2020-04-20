@@ -1,0 +1,13 @@
+/************* git *****************/
+git checkout --trail origin/originbranchName
+
+it will fetch and checkout remote branch under local name originbranchName
+
+/************* git *****************/
+  /************* git *****************/
+git checkout --trail origin/originbranchName
+
+it will fetch and checkout remote branch under local name originbranchName
+
+/************* git *****************/
+
