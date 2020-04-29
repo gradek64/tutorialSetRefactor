@@ -7,14 +7,28 @@
             <paragraph>
                 <info>U should create a sepearte folder for your test that follows the same structure as your src directory</info>
                 <example>
-================ test folder structure  __tests__ ================
+================  __tests__ ================
 
-      Intresting fact if you create folder named : src/__tests__ jest will automatically detect that and uses this foler for running test on files.js inside , beside their names , no need to include filename.test.js it could be skipped
+      Intresting fact if you create folder named : src/__tests__ jest will automatically detect that and uses this foler for running test on files.js inside, beside their names , no need to include filename.test.js it could be skipped.
+
+================  __mocks___ ================
+
+this folder will hold mocks for entire modules, the higher the folder exist the more mocks range will be covered. For example if you mock axios manually in src/__mocks__ then axios mock will be available in all src/ directory. So you dont have to mock it individually src/__mocks__ will cover all axios mock , All U need to do is to import axios as you would do to use it in the file as below.
+
+------------ test.js ------------
+import axios from 'axios'
+
+Jest first will look for __mocks__ version before it will try to execute original axios module
+
+
+================  __snapshots___ ================
+
+this folder is crated automatically once snapshot is being created
 
 ================ ================ ================      
                 </example>
             </paragraph>
-            <subtitle>instaling JEST</subtitle>
+            <subtitle>installing JEST</subtitle>
             <paragraph>
                 <info>jest is a testing framework ceated by facebook and covers most of the cases for testing react applications</info>
                 <example>
@@ -22,10 +36,14 @@
 
       npm i jest@20.0.4 (this version works with webpack 3 and babel6) latest version needs update on webpack and babel
 
+================ create script in package.json ================
+
+"scripts": {
+    "test": "jest"
+}
 ================ to run ================
 
-npm test (it will look for filenames with test in a name);
-
+npm run test or npm test;
 
 ================ run only one test as  ================
 
@@ -50,70 +68,17 @@ expect(result).toBe(7);
 ================ ================ ================      
                 </example>
             </paragraph>
-            <subtitle>testing Objects and arrays</subtitle>
-            <paragraph>
-                <info>in javascript {}==={} or []===[] are always false , the key is to test what is inside and array or object properties as below</info>
-                <example>
-================ 2 objects ================ 
-
-const obj1 = {name:'Greg'}
-const obj2 = {name:'Greg'}
-
-obj1===obj2 //false
-JSON.stringify(obj1)===JSON.stringify(obj2) //true we comparing to strings
-
-//jest 
-describe('Objects are the same', () => {
-test('have all the same properties', () => {
-  expect(obj1).toEqual(obj2);
-});
-});
 
 
-================ ================ ================
-                </example>
-            </paragraph>
-        </content>
-    </chapter>
-    <chapter>
-       <subject>Snapshot testing</subject>
-        <content>
-            <subtitle>react-test-renderer from JEST no event handlers support</subtitle>
-<paragraph>
-<info>There is a small package a 
-  npm package called 'react-test-renderer' for making your component snapshots. No need for Enzyme. BUT
-  in only creates static snapshot it doesnt allow to test clicks, mouse events etc.</info>
-<example>
-                  
-================ instaling react-test-renderer ================
 
-npm i react-test-renderer@16.0.0 (U need this version if you work with React 16.* )
-
-================ example snapshot with JEST react-test-renderer no event handlers   ================
-
-import React from 'react';
-import Link from '../Link.react';
-import renderer from 'react-test-renderer';
-
-it('renders correctly', () => {
-  const tree = renderer
-    .create(&lt;Link page="http://www.facebook.com">Facebook&lt;/Link&gt;)
-    .toJSON();
-  expect(tree).toMatchSnapshot();
-});
-
-================ ================ ================
-
-                </example>
-            </paragraph>
-      <subtitle>ENZYME Configuration</subtitle>
+<subtitle>ENZYME Configuration</subtitle>
       <paragraph>
           <info>Before U need 'Enzyme' Airbnb product that is created to enhance testing for React, it uses addtional selectors and enables Snapshot testing, it needs special adapters to work with JEST
           ENZYME allows you to add event handlers of any types to your shallow wrappers.
           </info>
           <example>
             
-================ instaling enzyme ================
+================ installing enzyme ================
 
 npm i --save-dev 
 enzyme@3.0.0 
@@ -196,7 +161,44 @@ describe('MyComponent', () => {
 
           </example>
       </paragraph>
-      <subtitle>Event simulators</subtitle>
+
+
+
+          
+        </content>
+    </chapter>
+    <chapter>
+       <subject>Snapshot testing with eact-test-renderer library</subject>
+        <content>
+            <subtitle>react-test-renderer from JEST no event handlers support</subtitle>
+<paragraph>
+<info>There is a small package a 
+  npm package called 'react-test-renderer' for making your component snapshots. No need for Enzyme. BUT
+  in only creates static snapshot it doesnt allow to test clicks, mouse events etc.</info>
+<example>
+                  
+================ installing react-test-renderer ================
+
+npm i react-test-renderer@16.0.0 (U need this version if you work with React 16.* )
+
+================ example snapshot with JEST react-test-renderer no event handlers   ================
+
+import React from 'react';
+import Link from '../Link.react';
+import renderer from 'react-test-renderer';
+
+it('renders correctly', () => {
+  const tree = renderer
+    .create(&lt;Link page="http://www.facebook.com">Facebook&lt;/Link&gt;)
+    .toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+================ ================ ================
+
+                </example>
+            </paragraph>
+            <subtitle>Event simulators</subtitle>
       <paragraph>
           <info>Enzyme allows you to simulate events , could be any event as onLoad, click etc.. U need to find DOM element first and attach simulate as U would event as addEbentListener</info>
           <example>
@@ -400,6 +402,33 @@ test("calls app.doAdd", () => {
         </content>
     </chapter>
     <chapter>
+        <subject>Testing objects and arrays</subject>
+        <content>
+            <paragraph>
+                <info>in javascript {}==={} or []===[] are always false , the key is to test what is inside and array or object properties as below</info>
+                <example>
+================ 2 objects ================ 
+
+const obj1 = {name:'Greg'}
+const obj2 = {name:'Greg'}
+
+obj1===obj2 //false
+JSON.stringify(obj1)===JSON.stringify(obj2) //true we comparing to strings
+
+//jest 
+describe('Objects are the same', () => {
+test('have all the same properties', () => {
+  expect(obj1).toEqual(obj2);
+});
+});
+
+
+================ ================ ================
+                </example>
+            </paragraph>
+        </content>
+    </chapter>
+    <chapter>
         <subject>Testing REDUX</subject>
         <content>
            <subtitle>redux-mock-store with thunk middleware</subtitle>
@@ -461,100 +490,16 @@ or U want to mock entire seperate module that is part of your test code executio
     <chapter>
         <subject>MOCK functions</subject>
         <content>          
-          <subtitle>jest.fn();</subtitle>
-          <paragraph>
-              <info>Every function can be assing to mock function. That way it will change its original functionality and will serve whaterver we declare in mock function body</info>
-              <example>
------------------ original apiService.get function -------
-
-apiService.get = (a, b) => a + b;
-
---- Assign apiService.get to mock function (it will loose it original functionality)
-
-apiService.get = jest.fn();
-
---jest.fn() is a normal function that doesnt return anything by default (as any js function)
-
-console.log( apiService.get() )
-//return undefined since fuction doesnt return anything
-
-
-- then JEST comes with some testing methods to verirfy function is working -
-
-//call funcion;
-apiService.get();
-
-//and expect
-expect(apiService.get).toHaveBeenCalled();
-
-
-- first call function and then test if function has been called twice with a param 'value'-
-
-apiService.get('value');
-
-expect(apiService.get).toHaveBeenCalledTimes(2);
-expect(apiService.get).toHaveBeenCalledWith('value');
-
-
-------------------------- ---------------------- -------------------------
-
-              </example>
-          </paragraph>
-          <subtitle>jest.fn() with function body</subtitle>
-          <paragraph>
-              <info>techinally you can specify or call any function inside jest.fn() funtion body</info>
-              <example>
-------------- call console once executing a mock function-----
-
-apiService.get = jest.fn(console.log('working'));
-
-
-//call method
-apiService.get()
-
----it will print to console but this is pointless cause it wont be testable cause jest.fn() do not return any value------
-
-
-              </example>
-          </paragraph>
-          <subtitle>jest mock function with function body RETURN</subtitle>
-          <paragraph>
-              <info>jest.fn() can have function body which is a callback function jest.fn(callback) callback allows you to define what to return from function and what arguments to accept</info>
-              <example>
--------- jest.fn() function body as  (callback with return value)-----
-
- apiService.get = jest.fn(() => 2);
-
- //now call you mock
- console.log( apiService.get()) //return 2
-
-- U can also pass arguments to your callback function -------
-
-apiService.get = jest.fn((x) => x + 2);
-
-console.log( apiService.get(2)) //return 4
-
- - Basically , U can do any trasformations inside your callback an then return any value you want and then verify in your acceptance criteria --
-
-apiService.get = jest.fn((x) => x + 2 * 5 * 6);
-
---------- assertion to above -----------
-
-expect(apiService.get(2)).toBe(62);
-
----------- ---------- ------------
-              </example>
-          </paragraph>
-          <subtitle>JEST function declaration helpers mockReturnValue nad mockReturnValueOnce</subtitle>
+        <subtitle>JEST function declaration helpers mockReturnValue nad mockReturnValueOnce</subtitle>
           <paragraph>
               <info>Jest comes with shorthand mock declaration that depends of your usage</info>
               <example>
 ------below is the same statement with 2 ways of declaring ------
 
-apiService.get = jest.fn(()=>2) ===  apiService.getmockReturnValue(2)
+apiService.get = jest.fn(()=>2) === same as::====   apiService.get = jest.fn().mockReturnValue(2)
 
 
-------- you can specify what function return every time you call it ------
+1. ------- once apiService.get is mocked as apiService.get = jest.fn(()=>2)  you can change its mock with diffrent implementation  ------
 
 apiService.get
 .mockReturnValueOnce(10)
@@ -567,32 +512,6 @@ console.log(apiService.get());
 
               </example>
           </paragraph>
-          <subtitle>Overriding Mock function based on implemenations with mockImplementation()</subtitle>
-          <paragraph>
-              <info>It is possible to declrae your mock functions more than once with diffrent result or implemenation</info>
-              <example>
-                
-------------- initial implementation ------------
-
-apiService.get = jest.fn(()=>2)
-
-console.log(apiService.get()); //2
-
------- override initial implemation and chain multiple overrides  ------
-apiService.get
-.mockImplementationOnce(() => 52)
-.mockImplementationOnce(() => 62)
-.mockImplementation(() => true);
-
-
-console.log(apiService.get()); //54
-console.log(apiService.get()); //62
-console.log(apiService.get()); //true
-
-------------   ------------   ------------
-              </example>
-          </paragraph>
-
           <subtitle>Jest.fn() mock that returns promise</subtitle>
           <paragraph>
               <info>jest.fn() can return any value so We could introduce async code and return a Promise, usefull for testing HTTP calls</info>
@@ -618,22 +537,15 @@ apiService.get = jest.fn(x => Promise.resolve(x));
         </content>
     </chapter>
      <chapter>
-      <subject>Mock entire modules/packages using jest.mock </subject>
-      <content>
-        <paragraph>
-            <info>
-/ --------------- /
-  Sometimes you want to imoport a module as UserAuthorization  but dont want all complex validation U can just mock.
-            There are 2 ways of mocking entire module.
-      We can place our module on __MOCK__ directory , usefull for modules frequently used in tests modules  as
- fetch, axios etc... Then once is mocked in seperate directory then it will be used throughout. 
- Second method is to mock in testing file itself for modules used only for particular test.
+    <subject>Mock custom module using jest.mock</subject>
+    <content>
+    <subtitle>by storing in __mocks__/react-redux.js</subtitle>
+      <paragraph>
+          <info>mock stored in __mocks__/nameofModule.js</info>
+          <example>
+// we are intresting in mocking showModal (in practice we will mock entire module anyway cause jest will mock entire file)
 
-/ --------------- /
-</info>
-            <example>
-
---------- original module  modalActions.js -------
+-------- original module  modalActions.js -------
 
 export function showModal(children, options = {}) {
   const { mode, type } = options
@@ -645,320 +557,349 @@ export function showModal(children, options = {}) {
     dispatch(openModal())
   }
 }
-// we are intresting in mocking showModal (in practice we will mock entire module anyway cause jest will mock entire file)
 
-/ --------------- /
-
- ----------------------- THERE ARE 2 WAYS OF MOCKING A MODULE ----------------
-
-
- 1. By creating a folder __MOCKS__ and creating mock version of modalActions.js
-
- / --------------- /
-
- / ----- __MOCKS__/modalActions.js  ------ /
+ By creating a folder __mocks__ and creating mock version of modalActions.js
+ / ----- __mocks__/modalActions.js  ------ /
 
 const showModal = jest.fn(() => ({ type: 'MOCK_SHOW_MODAL' }))
 export { showModal }
 
-/ --------------- /
 
-/---- in any test file as countryActions.spec.js  ------ /
+-------------------------------- testingfile.spec.js --------------------------------
+1. import your original module as you normally would:
+  --- import modalActions.js
+2. let jest know you want to use mocked version of modalActions.js
+  --- jest.mock('./pathto/modalActions')
+3. execute code that uses showModal()
 
-jest.mock('../modalActions') 
 
-/ --------------- /
+          </example>
+      </paragraph>
+      <subtitle>mocking in the scope of testing file</subtitle>
+      <paragraph>
+          <info>this method allows you to mack intant mock in the scope of testing file only.</info>
+          <example>
+1. import your original module as you normally would:
+  --- import modalActions.js
 
-explanation:
-Simply import original module as above => jest will know is mocked since its mock version sits under the same name 
-in __MOCKS__/modalActions.js
-
-explanation:
-Once is imported as jest.mock('../modalActions') is mocked with all method set in mock (dont need to call it either when test needs it it will run it as mock)
-
-/ ------------------------------------------- /
-
-2. By simply putting all above steps in below statement
-
-/ --------------- /
-
-/---- in any test file as countryActions.spec.js  ------ /
+2. let jest know you want to use mocked version of modalActions.js by specify callback method with mock behaviour
 
 jest.mock('../modalActions', () => ({
   showModal: () => ({ type: 'MOCK_SHOW_MODAL' }),
 })) 
 
+3. execute code that uses showModal()
+
 / --------------- /
+          </example>
+      </paragraph>
+     </content>
+    </chapter>
+    <chapter>
+        <subject>Mock entire module stored in node_modules as react-redux</subject>
+        <content>
+            <subtitle>by storing in __mocks__/react-redux.js</subtitle>
+            <paragraph>
+                <info>this is prefelable way of using mock cause it implemanation will be shared accross diffrent files.</info>
+                <example>
+                  ----------------------- __mocks__/react-redux.js ----------------
+
+
+ 1. By creating a folder __mocks__ and creating mock version of react-redux
+
+ !!! Name of the file has to match the name for the module so in our case: react-redux.js !!!
+
+ / ----- __mocks__/react-redux.js  ------ /
+ //this module we only intrested in connect method from this module so the content will look as below:
+
+
+
+//allways need to mock specific to module being used react-router has to exposed export { connect, provider };
+//we will use javascript factory to accomplish that!
+
+/-------- IMPORTANT  react-readux --------/
+
+const reactRedux = {
+  connect: jest.fn(
+    (mapStateToProps, mapDispatchToProps) => (reactComponent) => {
+      return {
+        mapStateToProps,
+        mapDispatchToProps,
+        component: reactComponent,
+      };
+    }
+  ),
+  provider: ({ children }) => children,
+};
+const connect = reactRedux.connect;
+const provider = reactRedux.provider;
+
+export { connect, provider };
+
+
+/-------- IMPORTANT axios--------/
+//axios has to expose object itself since is imported as import axios from 'axios'
+
+export default {
+  get: jest.fn(() => Promise.resolve("default")),
+};
+
+2./---- in any test file as: countryActions.spec.js  ------ /
+
+tell jest that U want to mock react-redux from node_modules
+-- jest.mock('react-redux') 
+
+
 
 explanation:
-Once is imported as above is mocked with all methods set in mock callback (showModal) (dont need to call it either when test needs it it will run it as mock)
+when react container component(redux container) is imported it will use our mocked connect method for setting mapStateToProps and mapDispatchToProps.
+Remember You still need to specify you mock_state required by map mapStateToProps.
+
+
+3./---ChannelContentContainer object attached to ChannelContentContainer  due to this:
+  --  export const ChannelContentContainer = connect(mapToProps)(dispatchToProps)(component) but also could be done as 
+  --  export default connect(mapToProps)(dispatchToProps)(component)
+
+4./-- lastly import your redux container that uses the react-redux connect mock
+
+ -- import { ChannelContentContainer } from "../ChannelContentContainer"; or import  ChannelContentContainer  from "../ChannelContentContainer"
+ //depending wchich import used from point 3.
+
+5. /--- now mock version of react-redux and it could be accessed by ---/
+
+  mapStateToPropsObject = ChannelContentContainer.mapStateToProps(mock_state);
+  mapDispatchToPropsObject = ChannelContentContainer.mapDispatchToProps(()=>console.log('method send as dispatch'));
+  connectedComponent = ChannelContentContainer.component;
+
+
+/ ------------------------------------------- /
+                </example>
+            </paragraph>
+            <subtitle>mock('react-redux', callback)</subtitle>
+            <paragraph>
+                <info> will mock in the scope of testing file. Disadvantage is that U have to always create mock per test file.</info>
+                <example>
+-------------- U can mock react-redux right in the testing file ----------
+
+/ --------------- /
+import the original module as usual first:
+1. -- import react-redux from 'react-redux'
+
+2. /---- in any test file as: countryActions.spec.js  ------ /
+make your manual inline mocks of react-redux installed by npm install react-redux
+
+jest.mock("react-redux", () => ({
+  connect: jest.fn(
+    (mapStateToProps, mapDispatchToProps) => (reactComponent) => {
+      return {
+        mapStateToProps,
+        mapDispatchToProps,
+        component: reactComponent,
+      };
+    }
+  ),
+}));
+
+3./ --------------- /
+-- lastly import your redux container that uses connect mocked method.
+
+import { ChannelContentContainer } from "../ChannelContentContainer";
+
+explanation:
+when react container componentis imported it will use our mock specify above. Important
+You still need to specify you mock_state required by map mapStateToProps.
+
+mock version of react-redux and it could be accessed by:
+
+  mapStateToPropsObject = ChannelContentContainer.mapStateToProps(mock_state);
+  mapDispatchToPropsObject = ChannelContentContainer.mapDispatchToProps(()=>console.log('method send as dispatch'));
+  connectedComponent = ChannelContentContainer.component;
 
 /------------------ /
-            </example>
-        </paragraph>
-      </content>
-  </chapter>
-  <chapter>
-        <subject>SpyOn Class methods</subject>
+                </example>
+            </paragraph>
+            <subtitle>override a mock implemanation</subtitle>
+            
+            <paragraph>
+                <info>most of a time U would use your default implemantion residing in __mocks__/modulename.js but occasionly U want specific behaviour for 
+                  the module thefore in you test file you can customize it.</info>
+                <example>
+
+1. -- import to module you want to mock as ---
+
+  import axios from 'axios'
+
+2. -- let jest know we want to use mock for this module 
+
+  jest.mock('axios')
+
+3. override default mock implemenation by overiding its content for example for get method in axios:
+
+  axios.get.mockImpenationOnce(()=>{hello:'I want this implemanation'})
+
+/------------------ /
+
+                </example>
+            </paragraph>
+        </content>
+    </chapter>
+    <chapter>
+        <subject>SpyOn functionality in general</subject>
         <content>
-          <subtitle>spyOn(wraper.instance(),'class method') with arrow functions</subtitle>
+           <paragraph>
+               <info>SpyOn method allows you to spy on specific method of the object. Especially usuefull for windows methods (as window.scrollTo()) or 
+                document event mehtods. </info>
+               <example>
+
+----------- original method -------
+
+function(scrollTo){
+  window.scrollTo(scrollTo)
+}
+
+-----------------------
+
+1. / -- if U try to test that it will break cause window method is not defined , one way is to spy on it
+
+const scrollToMethod = jest.spyOn(global.window,'scrollTo').mockImplementation((scroll)=>'is scrolled to'+scroll)
+
+2. /-- test function(scrollTo)
+
+it('calls scroll window method'()=>{
+
+expect(scrollTo(20)).toEqual('is scrolled to 20');
+
+})
+
+/ ----------------------- /
+               </example>
+           </paragraph>
+        </content>
+    </chapter>
+    <chapter>
+        <subject>jest.spyOn(object,method) as alternative to jest.mock()</subject>
+        <content>
+            <subtitle>spyOn(npm_module,method)</subtitle>
+            <paragraph>
+                <info>Sometimes U dont want to go all of that trouble to mock entire module, U Want just to 'borrow' or spy on one of its methods
+                  and then restore its original functinality. Spies only work with moduels, classes basicaly objects.</info>
+                <example>
+/-------------------------/
+
+axios is module/object that comes with methods as get, post, put etc lets spy on get method only
+
+1. /-- import your library as U would normally do 
+
+-- import axios from 'axios'
+
+2. /---spyOn(object, method)  with mock implenation for it 
+
+ -- jest.spyOn(axios, "get").mockImplementation(() => Promise.resolve("hi"));
+
+3. /-- run you test with mock
+
+axios.get().then((result) => {
+  expect(result).toEqual("hi");
+});
+
+4. /-- lastly remmber to restore axios.get() to its original 
+
+ -- axios.get.mockRestore()
+
+/-------------------------/
+
+                </example>
+            </paragraph>
+             <subtitle>spyOn(class,method) </subtitle>
           <paragraph>
-              <info>by using modern ES6 class syntax U have to test it differentlly to standard method declaration
-              Spy itself allows you to spy on single method. !! IMPORTANT !! with arrow function declaration You wont be
-              able to use enzyme click simulation, but only call class method itself</info>
-             <example>
-             ------------------------ react Class example ---------------------
-
-             class Counter extends Component {
-              state = {
-                count:0,
-              }
-              incrementCounter = () => {
-                this.setState({ count:this.state.count++ } )
-              }
-              render(){
-                button onClick={() => this.incrementCounter()} >Increment button>
-              }
-            }
-
-
-            ------------------test with spyOn --------------------------
-
-            it('should update the count by 1 once clicked', () => {
-
-              --- declare your wrapper first -----
-
-              const wrapper = shallow(Counter />);
-
-              --- assign your spy function on INSTANCE CLASS ONLY (not a wrapper)----
-                  (spyOn takes class Instance and name of the method for arrow functions)
-
-              const incrementSpyOn = jest.spyOn(
-                wrapper.instance(),
-                'incrementCounter'
-              )
-
-              ---- call instance class literally ---
-                (only this will work with arrow method declaration any onClick event will not trigger )-----
-
-              wrapper.instance().incrementCounter()
-
-
-              ----- expect increment by 1 ------
-
-              expect(wrapper.state('counter')).toBe(1);
-            });
-
-              </example>
-          </paragraph>
-          <subtitle>spyON(wraper.instance(), 'classMethod') with standard class methods</subtitle>
-          <paragraph>
-              <info>with a standard class methods, You need to bind your class functions in constructor in order
-              to make them responsive to events(eg. clicks) in jest test for click simulation.
-
-              constructor(props){
-                super(props)
-                this.method = this.method.bind(this)
-              }
-              
-              </info>
-             <example>
-             ------------------------ react Class example ---------------------
-
-             class Counter extends Component {
-              
-              contstructor(props){
-                super(props)
-                this.state = {
-                  count:0,
-                }
-                --- U have to bind your method for jest ----
-
-                this.incrementCounter = this.incrementCounter.bind(this)
-              }
-
-              incrementCounter(){
-                this.setState({ count:this.state.count++ } )
-              }
-
-              render(){
-                button onClick={() => this.incrementCounter()} >Increment button>
-              }
-            }
-
-
-
-            ------------------test with spyOn --------------------------
-
-            it('should update the count by 1 once clicked', () => {
-
-
-              --- assign your spy function on Class prototype first! ----
-                  (spyOn takes class Prototype and name of the method for standard declaration)
-
-
-              const incrementSpyOn = jest.spyOn(
-                Counter.prototype,
-                'incrementCounter'
-              )
-
-
-              -------- declare your shallow wrapper first-----
-
-              const wrapper = shallow(Counter />);
-
-
-              -------- then simulate click on wrapper child (NO NEED for class instance)-----
-
-              wrapper.find('button').simulate('click');
-
-              ------(or second way) find prop 'onClick' and execute -----
-
-              wrapper.find('button').prop('onClick')()
-
-
-
-              ----- expect increment by 1 ------
-
-              expect(wrapper.state('counter')).toBe(1);
-            });
-
-              </example>
-          </paragraph>
-          <subtitle>spyOn(wraper.instance(),'class method') with .mockImplementation(()=>'whatever')</subtitle>
-          <paragraph>
-              <info>Spy itself allows you to spy on single method. With mockImplementation()
+              <info>Spy itself allows you to spy on single method of a class as well. With mockImplementation()
               on spy You can change its original implemenation and then restore it. Example below</info>
              <example>
-            ------------------------ react Class example ---------------------
+  ------------------------ react Class example ---------------------
 
-             class Counter extends Component {
-              state = {
-                count:0,
-              }
+   class Counter extends Component {
+    state = {
+      count:0,
+    }
 
-              add = (val1,val2) => val1 + val2
-            }
-
-
-
-            ------------------ test with spyOn --------------------------
-
-            it('should add two integers', () => {
-
-              --- declare your wrapper first -----
-
-              const wrapper = shallow(Counter />);
-
-
-              --- assign your spy function on class instance only (WRAPPER WILL not work) ----
-
-              const incrementSpyOn = jest.spyOn(
-                wrapper.instance(),
-                'add'
-              ).mockImplementation(()=>1)
-
-
-              ---- call instance class literally -----
-
-              expect(wrapper.instance().add(2,3)).toEqual(1)
-
-
-              ---------- !!! the restore original implemenation !!! -----
-
-              wrapper.instance().add.mockRestore() -- (dont put that line)
-
-
-              ---- now make sure your original implemenation works back on ----
-
-              expect(wrapper.instance().add(2,3)).toEqual(5)
-
-            });
-
-              </example>
-          </paragraph>
-           <subtitle>spyOn(wraper.instance(),'class method') with .mockImplementationOnce(()=>'whatever')</subtitle>
-          <paragraph>
-              <info>Spy itself allows you to spy on single method. With mockImplementationOnce()
-              on spy You can change its original implemenation but it will only works once no need to restore it.
-              Example below</info>
-             <example>
-            ------------------------ react Class example ---------------------
-
-             class Counter extends Component {
-              state = {
-                count:0,
-              }
-
-              add = (val1,val2) => val1 + val2
-            }
+    add = (val1,val2) => val1 + val2
+  }
 
 
 
-            ------------------test with spyOn --------------------------
+  1. /------------------ test with spyOn --------------------------
 
-            it('should add two integers', () => {
+  it('should add two integers', () => {
 
+    --- declare your wrapper first -----
 
-              --- declare your wrapper first -----
-
-              const wrapper = shallow(Counter />);
-
-
-              --- assign your spy function on class instance only not a wrapper ----
-
-              const incrementSpyOn = jest.spyOn(
-                wrapper.instance(),
-                'add'
-              ).mockImplementationOnce(()=>1)
+    const wrapper = shallow(Counter />);
 
 
-              ---- call instance class literally -----
+   2.  /--- assign your spy function on class instance only (WRAPPER WILL not work) ----
 
-              expect(wrapper.instance().add(2,3)).toEqual(1)
-
-
-              ----------!!!! NO NEED to the restore original implemenation !!!!-----
-
-              //wrapper.instance().add.mockRestore()
+    const incrementSpyOn = jest.spyOn(
+      wrapper.instance(),
+      'add'
+    ).mockImplementation(()=>1)
 
 
-              ----now make sure your original implemenation works back on ----
+   3. / ---- test your mock implemantion-----
 
-              expect(wrapper.instance().add(2,3)).toEqual(5)
+    expect(wrapper.instance().add(2,3)).toEqual(1)
 
-            });
+
+   4. / ---------- !!! the restore original implemenation !!! -----
+
+    wrapper.instance().add.mockRestore() -- (dont put that line)
+
+
+    5. /- (optional)---- now make sure your original implemenation works back on ----
+
+    expect(wrapper.instance().add(2,3)).toEqual(5)
+
+  });
 
               </example>
           </paragraph>
         </content>
-  </chapter>
+    </chapter>
   <chapter>
       <subject>Mock Object methods</subject>
       <content>
-          <subtitle>jest.spyOn()</subtitle>
+          <subtitle>jest.spyOn() with mockRestore()</subtitle>
           <paragraph>
               <info>jest.spyOn to mock a funtion but later restore its original implementation</info>
              <example>
- ----------------------- math.js helpers ----------------
- export const add      = (a, b) => a + b;
- export const subtract = (a, b) => b - a;
+ ----------------------- math.js object----------------
+export default {
+     add:(a, b) => a + b,
+     subtract:(a, b) => b - a,
+ })
  ---------------------------------------------------------
 
- describe("use js.spyOn() to mock function and then restore original implementation",()=>{
-     const addMock = jest.spyOn(math, "add")
+ 1. /--- import your library like you would normaly do
 
-     // override the implementation
-     addMock.mockImplementation(() => "mock")
-     expect(app.doAdd(1, 2)).toEqual("mock")
+import math from './math'
 
-     // restore the original implementation
-     addMock.mockRestore()
-     expect(app.doAdd(1, 2)).toEqual(3)
- })
+ 2. /-- spyOn your method object with mock implementation
+
+     const addMock = jest.spyOn(math, "add").mockImplementation(() => "mock")
+
+ 3. /-- run your example test
+
+     expect(addMock.add(1, 2)).toEqual("mock")
+
+4. / ---------- !!! the restore original implemenation !!! -----
+
+    addMock.mockRestore()
+
+    //test expect(math.add(1, 2)).toEqual(3)
+
+----------
             </example>
           </paragraph>
-          <subtitle>Object set get method using mock functions</subtitle>
+          <subtitle>SpyOn(object,method,'get' or 'set') with restoring test</subtitle>
           <paragraph>
               <info>U can spy on the object properties and method and even assign temporarry get and set methods as shown below. The idea is to mock function as usual but then assing that function to set and get mehtod of the object</info>
               <example>
@@ -1003,6 +944,33 @@ jest.restoreAllMocks()
       </content>
   </chapter>
   <chapter>
+      <subject>clearing mocks</subject>
+      <content>
+         <paragraph>
+             <info>When you run multiple test in one file U most likely want to spy, mock something in one test but restore for next one.Those are jest 
+              clearing methods.</info>
+             <example>
+----------- restore to original functions ----------
+
+---for one mock---
+
+fn.mockClear() // Clears mock usage date (fn.mock.calls, fn.mock.instances)
+fn.mockReset() // Clears and removes any mocked return values or implementations
+fn.mockRestore() // Resets and restores the initial implementation
+
+
+---------- for all mocks ----------
+
+jest.clearAllMocks()
+jest.resetAllMocks()
+jest.restoreAllMocks()
+
+
+             </example>
+         </paragraph>
+      </content>
+  </chapter>
+  <chapter>
       <subject>run only one test</subject>
       <content>
           <paragraph>
@@ -1012,7 +980,7 @@ jest.restoreAllMocks()
 --config=jest.configuration.json      
 
 //command line
-gilgrz$ /Users/gilgrz/myReactComponents/node_modules/.bin/jest -i 'AppRouter.test.js'
+gilgrz$ /Users/gilgrz/myReactComponents/node_modules/.bin/jest -i 'absolutepath/AppRouter.test.js'
 
 
               </example>
