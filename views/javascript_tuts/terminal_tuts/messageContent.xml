@@ -3,7 +3,6 @@
  <chapter>
    <subject>history</subject>
     <content>
-   <subtitle></subtitle>
     <paragraph>
         <info>bash_history is the file that keeps track of the commands U have ever entered</info>
         <example>
@@ -36,6 +35,51 @@
         </example>
     </paragraph>
   </content>
+  </chapter>
+  <chapter>
+      <subject>bracket pattern file{1..3}</subject>
+      <content>
+         <paragraph>
+             <info>bracket patern allows you to create pattern output as example below
+
+              //echo name1 name2 name3
+              echo name{1..3}
+
+              //create files name1.txt name2.txt name3.txt
+              touch name{1..3}
+
+              //remove files name1.txt name2.txt name3.txt
+              rm name{1..3}
+
+              //combine echo with mkdir with pipe
+              echo name{1..3} | xargs mkdir
+
+             </info>
+             <example></example>
+         </paragraph>
+      </content>
+  </chapter>
+  <chapter>
+      <subject>write it or append file echo</subject>
+      <content>
+         <paragraph>
+             <info>echo 'text' and write in or append to the new or existing file</info>
+             <example>
+/---/
+                
+//write in new file 
+echo 'text to write in' > newFile.text
+
+//append to existing file 
+echo 'text to append' >> newFile.text
+
+//stdout echo mutltipe pattern names 
+echo file{2..10}.txt 
+
+
+             </example>
+         </paragraph>
+      </content>
   </chapter>
   <chapter>
       <subject>file permisions</subject>
@@ -127,6 +171,26 @@ chmod ugo-rwx;
 
 ------------ ------------ ------------ ------------
               </example>
+           </paragraph>
+       </content>
+   </chapter>
+   <chapter>
+       <subject>list ls</subject>
+       <content>
+           <paragraph>
+               <info>You should list to list files in curent directory dont use find for that</info>
+               <example>
+                 flags 
+                 -1 = list in seperate rows
+                 -la = includdig hidden files
+                 -l = with details as file permissions
+
+
+                 //list files in current dictory
+                 ls 
+                 //list and sort (it sorts by default anyway) 
+                 ls | sort
+               </example>
            </paragraph>
        </content>
    </chapter>
@@ -285,596 +349,167 @@ find . -type f -iname 'index*' -print -o -path './node_modules' -prune
        </content>
    </chapter>
    <chapter>
-       <subject>Desctructuring Assigment in Arrays</subject>
+       <subject>grep</subject>
        <content>
-          <subtitle>Desctructuring Assigment in Arrays</subtitle>
-           <paragraph>
-               <info>Desctructuring Assigment in Arrays:
-               allows you to assign "=" left to right with desctructuring syntax by creating variables as 
+          <subtitle>grep</subtitle>
+          <paragraph>
+              <info>greg allows you find within a text with this pattern doesnt support regex at this form
 
-               let [pocket1, pocket2, pocket3] = [1,2,3];
+                    grep [flag] [plain text] [where][*][filename.*]
 
-               </info>
-               <example>
- ------------------- ES5 -------------------
-
- var someArray = [1, 2, 3];
- var first = someArray[0];
- var second = someArray[1];
- var third = someArray[2];
-
- ------------------- ES6 -------------------
-
- var someArray = [1, 2, 3];
- let [pocket1, pocket2, pocket3] = someArray;
- console.log(pocket1, pocket2, pocket3);
-
- ----------------U can also skip values cause U can not be asked to type so much ;) -------------
-
- let  [,,third] = ["foo", "bar", "baz"];
- console.log(third); // "baz"
-
- -----------------------
-             </example>
-           </paragraph>
-           <subtitle>Desctructuring Assigment in nested structure Arrays</subtitle>
-           <paragraph>
-               <info>let [foo, [[bar], baz]] = [1, [[2], 3]]; //the [] syntax has to match;
-               </info>
-               <example>
-
- ----------------------ES6--------------------------
-
- var [foo, [[bar], baz]] = [1, [[2], 3]]; //the [] syntax has to match;
- console.log('values', foo,bar,baz);
-
- --------------------------------------------------
-             </example>
-           </paragraph>
-            <subtitle>Desctructuring Assigment in Arrays with (Spread Operator)</subtitle>
-           <paragraph>
-               <info>Desctructuring Assigment in Arrays with (Spread Operator)</info>
-               <example>
-
--------------- selecting last element of hte array with spread operator -------------------
-
-var [head, ...tail] = [1, 2, 3, 4];
-console.log(tail);// [2, 3, 4]
-console.log(head);// 1
-
-------------------------------------------------------------------------------------------
-
-             </example>
-            </paragraph>
-            <subtitle>Desctructuring Assigment in Arrays with (default value)</subtitle>
-              <paragraph>
-               <info>Desctructuring Assigment in Arrays (default value) can be assign to your desctucring structure to avoid undefined value</info>
-               <example>
-
- -------------------------- when the value doesnt exist -------------------------- 
-
- var [missing] = [];
- console.log(missing);
- // undefined
-
- -------------------------- but you can specify a default value as solution  -------------------------- 
-
- var [missing = true] = [];
- console.log(missing); //true;
-
- -------------------------- -------------------------- -------------------------- -------------------------- 
-
-             </example>
-            </paragraph>
-       </content>
-   </chapter>
-
-   <chapter>
-       <subject>Array.prototype.splice(startIndex,[endIndex])</subject>
-       <content>
-         <subtitle>Array.prototype.splice(startIndex,[endIndex])</subtitle>
-           <paragraph>
-               <info>Array.prototype.splice(startIndex,[endIndex])
-                    it will create a new Array from original one from startIndex [endIndex, 'newValue'] and it will modify the original
-               </info>
-               <example>
--------------------------- array --------------------------
-
-  const months = ['Jan', 'March', 'April', 'June'];
-
- -------------------------- months.splice(2) --------------------------
-
-  const cutHalf = months.splice(2);
-  //cutHalf = ['April', 'June']; 
-  //months = ['Jan', 'March']; 
-
-  -------------------------- Array.prototype.splice(startIndex,endIndex) --------------------------
-
-  const months = ['Jan', 'March', 'April', 'June'];
-
-  const cutMiddle = months.splice(1,2);
-  //cutMiddle = ['March', 'April']; 
-  //months = ['Jan', 'June'];
-
-  ------------------------- ------------------------- ------------------------- 
-
-               </example>
-           </paragraph>
-       <subtitle>Array.prototype.splice(startIndex,[endIndex,replacedRangeInSplice]</subtitle>
-           <paragraph>
-               <info>Array.prototype.splice(startIndex,[endIndex,replacedRangeInSplice])
-      
-                    the third argument will replace splice chunk (startIndex,endIndex) with the third Argument
-               </info>
-               <example>
- -------------------------- array --------------------------
-  const months = ['Jan', 'March', 'April', 'June'];
-
-   -------------------------- Array.prototype.splice(startIndex,endIndex) --------------------------
-
-  const cutMiddle = months.splice(1,2,'replacedRangeInSplice');
-
-  //cutMiddle = ['March', 'April']; 
-  //months = ['Jan', 'replacedRangeInSplice', 'June'];
-
-
-   -------------------------- -------------------------- -------------------------- --------------------------
-               </example>
-           </paragraph>
-       <subtitle>Array.prototype.splice(-1)</subtitle>
-           <paragraph>
-               <info>Array.prototype.splice(-1)
-                    splicing from the tail of the array so last element and create an array of the last one;
               </info>
-               <example>
-  -------------------------- array --------------------------
+              <example>
+/---/
 
-  const months = ['Jan', 'March', 'April', 'June','July', 'August'];
+//flags 
+-i - case insensitive
+-r = subdirectories of the current directory eg: grep -r hello .
+-l = list only files
+-w = finds only whole words so live 'but' not 'liver'
+-n = show lines where term appears
+--exclude-dir='.git' = exclude directory git from the search 
+--color = highlights the seach term 
 
-  -------------------------- const lastElement = months.splice(-1)  --------------------------
+//U can merge flags as well 
 
-  const lastElement = months.splice(-1)
-  //lastElement = ['August'];
-  //months = ['Jan', 'March', 'April', 'June','July'];
+grep  -rni --color  "campaign" .
 
-   --------------------------  --------------------------  --------------------------  -------------------------- 
-               </example>
-           </paragraph>
-       <subtitle>Array.prototype.splice(-1,1,replaceLastfromOriginal)</subtitle>
-           <paragraph>
-               <info>
-                Array.prototype.splice(-1,1,replaceLastfromOriginal)
-                 /*splicing from the tail of the array and replace original last element array*/
+=> look for "campaign" term rucursively, show the lines number and color the results
 
-                 Array.prototype.splice(startIndex,lastIndex,'replace') lastindex has to be 1 any other number will produce unexpexted results
 
-               </info>
-               <example>
- -------------------------- array --------------------------
 
- const months = ['Jan', 'March', 'April', 'June','July', 'August'];
+              </example>
+          </paragraph>
+          <subtitle>grep -E </subtitle>
+          <paragraph>
+              <info>greg allows you find within a text with this regex pattern
 
-  -------------------------- const lastElement = months.splice(-1,1,'replaceLastfromOriginal'); --------------------------
+                    grep -E [flag] [plain text] [where][*][filename.*]
 
-  const lastElement = months.splice(-1,1,'replaceLastfromOriginal');
- //lastElement = ['August'];
- //months = ['Jan', 'March', 'April', 'June','July','replaceLastfromOriginal'];
+              </info>
+              <example>
+/---/
 
- --------------------------
-               </example>
-           </paragraph>
+//flags 
+-E takes regex expressions as: 'campaigns?' look for campaign and campaigns
+-i - case insensitive
+-r = subdirectories of the current directory eg: grep -r hello .
+-l = list only files
+-w = finds only whole words so live 'but' not 'liver'
+-n = show lines where term appears
+--exclude-dir='.git' = exclude directory git from the search 
+--color = highlights the seach term 
+
+//U can merge flags as well 
+
+grep -E  -rni --color  "campaigns?" .
+
+=> look for "campaigns?" regex -E  term rucursively, show the lines number and color the results
+
+
+
+              </example>
+          </paragraph>
        </content>
    </chapter>
-
-
    <chapter>
-       <subject>Array.prototype.sort()</subject>
+       <subject>find and repace (sed)</subject>
        <content>
-            <subtitle>Array.prototype.sort()</subtitle>
            <paragraph>
-               <info>Array.prototype.sort() 
-                By default sorting will only for charackters of the same Case (lower or upper not mixed).
-                It will sort ascenting 
-                </info>
-               <example>
--------------------------- array --------------------------
+               <info>find and replace with sed command as :
 
-const charackters = ['chris','aga','STEFAN','greg'];
+                  sed [flag] 's/searchTerm/ReplaceTerm/g' [where][filename.*] 
 
-digits.sort();
-//["STEFAN", "aga", "chris", "greg"] not quite what is expected;
+                  // * wilcards alone are not allowed only combined folder/file*.js/
 
-THEREFORE YOUR SAVE BET IS TO USER SORT FUNCTIONS as explain in next sections 
-
-----------------------------------------------------
-                 
-               </example>
-      </paragraph>
-       <subtitle>Array.prototype.sort(callback) integers</subtitle>
-           <paragraph>
-               <info>
-                sort ascenting;
-                Array.prototype.sort( (a,b)=> a-b );
-                sort ascenting;
-                Array.prototype.sort( (a,b)=> b-a );
                </info>
                <example>
--------------------------- array --------------------------
-const arraySortNumbers = [6,5,1,9];
+/---/
+
+//find IP address and update with new one 
+sed -i '' 's/3432423/335353/g' database.txt
+
+//change expression from one to another
+sed -i "" "s/cdn: false/cdn: true/g" ./CLT-aptamil-*/src/js/adspandable_config.js
 
 
--------------------------- 1 round  --------------------------
-    compare(6-5);     // (a>b) returns 1, a is greater than b  (In other words, 5 will come first.) 5,6   [(5,6),1,9]
-    compare(6-1);  // (a>b) returns 5, a is greater than b  (In other words, 1 will come first.)  1,6     [5,(1,6),9]
-    compare(6-9);  // (a less than b) returns -3, a is less than b  (In other words, 6 will come first.)   6,9      [5,1,(6,9)]
-    
--------------------------- 2 round  --------------------------
-    compare(5-1);  // returns 4, a is greater than b  (In other words, b will come first.)  1,5     [(1,5),6,9]
-    compare(5-9);  // returns -4, a is greater than b  (In other words, b will come first.)  5,9    [1,(5),6,(9)]
-    
- --------------------------3 round  --------------------------
-    compare(1-9);  // returns -8, a is greater than b  (In other words, b will come first.)  1,9    [(1),5,6,(9)]
-
-      ( IN BRACKETS WE HAVE NUMBERS THAT ARE BEING COMPARED AND WHAT ORDER THEY SORT);
-
-
--------------------------- sorting ascenting --------------------------
-
-arraySortNumbers.sort((a,b)=> a-b );
-
--------------------------- sorting descenting --------------------------
-
-arraySortNumbers.sort((a,b)=> b-a );
-
---------------------------------------------------------------------------------------------------------
 
                </example>
-           </paragraph>
-       <subtitle>Array.prototype.sort(callback) non-integers</subtitle>
-           <paragraph>
-               <info>when you soring not-numeric values you need manually return either 0,1 or -1 </info>
-               <example>
--------------------------- array --------------------------
-
-var mixedCaseAnimals=["ant", "bee", "Cat", "dog", "Elephant"];
-
--------------------------- ascending order --------------------------
-
-mixedCaseAnimals.sort(function (a, b) {
-   var x = a.toUpperCase(),
-       y = b.toUpperCase();
-
-   if (x > y) { 
-       return 1; //y will be before x;
-   }
-   if (x &lt; y) { 
-       return -1; //x will be before y;
-   }
-
-   //default x = y ;
-   return 0;
-});
-
--------------------------- descending order --------------------------
-mixedCaseAnimals.sort(function (a, b) {
-   var x = a.toUpperCase(),
-       y = b.toUpperCase();
-
-   if (x > y) { 
-       return -1; //x will be before y
-   }
-   if (x &lt; y) { 
-       return 1; //y will be before x 
-   }
-
-   //default x = y ;
-   return 0;
-});
-
-console.log(mixedCaseAnimals); 
-
-----------------------------------------------------
-               </example>
-           </paragraph>
-       <subtitle>Array.prototype.sort() nested Objects (summary)</subtitle>
-           <paragraph>
-               <info>As shown in other examples based on numeric and non-numeric values sorting will execute below:</info>
-               <example>
-                 
- -------------------------- array with nested object --------------------------
-const employees = [
-        {name: 'john', salary: 90000, hireDate: "July 1, 2011"},
-        {name: 'david', salary: 75000, hireDate: "August 15, 2011"},
-        {name: 'ana', salary: 80000, hireDate: "December 12, 2011"}
-];
-
- -------------------------- SORT by name (non-numeric) --------------------------
-//ASC 
-
-employees.sort(function (a, b) {
-     var x = a.name.toUpperCase(),
-         y = b.name.toUpperCase();
-
-     if (x > y) { 
-         return 1; //y will be before x;
-     }
-     if (x &lt; y) { 
-         return -1; //x will be before y;
-     }
-
-     //default x = y ;
-     return 0;
- });
-
-//DESC
-employees.sort(function (a, b) {
-     var x = a.name.toUpperCase(),
-         y = b.name.toUpperCase();
-
-     if (x > y) { 
-         return -1; //x will be before x;
-     }
-     if (x &lt; y) { 
-         return 1; //y will be before x;
-     }
-
-     //default x = y ;
-     return 0;
- });
-
-
- -------------------------- SORT by salary (numeric) --------------------------
- //ASC 
-
-employees.sort((a, b) => a.salary - b.salary);
-//DESC 
-employees.sort((a, b) => b.salary - a.salary);
-
-
---------------------------  SORT by DATE (numeric) Date object converted to Number --------------------------
-//ASC
-
-employees.sort((x, y) => {
-    var a = new Date(x.hireDate);
-        b = new Date(y.hireDate);
-    return a - b;
-});
-
-//DESC
-employees.sort((x, y) => {
-    var a = new Date(x.hireDate);
-        b = new Date(y.hireDate);
-    return b - a;
-});
--------------------------- --------------------------
-</example>
            </paragraph>
        </content>
    </chapter>
-      <chapter>
-          <subject>ES5/ES6 array.map(callback)</subject>
-          <content>
-              <paragraph>
-                  <info>
-                     array.map(callback) will create a new copy of array as a final result of looping through (it is a great way to modify original content);
-                  </info>
-                  <example>
--------------------------- array --------------------------
+   <chapter>
+       <subject>pipe and execute command (| -exec | xargs )</subject>
+       <content>
+           <subtitle>xargs</subtitle>
+           <paragraph>
+               <info>xargs allows you to take standard input from pipe results and execute command from the resutls as below pattern:
 
-   const orgArray = [4,5,6,7];
+                    xargs allways is perceded by execution command as :
 
--------------------------- array.map() --------------------------
+                    echo a b c | xargs echo 
 
-   const newArray = orgArray.map((e,i)=> e+3);
+                    which simple say take output of echo a b c and pipe result and execute echo (which is simply duplication in this case)
+                    prints a b c
 
--------------------------- --------------------------
+               </info>
+               <example>
+                //-----flags--------/
+                -n [number]1,2 = take the output and place in (-n1 one line each word )-n2 (2 words in line) etc 
 
-                  </example>
-              </paragraph>
-          </content>
-      </chapter>
-      <chapter>
-          <subject>ES6 array methods</subject>
-          <content>
-             <subtitle>array.some(callback)</subtitle>
-             <paragraph>
-                 <info>array.some(callback):
-                   tests whether at least one element in the array passes the test implemented by the provided function.Contrary to every that test if every element pass</info>
-                 <example>
--------------------------- array --------------------------
+                echo a b c | xargs -n2 echo 
+                prints : a b 
+                        c
 
-[1, 2, 3, 4, 5].some(even=>even % 2 === 0); //true 
-
--------------------------- to prove we can find those; --------------------------
-
-[1, 2, 3, 4, 5].find(even=>even % 2 === 0) //2
-
---------------------------
-                 </example>
-             </paragraph>
-             <subtitle>array.every(callback)</subtitle>
-             <paragraph>
-                 <info>array.every(callback) will return true or false depending if all element meet condition in callback function. If only one element doesnt then it will return false.</info>
-                 <example>
--------------------------- array --------------------------
-
-[1, 2, 3, 4, 5].every(even=>even % 2 === 0); //false contray to some; 
-
--------------------------- array check if all values are numbers --------------------------
-
-const allNumbers = [4,6,7.7].every((e,i)=> !isNaN(e) ) //returns true;
-const mixedValues = [4,6,7.7,'string'].every((e,i)=> !isNaN(e) ) //returns false;
-
--------------------------- --------------------------
-                 </example>
-             </paragraph>
-              <subtitle>array.find(callback)</subtitle>
-              <paragraph>
-                  <info>
-                     array.find(callback) will stop interation once look for element is find. it will return a value being looked.
-                  </info>
-                  <example>
--------------------------- array --------------------------
-
-   [4,5,6,7].find((e,i)=> e===6); //return 6
-
--------------------------- --------------------------
-
-                  </example>
-              </paragraph>
-               <subtitle>array.findIndex(callback)</subtitle>
-              <paragraph>
-                  <info>
-                     array.findIndex(callback) will stop interation once look for element is find. it will return an index of value being looked.
-                  </info>
-                  <example>
--------------------------- array --------------------------
-
-   [4,5,6,7].findIndex((e,i)=> e===6); //return 2
-
--------------------------- --------------------------
-
-                  </example>
-              </paragraph>
-              <subtitle>array.filter(callback)</subtitle>
-              <paragraph>
-                  <info>array.filter(callback) will filter array elements according condition in callback function (no loop needed it will do it in one go)</info>
-                  <example>
--------------------------- oddNumbersFilter array  --------------------------
-
-    const oddNumbersFilter = [1, 2, 3 ].filter( x => x % 2 !== 0); //1,3 
-
--------------------------- evenNumbersFilter array  -------------------------- 
-
-    const evenNumbersFilter = [1, 2, 3 ].filter( x => x % 2 === 0); //2 
-
--------------------------- -------------------------- --------------------------
-                  </example>
-              </paragraph>
-              <subtitle>copyWithin(target, start, end)</subtitle>
-              <paragraph>
-                  <info>copyWithin(target, start, end)</info>
-                  <example>
--------------------------- array  --------------------------
-var array1 = [1, 2, 3, 4, 5];
-
--------------------------- place at position 0 the element between position 3 and 4 -------------
-
-console.log(array1.copyWithin(0, 3, 4)) // expected output: Array [4, 2, 3, 4, 5]
-
--------------------------- place at position 1 the elements after position 3 --------------------------
-
-console.log(array1.copyWithin(1, 3));  // expected output: Array [4, 4, 5, 4, 5];
-
------------------------- ------------------------
-                  </example>
-              </paragraph>
-              <subtitle>array.fill(value,[startIndex, endIndex])</subtitle>
-              <paragraph>
-                  <info>array.fill(value,[startIndex, endIndex])</info>
-                  <example>
----------------array.fill(value,[startIndex, endIndex])-------------
-
-[1, 2, 3, 4].fill(0, 2, 4); //[1, 2, 0, 0];
-
----------------array.fill(value,[startIndex])-------------
-
-[1, 2, 3, 4].fill(5,1); //[1, 5, 5, 5];
-
----------------array.fill(value)-------------
-
-[1, 2, 3, 4].fill(6); //[6, 6, 6, 6];
-
---------------- ---------------
-                  </example>
-              </paragraph>
-              <subtitle>array.includes(value)</subtitle>
-              <paragraph>
-                  <info>array.includes(value) it will check if array already has value (is or is not included)</info>
-                  <example>
--------------------------- array  --------------------------
-
-const values = [1,2,3,4,5,6,2,3,5];
-
--------------------------- make copy of values but skip duplicates  --------------------------
-const valuesNoDuplicates = values.reduce((arr,e,i)=>{
-     if(!arr.includes(e)){
-       arr.push(e);
-     }
-
-   return arr;
-},[]);
-
--------------------------- --------------------------
-                    
-                  </example>
-              </paragraph>
-          </content>
-      </chapter>
-      <chapter>
-          <subject>array.reduce(callback(a,e,i){return a},startPoint)</subject>
-          <content>
-              <subtitle>array.reduce(callback) interator couter</subtitle>
-              <paragraph>
-                  <info>
-                     array.reduce(callback) is the way to manipulate elements and it will produce new array. The simplest example is to use as math calculation calculator. needs to return an acumulator (a) in a callback function callback(),0 the extra 0 parameter (or any other value) is a starting point this time it has to be number cause reduce return number value (look for other examples below)
-                  </info>
-                  <example>
--------------------------- array  --------------------------
-
-const figures = [2,4,5,6];
-
--------------------------- reduce as calculator with starting point Number 0 or skiped (if we want to start form 0 could be skiped) -------------
-
-const sum = figures.reduce((a,e,i)=>a=a+e,0) //17
-const multiply1 = figures.reduce((a,e,i)=>a*=e) //240
-
---------------------------  --------------------------
-         
-                  </example>
-              </paragraph>
-              <subtitle>array.reduce(callback) array calculor with starting point </subtitle>
-              <paragraph>
-                  <info>array.reduce(callback) array, it will return accumulator as array and expect an array as starting point.</info>
-                  <example>
--------------------------- array  --------------------------
-
-const figures = [2,4,5,6];
-
--------------------------- reduce as calculator with starting point--------------------------
+                -t = prints what command has been executed by xargs 
+                find greg*.js | xargs  -t  rm  //prints rm greg1.js greg2.js greg3.js
 
 
- const justlikeMap = figures.reduce(
- (a,e,i)=>{
-   a[i] = e+3;
-   return a;
- },[]) //starting point empty array;
+                -p = promts what command is about to be executed by xargs 
+                find greg*.js | xargs  -t  rm  //prints rm greg1.js greg2.js greg3.js...y
 
-  --------------------------  --------------------------  -------------------------- 
-                  </example>
-              </paragraph>
-              <subtitle>array.reduce(callback) Object transformation </subtitle>
-              <paragraph>
-                  <info>array.reduce(callback) Object, it will return Object , because the starting point is Object.
-                    It coule be Empty {} will ruturn new object 
-                    or could be exisiting {prop:'prop'} it will merge to it</info>
-                  <example>
 
--------------------------- array.reduce() converted to object as outcome  --------------------------
+                //create and delete output of echo 
+                 echo 'one two three' | xargs mkdir //create directories
+                //delete output of echo 
+                echo 'one two three' | xargs rm -rf //remove directories
 
-const figures = [2,4,5,6];
-const existingObject = {pointer:'greg'};
+                //copy file text.txt with a content in new files file2.text file3.txt
+                echo file{2..3}.txt | xargs -n1 cp text.txt
 
- const objectArray = figures.reduce((a,e,i)=>{
-   a.values = figures.map((m)=>m+3);
-   return a;
- },existingObject) //starting point an existing Object;
+                //list files containing 'campaign' word and the sentence itself
+                ls . | xargs grep 'camp'
+                //prints campaings.txt:“campaign and campaigns”
 
- console.log(objectArray);
+                //list all in current directory and find file container 'cdn' word -l display file only not content
+                 ls . | grep -l "cdn" * ===  ls . | xargs grep -l "cdn" 
 
-  --------------------------  --------------------------  -------------------------- 
-                  </example>
-              </paragraph>
-          </content>
-      </chapter>
+
+
+               </example>
+           </paragraph>
+           <subtitle>exec</subtitle>
+           <paragraph>
+               <info>-exec allows you to take standard input from pipe results and execute command from the resutls as below pattern:
+
+                it is apprently slower that | xarts
+
+                    xargs allways is perceded by execution command as :
+
+                    find *.js -exec echo {} \; 
+
+
+               </info>
+               <example>
+                //not as good as xargs to be updated 
+
+                //find .jpg file in all subdirectories and list them 
+                find . -name "*.jpg" -exec ls {} ;
+
+             
+
+               </example>
+           </paragraph>
+       </content>
+   </chapter>
  </chapters>
