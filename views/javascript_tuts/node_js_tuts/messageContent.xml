@@ -1,6 +1,249 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapters>
 <chapter>
+    <subject>node package versions</subject>
+    <content>
+        <subtitle>install packages npm i</subtitle>
+        <paragraph>
+            <info>
+      By defaualt any npm i/install package will install latest package with 'carret' minor version as loadash:'^1.3.4' alowing minor
+      update to the version up below 2 as explained below:
+
+      There are 3 type of npm semenatic vesrioning:
+
+      major - upgrade from 1.0.0 to 2.00 (usually breaking changes)
+      minor - upgrade from 1.0.0 to max 1.9.0 (no breaking changes, minor changes)
+      patch - upgrade from 1.0.0 to max 1.0.9 (no breaking changes, bug fix)
+
+      From mpm 5.x.x by npm install package-lock.json will be created that tracks all exact versions of the packages.
+
+
+            </info>
+            <example>
+              /-- outcome in package.json----/
+
+  npm i lodash -S/ --save produces loadash:'^1.3.4' allowed updated below 2.
+
+  npm i lodash@1.4.5 -S/ --save produces loadash:'1.4.5' no updates version.
+
+  npm i lodash -SE/ --save produces loadash:'1.7.4'(any latest same as npm i lodash@latest -SE/) not allowed updates.
+
+
+  explained:
+  //there is no information how to istall patch version of a package ~1.3.4 , so for now just need to be updated manually
+  in package.json if needed.
+
+
+
+            </example>
+        </paragraph>
+        <subtitle>npm update, npm </subtitle>
+        <paragraph>
+            <info>this will update all your package in a scope of the folder even if package-lock.json is present. 
+/--/
+
+npm update => updates project local packages
+
+npm update packagename = updates one package 
+
+npm update -g => updates globall installed packages
+
+npm update packagename -g = updates one package installed globally 
+
+there is some usufull npm commands that will tell you if your packages needs update to prevent errors
+/--/
+
+            </info>
+            <example>
+/----/
+
+//list packages needed update locally / -g globally 
+ -- npm outdated 
+
+
+
+/-------- npm list ----------/
+
+//view curent installed version locally / -g globally 
+npm list --depth 0 
+
+---IMPORATANT ---
+
+this command also flags that which packages needs attentsion, update flaged as: UNMET PEER DEPENDENCY
+U need to habe node_modules alredy present so after npm install. npm outdated it wont flag outdated packges
+if they are not installed , so always run FIRST ::  npm list --depth 0 
+
+
+
+//----------- npm update ----------/
+
+this command will FIX all unmet depedencies regardless the package-lock.json versioning 
+IMPORTANT any package needs updating it has to have minor or patch version enables in package.json
+from node-sass:'1.3.4' it has to have node-sass:'^1.3.4' or node-sass:'`1.3.4'. It will not install 
+update otherwise!
+
+------------------------------------
+
+//update all package / -g globally
+-- npm update
+
+//update single package / -g globally
+-- npm update package
+
+------ minor usage npm commands -------
+
+//list all historical version about the package / -g globally
+-- npm view enzyme versions
+
+//clean unused dependencies (it wont fix unmet dependecies errors just will do repository clean up)
+-- npm prune /or npm prun package
+
+//package home page 
+-- npm home package
+
+//package repo page 
+-- npm repo package
+
+//package docs page 
+-- npm docs package
+
+//list curent bugs page 
+ -- npm bugs package
+
+/--/
+
+
+            </example>
+        </paragraph>
+        <subtitle>finding nearest node executive</subtitle>
+        <paragraph>
+            <info>node executive for pacakges are kept in /bin directory and can be find by below commands</info>
+            <example>
+                
+                /- find nearest node exectuble 
+                //npm bin
+
+                //once U have this you can run local package as gulp as:
+                /Users/gilg/dev/myTuts/views/javascript_tuts/node_js_tuts/node_modules/.bin/gulp
+
+                IMPORTANT package has to be in directory .bin/package and has to have executables as gulp does ;)
+
+
+            </example>
+        </paragraph>
+    </content>
+</chapter>
+<chapter>
+    <subject>node version manager (nvm) installation</subject>
+    <content>
+        <subtitle>why do we need nvm ?</subtitle>
+        <paragraph>
+            <info>sometimes when U managing multiple project from diffent time, packages gets updated, outeded and there is time U will update your 
+              node.js itself. Then some packages it wont work anymore. One way is to start updating them (very tidious) but not neccessary if you dont run your app
+              in production. The other solution is to install node that U need for the project and switch between node version.</info>
+            <example>
+  /----/
+
+              
+  1/- install nvm from official web , which is currnelty github : https://github.com/nvm-sh/nvm
+
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+
+//this script will do:
+  -- install nvm package, 
+  -- update .bashrc or .bash_profile with nvm paths(depending which do U have on your system)
+  -- create /.nvm directory in root
+
+  2. restart your bash for changes to take effect:
+
+  -- source ./bash_profile
+
+  3. check if nvm works 
+  -- nvm --version
+
+
+  4. all global packages wont work anymore, but nvm give you the option to use and to delte them , we are just going to use them
+  if you want uninstall npm global packages npm uninstall -g a_module, (not recomended since they will be used by some software)
+
+  //reuse global npm modules 
+  -- nvm use system
+
+  //prints for me ::: Now using system version of node: v12.14.1 (npm v6.13.4)
+
+  the version of system node.js is 12.14.1 but it will change if you install diffrent by nvm install 10.20.1 for example, the process is
+  explained in the tab : nvm manage and install node versions in this document.
+
+
+/----/
+            </example>
+        </paragraph>
+        <subtitle>nvm manage and install node versions</subtitle>
+        <paragraph>
+            <info>after instalation your ./nvm repository doesnt have any node versions , thefore U need to install them, below are some usefull comamnds to get it done</info>
+            <example>
+/----/
+
+---------- after nvm istalation commands ----------
+
+//list currently installed node.js versions for nvm
+-- nvm ls 
+
+//list all remote node version for instalation 
+-- nvm ls-remote
+
+---------- after nvm istalation there is no node versions installed so start instaling them one by one according the needs ----------
+for example:
+
+//install node version 10 ((Latest LTS: Dubnium))
+nvm install 10.20.1
+
+IMPORTANT: this version now is default version on your machine (since is the only one for now)
+
+
+//install node 12.14.1 
+nvm install 12.14.1
+
+IMPORTANT: this version now is set for the session but it is not default one !
+
+
+------------------- nvn alias default node-version ---------
+
+this command will set your default node version for new shell 
+
+//to make 12.14.1 
+nvm alias default 12.14.1
+
+//to make 10.14.1 
+nvm alias default 10.14.1 etc 
+
+------------------------------ nvm use version -----------------------
+
+after setting yours aliases and installing version you can use it 
+
+//use and set default (for curent and (new sessions !!)
+nvm use default 
+
+IMPORARTANT: use default will keep this version for new sessions as well 
+
+//use alias node10 (only for the time of shell session)
+nvm use node10 
+
+//use alias node8 (only for the time of shell session)
+nvm use node8 
+
+//use installed version (no alias) 10.20.1 (only for the time of shell session)
+nvm use 10.20.1 
+
+
+
+
+/----/
+
+            </example>
+        </paragraph>
+    </content>
+</chapter>
+<chapter>
     <subject>diffrence between exports.sth and module.exports = {} </subject>
     <content>
         <paragraph>
