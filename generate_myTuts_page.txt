@@ -1,0 +1,5 @@
+
+	1 go to => gulp-tuts-page-generator => run gulp 
+	2 <li> is generatad to : gulp-tuts-page-generator/src/partials/_all_tuts_lists.html 
+	3.open src/partials/_all_tuts_list.html to check if generated file is correct !
+	44444444444444444444444444444444444444444444._all_tuts_list.html is then used in views/index.ejs (main page of myTuts)
