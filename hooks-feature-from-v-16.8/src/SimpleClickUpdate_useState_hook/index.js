@@ -27,9 +27,12 @@ const ExampleClickUpdate = () => {
   return (
     <div>
       <h2>Simple click update counter using hook useState()</h2>
-      <p>{`You clicked ${count} times`}</p>
+      <p id="display" data-testid="counter">{`You clicked ${count} times`}</p>
       <button type="button" onClick={() => setCount(count + 1)}>
-        Click me
+        Click me up
+      </button>
+      <button type="button" onClick={() => setCount(count - 1)}>
+        Click me down
       </button>
     </div>
   );

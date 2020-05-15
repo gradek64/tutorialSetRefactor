@@ -8,6 +8,7 @@ import ComponentDidUnmountHookSubstitute from './ComponentDidUnmount_useEffect_h
 import AppLocalRedux from './localRedux_useReducer_hook';
 import ContextAPI from './contextAPI-useContext-hook';
 import CustomHook from './custom_Hooks_shared_logic';
+import CustomHookGlobalState from './global_state_custom_hook';
 
 // shared logic hook;
 import { useFriendStatus } from './custom_Hooks_shared_logic/sharedLogic_hook';
@@ -28,7 +29,6 @@ const ChecStatusHere = () => {
   return <span style={{ color: 'green' }}>{isOnline}</span> || 'Offline';
 };
 
-
 const Index = () => {
   // hook for managing comps array display;
   const [components, setComponent] = useState(comps);
@@ -43,7 +43,7 @@ const Index = () => {
       <SimpleClickUpdate />
       <ComponendDidMountAndUpdate />
       <h2>substitue to componentWillUnmount() class method</h2>
-      { components.map(({ title }, i) => (
+      {components.map(({ title }, i) => (
         <ComponentDidUnmountHookSubstitute
           key={`key${i}`}
           title={title}
@@ -54,9 +54,14 @@ const Index = () => {
       <AppLocalRedux />
       <h2>context API as the way to simulate redux store</h2>
       <ContextAPI />
+      <h2>custom Hooks shared logic with global state</h2>
+      <CustomHookGlobalState />
       <h2>custom Hooks shared logic</h2>
       <CustomHook />
-      <p>Awesome ! react allows you to share state without REDUX by exposing and then importing custom hook logic/state</p>
+      <p>
+        Awesome ! react allows you to share state without REDUX by exposing and
+        then importing custom hook logic/state
+      </p>
       status outside main composition:
       <ChecStatusHere />
     </div>
