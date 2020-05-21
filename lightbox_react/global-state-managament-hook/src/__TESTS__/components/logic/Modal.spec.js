@@ -1,9 +1,9 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
-import Modal from '../../../components/logic/Modal';
+import { renderHook, act } from '@testing-library/react-hooks';
 
 //custom
 import customEvent from '../../../customEvents/dispatchEvent';
+import ModalHook from '../../../components/logic/Modal/Modal_hook';
 
 //spy on customEvent.emit
 jest.spyOn(customEvent, 'on').mockImplementation(() => {});
@@ -14,11 +14,11 @@ describe('Modal', () => {
     children: {},
   };
   it('should render correctly', () => {
-    const component = shallow(<Modal {...initialprops} />);
-    expect(component).toMatchSnapshot();
+    const { result } = renderHook(<ModalHook {...initialprops} />);
+    console.log('ModalHook', result.current.openState());
   });
 
-  describe('componentDidMount', () => {
+  /*  describe('componentDidMount', () => {
     beforeEach(() => {
       //clear mock for next test
       customEvent.on.mockClear();
@@ -102,5 +102,5 @@ describe('Modal', () => {
     });
   });
 
-  describe('close Modal instance method', () => {});
+  describe('close Modal instance method', () => {}); */
 });

@@ -8,6 +8,8 @@ import ComponentDidUnmountHookSubstitute from './ComponentDidUnmount_useEffect_h
 import AppLocalRedux from './localRedux_useReducer_hook';
 import ContextAPI from './contextAPI-useContext-hook';
 import CustomHook from './custom_Hooks_shared_logic';
+import CustomHookCounter1 from './custom_hook_principle/CounterComp1';
+import CustomHookCounter2 from './custom_hook_principle/CounterComp2';
 import CustomHookGlobalState from './global_state_custom_hook';
 
 // shared logic hook;
@@ -56,6 +58,9 @@ const Index = () => {
       <ContextAPI />
       <h2>custom Hooks shared logic with global state</h2>
       <CustomHookGlobalState />
+      <h2>custom Hooks counter with useCounter extracted logic hook</h2>
+      <CustomHookCounter1 />
+      <CustomHookCounter2 />
       <h2>custom Hooks shared logic</h2>
       <CustomHook />
       <p>

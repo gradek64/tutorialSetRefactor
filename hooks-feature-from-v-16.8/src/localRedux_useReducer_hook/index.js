@@ -1,6 +1,4 @@
 import React, { useReducer } from 'react';
-import List from './ListHookedToLocalRedux';
-import { listReducer } from './listReducer';
 import Info from './Info';
 
 const initialList = {
@@ -12,13 +10,43 @@ const initialList = {
   ],
 };
 
+export { initialList };
+
+const listReducer = (state, action) => {
+  switch (action.type) {
+    /* eslint-disable no-case-declarations */
+    case 'REMOVE_ITEM':
+      const order = state.items.findIndex(
+        ({ title }) => title === action.title
+      );
+      state.items.splice(order, 1);
+      return { items: [...state.items] };
+    default:
+      return state;
+  }
+};
+
 const AppLocalRedux = () => {
-  const [list, dispatch] = useReducer(listReducer, initialList);
+  //useReducer is just the same state mananagement as useState()
+  //but allows you to deal with more complicated state as  object state
+  const [list, dispatchAction] = useReducer(listReducer, initialList);
 
   return (
-    <div>
+    <div style={{ border: '1px dashed green' }}>
       <Info items={list.items.length} />
-      <List list={list.items} dispatch={dispatch} />
+      <div>
+        {list.items.map(({ title }, i) => (
+          <div key={`keys${i}`}>
+            <span>title</span>
+            <button
+              type="button"
+              onClick={() => dispatchAction({ type: 'REMOVE_ITEM', title })}
+            >
+              remove
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

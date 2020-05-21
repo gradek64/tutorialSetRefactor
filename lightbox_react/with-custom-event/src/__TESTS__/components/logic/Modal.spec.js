@@ -7,6 +7,8 @@ import customEvent from '../../../customEvents/dispatchEvent';
 
 //spy on customEvent.emit
 jest.spyOn(customEvent, 'on').mockImplementation(() => {});
+//same as below
+//customEvent.on = jest.fn(() => {});
 
 describe('Modal', () => {
   const initialprops = {
@@ -24,8 +26,6 @@ describe('Modal', () => {
       customEvent.on.mockClear();
     });
     it('should warn and exit if eventON prop is not defined', () => {
-      jest.spyOn(customEvent, 'on').mockImplementation(() => {});
-
       const component = shallow(<Modal />);
       const instance = component.instance();
       instance.componentDidMount();
@@ -42,8 +42,9 @@ describe('Modal', () => {
         expect(customEvent.on).toBeCalledWith('OPEN_MODAL', openModalFn);
       });
 
-      it('should assign function to CLOSE_OPEN_MODAL event', () => {
+      fit('should assign function to CLOSE_OPEN_MODAL event', () => {
         const closeModalFn = instance.closeModal;
+        instance.scrollMe = jest.fn();
         expect(customEvent.on).toBeCalledWith('CLOSE_OPEN_MODAL', closeModalFn);
       });
     });

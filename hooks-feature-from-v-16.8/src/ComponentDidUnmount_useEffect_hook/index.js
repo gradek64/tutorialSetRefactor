@@ -16,7 +16,12 @@ const SubstituteForLifeCycles = ({ title, eventHandler }) => {
   return (
     <div>
       <span>it logs unmounted state once removed</span>
-      <button type="button" onClick={() => { eventHandler(title); }}>
+      <button
+        type="button"
+        onClick={() => {
+          eventHandler(title);
+        }}
+      >
         remove me
       </button>
     </div>

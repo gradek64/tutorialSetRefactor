@@ -15,7 +15,7 @@ class Modal extends React.Component {
     this.closeModal = this.closeModal.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     const { eventOn } = this.props;
 
     if (!eventOn) {
@@ -24,7 +24,7 @@ class Modal extends React.Component {
     }
     customEvent.on(eventOn, this.openModal);
     customEvent.on(`CLOSE_${eventOn}`, this.closeModal);
-  }
+  };
 
   componentWillUnmount() {
     // only when you change route though;

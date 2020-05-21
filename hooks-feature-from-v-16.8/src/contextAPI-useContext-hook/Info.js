@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 // custom
 import { SectionContext } from './index';
 
-const ListHookedToLocalRedux = () => {
+const Info = () => {
   const { list } = useContext(SectionContext);
   return `curtent number of items: ${list.items.length}`;
 };
 
-export default ListHookedToLocalRedux;
+export default Info;

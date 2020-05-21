@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // custom imports;
+import dispatchEvent from '../../../customEvents/dispatchEvent';
 import './modal.scss';
 
 const Modal = (props) => {
@@ -23,6 +24,10 @@ const Modal = (props) => {
     openState(false);
   };
   //------- ------- ----------
+
+  //register event with custom event
+  const { eventOn } = props;
+  dispatchEvent.on(eventOn, openModal);
 
   return (
     <React.Fragment>
