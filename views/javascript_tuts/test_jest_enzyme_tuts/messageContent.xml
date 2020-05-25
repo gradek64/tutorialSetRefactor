@@ -383,6 +383,124 @@ https://devhints.io/enzyme
         </content>
     </chapter>
     <chapter>
+        <subject>Testing hooks with react-testing-library</subject>
+        <content>
+            <subtitle>installation</subtitle>
+            <paragraph>
+                <info>react-testing-library is an alternative to Enzyme who doesnt suppoert hooks out of the box(without mocking some functionality;). React-testing-library is recommended by facebook itself it might even been created by them just like jest. Follow instalation process</info>
+                <example>
+/------ react-testing-library----/
+
+npm install --save-dev @testing-library/dom
+
+/---- For accesing dom elements and set expect you also need js-dom ---/
+
+npm install --save-dev @testing-library/jest-dom
+
+
+/-------------------/
+
+
+                </example>
+            </paragraph>
+            <subtitle>snapshot test</subtitle>
+            <paragraph>
+                <info>The best way of tracking changes to the jsx hook outcome is to take a picture of it which is called snapshot ;)</info>
+                <example>
+/--- copy below for snaphshot testing -------/
+                  
+import React from 'react';
+import { render, cleanup } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import Component from '../../SimpleClickUpdate_useState_hook';
+
+afterEach(cleanup);
+  it('should take a snapshot', () => {
+    const { asFragment } = render(&lt;Component />);
+    expect(asFragment(&lt;Component />)).toMatchSnapshot();
+  });
+
+/-------------/
+                </example>
+            </paragraph>
+            <subtitle>alternative to snapshot</subtitle>
+            <paragraph>
+                <info>if your component is very small then you can use below arlternative just to know it ;0</info>
+                <example>
+/--- copy below for snaphshot testing -------/
+                  
+import React from 'react';
+import { render, cleanup } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import Component from '../../SimpleClickUpdate_useState_hook';
+
+it('initial state should be zero (0)', () => {
+    /**
+     *
+     * @usage: getByTestId is set in jsx as &lt;p data-testid="counter">
+     *  
+     **/
+    const { getByTestId } = render(&lt;Component />);
+    expect(getByTestId('counter')).toHaveTextContent('You clicked 0 times');
+  });
+                </example>
+            </paragraph>
+            <subtitle>selecting DOM elements</subtitle>
+            <paragraph>
+                <info>React testing libray comes with lots of more or less useufull selectors, personaly I prefer use css selectors. U can use them by using 
+const {container} = render( component {&lt;..props}/>)
+Rembeber they want U to use {container} as custom or defualt container that component is being rendered to. as table component as custom container 
+
+/----------/
+
+const table = document.createElement('table')
+
+const { container } = render(&lt;TableBody {...props} />, {
+container: document.body.appendChild(table),
+})
+
+/----------/
+If you don specify you custom cotainer then is rendered and appended to div element. And that is why we can use here as selector, cause everying is appended to div down 
+
+                </info>
+                <example>
+/-------- user container div as document.body --------/
+
+
+
+const { container } = render(&lt;CounterComp />);
+const button1 = container.querySelectorAll('button')[0];
+fireEvent.click(button1);
+expect(container.querySelector('#display')).toHaveTextContent(
+  'You clicked 1 times'
+);
+
+
+
+/-----other selectors provided by libary -----/
+
+
+
+// Matching a string:
+const { screen } = render(&lt;CounterComp />);
+screen.getByText('Hello World') // full string match
+screen.getByText('llo Worl', { exact: false }) // substring match
+screen.getByText('hello world', { exact: false }) // ignore case
+
+
+
+---IMPORATANT---
+
+they can be find under ::: queries 
+in documenation
+
+---IMPORATANT---
+
+                </example>
+            </paragraph>
+        </content>
+    </chapter>
+    <chapter>
         <subject>Testing original functions</subject>
         <content>
            <paragraph>
@@ -714,12 +832,15 @@ export { showModal }
 
           </example>
       </paragraph>
-      <subtitle>mocking only in testingfile.spec.js</subtitle>
+      <subtitle>mocking only in testing-file.spec.js</subtitle>
       <paragraph>
           <info>this method allows you to mack intant mock in the scope of testing file only.</info>
           <example>
+------ specify method to mock in module -------------
+
+
 1. import your original module as you normally would:
-  --- import modalActions.js
+  --- import {showModal } from  modalActions.js
 
 2. let jest know you want to use mocked version of modalActions.js by specify callback method with mock behaviour
 
@@ -727,7 +848,24 @@ jest.mock('../modalActions', () => ({
   showModal: () => ({ type: 'MOCK_SHOW_MODAL' }),
 })) 
 
-3. execute code that uses showModal()
+3. execute code that uses showModal()  (only this method is mocked from this module)
+
+/ --------------- /
+
+
+------DONT specify method to mock in module (mock every method) -------------
+
+
+1. import your original module as you normally would:
+  --- import * as all from  modalActions.js
+
+2. let jest know you want to use mocked version of modalActions.js by specify callback method with mock behaviour
+
+jest.mock('../modalActions')
+
+3. execute code that uses showModal() or any other method used in this object 
+all.showModal()
+all.closeModal() etc .. (all of them will be mocked)
 
 / --------------- /
           </example>
@@ -941,8 +1079,21 @@ test example file::: REact_studies_examples/redux/saga-thunk-redux-plus-tests/sr
         <subject>SpyOn functionality in general</subject>
         <content>
            <paragraph>
-               <info>SpyOn method allows you to spy on specific method of the object. Especially usuefull for windows methods (as window.scrollTo()) or 
-                document methos ad document.addClass('class name'). Those need to be spyOn in order to make test pass. </info>
+               <info>SpyOn method allows you to spy on specific method of the object. There are 2 variations:
+
+                1.    jest.spyOn(object, method) 
+
+                  => this way we will execute original implementation the function will be executed in the code 
+                as normla 
+
+                2.     jest.spyOn(object, method).mockImplentation(()=>{}) 
+
+                => function wont be executed as normal but it could restored later. But at the
+                time of execution is exactly the same as:
+
+                    jest.spyOn(object, method).mockImplentation(()=>{}) === object.method = jest.fn(()=>{})
+
+                 </info>
                <example>
 
 ----------- original method -------
@@ -953,7 +1104,27 @@ function(scrollTo){
 
 -----------------------
 
+--------- first variation ------------
+
 1. / -- if U try to test that it will break cause window method is not defined , one way is to spy on it
+
+const scrollToMethod = jest.spyOn(global.window,'scrollTo')
+
+//this method it will be executed as normal and will throw the error. In order to pass it, it needs mocking window.scroll additionally
+
+window.scroll = jest.fn()
+
+2. /-- test function(scrollTo)
+
+it('calls scroll window method'()=>{
+
+expect(scrollTo(20)).tobeCalledWith(20)
+
+})
+
+--------- second variation ------------
+
+1. / -- if U try to test that it will break cause window method is not defined , one way is to spy on it and return mock implementation (the original implementation is not executed !)
 
 const scrollToMethod = jest.spyOn(global.window,'scrollTo').mockImplementation((scroll)=>'is scrolled to'+scroll)
 
@@ -992,8 +1163,15 @@ beforeAll(() => {
                               //.mockImplementation(jest.fn());
                               //.mockImplementation(() => jest.fn());
 
-});
+  ---IMPORTANT--
 
+
+});
+jest.spyOn(window, "scrollTo").mockImplementation(() => {}); === window.scrollTo = jest.fn(()=>{})
+
+but if you used spy.On() U can still restore original implementation 
+
+window.scrollTo.mockClear();
 
 / --------- /
 

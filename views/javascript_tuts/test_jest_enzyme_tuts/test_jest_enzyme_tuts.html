@@ -56,6 +56,22 @@
                  
       </li>
     
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">Testing hooks with react-testing-library</a><span class="tooltiptext">Testing hooks with react-testing-library</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>installation</a><span class="tooltiptext">installation</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>snapshot test</a><span class="tooltiptext">snapshot test</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>alternative to snapshot</a><span class="tooltiptext">alternative to snapshot</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>selecting DOM elements</a><span class="tooltiptext">selecting DOM elements</span>
+                        
+                    </ul>
+                
+      </li>
+    
       <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">Testing original functions</a><span class="tooltiptext">Testing original functions</span>
                  
       </li>
@@ -98,7 +114,7 @@
                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>globally in __mocks__/custom.js</a><span class="tooltiptext">globally in __mocks__/custom.js</span>
                            
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>mocking only in testingfile.spec.js</a><span class="tooltiptext">mocking only in testingfile.spec.js</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>mocking only in testing-file.spec.js</a><span class="tooltiptext">mocking only in testing-file.spec.js</span>
                         
                     </ul>
                 
@@ -605,6 +621,135 @@ https://devhints.io/enzyme</code>
   
       
       <section   class="band band-b" class="band band-b">
+          <h1> Testing hooks with react-testing-library </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>react-testing-library is an alternative to Enzyme who doesnt suppoert hooks out of the box(without mocking some functionality;). React-testing-library is recommended by facebook itself it might even been created by them just like jest. Follow instalation process</p>
+                  <div class="codeWraper">
+                    <code>/------ react-testing-library----/
+
+npm install --save-dev @testing-library/dom
+
+/---- For accesing dom elements and set expect you also need js-dom ---/
+
+npm install --save-dev @testing-library/jest-dom
+
+
+/-------------------/</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>The best way of tracking changes to the jsx hook outcome is to take a picture of it which is called snapshot ;)</p>
+                  <div class="codeWraper">
+                    <code>/--- copy below for snaphshot testing -------/
+                  
+import React from &#39;react&#39;;
+import { render, cleanup } from &#39;@testing-library/react&#39;;
+import &#39;@testing-library/jest-dom/extend-expect&#39;;
+import Component from &#39;../../SimpleClickUpdate_useState_hook&#39;;
+
+afterEach(cleanup);
+  it(&#39;should take a snapshot&#39;, () =&gt; {
+    const { asFragment } = render(&lt;Component /&gt;);
+    expect(asFragment(&lt;Component /&gt;)).toMatchSnapshot();
+  });
+
+/-------------/</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>if your component is very small then you can use below arlternative just to know it ;0</p>
+                  <div class="codeWraper">
+                    <code>/--- copy below for snaphshot testing -------/
+                  
+import React from &#39;react&#39;;
+import { render, cleanup } from &#39;@testing-library/react&#39;;
+import &#39;@testing-library/jest-dom/extend-expect&#39;;
+import Component from &#39;../../SimpleClickUpdate_useState_hook&#39;;
+
+it(&#39;initial state should be zero (0)&#39;, () =&gt; {
+    /**
+     *
+     * @usage: getByTestId is set in jsx as &lt;p data-testid=&quot;counter&quot;&gt;
+     *  
+     **/
+    const { getByTestId } = render(&lt;Component /&gt;);
+    expect(getByTestId(&#39;counter&#39;)).toHaveTextContent(&#39;You clicked 0 times&#39;);
+  });</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
+                  <p>React testing libray comes with lots of more or less useufull selectors, personaly I prefer use css selectors. U can use them by using 
+const {container} = render( component {&lt;..props}/&gt;)
+Rembeber they want U to use {container} as custom or defualt container that component is being rendered to. as table component as custom container 
+
+/----------/
+
+const table = document.createElement(&#39;table&#39;)
+
+const { container } = render(&lt;TableBody {...props} /&gt;, {
+container: document.body.appendChild(table),
+})
+
+/----------/
+If you don specify you custom cotainer then is rendered and appended to div element. And that is why we can use here as selector, cause everying is appended to div down</p>
+                  <div class="codeWraper">
+                    <code>/-------- user container div as document.body --------/
+
+
+
+const { container } = render(&lt;CounterComp /&gt;);
+const button1 = container.querySelectorAll(&#39;button&#39;)[0];
+fireEvent.click(button1);
+expect(container.querySelector(&#39;#display&#39;)).toHaveTextContent(
+  &#39;You clicked 1 times&#39;
+);
+
+
+
+/-----other selectors provided by libary -----/
+
+
+
+// Matching a string:
+const { screen } = render(&lt;CounterComp /&gt;);
+screen.getByText(&#39;Hello World&#39;) // full string match
+screen.getByText(&#39;llo Worl&#39;, { exact: false }) // substring match
+screen.getByText(&#39;hello world&#39;, { exact: false }) // ignore case
+
+
+
+---IMPORATANT---
+
+they can be find under ::: queries 
+in documenation
+
+---IMPORATANT---</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
           <h1> Testing original functions </h1> 
           
 
@@ -978,8 +1123,11 @@ export { showModal }
 
                   <p>this method allows you to mack intant mock in the scope of testing file only.</p>
                   <div class="codeWraper">
-                    <code>1. import your original module as you normally would:
-  --- import modalActions.js
+                    <code>------ specify method to mock in module -------------
+
+
+1. import your original module as you normally would:
+  --- import {showModal } from  modalActions.js
 
 2. let jest know you want to use mocked version of modalActions.js by specify callback method with mock behaviour
 
@@ -987,7 +1135,24 @@ jest.mock(&#39;../modalActions&#39;, () =&gt; ({
   showModal: () =&gt; ({ type: &#39;MOCK_SHOW_MODAL&#39; }),
 })) 
 
-3. execute code that uses showModal()
+3. execute code that uses showModal()  (only this method is mocked from this module)
+
+/ --------------- /
+
+
+------DONT specify method to mock in module (mock every method) -------------
+
+
+1. import your original module as you normally would:
+  --- import * as all from  modalActions.js
+
+2. let jest know you want to use mocked version of modalActions.js by specify callback method with mock behaviour
+
+jest.mock(&#39;../modalActions&#39;)
+
+3. execute code that uses showModal() or any other method used in this object 
+all.showModal()
+all.closeModal() etc .. (all of them will be mocked)
 
 / --------------- /</code>
                   </div>
@@ -1223,8 +1388,19 @@ test example file::: REact_studies_examples/redux/saga-thunk-redux-plus-tests/sr
               <div class="band-container">
                 <div class="band-inner">
 
-                  <p>SpyOn method allows you to spy on specific method of the object. Especially usuefull for windows methods (as window.scrollTo()) or 
-                document methos ad document.addClass(&#39;class name&#39;). Those need to be spyOn in order to make test pass.</p>
+                  <p>SpyOn method allows you to spy on specific method of the object. There are 2 variations:
+
+                1.    jest.spyOn(object, method) 
+
+                  =&gt; this way we will execute original implementation the function will be executed in the code 
+                as normla 
+
+                2.     jest.spyOn(object, method).mockImplentation(()=&gt;{}) 
+
+                =&gt; function wont be executed as normal but it could restored later. But at the
+                time of execution is exactly the same as:
+
+                    jest.spyOn(object, method).mockImplentation(()=&gt;{}) === object.method = jest.fn(()=&gt;{})</p>
                   <div class="codeWraper">
                     <code>----------- original method -------
 
@@ -1234,7 +1410,27 @@ function(scrollTo){
 
 -----------------------
 
+--------- first variation ------------
+
 1. / -- if U try to test that it will break cause window method is not defined , one way is to spy on it
+
+const scrollToMethod = jest.spyOn(global.window,&#39;scrollTo&#39;)
+
+//this method it will be executed as normal and will throw the error. In order to pass it, it needs mocking window.scroll additionally
+
+window.scroll = jest.fn()
+
+2. /-- test function(scrollTo)
+
+it(&#39;calls scroll window method&#39;()=&gt;{
+
+expect(scrollTo(20)).tobeCalledWith(20)
+
+})
+
+--------- second variation ------------
+
+1. / -- if U try to test that it will break cause window method is not defined , one way is to spy on it and return mock implementation (the original implementation is not executed !)
 
 const scrollToMethod = jest.spyOn(global.window,&#39;scrollTo&#39;).mockImplementation((scroll)=&gt;&#39;is scrolled to&#39;+scroll)
 
@@ -1275,8 +1471,15 @@ beforeAll(() =&gt; {
                               //.mockImplementation(jest.fn());
                               //.mockImplementation(() =&gt; jest.fn());
 
-});
+  ---IMPORTANT--
 
+
+});
+jest.spyOn(window, &quot;scrollTo&quot;).mockImplementation(() =&gt; {}); === window.scrollTo = jest.fn(()=&gt;{})
+
+but if you used spy.On() U can still restore original implementation 
+
+window.scrollTo.mockClear();
 
 / --------- /</code>
                   </div>
