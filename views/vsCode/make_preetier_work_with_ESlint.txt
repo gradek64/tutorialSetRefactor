@@ -1,16 +1,42 @@
-1 create .eslintrc with bare content 
+1 create .eslintrc in your local project directory with content below:  
 
-	{
- 	 "extends": ["eslint:recommended", "prettier"]
-}	
+{
+  "env": {
+    "browser": true,
+    "jest": true,
+    "es6": true
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    },
+
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["prettier", "react"],
+  "rules": {
+    "no-console": ["warn"]
+  }
+}
+
+
+1) local instalation 
 
 then install package 
-	npm install --save-dev eslint-config-prettier
+	npm install -D eslint babel-eslint eslint-plugin-prettier eslint-config-prettier prettier eslint-plugin-react 
 
-it allows you to marry them together, U shoud try do that for global setting so you dont need to set .eslint evey time and istall that package 
-
-But the best sollution is to sort it out globally so with those packages react eslint seems to be happy for minimum requirements nothing fancy
-
-├── eslint@6.8.0
+it allows you to marry them together, U shoud try do that for global setting so you dont need to set .eslintrceslint@6.8.0
 ├── eslint-config-prettier@6.10.1
-├── prettier@1.19.1
+├── prettier@1.19.1 evey time and istall that package 
+
+2) global instalation (has to be installed in home directory)
+ 
+
+a) create .eslintrc in your home directory (cd ~)
+b) create package.json in home directory npm init -f
+b)  npm install -S eslint babel-eslint eslint-plugin-prettier eslint-config-prettier prettier eslint-plugin-react
+	(those packages needs to be installed on home directory level thefore no need for -g flag !) 
