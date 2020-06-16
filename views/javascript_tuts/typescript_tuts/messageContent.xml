@@ -1,321 +1,286 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapters>
-<chapter>
-    <subject>simple express node server</subject>
-    <content>
-        <paragraph>
-            <info>this is simple start up setup for node.js server with express it works on heroku as  well as localhost,
-              it needs script in package.json: start:node file.js (file your sever below) it also supports ejs engine templating</info>
-            <example>
---------- server.js ----------------
-
-var express = require('express');
-var app = express();
-const bodyParser = require('body-parser');
-const cors = require('cors')
-
-// process.env.PORT lets the port be set by Heroku
-  var port = process.env.PORT || 8080;
-
-// set the view engine to ejs
-  app.set('view engine', 'ejs');
-
-// make express look in the public directory for assets (css/js/img)
-  app.use(express.static(__dirname + '/public'));
-
-app.use(cors())
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-
-// set the home page route
-app.get('/', function(req, res) {
-  //U need to specify header the bare minimum
-  res.header('Content-Type', 'text/html; charset=utf-8')
-  res.render('index');
-  //res.end('hi');
-});
-
-app.get('/json', (req, res) => {
-  res.header('Content-Type', 'application/json; charset=utf-8')
-  res.json({json:'it is json response object set'})
-})
-
-app.listen(port, function() {
-console.log('Our app is running on http://localhost:' + port);
-});
-
---------------------------------------------
-
-            </example>
-        </paragraph>
-    </content>
-</chapter>
-<chapter>
-        <subject>execute method on object</subject>
-        <content>
-           <subtitle>Function.prototype.call()</subtitle>
-            <paragraph>
-                <info>
-                  object.method.call( objectAttachToThis ,param1, param2...);
-
-                  object (window,Array,custom...) that has method, is executed on diffrent object (objectAttachToThis )that will become available in inside that function {body} and could be called with params if that method was declared to have params.
-                 </info>
-                <example>
-
-                    const objectAttachToThis = {name:'Greg', role:'front-end'};
-
-                    window.whatDoYouDo = function(company){
-                        console.log('I am '+ this.name + 'and I happend to do ' + this.role + 'in ' + company);
-                        console.log('who is this' ,this );
-                    }
-
-                    window.whatDoYouDo.call( objectAttachToThis ,'New company'); //takes object, argument(s) for function;
-
-                </example>
-            </paragraph>
-             <subtitle>Function.prototype.call() on JS build-in Objects</subtitle>
-            <paragraph>
-                <info>call() within core javascript object on examples of: 
-                            array.forEach(function(e,i){}) takes parameter as function 
-                            array.indexof('value') takes value as parameter
-                        </info>
-                <example>
-                        /* forEach will also work for NodeList , no need to convert to array Array.from(NodeList)*/
-
-                        const arr = ['a','b', 'c']; 
-                        Array.prototype.forEach.call(arr,(e,i)=>{arr[i]= `${e}${i}`}) === arr.forEach((e,i)=>{arr[i]= `${e}${i}`});
-
-                        const arrValue = ['a','b', 'c']; 
-                        Array.prototype.indexOf.call(arrValue,'b') === arrValue.indexOf('b');
-
-                </example>
-            </paragraph>
-        <subtitle>Function.prototype.apply()</subtitle>
-                    <paragraph>
-                           <info>
-                            object.method.apply( objectAttachToThis ,[param1, param2...]);
-
-                            apply() is the same as call() but params are set in Array;
-                                      
-                            </info>
-                           <example>
-
-                               const objectAttachToThis = {name:'Greg', role:'front-end'};
-
-                               window.whatDoYouDo = function(company){
-                                   console.log('I am '+ this.name + 'and I happend to do ' + this.role + 'in ' + company);
-                                   console.log('who is this' , this );
-                               }
-
-                               window.whatDoYouDo.apply( objectAttachToThis ,['New company']); //takes object, array as argument for function;
-
-                           </example>
-                   </paragraph>
-                  <subtitle>Function.prototype.apply() in JS build-in Objects</subtitle>
-                   <paragraph>
-                           <info>apply() within core javascript object on examples of: 
-                                       array.forEach(function(e,i){}) takes parameter as function 
-                                       array.indexof('value') takes value as parameter
-                                   </info>
-                           <example>
-                                   /* forEach will also work for NodeList , no need to convert to array Array.from(NodeList)*/
-
-                                   const arr = ['a','b', 'c']; 
-                                   Array.prototype.forEach.apply(arr,[(e,i)=>{arr[i]= `${e}${i}`}]) === arr.forEach((e,i)=>{arr[i]= `${e}${i}`}]);
-
-                                   const arrValue = ['a','b', 'c']; 
-                                   Array.prototype.indexOf.apply(arrValue,['b']) === arrValue.indexOf('b');
-
-                           </example>
-                    </paragraph>
-        <subtitle>Function.prototype.bind()</subtitle>
-                    <paragraph>
-                           <info>
-    
-                            const bindtoMethod = method.bind(objectAttachToThis);
-
-                            bind() it will bind a specific object as  'this' keyword reference inside that function {body}, but in that case it wont call it ! it will just bind and wait for you to call it;
-                            </info>
-                           <example>
-
-                               const objectAttachToThis = {name:'Greg', role:'front-end'};
-
-                               window.whatDoYouDo = function(company){
-                                   console.log('I am '+ this.name + 'and I happend to do ' + this.role + 'in ' + company);
-                                   console.log('who is this' , this );
-                               }
-
-                               const binder = window.whatDoYouDo.bind( objectAttachToThis );
-                               //now call;
-                               binder('New company');
-
-                           </example>
-                   </paragraph>
-                  <subtitle>Function.prototype.bind() in JS build-in Objects</subtitle>
-                   <paragraph>
-                           <info>bind() within core javascript object
-                                   </info>
-                           <example>
-                                   /* forEach() 
-                                      bind() it wont work for forEach(callback) function since it needs callback for every interaction 
-                                      but bind() will only bind but not execute callback (different to above) 
-                                   */
-
-                                                              
-                                   const arrValue = ['a','b', 'c']; 
-                                   const binderValue = Array.prototype.indexOf.bind(arrValue)
-                                   binderValue('b') === arrValue.indexOf('b');
-
-                           </example>
-                    </paragraph>
-            </content>
-</chapter>
+ <chapters>
   <chapter>
-       <subject>Destructring in functions (passing values)</subject>
+       <subject>ES6 import and export in browser</subject>
        <content>
-           <subtitle> Destructring in functions (passing values)</subtitle>
+           <subtitle>ES6 import and export in browser files</subtitle>
            <paragraph>
-               <info>passing values</info>
+               <info>Create main.js in a script folder as below that have import and react and react-dom </info>
                <example>
-                 // ES5
-                 function myFunc(opts) {
-                   var name = opts.name;
-                   var age = opts.age;
+--------------------scripts/main.js------------------------
+'use strict';
 
-                   return {name:name,age:age}
-                 }
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-                 myFunc({ name: 'John', age: 25 });
+const title = 'My Minimal React Webpack Babel Setup is set';
 
-                 // ES6
-                 function myFuncES6( {name,age} ) { //U can see what properties are there;
-                   var name = name;
-                   var age = age;
+ReactDOM.render(
+  &lt;div>{title}&lt;/div>,
+  document.getElementById('app')
+);
 
-                   return {name,age} //shorhand for {name:name,age:age}
-                 }
 
-                 //ES6 shorter 
-                 const myFuncES6 = ( {name,age} )=>{ return {name,age} };
-                 myFuncES6({ name: 'John', age: 25 });
+ --------------------index.html------------------------
+ //for runing bundle.js in a browser;
+
+ &lt;!DOCTYPE html>
+ &lt;html lang="en">
+ &lt;head>
+  &lt;meta charset="UTF-8">
+  &lt;title>browserify outcome&lt;/title>
+ &lt;/head>
+ &lt;body>
+ &lt;script src="bundle.js">&lt;/script>
+ &lt;/body>
+ &lt;/html>
+
+ ------------------ ------------------ ------------------
+
                </example>
            </paragraph>
-           <subtitle> Destructring in functions (default values)</subtitle>
+           <subtitle>ES6 import and export in browser setup</subtitle>
            <paragraph>
-               <info>Destructring in functions (default values) ES6 desctructiring introduces new syntax for default values in function arguments being passed.</info>
+               <info>
+                 ES6 import and export in browser: 
+                 Some of the features of ES6 dont work directly in browser just yet. Therefore we need use transpilers and compilers to make it work.Below Is is simple set up using:
+                 1) babel-cli = transpiler to ES5 or node.js code in command line
+                 2) babel-preset-env = preset needed for transpiling could be diffrent as react etc.
+                 2) babel-preset-react = preset needed for transpiling react into ES5 node.
+                 3) browserify = compiler of node.js code to use in browser, allows to use module.exports and require(modules) features in a browser
+               </info>
                <example>
-                //ES5
-                function myFuncES5(opts, name = 'Default Frank') {
-                  var name = opts.name || name ;
-                  var age = opts.age;
+--------------- project set up ---------------
 
-                  return `Yo, I happend to be ${name} of age of ${age} `;
+npm init -f //start package.json with defaults 
+
+--------------- install babel-cli ---------------
+
+//babel-cli to use in command line only for this example
+
+npm i babel-cli --save or -S (to list in dependencies);
+
+--------------------------------------------------
+
+               </example>
+           </paragraph>
+           <subtitle>install babel preset</subtitle>
+           <paragraph>
+               <info>npm i babel-preset-env -S 
+               it will traspile your ES6 code into node.js code if you use export/import module feature (require in node.js)
+               npm i babel-preset-react -S it will transpile react code into node.js code with require features 
+               </info>
+               <example>
+--------------- install babel presets---------------
+
+npm i babel-preset-env -S 
+npm i babel-preset-react -S 
+
+--------------------------------------------------
+               </example>
+           </paragraph>
+           <subtitle>use presets in your package.json </subtitle>
+           <paragraph>
+               <info>U need to use preset previously installed. U could also make separte file called .babelrc as :
+
+                --------------- .babelrc file as option---------------
+
+                {
+                  "presets": ["env","react"]
                 }
+                --------------------------------------------------
 
-                myFuncES5({ age: 25 });
+                but it is possible to set it in package.json so why not ;P
 
-                //ES6
-                function myFuncES6( {age, name = 'Default Frank ES6'}={} ) {
-                  let name = name; //no need for checking of undefined;
-                  let  age = age;
+               </info>
+               <example>
+--------------- package.json part---------------
 
-                  return `Yo, I happend to be ${name} of age of ${age} `;
-                }
-
-                myFuncES6({ age: 25 });
-
-                //ES6 shorter (if U dont need to modify passing values);
-                const  myFuncES6short = ( {age, name = 'Default Frank ES6'}={} ) => `Yo, I happend to be ${name} of age of ${age}`
-
-                myFuncES6short({ age: 25 });
-
-                
+"babel": {
+    "presets": [
+      "env", "react"
+    ]
+}
+--------------------------------------------------
                </example>
            </paragraph>
-           <subtitle>Destructring in functions (default values) with temporary object properties</subtitle>
+           <subtitle>run your babel command for traspiling to ES5</subtitle>
            <paragraph>
-               <info>Destructring in functions (default values) with temporary object properties, allows you to attached temporary properties to the object availabale in the function body</info>
+               <info>In this exaple we going to run evertying in command line but in real project you would use gulp, grunt or node commands in package.json</info>
                <example>
-                //ES6
-                 function myFuncES6_3( {age:oldEnough, name:quteName = 'Default Frank ES6'}={} ) {
-                   var name = quteName; //no need for checking of undefined;
-                   var age = oldEnough;
+--------------- run bubel for folder scripts ---------------
 
-                   return `Yo, I happend to be ${quteName} of age of ${oldEnough}`;
-                 }
+//using local install babel ./node_modules/.bin/babel
 
-                 myFuncES6_3({ age: 25 });
+./node_modules/.bin/babel  ./scripts --experimental --source-maps-inline -d ./lib
 
-                 //ES6 shorter (skip declaration in function body);
-                  function myFuncES6_4( {age:oldEnough, name:quteName = 'Default Frank ES6'}={} ) {
-                    return `Yo, I happend to be ${quteName} of age of ${oldEnough} `;
-                  }
+--------------------------------------------------
 
-                 myFuncES6_3({ age: 25 });
-
-                //ES6 even shorter
-                const myFuncES6_5 = ( {age:oldEnough, name:quteName = 'Default Frank ES6'}={} ) 
-                => `Yo, I happend to be ${quteName} of age of ${oldEnough} `
-
-                myFuncES6_5({ age: 25 });
                </example>
            </paragraph>
-            <subtitle>ES6 closure syntax</subtitle>
+           <subtitle>run browserfy</subtitle>
            <paragraph>
-               <info>ES6 closure syntax</info>
-               <example>
+               <info>run browserfy to the main file:
+               now we have traspiled version of files so it is time to compile main.js and run in browser
+             </info>
+               <example> 
+----run browserify only on main.js (since the other depend on it exporting) ----
 
-                //ES5
-                function ES5Closure() {
-                    var outsideScope = 'I am outside scope';
-                    this.prop = outsideScope;
+//using local install browserify ./node_modules/.bin/browserify
 
-                    function innerfunction() {
+./node_modules/.bin/browserify lib/main.js -o bundle.js
 
-                       //it is avaliable since block for starts above 
-                       console.log(outsideScope); 
-                       /* it is avalailable since we use arraw function so dont bind this to 
-                       curent function body*/
-                       console.log('this.prop', this.prop); //udefinded cause this is binded to current function body;
+----------------run bundle.js in browser ----------------------
 
-                        return 'innerfunction';
-                    }
+open index.html 
 
-                    return { 
-                      outsideScope:outsideScope, 
-                      innerfunction:innerfunction
-                    };
-                };
+//full example folder: simple_setup
 
-                ES5Closure().innerfunction();
-
-
-                 //ES6
-                 const ES6Closure = () => {
-                     const outsideScope = 'I am outside scope';
-                     this.prop = outsideScope;
-
-                     const innerfunction = () => {
-
-                        //it is avaliable since block for starts above 
-                        console.log(outsideScope); 
-                        /* it is avalailable since we use arraw function so dont bind this to 
-                        curent function body*/
-                        console.log('this.prop', this.prop); 
-
-
-                         return 'innerfunction';
-                     }
-
-                      
-
-                     return { outsideScope, innerfunction };
-                 };
-
-                 ES6Closure().innerfunction();
-
-               </example>
+---------------- ---------------- ----------------
+            </example>
            </paragraph>
        </content>
    </chapter>
-</chapters>
+   <chapter>
+       <subject>React Components</subject>
+       <content>
+           <subtitle>Functional Component no JSX</subtitle>
+           <paragraph>
+               <info>Functional Component is a stateless component that calls a function that returns either jsx or React.create() element</info>
+               <example>
+------------------Functional Component no jsx by-------------------------
+
+React.createElement(HTMLElement,{ name: props.name },"content" or children);
+
+const FunctionalComponent = (props) => {
+      return React.createElement(
+        "p",
+        { name: props.name },
+        "I am functional component"
+      );
+  };
+} 
+
+ReactDOM.render(&lt;FunctionalComponent name="Greg" />,document.getElementById('app'));
+
+
+               </example>
+           </paragraph>
+           <subtitle>Functional Component with JSX</subtitle>
+           <paragraph>
+               <info>Functional compoent in again Stateless compoents that accepts props as function argument and returns JSX syntax</info>
+               <example>
+------------------------- Functional Stateless component-----------
+
+ const FunctionalComponent = (props) => &lt;p>I am functional component&lt;/p>
+
+ReactDOM.render(&lt;FunctionalComponent name="Greg" />,document.getElementById('app'));
+
+-----------------------------------------------------------------
+               </example>
+           </paragraph>
+                  <subtitle>React Components: Statefull Classes</subtitle>
+                  <paragraph>
+                      <info>StateFull Class Component: it creates a component that accpets props and allows you to define 'state' and ref. Use only if you need that you need to change the state. You dont need to use JSX but it is preferable.</info>
+                      <example>
+                        
+class Hello extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={value:0}
+  }
+  render() {
+    return &lt;div>Hello {this.props.toWhat} &lt;/div>;
+  }
+}
+
+ReactDOM.render(
+  &lt;Hello toWhat="World" />,
+  document.getElementById('root')
+);
+                      </example>
+                  </paragraph>
+       </content>
+   </chapter>
+  <chapter>
+      <subject>JSX syntax</subject>
+      <content>
+          <subtitle>JSX single line</subtitle>
+          <paragraph>
+              <info>JSX could be set on single line and it needs {variable,js expresion} to interpolate that into syntax</info>
+              <example>
+---------------- jsx single Line--------------
+
+  const info = 'info';
+  const fn = value=> `myValue ${value}`
+
+  const jsxExample = &lt;div>{info} {fn('set')} {5+5} &lt;/div>
+
+  ReactDOM.render(
+    jsxExample,
+    document.getElementById('root')
+  );
+------------------------------------------------
+              </example>
+          </paragraph>
+          <subtitle>JSX multiple line</subtitle>
+          <paragraph>
+              <info>for clarity JSX could and should be set on multiple lines with () and it accepts {variable,js expresion} to interpolate that into syntax</info>
+              <example>
+---------------- jsx multiple Line needs () parenthesis--------------
+
+const info = 'info';
+const fn = value=> `myValue ${value}`
+
+const jsxExample = (
+                    &lt;div>
+                      {info}
+                      {fn('set')} 
+                      {5+5} 
+                    &lt;/div>
+                    );
+
+ReactDOM.render(
+  jsxExample,
+  document.getElementById('root')
+);
+------------------------------------------------
+              </example>
+          </paragraph>
+          <subtitle>JSX nesting</subtitle>
+          <paragraph>
+              <info>U could nest your jsx and render them into one jsx</info>
+              <example>
+---------------- jsx multiple Line--------------
+
+const nestAndRenderArray = [1,2,3,4];
+//create jsx outside
+const outside = nestAndRenderArray.map( arrEl => &lt;p key={arrEl+3} > myElements: {arrEl} &lt;/p>);
+
+const jsxExample = (
+            &lt;div>
+                &lt;div>
+                    {&lt;p>{5+5}&lt;/p>}
+                 &lt;/div>
+                      {   nestAndRenderArray.map( arrEl =>
+                            &lt;p key={arrEl} > myElements: {arrEl} &lt;/p>)
+                      }
+                &lt;div>
+                    {outside}
+                &lt;/div>
+            &lt;/div>
+        );
+
+ReactDOM.render(
+  jsxExample,
+  document.getElementById('root')
+);
+------------------------------------------------
+
+
+
+              </example>
+          </paragraph>
+      </content>
+  </chapter>
+ </chapters>

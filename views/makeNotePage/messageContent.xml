@@ -10,4 +10,14 @@ git checkout --trail origin/originbranchName
 it will fetch and checkout remote branch under local name originbranchName
 
 /************* git *****************/
+/************* javascript *****************/
+
+it is important to know the difference beetween && and & operators which is seen in package.json as 
+
+"compile_and_watch": "npm run tsc-watch & npm run watchifyMe"
+
+&& IS AND CONDITIONAL operator once one script doesnt produce error it will run next , 
+& operator will run both scripts regardeless the outcome of the first one 
+
+/********************/
 ]]></body>

@@ -10,7 +10,7 @@ import ContextAPI from './contextAPI-useContext-hook/index';
 import CustomHook from './custom_Hooks_shared_logic/index'; */
 
 // shared logic hook;
-//import { useFriendStatus } from './custom_Hooks_shared_logic/sharedLogic_hook';
+// import { useFriendStatus } from './custom_Hooks_shared_logic/sharedLogic_hook';
 
 const comps = [
   { title: 'set' },
@@ -27,7 +27,6 @@ const comps = [
   }
   return <span style={{ color: 'green' }}>{isOnline}</span> || 'Offline';
 }; */
-
 
 const Index = () => {
   // hook for managing comps array display;

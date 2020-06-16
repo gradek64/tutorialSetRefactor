@@ -9,7 +9,6 @@ const SubstituteForLifeCycles = () => {
   */
   const [count, setCount] = useState(0);
 
-
   /*
   limit useEffet to be called only once after is mounted
   just like componentDidMount() class method
@@ -18,7 +17,6 @@ const SubstituteForLifeCycles = () => {
   useEffect(() => {
     console.log('useEffect called only once I mounted');
   }, []); // array of conditions is empty so run only onces is mounted
-
 
   // just like componedDidUpdate(prevProps);
   useEffect(() => {
