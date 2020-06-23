@@ -1,172 +1,227 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <chapters>
   <chapter>
-       <subject>ES6 import and export in browser</subject>
+      <subject>types</subject>
+      <content>
+          <subtitle>tuple</subtitle>
+          <paragraph>
+                      <info>tuple allows you to specify ordered array, similar to destrucring array</info>
+                      <example>
+
+------- ordered array tuple ------------
+
+const arr:[string,number] = ['3', 4]
+
+//this array only takes max 2 arguments of a type string[0] and number[1]
+
+                      </example>
+                  </paragraph>
+          <subtitle>types literals</subtitle>
+          <paragraph>
+              <info>types literals allows you to specify literal value as :
+
+                type animal = 'dog' | 'cat'
+
+              </info>
+              <example>
+-------- literal type allowance --------
+
+const myAnimal = 'dog' //correct
+const myAnimal2 = 'hamster' //ups you only have option for "dog" | "cat"
+
+------------
+              </example>
+          </paragraph>
+          <subtitle>types guards</subtitle>
+          <paragraph>
+              <info>Types guards allow to check for specific type either by  'property' in object method that loops
+                through types or swich method.</info>
+              <example>
+-------- ('property' in object) type guards ---------
+
+function moveAnimal(animal: Animal) {
+  //1. One options is to use loop 'property' in object
+  if ('flyingSpeed' in animal) {
+    console.log('Animal is moving with', animal.flyingSpeed);
+  }
+
+  if ('runnigSpeed' in animal) {
+    console.log('Animal is moving with', animal.runnigSpeed);
+  }
+}
+
+-------- switch statement with  type guards ---------
+
+//discriminated unions with switch statement (access some common property as comparison)
+
+function moveAnimalDiscriminatedTypes(animal: Animal) {
+  switch (animal.kind) {
+    case 'bird':
+      console.log('Animal is moving with', animal.flyingSpeed);
+      break;
+    case 'horse':
+      console.log('Animal is moving with', animal.runnigSpeed);
+      break;
+    default:
+      break;
+  }
+}
+              </example>
+          </paragraph>
+      </content>
+  </chapter>
+  <chapter>
+       <subject>Typescript generics</subject>
        <content>
-           <subtitle>ES6 import and export in browser files</subtitle>
+           <subtitle>Build-in generics</subtitle>
            <paragraph>
-               <info>Create main.js in a script folder as below that have import and react and react-dom </info>
+               <info>Typescript uses generics for data assumptions, for example
+
+                  const array = []
+
+                  when U hover on array in IDE U will see : array:any[] or never[]
+               </info>
                <example>
---------------------scripts/main.js------------------------
-'use strict';
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-const title = 'My Minimal React Webpack Babel Setup is set';
-
-ReactDOM.render(
-  &lt;div>{title}&lt;/div>,
-  document.getElementById('app')
-);
+--------------------other exaples of build-in generics------------------------
 
 
- --------------------index.html------------------------
- //for runing bundle.js in a browser;
+1) promises always assume generics return type
 
- &lt;!DOCTYPE html>
- &lt;html lang="en">
- &lt;head>
-  &lt;meta charset="UTF-8">
-  &lt;title>browserify outcome&lt;/title>
- &lt;/head>
- &lt;body>
- &lt;script src="bundle.js">&lt;/script>
- &lt;/body>
- &lt;/html>
+const promise = new Promise((resolve, reject)=>{
+  resolve('this is done')
+})  
+
+=> this will resolve to Promise:promise&lt;unknown> 
+=> but we allowed and should tell typescript what to return as Promise:promise&lt;string>
+
+
 
  ------------------ ------------------ ------------------
 
                </example>
            </paragraph>
-           <subtitle>ES6 import and export in browser setup</subtitle>
+            <subtitle>custom multiple generics in function</subtitle>
+           <paragraph>
+               <info>U can assign generic type to every argument passed to the functtion. To create array from 2 arguments 
+                you can return array of tuple as example below</info>
+               <example>
+//-------- multiple types generics
+
+function createArray2MultipleTypes&lt;T, U>(n: T, u: U): [T, U] {
+  return [n, u];
+}
+
+createArray2MultipleTypes&lt;number, number>(6, 4);
+createArray2MultipleTypes&lt;string, number[]>('2', [4]);
+createArray2MultipleTypes&lt;number, number[]>(2, [4]);
+
+
+               </example>
+           </paragraph>
+           <subtitle>custom generics in function</subtitle>
            <paragraph>
                <info>
-                 ES6 import and export in browser: 
-                 Some of the features of ES6 dont work directly in browser just yet. Therefore we need use transpilers and compilers to make it work.Below Is is simple set up using:
-                 1) babel-cli = transpiler to ES5 or node.js code in command line
-                 2) babel-preset-env = preset needed for transpiling could be diffrent as react etc.
-                 2) babel-preset-react = preset needed for transpiling react into ES5 node.
-                 3) browserify = compiler of node.js code to use in browser, allows to use module.exports and require(modules) features in a browser
+                 Generics are used for specific type on single run time. That means , the same function can 
+                 be called one with a string and with a number on other time. It is important to make sure that typescript
+                 knows what type is currently used, which is called type lock.
                </info>
                <example>
---------------- project set up ---------------
+-----
 
-npm init -f //start package.json with defaults 
-
---------------- install babel-cli ---------------
-
-//babel-cli to use in command line only for this example
-
-npm i babel-cli --save or -S (to list in dependencies);
-
---------------------------------------------------
-
-               </example>
-           </paragraph>
-           <subtitle>install babel preset</subtitle>
-           <paragraph>
-               <info>npm i babel-preset-env -S 
-               it will traspile your ES6 code into node.js code if you use export/import module feature (require in node.js)
-               npm i babel-preset-react -S it will transpile react code into node.js code with require features 
-               </info>
-               <example>
---------------- install babel presets---------------
-
-npm i babel-preset-env -S 
-npm i babel-preset-react -S 
-
---------------------------------------------------
-               </example>
-           </paragraph>
-           <subtitle>use presets in your package.json </subtitle>
-           <paragraph>
-               <info>U need to use preset previously installed. U could also make separte file called .babelrc as :
-
-                --------------- .babelrc file as option---------------
-
-                {
-                  "presets": ["env","react"]
-                }
-                --------------------------------------------------
-
-                but it is possible to set it in package.json so why not ;P
-
-               </info>
-               <example>
---------------- package.json part---------------
-
-"babel": {
-    "presets": [
-      "env", "react"
-    ]
+function createArray&lt;T>(...arg: T[]) {
+  return [...arg];
 }
---------------------------------------------------
+
+createArray('one', 'two', 'three'); //string[]
+createArray(3, 1, 4); //number[]
+createArray([3], [2], [4]); //number[][]
+
+---NOTICE----
+//bellow should create an error
+createArray({ ss: 3 }, { ee: 3 }, [6]); 
+
+---THEREFORE----
+//sometimes you need to help typescript to lock values types you want to use as below
+
+//with type locking
+createArray&lt;{ [key: string]: number }>({ ss: 3 }, { ee: 3 }); //array{[key: string]: number }
+
+
                </example>
            </paragraph>
-           <subtitle>run your babel command for traspiling to ES5</subtitle>
+           <subtitle>types generic with constrains</subtitle>
            <paragraph>
-               <info>In this exaple we going to run evertying in command line but in real project you would use gulp, grunt or node commands in package.json</info>
+               <info>Generics allows you to pass any type to the function, but sometime U want to be more specific 
+                and tell typescirpt that you want to use only sting | numbers, basically contrains what type can be 
+                used with your generic function. Generic constrains is the way to tell typescript that you only want to work with certain types.
+               </info>
                <example>
---------------- run bubel for folder scripts ---------------
+--------------
 
-//using local install babel ./node_modules/.bin/babel
+type stringOrNumber = string | number;
+function createArray1&lt;T extends stringOrNumber>(...arg: T[]) {
+  return [...arg];
+}
 
-./node_modules/.bin/babel  ./scripts --experimental --source-maps-inline -d ./lib
+createArray1(2, 4, 5);
+createArray1('2', '4', '5');
+createArray1([2], [4], [5]); //not accepted
+               </example>
+           </paragraph>
+           <subtitle>' key of' in type generics constrains</subtitle>
+           <paragraph>
+               <info>Typescript forces you to use typeof for type conditions, for object U can use value 'key of' object
+                as the example below;
+               </info>
+               <example>
+----------------check if key exists in object with generics  ----
 
---------------------------------------------------
+const getObjectPropertyValue = &lt;T extends object, U extends keyof T>(obj:T,key:U):string => {
+  return 'the value is'+obj[key]
+}
+
+getObjectPropertyValue({}, 'name') //error
+getObjectPropertyValue({name:'Greg'}, 'name') //correct
 
                </example>
            </paragraph>
-           <subtitle>run browserfy</subtitle>
-           <paragraph>
-               <info>run browserfy to the main file:
-               now we have traspiled version of files so it is time to compile main.js and run in browser
-             </info>
-               <example> 
-----run browserify only on main.js (since the other depend on it exporting) ----
-
-//using local install browserify ./node_modules/.bin/browserify
-
-./node_modules/.bin/browserify lib/main.js -o bundle.js
-
-----------------run bundle.js in browser ----------------------
-
-open index.html 
-
-//full example folder: simple_setup
-
----------------- ---------------- ----------------
-            </example>
-           </paragraph>
+           
        </content>
    </chapter>
    <chapter>
-       <subject>React Components</subject>
+       <subject>function overloads</subject>
        <content>
-           <subtitle>Functional Component no JSX</subtitle>
+           <subtitle>function overloads syntax</subtitle>
            <paragraph>
-               <info>Functional Component is a stateless component that calls a function that returns either jsx or React.create() element</info>
+               <info>Function overloads are great example of locking types. For complex function that returns compulation 
+                You should use fuction overloads for simple compulation (not depending on types return) you should use types generics with functions</info>
                <example>
-------------------Functional Component no jsx by-------------------------
+//proper usege of overload functions
 
-React.createElement(HTMLElement,{ name: props.name },"content" or children);
+function passStringOrNumber(n: string): string;
+function passStringOrNumber(n: number): string;
+function passStringOrNumber(n: string | number):string {
+  if (n === 'string') {
+    return 'you passed string' + n;
+  }
+  if (n === 'number') {
+    return 'you passed number' + n;
+  }
 
-const FunctionalComponent = (props) => {
-      return React.createElement(
-        "p",
-        { name: props.name },
-        "I am functional component"
-      );
-  };
-} 
+  return ''
+}
 
-ReactDOM.render(&lt;FunctionalComponent name="Greg" />,document.getElementById('app'));
+//concluesion function overload is not that diffrent from regular function only allows you to 
+//specify exact type arguments eventually combining into union types (which btw is always last in function overload)
+
+passStringOrNumber(4);
+passStringOrNumber('4');
+passStringOrNumber({4}); //not included in function overload
 
 
                </example>
            </paragraph>
-           <subtitle>Functional Component with JSX</subtitle>
+           <subtitle>next to fill</subtitle>
            <paragraph>
                <info>Functional compoent in again Stateless compoents that accepts props as function argument and returns JSX syntax</info>
                <example>
@@ -178,107 +233,51 @@ ReactDOM.render(&lt;FunctionalComponent name="Greg" />,document.getElementById('
 
 -----------------------------------------------------------------
                </example>
-           </paragraph>
-                  <subtitle>React Components: Statefull Classes</subtitle>
-                  <paragraph>
-                      <info>StateFull Class Component: it creates a component that accpets props and allows you to define 'state' and ref. Use only if you need that you need to change the state. You dont need to use JSX but it is preferable.</info>
-                      <example>
-                        
-class Hello extends React.Component {
-  constructor(props){
-    super(props);
-    this.state={value:0}
-  }
-  render() {
-    return &lt;div>Hello {this.props.toWhat} &lt;/div>;
-  }
-}
-
-ReactDOM.render(
-  &lt;Hello toWhat="World" />,
-  document.getElementById('root')
-);
-                      </example>
-                  </paragraph>
+           </paragraph>                  
        </content>
    </chapter>
   <chapter>
-      <subject>JSX syntax</subject>
+      <subject>Type casting</subject>
       <content>
-          <subtitle>JSX single line</subtitle>
+          <subtitle>Type casting with html elements</subtitle>
           <paragraph>
-              <info>JSX could be set on single line and it needs {variable,js expresion} to interpolate that into syntax</info>
+              <info>Type casting is the way to tell typescript that the type needed to be used U will provide better, typescript type assumption it not takken.</info>
               <example>
 ---------------- jsx single Line--------------
 
-  const info = 'info';
-  const fn = value=> `myValue ${value}`
+//by default typescirpt takes input as HTMLElement and doesnt allow to access input.value property we know it exists
 
-  const jsxExample = &lt;div>{info} {fn('set')} {5+5} &lt;/div>
+const inputElement = document.getElementById('ss'); 
+inputElement.value //produces error cause it doesnt exist on HTMLElement
 
-  ReactDOM.render(
-    jsxExample,
-    document.getElementById('root')
-  );
+1. one way is to set type before document
+
+const inputElement = &lt;HTMLInputElement>document.getElementById('ss');
+
+
+2. or for the JSX or TSX files use 'as' operator
+
+const inputElement = document.getElementById('ss') as HTMLInputElement;
+
+
 ------------------------------------------------
               </example>
           </paragraph>
-          <subtitle>JSX multiple line</subtitle>
+          <subtitle>type casting not null values</subtitle>
           <paragraph>
-              <info>for clarity JSX could and should be set on multiple lines with () and it accepts {variable,js expresion} to interpolate that into syntax</info>
+              <info>typescript has a syntax of 
+
+                element.current!.value 
+
+                where element.current! assures that 
+                element that current can not be never null or undefined</info>
               <example>
----------------- jsx multiple Line needs () parenthesis--------------
+---------------- not null value for HTML element--------------
 
-const info = 'info';
-const fn = value=> `myValue ${value}`
+const DomElement = document.getElementByID('id')!
 
-const jsxExample = (
-                    &lt;div>
-                      {info}
-                      {fn('set')} 
-                      {5+5} 
-                    &lt;/div>
-                    );
-
-ReactDOM.render(
-  jsxExample,
-  document.getElementById('root')
-);
+//the above way we ensure that DomElement is never undefined or null
 ------------------------------------------------
-              </example>
-          </paragraph>
-          <subtitle>JSX nesting</subtitle>
-          <paragraph>
-              <info>U could nest your jsx and render them into one jsx</info>
-              <example>
----------------- jsx multiple Line--------------
-
-const nestAndRenderArray = [1,2,3,4];
-//create jsx outside
-const outside = nestAndRenderArray.map( arrEl => &lt;p key={arrEl+3} > myElements: {arrEl} &lt;/p>);
-
-const jsxExample = (
-            &lt;div>
-                &lt;div>
-                    {&lt;p>{5+5}&lt;/p>}
-                 &lt;/div>
-                      {   nestAndRenderArray.map( arrEl =>
-                            &lt;p key={arrEl} > myElements: {arrEl} &lt;/p>)
-                      }
-                &lt;div>
-                    {outside}
-                &lt;/div>
-            &lt;/div>
-        );
-
-ReactDOM.render(
-  jsxExample,
-  document.getElementById('root')
-);
-------------------------------------------------
-
-
-
               </example>
           </paragraph>
       </content>
