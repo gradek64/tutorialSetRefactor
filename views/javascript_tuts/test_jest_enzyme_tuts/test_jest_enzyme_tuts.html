@@ -100,12 +100,18 @@
                   
                     <ul class="linksNested">
                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>expect() and mock functions</a><span class="tooltiptext">expect() and mock functions</span>
+                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>JEST function declaration helpers mockReturnValue nad mockReturnValueOnce</a><span class="tooltiptext">JEST function declaration helpers mockReturnValue nad mockReturnValueOnce</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>Jest.fn() mock that returns promise</a><span class="tooltiptext">Jest.fn() mock that returns promise</span>
                         
                     </ul>
                 
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">MOCK document.body</a><span class="tooltiptext">MOCK document.body</span>
+                 
       </li>
     
       <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">Mock custom module using jest.mock</a><span class="tooltiptext">Mock custom module using jest.mock</span>
@@ -1025,6 +1031,44 @@ example file:::: REact_studies_examples/redux/saga-thunk-redux-plus-tests/src/sa
               <div class="band-container partition first" part="part-1">
                 <div class="band-inner">
 
+                  <p>Every function that needs to be tested against:
+                      
+                        expect(jest.fn()).toBeCalled()
+                        expect(jest.fn()).not.toBeCalled()
+                        expect(jest.fn()).toBeCalledWith()
+
+                        has to be mocked !! , but that way it will lose its original implemenation, and wont 
+                        be called in its original enviroment.</p>
+                  <div class="codeWraper">
+                    <code>------------ we have Element Component --------
+
+const clickHandler(e){
+console.log(&#39;element has been clicked&#39;)
+}
+
+const Element = ()=&gt; (&lt;button onClick={clickHandler}&gt;clickMe&lt;/button&gt;)
+
+--------- test Element component --------
+
+component.simulate(&#39;click&#39;)
+
+//to test if click has bee clicked the handler has to mocked or spied on
+clickHandler = jest.fn()
+
+now it can be testd for call 
+
+expect(clickHandler).toBeCalled()
+expect(clickHandler).not.toBeCalled()
+expect(clickHandler).toBeCalledWith()
+
+------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
                   <p>Jest comes with shorthand mock declaration that depends of your usage</p>
                   <div class="codeWraper">
                     <code>------below is the same statement with 2 ways of declaring ------
@@ -1047,7 +1091,7 @@ console.log(apiService.get());</code>
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-2">
+              <div class="band-container partition " part="part-3">
                 <div class="band-inner">
 
                   <p>jest.fn() can return any value so We could introduce async code and return a Promise, usefull for testing HTTP calls</p>
@@ -1073,6 +1117,65 @@ apiService.get = jest.fn(x =&gt; Promise.resolve(x));
               </div>
             
 
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> MOCK document.body </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>If you code using elements from the real browser DOME, then you need to tell jest what is your structure 
+                  of document.body. Otherwise those elements are null, just like they can not be selected from real DOME and test will crash. So U need to provide those elements to pass the test. This example is for testing form.</p>
+                  <div class="codeWraper">
+                    <code>/****
+
+** Supposingly U have a code that selects form elements as 
+
+ const form = document.getElementById(formId)
+
+** and then you need form content
+
+const formChildren = form.children
+
+** thefore you need to provide those ellement for jestDOME
+*****/
+
+1. The easiset method is to use element.innerHTML();
+
+document.body.innerHTML = `
+&lt;form id=&quot;addressForm&quot;&gt;
+&lt;input name=&quot;surname&quot;/&gt;
+&lt;input name=&quot;name&quot; /&gt;
+&lt;/form&gt;`
+
+
+ 2. You can use document.createElement(&#39;tag&#39;) as well. 
+
+ const form = document.createElement(&#39;form&#39;)
+ form.setAttribute(&#39;id&#39;, &#39;addressForm&#39;);  
+
+ const input1 = document.createElement(&quot;input&quot;); 
+ input1.setAttribute(&#39;type&#39;, &#39;text&#39;); 
+ input1.setAttribute(&#39;name&#39;, &#39;surname&#39;); 
+
+ const input2 = document.createElement(&quot;input&quot;); 
+ input2.setAttribute(&#39;type&#39;, &#39;text&#39;); 
+ input2.setAttribute(&#39;name&#39;, &#39;surname&#39;);
+
+ form.appendChild(input1)
+ form.appendChild(input2)
+ document.body.appendChild(form)
+
+ --------------------------------</code>
+                  </div>
+                </div>
+              </div>
             
 
       </section>

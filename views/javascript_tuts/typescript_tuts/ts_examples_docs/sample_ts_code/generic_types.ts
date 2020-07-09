@@ -12,7 +12,7 @@ createArray2(2, 4, 5);
 createArray2('2', '4', '5');
 createArray2([2], [4], [5]);
 
-//-------- multiple types generics
+//-------- multiple types generics generic for more that one function arguments
 
 function createArray2MultipleTypes<T, U>(n: T, u: U): [T, U] {
   return [n, u];

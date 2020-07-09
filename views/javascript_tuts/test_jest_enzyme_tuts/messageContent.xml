@@ -745,7 +745,44 @@ example file:::: REact_studies_examples/redux/saga-thunk-redux-plus-tests/src/sa
     </chapter>
     <chapter>
         <subject>MOCK functions</subject>
-        <content>          
+        <content> 
+        <subtitle>expect() and mock functions</subtitle>
+                 <paragraph>
+                     <info>Every function that needs to be tested against:
+                      
+                        expect(jest.fn()).toBeCalled()
+                        expect(jest.fn()).not.toBeCalled()
+                        expect(jest.fn()).toBeCalledWith()
+
+                        has to be mocked !! , but that way it will lose its original implemenation, and wont 
+                        be called in its original enviroment.
+                     </info>
+                     <example>
+------------ we have Element Component --------
+
+const clickHandler(e){
+console.log('element has been clicked')
+}
+
+const Element = ()=> (&lt;button onClick={clickHandler}>clickMe&lt;/button>)
+
+--------- test Element component --------
+
+component.simulate('click')
+
+//to test if click has bee clicked the handler has to mocked or spied on
+clickHandler = jest.fn()
+
+now it can be testd for call 
+
+expect(clickHandler).toBeCalled()
+expect(clickHandler).not.toBeCalled()
+expect(clickHandler).toBeCalledWith()
+
+------------------------
+
+                     </example>
+                 </paragraph>         
         <subtitle>JEST function declaration helpers mockReturnValue nad mockReturnValueOnce</subtitle>
           <paragraph>
               <info>Jest comes with shorthand mock declaration that depends of your usage</info>
@@ -791,6 +828,59 @@ apiService.get = jest.fn(x => Promise.resolve(x));
 ----------  -----------  --------------
               </example>
           </paragraph>       
+        </content>
+    </chapter>
+    <chapter>
+        <subject>MOCK document.body</subject>
+        <content>
+            <paragraph>
+                <info>If you code using elements from the real browser DOME, then you need to tell jest what is your structure 
+                  of document.body. Otherwise those elements are null, just like they can not be selected from real DOME and test will crash. So U need to provide those elements to pass the test. This example is for testing form.</info>
+                <example>
+                  
+/****
+
+** Supposingly U have a code that selects form elements as 
+
+ const form = document.getElementById(formId)
+
+** and then you need form content
+
+const formChildren = form.children
+
+** thefore you need to provide those ellement for jestDOME
+*****/
+
+1. The easiset method is to use element.innerHTML();
+
+document.body.innerHTML = `
+&lt;form id="addressForm">
+&lt;input name="surname"/>
+&lt;input name="name" />
+&lt;/form>`
+
+
+ 2. You can use document.createElement('tag') as well. 
+
+ const form = document.createElement('form')
+ form.setAttribute('id', 'addressForm');  
+
+ const input1 = document.createElement("input"); 
+ input1.setAttribute('type', 'text'); 
+ input1.setAttribute('name', 'surname'); 
+
+ const input2 = document.createElement("input"); 
+ input2.setAttribute('type', 'text'); 
+ input2.setAttribute('name', 'surname');
+
+ form.appendChild(input1)
+ form.appendChild(input2)
+ document.body.appendChild(form)
+
+ --------------------------------
+
+                </example>
+            </paragraph>
         </content>
     </chapter>
      <chapter>

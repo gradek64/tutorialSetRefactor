@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <chapters>
+ <chapter>
+   <subject>catch and try</subject>
+    <content>
+    <subtitle>try {} catch{} </subtitle>
+    <paragraph>
+        <info>try {} catch{} block allows you to catch errors and do something about them as : trow custom errors, log errors or continue with code after errors ( by default error will break your code stopping execution). Try block will check 
+          if whatever we wrote in try block create error (not defined). Rember null, not defined, empty string wont throw error since those are js valid expressions.</info>
+        <example>
+        ---------- basic catch and try ---------
+
+//will throw Custom error: 'functionDontExist'
+
+try {
+  functionDontExist()
+} catch(e) {
+throw new Error('functionDontExist');
+}
+
+//will throw default error 'functionDontExist is not defined'
+
+try {
+  functionDontExist()
+} catch(e) {
+throw new Error(e); 
+}
+
+  //will NOT throw error 
+
+try {
+  'some text'
+} catch(e) {
+throw new Error('functionDontExist');
+}
+
+-------------------------
+        </example>
+    </paragraph>
+    <subtitle>try {} catch {} in function body</subtitle>
+    <paragraph>
+        <info>when try{} and catch{} is enclosed in function body then it will work as condition. if(arg){}else{}</info>
+        <example>
+    //below will produce true of false in try{} and catch blocks
+
+function isValidJSON(text) {
+  try {
+    JSON.parse(text);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+
+-------------------------
+        </example>
+    </paragraph>
+    <subtitle>try {} catch{} finally{}</subtitle>
+    <paragraph>
+        <info>finally{} block will always executes first and will execute regadless the outcome of try{} or catch{}</info>
+        <example>
+          
+try {
+  'some text'
+} catch(e) {
+throw new Error('functionDontExist');
+}
+finally {
+  console.log('I am called first')
+}
+
+        </example>
+    </paragraph>
+  </content>
+  </chapter>
+  <chapter>
+      <subject>loading &lt;script> tag</subject>
+       <content>
+      <subtitle>default bahavior</subtitle>
+      <paragraph>
+         <info>1. Scripts will block rendering the page. 
+                2. scripts
+                3. multiple scripts are loaded not in sync (one doesnt wait for another)</info>
+          <example>
+            ---- simple sollution for blocking rendering -----
+
+            1. put the scripts at the bottom of the &lt;body> tag so they are loaded after the content
+
+---------------------------------------------------------------------------------------------
+          </example>
+      </paragraph>
+      <subtitle>&lt;script src='' defer></subtitle>
+      <paragraph>
+          <info>1. Scripts with defer never block the page. 
+                2. Scripts with defer always execute when the DOM is ready, but before DOMContentLoaded event
+                3. multiple scripts are loaded in order from top to bottom (one after another)</info>
+          <example>
+//those 2 scripts will load one after another and they dont block page rendering.
+
+&lt;script defer src="https://javascript.info/article/script-async-defer/long.js">&lt;/script>
+&lt;script defer src="https://javascript.info/article/script-async-defer/small.js">&lt;/script>
+
+---------------------------------------------------------------------------------------------
+          </example>
+      </paragraph>
+      <subtitle>&lt;script src='' async></subtitle>
+      <paragraph>
+          <info>1. Scripts with defer never block the page. 
+                2. Scripts can load before DOME is ready or DOME can load before scripts are ready (either way no one wait, no one cares ;)
+                2. Other scripts don’t wait for async scripts, and async scripts don’t wait for them (load first serves)</info>
+          <example>
+//those 2 scripts will load asynchronisly.  The script that loads first – runs first (“load-first” order).
+
+&lt;script async src="https://javascript.info/article/script-async-defer/long.js">&lt;/script>
+&lt;script async src="https://javascript.info/article/script-async-defer/small.js">&lt;/script>
+
+---------------------------------------------------------------------------------------------
+          </example>
+      </paragraph>
+      <subtitle>dynamic &lt;script> tag</subtitle>
+      <paragraph>
+          <info>
+            1. Dynamic scripts behave as “async” by default. So they are available once they loaded, they dont wait for other scripts and they dont wait or block Dome.
+          </info>
+          <example>
+            
+
+            let script = document.createElement('script');
+script.src = "/article/script-async-defer/long.js";
+document.body.append(script);
+
+
+//control to load of dynamic load with script.async = false
+
+function loadScript(src) {
+  let script = document.createElement('script');
+  script.src = src;
+  script.async = false;
+  document.body.append(script);
+}
+
+// first.js runs first because of async=false
+loadScript("first.js");
+loadScript("second.js");
+
+//those will execute one after another because of the script.async = false what makes eqwiwalent to below:
+
+&lt;script defer src="first.js">&lt;/script>
+&lt;script defer src="second.js">&lt;/script>
+
+---------------------------------------------------------------------------------------------
+
+          </example>
+      </paragraph>
+       </content>
+  </chapter>
+  <chapter>
+      <subject>write it or append file echo</subject>
+      <content>
+         <paragraph>
+             <info>echo 'text' and write in or append to the new or existing file</info>
+             <example>
+/---/
+                
+//write in new file 
+echo 'text to write in' > newFile.text
+
+//append to existing file 
+echo 'text to append' >> newFile.text
+
+//stdout echo mutltipe pattern names 
+echo file{2..10}.txt 
+
+
+             </example>
+         </paragraph>
+      </content>
+  </chapter>
+  <chapter>
+      <subject>file permisions</subject>
+      <content>
+      <subtitle>find it out the user (either root or any other user)</subtitle>
+      <paragraph>
+          <info>
+           Linux can have eiher a regual user of super user(su) which is root
+          </info>
+          <example>
+/*********************************************/
+
+  //to find out who is logged in;
+    whoami  
+      //prints greggil
+
+  //to change to root (super user);
+      sudo su - 
+      //whoami prints root;
+
+  //to chage back to regular user
+      su - greggil
+      //whoami prints root;
+
+
+/*********************************************/
+          </example>
+      </paragraph>
+      <subtitle>changing the owner of the file/directory</subtitle>
+      <paragraph>
+          <info>depending who created file/directory (which user) and only that user can maninpulate (edit/delete)
+          unless you will change file/directory permisions;</info>
+          <example>
+/*********************************************/
+
+//if the owner of the file is root then only root can change its owner 
+
+//change from root to gilg  (subdirectories stile belong to root)
+
+  sudo chown gilg file/directory;
+
+//change owner from root to gilg for file/direcoires with all subdirectories -R flag now belong to gilg
+
+sudo chown -R gilg file/directory/subdirectory;
+
+/*********************************************/
+          </example>
+      </paragraph>
+    </content>
+  </chapter>
+   <chapter>
+       <subject>change file permisions</subject>
+       <content>
+           <paragraph>
+               <info>file/directory permisions can be eiher drwx = directory,read,write,execute that could be also stated in numeric
+
+0 = ---
+1 = --x
+2 = -w-
+3 = -wx
+4 = r-
+5 = r-x
+6 = rw-
+7 = rwx 
+
+</info>
+               <example>
+---------------- add or remove file permision for owner---------------------
+
+//adds read/write/execute for the owner 
+chmod +rwx; = chmod u+rwx; (user is owner by default)
+
+//removes read/write/execute for the owner 
+chmod +rwx = chmod u+rwx;
+
+---------------- add or remove file permision for owner and group---------------------
+
+//adds read/write/execute for the owner and the group
+chmod ug+rwx;
+//removes read/write/execute for the owner and the group
+chmod og-rwx;
+
+---------------- add or remove file permision for owner and group and others---------------------
+
+//adds read/write/execute for the owner and the group and the others
+chmod ugo+rwx = chmod 777;
+//removes read/write/execute for the owner and the group and the others
+chmod ugo-rwx;
+
+------------ ------------ ------------ ------------
+              </example>
+           </paragraph>
+       </content>
+   </chapter>
+   <chapter>
+       <subject>list ls</subject>
+       <content>
+           <paragraph>
+               <info>You should list to list files in curent directory dont use find for that</info>
+               <example>
+                 flags 
+                 -1 = list in seperate rows
+                 -la = includdig hidden files
+                 -l = with details as file permissions
+
+
+                 //list files in current dictory
+                 ls 
+                 //list and sort (it sorts by default anyway) 
+                 ls | sort
+               </example>
+           </paragraph>
+       </content>
+   </chapter>
+   <chapter>
+       <subject>find</subject>
+       <content>
+          <subtitle>find general pattern</subtitle>
+           <paragraph>
+               <info>
+               The find command will begin looking:
+               in the starting directory you specify and proceed to search through 
+               all accessible subdirectories. 
+               You may specify more than one starting directory for searching.
+               
+               find (starting directory) (matching criteria and actions);
+
+               find examples:
+               find . = find recursilvely 
+               find ./specifig = find in directory 
+               find ./specifig/filename.js = find file in directory
+               find */filename.js = find in all directories specific file
+
+               addding flags:
+
+               -type f, d = of type file or directory
+               -name, -iname = of spefic name or name case insensitive
+               -maxdepth 0 = search on current level
+               -path 'path' = specify path
+               -prune = exlude
+               -o = or operator
+               -size +1000 = bigger that 1000mb
+               -print = is to stdout (find . === find . -print)
+
+               </info>
+               <example>
+------------ ------------  general search --------  ------------
+
+------- find in directory (/ slash means root directory be aware ./ dot means current)------------
+ find ./directory/ -name 'filename' or '*wilcardCombination'
+
+--------------- u should always use find with flags (more predictable)------------ 
+//find all files in given directory (recursively);
+find ./scripts -type f
+
+//find all directories in given directory (recursively);
+find ./scripts -type d
+
+//find recursively from current all js files that have name as wilcardCombination 
+-name 'filename or *wilcardCombination' flag
+ find ./directory/ -name '*.js'
+
+ //find recursively more that one directory at the time that have files
+ find ./directory/ ./directory1/ -type f
+
+//combining flags (all files that size is bigger thant 1000mb and -name '*.js')
+-type f =all files
+-size +1 = bigger than 1mb
+-print = print paths
+ -name '*.js 
+
+find ./scripts -type f -size +1000 -print -name '*.js
+               </example>
+           </paragraph>
+           <subtitle>find with exclusion !(not operator)</subtitle>
+           <paragraph>
+               <info>U can perform your search and specify what to exclude from search 
+               as !exclude with flag
+               we will operate on those flags:
+
+                ! === --not (selector)
+                -path '/*' (selector)
+                -o (logical or)
+                -prune => means exclude ussually in combination with -o 
+                [ -o -path './node_modules' -prune ] => or exclude
+
+               </info>
+               <example>
+
+ --------------- exclude with !(not) or -not selector ------------ 
+
+//find all files in given directory (recursively) and exclude .txt files
+// find ./to_delete/ -type f => look for files -type f
+//! -name '*.txt' => but not ones of .txt extension
+
+find ./to_delete/ -type f ! -name '*.txt'
+
+
+
+//find index.* but exclude node_modules -path flag
+//find . -name 'index.*' => look for index.*
+//! -path '*/node*' => but exclude node*
+
+find . -name 'index.*' ! -path '*/node*'
+
+//the same as above with -not selector !=== -not
+
+find . -name 'index*' -not -path './node_modules/*'
+
+//exclude multiple directories with -path (path has to have wild cards dir/* )
+//. ! -path './node_modules/*' => exclude from node_modules/*
+//. ! -path './constants/*' => exclude from constants/*
+//-iname "index*" => finally look for index.* name elsewhere
+
+find . ! -path './node_modules/*' ! -path './constants/*' -iname "index*"
+
+//the same as above with -not selector !=== -not
+
+find . -name 'index*' -not -path './node_modules/*' -not -path './constants/*
+
+//or more mathematic approach (too complex but proves the magic of maths)
+find . -name 'index*' -not \( -path './node_modules/*' -o -path './vendor/*' \)
+
+
+------------   exclude with -prune flag and -o (or selector) -------------------
+
+//-path './node_modules' -prune => exclude ./node_modules
+// -o -iname 'index*' => or show case insensitive for name 'index*'
+// -print => dont show paths where perform search; 
+
+find . -path './node_modules' -prune -o -type f -iname 'index*' -print
+//reverse above
+find . -type f -iname 'index*' -print -o -path './node_modules' -prune 
+ ------------------------------------------------------------
+
+               </example>
+           </paragraph>
+           <subtitle>pipe find results</subtitle>
+           <paragraph>
+               <info>pipe allows you to combine your commands and take results from command into another and another
+               findResults (| pipe into) deleteCommand
+
+               IMPORTANT: pipe always need verb after like: grep or xargs ...
+                </info>
+               <example>
+  ----------------- find files then filter and delete them  -----------------
+
+  //lets assume U have file1.js, file2.js , file3.js, file4.js 
+  //and U want to remove only files 2 and 3 you can find all, pipe to filter and remove
+
+  find file*.js | grep "file[2-3]" | xargs rm
+
+
+  //find all directory on current level and copy gulpfile.js file to them 
+
+  find * -maxdepth 0 -type d -exec cp -vi test_jest_enzyme_tuts/gulpfile.js {} \;
+
+  break down:
+  find * -maxdepth 0 -type d = finds all current directories 
+  -exec cp -vi test_jest_enzyme_tuts/gulpfile.js {} \; = then execute copy test_jest_enzyme_tuts/gulpfile.js to those directories
+
+
+  --------------------------------------------------------------------
+                 
+               </example>
+           </paragraph>
+       </content>
+   </chapter>
+   <chapter>
+       <subject>grep</subject>
+       <content>
+          <subtitle>grep</subtitle>
+          <paragraph>
+              <info>greg allows you find within a text with this pattern doesnt support regex at this form
+
+                    grep [flag] [plain text] [where][*][filename.*]
+
+              </info>
+              <example>
+/---/
+
+//flags 
+-i - case insensitive
+-r = subdirectories of the current directory eg: grep -r hello .
+-l = list only files
+-w = finds only whole words so live 'but' not 'liver'
+-n = show lines where term appears
+--exclude-dir='.git' = exclude directory git from the search 
+--color = highlights the seach term 
+
+//U can merge flags as well 
+
+grep  -rni --color  "campaign" .
+
+=> look for "campaign" term rucursively, show the lines number and color the results
+
+
+
+              </example>
+          </paragraph>
+          <subtitle>grep -E </subtitle>
+          <paragraph>
+              <info>greg allows you find within a text with this regex pattern
+
+                    grep -E [flag] [plain text] [where][*][filename.*]
+
+              </info>
+              <example>
+/---/
+
+//flags 
+-E takes regex expressions as: 'campaigns?' look for campaign and campaigns
+-i - case insensitive
+-r = subdirectories of the current directory eg: grep -r hello .
+-l = list only files
+-w = finds only whole words so live 'but' not 'liver'
+-n = show lines where term appears
+--exclude-dir='.git' = exclude directory git from the search 
+--color = highlights the seach term 
+
+//U can merge flags as well 
+
+grep -E  -rni --color  "campaigns?" .
+
+=> look for "campaigns?" regex -E  term rucursively, show the lines number and color the results
+
+
+
+              </example>
+          </paragraph>
+       </content>
+   </chapter>
+   <chapter>
+       <subject>find and repace (sed)</subject>
+       <content>
+           <paragraph>
+               <info>find and replace with sed command as :
+
+                  sed [flag] 's/searchTerm/ReplaceTerm/g' [where][filename.*] 
+
+                  // * wilcards alone are not allowed only combined folder/file*.js/
+
+               </info>
+               <example>
+/---/
+
+//find IP address and update with new one 
+sed -i '' 's/3432423/335353/g' database.txt
+
+//change expression from one to another
+sed -i "" "s/cdn: false/cdn: true/g" ./CLT-aptamil-*/src/js/adspandable_config.js
+
+
+
+               </example>
+           </paragraph>
+       </content>
+   </chapter>
+   <chapter>
+       <subject>pipe and execute command (| -exec | xargs )</subject>
+       <content>
+           <subtitle>xargs</subtitle>
+           <paragraph>
+               <info>xargs allows you to take standard input from pipe results and execute command from the resutls as below pattern:
+
+                    xargs allways is perceded by execution command as :
+
+                    echo a b c | xargs echo 
+
+                    which simple say take output of echo a b c and pipe result and execute echo (which is simply duplication in this case)
+                    prints a b c
+
+               </info>
+               <example>
+                //-----flags--------/
+                -n [number]1,2 = take the output and place in (-n1 one line each word )-n2 (2 words in line) etc 
+
+                echo a b c | xargs -n2 echo 
+                prints : a b 
+                        c
+
+                -t = prints what command has been executed by xargs 
+                find greg*.js | xargs  -t  rm  //prints rm greg1.js greg2.js greg3.js
+
+
+                -p = promts what command is about to be executed by xargs 
+                find greg*.js | xargs  -t  rm  //prints rm greg1.js greg2.js greg3.js...y
+
+
+                //create and delete output of echo 
+                 echo 'one two three' | xargs mkdir //create directories
+                //delete output of echo 
+                echo 'one two three' | xargs rm -rf //remove directories
+
+                //copy file text.txt with a content in new files file2.text file3.txt
+                echo file{2..3}.txt | xargs -n1 cp text.txt
+
+                //list files containing 'campaign' word and the sentence itself
+                ls . | xargs grep 'camp'
+                //prints campaings.txt:“campaign and campaigns”
+
+                //list all in current directory and find file container 'cdn' word -l display file only not content
+                 ls . | grep -l "cdn" * ===  ls . | xargs grep -l "cdn" 
+
+
+
+               </example>
+           </paragraph>
+           <subtitle>exec</subtitle>
+           <paragraph>
+               <info>-exec allows you to take standard input from pipe results and execute command from the resutls as below pattern:
+
+                it is apprently slower that | xarts
+
+                    xargs allways is perceded by execution command as :
+
+                    find *.js -exec echo {} \; 
+
+
+               </info>
+               <example>
+                //not as good as xargs to be updated 
+
+                //find .jpg file in all subdirectories and list them 
+                find . -name "*.jpg" -exec ls {} ;
+
+             
+
+               </example>
+           </paragraph>
+       </content>
+   </chapter>
+ </chapters>

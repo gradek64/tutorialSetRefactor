@@ -1,7 +1,230 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <chapters>
+   <chapter>
+      <subject>interface</subject>
+      <content>
+          <subtitle>object interface</subtitle>
+          <paragraph>
+                      <info>interface can only represent object structure to a object structure data. The interface should be perceded by capital I letter and name start with capital as well, it is industry standard.</info>
+                      <example>
+
+------- regular interface ------------
+
+interface IObjectStructure {
+  name: string;
+  lastname: string;
+  age: number;
+}
+
+//all properties from interface has to be place in const object declaraion
+const person: objectStructure = { name: 'greg', lastname: 'gil', age: 38 };
+
+------- [key]:value type interface ------------
+
+interface IAnyKeyUnknownValue {
+  [key:string]: unknown;
+}
+
+//this objet interface will take as many props as possible of type string and value of anything
+const person1: IAnyKeyUnknownValue = { name: 'greg', lastname: {greg:'greg'}, age: 38, arr:[{}] };
+
+
+-----------------------------------------------------------------------------------
+                      </example>
+                  </paragraph>
+          <subtitle>Interface intersections (extends keyword)</subtitle>
+          <paragraph>
+              <info>Interfaces can be combined as I1 and I2 as well as I1 or I2
+              </info>
+              <example>
+//---- 1a. Interface  combined naturally by intface duplication (not reccomended though)
+
+interface Dude {
+  name: string;
+  age: number;
+}
+
+interface Dude {
+  job: string;
+  position: string;
+}
+
+let myEmployee10: Dude;
+myEmployee10 = {
+  name: 'Darek',
+  age: 31,
+  job: 'contract',
+  position: 'developer',
+};
+
+//---- 1b. Interface can be extended as well (recommended) with the same effect
+
+interface Dude1 {
+  name: string;
+  age: number;
+}
+
+interface Dude2 extends Dude1 {
+  job: string;
+  position: string;
+}
+
+let myEmployee11 = {} as Dude2;
+myEmployee11 = {
+  name: 'Darek',
+  age: 31,
+  job: 'contract',
+  position: 'developer',
+};
+
+//---- 2. Interface one of another with or | operator
+
+
+interface Dude100 {
+  name: string;
+  age: number;
+}
+
+interface Dude200 {
+  job: string;
+  position: string;
+}
+
+let myEmployee14: Dude100 | Dude200;
+
+myEmployee14 = {
+  name: 'string',
+  job: 'contract',
+  position: 'developer',
+}; 
+// a bit buggy cause it accepts 3 arguments it should accpet 2 or 4
+
+------------
+              </example>
+          </paragraph>
+      </content>
+  </chapter>
   <chapter>
-      <subject>types</subject>
+      <subject>type</subject>
+      <content>
+          <subtitle>object type</subtitle>
+          <paragraph>
+                      <info>type can represent object structure or any other data include type literals</info>
+                      <example>
+
+------- regular interface ------------
+
+type ObjectStructure = {
+  name: string;
+  lastname: string;
+  age: number;
+}
+
+//all properties from interface has to be place in const object declaraion
+const person: objectStructure = { name: 'greg', lastname: 'gil', age: 38 };
+
+------- [key]:value type interface ------------
+
+type IAnyKeyUnknownValue = {
+  [key:string]: unknown;
+}
+
+//this objet interface will take as many props as possible of type string and value of anything
+const person1: IAnyKeyUnknownValue = { name: 'greg', lastname: {greg:'greg'}, age: 38, arr:[{}] };
+
+------- type literal ------------
+
+type = availableColors = 'blue' | 'green'
+
+
+-----------------------------------------------------------------------------------
+                      </example>
+                  </paragraph>
+          <subtitle>type aliases</subtitle>
+          <paragraph>
+              <info>Types can be combined as I1 and I2 as well as I1 or I2
+              </info>
+              <example>
+//---- 1a. Interface  combined with &amp; and operator
+
+type Dude = {
+  name: string;
+  age: number;
+}
+
+type Dude2 = {
+  job: string;
+  position: string;
+}
+
+let myEmployee10: Dude &amp; Dude2;
+myEmployee10 = {
+  name: 'Darek',
+  age: 31,
+  job: 'contract',
+  position: 'developer',
+};
+
+
+
+//---- 2. type one of another with or | operator
+
+
+type Dude100 = {
+  name: string;
+  age: number;
+}
+
+type Dude200 = {
+  job: string;
+  position: string;
+}
+
+let myEmployee14: Dude100 | Dude200;
+
+myEmployee14 = {
+  name: 'string',
+  job: 'contract',
+  position: 'developer',
+}; 
+// a bit buggy cause it accepts 3 arguments it should accpet 2 or 4
+
+------------
+              </example>
+          </paragraph>
+      </content>
+  </chapter>
+  <chapter>
+      <subject>interface versus type (diffrences)</subject>
+      <content>
+          <paragraph>
+              <info>They are preety much the same. The only diffrence the type allows you to specify type literal as 
+                type greg = 'greg' . Interfaces are limited to object type structure. Also Disjoint unions alowed only in types</info>
+              <example>
+---------- type literals ---------------
+
+type GregorDaniel = 'Greg' | 'Daniel';
+
+const myEmployee1: GregorDaniel = 'Greg';
+const myEmployee2: GregorDaniel = 'Daniel';
+const myEmployee3: GregorDaniel = 'Michal'; //opps he is not specified in type
+
+//or tuples declarion can not be done by interface
+type Reponse = [string, number];
+const x: Reponse = ['value', 5];
+
+//Disjoint unions only in types
+type DomesticAnimals = { type: 'Dog' } | { type: 'Cat' };
+
+
+-----------------------------------------
+
+              </example>
+          </paragraph>
+      </content>
+  </chapter>
+  <chapter>
+      <subject>typescript own types</subject>
       <content>
           <subtitle>tuple</subtitle>
           <paragraph>
@@ -66,6 +289,252 @@ function moveAnimalDiscriminatedTypes(animal: Animal) {
       break;
   }
 }
+              </example>
+          </paragraph>
+      </content>
+  </chapter>
+  <chapter>
+      <subject>Utillity types (build-in)</subject>
+      <content>
+          <subtitle>Partial&lt;T></subtitle>
+          <paragraph>
+              <info>Partial will take one generic type and make it all properties
+ * from required to optional, that means we can call even with empty object
+ * but not with new property that dont exist in original type.</info>
+              <example>
+---------------- Partial of a type -------------
+
+interface motorbike {
+  color: string;
+  engineSize: number;
+}
+let kawasaki: motorbike = {
+  color: 'green',
+  engineSize: 1200,
+};
+
+//Partial will make all properties optional 
+
+let kawasakiSport: Partial&lt;motorbike> = {
+  engineSize: 1000,
+};
+let kawasakiCruizer: Partial&lt;motorbike> = {
+  color: 'black',
+};
+
+//empty object is aslo allowe cause it all properties or partial but also none
+let kawasakiMotorUnknow: Partial&lt;motorbike> = {};
+
+
+//error newModel dont exist in original motorbike interface
+let kawasakiMotorNewModel: Partial&lt;motorbike> = { newModel: 'not allowed' };
+
+----------------------------------
+              </example>
+          </paragraph>
+          <subtitle>Partial in generics (partial explained)</subtitle>
+          <paragraph>
+              <info>Partial can be also written with generics</info>
+              <example>
+  -------- Partial can be break out as generic --------------
+
+type PartialManually&lt;Obj> = {
+  [Prop in keyof Obj]?: Obj[Prop];
+};
+
+let kawasakiSport1: PartialManually&lt;motorbike> = {
+  engineSize: 1000,
+};
+
+let kawasakiCruizer1: PartialManually&lt;motorbike> = {
+  color: 'black',
+};
+
+//empty object is aslo allowe cause it all properties or partial but also none
+
+let kawasakiMotorUnknow1: PartialManually&lt;motorbike> = {};
+
+//but new properties are not allowed 
+
+let kawasakiMotorNewModel1: PartialManually&lt;motorbike> = {
+  newModel: 'not allowed',
+};
+
+--------------------------------------
+              </example>
+          </paragraph>
+          <subtitle>Required&lt;type></subtitle>
+          <paragraph>
+              <info>Opposite to Partial will take one generic type and make it all properties
+ * from optional to required</info>
+              <example>
+------- all properties are required in the object structure ----------
+                
+interface classicMotorbike {
+  color?: string;
+  engineSize?: number;
+  old: Boolean;
+}
+let BSA: classicMotorbike = {
+  old: true,
+};
+//now convert all properties to mandatory;
+let Triumph: Required&lt;classicMotorbike> = {
+  color: 'blue',
+  engineSize: 865,
+  old: false,
+};
+
+----------------------------
+              </example>
+          </paragraph>
+          <subtitle>Readonly&lt;classicMotorbikeCollection></subtitle>
+          <paragraph>
+              <info>Makes all propeties readonly so they can not be changed</info>
+              <example>
+                
+------- all properties are required and they can not be chanded (read-only) in the object structure ----------
+
+interface classicMotorbikeCollection {
+  color: string;
+  engineSize: number;
+  old: Boolean;
+}
+
+//now convert all properties to mandatory;
+let Vincent: Readonly&lt;classicMotorbikeCollection> = {
+  color: 'blue',
+  engineSize: 865,
+  old: false,
+};
+
+----------------------------
+              </example>
+          </paragraph>
+          <subtitle>Record&lt;string, customType></subtitle>
+          <paragraph>
+              <info>Record takes 2 generic types one for object Property, the other for type what property
+                They are mainly used for:
+                * represent as Array, Object, string etc ...
+                * Record are used for objects literals mainly</info>
+              <example>
+  ----------- Record for object -----------------
+                
+
+interface Motorbikes {
+  make: string;
+  type: string;
+}
+
+const shoppingList: Record&lt;string, Motorbikes> = {
+  owner1: {
+    make: 'Honda',
+    type: 'sport',
+  },
+  owner2: {
+    make: 'Yamaha',
+    type: 'sport',
+  },
+};
+----------- record as array of objects--------------
+
+type  Motorbikestype  = {
+  make: string;
+  type: string;
+}
+
+const shoppingListArray: Record&lt;number, Motorbikestype> = {
+  0: {
+    make: 'Honda',
+    type: 'sport',
+  },
+  1: {
+    make: 'Yamaha',
+    type: 'sport',
+  },
+};
+
+----------- ----------- -----------
+              </example>
+          </paragraph>
+          <subtitle>Pick&lt;CystomType, 'make' | 'type'></subtitle>
+          <paragraph>
+              <info>Pick will take only properties picked, selected from the type, which listed after coma Pick&lt;CystomType, 'make' | 'type'> </info>
+              <example>
+------
+
+interface MotorbikesSet {
+  make: string;
+  speed: number;
+  type: string;
+}
+//pick only make and type in this case pipe is not or ;)
+let newBike: Pick&lt;MotorbikesSet, 'make' | 'type'> = {
+  make: 'Triumph',
+  type: 'classic',
+};
+
+
+-----------------
+              </example>
+          </paragraph>
+          <subtitle>Omit&lt;MotorbikesSet, 'make' | 'type'></subtitle>
+          <paragraph>
+              <info>Omit is the opposite to Pick so omit some properties, whatever is not listed will be taken</info>
+              <example>
+------
+
+interface MotorbikesSet {
+  make: string;
+  speed: number;
+  type: string;
+}
+//pick only make and type in this case pipe is not or ;)
+let newBike: Pick&lt;MotorbikesSet, 'make' | 'type'> = {
+  make: 'Triumph',
+  type: 'classic',
+};
+
+
+//omit make and type (so pick only speed what is left )
+let newBike2: Omit&lt;MotorbikesSet, 'make' | 'type'> = { speed: 70 };
+
+-----------------
+              </example>
+          </paragraph>
+          <subtitle>Exlude&lt;T,U></subtitle>
+          <paragraph>
+              <info>Exlude allows you to exclude specific values from type literals (eliminate some specific values</info>
+              <example>
+.**************  Exlude&lt;T,U> with union types*****************/
+
+//those nubers are types on its own they not just const value:number = 2332
+
+type RegistrationNumbers = 2332 | 34343 | 53453 | 53535353;
+type updatedRegistrationNumbers = Exclude&lt;RegistrationNumbers, 34343>;
+
+
+const RegistrationNumbersSet: updatedRegistrationNumbers = 34343 //error
+const RegistrationNumbersSet1:updatedRegistrationNumbers = 53535353 //OK
+
+---------------------------------
+              </example>
+            </paragraph>
+               <subtitle>Extract&lt;T,U></subtitle>
+          <paragraph>
+              <info>Extract is the oposite to exlude so it will only take extracted values as final value</info>
+              <example>
+.**************  Extract&lt;T,U> with union types*****************/
+
+//those nubers are types on its own they not just const value:number = 2332
+
+type RegistrationNumbers = 2332 | 34343 | 53453 | 53535353;
+type updatedRegistrationNumbers = Extract&lt;RegistrationNumbers, 34343>;
+
+const RegistrationNumbersSEt: updatedRegistrationNumbers = 34343 //OK
+const RegistrationNumbersSEt1:updatedRegistrationNumbers = 53535353 //error
+
+---------------------------------
               </example>
           </paragraph>
       </content>
@@ -168,24 +637,136 @@ createArray1('2', '4', '5');
 createArray1([2], [4], [5]); //not accepted
                </example>
            </paragraph>
-           <subtitle>' key of' in type generics constrains</subtitle>
-           <paragraph>
-               <info>Typescript forces you to use typeof for type conditions, for object U can use value 'key of' object
-                as the example below;
-               </info>
-               <example>
-----------------check if key exists in object with generics  ----
-
-const getObjectPropertyValue = &lt;T extends object, U extends keyof T>(obj:T,key:U):string => {
-  return 'the value is'+obj[key]
+           <subtitle>Interface and type with generics</subtitle>
+          <paragraph>
+              <info>generics gives multiple types options in intrface of types. U can specify diffrent type on declaration.</info>
+              <example>
+---------- interface with generic types ----------------
+                
+interface KeyPair&lt;T, U> {
+  key: T;
+  value: U;
 }
 
-getObjectPropertyValue({}, 'name') //error
-getObjectPropertyValue({name:'Greg'}, 'name') //correct
 
-               </example>
-           </paragraph>
-           
+//----generics gives multiple types options
+const kv1: KeyPair&lt;number, string> = { key: 1, value: 'Steve' }; // OK
+const kv2: KeyPair&lt;string, string> = { key: 'set', value: 'Steve' }; // OK
+const kv3: KeyPair&lt;{[key:string]:string}, number> = { key: {'prop':'value'}, value: 55 }; // OK
+
+---------- type with generic types ----------------
+
+type KeyPair1&lt;T, U> = {
+  key: T;
+  value: U;
+}
+
+let kv1type: KeyPair1&lt;number, string> = { key:1, value:"Steve" }; // OK
+
+
+---------------------------
+
+              </example>
+          </paragraph>
+            <subtitle>Interface and type with generics and generic constrains</subtitle>
+          <paragraph>
+              <info>generics gives multiple types options in intrface of types. U can specify diffrent type on declaration. But 
+                you can go further and constrain what specific type generic can take. It most cases is a overkill.</info>
+              <example>
+---------- interface with generic types and generic constrain ----------------
+                
+interface someI&lt;T , U extends string| number> {
+  job: T;
+  value: U;
+}
+
+const obj1: someI&lt;string, number> = { job: 'greg', value: 45 };
+const obj10: someI&lt;number, number> = { job: 66, value: 45 };
+const obj101: someI&lt;number, boolean> = { job: 66, value: true }; //error boolean is not in constrained values 
+
+---------- tyoe with generic types and generic constrain ----------------
+
+type  someI&lt;T , U extends string| number> = {
+  job: T;
+  value: U;
+}
+
+const obj1: someI&lt;string, number> = { job: 'greg', value: 45 };
+const obj10: someI&lt;number, number> = { job: 66, value: 45 };
+const obj101: someI&lt;number, boolean> = { job: 66, value: true }; //error boolean is not in constrained values 
+
+
+---------------------------
+
+              </example>
+          </paragraph>
+          <subtitle>Interface and type with generics and generic constrains (complex)</subtitle>
+          <paragraph>
+              <info>U can go really creative with generics. As the example below.</info>
+              <example>
+                
+//this interface accpets:  key of type string , generic to be specified with call
+
+interface KeyP&lt;G> {
+  [key: string]: G;
+}
+
+//this inteface accets: Generic &lt;T> that is constain to be of shape of KeyP
+//KeyP is also generic so it needs to specify what types it works with therefore  KeyP&lt;string | number>
+
+interface KeyPairExtended&lt;T extends KeyP&lt;string | number>, U> {
+  job: T;
+  value: U;
+}
+
+//call generic that needs generic types config: KeyP&lt;string> and string
+
+let gg: KeyPairExtended&lt;KeyP&lt;string>, string> = {
+  job: { someProp: 'set' },
+  value: 'Steve',
+}; // OK
+
+//call generic that needs generic types config: KeyP&lt;number> and string
+
+let gg1: KeyPairExtended&lt;KeyP&lt;number>, string> = {
+  job: { set: 66 },
+  value: 'Steve',
+}; // OK
+
+//call generic that needs generic types config: KeyP&lt;number> and string
+
+let ggset: KeyPairExtended&lt;KeyP&lt;number>, string> = {
+  job: { someother: 66 },
+  value: 'Steve',
+}; // OK
+
+              </example>
+          </paragraph>
+          <subtitle>Interface generic with 'key of ' object keyword</subtitle>
+          <paragraph>
+              <info>Typescript introduces type guard of object 'key of' that allows specify what keys must have in the object structure with generics</info>
+              <example>
+---------- object structure with generics and 'key of' keyword -----------
+
+interface EmployeeInterface {
+  position: string;
+  startDate: Date;
+}
+const getObjectPropertyValue = &lt;T extends object, U extends keyof T>(
+  obj: T,
+  key: U
+): string => {
+  return 'the value is' + obj[key];
+};
+
+getObjectPropertyValue({}, 'name'); //error
+getObjectPropertyValue({ name: 'Greg' }, 'name'); //correct
+
+
+----------------------------------
+
+              </example>
+          </paragraph>
        </content>
    </chapter>
    <chapter>

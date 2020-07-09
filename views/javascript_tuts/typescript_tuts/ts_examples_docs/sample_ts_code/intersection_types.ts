@@ -36,8 +36,8 @@ const ITEmployeeInterface1: ITEmployeeInterface = {
   position: 'developer',
   startDate: new Date(),
 };
-
-//intersection types with union types (will take nuber that is common means that intesect with each other)
+//2 type intersection
+//intersection types with union types (will take number that is common means that intesect with each other)
 type one = string | number;
 type two = number | boolean;
 
@@ -45,3 +45,5 @@ type combined = one & two; //for those two types interesection is number
 
 //string takes priority for this setter type since both one & two types have common string type
 const setter: combined = 3;
+
+//functon argument intesection
