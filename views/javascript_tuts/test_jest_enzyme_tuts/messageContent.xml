@@ -387,7 +387,7 @@ https://devhints.io/enzyme
         <content>
             <subtitle>installation</subtitle>
             <paragraph>
-                <info>react-testing-library is an alternative to Enzyme who doesnt suppoert hooks out of the box(without mocking some functionality;). React-testing-library is recommended by facebook itself it might even been created by them just like jest. Follow instalation process</info>
+                <info>react-testing-library is an alternative to Enzyme who doesnt support hooks out of the box(without mocking some functionality;). React-testing-library is recommended by facebook itself it might even been created by them just like jest. Follow instalation process</info>
                 <example>
 /------ react-testing-library----/
 
@@ -408,6 +408,8 @@ npm install --save-dev @testing-library/jest-dom
                 <info>The best way of tracking changes to the jsx hook outcome is to take a picture of it which is called snapshot ;)</info>
                 <example>
 /--- copy below for snaphshot testing -------/
+
+//generated to file Snapshot
                   
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
@@ -415,11 +417,20 @@ import '@testing-library/jest-dom/extend-expect';
 import Component from '../../SimpleClickUpdate_useState_hook';
 
 afterEach(cleanup);
-  it('should take a snapshot', () => {
+  test('should take a snapshot', () => {
     const { asFragment } = render(&lt;Component />);
-    expect(asFragment(&lt;Component />)).toMatchSnapshot();
+    expect(asFragment()).toMatchSnapshot();
   });
 
+//inlineSnapshot
+
+test('renders a message', () => {
+  const { container, getByText } = render(&lt;Greeting />)
+  expect(getByText('Hello, world!')).toBeInTheDocument()
+  expect(container.firstChild).toMatchInlineSnapshot(`
+    &lt;h1>Hello, World!&lt;/h1>
+  `)
+})
 /-------------/
                 </example>
             </paragraph>
@@ -498,6 +509,315 @@ in documenation
 
                 </example>
             </paragraph>
+            <subtitle>testing async custom hook</subtitle>
+            <paragraph>
+                <info>Custom hooks allow you to expose state logic outside to other files. At the moment the only way to test is by @testing-library/react-hooks library which is the  addition to @testing-library/react. Example below </info>
+                <example>
+                  
+ /------------- async custom hook example useAsyncRequest.js -------------------/
+
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+const useAsyncRequest = (url, initialValue) => {
+
+  const [data, setData] = useState(initialValue);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+
+    const fetchData = async function() {
+      try {
+        setLoading(true);
+
+        //this hook uses axios.get() to be mocked in test
+
+        const response = await axios.get(url);
+
+        if (response.status === 200) {
+          setData(response.data);
+        }
+      } catch (error) {
+        throw error;
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+
+  }, [url]);
+
+
+  return { loading, data };
+
+};
+
+export default useAsyncRequest;
+
+
+/------------- test useAsyncRequest.spec.js  -------------------/
+
+
+
+/------------    HOW TO TEST IT ?  -----------------/
+
+1. since it is async hook it depend on async http call that needs to be mocked. This hook uses axios library that could be mocked
+in 2 ways , described in this document under: MOCK ENTIRE MODULE STORED IN NODE_MODULES ....
+
+  so U might only use jest.mock('axios') or call manually axios.get('path') to execute call (depend on implementation)
+
+3. Once axios is mocked we need to render our custom hook by twice once before call and second with http response.
+
+  test('calls http request and show loading status before http response', ()=>{
+
+
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useCallAPI(query, String(pageNumber))
+    );
+
+  })
+
+
+/------------ /
+                </example>
+            </paragraph>
+<subtitle>testing async custom hook part 2 (simplified)</subtitle>
+            <paragraph>
+                <info>There are 2 stages for testing async cutom hook before and after data
+                  loads. Details below. We need to use
+
+                     const { result,waitForNextUpdate } = renderHook(() => useFetch());
+
+                    await waitForNextUpdate() will update data for use 
+
+                   </info>
+                <example>
+                  
+ /------------- async custom hook example useAsyncRequest.js -------------------/
+
+1. ---- import from seperate react-hooks library -----
+import { cleanup, renderHook } from '@testing-library/react-hooks';
+
+
+----- mock the fetch for the cutom hook first -----
+
+cosnt mockData = {mockData:'mockData'}
+const mockJsonPromise = Promise.resolve(mockData);
+const mockFetchPromise = Promise.resolve({
+  json: () => mockJsonPromise,
+});
+
+
+
+----- testing simple loading status before and after data arrives -------
+
+describe('useFetch() is loading data', () => {
+  afterEach(cleanup);
+  beforeEach(()=>{
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
+  })
+  it('should set loading=true' , async () => {
+    const { result,waitForNextUpdate } = renderHook(() => useFetch());
+    expect(result.current.loading).toBe(true)
+    await waitForNextUpdate()
+  });
+  it('should set loading=false once data is loaded' , async () => {
+    const { result,waitForNextUpdate } = renderHook(() => useFetch());
+    await waitForNextUpdate()
+    expect(result.current.loading).toBe(false)
+  });
+}); 
+
+----- testing DATA before and after data arrives -------
+
+
+describe('useFetch() responds with data', () => {
+  afterEach(cleanup);
+  beforeEach(()=>{
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
+  })
+  it('should call useFetch() with no params and return data' , async () => {
+    const { result,waitForNextUpdate } = renderHook(() => useFetch());
+    await waitForNextUpdate()
+    const mockDataJson = JSON.stringify(mockData.data)
+    const hookResponseJson = JSON.stringify(result.current.data)
+    expect(hookResponseJson).toBe(mockDataJson)
+  });
+  it('should call useFetch({url,location}) with no url,location obj and return data' , async () => {
+    const paramObject = {url:'url',locations:{'london': { lon: '-0.118092', lat: '51.509865' },}};
+    const { result,waitForNextUpdate } = renderHook(() => useFetch(paramObject))
+    await waitForNextUpdate()
+    const mockDataJson = JSON.stringify(mockDataMultipleLocations)
+    const hookResponseJson = JSON.stringify(result.current.data)
+    expect(hookResponseJson).toBe(mockDataJson)
+  });
+}); 
+
+
+----- testing response comes with error and how it is handled -------
+
+describe('useFetch() responds with error', () => {
+  afterEach(cleanup);
+  beforeEach(()=>{
+    global.fetch = jest.fn().mockImplementation(() => Promise.reject('error'));
+  })
+  it('should set error' , async () => {
+    const { result,waitForNextUpdate } = renderHook(() => useFetch());
+    await waitForNextUpdate()
+    expect(result.current.loading).toBe(false)
+    expect(result.current.error).toBe('error')
+  });
+}); 
+
+/-------------/
+                </example>
+            </paragraph>
+            <subtitle>async react hook functional component</subtitle>
+            <paragraph>
+                <info>Async react component needs to be tested before and after response is back. To achive that our test has to be set for async fuction and await the response for update. Details below:</info>
+                <example>
+                  
+/------------- async App.js -------------------/
+
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+const App = (url, initialValue) => {
+
+  const [data, setData] = useState(initialValue);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+
+    const fetchData = async function() {
+      try {
+        setLoading(true);
+
+        //this hook uses axios.get() to be mocked in test
+
+        const response = await axios.get(url);
+
+        if (response.status === 200) {
+          setData(response.data);
+        }
+      } catch (error) {
+        throw error;
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+
+  }, [url]);
+
+  return (
+    &lt;>
+      {!loading &amp;&amp; 'loading...'}
+      {loading &amp;&amp;  data.map((httpResult)=> httpResult.block )}
+    &lt;/>
+  );
+
+};
+
+export default App;
+
+
+-------------- App.spec.tsx test -----------------------
+
+  
+1. First step is to check if loading message is present, since this is async component it needs async handling. Wait or 
+WaitFor from React testing library will make sure the data is handled correctly in the first step. IMPORTANT wait or waitfor method
+in callback returns void 
+
+function waitFor&lt;T>(
+  callback: () => void,
+  options?: {
+    container?: HTMLElement
+    timeout?: number
+    interval?: number
+    onTimeout?: (error: Error) => Error
+    mutationObserverOptions?: MutationObserverInit
+  }
+): Promise&lt;T>
+
+Thefore we dont see the ruslt of callback but initial loading state.
+
+describe('handles async call and shows status of loading',()=>{
+test('renders "loading..." when data is not returned', async () => {
+     await act(
+      async (): Promise&lt;any> => {
+        const { container, debug } = render(&lt;App />);
+
+        await wait(() => {
+          debug();
+        });
+
+        return container;
+      }
+    );
+
+  });
+
+test('updates list when data is returned', async () => {
+  const { container } = render(&lt;App />);
+    const updatedContainer = await waitForElement(
+      async () => container.outerHTML
+    );
+    console.log('updatedContainer', updatedContainer);
+
+  })
+
+
+2. test('updates list...') uses promise waitForElement that returns updated values, in this case container from render('&lt;App />')
+contrary to wait of waitFor that returns void as show above.
+
+function waitForElement&lt;T>(
+  callback: () => T,
+  options?: {
+    container?: HTMLElement
+    timeout?: number
+    mutationObserverOptions?: MutationObserverInit
+  }
+): Promise&lt;T>
+
+
+
+                </example>
+            </paragraph>
+            <subtitle>waitFor() async react-testing library v10+</subtitle>
+            <paragraph>
+                <info>in latest versions v10+ most async methods are deprecated and replaced with one waitFor(). Below is example how to use it, the main diffrence is that waitFor() doesnt return result but insted takes async response inside it method as:
+
+                   await waitFor(() => {
+                    const component = asFragment();
+                    expect(something);
+                  });
+
+                </info>
+                <example>
+//example of snapshot before and after async call 
+
+describe('should render correctlly with initial props', () => {
+  it('should render and take a snapshot before data loads', () => {
+    const { asFragment } = render(&lt;App />);
+    const firstRender = asFragment();
+    expect(firstRender).toMatchSnapshot();
+  });
+  it('should render and take a snapshot after data loads', async () => {
+    //mock list async response
+    (List as any).getList = jest.fn().mockReturnValue(List.list);
+    const { asFragment } = render(&lt;App />);
+    await waitFor(() => {
+      const component = asFragment();
+      expect(component).toMatchSnapshot();
+    });
+  });
+});
+
+                </example>
+            </paragraph>
         </content>
     </chapter>
     <chapter>
@@ -536,6 +856,44 @@ test("calls math.add", () => {
 test("calls app.doAdd", () => {
     const appAdd = app.doAdd(1,2)
     expect(appAdd).toBe(3)
+})
+----------------------------------------------------------------------------
+              </example>
+          </paragraph>
+        </content>
+    </chapter>
+    <chapter>
+        <subject>Testing named functions</subject>
+        <content>
+           <paragraph>
+              <info>when the function is expored by its name as 
+
+                export const getList = () => {}
+
+              then to test you need to import entire file first as below:
+              </info>
+              <example>
+----------------------- List.js  ----------------
+
+export const getList = () => {
+  console.log('get list call');
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(list);
+    }, 1000);
+  });
+};
+---------------------------------------------------------
+
+
+
+--------------- test.spec.tsx --------------------------
+
+import * as List from './List.js';
+
+//typescript 
+    (List as any).getList = jest.fn().mockReturnValue(List.list);
+
 })
 ----------------------------------------------------------------------------
               </example>
@@ -960,6 +1318,54 @@ all.closeModal() etc .. (all of them will be mocked)
 / --------------- /
           </example>
       </paragraph>
+       <subtitle>mocking fetch()</subtitle>
+      <paragraph>
+          <info>Custom mock of fetch() native js method for async call</info>
+          <example>
+------ Fetch has 2 promises to resolve data  -------------
+
+1. mock resolve()
+
+const mockData = [{data:'data required for resolve'}]
+
+const mockJsonPromise = Promise.resolve(mockData);
+//Fetch always resolves with string that needs to be converted to .json()
+const mockFetchPromise = Promise.resolve({
+  json: () => mockJsonPromise,
+});
+
+----- in test -----
+
+beforeEach(()=>{
+  global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
+})
+
+
+2. mock reject()
+
+---------eiher reject on first stage of fetch-----------
+
+const mockFetchPromise = Promise.reject({
+  json: () => mockJsonPromise,
+});
+
+
+---------or reject on json() stage ------------
+
+const mockJsonPromise = Promise.reject('promise rejected');
+const mockFetchPromise = Promise.resolve({
+  json: () => mockJsonPromise,
+});
+
+----- in test -----
+
+beforeEach(()=>{
+  global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
+})
+
+/ --------------- /
+          </example>
+      </paragraph>
      </content>
     </chapter>
     <chapter>
@@ -1108,6 +1514,301 @@ mock version of react-redux and it could be accessed by:
 
                 </example>
             </paragraph>
+            <subtitle>mock axios globally in __mocks__ folder axios() as method </subtitle>
+      <paragraph>
+          <info>
+            Any module/library can be mocked either globally or localy in the file. this example shows how to mock axios as axios module with get,put,post  methods etc.
+          </info>
+          <example>
+
+
+----- file using axios ---------
+
+axios({
+  method: 'GET',
+  url: 'https://api.harvardartmuseums.org/object?',
+  params: { classification: query, page: pageNumber },
+  paramsSerializer: function (params) { return `${params.classification}page=${params.page}`}
+})
+.then((data) => {
+  const { records } = data.data;
+})
+.catch((error) => {
+  throw new Error('no net');
+});
+
+
+--------------
+this implementation of axios requires axios() as method and U need to mock with this pattern
+-----------------------
+
+------ test --------
+
+1. create file __mocks__/axios.js
+
+-------------_mocks__/axios.js -----------
+
+export default () => {
+  return Promise.resolve({
+    data: {
+      records: [
+        {
+          title: 'title',
+          images: [],
+          century: '21',
+          division: 'general',
+        },
+        {
+          title: 'title',
+          images: [],
+          century: '21',
+          division: 'general',
+        },
+      ],
+    },
+});
+};
+
+----- Above file is exported by default as method that returns promise ----------
+
+/------------------------- test.spec.js --------/
+
+2.let jest know that you want to use mock axios by below syntax 
+
+jest.mock('axios');
+
+3.depending of the implementation call you mock axios (optional depends on the implementation)
+
+axios({}).then(()=>{
+  //your assertion
+})
+
+
+/-------------------------/
+
+
+
+
+          </example>
+      </paragraph>
+       <subtitle>mock axios globally in __mocks__ folder axios() as object axios.get() </subtitle>
+      <paragraph>
+          <info>
+            Any module/library can be mocked either globally or localy in the file. this example shows how to mock axios as axios() method.
+          </info>
+          <example>
+
+
+----- file using axios ---------
+
+axios.get('/path')
+.then((data) => {
+  const { records } = data.data;
+})
+.catch((error) => {
+  throw new Error('no net');
+});
+
+
+--------------
+this implementation of axios requires axios as object with methods and U need to mock with this pattern
+-----------------------
+
+------ test --------
+
+1. create file __mocks__/axios.js
+
+-------------_mocks__/axios.js -----------
+
+export default {
+  get: jest.fn(() => {
+    return Promise.resolve({
+      data: {
+        records: [
+          {
+            title: 'title',
+            images: [],
+            century: '21',
+            division: 'general',
+          },
+          {
+            title: 'title',
+            images: [],
+            century: '21',
+            division: 'general',
+          },
+        ],
+      },
+  }),
+};
+
+----- Above file is exported by default as method that returns promise ----------
+
+/------------------------- test.spec.js --------/
+
+2.let jest know that you want to use mock axios by below syntax 
+
+jest.mock('axios');
+
+3.depending of the implementation call you mock axios (optional depends on the implementation)
+
+axios.get('/path').then(()=>{
+  //your assertion
+})
+
+
+/-------------------------/
+
+
+
+
+          </example>
+      </paragraph>
+        </content>
+    </chapter>
+     <chapter>
+        <subject>Mock entire module stored in node_modules in testing file</subject>
+        <content>
+            <subtitle>mock axios as method axios() locally in testing file</subtitle>
+      <paragraph>
+          <info>
+            Any module/library can be mocked either globally or localy in the file. this example shows how to mock axios as axios module with get,put,post  methods etc. only in testing file with jest.mock('library',()=>{ /* mock funtionality */})
+          </info>
+          <example>
+
+
+----- file using axios ---------
+
+axios({
+  method: 'GET',
+  url: 'https://api.harvardartmuseums.org/object?',
+  params: { classification: query, page: pageNumber },
+  paramsSerializer: function (params) { return `${params.classification}page=${params.page}`}
+})
+.then((data) => {
+  const { records } = data.data;
+})
+.catch((error) => {
+  throw new Error('no net');
+});
+
+
+--------------
+this implementation of axios requires axios() as method and U need to mock with this pattern
+-----------------------
+
+
+1. in testing file use callback of jest.mock('library',()=>{ /* mock funtionality */}
+
+------------- test.spec.js -----------
+
+jest.mock('axios', () => {
+  return () =>
+    Promise.resolve({
+      data: {
+        records: [
+          {
+            title: 'title',
+            images: [],
+            century: '21',
+            division: 'general',
+          },
+          {
+            title: 'title',
+            images: [],
+            century: '21',
+            division: 'general',
+          },
+        ],
+      },
+    });
+});
+
+---------------------------
+
+
+3.depending of the implementation call your mock axios (optional depends on the implementation)
+
+axios({}).then(()=>{
+  //your assertion
+})
+
+
+/-------------------------/
+
+
+
+
+          </example>
+      </paragraph>
+            <subtitle>mock axios as object/module axios locally in testing file</subtitle>
+      <paragraph>
+          <info>
+            Any module/library can be mocked either globally or localy in the file. this example shows how to mock axios as axios obeject with custom method as axios.get() axios.post() etc
+          </info>
+          <example>
+
+
+----- file using axios ---------
+
+axios.get('/path')
+.then((data) => {
+  const { records } = data.data;
+})
+.catch((error) => {
+  throw new Error('no net');
+});
+
+
+--------------
+this implementation of axios requires axios as object with methods and U need to mock with this pattern
+-----------------------
+
+
+1. in testing file use callback of jest.mock('library',()=>{ /* mock funtionality */}
+
+/------------------------- test.spec.js that mocks only get() method --------/
+
+jest.mock('axios', () => ({
+  get: jest.fn(() => {
+    return Promise.resolve({
+      data: {
+        records: [
+          {
+            title: 'title',
+            images: [],
+            century: '21',
+            division: 'general',
+          },
+          {
+            title: 'title',
+            images: [],
+            century: '21',
+            division: 'general',
+          },
+        ],
+      },
+    });
+  }),
+}));
+
+
+2.depending of the implementation call your mock axios (optional depends on the implementation)
+
+axios.get('/path')
+.then(()=>{
+  //your assertion
+})
+.catch(e=>trow new Error(e))
+
+
+/-------------------------/
+
+
+
+
+          </example>
+      </paragraph>
         </content>
     </chapter>
     <chapter>

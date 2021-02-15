@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)https://glebbahmutov.com/blog/configure-prettier-in-vscode/ -->
+<html class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  
+  <title>How to configure Prettier and VSCode | Better world by better software</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="You can configure JavaScript code auto-formatting with Prettier to work per-project. This allows you to get a consistent formatting without thinking or arguing about it. This blog post shows how to co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to configure Prettier and VSCode">
+<meta property="og:url" content="https://glebbahmutov.com/blog/configure-prettier-in-vscode/index.html">
+<meta property="og:site_name" content="Better world by better software">
+<meta property="og:description" content="You can configure JavaScript code auto-formatting with Prettier to work per-project. This allows you to get a consistent formatting without thinking or arguing about it. This blog post shows how to co">
+<meta property="og:locale">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/prettier-intellisense.gif">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/projectA.gif">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/projectB.gif">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/show-extension.png">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/prettier-not-enabled.png">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/save-enables-prettier.gif">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/prettier-tab.png">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/comma-deleted.gif">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/disable.png">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/save-without-formatting.png">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/format-toggle.png">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/require-prettier-config.png">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/const.gif">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/eslint-errors.png">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/eslint-prettier.png">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/eslint-fix.gif">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/use-eslint-to-format.gif">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/ts-eslint.png">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/ts-prettier.png">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/prettier-error.png">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/fix-ts.gif">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/cypress-error.png">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/format-css.gif">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/format-json.gif">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/format-json-6.gif">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/format-md.gif">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/async.png">
+<meta property="og:image" content="https://glebbahmutov.com/blog/images/prettier/prettier-in-gh-action.png">
+<meta property="article:published_time" content="2019-09-09T04:00:00.000Z">
+<meta property="article:modified_time" content="2020-05-15T16:35:27.801Z">
+<meta property="article:author" content="Gleb Bahmutov">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="markdown">
+<meta property="article:tag" content="tutorial">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://glebbahmutov.com/blog/images/prettier/prettier-intellisense.gif">
+<meta name="twitter:creator" content="@bahmutov">
+  
+    <link rel="alternative" href="https://glebbahmutov.com/blog/atom.xml" title="Better world by better software" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://glebbahmutov.com/favicon.png">
+  
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Source+Code+Pro" as="style">
+  
+<link rel="stylesheet" href="./How to configure Prettier and VSCode _ Better world by better software_files/style.css">
+
+  
+<!-- Google Analytics -->
+<script async="" src="./How to configure Prettier and VSCode _ Better world by better software_files/analytics.js"></script><script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-59999353-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  <!-- global digital climate strike -->
+  <!-- https://digital.globalclimatestrike.net/#website-assets -->
+  <script src="https://assets.digitalclimatestrike.net/widget.js" async=""></script>
+<meta name="generator" content="Hexo 5.2.0"><script type="text/javascript" async="" src="./How to configure Prettier and VSCode _ Better world by better software_files/embed.js"></script><style type="text/css">.fancybox-margin{margin-right:15px;}</style><script id="_carbonads_projs" type="text/javascript" src="./How to configure Prettier and VSCode _ Better world by better software_files/CKYI5K7U.json"></script><link rel="prefetch" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.c91042d40efe3b95890994e857d7bde7.css"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.9cdf86f4e27785c1f9f29a4ffb5ede34.js"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.c1c5342a5f0ac83c8baa69753c98266d.js"><link rel="prefetch" as="script" href="https://disqus.com/next/config.js"><script src="./How to configure Prettier and VSCode _ Better world by better software_files/alfie_v4.63f1ab6d6b9d5807dc0c94ef3fe0b851.js" async="" charset="UTF-8"></script></head>
+
+<body style="">
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-titles">
+      <div id="header-title" class="inner">
+        <h1 id="logo-wrap">
+          <a href="https://glebbahmutov.com/blog/index.html" id="logo">Better world by better software</a>
+        </h1>
+        <!--
+        
+        -->
+        <!-- <span class="no-mobile">Software advice from</span> -->
+        <h2 id="subtitle-wrap">
+          <span class="subtitle">
+            <a id="subtitle" href="https://glebbahmutov.com/">Gleb Bahmutov PhD</a>
+            <a id="nav-house-link" class="nav-icon" href="https://glebbahmutov.com/" title="Home"></a>
+            
+              <a id="nav-rss-link" class="nav-icon" href="https://glebbahmutov.com/blog/atom.xml" title="RSS Feed"></a>
+            
+            <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+            <div id="search-form-wrap">
+              <form action="https://google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://glebbahmutov.com/blog"></form>
+            </div>
+          </span>
+        </h2>
+
+      </div>
+    </div>
+    <div id="climate-crisis">
+      <h2>Our planet 🌏 is in danger</h2>
+      <h3>Act today: <a href="https://glebbahmutov.com/blog/climate-emergency/">what you can do</a></h3>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main" class="center-main"><article id="post-configure-prettier-in-vscode" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/" class="article-date">
+  <time datetime="2019-09-09T04:00:00.000Z" itemprop="datePublished">Sep 9 2019</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="https://glebbahmutov.com/blog/categories/products/">products</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      How to configure Prettier and VSCode
+    </h1>
+
+    <h2 class="article-title" itemprop="name">
+      How to set up Prettier, ESLint and VSCode per project and have your JavaScript auto-formatted without pulling your hair.
+    </h2>
+
+  
+
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>You can configure JavaScript code auto-formatting with Prettier to work per-project. This allows you to get a consistent formatting without thinking or arguing about it. This blog post shows how to configure Prettier to work from command line, from VSCode and from Git hooks.</p>
+<p>You can find the sample project with different Prettier settings configured per-subfolder at <a target="_blank" rel="noopener" href="https://github.com/bahmutov/prettier-config-example">bahmutov/prettier-config-example</a>.</p>
+<!-- toc -->
+<ul>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#why-prettier">Why Prettier?</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#setup">Setup</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#settings">Settings</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#vscode-setup">VSCode setup</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#format-files-from-cli">Format files from CLI</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#format-staged-files-on-commit">Format staged files on commit</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#catch-mis-formatted-files-on-ci">Catch mis-formatted files on CI</a><ul>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#using-stop-build">Using stop-build</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#using-prettier">Using Prettier</a></li>
+</ul>
+</li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#common-problems">Common problems</a><ul>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#nothing-happens-on-save">Nothing happens on save</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#code-formatting-is-wrong">Code formatting is wrong</a></li>
+</ul>
+</li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#tips">Tips</a><ul>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#ignoring-files">Ignoring files</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#saving-without-formatting">Saving without formatting</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#temporarily-disable-formatting">Temporarily disable formatting</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#only-format-configured-projects">Only format configured projects</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#ignore-parts-of-files">Ignore parts of files</a></li>
+</ul>
+</li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#use-eslint-with-prettier">Use Eslint with Prettier</a><ul>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#disable-style-rules-in-eslint">Disable style rules in ESLint</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#eslint-and-react">ESLint and React</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#integrate-eslint-in-vscode">Integrate ESLint in VSCode</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#run-prettier-from-eslint">Run Prettier from ESLint</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#vscode-eslint-prettier-setup">VSCode + ESLint + Prettier setup</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#vscode-eslint-prettier-typescript-setup">VSCode + ESLint + Prettier + TypeScript setup</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#use-prettier-eslint-cypress">Use Prettier + ESLint + Cypress</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#catch-exclusive-tests">Catch exclusive tests</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#format-other-languages-with-prettier">Format other languages with Prettier</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#format-json-files-with-prettier">Format JSON files with Prettier</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#use-custom-settings-overrides">Use custom settings overrides</a></li>
+</ul>
+</li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#common-eslint-problems">Common ESLint problems</a><ul>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#errors-shown-for-async-keyword">Errors shown for async keyword</a></li>
+</ul>
+</li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#chrome-extension">Chrome extension</a></li>
+<li><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#run-prettier-inside-github-action">Run Prettier inside GitHub Action</a></li>
+</ul>
+<!-- tocstop -->
+<h2><span id="why-prettier"><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#why-prettier" class="linkjuice">Why Prettier? <span class="link-symbol">#</span></a>
+</span></h2><p><a target="_blank" rel="noopener" href="https://prettier.io/">Prettier</a> reformats your JavaScript code consistently and (arguably) in way that is easy to read and understand. It takes whatever copy/pasted code snippets you put into your file and makes it look the same as the rest of the code. By using Prettier your team skips ALL disagreements about spacing, variable declarations, semi-colons, trailing commas, etc. The code just magically gets to the format you pick.</p>
+<p>You can use Prettier from command line, or from your code editor whenever you paste or save a file. I prefer to use two solutions described in this blog post:</p>
+<ul>
+<li>format the file from VSCode every time I save it</li>
+<li>format the changed files on Git commit before committing them</li>
+</ul>
+<p>Let me show you how to do both.</p>
+<h2><span id="setup"><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#setup" class="linkjuice">Setup <span class="link-symbol">#</span></a>
+</span></h2><p>When setting up Prettier it is important to configure it per-project. Not every project uses the same code style, thus it is important to respect the style of whatever project you are currently working in. The demo repo <a target="_blank" rel="noopener" href="https://github.com/bahmutov/prettier-config-example">bahmutov/prettier-config-example</a> has two subfolders, each with its distinct code style, enforced by Prettier. In reality, each of your repos will have its style; I am using subfolders in order to keep the example simple.</p>
+<p>I assume you are using NPM and have <code>package.json</code> file inside the repository. Install Prettier</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev --save-exact prettier</span><br></pre></td></tr></tbody></table></figure>
+<p>At the root of the project create the Prettier configuration file. In my example I have two subfolders, and there is a configuration file in each subfolder:</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">prettier-config-example/</span><br><span class="line">  projectA/</span><br><span class="line">    .prettierrc.json</span><br><span class="line">  projectB/</span><br><span class="line">    .prettierrc.json</span><br></pre></td></tr></tbody></table></figure>
+<p>I like using JSON configuration format so my code editor helps me. In fact, VSCode understands the Prettier configuration file format via the built-in <a href="https://glebbahmutov.com/blog/json-schema-for-the-win/">json schema</a>. So when I edit <code>projectA/.prettierrc.json</code> file, I get intelligent tooltips.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/prettier-intellisense.gif" title="Picking trailing comma setting" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/prettier-intellisense.gif" alt="Picking trailing comma setting"></a><span class="caption">Picking trailing comma setting</span></p>
+<h2><span id="settings"><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#settings" class="linkjuice">Settings <span class="link-symbol">#</span></a>
+</span></h2><p>Prettier tries to enforce the same code style without 100s of options, thus there are just a few settings you can change. Here are settings I am using in the first project to make it look "traditional" ES5</p>
+<figure class="highlight json"><figcaption><span>projectA/.prettierrc.json</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"trailingComma"</span>:<span class="string">"none"</span>,</span><br><span class="line">  <span class="attr">"tabWidth"</span>: <span class="number">4</span>,</span><br><span class="line">  <span class="attr">"semi"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"singleQuote"</span>: <span class="literal">false</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>The second project uses more modern style without semi-colons and with trailing commas.</p>
+<figure class="highlight json"><figcaption><span>projectB/.prettierrc.json</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"trailingComma"</span>: <span class="string">"all"</span>,</span><br><span class="line">  <span class="attr">"tabWidth"</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="attr">"semi"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"singleQuote"</span>: <span class="literal">true</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2><span id="vscode-setup"><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#vscode-setup" class="linkjuice">VSCode setup <span class="link-symbol">#</span></a>
+</span></h2><p>To use the Prettier we have just installed from VSCode we need to install the <a target="_blank" rel="noopener" href="https://github.com/prettier/prettier-vscode">Prettier VSCode extension</a>:</p>
+<ol>
+<li>Launch VS Code Quick Open (Ctrl+P)</li>
+<li>Run the following command</li>
+</ol>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ext install esbenp.prettier-vscode</span><br></pre></td></tr></tbody></table></figure>
+<p>Because you might have global settings related to code formatting, I prefer having in each repository a file with local workspace VSCode settings. I commit this file <code>.vscode/settings.json</code> to source control to make sure everyone uses the same extension to format the code.</p>
+<figure class="highlight json"><figcaption><span>.vscode/settings.json</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"editor.defaultFormatter"</span>: <span class="string">"esbenp.prettier-vscode"</span>,</span><br><span class="line">  <span class="attr">"editor.formatOnSave"</span>: <span class="literal">true</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>Now every time we save a JavaScript file, it will be formatted using Prettier automatically. Here is me formatting <code>projectA/index.js</code> file by saving it.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/projectA.gif" title="Prettier formats projectA/index.js" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/projectA.gif" alt="Prettier formats projectA/index.js"></a><span class="caption">Prettier formats projectA/index.js</span></p>
+<p>Notice the double quotes, semi-colons, etc - Prettier has applied the settings from <code>projectA/.prettierrc.json</code>. It also split long object across multiple lines to make it easier to read.</p>
+<p>The same JavaScript code in <code>projectB/index.js</code> gets formatted by Prettier using different local settings and ends up looking different.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/projectB.gif" title="Prettier formats projectB/index.js" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/projectB.gif" alt="Prettier formats projectB/index.js"></a><span class="caption">Prettier formats projectB/index.js</span></p>
+<p>Single quotes, no semi-colons, trailing commas.</p>
+<p><strong>Tip:</strong> I love formatting code on "Save", but I hate formatting code on "Paste" - because it always adds extra line breaks. So I highly recommend the following VSCode settings</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"editor.defaultFormatter"</span>: <span class="string">"esbenp.prettier-vscode"</span>,</span><br><span class="line">  <span class="attr">"editor.formatOnSave"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"editor.formatOnPaste"</span>: <span class="literal">false</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2><span id="format-files-from-cli"><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#format-files-from-cli" class="linkjuice">Format files from CLI <span class="link-symbol">#</span></a>
+</span></h2><p>Formatting every file as you save it is nice, but we can also format ALL source files at once using Prettier CLI. In the <code>package.json</code> add a script to format files matching the mask and to write them back to disk.</p>
+<figure class="highlight json"><figcaption><span>package.json</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"prettier-config-example"</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: {</span><br><span class="line">    <span class="attr">"format"</span>: <span class="string">"prettier --write 'projectA/*.js' 'projectB/*.js'"</span></span><br><span class="line">  },</span><br><span class="line">  <span class="attr">"devDependencies"</span>: {</span><br><span class="line">    <span class="attr">"prettier"</span>: <span class="string">"1.18.2"</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>Run this NPM script and the files will be formatted to follow the Prettier style.</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ npm run format</span><br><span class="line"></span><br><span class="line">&gt; prettier-config-example@1.0.0 format /Users/gleb/git/prettier-config-example</span><br><span class="line">&gt; prettier --write 'projectA/*.js' 'projectB/*.js'</span><br><span class="line"></span><br><span class="line">projectA/index.js 30ms</span><br><span class="line">projectB/index.js 10ms</span><br></pre></td></tr></tbody></table></figure>
+<p>If you want to format files with several extensions, list them using curly braces and commas. If you need to find all files in all subfolders, use <code>**</code> syntax. For example, to format all <code>.ts</code> and <code>.tsx</code> files in the <code>src</code> folder use:</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prettier --write 'src/**/*.{ts,tsx}'</span><br></pre></td></tr></tbody></table></figure>
+<h2><span id="format-staged-files-on-commit"><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#format-staged-files-on-commit" class="linkjuice">Format staged files on commit <span class="link-symbol">#</span></a>
+</span></h2><p>Whenever we work with files locally, we might accidentally commit them without proper styling. That's where Git hooks and formatting staged files comes in handy. To consistently format all files before committing and then commit changes, I recommend using <a target="_blank" rel="noopener" href="https://github.com/typicode/husky">husky</a> + <a target="_blank" rel="noopener" href="https://github.com/okonet/lint-staged">lint-staged</a> combination of tools.</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm i -D husky lint-staged</span></span><br><span class="line">+ husky@3.0.5</span><br><span class="line">+ lint-staged@9.2.5</span><br></pre></td></tr></tbody></table></figure>
+<p>Now configure pre-commit hook to run Prettier against staged JavaScript files. In the <code>package.json</code> set the following</p>
+<figure class="highlight json"><figcaption><span>package.json</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"devDependencies"</span>: {</span><br><span class="line">    <span class="attr">"husky"</span>: <span class="string">"3.0.5"</span>,</span><br><span class="line">    <span class="attr">"lint-staged"</span>: <span class="string">"9.2.5"</span>,</span><br><span class="line">    <span class="attr">"prettier"</span>: <span class="string">"1.18.2"</span></span><br><span class="line">  },</span><br><span class="line">  <span class="attr">"husky"</span>: {</span><br><span class="line">    <span class="attr">"hooks"</span>: {</span><br><span class="line">      <span class="attr">"pre-commit"</span>: <span class="string">"lint-staged"</span></span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  <span class="attr">"lint-staged"</span>: {</span><br><span class="line">    <span class="attr">"*.js"</span>: [<span class="string">"prettier --write"</span>, <span class="string">"git add"</span>]</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>See <a target="_blank" rel="noopener" href="https://github.com/okonet/lint-staged#reformatting-the-code">lint-staged code formatting documentation</a>.</p>
+<p>If you try to commit changed JavaScript files, they will automatically be formatted and re-staged, ensuring only pretty JavaScript code is committed. In the Git commit shortcut output below, the "Running tasks..." messages comes from the <code>lint-staged</code> tool.</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ g done "add husky and lint-staged"</span><br><span class="line">husky &gt; pre-commit (node v12.4.0)</span><br><span class="line">  ↓ Stashing changes... [skipped]</span><br><span class="line">    → No partially staged files found...</span><br><span class="line">  ✔ Running tasks...</span><br><span class="line">[master 583b92a] add husky and lint-staged</span><br><span class="line"> 2 files changed, 1513 insertions(+)</span><br></pre></td></tr></tbody></table></figure>
+<p>Of course, you can skip the Git pre-commit hook by committing with <code>-n</code> flag.</p>
+<p><strong>Update</strong> when using <code>husky@4</code> and <code>lint-staged@10</code> the transformed files are added to the commit automatically. For example to format JavaScript and Markdown files on commit:</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"husky"</span>: {</span><br><span class="line">    <span class="attr">"hooks"</span>: {</span><br><span class="line">      <span class="attr">"pre-commit"</span>: <span class="string">"lint-staged"</span></span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  <span class="attr">"lint-staged"</span>: {</span><br><span class="line">    <span class="attr">"*.{js,md}"</span>: [<span class="string">"prettier --write"</span>]</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2><span id="catch-mis-formatted-files-on-ci"><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#catch-mis-formatted-files-on-ci" class="linkjuice">Catch mis-formatted files on CI <span class="link-symbol">#</span></a>
+</span></h2><h3><span id="using-stop-build">Using stop-build</span></h3><p>You can really enforce the formatting before pushing code to the central repository by running Prettier on CI and then detecting any changed files. Just run <a target="_blank" rel="noopener" href="https://github.com/bahmutov/stop-build">stop-build</a> after running Prettier.</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">script:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">npm</span> <span class="string">run</span> <span class="string">format</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">npx</span> <span class="string">run</span> <span class="string">stop-build</span></span><br></pre></td></tr></tbody></table></figure>
+<p>If any of the source files were reformatted by Prettier, the <code>stop-only</code> will detect changed source files using Git information and will exit with an error. It will list the changed files, something like this:</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">⚠️ there are 2 changed files</span><br><span class="line">M projectA/index.js</span><br><span class="line">M projectB/index.js</span><br></pre></td></tr></tbody></table></figure>
+<h3><span id="using-prettier">Using Prettier</span></h3><p>Prettier has built-in command <a target="_blank" rel="noopener" href="https://prettier.io/docs/en/cli.html#check"><code>--check</code></a> that validates code files against formatting. Using it from a script in <code>package.json</code> file:</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"scripts"</span>: {</span><br><span class="line">    <span class="attr">"check"</span>: <span class="string">"prettier --check 'projectA/*.js' 'projectB/*.js'"</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>Then on CI we can call the script right after <code>npm install</code></p>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">script:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">npm</span> <span class="string">install</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">npx</span> <span class="string">run</span> <span class="string">check</span></span><br></pre></td></tr></tbody></table></figure>
+<p>Let's say one of the files has not been formatted.</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ npm run check</span><br><span class="line"></span><br><span class="line">&gt; prettier-config-example@1.0.0 check /git/prettier-config-example</span><br><span class="line">&gt; prettier --check 'projectA/*.js' 'projectB/*.js'</span><br><span class="line"></span><br><span class="line">Checking formatting...</span><br><span class="line">projectB/index.js</span><br><span class="line">Code style issues found in the above file(s). Forgot to run Prettier?</span><br></pre></td></tr></tbody></table></figure>
+<h2><span id="common-problems"><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#common-problems" class="linkjuice">Common problems <span class="link-symbol">#</span></a>
+</span></h2><h3><span id="nothing-happens-on-save">Nothing happens on save</span></h3><p>You are saving a file in VSCode ... and the code does not change. This could be due to three issues:</p>
+<ol>
+<li>Make sure local workspace settings have auto-format on save enabled. Open <code>.vscode/settings.json</code> file and confirm:<ul>
+<li>VSCode Prettier extension is configured as the default formatter.</li>
+<li>Formatting on save is enabled</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight json"><figcaption><span>.vscode/settings.json</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"editor.defaultFormatter"</span>: <span class="string">"esbenp.prettier-vscode"</span>,</span><br><span class="line">  <span class="attr">"editor.formatOnSave"</span>: <span class="literal">true</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ol start="2">
+<li>Prettier extension might be disabled by VSCode. Make sure the word "Prettier" appears on the Status Bar and has check mark symbol next to it. To check:<ul>
+<li>Right click on the Status Bar. Make sure the "Prettier" extension appears there is displayed.</li>
+</ul>
+</li>
+</ol>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/show-extension.png" title="Show Prettier extension status" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/show-extension.png" alt="Show Prettier extension status"></a><span class="caption">Show Prettier extension status</span></p>
+<ol start="3">
+<li>Make sure there is a checkmark next to the "Prettier" in the Status Bar. Sometimes after enabling the extension, it is loaded, but not enabled.</li>
+</ol>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/prettier-not-enabled.png" title="Prettier extension is disabled for some reason" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/prettier-not-enabled.png" alt="Prettier extension is disabled for some reason"></a><span class="caption">Prettier extension is disabled for some reason</span></p>
+<p>One thing I have noticed that sometimes saving a file enables Prettier if the <code>.vscode/settings.json</code> have the extension enabled for this workspace. For example in this animation I am saving the file with double quotes around a string, and magically the Prettier extension gets the check mark and does its job. Don't ask.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/save-enables-prettier.gif" title="Saving file enables Prettier and formats the code" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/save-enables-prettier.gif" alt="Saving file enables Prettier and formats the code"></a><span class="caption">Saving file enables Prettier and formats the code</span></p>
+<p>If you click on the "Prettier" extension word in the status bar, it should open the Prettier output tab. It shows what Prettier extension executes, and often shows the problem. For example, the screenshot below shows that Prettier did not run because the project does not have Prettier configuration file like <code>.prettierrc</code>.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/prettier-tab.png" title="Prettier extension tab" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/prettier-tab.png" alt="Prettier extension tab"></a><span class="caption">Prettier extension tab</span></p>
+<p>If everything else fails, quit VSCode and start it again.</p>
+<h3><span id="code-formatting-is-wrong">Code formatting is wrong</span></h3><p>Here is a little animation that shows a file being saved with Prettier setting "trailingComma: true", yet the comma gets deleted somehow.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/comma-deleted.gif" title="Saving file removes trailing comma" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/comma-deleted.gif" alt="Saving file removes trailing comma"></a><span class="caption">Saving file removes trailing comma</span></p>
+<p>Check if there are OTHER code formatting extensions installed and disable them for this workspace. For some reason, VSCode can use globally installed extension overwriting local setting. Don't ask. In my case, I had "Prettier-Standard" extension enabled globally. After disabling the "Prettier-Standard" for the current workspace, Prettier extension started working as expected.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/disable.png" title="Disabling Prettier-Standard extension" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/disable.png" alt="Disabling Prettier-Standard extension"></a><span class="caption">Disabling Prettier-Standard extension</span></p>
+<p>Why can't VSCode save the list of disabled extensions in <code>.vscode/settings.json</code>?</p>
+<h2><span id="tips"><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#tips" class="linkjuice">Tips <span class="link-symbol">#</span></a>
+</span></h2><h3><span id="ignoring-files">Ignoring files</span></h3><p>Sometimes you have files that should not be formatted: auto-generated source files, saved snapshots, etc. You can list file masks to ignore in file <code>.prettierignore</code>. For example, to ignore all JavaScript files in <code>snapshots</code> folders use</p>
+<figure class="highlight text"><figcaption><span>.prettierignore</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># do not run Prettier against JavaScript files</span><br><span class="line"># in "snapshots/" folders</span><br><span class="line">**/snapshots/*.js</span><br></pre></td></tr></tbody></table></figure>
+<h3><span id="saving-without-formatting">Saving without formatting</span></h3><p>If you ever work in someone else's project, please respect their formatting. In order to avoid reformatting the entire file when you save it from VSCode, save it without formatting. Run "Command + Shift + P" to open the Command Palette and type "save without" until you see "File: Save without Formatting" command - use that.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/save-without-formatting.png" title="Save without formatting" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/save-without-formatting.png" alt="Save without formatting"></a><span class="caption">Save without formatting</span></p>
+<h3><span id="temporarily-disable-formatting">Temporarily disable formatting</span></h3><p>There is also an extension that temporarily disables format on save feature called <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=tombonnike.vscode-status-bar-format-toggle">Formatting Toggle</a>. Install it in your VSCode and whenever you want to temporarily disable Prettier on save, click on the "Formatting" toggle in the status bar.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/format-toggle.png" title="Save without formatting" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/format-toggle.png" alt="Save without formatting"></a><span class="caption">Save without formatting</span></p>
+<h3><span id="only-format-configured-projects">Only format configured projects</span></h3><p>In the VSCode global settings, set this option to only allow running Prettier in the folders with Prettier config file.</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Prettier: Require Config</span><br><span class="line">✅ Require a prettier configuration file to format</span><br></pre></td></tr></tbody></table></figure>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/require-prettier-config.png" title="User global setting to require configuration file" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/require-prettier-config.png" alt="User global setting to require configuration file"></a><span class="caption">User global setting to require configuration file</span></p>
+<p>I definitely recommend setting this global option to avoid accidentally changing how the code looks in the projects that do not want to use your or any Prettier settings.</p>
+<h3><span id="ignore-parts-of-files">Ignore parts of files</span></h3><p>I love using <a target="_blank" rel="noopener" href="https://prettier.io/docs/en/ignore.html">range ignore</a> to disable formatting parts of file. For example, to stop Prettier from reformatting Markdown tables use:</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- prettier-ignore-start --&gt;</span><br><span class="line">name | job</span><br><span class="line">--- | ---</span><br><span class="line">Joe | student</span><br><span class="line">Mary | therapist</span><br><span class="line">&lt;!-- prettier-ignore-end --&gt;</span><br></pre></td></tr></tbody></table></figure>
+<p>In code, you can tell Prettier to ignore the next AST node by adding <code>// prettier-ignore</code> comment. For example, in the next test we want to show the array input as a Tic-Tac-Toe board</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">it(<span class="string">'returns O for second row of O'</span>, <span class="function">() =&gt;</span> {</span><br><span class="line">  <span class="comment">// preserve our Tic-Tac-Toe board formatting</span></span><br><span class="line">  <span class="comment">// prettier-ignore</span></span><br><span class="line">  <span class="keyword">const</span> squares = [</span><br><span class="line">    <span class="string">'X'</span>, <span class="string">'X'</span>, <span class="literal">null</span>,</span><br><span class="line">    <span class="string">'O'</span>, <span class="string">'O'</span>, <span class="string">'O'</span>,</span><br><span class="line">    <span class="literal">null</span>, <span class="literal">null</span>, <span class="string">'X'</span></span><br><span class="line">  ]</span><br><span class="line">  <span class="keyword">const</span> winner = calculateWinner(squares)</span><br><span class="line">  expect(winner).to.equal(<span class="string">'O'</span>)</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+<h2><span id="use-eslint-with-prettier"><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#use-eslint-with-prettier" class="linkjuice">Use Eslint with Prettier <span class="link-symbol">#</span></a>
+</span></h2><p>Prettier reformats JavaScript code to follow certain style, it does not check the meaning of the code. For example, Prettier happily reformats the following wrong code.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/const.gif" title="Prettier makes this wrong code look pretty" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/const.gif" alt="Prettier makes this wrong code look pretty"></a><span class="caption">Prettier makes this wrong code look pretty</span></p>
+<p>Static linters, like <a target="_blank" rel="noopener" href="https://eslint.org/">ESLint</a> can catch the assignment to a constant variable, so we need both:</p>
+<ul>
+<li>Prettier will reformat the code to be consistent in style</li>
+<li>ESLint will analyze the meaning of code and catch potential problems</li>
+</ul>
+<h3><span id="disable-style-rules-in-eslint">Disable style rules in ESLint</span></h3><p>ESLint runs a long list of rules against the code, and some of these rules are stylistic, and can conflict with Prettier's style. Thus we need to configure ESLint to skip those rules. This configuration is in module <a target="_blank" rel="noopener" href="https://prettier.io/docs/en/integrating-with-linters.html#eslint">eslint-config-prettier</a>. Install it</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm i -D eslint eslint-config-prettier</span></span><br></pre></td></tr></tbody></table></figure>
+<p>and can be added to your project <code>.eslintrc.json</code> file. ESLint will not run without a valid configuration file.</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"env"</span>: {</span><br><span class="line">    <span class="attr">"es6"</span>: <span class="literal">true</span></span><br><span class="line">  },</span><br><span class="line">  <span class="attr">"extends"</span>: [<span class="string">"eslint:recommended"</span>, <span class="string">"prettier"</span>]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>Now when you run ESLint against this file</p>
+<figure class="highlight js"><figcaption><span>projectC/index.js</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name = <span class="string">'Joe'</span>; name = <span class="string">'Mary'</span></span><br></pre></td></tr></tbody></table></figure>
+<p>Then ESLint will catch the <code>const</code> assignment error; it will also catch that the variable <code>name</code> is never used after assignment.</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npx eslint projectC/index.js</span></span><br><span class="line"></span><br><span class="line">/prettier-config-example/projectC/index.js</span><br><span class="line">  1:7   error  'name' is assigned a value but never used  no-unused-vars</span><br><span class="line">  1:21  error  'name' is constant                         no-const-assign</span><br><span class="line"></span><br><span class="line">✖ 2 problems (2 errors, 0 warnings)</span><br></pre></td></tr></tbody></table></figure>
+<h3><span id="eslint-and-react">ESLint and React</span></h3><p>If you want to check React code that uses JSX, <code>import / export</code> keywords, then install a plugin <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-plugin-react">eslint-plugin-react</a></p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npx i -D eslint-plugin-react</span></span><br></pre></td></tr></tbody></table></figure>
+<p>And configure <code>.eslintrc.json</code></p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"parserOptions"</span>: {</span><br><span class="line">    <span class="attr">"ecmaVersion"</span>: <span class="number">6</span>,</span><br><span class="line">    <span class="attr">"sourceType"</span>: <span class="string">"module"</span></span><br><span class="line">  },</span><br><span class="line">  <span class="attr">"env"</span>: {</span><br><span class="line">    <span class="attr">"browser"</span>: <span class="literal">true</span></span><br><span class="line">  },</span><br><span class="line">  <span class="attr">"extends"</span>: [<span class="string">"eslint:recommended"</span>, <span class="string">"plugin:react/recommended"</span>]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3><span id="integrate-eslint-in-vscode">Integrate ESLint in VSCode</span></h3><p>Since we are using VSCode, it makes sense to install <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint VSCode extension</a> called <code>dbaeumer.vscode-eslint</code></p>
+<p>Open Command Pallette with Command + P</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ext install dbaeumer.vscode-eslint</span><br></pre></td></tr></tbody></table></figure>
+<p>Enable this extension in VSCode workspace settings</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  "editor.defaultFormatter": "dbaeumer.vscode-eslint",</span><br><span class="line">  "editor.formatOnSave": true,</span><br><span class="line">  "eslint.enable": true</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>JavaScript files should now show ESLint errors right inside VSCode editor.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/eslint-errors.png" title="ESLint errors" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/eslint-errors.png" alt="ESLint errors"></a><span class="caption">ESLint errors</span></p>
+<p>You can see these errors for yourself by opening <code>projectC/index.js</code> in VSCode from the <a target="_blank" rel="noopener" href="https://github.com/bahmutov/prettier-config-example">example repo</a>.</p>
+<h3><span id="run-prettier-from-eslint">Run Prettier from ESLint</span></h3><p>Since ESLint can detect and fix many of the errors it detects automatically, let's tell ESLint to run Prettier too. Here is the <a target="_blank" rel="noopener" href="https://prettier.io/docs/en/integrating-with-linters.html#recommended-configuration">recommended setup</a></p>
+<p>Install ESLint Prettier config and plugin</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm i -D eslint-config-prettier eslint-plugin-prettier</span></span><br></pre></td></tr></tbody></table></figure>
+<p>Point ESLint at the recommended settings which include Prettier styles</p>
+<figure class="highlight json"><figcaption><span>projectD/.eslintrc.json</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"env"</span>: {</span><br><span class="line">    <span class="attr">"node"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"es6"</span>: <span class="literal">true</span></span><br><span class="line">  },</span><br><span class="line">  <span class="attr">"extends"</span>: [<span class="string">"eslint:recommended"</span>, <span class="string">"plugin:prettier/recommended"</span>],</span><br><span class="line">  <span class="attr">"rules"</span>: {</span><br><span class="line">    <span class="attr">"no-console"</span>: <span class="string">"off"</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>Notice in the screenshot below how ESLint warnings in VSCode editor include style errors from Prettier.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/eslint-prettier.png" title="ESLint shows Prettier errors" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/eslint-prettier.png" alt="ESLint shows Prettier errors"></a><span class="caption">ESLint shows Prettier errors</span></p>
+<p>If we run ESLint with <code>--fix</code> flag, it will use Prettier to auto format code, solving both stylistic and semantic problems.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/eslint-fix.gif" title="ESLint with Prettier fixes the code formatting" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/eslint-fix.gif" alt="ESLint with Prettier fixes the code formatting"></a><span class="caption">ESLint with Prettier fixes the code formatting</span></p>
+<p>If you decide to use ESLint with Prettier rules and have configured <code>husky</code> to run <code>lint-staged</code>, point it at <code>eslint --fix</code> instead of <code>prettier --write</code>.</p>
+<h3><span id="vscode-eslint-prettier-setup">VSCode + ESLint + Prettier setup</span></h3><p>Let's configure VSCode to use ESLint to auto-fix found issues, including Prettier. The workspace settings use <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint"><code>dbaeumer.vscode-eslint</code></a>.</p>
+<p><strong>plugin v1 version (old)</strong></p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"editor.defaultFormatter"</span>: <span class="string">"dbaeumer.vscode-eslint"</span>,</span><br><span class="line">  <span class="attr">"editor.formatOnSave"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"eslint.enable"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"eslint.alwaysShowStatus"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"eslint.autoFixOnSave"</span>: <span class="literal">true</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>plugin v2 version (current)</strong></p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"editor.defaultFormatter"</span>: <span class="string">"dbaeumer.vscode-eslint"</span>,</span><br><span class="line">  <span class="attr">"editor.formatOnSave"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"eslint.enable"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"eslint.alwaysShowStatus"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"editor.codeActionsOnSave"</span>: {</span><br><span class="line">    <span class="attr">"source.fixAll.eslint"</span>: <span class="literal">true</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>The animation shows how saving the file fixes both style and lint problems.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/use-eslint-to-format.gif" title="Using ESLint to auto-format and auto-fix issues on save" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/use-eslint-to-format.gif" alt="Using ESLint to auto-format and auto-fix issues on save"></a><span class="caption">Using ESLint to auto-format and auto-fix issues on save</span></p>
+<h3><span id="vscode-eslint-prettier-typescript-setup">VSCode + ESLint + Prettier + TypeScript setup</span></h3><p>ESLint can lint TypeScript files through <a target="_blank" rel="noopener" href="https://github.com/typescript-eslint/typescript-eslint">typescript-eslint</a>, and <a target="_blank" rel="noopener" href="https://github.com/prettier/prettier/issues/13">Prettier can format TypeScript code</a>. Let's set it up.</p>
+<p>First, if you have previous installed <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=eg2.tslint">TSLint extension <code>vscode-tslint</code></a> for VSCode, uninstall it - let ESLint do everything.</p>
+<p>Second, install a new parser and plugin modules</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm i -D @typescript-eslint/parser @typescript-eslint/eslint-plugin</span></span><br><span class="line">+ @typescript-eslint/parser@2.2.0</span><br><span class="line">+ @typescript-eslint/eslint-plugin@2.2.0</span><br><span class="line">updated 2 packages and audited 576 packages in 2.42s</span><br><span class="line">found 0 vulnerabilities</span><br></pre></td></tr></tbody></table></figure>
+<p>Then set the VSCode workspace settings to lint TypeScript files</p>
+<figure class="highlight json"><figcaption><span>.vscode/settings.json</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"editor.defaultFormatter"</span>: <span class="string">"dbaeumer.vscode-eslint"</span>,</span><br><span class="line">  <span class="attr">"editor.formatOnSave"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"eslint.enable"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"eslint.alwaysShowStatus"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"eslint.autoFixOnSave"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"eslint.validate"</span>: [</span><br><span class="line">    <span class="string">"javascript"</span>,</span><br><span class="line">    <span class="string">"typescript"</span></span><br><span class="line">  ]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>Set the ESLint options. Parsing files will be done using <a target="_blank" rel="noopener" href="https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/parser">@typescript-eslint/parser</a>, and we need <a target="_blank" rel="noopener" href="https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin">@typescript-eslint</a> plugin.</p>
+<figure class="highlight json"><figcaption><span>.eslintrc.json</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"parser"</span>: <span class="string">"@typescript-eslint/parser"</span>,</span><br><span class="line">  <span class="attr">"plugins"</span>: [<span class="string">"@typescript-eslint"</span>],</span><br><span class="line">  <span class="attr">"extends"</span>: [</span><br><span class="line">    <span class="string">"eslint:recommended"</span>,</span><br><span class="line">    <span class="string">"plugin:@typescript-eslint/eslint-recommended"</span>,</span><br><span class="line">    <span class="string">"plugin:@typescript-eslint/recommended"</span>,</span><br><span class="line">    <span class="string">"plugin:prettier/recommended"</span>,</span><br><span class="line">    <span class="string">"prettier/@typescript-eslint"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"rules"</span>: {</span><br><span class="line">    <span class="attr">"no-var"</span>: <span class="string">"error"</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>And now you should see ESLint + Prettier errors and warnings in VSCode</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/ts-eslint.png" title="ESLint error - no vars allowed" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/ts-eslint.png" alt="ESLint error - no vars allowed"></a><span class="caption">ESLint error - no vars allowed</span></p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/ts-prettier.png" title="Style error - no semi-colons allowed" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/ts-prettier.png" alt="Style error - no semi-colons allowed"></a><span class="caption">Style error - no semi-colons allowed</span></p>
+<p><strong>Note:</strong> there is a bug in VSCode + ESLint extension where Prettier is not found. If you open Prettier console you can see the error, there is an <a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode-eslint/issues/696">open issue</a></p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/prettier-error.png" title="Prettier cannot fix the style automatically" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/prettier-error.png" alt="Prettier cannot fix the style automatically"></a><span class="caption">Prettier cannot fix the style automatically</span></p>
+<p>So we see the lint and style errors, yet cannot reformat the code automatically on save. To work around this issue, use NPM script command.</p>
+<figure class="highlight json"><figcaption><span>package.json</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"scripts"</span>: {</span><br><span class="line">    <span class="attr">"fix-ts"</span>: <span class="string">"eslint --fix 'project-with-typescript/*.ts'"</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>Run this command and it should reformat the TS files and fix most ESLint issues.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/fix-ts.gif" title="Fixing TypeScript files" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/fix-ts.gif" alt="Fixing TypeScript files"></a><span class="caption">Fixing TypeScript files</span></p>
+<h3><span id="use-prettier-eslint-cypress">Use Prettier + ESLint + Cypress</span></h3><p>One final touch. If you write <a target="_blank" rel="noopener" href="https://www.cypress.io/">Cypress</a> end-to-end tests, there is an official <a target="_blank" rel="noopener" href="https://github.com/cypress-io/eslint-plugin-cypress">cypress-io/eslint-plugin-cypress</a> plugin that can catch some common test mistakes. You can find an example "test" in <code>project-with-Cypress/index.js</code> file.</p>
+<p>First, install the plugin</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm i -D eslint-plugin-cypress</span></span><br></pre></td></tr></tbody></table></figure>
+<p>Then extend ESLint settings</p>
+<figure class="highlight json"><figcaption><span>project-with-Cypress/.eslintrc.json</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"env"</span>: {</span><br><span class="line">    <span class="attr">"cypress/globals"</span>: <span class="literal">true</span></span><br><span class="line">  },</span><br><span class="line">  <span class="attr">"extends"</span>: [</span><br><span class="line">    <span class="string">"eslint:recommended"</span>,</span><br><span class="line">    <span class="string">"plugin:prettier/recommended"</span>,</span><br><span class="line">    <span class="string">"plugin:cypress/recommended"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"plugins"</span>: [<span class="string">"cypress"</span>]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>Let's say your test tries to get back an element using <a target="_blank" rel="noopener" href="https://on.cypress.io/get"><code>cy.get</code></a> command.</p>
+<figure class="highlight js"><figcaption><span>project-with-Cypress/index.js</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// typical Cypress test</span></span><br><span class="line">it(<span class="string">'loads todos'</span>, <span class="function">() =&gt;</span> {</span><br><span class="line">  <span class="comment">// this is wrong - Cypress commands are asynchronous</span></span><br><span class="line">  <span class="comment">// you cannot get element back from cy.get</span></span><br><span class="line">  <span class="comment">// see <a class="vglnk" href="https://on.cypress.io/get" rel="nofollow"><span>https</span><span>://</span><span>on</span><span>.</span><span>cypress</span><span>.</span><span>io</span><span>/</span><span>get</span></a></span></span><br><span class="line">  <span class="keyword">const</span> myApp = cy.get(<span class="string">'#my-app'</span>)</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+<p>This WON'T work - <code>cy.get</code> does not return an element, like a Promise, the found element will be passed down the command chain. Notice how ESLint shows an error if you try to assign the value of the <code>cy.get</code> command.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/cypress-error.png" title="ESLint shows Cypress error" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/cypress-error.png" alt="ESLint shows Cypress error"></a><span class="caption">ESLint shows Cypress error</span></p>
+<h3><span id="catch-exclusive-tests">Catch exclusive tests</span></h3><p>If you are writing Cypress or Mocha tests, you might accidentally leave <code>it.only</code> or <code>describe.only</code> exclusive tests. The build pipeline will be forever green giving you a false sense of confidence. You can catch exclusive tests using <a target="_blank" rel="noopener" href="https://github.com/lo1tuma/eslint-plugin-mocha">eslint-plugin-mocha</a>.</p>
+<p>See example in subfolder 'project-with-mocha' of the <a target="_blank" rel="noopener" href="https://github.com/bahmutov/prettier-config-example">demo repo</a>.</p>
+<p>First, let's use the Mocha plugin and set the environment and globals.</p>
+<figure class="highlight json"><figcaption><span>.eslintrc.json</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"env"</span>: {</span><br><span class="line">    <span class="attr">"es6"</span>: <span class="literal">true</span></span><br><span class="line">  },</span><br><span class="line">  <span class="attr">"extends"</span>: [</span><br><span class="line">    <span class="string">"eslint:recommended"</span>,</span><br><span class="line">    <span class="string">"plugin:prettier/recommended"</span>,</span><br><span class="line">    <span class="string">"plugin:mocha/recommended"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"plugins"</span>: [<span class="string">"mocha"</span>],</span><br><span class="line">  <span class="attr">"globals"</span>: {</span><br><span class="line">    <span class="attr">"describe"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"it"</span>: <span class="literal">true</span></span><br><span class="line">  },</span><br><span class="line">  <span class="attr">"rules"</span>: {</span><br><span class="line">    <span class="attr">"mocha/no-mocha-arrows"</span>: <span class="string">"off"</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>Second, let's try linting a spec file with an exclusive test</p>
+<figure class="highlight js"><figcaption><span>spec.js</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="string">'Mocha tests'</span>, <span class="function">() =&gt;</span> {</span><br><span class="line">  it(<span class="string">'has a test'</span>, <span class="function">() =&gt;</span> {</span><br><span class="line">    expect(<span class="number">1</span>).to.equal(<span class="number">1</span>)</span><br><span class="line">  })</span><br><span class="line"></span><br><span class="line">  it.only(<span class="string">'has another test'</span>, <span class="function">() =&gt;</span> {</span><br><span class="line">    expect(<span class="number">2</span>).to.equal(<span class="number">2</span>)</span><br><span class="line">  })</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ../node_modules/.bin/eslint .</span></span><br><span class="line"></span><br><span class="line">/Users/gleb/git/prettier-config-example/project-with-mocha/spec.js</span><br><span class="line">  8:6  warning  Unexpected exclusive mocha test  mocha/no-exclusive-tests</span><br><span class="line"></span><br><span class="line">✖ 1 problem (0 errors, 1 warning)</span><br></pre></td></tr></tbody></table></figure>
+<p>Nice, by default the <code>mocha/no-exclusive-tests</code> rules gives a warning. I recommend running lint step in pre-commit hook, where a warning is enough. From the pre-push Git hook I recommend making this rule an error.</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ../node_modules/.bin/eslint . --rule <span class="string">'mocha/no-exclusive-tests: error'</span></span></span><br><span class="line"></span><br><span class="line">/Users/gleb/git/prettier-config-example/project-with-mocha/spec.js</span><br><span class="line">  8:6  error  Unexpected exclusive mocha test  mocha/no-exclusive-tests</span><br><span class="line"></span><br><span class="line">✖ 1 problem (1 error, 0 warnings)</span><br></pre></td></tr></tbody></table></figure>
+<h3><span id="format-other-languages-with-prettier">Format other languages with Prettier</span></h3><p>Prettier can format many languages: JavaScript, JSON, Markdown, HTML, CSS, etc. Here is formatting CSS for example.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/format-css.gif" title="Format CSS file using Prettier" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/format-css.gif" alt="Format CSS file using Prettier"></a><span class="caption">Format CSS file using Prettier</span></p>
+<h3><span id="format-json-files-with-prettier">Format JSON files with Prettier</span></h3><p>You can configure Prettier and its VSCode extension to format your JSON files. Since there is already a default JSON formatter built into VSCode, you need to tell VSCode to specifically use <code>esbenp.prettier-vscode</code> to format JSON files. Here is a sample project settings file.</p>
+<figure class="highlight json"><figcaption><span>.vscode/settings.json</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"editor.defaultFormatter"</span>: <span class="string">"esbenp.prettier-vscode"</span>,</span><br><span class="line">  <span class="attr">"[json]"</span>: {</span><br><span class="line">    <span class="attr">"editor.defaultFormatter"</span>: <span class="string">"esbenp.prettier-vscode"</span></span><br><span class="line">  },</span><br><span class="line">  <span class="attr">"editor.formatOnSave"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"json.format.enable"</span>: <span class="literal">false</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/format-json.gif" title="Format JSON files using Prettier" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/format-json.gif" alt="Format JSON files using Prettier"></a><span class="caption">Format JSON files using Prettier</span></p>
+<h3><span id="use-custom-settings-overrides">Use custom settings overrides</span></h3><p>Here is a nice feature - you can set custom Prettier settings for some files. For example, we can use 2 spaces to indent by default, but 4 spaces to indent code blocks inside Markdown files, and 6 spaces to indent JSON files. Just because.</p>
+<figure class="highlight json"><figcaption><span>.prettierrc.json</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"trailingComma"</span>: <span class="string">"all"</span>,</span><br><span class="line">  <span class="attr">"tabWidth"</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="attr">"semi"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"singleQuote"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"overrides"</span>: [</span><br><span class="line">    {</span><br><span class="line">      <span class="attr">"files"</span>: <span class="string">"*.md"</span>,</span><br><span class="line">      <span class="attr">"options"</span>: {</span><br><span class="line">        <span class="attr">"tabWidth"</span>: <span class="number">4</span></span><br><span class="line">      }</span><br><span class="line">    },</span><br><span class="line">    {</span><br><span class="line">      <span class="attr">"files"</span>: <span class="string">"*.json"</span>,</span><br><span class="line">      <span class="attr">"options"</span>: {</span><br><span class="line">        <span class="attr">"tabWidth"</span>: <span class="number">6</span></span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  ]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>Let's save a JSON file.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/format-json-6.gif" title="Format JSON files using Prettier with overridden settings" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/format-json-6.gif" alt="Format JSON files using Prettier with overridden settings"></a><span class="caption">Format JSON files using Prettier with overridden settings</span></p>
+<p>And here is saving a Markdown with a code block - which gets automatically formatted using Prettier with 4 spaces per tab.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/format-md.gif" title="Format code blocks inside Markdown files" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/format-md.gif" alt="Format code blocks inside Markdown files"></a><span class="caption">Format code blocks inside Markdown files</span></p>
+<h2><span id="common-eslint-problems"><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#common-eslint-problems" class="linkjuice">Common ESLint problems <span class="link-symbol">#</span></a>
+</span></h2><h3><span id="errors-shown-for-async-keyword">Errors shown for async keyword</span></h3><p>Sometimes ESLint reports a problem around <code>async</code> keyword.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/async.png" title="Misleading error after async keyword" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/async.png" alt="Misleading error after async keyword"></a><span class="caption">Misleading error after async keyword</span></p>
+<p>ESLint's parser does not understand that you are trying to use ES2017 syntax. Set the parser option in <code>.eslintrc.json</code> file to handle the <code>async / await</code> syntax.</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"env"</span>: {</span><br><span class="line">    <span class="attr">"es6"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"node"</span>: <span class="literal">true</span></span><br><span class="line">  },</span><br><span class="line">  <span class="attr">"parserOptions"</span>: {</span><br><span class="line">    <span class="attr">"ecmaVersion"</span>: <span class="number">2017</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2><span id="chrome-extension"><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#chrome-extension" class="linkjuice">Chrome extension <span class="link-symbol">#</span></a>
+</span></h2><p>There is now Chrome <a target="_blank" rel="noopener" href="https://github.com/prettier/prettier-chrome-extension">Prettier extension</a> that can format code blocks in text areas. Seems for now it is limited to StackOverflow and GitHub.</p>
+<h2><span id="run-prettier-inside-github-action"><a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#run-prettier-inside-github-action" class="linkjuice">Run Prettier inside GitHub Action <span class="link-symbol">#</span></a>
+</span></h2><p>GitHub Actions are now generally available - and they can do lots of interesting things, including running Prettier on every push and if there are any changes, committing the code and pushing it to the repo. In essence, they are doing the hard work for you! Read <a href="https://glebbahmutov.com/blog/trying-github-actions/">Trying GitHub Actions</a> blog post for full details, here is the relevant <a target="_blank" rel="noopener" href="https://github.com/bahmutov/gh-action-with-prettier/blob/master/.github/workflows/ci.yml">CI YML file</a> from <a target="_blank" rel="noopener" href="https://github.com/bahmutov/gh-action-with-prettier">bahmutov/gh-action-with-prettier</a> repo.</p>
+<figure class="highlight yml"><figcaption><span>.github/workflows/ci.yml</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Prettier</span></span><br><span class="line"><span class="attr">on:</span> [<span class="string">push</span>]</span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">Prettier</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v1</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">bahmutov/npm-install@v1</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">npm</span> <span class="string">run</span> <span class="string">format</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">git</span> <span class="string">status</span></span><br><span class="line">      <span class="comment"># commit any changed files</span></span><br><span class="line">      <span class="comment"># <a class="vglnk" href="https://github.com/mikeal/publish-to-github-action" rel="nofollow"><span>https</span><span>://</span><span>github</span><span>.</span><span>com</span><span>/</span><span>mikeal</span><span>/</span><span>publish</span><span>-</span><span>to</span><span>-</span><span>github</span><span>-</span><span>action</span></a></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">mikeal/publish-to-github-action@master</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="comment"># github token is automatically injected by GH Action</span></span><br><span class="line">          <span class="attr">GITHUB_TOKEN:</span> <span class="string">${{</span> <span class="string">secrets.GITHUB_TOKEN</span> <span class="string">}}</span></span><br></pre></td></tr></tbody></table></figure>
+<p>Beautiful, and on every push, if there are any format changes, the code gets updated and pushed, which you can see from the list of commits.</p>
+<p><a href="./How to configure Prettier and VSCode _ Better world by better software_files/prettier-in-gh-action.png" title="Prettier inside GitHub Action fixing code" class="fancybox" rel="article0"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/prettier-in-gh-action.png" alt="Prettier inside GitHub Action fixing code"></a><span class="caption">Prettier inside GitHub Action fixing code</span></p>
+
+      
+    </div>
+
+    
+      <footer class="article-footer personal-links">
+  Follow Gleb Bahmutov <a target="_blank" rel="noopener" href="https://twitter.com/bahmutov">@bahmutov</a>,
+  see his projects at <a href="https://glebbahmutov.com/">glebbahmutov.com</a>
+</footer>
+<script src="./How to configure Prettier and VSCode _ Better world by better software_files/linkjuice.js"></script>
+<script>
+function contentFn (node, icon) {
+  const s = '<a href="#' + node.id + '" class="linkjuice">' +
+    node.innerHTML + ' ' + icon + '</a>\n'
+  return s
+}
+linkjuice.init('.article-entry', {
+  selectors: ['h2 span'],
+  icon: '<span class="link-symbol">#</span>',
+  contentFn: contentFn
+});
+</script>
+
+    
+
+    <footer class="article-footer">
+      <a data-url="https://glebbahmutov.com/blog/configure-prettier-in-vscode/" data-id="ckh57ltjd01jli2fj327o2hj0" class="article-share-link">Share</a>
+      
+        <a href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://glebbahmutov.com/blog/tags/javascript/" rel="tag">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://glebbahmutov.com/blog/tags/markdown/" rel="tag">markdown</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://glebbahmutov.com/blog/tags/tutorial/" rel="tag">tutorial</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="https://glebbahmutov.com/blog/visual-diffing-for-CLI-apps/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Visual diffing flow for your pretty CLI applications
+        
+      </div>
+    </a>
+  
+  
+    <a href="https://glebbahmutov.com/blog/cypress-using-child-window/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Cypress using child window</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread"><iframe id="dsq-app7394" name="dsq-app7394" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" sandbox="allow-forms allow-popups allow-same-origin allow-scripts" width="100%" src="./How to configure Prettier and VSCode _ Better world by better software_files/saved_resource.html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 586px !important;"></iframe><iframe id="dsq-app7391" name="dsq-app7391" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./How to configure Prettier and VSCode _ Better world by better software_files/saved_resource(1).html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 2501px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe><iframe id="dsq-app7396" name="dsq-app7396" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" sandbox="allow-forms allow-popups allow-same-origin allow-scripts" width="100%" src="./How to configure Prettier and VSCode _ Better world by better software_files/saved_resource(2).html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 303px !important;"></iframe></div>
+</section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <style>
+#carbonads {
+  display: block;
+  overflow: hidden;
+  font-size: 11px;
+  font-family: Verdana, "Helvetica Neue", Helvetica, sans-serif;
+  line-height: 1.5;
+}
+
+#carbonads a {
+  color: #258fb8;
+  text-decoration: none;
+}
+
+#carbonads a:hover {
+  text-decoration: underline;
+}
+
+#carbonads span {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.carbon-img {
+  float: left;
+  margin-right: 1em;
+}
+
+.carbon-img img { display: block; }
+
+.carbon-text {
+  display: block;
+  float: left;
+  text-align: left;
+  margin-top: 0.5em;
+}
+@media screen and (min-width: 1024px) {
+  .carbon-text {
+    max-width: calc(100% - 130px - 1em);
+  }
+}
+
+.carbon-poweredby {
+  /*position: absolute;
+  right: 0;
+  bottom: 0;*/
+  float: right;
+  display: block;
+  font-size: 11px;
+}
+</style>
+<div class="widget-wrap">
+  <div class="widget-title">&nbsp;</div>
+  <div class="widget">
+    <!-- Carbon Ads -->
+    <script async="" type="text/javascript" src="./How to configure Prettier and VSCode _ Better world by better software_files/carbon.js" id="_carbonads_js"></script><div id="carbonads"><span><span class="carbon-wrap"><a href="https://srv.carbonads.net/ads/click/x/GTND42JECEADT5QECTYLYKQNCTBDC5QNCEAIVZ3JCYYDV23LCEYI453KCWADK237CWBDLK7UCTSIV2QLCKAI453KC6SDT23UFT7DEK3EHJNCLSIZ?segment=placement:glebbahmutovcom;" class="carbon-img" target="_blank" rel="noopener sponsored"><img src="./How to configure Prettier and VSCode _ Better world by better software_files/1565723204-1548360785-Authentic2.jpg" alt="ads via Carbon" border="0" style="max-width: 130px;"></a><a href="https://srv.carbonads.net/ads/click/x/GTND42JECEADT5QECTYLYKQNCTBDC5QNCEAIVZ3JCYYDV23LCEYI453KCWADK237CWBDLK7UCTSIV2QLCKAI453KC6SDT23UFT7DEK3EHJNCLSIZ?segment=placement:glebbahmutovcom;" class="carbon-text" target="_blank" rel="noopener sponsored">Your new development career awaits. Check out the latest listings.</a></span><a href="http://carbonads.net/?utm_source=glebbahmutovcom&amp;utm_medium=ad_via_link&amp;utm_campaign=in_unit&amp;utm_term=carbon" class="carbon-poweredby" target="_blank" rel="noopener sponsored">ads via Carbon</a></span></div>
+  </div>
+</div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="https://glebbahmutov.com/blog/categories/book-review/">book review</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="https://glebbahmutov.com/blog/categories/people/">people</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="https://glebbahmutov.com/blog/categories/process/">process</a><span class="category-list-count">135</span></li><li class="category-list-item"><a class="category-list-link" href="https://glebbahmutov.com/blog/categories/products/">products</a><span class="category-list-count">345</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/QUnit/" rel="tag">QUnit</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/a11y/" rel="tag">a11y</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/advice/" rel="tag">advice</a><span class="tag-list-count">104</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/algolia/" rel="tag">algolia</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/angularjs/" rel="tag">angularjs</a><span class="tag-list-count">58</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/angularjs2/" rel="tag">angularjs2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/assertions/" rel="tag">assertions</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/ast/" rel="tag">ast</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/boilerplate/" rel="tag">boilerplate</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/browser/" rel="tag">browser</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/ci/" rel="tag">ci</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/climate/" rel="tag">climate</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/concurrency/" rel="tag">concurrency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/cyclejs/" rel="tag">cyclejs</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/cypress/" rel="tag">cypress</a><span class="tag-list-count">71</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/d3/" rel="tag">d3</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/db/" rel="tag">db</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/docker/" rel="tag">docker</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/es6/" rel="tag">es6</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/es7/" rel="tag">es7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/functional/" rel="tag">functional</a><span class="tag-list-count">68</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/generators/" rel="tag">generators</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/git/" rel="tag">git</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/github/" rel="tag">github</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/graphql/" rel="tag">graphql</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/grunt/" rel="tag">grunt</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/gulp/" rel="tag">gulp</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/hyperapp/" rel="tag">hyperapp</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/immutable/" rel="tag">immutable</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/interview/" rel="tag">interview</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/jade/" rel="tag">jade</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/javascript/" rel="tag">javascript</a><span class="tag-list-count">165</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/jshint/" rel="tag">jshint</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/markdown/" rel="tag">markdown</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/model-based-testing/" rel="tag">model-based testing</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/modular-development/" rel="tag">modular development</a><span class="tag-list-count">27</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/nodejs/" rel="tag">nodejs</a><span class="tag-list-count">82</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/performance/" rel="tag">performance</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/presentation/" rel="tag">presentation</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/promises/" rel="tag">promises</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/proposal/" rel="tag">proposal</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/ramda/" rel="tag">ramda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/react/" rel="tag">react</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/reactive/" rel="tag">reactive</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/reactjs/" rel="tag">reactjs</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/renovate/" rel="tag">renovate</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/screencast/" rel="tag">screencast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/security/" rel="tag">security</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/sentry/" rel="tag">sentry</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/service-workers/" rel="tag">service workers</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/state-machine/" rel="tag">state machine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/testing/" rel="tag">testing</a><span class="tag-list-count">113</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/tutorial/" rel="tag">tutorial</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/typescript/" rel="tag">typescript</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/ui/" rel="tag">ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/vercel/" rel="tag">vercel</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/vuejs/" rel="tag">vuejs</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/web-workers/" rel="tag">web workers</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="https://glebbahmutov.com/blog/tags/webpack/" rel="tag">webpack</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="https://glebbahmutov.com/blog/tags/QUnit/" style="font-size: 11.67px;">QUnit</a> <a href="https://glebbahmutov.com/blog/tags/a11y/" style="font-size: 10px;">a11y</a> <a href="https://glebbahmutov.com/blog/tags/advice/" style="font-size: 19.17px;">advice</a> <a href="https://glebbahmutov.com/blog/tags/algolia/" style="font-size: 10px;">algolia</a> <a href="https://glebbahmutov.com/blog/tags/angularjs/" style="font-size: 17.5px;">angularjs</a> <a href="https://glebbahmutov.com/blog/tags/angularjs2/" style="font-size: 10px;">angularjs2</a> <a href="https://glebbahmutov.com/blog/tags/assertions/" style="font-size: 13.33px;">assertions</a> <a href="https://glebbahmutov.com/blog/tags/ast/" style="font-size: 12.92px;">ast</a> <a href="https://glebbahmutov.com/blog/tags/boilerplate/" style="font-size: 15px;">boilerplate</a> <a href="https://glebbahmutov.com/blog/tags/browser/" style="font-size: 16.25px;">browser</a> <a href="https://glebbahmutov.com/blog/tags/ci/" style="font-size: 13.75px;">ci</a> <a href="https://glebbahmutov.com/blog/tags/climate/" style="font-size: 12.92px;">climate</a> <a href="https://glebbahmutov.com/blog/tags/concurrency/" style="font-size: 10px;">concurrency</a> <a href="https://glebbahmutov.com/blog/tags/cyclejs/" style="font-size: 12.5px;">cyclejs</a> <a href="https://glebbahmutov.com/blog/tags/cypress/" style="font-size: 18.33px;">cypress</a> <a href="https://glebbahmutov.com/blog/tags/d3/" style="font-size: 10.83px;">d3</a> <a href="https://glebbahmutov.com/blog/tags/db/" style="font-size: 13.75px;">db</a> <a href="https://glebbahmutov.com/blog/tags/docker/" style="font-size: 14.17px;">docker</a> <a href="https://glebbahmutov.com/blog/tags/es6/" style="font-size: 14.58px;">es6</a> <a href="https://glebbahmutov.com/blog/tags/es7/" style="font-size: 10px;">es7</a> <a href="https://glebbahmutov.com/blog/tags/functional/" style="font-size: 17.92px;">functional</a> <a href="https://glebbahmutov.com/blog/tags/generators/" style="font-size: 11.67px;">generators</a> <a href="https://glebbahmutov.com/blog/tags/git/" style="font-size: 14.58px;">git</a> <a href="https://glebbahmutov.com/blog/tags/github/" style="font-size: 12.5px;">github</a> <a href="https://glebbahmutov.com/blog/tags/graphql/" style="font-size: 11.25px;">graphql</a> <a href="https://glebbahmutov.com/blog/tags/grunt/" style="font-size: 12.5px;">grunt</a> <a href="https://glebbahmutov.com/blog/tags/gulp/" style="font-size: 10.83px;">gulp</a> <a href="https://glebbahmutov.com/blog/tags/hyperapp/" style="font-size: 12.5px;">hyperapp</a> <a href="https://glebbahmutov.com/blog/tags/immutable/" style="font-size: 11.67px;">immutable</a> <a href="https://glebbahmutov.com/blog/tags/interview/" style="font-size: 10.83px;">interview</a> <a href="https://glebbahmutov.com/blog/tags/jade/" style="font-size: 11.25px;">jade</a> <a href="https://glebbahmutov.com/blog/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="https://glebbahmutov.com/blog/tags/jshint/" style="font-size: 10.83px;">jshint</a> <a href="https://glebbahmutov.com/blog/tags/markdown/" style="font-size: 13.75px;">markdown</a> <a href="https://glebbahmutov.com/blog/tags/model-based-testing/" style="font-size: 10px;">model-based testing</a> <a href="https://glebbahmutov.com/blog/tags/modular-development/" style="font-size: 16.67px;">modular development</a> <a href="https://glebbahmutov.com/blog/tags/nodejs/" style="font-size: 18.75px;">nodejs</a> <a href="https://glebbahmutov.com/blog/tags/performance/" style="font-size: 15.83px;">performance</a> <a href="https://glebbahmutov.com/blog/tags/presentation/" style="font-size: 11.25px;">presentation</a> <a href="https://glebbahmutov.com/blog/tags/promises/" style="font-size: 17.08px;">promises</a> <a href="https://glebbahmutov.com/blog/tags/proposal/" style="font-size: 10.42px;">proposal</a> <a href="https://glebbahmutov.com/blog/tags/ramda/" style="font-size: 10px;">ramda</a> <a href="https://glebbahmutov.com/blog/tags/react/" style="font-size: 11.25px;">react</a> <a href="https://glebbahmutov.com/blog/tags/reactive/" style="font-size: 14.17px;">reactive</a> <a href="https://glebbahmutov.com/blog/tags/reactjs/" style="font-size: 11.25px;">reactjs</a> <a href="https://glebbahmutov.com/blog/tags/renovate/" style="font-size: 11.25px;">renovate</a> <a href="https://glebbahmutov.com/blog/tags/screencast/" style="font-size: 10px;">screencast</a> <a href="https://glebbahmutov.com/blog/tags/security/" style="font-size: 13.33px;">security</a> <a href="https://glebbahmutov.com/blog/tags/sentry/" style="font-size: 13.75px;">sentry</a> <a href="https://glebbahmutov.com/blog/tags/service-workers/" style="font-size: 12.08px;">service workers</a> <a href="https://glebbahmutov.com/blog/tags/state-machine/" style="font-size: 10px;">state machine</a> <a href="https://glebbahmutov.com/blog/tags/testing/" style="font-size: 19.58px;">testing</a> <a href="https://glebbahmutov.com/blog/tags/tutorial/" style="font-size: 15.42px;">tutorial</a> <a href="https://glebbahmutov.com/blog/tags/typescript/" style="font-size: 12.08px;">typescript</a> <a href="https://glebbahmutov.com/blog/tags/ui/" style="font-size: 10.42px;">ui</a> <a href="https://glebbahmutov.com/blog/tags/vercel/" style="font-size: 12.08px;">vercel</a> <a href="https://glebbahmutov.com/blog/tags/vuejs/" style="font-size: 11.67px;">vuejs</a> <a href="https://glebbahmutov.com/blog/tags/web-workers/" style="font-size: 12.08px;">web workers</a> <a href="https://glebbahmutov.com/blog/tags/webpack/" style="font-size: 10.83px;">webpack</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2020/11/">November 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2020/10/">October 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2020/09/">September 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2020/08/">August 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2020/07/">July 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2020/06/">June 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2020/05/">May 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2020/04/">April 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2020/03/">March 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2020/02/">February 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2020/01/">January 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2019/12/">December 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2019/11/">November 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2019/10/">October 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2019/09/">September 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2019/08/">August 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2019/07/">July 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2019/05/">May 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2019/04/">April 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2019/01/">January 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2018/12/">December 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2018/09/">September 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2018/08/">August 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2018/06/">June 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2018/04/">April 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2018/03/">March 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2018/02/">February 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2017/12/">December 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2017/11/">November 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2017/08/">August 2017</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2017/07/">July 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2017/06/">June 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2017/05/">May 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2017/04/">April 2017</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2017/03/">March 2017</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2017/02/">February 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2016/12/">December 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2016/10/">October 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2016/08/">August 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2016/06/">June 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2016/05/">May 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2016/04/">April 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2016/03/">March 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2016/02/">February 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2016/01/">January 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2015/12/">December 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2015/11/">November 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2015/10/">October 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2015/08/">August 2015</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2015/07/">July 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2015/06/">June 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2015/05/">May 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2015/04/">April 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2015/03/">March 2015</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2015/02/">February 2015</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2015/01/">January 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2014/12/">December 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2014/11/">November 2014</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2014/10/">October 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2014/09/">September 2014</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2014/08/">August 2014</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2014/07/">July 2014</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2014/06/">June 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2014/05/">May 2014</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2014/04/">April 2014</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2014/03/">March 2014</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2014/02/">February 2014</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2014/01/">January 2014</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2013/12/">December 2013</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2013/11/">November 2013</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2013/10/">October 2013</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="https://glebbahmutov.com/blog/archives/2013/09/">September 2013</a><span class="archive-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://glebbahmutov.com/blog/help-me-say-yes/">Help Me Say Yes</a>
+          </li>
+        
+          <li>
+            <a href="https://glebbahmutov.com/blog/do-not-let-npm-cache-snowball/">Do Not Let NPM Cache Snowball on CI</a>
+          </li>
+        
+          <li>
+            <a href="https://glebbahmutov.com/blog/writing-webpack-loader/">Writing Webpack Loader</a>
+          </li>
+        
+          <li>
+            <a href="https://glebbahmutov.com/blog/effective-react-tests/">Effective React Tests</a>
+          </li>
+        
+          <li>
+            <a href="https://glebbahmutov.com/blog/testing-csp-almost/">Testing Content-Security-Policy using Cypress ... Almost</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      © 2020 Gleb Bahmutov<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'betterworldbybettersoftware';
+  
+  var disqus_url = 'https://glebbahmutov.com/blog/configure-prettier-in-vscode/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="./How to configure Prettier and VSCode _ Better world by better software_files/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="./How to configure Prettier and VSCode _ Better world by better software_files/jquery.fancybox.css">
+
+  
+<script src="./How to configure Prettier and VSCode _ Better world by better software_files/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="./How to configure Prettier and VSCode _ Better world by better software_files/script.js"></script>
+
+
+  </div>
+  <script src="./How to configure Prettier and VSCode _ Better world by better software_files/lodash.min.js"></script>
+<script>
+(function centerMainOnAsideScroll () {
+  // when aside side bar scrolls outside the view
+  // it centers the main content.
+  const main = document.querySelector('#main')
+  const aside = document.querySelector('aside#sidebar')
+  console.assert(main, 'could not get #main')
+  console.assert(aside, 'could not get aside')
+  // initially the aside sidebar is visible
+  let asideVisible = true
+
+  function centerMain () {
+    console.log('adding class center-main')
+    main.classList.add('center-main')
+  }
+  function leftMain () {
+    main.classList.remove('center-main')
+  }
+
+  function callWhenAsideScrollsUp (becameInvisible, becameVisible) {
+    return function () {
+      const border = 50
+      const rect = aside.getBoundingClientRect()
+      if (asideVisible && rect.bottom < -border) {
+        asideVisible = false
+        becameInvisible()
+      }
+
+      if (!asideVisible && window.scrollY < border) {
+        asideVisible = true
+        becameVisible()
+      }
+    }
+  }
+  const throttleWaitMs = 250
+  const onScroll = _.throttle(
+    callWhenAsideScrollsUp(centerMain, leftMain),
+    throttleWaitMs
+  )
+  window.addEventListener('scroll', onScroll)
+}())
+</script>
+
+
+
+<iframe style="display: none;" src="./How to configure Prettier and VSCode _ Better world by better software_files/saved_resource(3).html"></iframe></body></html>

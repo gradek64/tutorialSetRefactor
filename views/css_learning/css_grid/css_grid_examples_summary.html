@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>flex examples</title>
+</head>
+<style>
+.flex {
+    display: flex;
+    direction: row;
+    align-items: flex-start;
+    margin: 100px;
+    border-bottom: 2px solid green;
+}
+
+.box {
+    padding: 20px;
+    border: 2px solid rgb(96, 139, 168);
+    border-radius: 5px;
+    background-color: rgba(96, 139, 168, .2);
+}
+
+.flexContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    border: 1px solid green;
+}
+
+.flexContainerSelf {
+    display: flex;
+    width: 50%;
+    height: 400px;
+    border: 1px solid green;
+}
+
+.flexContainerCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 400px;
+    border: 1px solid green;
+}
+
+
+.flexContainerCenter .box {
+    flex: 0 0 0;
+    width: 100px;
+    height: 100px;
+}
+
+.gridContainer {
+  display: grid ;
+  width:70%;
+  margin: 0 auto;
+  border: 1px solid green;
+}
+
+
+
+
+
+
+
+.flexContainerAlignContentColumn .box,
+.flexContainerAlignContent .box {
+    flex: 1 1 100px;
+}
+
+.flexContainerAlignContentColumn {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 400px;
+    width: 500px;
+    align-content: center;
+    border: 1px solid green;
+}
+
+.flexContainerJustify {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 500px;
+    border: 1px solid green;
+}
+
+.flexContainerJustify .box {
+    /*reset flex*/
+    flex: 0 0 50px;
+}
+
+.flexContainerJustifyColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 500px;
+    width: 500px;
+    border: 1px solid green;
+}
+
+.flexContainerJustifyColumn .box {
+    /*reset flex*/
+    flex: 0 0 50px;
+}
+</style>
+
+<body>
+    <h2 style="width: 100%;text-align: center;font-family: arial;">controlling <span style="color: red">container position</span></h2>
+    <h3>The parent element container that makes its children spit in 8 rows</h3>
+    <div class="flex">
+      <style>
+        .gridContainer.grid-template-columns {
+  grid-template-columns: auto auto;
+}
+      </style>
+        <div class="styles">
+            <code style="white-space: pre-wrap;">
+
+        {
+            /*
+                simple 2 column setup even stretched
+            */
+            <span style="color:red">display: grid;</span>;
+            <span style="color:red">grid-template-columns: auto auto</span>;
+            /*
+                default is row: grid-template-row
+
+                IMPORTANT: Auto means stretch 
+
+            */
+          }
+          </code>
+        </div>
+        <div class="gridContainer grid-template-columns">
+          <div class="box">auto</div>
+          <div class="box">auto</div>
+          <div class="box">auto</div>
+          <div class="box">auto</div>
+          <div class="box">auto</div>
+          <div class="box">auto</div>
+          <div class="box">auto</div>
+          <div class="box">auto</div>
+        </div>
+    </div>
+    <div class="flex">
+      <style>
+        .gridContainer.grid-template-rows {
+            grid-template-rows: 18% 16% 15% 12% 11% 10% 9% 8% ;
+          }
+      </style>
+      <div class="styles">
+          <code style="white-space: pre-wrap;">
+
+      {
+          /*
+              8 rows : 8 values representing 8 different heights (U dont need to specify all but if you do every one represent a child in the 
+              stack)
+
+          */
+          <span style="color:red">display: grid;</span>;
+          <span style="color:red">grid-template-rows: 18% 16% 15% 12% 11% 10% 9% 8% ;</span>;
+          /*
+              default is row: grid-template-row
+
+              IMPORTANT: Auto means stretch 
+
+          */
+        }
+        </code>
+      </div>
+      <div class="gridContainer grid-template-rows">
+          <div class="box">18%</div>
+          <div class="box">16%</div>
+          <div class="box">15%</div>
+          <div class="box">12%</div>
+          <div class="box">11%</div>
+          <div class="box">10%</div>
+          <div class="box">9%</div>
+          <div class="box">8%</div>
+      </div>
+  </div>
+  <style>
+    .info {
+      background-color: lightgoldenrodyellow;
+      border-radius: 5px;
+      line-height: 110%;
+      color:#825263;
+      border:1px solid green;
+      margin: 0 auto;
+      width:90%;
+      white-space: pre-line;
+    }
+  </style>
+   <h3>mixed columns with rows</h3>
+   <style>
+     .gridContainer.grid-template-mix {
+  grid-template-columns:auto 90px auto;
+  grid-template-rows:33% 70px auto ;
+}
+   </style>
+    <div class="flex">
+        <div class="styles">
+            <code style="white-space: pre-wrap;">
+
+        {
+            /*
+                mix of 3 columns and 3 rows (notice that you can give a name to the columns and row)
+            */
+            <span style="color:red">grid-template-columns: auto 90px auto;</span>;
+            <span style="color:red">grid-template-rows:33% 70px auto;</span>;
+                  }
+          </code>
+        </div>
+        <div class="gridContainer grid-template-mix">
+          <div class="box">auto x 33%</div>
+          <div class="box">90px x 33%</div>
+          <div class="box">auto x 33%</div>
+
+          <div class="box">auto x 70px</div>
+          <div class="box">90px x 70px</div>
+          <div class="box">auto x 70px</div>
+
+          <div class="box">auto x auto</div>
+          <div class="box">90px x auto</div>
+          <div class="box">auto x auto</div>
+        </div>
+    </div>
+   
+      <h3>Fr unit 1fr, 2fr etc</h3>
+      <div class="info">
+        
+        <h3>
+          An interesting unit is 1fr or even 0fr which basically means 'take free space', but you can multiply free space 
+          as 1fr, 2fr  etc. 
+    
+          1fr 90px 1fr === auto 90px auto ( means stretch first and last)
+        
+          //the size of 1fr defines how much will be any multiply of 1free 
+    
+          2fr 10% 1fr === 65% 10% 25%; ( means stretch first and last by the width of 2 x first)
+          3fr 10% 1fr === 65% 10% 25%; ( means stretch first and last by the width of 3 x first)
+          0fr 90px 10fr === auto 90px auto ( means min first and last becomes auto cause we multiply by 0 so gives 0 so it treated as auto)
+    
+          this represents 3 columns first auto stretched, second 5px wide , third auto stretched
+    
+          grid-template-rows: [first] 20% [second] 90px [last] auto ;
+    
+          this represents 3 rows first 20% height, second 90px height , last auto stretched vertically
+        </h3>
+      </div>
+      <div class="flex">
+      <style>
+        
+
+.gridContainer.grid-template-with-gap {
+  grid-template-columns:1fr 50px 1fr;
+  grid-template-rows: [first] 20% [second] 90px [last] auto ;
+}
+
+.gridContainer.grid-template-fr-unit {
+  grid-template-columns:2fr 20% 1fr;
+  grid-template-rows: [first] 20% [second] 90px [last] auto ;
+}
+
+      </style>
+      <div class="styles">
+          <code style="white-space: pre-wrap;">
+
+      {
+          /*
+              mix of 3 columns and 3 rows (notice that you can give a name to the columns and row)
+
+              IMPORTANT: Auto means stretch 
+          */
+          <span style="color:red">grid-template-columns: 2fr 20% 1fr;</span>;
+          <span style="color:red"> grid-template-rows: [first] 20% [second] 90px [last] auto;</span>;
+                }
+        </code>
+      </div>
+      <div class="gridContainer grid-template-fr-unit">
+          <div class="box">2fr x 20%</div>
+          <div class="box">20% x 20%</div>
+          <div class="box">1fr x 20%</div>
+          <div class="box">2fr x 90px</div>
+          <div class="box">20% x 90px</div>
+          <div class="box">1fr x 90px</div>
+          <div class="box">2fr x auto</div>
+          <div class="box">20% x auto</div>
+          <div class="box">1fr x auto</div>
+      </div>
+  </div>
+  <h3>Manipulating children (not a single child) children as all grid boxes </h3>
+  <div class="info">
+    
+    <h3>
+      <h2>justify-items</h2>
+      Aligns grid items along the inline (row) axis 
+      This value applies to all grid items inside the container.It will take below properties:
+
+      justify-items: start | end | center | stretch;
+
+      Those properties will shrink your items to the actual content width, height (unless your items has width and height
+      defined) The exceptions to that is 'stretch' that will stretch element same as 
+
+      auto === stretch 
+
+      for elements with no height or width 
+
+      (those examples/boxes in above examples don`t have width, height set  )
+
+      .box {
+        padding: 20px;
+        border: 2px solid rgb(96, 139, 168);
+        border-radius: 5px;
+        background-color: rgba(96, 139, 168, .2);
+      }
+
+
+    </h3>
+  </div>
+  <div class="flex">
+  <style>
+.gridContainer.grid-justify-items {
+    grid-template-columns:75% auto;
+}
+.start {
+  justify-items: start;
+}
+.box-set{
+    border: 2px solid rgb(96, 139, 168);
+    border-radius: 5px;
+    background-color: rgba(96, 139, 168, .2);
+}
+  </style>
+  <div class="styles">
+      <code style="white-space: pre-wrap;">
+  {
+
+      <span style="color:red"> grid-template-columns:75% auto;</span>;
+      <span style="color:red"> justify-items: start;</span>;
+}
+    </code>
+  </div>
+  <div class="gridContainer grid-justify-items start">
+      <div class="box-set">start</div>
+      <div class="box-set">start</div>
+      <div class="box-set">start</div>
+      <div class="box-set">start</div>
+      <div class="box-set">start</div>
+      <div class="box-set">start</div>
+      <div class="box-set">start</div>
+      <div class="box-set">start</div>
+      <div class="box-set">start</div>
+  </div>
+</div>
+<div class="flex">
+  <style>
+.gridContainer.grid-justify-items {
+    grid-template-columns:75% auto;
+}
+.center {
+  justify-items: center;
+}
+.box-set{
+    border: 2px solid rgb(96, 139, 168);
+    border-radius: 5px;
+    background-color: rgba(96, 139, 168, .2);
+}
+  </style>
+  <div class="styles">
+      <code style="white-space: pre-wrap;">
+  {
+
+      <span style="color:red"> grid-template-columns:75% auto;</span>;
+      <span style="color:red"> justify-items: center;</span>;
+}
+    </code>
+  </div>
+  <div class="gridContainer grid-justify-items center">
+      <div class="box-set">center</div>
+      <div class="box-set">center</div>
+      <div class="box-set">center</div>
+      <div class="box-set">center</div>
+      <div class="box-set">center</div>
+      <div class="box-set">center</div>
+      <div class="box-set">center</div>
+      <div class="box-set">center</div>
+      <div class="box-set">center</div>
+  </div>
+</div>
+<div class="flex">
+  <style>
+.gridContainer.grid-justify-items {
+    grid-template-columns:75% auto;
+}
+.stretch {
+  justify-items: stretch;
+}
+.box-set{
+    border: 2px solid rgb(96, 139, 168);
+    border-radius: 5px;
+    background-color: rgba(96, 139, 168, .2);
+}
+  </style>
+  <div class="styles">
+      <code style="white-space: pre-wrap;">
+  {
+
+      <span style="color:red"> grid-template-columns:75% auto;</span>;
+      <span style="color:red"> justify-items: stretch;</span>;
+}
+    </code>
+  </div>
+  <div class="gridContainer grid-justify-items stretch">
+      <div class="box-set">stretch</div>
+      <div class="box-set">stretch</div>
+      <div class="box-set">stretch</div>
+      <div class="box-set">stretch</div>
+      <div class="box-set">stretch</div>
+      <div class="box-set">stretch</div>
+      <div class="box-set">stretch</div>
+      <div class="box-set">stretch</div>
+      <div class="box-set">stretch</div>
+  </div>
+</div>
+<h3>Manipulating children (not a single child) children as all grid boxes </h3>
+  <div class="info">
+    
+    <h3>
+      <h2>justify-items</h2>
+      Aligns grid items along the block (column) axis. 
+      This value applies to all grid items inside the container..It will take below properties:
+
+      align-items: start | end | center | stretch;
+
+      Those properties will shrink your items to the actual content width, height (unless your items has width and height
+      defined) The exceptions to that is 'stretch' that will stretch element same as 
+
+      auto === stretch 
+
+      for elements with no height or width 
+
+      (those examples/boxes in above examples don`t have width, height set  )
+
+      .box {
+        padding: 20px;
+        border: 2px solid rgb(96, 139, 168);
+        border-radius: 5px;
+        background-color: rgba(96, 139, 168, .2);
+      }
+
+
+    </h3>
+  </div>
+  <div class="flex">
+  <style>
+.gridContainer.grid-align-items {
+    grid-template-rows: repeat(8, 55%);
+}
+.start1 {
+  align-items: start;
+}
+.box-set{
+    border: 2px solid rgb(96, 139, 168);
+    border-radius: 5px;
+    background-color: rgba(96, 139, 168, .2);
+}
+  </style>
+  <div class="styles">
+      <code style="white-space: pre-wrap;">
+  {
+
+      <span style="color:red"> grid-template-rows:1ft;</span>;
+      <span style="color:red"> align-items: start;</span>;
+}
+    </code>
+  </div>
+  <div class="gridContainer grid-align-items start1">
+      <div class="box-set">start</div>
+      <div class="box-set">start</div>
+      <div class="box-set">start</div>
+  </div>
+</div>
+<div class="flex">
+  <style>
+.center1 {
+  align-items: center;
+}
+  </style>
+  <div class="styles">
+      <code style="white-space: pre-wrap;">
+  {
+
+      <span style="color:red"> grid-template-rows:75% auto;</span>;
+      <span style="color:red"> justify-items: center;</span>;
+}
+    </code>
+  </div>
+  <div class="gridContainer grid-align-items center1">
+      <div class="box-set">center</div>
+      <div class="box-set">center</div>
+      <div class="box-set">center</div>
+     
+  </div>
+</div>
+<div class="flex">
+  <style>
+.stretch1 {
+  align-items: stretch;
+}
+  </style>
+  <div class="styles">
+      <code style="white-space: pre-wrap;">
+  {
+
+      <span style="color:red"> grid-template-rows:75% auto;</span>;
+      <span style="color:red"> align-items: stretch;</span>;
+
+      /* only stretch will no create gaps */
+}
+    </code>
+  </div>
+  <div class="gridContainer grid-align-items stretch1">
+      <div class="box-set">stretch</div>
+      <div class="box-set">stretch</div>
+      <div class="box-set">stretch</div>
+      <div class="box-set">stretch</div>
+  </div>
+</div>
+
+     
+</body>
+
+</html>

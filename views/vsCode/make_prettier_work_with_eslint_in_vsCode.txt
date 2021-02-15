@@ -1,0 +1,33 @@
+
+
+	1. Format file manually 
+
+		=> CMD+SHIFT+P => search for => 'format document' 
+
+	VS code might ask you which formatterr you want to use select => prettier
+
+
+	2. Set up configuration for prettier:
+		
+		CMD+SHIFT+P => settings (JSON) 
+	add or change lines below:
+
+
+		format on save:
+
+	"editor.formatOnSave": true,
+	
+
+	2a. (Optional) limit formation to the specific files/languages
+
+	"[javascript, typescript]": {
+   		"editor.formatOnSave": true
+ 	 }
+
+	3a. If you don't want to set up separate prettier file prettierrc.json then VScode has some simple prettier rules here as well as below:
+
+
+	"prettier.singleQuote": true,
+	"prettier.trailingComma": "all",
+
+	just start typing prettier in the file and you will get the options you can set. 

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Flex fetures</title>
+    <style>
+    .box {
+        height: 300px;
+        border-radius: 4px;
+        border-bottom: 1px solid green;
+        border-right: 1px solid green;
+        background-color: pink;
+    }
+    </style>
+    <link rel="stylesheet" type="text/css" href="./flexbox_setup.css">
+</head>
+
+<body>
+    <div>
+        <h1>Children section</h1>
+        <h2>GROWING AND SHRINKING </h2>
+        <h3>verticaly</h3>
+        <code style="white-space: pre-wrap;">
+          {
+            /*
+
+           
+
+            Once you have your flex set : display:flex set to container you need show children eiher in
+            rows or columns the bare minimum you need is below:
+
+            */
+            /*for container*/
+
+            display:flex;
+
+            /*column*/
+            flex-direction: column;
+            flex-direction: column-reverse; (last child is first)
+
+            /row*/
+            flex-direction: row; (default)
+            flex-direction: row-reverse; (last child is first)
+
+             GROWING AND SHRINKING CHILDREN 
+
+            /*for children*/
+
+            width: 20%; //to make them fit to container in every way
+
+            /flex-grow:
+
+              it takes number : 1, 2 , ...etc
+
+              id divides children along its container so 
+              flex-grow:1 takes one space
+              flex-grow:2 takes one 2 spaces
+              flex-grow:3 takes one 3 spaces etc...
+
+              It will try to make them grow according to the width of container
+            /
+          }
+        </code>
+        <style>
+        .verticalLayoutShrinkGrow {
+            display: flex;
+            flex-direction: row;
+            border: 1px solid green;
+        }
+
+        .mybox {
+            width: 20%;
+            height: 200px;
+            background-color: orange;
+            border-left: 1px dashed green;
+        }
+
+        .mybox p {
+            margin: 0;
+            padding: 0;
+
+        }
+        </style>
+        <div class="verticalLayoutShrinkGrow">
+            <div class="mybox" style="width: 10%">
+                <p>I am not growing I am only set width:10%</p>
+            </div>
+            <div class="mybox" style="flex-grow: 1">
+                <p>I am taking 1 space flex-grow: 1</p>
+            </div>
+            <div class=" mybox" style="flex-grow: 1">
+                <p>I am taking 1 space flex-grow: 1 </p>
+            </div>
+            <div class=" mybox" style="width: 10%">
+                <p>I am not growing I am only set width:20%</p>
+            </div>
+        </div>
+        <div class="verticalLayoutShrinkGrow">
+            <div class="mybox" style="flex-grow: 1">
+                <p>I am taking 1 space flex-grow: 1</p>
+            </div>
+            <div class="mybox" style="flex-grow: 3">
+                <p>I am greedy I am taking 3 spaces even though I can not take so much flex-grow: 3</p>
+            </div>
+            <div class="mybox" style="flex-grow: 1">
+                <p>I am taking 1 space flex-grow: 1</p>
+            </div>
+        </div>
+        <div class="verticalLayoutShrinkGrow">
+            <div class="mybox" style="flex-grow: 1">
+                <p>I am taking 1 space flex-grow: 1 so 33%</p>
+            </div>
+            <div class="mybox" style="flex-grow: 1">
+                <p>I am taking 1 space flex-grow: 1 so 33%</p>
+            </div>
+            <div class="mybox" style="flex-grow: 1">
+                <p>I am taking 1 space flex-grow: 1 so 33%</p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h2>GROWING AND SHRINKING</h2>
+        <h3>horizontly</h3>
+        <code style="white-space: pre-wrap;">
+          {
+            /*
+
+           
+
+            Once you have your flex set : display:flex set to container you need show children eiher in
+            rows or columns the bare minimum you need is below:
+
+            */
+            /*for container*/
+
+            display:flex;
+
+            /*
+              U must specify container height it could be percenatage if outside containers 
+              have specified height (our percentage has to be relative to something !)
+
+            */
+            
+
+             GROWING AND SHRINKING CHILDREN VERTICALLY
+
+            /*for children*/
+
+            width: 100%; //to make them fit container entire row;
+
+            /flex-grow:
+
+              it takes number : 1, 2 , ...etc
+
+              id divides children along its container so 
+              flex-grow:1 takes one space
+              flex-grow:2 takes one 2 spaces
+              flex-grow:3 takes one 3 spaces etc...
+
+              It will try to make them grow according to the height of container that has hight (must)
+            /
+          }
+        </code>
+        <style>
+        .verticalLayoutShrinkGrowVertically {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid green;
+
+            /*
+              U must specify parent height;
+            */
+
+            height: 200px;
+        }
+
+        /*
+            children;
+        */
+
+        .verticalLayoutShrinkGrowVertically .myboxV {
+            width: 100%;
+            background-color: green;
+            border: 1px dashed white;
+        }
+
+        .verticalLayoutShrinkGrowVertically .myboxV p {
+            margin: 0;
+            padding: 0;
+            color: white;
+
+        }
+        </style>
+        <div class="verticalLayoutShrinkGrowVertically">
+            <div class="myboxV">
+                <p>I am taking default hight not growing</p>
+            </div>
+            <div class="myboxV" style="flex-grow: 1">
+                <p>I am taking all remaing space -- flex-grow: 1 -- since no one is using flex-grow except for me</p>
+            </div>
+            <div class="myboxV">
+                <p>I am taking default hight not growing</p>
+            </div>
+        </div>
+        <div class="verticalLayoutShrinkGrowVertically" style="margin-top:20px;">
+            <div class="myboxV" style="flex-grow: 2">
+                <p>I am taking 2 spaces: flex-grow:2</p>
+            </div>
+            <div class="myboxV" style="flex-grow: 1">
+                <p>I am taking 1 space : flex-grow:1</p>
+            </div>
+            <div class="myboxV" style="flex-grow: 2">
+                <p>I am taking 2 spaces: flex-grow:2</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

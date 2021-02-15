@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>footer and header flex</title>
+</head>
+
+<body>
+    <style>
+    * {
+        border: 1px solid green;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .content {
+        /*strech content by flex-grow*/
+flex-grow: 1;
+    }
+
+    header,
+    footer {
+        height: 50px;
+    }
+    </style>
+    <div class="container">
+        <header> this is my header</header>
+        <div class="content">this is my content</div>
+        <footer>this is my footer</footer>
+    </div>
+</body>
+
+</html>

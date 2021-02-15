@@ -1,0 +1,105 @@
+.searchBar {
+  height: 200px;
+  border: dashed green; }
+  .searchBar form {
+    display: flex;
+    align-items: center;
+    height: inherit; }
+  .searchBar input, .searchBar button {
+    margin: 0 5px; }
+  .searchBar input {
+    height: 50px;
+    background: none;
+    box-shadow: none;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 46px;
+    border: 1px solid #d0d0d0;
+    border-radius: 3px;
+    /*flex scaling to 1 for all inputs in .serchbox so they are same size...!*/
+    flex-grow: 1; }
+  .searchBar input#search {
+    flex-grow: 2; }
+
+.searchBarNoHeight {
+  border: dashed green; }
+  .searchBarNoHeight form {
+    display: flex;
+    margin: 10% 0; }
+  .searchBarNoHeight input, .searchBarNoHeight button {
+    margin: 0 5px; }
+  .searchBarNoHeight input {
+    height: 50px;
+    background: none;
+    box-shadow: none;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 46px;
+    border: 1px solid #d0d0d0;
+    border-radius: 3px;
+    /*flex scaling to 1 for all inputs in .serchbox so they are same size...!*/
+    flex-grow: 1; }
+  .searchBarNoHeight input#search {
+    flex-grow: 2; }
+
+/** understanding flex-shrink ***/
+.flexShrink {
+  display: flex;
+  border: 1px solid green;
+  width: 90;
+  margin: 0 auto;
+  box-shadow: 1px green; }
+  .flexShrink p {
+    flex: 0 0 auto; }
+  .flexShrink button {
+    flex: 0 0 180px; }
+
+.flexShrink1 {
+  display: flex;
+  border: 1px solid green;
+  align-items: center;
+  width: 90;
+  margin: 0 auto;
+  box-shadow: 1px green; }
+  .flexShrink1 p {
+    flex: 0 1 auto; }
+  .flexShrink1 button {
+    flex: 0 0 180px; }
+
+.flexShrink2 {
+  display: flex;
+  border: 1px solid green;
+  align-items: center;
+  width: 90;
+  margin: 0 auto;
+  box-shadow: 1px green; }
+  .flexShrink2 p {
+    flex: 0 1 600px; }
+  .flexShrink2 button {
+    flex: 0 0 180px; }
+
+/***********/
+/*extras*/
+.btn {
+  font-size: 20px;
+  line-height: 35px;
+  font-weight: 400;
+  padding: 8px 40px;
+  border: 0;
+  margin-right: 0;
+  color: white;
+  border-radius: 50px;
+  text-shadow: none;
+  text-decoration: none;
+  white-space: normal;
+  background: #D72D18;
+  max-height: 55px;
+  /*btn has to be same as regular input so flex:1*/
+  flex-grow: 1; }
+
+h6 {
+  font-size: 20px;
+  color: blue; }
+
+span {
+  color: green; }

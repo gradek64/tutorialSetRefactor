@@ -67,12 +67,24 @@
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>alternative to snapshot</a><span class="tooltiptext">alternative to snapshot</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>selecting DOM elements</a><span class="tooltiptext">selecting DOM elements</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>testing async custom hook</a><span class="tooltiptext">testing async custom hook</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>testing async custom hook part 2 (simplified)</a><span class="tooltiptext">testing async custom hook part 2 (simplified)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>async react hook functional component</a><span class="tooltiptext">async react hook functional component</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>waitFor() async react-testing library v10+</a><span class="tooltiptext">waitFor() async react-testing library v10+</span>
                         
                     </ul>
                 
       </li>
     
       <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">Testing original functions</a><span class="tooltiptext">Testing original functions</span>
+                 
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">Testing named functions</a><span class="tooltiptext">Testing named functions</span>
                  
       </li>
     
@@ -121,6 +133,8 @@
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>globally in __mocks__/custom.js</a><span class="tooltiptext">globally in __mocks__/custom.js</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>mocking only in testing-file.spec.js</a><span class="tooltiptext">mocking only in testing-file.spec.js</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>mocking fetch()</a><span class="tooltiptext">mocking fetch()</span>
                         
                     </ul>
                 
@@ -135,6 +149,22 @@
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>mock(&#39;react-redux&#39;, callback)</a><span class="tooltiptext">mock(&#39;react-redux&#39;, callback)</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>override a mock implemanation</a><span class="tooltiptext">override a mock implemanation</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>mock axios globally in __mocks__ folder axios() as method</a><span class="tooltiptext">mock axios globally in __mocks__ folder axios() as method</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>mock axios globally in __mocks__ folder axios() as object axios.get()</a><span class="tooltiptext">mock axios globally in __mocks__ folder axios() as object axios.get()</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">Mock entire module stored in node_modules in testing file</a><span class="tooltiptext">Mock entire module stored in node_modules in testing file</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>mock axios as method axios() locally in testing file</a><span class="tooltiptext">mock axios as method axios() locally in testing file</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>mock axios as object/module axios locally in testing file</a><span class="tooltiptext">mock axios as object/module axios locally in testing file</span>
                         
                     </ul>
                 
@@ -632,7 +662,7 @@ https://devhints.io/enzyme</code>
               <div class="band-container partition first" part="part-1">
                 <div class="band-inner">
 
-                  <p>react-testing-library is an alternative to Enzyme who doesnt suppoert hooks out of the box(without mocking some functionality;). React-testing-library is recommended by facebook itself it might even been created by them just like jest. Follow instalation process</p>
+                  <p>react-testing-library is an alternative to Enzyme who doesnt support hooks out of the box(without mocking some functionality;). React-testing-library is recommended by facebook itself it might even been created by them just like jest. Follow instalation process</p>
                   <div class="codeWraper">
                     <code>/------ react-testing-library----/
 
@@ -654,6 +684,8 @@ npm install --save-dev @testing-library/jest-dom
                   <p>The best way of tracking changes to the jsx hook outcome is to take a picture of it which is called snapshot ;)</p>
                   <div class="codeWraper">
                     <code>/--- copy below for snaphshot testing -------/
+
+//generated to file Snapshot
                   
 import React from &#39;react&#39;;
 import { render, cleanup } from &#39;@testing-library/react&#39;;
@@ -661,11 +693,20 @@ import &#39;@testing-library/jest-dom/extend-expect&#39;;
 import Component from &#39;../../SimpleClickUpdate_useState_hook&#39;;
 
 afterEach(cleanup);
-  it(&#39;should take a snapshot&#39;, () =&gt; {
+  test(&#39;should take a snapshot&#39;, () =&gt; {
     const { asFragment } = render(&lt;Component /&gt;);
-    expect(asFragment(&lt;Component /&gt;)).toMatchSnapshot();
+    expect(asFragment()).toMatchSnapshot();
   });
 
+//inlineSnapshot
+
+test(&#39;renders a message&#39;, () =&gt; {
+  const { container, getByText } = render(&lt;Greeting /&gt;)
+  expect(getByText(&#39;Hello, world!&#39;)).toBeInTheDocument()
+  expect(container.firstChild).toMatchInlineSnapshot(`
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+  `)
+})
 /-------------/</code>
                   </div>
                 </div>
@@ -749,6 +790,316 @@ in documenation
                 </div>
               </div>
             
+              <div class="band-container partition " part="part-5">
+                <div class="band-inner">
+
+                  <p>Custom hooks allow you to expose state logic outside to other files. At the moment the only way to test is by @testing-library/react-hooks library which is the  addition to @testing-library/react. Example below</p>
+                  <div class="codeWraper">
+                    <code>/------------- async custom hook example useAsyncRequest.js -------------------/
+
+import { useState, useEffect } from &quot;react&quot;;
+import axios from &quot;axios&quot;;
+
+const useAsyncRequest = (url, initialValue) =&gt; {
+
+  const [data, setData] = useState(initialValue);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() =&gt; {
+
+    const fetchData = async function() {
+      try {
+        setLoading(true);
+
+        //this hook uses axios.get() to be mocked in test
+
+        const response = await axios.get(url);
+
+        if (response.status === 200) {
+          setData(response.data);
+        }
+      } catch (error) {
+        throw error;
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+
+  }, [url]);
+
+
+  return { loading, data };
+
+};
+
+export default useAsyncRequest;
+
+
+/------------- test useAsyncRequest.spec.js  -------------------/
+
+
+
+/------------    HOW TO TEST IT ?  -----------------/
+
+1. since it is async hook it depend on async http call that needs to be mocked. This hook uses axios library that could be mocked
+in 2 ways , described in this document under: MOCK ENTIRE MODULE STORED IN NODE_MODULES ....
+
+  so U might only use jest.mock(&#39;axios&#39;) or call manually axios.get(&#39;path&#39;) to execute call (depend on implementation)
+
+3. Once axios is mocked we need to render our custom hook by twice once before call and second with http response.
+
+  test(&#39;calls http request and show loading status before http response&#39;, ()=&gt;{
+
+
+    const { result, waitForNextUpdate } = renderHook(() =&gt;
+      useCallAPI(query, String(pageNumber))
+    );
+
+  })
+
+
+/------------ /</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-6">
+                <div class="band-inner">
+
+                  <p>There are 2 stages for testing async cutom hook before and after data
+                  loads. Details below. We need to use
+
+                     const { result,waitForNextUpdate } = renderHook(() =&gt; useFetch());
+
+                    await waitForNextUpdate() will update data for use</p>
+                  <div class="codeWraper">
+                    <code>/------------- async custom hook example useAsyncRequest.js -------------------/
+
+1. ---- import from seperate react-hooks library -----
+import { cleanup, renderHook } from &#39;@testing-library/react-hooks&#39;;
+
+
+----- mock the fetch for the cutom hook first -----
+
+cosnt mockData = {mockData:&#39;mockData&#39;}
+const mockJsonPromise = Promise.resolve(mockData);
+const mockFetchPromise = Promise.resolve({
+  json: () =&gt; mockJsonPromise,
+});
+
+
+
+----- testing simple loading status before and after data arrives -------
+
+describe(&#39;useFetch() is loading data&#39;, () =&gt; {
+  afterEach(cleanup);
+  beforeEach(()=&gt;{
+    global.fetch = jest.fn().mockImplementation(() =&gt; mockFetchPromise);
+  })
+  it(&#39;should set loading=true&#39; , async () =&gt; {
+    const { result,waitForNextUpdate } = renderHook(() =&gt; useFetch());
+    expect(result.current.loading).toBe(true)
+    await waitForNextUpdate()
+  });
+  it(&#39;should set loading=false once data is loaded&#39; , async () =&gt; {
+    const { result,waitForNextUpdate } = renderHook(() =&gt; useFetch());
+    await waitForNextUpdate()
+    expect(result.current.loading).toBe(false)
+  });
+}); 
+
+----- testing DATA before and after data arrives -------
+
+
+describe(&#39;useFetch() responds with data&#39;, () =&gt; {
+  afterEach(cleanup);
+  beforeEach(()=&gt;{
+    global.fetch = jest.fn().mockImplementation(() =&gt; mockFetchPromise);
+  })
+  it(&#39;should call useFetch() with no params and return data&#39; , async () =&gt; {
+    const { result,waitForNextUpdate } = renderHook(() =&gt; useFetch());
+    await waitForNextUpdate()
+    const mockDataJson = JSON.stringify(mockData.data)
+    const hookResponseJson = JSON.stringify(result.current.data)
+    expect(hookResponseJson).toBe(mockDataJson)
+  });
+  it(&#39;should call useFetch({url,location}) with no url,location obj and return data&#39; , async () =&gt; {
+    const paramObject = {url:&#39;url&#39;,locations:{&#39;london&#39;: { lon: &#39;-0.118092&#39;, lat: &#39;51.509865&#39; },}};
+    const { result,waitForNextUpdate } = renderHook(() =&gt; useFetch(paramObject))
+    await waitForNextUpdate()
+    const mockDataJson = JSON.stringify(mockDataMultipleLocations)
+    const hookResponseJson = JSON.stringify(result.current.data)
+    expect(hookResponseJson).toBe(mockDataJson)
+  });
+}); 
+
+
+----- testing response comes with error and how it is handled -------
+
+describe(&#39;useFetch() responds with error&#39;, () =&gt; {
+  afterEach(cleanup);
+  beforeEach(()=&gt;{
+    global.fetch = jest.fn().mockImplementation(() =&gt; Promise.reject(&#39;error&#39;));
+  })
+  it(&#39;should set error&#39; , async () =&gt; {
+    const { result,waitForNextUpdate } = renderHook(() =&gt; useFetch());
+    await waitForNextUpdate()
+    expect(result.current.loading).toBe(false)
+    expect(result.current.error).toBe(&#39;error&#39;)
+  });
+}); 
+
+/-------------/</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-7">
+                <div class="band-inner">
+
+                  <p>Async react component needs to be tested before and after response is back. To achive that our test has to be set for async fuction and await the response for update. Details below:</p>
+                  <div class="codeWraper">
+                    <code>/------------- async App.js -------------------/
+
+import { useState, useEffect } from &quot;react&quot;;
+import axios from &quot;axios&quot;;
+
+const App = (url, initialValue) =&gt; {
+
+  const [data, setData] = useState(initialValue);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() =&gt; {
+
+    const fetchData = async function() {
+      try {
+        setLoading(true);
+
+        //this hook uses axios.get() to be mocked in test
+
+        const response = await axios.get(url);
+
+        if (response.status === 200) {
+          setData(response.data);
+        }
+      } catch (error) {
+        throw error;
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+
+  }, [url]);
+
+  return (
+    &lt;&gt;
+      {!loading &amp;&amp; &#39;loading...&#39;}
+      {loading &amp;&amp;  data.map((httpResult)=&gt; httpResult.block )}
+    &lt;/&gt;
+  );
+
+};
+
+export default App;
+
+
+-------------- App.spec.tsx test -----------------------
+
+  
+1. First step is to check if loading message is present, since this is async component it needs async handling. Wait or 
+WaitFor from React testing library will make sure the data is handled correctly in the first step. IMPORTANT wait or waitfor method
+in callback returns void 
+
+function waitFor&lt;T&gt;(
+  callback: () =&gt; void,
+  options?: {
+    container?: HTMLElement
+    timeout?: number
+    interval?: number
+    onTimeout?: (error: Error) =&gt; Error
+    mutationObserverOptions?: MutationObserverInit
+  }
+): Promise&lt;T&gt;
+
+Thefore we dont see the ruslt of callback but initial loading state.
+
+describe(&#39;handles async call and shows status of loading&#39;,()=&gt;{
+test(&#39;renders &quot;loading...&quot; when data is not returned&#39;, async () =&gt; {
+     await act(
+      async (): Promise&lt;any&gt; =&gt; {
+        const { container, debug } = render(&lt;App /&gt;);
+
+        await wait(() =&gt; {
+          debug();
+        });
+
+        return container;
+      }
+    );
+
+  });
+
+test(&#39;updates list when data is returned&#39;, async () =&gt; {
+  const { container } = render(&lt;App /&gt;);
+    const updatedContainer = await waitForElement(
+      async () =&gt; container.outerHTML
+    );
+    console.log(&#39;updatedContainer&#39;, updatedContainer);
+
+  })
+
+
+2. test(&#39;updates list...&#39;) uses promise waitForElement that returns updated values, in this case container from render(&#39;&lt;App /&gt;&#39;)
+contrary to wait of waitFor that returns void as show above.
+
+function waitForElement&lt;T&gt;(
+  callback: () =&gt; T,
+  options?: {
+    container?: HTMLElement
+    timeout?: number
+    mutationObserverOptions?: MutationObserverInit
+  }
+): Promise&lt;T&gt;</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-8">
+                <div class="band-inner">
+
+                  <p>in latest versions v10+ most async methods are deprecated and replaced with one waitFor(). Below is example how to use it, the main diffrence is that waitFor() doesnt return result but insted takes async response inside it method as:
+
+                   await waitFor(() =&gt; {
+                    const component = asFragment();
+                    expect(something);
+                  });</p>
+                  <div class="codeWraper">
+                    <code>//example of snapshot before and after async call 
+
+describe(&#39;should render correctlly with initial props&#39;, () =&gt; {
+  it(&#39;should render and take a snapshot before data loads&#39;, () =&gt; {
+    const { asFragment } = render(&lt;App /&gt;);
+    const firstRender = asFragment();
+    expect(firstRender).toMatchSnapshot();
+  });
+  it(&#39;should render and take a snapshot after data loads&#39;, async () =&gt; {
+    //mock list async response
+    (List as any).getList = jest.fn().mockReturnValue(List.list);
+    const { asFragment } = render(&lt;App /&gt;);
+    await waitFor(() =&gt; {
+      const component = asFragment();
+      expect(component).toMatchSnapshot();
+    });
+  });
+});</code>
+                  </div>
+                </div>
+              </div>
+            
 
             
 
@@ -795,6 +1146,51 @@ test(&quot;calls math.add&quot;, () =&gt; {
 test(&quot;calls app.doAdd&quot;, () =&gt; {
     const appAdd = app.doAdd(1,2)
     expect(appAdd).toBe(3)
+})
+----------------------------------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> Testing named functions </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>when the function is expored by its name as 
+
+                export const getList = () =&gt; {}
+
+              then to test you need to import entire file first as below:</p>
+                  <div class="codeWraper">
+                    <code>----------------------- List.js  ----------------
+
+export const getList = () =&gt; {
+  console.log(&#39;get list call&#39;);
+  return new Promise((resolve) =&gt; {
+    setTimeout(() =&gt; {
+      resolve(list);
+    }, 1000);
+  });
+};
+---------------------------------------------------------
+
+
+
+--------------- test.spec.tsx --------------------------
+
+import * as List from &#39;./List.js&#39;;
+
+//typescript 
+    (List as any).getList = jest.fn().mockReturnValue(List.list);
+
 })
 ----------------------------------------------------------------------------</code>
                   </div>
@@ -1262,6 +1658,57 @@ all.closeModal() etc .. (all of them will be mocked)
                 </div>
               </div>
             
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>Custom mock of fetch() native js method for async call</p>
+                  <div class="codeWraper">
+                    <code>------ Fetch has 2 promises to resolve data  -------------
+
+1. mock resolve()
+
+const mockData = [{data:&#39;data required for resolve&#39;}]
+
+const mockJsonPromise = Promise.resolve(mockData);
+//Fetch always resolves with string that needs to be converted to .json()
+const mockFetchPromise = Promise.resolve({
+  json: () =&gt; mockJsonPromise,
+});
+
+----- in test -----
+
+beforeEach(()=&gt;{
+  global.fetch = jest.fn().mockImplementation(() =&gt; mockFetchPromise);
+})
+
+
+2. mock reject()
+
+---------eiher reject on first stage of fetch-----------
+
+const mockFetchPromise = Promise.reject({
+  json: () =&gt; mockJsonPromise,
+});
+
+
+---------or reject on json() stage ------------
+
+const mockJsonPromise = Promise.reject(&#39;promise rejected&#39;);
+const mockFetchPromise = Promise.resolve({
+  json: () =&gt; mockJsonPromise,
+});
+
+----- in test -----
+
+beforeEach(()=&gt;{
+  global.fetch = jest.fn().mockImplementation(() =&gt; mockFetchPromise);
+})
+
+/ --------------- /</code>
+                  </div>
+                </div>
+              </div>
+            
 
             
 
@@ -1416,6 +1863,285 @@ mock version of react-redux and it could be accessed by:
   axios.get.mockImpenationOnce(()=&gt;{hello:&#39;I want this implemanation&#39;})
 
 /------------------ /</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
+                  <p>Any module/library can be mocked either globally or localy in the file. this example shows how to mock axios as axios module with get,put,post  methods etc.</p>
+                  <div class="codeWraper">
+                    <code>----- file using axios ---------
+
+axios({
+  method: &#39;GET&#39;,
+  url: &#39;https://api.harvardartmuseums.org/object?&#39;,
+  params: { classification: query, page: pageNumber },
+  paramsSerializer: function (params) { return `${params.classification}page=${params.page}`}
+})
+.then((data) =&gt; {
+  const { records } = data.data;
+})
+.catch((error) =&gt; {
+  throw new Error(&#39;no net&#39;);
+});
+
+
+--------------
+this implementation of axios requires axios() as method and U need to mock with this pattern
+-----------------------
+
+------ test --------
+
+1. create file __mocks__/axios.js
+
+-------------_mocks__/axios.js -----------
+
+export default () =&gt; {
+  return Promise.resolve({
+    data: {
+      records: [
+        {
+          title: &#39;title&#39;,
+          images: [],
+          century: &#39;21&#39;,
+          division: &#39;general&#39;,
+        },
+        {
+          title: &#39;title&#39;,
+          images: [],
+          century: &#39;21&#39;,
+          division: &#39;general&#39;,
+        },
+      ],
+    },
+});
+};
+
+----- Above file is exported by default as method that returns promise ----------
+
+/------------------------- test.spec.js --------/
+
+2.let jest know that you want to use mock axios by below syntax 
+
+jest.mock(&#39;axios&#39;);
+
+3.depending of the implementation call you mock axios (optional depends on the implementation)
+
+axios({}).then(()=&gt;{
+  //your assertion
+})
+
+
+/-------------------------/</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-5">
+                <div class="band-inner">
+
+                  <p>Any module/library can be mocked either globally or localy in the file. this example shows how to mock axios as axios() method.</p>
+                  <div class="codeWraper">
+                    <code>----- file using axios ---------
+
+axios.get(&#39;/path&#39;)
+.then((data) =&gt; {
+  const { records } = data.data;
+})
+.catch((error) =&gt; {
+  throw new Error(&#39;no net&#39;);
+});
+
+
+--------------
+this implementation of axios requires axios as object with methods and U need to mock with this pattern
+-----------------------
+
+------ test --------
+
+1. create file __mocks__/axios.js
+
+-------------_mocks__/axios.js -----------
+
+export default {
+  get: jest.fn(() =&gt; {
+    return Promise.resolve({
+      data: {
+        records: [
+          {
+            title: &#39;title&#39;,
+            images: [],
+            century: &#39;21&#39;,
+            division: &#39;general&#39;,
+          },
+          {
+            title: &#39;title&#39;,
+            images: [],
+            century: &#39;21&#39;,
+            division: &#39;general&#39;,
+          },
+        ],
+      },
+  }),
+};
+
+----- Above file is exported by default as method that returns promise ----------
+
+/------------------------- test.spec.js --------/
+
+2.let jest know that you want to use mock axios by below syntax 
+
+jest.mock(&#39;axios&#39;);
+
+3.depending of the implementation call you mock axios (optional depends on the implementation)
+
+axios.get(&#39;/path&#39;).then(()=&gt;{
+  //your assertion
+})
+
+
+/-------------------------/</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> Mock entire module stored in node_modules in testing file </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>Any module/library can be mocked either globally or localy in the file. this example shows how to mock axios as axios module with get,put,post  methods etc. only in testing file with jest.mock(&#39;library&#39;,()=&gt;{ /* mock funtionality */})</p>
+                  <div class="codeWraper">
+                    <code>----- file using axios ---------
+
+axios({
+  method: &#39;GET&#39;,
+  url: &#39;https://api.harvardartmuseums.org/object?&#39;,
+  params: { classification: query, page: pageNumber },
+  paramsSerializer: function (params) { return `${params.classification}page=${params.page}`}
+})
+.then((data) =&gt; {
+  const { records } = data.data;
+})
+.catch((error) =&gt; {
+  throw new Error(&#39;no net&#39;);
+});
+
+
+--------------
+this implementation of axios requires axios() as method and U need to mock with this pattern
+-----------------------
+
+
+1. in testing file use callback of jest.mock(&#39;library&#39;,()=&gt;{ /* mock funtionality */}
+
+------------- test.spec.js -----------
+
+jest.mock(&#39;axios&#39;, () =&gt; {
+  return () =&gt;
+    Promise.resolve({
+      data: {
+        records: [
+          {
+            title: &#39;title&#39;,
+            images: [],
+            century: &#39;21&#39;,
+            division: &#39;general&#39;,
+          },
+          {
+            title: &#39;title&#39;,
+            images: [],
+            century: &#39;21&#39;,
+            division: &#39;general&#39;,
+          },
+        ],
+      },
+    });
+});
+
+---------------------------
+
+
+3.depending of the implementation call your mock axios (optional depends on the implementation)
+
+axios({}).then(()=&gt;{
+  //your assertion
+})
+
+
+/-------------------------/</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>Any module/library can be mocked either globally or localy in the file. this example shows how to mock axios as axios obeject with custom method as axios.get() axios.post() etc</p>
+                  <div class="codeWraper">
+                    <code>----- file using axios ---------
+
+axios.get(&#39;/path&#39;)
+.then((data) =&gt; {
+  const { records } = data.data;
+})
+.catch((error) =&gt; {
+  throw new Error(&#39;no net&#39;);
+});
+
+
+--------------
+this implementation of axios requires axios as object with methods and U need to mock with this pattern
+-----------------------
+
+
+1. in testing file use callback of jest.mock(&#39;library&#39;,()=&gt;{ /* mock funtionality */}
+
+/------------------------- test.spec.js that mocks only get() method --------/
+
+jest.mock(&#39;axios&#39;, () =&gt; ({
+  get: jest.fn(() =&gt; {
+    return Promise.resolve({
+      data: {
+        records: [
+          {
+            title: &#39;title&#39;,
+            images: [],
+            century: &#39;21&#39;,
+            division: &#39;general&#39;,
+          },
+          {
+            title: &#39;title&#39;,
+            images: [],
+            century: &#39;21&#39;,
+            division: &#39;general&#39;,
+          },
+        ],
+      },
+    });
+  }),
+}));
+
+
+2.depending of the implementation call your mock axios (optional depends on the implementation)
+
+axios.get(&#39;/path&#39;)
+.then(()=&gt;{
+  //your assertion
+})
+.catch(e=&gt;trow new Error(e))
+
+
+/-------------------------/</code>
                   </div>
                 </div>
               </div>

@@ -509,6 +509,45 @@ grep -E  -rni --color  "campaigns?" .
        </content>
    </chapter>
    <chapter>
+       <subject>testing Internet Explorer</subject>
+       <content>
+           <paragraph>
+               <info>The most ultimate way of testing Internet explorer 
+               is to use Virtual Box that will host windows operating 
+               system with the browser (IE or EDGE) that u need to support 
+               and run on localhost
+
+               </info>
+               <example>
+/---/
+1. Download you Virtual Box software
+
+  https://www.virtualbox.org/wiki/Downloads
+
+2. Download 90-day windows virtural software for Virtual 
+
+  https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/
+
+3. Install all software...
+  CMD+i open new windows.ovf file and confirm all default settings for 
+  instalation , the only thing make sure the video memory is higher that 16 since 
+  it wont allow you to go full screen.
+
+4. to test all localhost U need to have surver running on PORT on virtual 
+maching the localhost is: 
+
+  http://10.0.2.2:PORT  is equivalent to http://localhost:PORT.
+
+
+
+
+
+
+               </example>
+           </paragraph>
+       </content>
+   </chapter>
+    <chapter>
        <subject>find and repace (sed)</subject>
        <content>
            <paragraph>
@@ -534,6 +573,7 @@ sed -i "" "s/cdn: false/cdn: true/g" ./CLT-aptamil-*/src/js/adspandable_config.j
            </paragraph>
        </content>
    </chapter>
+
    <chapter>
        <subject>pipe and execute command (| -exec | xargs )</subject>
        <content>

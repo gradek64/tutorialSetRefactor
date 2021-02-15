@@ -224,6 +224,258 @@ type DomesticAnimals = { type: 'Dog' } | { type: 'Cat' };
       </content>
   </chapter>
   <chapter>
+      <subject>js libraries with typescript (popular libraries)part 1</subject>
+      <content>
+          <paragraph>
+             <info>if you using popular library, most likely a community has alredy 
+                difined js library to work with types , all that needs to be done</info>
+              <example>
+--------------
+
+//-------how to finde types declaration for a js library---------       
+
+1. google react types or react @types 
+
+2. search for types packages at https://www.typescriptlang.org/
+
+3. If you can not find it then you will need to make it your own (next chapter)
+
+-------------
+              </example>
+          </paragraph>
+      </content>
+  </chapter>
+  <chapter>
+      <subject>js libraries define your own d.ts file (part 2)</subject>
+      <content>
+          <subtitle>export/import common.js module in TS</subtitle>
+          <paragraph>
+              <info>
+the bare minimum to make TS bitching about lack od declaration file is to set  
+
+"allowJs": false, 
+
+The rules are simple for imports in TS: 
+
+    import lib from './lib'
+
+1 First typescript will attepmt to look for file lib.ts or lib.tsx
+
+2   if can no find it then it will look for .js file (if  &quot;allowJs&quot;: true,) in tsconfig
+
+3   if TS has option  &quot;allowJs&quot;: false and lib has .js extension then will look for its type definition in d.ts file 
+
+How you construct d.ts file depends of TS version. Always reffer to latest TS documentation and update your TS if possible. 
+
+https://www.typescriptlang.org/docs/handbook/declaration-files/templates/module-d-ts.html
+               </info>
+              <example>
+--------------
+
+//-------those are the examples for TS typescript@4.1.2 ---------       
+
+1  -------- common way to named export in common.js ------ 
+
+const maxInterval = 12;
+
+function getArrayLength(arr) {
+  return arr.length;
+}
+
+module.exports = {
+  getArrayLength,
+  maxInterval,
+};
+
+
+2  --------  declaration file for above ------ 
+
+export function getArrayLength(arr: any[]): number;
+export const maxInterval: 12;
+
+3 --- usage of the typescript 
+
+//keep common.js format 
+const moduleWithFunction = require('.file_path');
+
+moduleWithFunction.getArrayLength([2])
+moduleWithFunction.maxInterval
+
+//or ES6 format 
+import { maxInterval, getArrayLength } from '.file_path';
+
+getArrayLength([2])
+maxInterval
+
+
+
+-------------
+              </example>
+          </paragraph>
+           <subtitle>declare 'key word' in d.ts file</subtitle>
+          <paragraph>
+              <info>There are certain rule what is allowed  in d.ts file. For example if you export funtion you allow to only export function defintion (function name => parameter it takes => return value) but you are not allowd to crate funcion body here. To define const or module you need to use 'key word' declare.
+
+                the full guidance can be found here:
+
+                https://www.typescriptlang.org/docs/handbook/declaration-files/by-example.html
+
+
+              </info>
+              <example>
+                
+--------------
+
+/******** simple example of constant declarion from docs ***************/
+
+/*
+     this simply exports a number in common js as default export
+*/
+
+
+/************  Example 1 *************/
+
+module.exports = 3.142;
+
+******* usage in typescipt *****/
+
+//keep common js:
+const pi = require('.path_file')
+console.log('pi equals:', pi)
+
+//or ES6 module 
+import pi from '.path_file'
+console.log('pi equals:', pi) 
+
+/*******  declaration file for above file.d.ts file  *****/
+
+declare const pi: number;
+export default pi;
+
+/**Explanation*/
+
+start with declaring a const 'pi' of type:number and export const as default 
+
+
+/************  Example 2 *************/
+
+module.exports = /hello( world)?/;
+
+******* usage in typescipt *****/
+
+//keep common js:
+const helloWorldReg = require('.path_file')
+
+console.log(helloWorldReg.test('hello')) //prints true
+
+//or ES6 module 
+import helloWorldReg from '.path_file'
+
+console.log(helloWorldReg.test('greg')) //prints false
+
+
+/*******  declaration file for above file.d.ts file  *****/
+
+declare const helloWorld: RegExp;
+export default helloWorld;
+
+/**Explanation*/
+
+start with declaring a const 'helloWorld' of type:RegExp and export cosnt as default 
+
+
+-------------
+              </example>
+          </paragraph>
+  </content>
+  </chapter>
+   <chapter>
+      <subject>javascript types in typescript</subject>
+      <content>
+          <subtitle>array</subtitle>
+          <paragraph>
+              <info>array typescript declaration</info>
+              <example>
+--------------
+
+//one way         
+const array: string[] = ['greg'];
+
+//same thing another way
+const array2: Array&lt;string> = ['greg'];
+
+//with onion types
+const customers: Array&lt;string | number> = [2];
+
+-------------
+              </example>
+          </paragraph>
+           <subtitle>object</subtitle>
+          <paragraph>
+              <info>object typescript declaration</info>
+              <example>
+                
+--------------
+
+//inline declaration
+
+const anyKeyObject: { [key: string]: string } = {
+  greg: 'is cool',
+  age: 'unknown',
+};
+
+
+//Object type assertion
+
+const anyKeyObject2 = {
+  greg: 'is cool',
+  age: 'unknown',
+  gre: '2',
+} as { [key: string]: string };
+
+
+//3a Object dusctructring
+
+const scientist: { firstName: string, experience: number } = { firstName: 'Robert', experience: 9000 };
+const { firstName, experience } = scientist;
+
+
+-------------
+              </example>
+          </paragraph>
+      <subtitle>function</subtitle>
+      <paragraph>
+          <info>function arguments</info>
+          <example>
+-------------        
+
+//4. functions args
+//optional
+---- const seter = (arg: string, arg2?: number | string) => {};
+seter('first');
+
+//optional and default
+---- const seter2 = (arg: string, arg2 = 2) => {};
+seter2('first');
+
+//optional and default destructring object properties
+---- const seter3 = ({ arg=1, arg2 = 3 }) => {};
+
+//both the same
+---- const seter3a = ({ arg, arg2 } = { arg: 1, arg2: 3 }) => {};
+seter3a();
+
+//combination of obobe
+---- const seter4 = ({ arg, arg2 = 2 } = { arg: 4 }) => {};
+seter4();
+
+
+-------------
+          </example>
+      </paragraph>
+  </content>
+  </chapter>
+  <chapter>
       <subject>typescript own types</subject>
       <content>
           <subtitle>tuple</subtitle>
@@ -859,6 +1111,557 @@ const DomElement = document.getElementByID('id')!
 
 //the above way we ensure that DomElement is never undefined or null
 ------------------------------------------------
+              </example>
+          </paragraph>
+      </content>
+  </chapter>
+  <chapter>
+      <subject>React with typescipt</subject>
+      <content>
+          <subtitle>Functional component</subtitle>
+          <paragraph>
+              <info>Declaration of functional component in Typescript with props Interface</info>
+              <example>
+------------------------------
+
+interface FCInterfaceProps{
+  name:string;
+  age:number;
+}
+const functionalCompWithInterface:React.FC&lt;FCInterfaceProps> = (props:FCInterfaceProps) => {
+  return(
+    &lt;p>{`${props.name} ${props.age}`}&lt;/p>
+  )
+}
+---------              
+              </example>
+          </paragraph>
+          <subtitle>Functional component with hook useState()</subtitle>
+          <paragraph>
+              <info>Declaration of functional component in Typescript with useState hook</info>
+              <example>
+------------------------------
+
+interface FCInterfaceProps{
+  name:string;
+  age:number;
+}
+const functionalCompWithInterface:React.FC&lt;FCInterfaceProps> = ({name,age}) => {
+
+    //by specifing initial useState(0) value you setting a type
+    const [counter, setCounter] = useState(0);
+
+    //behind the scene creates this:  const [counter, setCounter] = useState&lt;number>(0);
+
+  return(
+    &lt;p>{`${name} ${age}`}&lt;/p>
+  )
+}
+
+
+---------              
+
+
+              </example>
+          </paragraph>
+          <subtitle>FC with Mouse Event</subtitle>
+          <paragraph>
+              <info>Declaration of FC in Typescript with MouseEvent</info>
+              <example>
+------------------------------
+
+const functionalCompWithInterface: React.FC= () => {
+
+//(e:React.MouseEvent) this would be sufficient but better to be more specific
+
+   (e:React.MouseEvent&lt;HTMLButtonElement>)
+
+  const setMe = (e:React.MouseEvent&lt;HTMLButtonElement>) =>{
+    setCounter(counter+1)
+  }
+  return (
+    &lt;>
+      &lt;button onClick={setMe} >onClick&lt;/button>
+   &lt;/>
+  );
+};
+
+
+---------              
+
+              </example>
+          </paragraph>
+<subtitle>useCallback()</subtitle>
+          <paragraph>
+  <info>useCallback allows you to 'lock' function based on property 
+  into [dependencyArray] or called and lock only once with empty array[]. This funciton will be only re-render 
+  if the property that is depending on will change. Remember!, here we are LOCKING THE FUNCTION , not what is return from 
+  the function (as it is in useMemo) therefore funcion could be pass down in child props and execute from the child
+  to be sure the child has always same function as was send to it on initial render.
+
+      useCallback(()=>fuction,[])
+
+  </info>
+              <example>
+------------------------------
+
+interface FCInterfaceProps{
+  name:string;
+  age:number;
+}
+const functionalCompWithInterface:React.FC&lt;FCInterfaceProps> = ({name,age}) => {
+
+   const [childCounter, setChildValue] = useState(); 
+  //this initial state doesn t matter it will
+  //be overridden from the child on first render
+
+    const methodCalledFromChild = useCallback((value:number) => {
+      //parent state is manipulate from the Child thanks to the function being locked and 
+      //being able to be executed with arguements
+      setChildValue(value);
+  }, []);
+
+ 
+
+  return(
+    &lt;p onClick={methodCalledFromChild}>{`${name} ${age}`}&lt;/p>
+  )
+}
+
+
+---------              
+
+
+              </example>
+          </paragraph>
+<subtitle>useCallback() with React.Memo(ChildCompoent)</subtitle>
+          <paragraph>
+  <info>useCallback allows you to 'lock' function based on property 
+  into [dependencyArray] or call and lock once with empty array[]. This allows to pass this locked function down into the props and be 
+  sure it the the same function as initial render. Just because it is the same function Child component wrapped in React.Memo(ChildCompoent)
+  it will not re-render because the props have not changed.(One condition is none of the props passed down can not changed). React.Memo(ChildCompoent)
+  will only re-render if props comparison will show change in props. That way we have controllable enviroment for both parent and child Compoent.
+  </info>
+              <example>
+------------------------------
+
+------------ Parent component -----------------------
+
+interface FCInterfaceProps{
+  name:string;
+  age:number;
+}
+const Parent:React.FC&lt;FCInterfaceProps> = ({name,age}) => {
+
+   const [childCounter, setChildValue] = useState();  //this initial state doesn t matter it will be overridden from the child on first render
+
+    const methodCalledFromChild = useCallback((value:number) => {
+      setChildValue(value);
+  }, []);
+
+ 
+
+  return(
+    &lt;p onClick={methodCalledFromChild}>{`${name} ${age}`}&lt;/p>
+  )
+}
+------------ Child component -----------------------
+
+const Child:React.FC&lt;FCInterfaceProps> = ({name,age}) => {
+
+    const { methodCalledFromChild } = props;
+
+  let value = 1000;
+  /*
+    React.Memo(ChildComponentWithReactMemo) will stop unnecessary render 
+    therefore value = 0 should be called only once. The component should not 
+    re-render as long as the props stay the same;
+  */
+
+  const updateValue = () => {
+    value++;
+    methodCalledFromChild(value);
+  };
+
+  //initial state set for parent from the child
+  methodCalledFromChild(value); //this part wont re-render so it safe it wont change
+
+  return (
+    &lt;div>
+      &lt;button onClick={updateValue}>{'Child counter'}&lt;/button>
+    &lt;/div>
+  );
+
+ 
+
+  return(
+    &lt;p>{`${name} ${age}`}&lt;/p>
+  )
+}
+
+
+---------              
+
+
+              </example>
+          </paragraph>
+          <subtitle>useMemo()</subtitle>
+          <paragraph>
+  <info>useCallback allows you to 'lock' function RETURN value based on property 
+  into [dependencyArray] or called and lock only once with empty array[]. This funciton will be only called and return a value 
+  if the property that is depending on will change. Remember!, here we are LOCKING THE FUNCTION WITH EXECUTION. Thefore it is useful
+  for the optamization purposes when we want to perform some compuation only when propety changes.
+
+      const complexComputation(value:number){
+        //some complex mutation 
+        return value + complex mutation
+      }
+      useMemo(()=>{ return complexComputation(propertyA)},[propertyA]) 
+  
+  Only will perform complexComputation(value:number) when the property 'propertyA' changes
+
+  </info>
+              <example>
+------------------------------
+
+interface FCInterfaceProps{
+  name:string;
+  age:number;
+}
+const functionalCompWithInterface:React.FC&lt;FCInterfaceProps> = ({name,age}) => {
+
+   const [counter, setCounter = useState(); 
+
+
+   const complexComputation(value:number){
+        //some complex mutation 
+        return value + complex mutation
+      }
+  
+  useMemo(()=>{ return complexComputation(counter)},[counter]) 
+
+  return(
+    &lt;p>{`${name} ${age}`}&lt;/p>
+  )
+}
+
+---------              
+
+              </example>
+          </paragraph>
+<subtitle>useEffect() async</subtitle>
+          <paragraph>
+  <info>use effect it is a hook perfect for handling asyncrounous code, there certain rules how it should be 
+    composed but the most important is the depedency array [] that wil dictate when the hook is being 
+    executed. The example bellow.
+  </info>
+              <example>
+------------------------------
+
+interface FCInterfaceProps{
+  name:string;
+  age:number;
+}
+const Parent:React.FC&lt;FCInterfaceProps> = ({name,age}) => {
+
+   const [currentId, setCurrentId ] = useState(1); 
+   const [loading, isLoaing ] = useState(false);
+   const [error, setError ] = useState(null);
+
+
+  useEffect(()=>{
+    const mockApi = async () => {
+      try{
+          //below doesnt need to be in depedency array cause it doesnt affect outcome of hook
+          isLoading(true)
+
+           //below HAS TO be in depedency array cause it affects outcome of hook
+          const response = await get({id:currentId})
+
+          //below doesnt need to be in depedency array cause it doesnt affect outcome of hook
+          isLoading(false)
+
+          //response set to data useState hook
+          setData((prevData=>Array.isArray(prevData)?[response,...prevData]:[response]))
+        }
+      catch(e) {
+        //both dont effect 
+        isLoading(false)
+        hasError(e)
+      }
+    }
+    //1. conditional call
+    //this will require put 'error' constant in dependency array cause the outcome depend on it 
+    // [currentId,error]
+    if(!error) mockApi()
+
+    //2 regular call
+    mockApi()
+   //every time currentId changes it will cause useEffect to re-rerender
+  },[currentId])
+
+---------              
+
+              </example>
+          </paragraph>
+<subtitle>useEffect() object in depedency</subtitle>
+          <paragraph>
+  <info>useEffect() comes with dependency array useEffect(()=>{},[])
+    1. when dependency array is empty means it will fire on componentDidMount only
+
+    2. when is not empty it will fire every time it dependency value changes/updates
+
+         useEffect(()=>{},[data]
+
+    3. when dependency array has object inside, React can compare values only 
+    on shalow level, so for more complex object (deep nesting) We need to use the 
+    trick to convert them to string or json string and then put them in 
+    depedncy array
+
+  </info>
+              <example>
+------------------------------
+
+interface FCInterfaceProps{
+  name:string;
+  age:number;
+  locations:{[key:string]:any};
+}
+
+
+const Parent:React.FC&lt;FCInterfaceProps> = ({name,age,locations}) => {
+
+   const [currentId, setCurrentId ] = useState(1); 
+   const [loading, isLoaing ] = useState(false);
+   const [error, setError ] = useState(null);
+   //this objec is has to be converted to string to avoid deep nested comparision
+  const locationsJsonString = JSON.stringify(locations)
+
+
+
+  useEffect(()=>{
+    const mockApi = async () => {
+      try{
+          //below doesnt need to be in depedency array cause it doesnt affect outcome of hook
+          isLoading(true)
+          //convert back to object 
+          const locationsObject = JSON!.parse(locationsJsonString);
+
+
+           //below HAS TO be in depedency array cause it affects outcome of hook
+          const response = await get({id:currentId,locations:locationsObject})
+
+          //below doesnt need to be in depedency array cause it doesnt affect outcome of hook
+          isLoading(false)
+
+          //response set to data useState hook
+          setData((prevData=>Array.isArray(prevData)?[response,...prevData]:[response]))
+        }
+      catch(e) {
+        //both dont effect 
+        isLoading(false)
+        hasError(e)
+      }
+    }
+    //1. conditional call
+    //this will require put 'error' constant in dependency array cause the outcome depend on it 
+    // [currentId,error]
+    if(!error) mockApi()
+
+    //2 regular call
+    mockApi()
+
+  // location object it has been dependend on it json() version for string comparizon
+  //every time currentId changes it will cause useEffect to re-rerender
+  },[locationsJsonString,currentId])
+
+---------              
+
+              </example>
+          </paragraph>
+<subtitle>useEffect() clean up function</subtitle>
+          <paragraph>
+  <info>use effect also comes with cleanup method that is executed before and after hook is being updated 
+    The example below shows setTimeout() timer implementation.
+  </info>
+              <example>
+------------------------------
+
+interface FCInterfaceProps{
+  name:string;
+  age:number;
+}
+const Parent:React.FC&lt;FCInterfaceProps> = ({name,age}) => {
+
+   const [currentId, setCurrentId ] = useState(1); 
+   const [loading, isLoaing ] = useState(false);
+   const [error, setError ] = useState(null);
+
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+
+      //update CurrentId on every Timeout callback
+       setCurrentId((previousId) => previousId &lt; maxCalls ? previousId + 1 : previousId)
+
+      //on every update or dismount it will remove old timer and call useEffect again 
+      return () => {
+        return clearTimeout(timer)
+      }
+
+    }, timeLap)
+    //this useEffect will run everty time there is update to setCurrentId method
+  }, [setCurrentId])
+
+---------              
+
+              </example>
+          </paragraph>
+<subtitle>useRef()</subtitle>
+          <paragraph>
+  <info>useRef allows you to set a value as 
+
+    const element = useRef&lt;HTMLInputElement>(null) 
+  
+  and then change it value by element.current = newValue. What is IMPORTANT by updating the value of element.current COMPONENT it
+  WILL NOT BE re-rendered. It will update element.current without the whole compoent to be re-rendered.
+
+  </info>
+              <example>
+------------------------------
+
+interface FCInterfaceProps{
+  name:string;
+  age:number;
+}
+const Parent:React.FC&lt;FCInterfaceProps> = ({name,age}) => {
+
+   const [toggle, toggleState = useState(true); 
+
+
+
+  return(
+    &lt;p onClick={toggleState(!toggle)}>{`${name} ${age}`}&lt;/p>
+  )
+}
+
+---------- Child component --------------
+
+interface FCInterfaceProps{
+  name:string;
+  age:number;
+}
+const Parent:React.FC&lt;FCInterfaceProps> = ({name,age}) => {
+
+  const renders = useRef(0) 
+
+ console.log('renders times',renders.current++)
+
+  //will track only renders caused by parent toggle method it wont re-render basad on renders.current variable update
+  
+
+  return(
+    &lt;p>{`${name} ${age}`}&lt;/p>
+  )
+}
+
+---------              
+
+              </example>
+          </paragraph>
+<subtitle>useRef() counter versus useState counter</subtitle>
+          <paragraph>
+  <info>useRef allows You to set initial value useRef(1) just like useState(1) but the update to both behaves difrentlly:
+
+
+      1. useRef(1) will call () => ref.current++; but U want see the change in UI since the render part is not 
+      triggered ! 
+
+      Also ref.current current value will be kept throught all updates 
+
+      2. useState(1) will call () => setCount(c => c + 1); and on every update will re-render entire component 
+      showing the current value in UI 
+
+      Also besides if you first run () => ref.current++; and then () => setCount(c => c + 1); just because U updating 
+      entire render U will also see {ref.current} updated since its execution method was previously called. 
+
+  </info>
+              <example>
+------------------------------
+
+const [count, setCount] = useState(1);
+const ref = useRef(1);
+
+  console.log('renders')
+ 
+  const incCount = () => setCount(c => c + 1);
+ 
+  const incRef = () => ref.current++;
+ 
+  return (
+    &lt;div className="App">
+      &lt;button onClick={incCount}>count: {count}&lt;/button>
+      &lt;hr />
+      &lt;button onClick={incRef}>ref.current: {ref.current}&lt;/button>
+    &lt;/div>
+  );
+
+---------              
+
+              </example>
+          </paragraph>
+          <subtitle>FC with Mouse Event</subtitle>
+          <paragraph>
+              <info>Declaration of FC in Typescript with MouseEvent</info>
+              <example>
+------------------------------
+
+const functionalCompWithInterface: React.FC= () => {
+
+//(e:React.MouseEvent) this would be sufficient but better to be more specific
+
+   (e:React.MouseEvent&lt;HTMLButtonElement>)
+
+  const setMe = (e:React.MouseEvent&lt;HTMLButtonElement>) =>{
+    setCounter(counter+1)
+  }
+  return (
+    &lt;>
+      &lt;button onClick={setMe} >onClick&lt;/button>
+   &lt;/>
+  );
+};
+
+
+---------              
+
+              </example>
+          </paragraph>
+          <subtitle>FC with Mouse Keyboard Event</subtitle>
+          <paragraph>
+              <info>Declaration of FC in Typescript with KeyboardEvent</info>
+              <example>
+------------------------------
+
+const functionalCompWithInterface: React.FC= () => {
+
+//(e:React.KeyboardEvent) this would be sufficient but better to be more specific
+
+   (e:React.KeyboardEvent&lt;HTMLTextAreaElement>)
+
+ const setMe = (e:React.KeyboardEvent&lt;HTMLTextAreaElement>) =>{
+    setCounter(counter+1)
+  }
+  return (
+    &lt;>
+         &lt;textarea onKeyPress={setMe} />
+   &lt;/>
+  );
+};
+
+
+---------              
+
               </example>
           </paragraph>
       </content>
