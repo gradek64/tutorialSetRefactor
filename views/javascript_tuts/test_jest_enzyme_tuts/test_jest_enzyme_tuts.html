@@ -66,7 +66,11 @@
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>alternative to snapshot</a><span class="tooltiptext">alternative to snapshot</span>
                            
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>selecting DOM elements</a><span class="tooltiptext">selecting DOM elements</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>selecting DOM elements {container}</a><span class="tooltiptext">selecting DOM elements {container}</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>events (click,change) and react-dom/test-utils</a><span class="tooltiptext">events (click,change) and react-dom/test-utils</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>testing props (callbacks)</a><span class="tooltiptext">testing props (callbacks)</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>testing async custom hook</a><span class="tooltiptext">testing async custom hook</span>
                            
@@ -741,11 +745,14 @@ it(&#39;initial state should be zero (0)&#39;, () =&gt; {
                 <div class="band-inner">
 
                   <p>React testing libray comes with lots of more or less useufull selectors, personaly I prefer use css selectors. U can use them by using 
+-----Default Conatainer------
 const {container} = render( component {&lt;..props}/&gt;)
+
 Rembeber they want U to use {container} as custom or defualt container that component is being rendered to. as table component as custom container 
 
 /----------/
 
+-----Custom Container-----
 const table = document.createElement(&#39;table&#39;)
 
 const { container } = render(&lt;TableBody {...props} /&gt;, {
@@ -761,7 +768,6 @@ If you don specify you custom cotainer then is rendered and appended to div elem
 
 const { container } = render(&lt;CounterComp /&gt;);
 const button1 = container.querySelectorAll(&#39;button&#39;)[0];
-fireEvent.click(button1);
 expect(container.querySelector(&#39;#display&#39;)).toHaveTextContent(
   &#39;You clicked 1 times&#39;
 );
@@ -791,6 +797,64 @@ in documenation
               </div>
             
               <div class="band-container partition " part="part-5">
+                <div class="band-inner">
+
+                  <p>Events have this syntax 
+
+
+fireEvent[eventName](node: HTMLElement, eventProperties: Object)
+
+const {fireEvent}  from &#39;react-testing-libary&#39;
+fireEvent.click(element, {target:{value:&#39;Greg&#39;}})</p>
+                  <div class="codeWraper">
+                    <code>/-------- depends on the element you have option with events as --------/
+
+fireEvent.click(element, {target:{value:&#39;Greg&#39;}})
+fireEvent.change(element, {target:{value:&#39;Greg&#39;}})
+fireEvent.keyDown(domNode, { key: &#39;Enter&#39;, code: &#39;Enter&#39; })
+fireEvent.keyDown(domNode, { key: &#39;A&#39;, code: &#39;KeyA&#39; })
+
+//submit
+const rightClick = { button: 2 }
+fireEvent.click(getByText(&#39;Submit&#39;), rightClick)
+
+//events seems to be a bit buggy (except click) with react Testing libraray
+//alternative will to to use react-test utils as below 
+
+import { Simulate } from &#39;react-dom/test-utils&#39;;
+Simulate.change(maxFilterRadioButton, { target: { value: &#39;max&#39; } } as any)</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-6">
+                <div class="band-inner">
+
+                  <p>Once you render a component as 
+
+const { container } = render(&lt;SearchTemperature filterCallback={filterCallbackMock} /&gt;);
+
+ U will send filterCallback prop to the componenent that needs to be tested as below:</p>
+                  <div class="codeWraper">
+                    <code>/-------- testing callback prop --------/
+
+describe(&#39;on submit temperature form&#39;, () =&gt; {
+    it(&#39;should submit search with calling callback method&#39;, () =&gt; {
+
+      const filterCallbackMock = jest.fn()
+      const { container } = render(&lt;SearchTemperature filterCallback={filterCallbackMock} /&gt;);
+      const { filterInput, buttonSubmit } = getFormElements(container)
+      filterInput.value = &#39;30&#39;
+      fireEvent.click(buttonSubmit)
+      expect(filterCallbackMock).toHaveBeenCalledWith([&#39;min&#39;, 30])
+
+    })
+  })</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-7">
                 <div class="band-inner">
 
                   <p>Custom hooks allow you to expose state logic outside to other files. At the moment the only way to test is by @testing-library/react-hooks library which is the  addition to @testing-library/react. Example below</p>
@@ -865,7 +929,7 @@ in 2 ways , described in this document under: MOCK ENTIRE MODULE STORED IN NODE_
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-6">
+              <div class="band-container partition " part="part-8">
                 <div class="band-inner">
 
                   <p>There are 2 stages for testing async cutom hook before and after data
@@ -956,7 +1020,7 @@ describe(&#39;useFetch() responds with error&#39;, () =&gt; {
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-7">
+              <div class="band-container partition " part="part-9">
                 <div class="band-inner">
 
                   <p>Async react component needs to be tested before and after response is back. To achive that our test has to be set for async fuction and await the response for update. Details below:</p>
@@ -1068,7 +1132,7 @@ function waitForElement&lt;T&gt;(
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-8">
+              <div class="band-container partition " part="part-10">
                 <div class="band-inner">
 
                   <p>in latest versions v10+ most async methods are deprecated and replaced with one waitFor(). Below is example how to use it, the main diffrence is that waitFor() doesnt return result but insted takes async response inside it method as:
