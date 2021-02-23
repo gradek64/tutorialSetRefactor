@@ -106,7 +106,7 @@
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>test redux-saga</a><span class="tooltiptext">test redux-saga</span>
                            
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>test saga with external library as redux-saga-test-plan</a><span class="tooltiptext">test saga with external library as redux-saga-test-plan</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>test redux with react testing libraray</a><span class="tooltiptext">test redux with react testing libraray</span>
                         
                     </ul>
                 
@@ -1436,45 +1436,68 @@ sample useage file::: REact_studies_examples/redux/saga-thunk-redux-plus-tests/s
               <div class="band-container partition " part="part-4">
                 <div class="band-inner">
 
-                  <p>The best libray that worked for me wat to use redux-saga-test-plan that allows you to define store passed to saga and run it 
-                  entirely from bottom to top and allows you to return outcome to jest it(),calback so this way is connected to jest functionality for passing 
-                  or failing test.</p>
+                  <p>React testing library allows you to create own wrapper in this
+                case store Provider and hook real-application reducer to all action 
+                calls will reflect in changes in UI of components</p>
                   <div class="codeWraper">
-                    <code>/ ------- /
+                    <code>//---------------- example file of custom_render_redux.tsx ---------
 
-1. /- import your library 
+// 1.import all needed libraries
+import React, { ReactElement } from &#39;react&#39;
+import { Provider, } from &#39;react-redux&#39;;
+import { createStore, combineReducers } from &#39;redux&#39;
+import { render } from &#39;@testing-library/react&#39;
+import cartReducer from &#39;../redux/reducers/cart_reducer&#39;
+import { basketItemsInterface } from &#39;../redux/reducers/cart_reducer&#39; 
 
---  import { expectSaga } from &quot;redux-saga-test-plan&quot;;
 
-2. /- import saga helpers function used in the test 
+// 2. create iterface of your reducer you will use for testing
+export interface ICart {
+  cart: {
+    items: basketItemsInterface[],
+    numberOfItems: number,
+  }
+}
 
---  import { takeEvery } from &quot;redux-saga/effects&quot;;
+/* 3.
+   start exporing your custom render function from react-render-library
+   this fucntion will take 
+    =&gt;component (to be wrapped in redux provider)
+    //option with property state
+    =&gt;options{
+      state
+        :cart:{initialCart}
+      }
+    ...other option to pass 
 
-                  
-3. /- test saga with expectSaga() 
+  */
 
-it(&quot;should call fetch and dispatches setChannelInfo when channel.get(`fetchStatus`) === NOT_FETCHED&quot;, () =&gt; {
 
-    //mutate state object no  need to assing new variable
-    Object.assign(state.channels[0], { fetchStatus: &quot;NOT_FETCHED&quot; });
+export function renderWithRedux(
+  component: ReactElement,
+  options: {
+    state: ICart,
+    [key: string]: any,
+  }
+) {
+  const rootReducer = combineReducers({
+    cart: cartReducer,
+  })
+  //create store methot takes reducer and initial store
+  const store = createStore(rootReducer, options.state);
+  const AllProviders: React.FC&lt;{}&gt; = ({ children }) =&gt;
+    &lt;Provider store={store}&gt;
+      {children}
+    &lt;/Provider&gt;
 
-    return expectSaga(fetchChannelInfo, parameterID)
-      .withState(fromJS(state))
-      .put({
-        type: &quot;SET_CHANNEL_INFO&quot;,
-        channel: fromJS({ fetchStatus: &quot;FETCHED&quot;, response: &quot;success&quot; }),
-      })
-      .run();
-
+  // custom wrapped method with wrapper
+  const wrappedComponent = render(component, {
+    wrapper: AllProviders,
+    ...options
   });
 
-//IMPORTANTE::: by returning expectSaga() method you will connected to the jest library for handling errors
-
-/---/ 
-
-example file:::: REact_studies_examples/redux/saga-thunk-redux-plus-tests/src/sagas/__tests__/channelSaga.spec.js
-
-/---/</code>
+  return { store, ...wrappedComponent };
+}</code>
                   </div>
                 </div>
               </div>

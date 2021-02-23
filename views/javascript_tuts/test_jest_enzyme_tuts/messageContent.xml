@@ -1115,48 +1115,72 @@ sample useage file::: REact_studies_examples/redux/saga-thunk-redux-plus-tests/s
 
                 </example>
             </paragraph>
-            <subtitle>test saga with external library as redux-saga-test-plan</subtitle>
+            <subtitle>test redux with react testing libraray</subtitle>   
             <paragraph>
-                <info>The best libray that worked for me wat to use redux-saga-test-plan that allows you to define store passed to saga and run it 
-                  entirely from bottom to top and allows you to return outcome to jest it(),calback so this way is connected to jest functionality for passing 
-                  or failing test.</info>
+                <info>React testing library allows you to create own wrapper in this
+                case store Provider and hook real-application reducer to all action 
+                calls will reflect in changes in UI of components</info>
                 <example>
-/ ------- /
 
-1. /- import your library 
+//---------------- example file of custom_render_redux.tsx ---------
 
---  import { expectSaga } from "redux-saga-test-plan";
+// 1.import all needed libraries
+import React, { ReactElement } from 'react'
+import { Provider, } from 'react-redux';
+import { createStore, combineReducers } from 'redux'
+import { render } from '@testing-library/react'
+import cartReducer from '../redux/reducers/cart_reducer'
+import { basketItemsInterface } from '../redux/reducers/cart_reducer' 
 
-2. /- import saga helpers function used in the test 
 
---  import { takeEvery } from "redux-saga/effects";
+// 2. create iterface of your reducer you will use for testing
+export interface ICart {
+  cart: {
+    items: basketItemsInterface[],
+    numberOfItems: number,
+  }
+}
 
-                  
-3. /- test saga with expectSaga() 
+/* 3.
+   start exporing your custom render function from react-render-library
+   this fucntion will take 
+    =>component (to be wrapped in redux provider)
+    //option with property state
+    =>options{
+      state
+        :cart:{initialCart}
+      }
+    ...other option to pass 
 
-it("should call fetch and dispatches setChannelInfo when channel.get(`fetchStatus`) === NOT_FETCHED", () => {
+  */
 
-    //mutate state object no  need to assing new variable
-    Object.assign(state.channels[0], { fetchStatus: "NOT_FETCHED" });
 
-    return expectSaga(fetchChannelInfo, parameterID)
-      .withState(fromJS(state))
-      .put({
-        type: "SET_CHANNEL_INFO",
-        channel: fromJS({ fetchStatus: "FETCHED", response: "success" }),
-      })
-      .run();
+export function renderWithRedux(
+  component: ReactElement,
+  options: {
+    state: ICart,
+    [key: string]: any,
+  }
+) {
+  const rootReducer = combineReducers({
+    cart: cartReducer,
+  })
+  
+  //create store methot takes reducer and initial store
+  const store = createStore(rootReducer, options.state);
+  const AllProviders: React.FC&lt;{}> = ({ children }) =>
+    &lt;Provider store={store}>
+      {children}
+    &lt;/Provider>
 
+  // custom wrapped method with wrapper
+  const wrappedComponent = render(component, {
+    wrapper: AllProviders,
+    ...options
   });
 
-//IMPORTANTE::: by returning expectSaga() method you will connected to the jest library for handling errors
-
-/---/ 
-
-example file:::: REact_studies_examples/redux/saga-thunk-redux-plus-tests/src/sagas/__tests__/channelSaga.spec.js
-
-/---/
-
+  return { store, ...wrappedComponent };
+}
                 </example>
             </paragraph>
         </content>
