@@ -16,6 +16,10 @@
 <ul class="links">
 <!--list-tag-->
     
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts">managing node version nvm</a><span class="tooltiptext">managing node version nvm</span>
+                 
+      </li>
+    
       <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts">node package versions</a><span class="tooltiptext">node package versions</span>
                   
                     <ul class="linksNested">
@@ -149,6 +153,87 @@
    
       
       <section  class="band band-b activeSection"  class="band band-b">
+          <h1> managing node version nvm </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>node version control (nvm)</p>
+                  <div class="codeWraper">
+                    <code>------
+Those are the steps for setting up node version control for mac os:
+
+
+1. create .bashrc or .bash_profile in your home directory 
+
+(unless you already have one created one of another)
+
+  cd ~ 
+  
+//create 
+
+  &gt; .bashrc
+
+2. use wget link to install nvm for the time of writing this it is 
+
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+
+3 bash script should be updated and then check if installation created directory:
+
+    cd ~/.nvm 
+
+4. reload the bash script where the nvm is saved 
+
+   source ~/.bashrc 
+
+5. verify installation 
+
+  command -v nvm
+
+//or 
+
+  nvm --version 
+
+
+--------------------- installing node versions --------------------
+
+1. install node version you required by 
+
+    nvm install 12.13.0 
+    nvm install 8.17.0  
+
+or any version required 
+
+2. set you default node by alias: 
+
+    nvn alias default 12.13.0
+
+3 set other alias
+
+    nvm alias node8 8.17.0
+
+    (or nvm alias name 8 major version if U have only one version istalled)
+
+4. use default version by 
+
+     nvm use default
+
+4a. use other version or alias
+
+     nvm use node8
+
+-------------------------------------------------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
           <h1> node package versions </h1> 
           
               <div class="band-container partition first" part="part-1">

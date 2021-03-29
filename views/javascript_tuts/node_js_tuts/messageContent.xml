@@ -1,8 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapters>
-<chapter>
+<chapter> 
+  <subject>managing node version nvm</subject>
+   <content>
+    <paragraph>
+        <info>node version control (nvm)</info>
+        <example>
+------
+Those are the steps for setting up node version control for mac os:
+
+
+1. create .bashrc or .bash_profile in your home directory 
+
+(unless you already have one created one of another)
+
+  cd ~ 
+  
+//create 
+
+  > .bashrc
+
+2. use wget link to install nvm for the time of writing this it is 
+
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+
+3 bash script should be updated and then check if installation created directory:
+
+    cd ~/.nvm 
+
+4. reload the bash script where the nvm is saved 
+
+   source ~/.bashrc 
+
+5. verify installation 
+
+  command -v nvm
+
+//or 
+
+  nvm --version 
+
+
+--------------------- installing node versions --------------------
+
+1. install node version you required by 
+
+    nvm install 12.13.0 
+    nvm install 8.17.0  
+
+or any version required 
+
+2. set you default node by alias: 
+
+    nvn alias default 12.13.0
+
+3 set other alias
+
+    nvm alias node8 8.17.0
+
+    (or nvm alias name 8 major version if U have only one version istalled)
+
+4. use default version by 
+
+     nvm use default
+
+4a. use other version or alias
+
+     nvm use node8
+
+-------------------------------------------------------------------------
+
+
+
+
+
+
+        </example>
+    </paragraph>
+  </content>
+  </chapter> 
+  <chapter> 
     <subject>node package versions</subject>
     <content>
+
         <subtitle>install packages npm i</subtitle>
         <paragraph>
             <info>
@@ -113,7 +193,7 @@ update otherwise!
 /--/
 
 
-            </example>
+</example>
         </paragraph>
         <subtitle>finding nearest node executive</subtitle>
         <paragraph>
