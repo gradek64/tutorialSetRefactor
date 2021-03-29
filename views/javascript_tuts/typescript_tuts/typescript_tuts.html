@@ -74,6 +74,22 @@
                 
       </li>
     
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts">Promises</a><span class="tooltiptext">Promises</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>regular Promise syntax</a><span class="tooltiptext">regular Promise syntax</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>Promise chaining</a><span class="tooltiptext">Promise chaining</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>promise fetch response</a><span class="tooltiptext">promise fetch response</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>Promise is async function</a><span class="tooltiptext">Promise is async function</span>
+                        
+                    </ul>
+                
+      </li>
+    
       <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts">typescript own types</a><span class="tooltiptext">typescript own types</span>
                   
                     <ul class="linksNested">
@@ -99,6 +115,8 @@
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>Required&lt;type&gt;</a><span class="tooltiptext">Required&lt;type&gt;</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>Readonly&lt;classicMotorbikeCollection&gt;</a><span class="tooltiptext">Readonly&lt;classicMotorbikeCollection&gt;</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>Record same as {[key:string]:any}</a><span class="tooltiptext">Record same as {[key:string]:any}</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>Record&lt;string, customType&gt;</a><span class="tooltiptext">Record&lt;string, customType&gt;</span>
                            
@@ -138,13 +156,15 @@
                 
       </li>
     
-      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts">function overloads</a><span class="tooltiptext">function overloads</span>
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts">functions</a><span class="tooltiptext">functions</span>
                   
                     <ul class="linksNested">
                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>function overloads syntax</a><span class="tooltiptext">function overloads syntax</span>
                            
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>next to fill</a><span class="tooltiptext">next to fill</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>function Contextual Typing</a><span class="tooltiptext">function Contextual Typing</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>function signature v function interface</a><span class="tooltiptext">function signature v function interface</span>
                         
                     </ul>
                 
@@ -154,6 +174,10 @@
                   
                     <ul class="linksNested">
                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>Typecasting v type assertions</a><span class="tooltiptext">Typecasting v type assertions</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>double casting (last force method)</a><span class="tooltiptext">double casting (last force method)</span>
+                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>Type casting with html elements</a><span class="tooltiptext">Type casting with html elements</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>type casting not null values</a><span class="tooltiptext">type casting not null values</span>
@@ -735,6 +759,102 @@ seter4();
   
       
       <section   class="band band-b" class="band band-b">
+          <h1> Promises </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>Typescript by defualt will alwaus return promise as 
+
+
+Promise&lt;unknown&gt;
+
+or for fetch 
+
+Promise&lt;Response&gt;
+
+It is alwasy better to be more presicised what Promise should 
+return as the examples below:</p>
+                  <div class="codeWraper">
+                    <code>//default Promise return: unknown (even though we contextually provide string)
+
+new Promise((resolve) =&gt; {resolve(&#39;1&#39;)});
+
+
+//promise explicitly returns: string 
+
+new Promise&lt;string&gt;((resolve) =&gt; {resolve(&#39;1&#39;)});
+
+ //promise explicitly returns: object of any properties 
+
+new Promise&lt;Record&lt;string,any&gt;&gt;((resolve) =&gt; {resolve({prop:1,prop2:&#39;string&#39;})});</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>Promise that returns another promise will alwasy return a promise type that is last in the chain:</p>
+                  <div class="codeWraper">
+                    <code>//first promise returns string;
+
+const firstPromise = new Promise&lt;string&gt;((resolve) =&gt; {resolve(&#39;1&#39;)});   
+
+//second promise is to be chained to the first 
+
+const secondPromise = firstPromise.then((firstRusult)=[firstResult])
+
+//third Promise will be of type of last one 
+
+const thirdPromise:string[] = firstPromise.then((secondPromise)=secondPromise)</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>fetch response is also promise and has the same rules as promise chaining the last promise return in fetch or fetch itselft (if there is only
+              fetch on chaining) will have Return value of Promise&lt;Response&gt; if you want to convert &lt;Response&gt; to the rigid value as string then first you need to converted to unknown</p>
+                  <div class="codeWraper">
+                    <code>//converting default Promise&lt;Response&gt; =&gt; Promise&lt;unknown&gt; =&gt; Promise&lt;string&gt;
+
+const one:Promise&lt;Response&gt; = fetch(&#39;url&#39;) 
+const three:Promise&lt;unknown&gt;  = one.then((result)=&gt; result as unknown)
+const four:Promise&lt;string&gt;  = three.then((result)=&gt; result as string)
+
+console.log(four.then((result)=&gt;result ))
+
+//the sequence has to be as the one above for TS to be happy about conversion</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
+                  <p>In example when promise is assign to the async funcion as return type then we can cast the type for the Response since the Promise response by defualt will be &lt;Promise&lt;unknown&gt;&gt;</p>
+                  <div class="codeWraper">
+                    <code>//function has been casted from Promise&lt;unknown&gt; to Promise&lt;string&gt; 
+
+async function asyncCode() {
+  return new Promise(resolve=&gt;resolve(&#39;ready&#39;))
+}
+
+const ss:Promise&lt;string&gt; = asyncCode() as Promise&lt;string&gt;
+console.log(ss.then(()=&gt;&#39;greg&#39;))</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
           <h1> typescript own types </h1> 
           
               <div class="band-container partition first" part="part-1">
@@ -945,6 +1065,47 @@ let Vincent: Readonly&lt;classicMotorbikeCollection&gt; = {
               <div class="band-container partition " part="part-5">
                 <div class="band-inner">
 
+                  <p>Record has to define 2 types for the object</p>
+                  <div class="codeWraper">
+                    <code>==&gt; Record as any object
+ Record&lt;any,any&gt;
+
+==&gt; Record as string property any any value
+
+ Record&lt;string,any&gt; ===  {[key:string]:any}
+
+==&gt; Record as string proprerty with number values
+
+ Record&lt;string,number&gt; ===  {[key:string]:number}
+
+ ==&gt; Record with specific properties and string values
+
+ Record&lt;&#39;prop1&#39;|&#39;prop2&#39;,string&gt; ===  {prop1:string,prop2:string}
+
+ ==&gt; Record with specific properties and specific values typescript
+
+Record&lt;&#39;gg&#39;|&#39;pp&#39;,string | number&gt;  === {
+      gg:string|number,
+      pp:string|number
+    }
+
+==&gt; object literals with object literals array
+
+Record&lt;string,Record&lt;string,string | number&gt;[]&gt;
+  === {
+    [key:string]:{[key:string]:string|number}[]
+  }
+
+ ==&gt; Record as string property with number values
+
+ Record&lt;string,Record&lt;any,any&gt;[]&gt; ===  {[key:string]: {[key:string]:any}[]}</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-6">
+                <div class="band-inner">
+
                   <p>Record takes 2 generic types one for object Property, the other for type what property
                 They are mainly used for:
                 * represent as Array, Object, string etc ...
@@ -991,7 +1152,7 @@ const shoppingListArray: Record&lt;number, Motorbikestype&gt; = {
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-6">
+              <div class="band-container partition " part="part-7">
                 <div class="band-inner">
 
                   <p>Pick will take only properties picked, selected from the type, which listed after coma Pick&lt;CystomType, &#39;make&#39; | &#39;type&#39;&gt;</p>
@@ -1015,7 +1176,7 @@ let newBike: Pick&lt;MotorbikesSet, &#39;make&#39; | &#39;type&#39;&gt; = {
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-7">
+              <div class="band-container partition " part="part-8">
                 <div class="band-inner">
 
                   <p>Omit is the opposite to Pick so omit some properties, whatever is not listed will be taken</p>
@@ -1042,7 +1203,7 @@ let newBike2: Omit&lt;MotorbikesSet, &#39;make&#39; | &#39;type&#39;&gt; = { spe
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-8">
+              <div class="band-container partition " part="part-9">
                 <div class="band-inner">
 
                   <p>Exlude allows you to exclude specific values from type literals (eliminate some specific values</p>
@@ -1063,7 +1224,7 @@ const RegistrationNumbersSet1:updatedRegistrationNumbers = 53535353 //OK
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-9">
+              <div class="band-container partition " part="part-10">
                 <div class="band-inner">
 
                   <p>Extract is the oposite to exlude so it will only take extracted values as final value</p>
@@ -1334,7 +1495,7 @@ getObjectPropertyValue({ name: &#39;Greg&#39; }, &#39;name&#39;); //correct
   
       
       <section   class="band band-b" class="band band-b">
-          <h1> function overloads </h1> 
+          <h1> functions </h1> 
           
               <div class="band-container partition first" part="part-1">
                 <div class="band-inner">
@@ -1370,15 +1531,88 @@ passStringOrNumber({4}); //not included in function overload</code>
               <div class="band-container partition " part="part-2">
                 <div class="band-inner">
 
-                  <p>Functional compoent in again Stateless compoents that accepts props as function argument and returns JSX syntax</p>
+                  <p>Typescript will assume return type, argument from the values 
+                predifined before</p>
                   <div class="codeWraper">
-                    <code>------------------------- Functional Stateless component-----------
+                    <code>1. function arguments with function signature 
 
- const FunctionalComponent = (props) =&gt; &lt;p&gt;I am functional component&lt;/p&gt;
+-----------------------------------
+==&gt; second argument Contextually assumed from the function signature
 
-ReactDOM.render(&lt;FunctionalComponent name=&quot;Greg&quot; /&gt;,document.getElementById(&#39;app&#39;));
+const addConst_ts_es6_cont: (xtype: number, ytypo: number) =&gt; number = (
+  x,
+  y: number
+) =&gt; {
+  return x + y;
+};
 
------------------------------------------------------------------</code>
+-----------------------------------
+==&gt; both arguments types due to contextual function signature
+
+const addConst_ts_es6_cont: (xtype: number, ytypo: number) =&gt; number = (x,y) =&gt; {
+  return x + y;
+};
+
+
+2. function arguments with interface
+
+-----------------------------------
+==&gt; single argument Contextually assumed from the function interface
+
+
+interface fn { (xtype: number, ytypo: number):number }
+
+const addConst_ts_es6_cont:fn  = (x:number,y) =&gt; {
+  return x + y;
+};
+
+-----------------------------------------------------------------
+==&gt; both arguments Contextually assumed from the function interface
+
+
+interface fn { (xtype: number, ytypo: number):number }
+
+const addConst_ts_es6_cont:fn  = (x,y) =&gt; {
+  return x + y;
+};</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>There are 2 ways of defining your function type either by
+        function signature or function interface as below:</p>
+                  <div class="codeWraper">
+                    <code>---- 1.function interface ----------
+
+interface fn { (xtype: number, ytypo: number):number }
+
+const addConst_ts_es6_cont:fn  = (x:number,y) =&gt; {
+  return x + y;
+};
+
+----- 2. function type  ----------
+
+type functionType= (x: number, y: number) =&gt; number;
+
+const addConst_ts_es6:functionType = (
+  x: number,
+  y: number
+) =&gt; {
+  return x + y;
+};
+
+
+------- 2a function type inline definition ------------
+
+const addConst_ts: (x: number, y: number) =&gt; number = function (
+  x: number,
+  y: number
+) {
+  return x + y;
+};</code>
                   </div>
                 </div>
               </div>
@@ -1393,6 +1627,61 @@ ReactDOM.render(&lt;FunctionalComponent name=&quot;Greg&quot; /&gt;,document.get
           <h1> Type casting </h1> 
           
               <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>Sometimes TS assumes type by its contextual typing but we can cast a type 
+                to the Variable, function as below:</p>
+                  <div class="codeWraper">
+                    <code>--------
+1 Typecasting helps you to convert types and provide consistent (expected) results
+
+this.createMarkerStyle(&lt;MarkerSymbolInfo&gt;symbolInfo);
+this.createMarkerStyle(symbolInfo as MarkerSymbolInfo);
+
+let element = event as HTMLElement
+let element = &lt;HTMLElement&gt;event
+
+// you can start to cast to any
+let element = event as any
+let element = &lt;any&gt;event
+
+
+2. Type assertions is actully change type to a diffrent TYPE as below
+
+ let length: number = (&lt;string&gt;lengthField);
+ let length: number = (lengthField as string);
+
+2a Cast type for let 
+
+  let whatNum: any = 42;
+  let reallyNum = &lt;number&gt;whatNum;
+  let reallyNum2 = whatNum as number; (JSX syntax)
+  console.log(typeof reallyNum); // number
+  console.log(typeof reallyNum2); // number
+
+3 type casting as type of Type 
+
+var x = 5;  
+var y = typeof x;</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>you can also double cast type. If you still want that Type, you can use a double assertion, but first asserting to unknown (or any) which is compatible with all types and therefore the compiler no longer complains</p>
+                  <div class="codeWraper">
+                    <code>//double assertion for Event
+                
+                function handler(event: Event) {
+                    let element = event as unknown as HTMLElement; // Okay!
+                }</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
                 <div class="band-inner">
 
                   <p>Type casting is the way to tell typescript that the type needed to be used U will provide better, typescript type assumption it not takken.</p>
@@ -1419,7 +1708,7 @@ const inputElement = document.getElementById(&#39;ss&#39;) as HTMLInputElement;
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-2">
+              <div class="band-container partition " part="part-4">
                 <div class="band-inner">
 
                   <p>typescript has a syntax of 

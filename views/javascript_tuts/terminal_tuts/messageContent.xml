@@ -82,6 +82,28 @@ echo file{2..10}.txt
       </content>
   </chapter>
   <chapter>
+      <subject>ps command</subject>
+      <content>
+         <paragraph>
+             <info> ps displays information about a selection of the active
+       processes</info>
+             <example>
+------------
+
+1. (look for process called redis)
+
+ps -aef | grep redis 
+
+2.to kill process called redis 
+
+pkill redis
+
+------------
+             </example>
+         </paragraph>
+      </content>
+  </chapter>
+  <chapter>
       <subject>file permisions</subject>
       <content>
       <subtitle>find it out the user (either root or any other user)</subtitle>

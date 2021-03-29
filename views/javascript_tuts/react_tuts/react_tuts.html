@@ -42,9 +42,25 @@
                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/react_tuts" partition>Functional Component no JSX</a><span class="tooltiptext">Functional Component no JSX</span>
                            
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/react_tuts" partition>React Select =&gt; predifined value</a><span class="tooltiptext">React Select =&gt; predifined value</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/react_tuts" partition>React Select =&gt; defualtValue</a><span class="tooltiptext">React Select =&gt; defualtValue</span>
+                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/react_tuts" partition>Functional Component with JSX</a><span class="tooltiptext">Functional Component with JSX</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/react_tuts" partition>React Components: Statefull Classes</a><span class="tooltiptext">React Components: Statefull Classes</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/react_tuts">dynamic import</a><span class="tooltiptext">dynamic import</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/react_tuts" partition>dynamic import as hook on click</a><span class="tooltiptext">dynamic import as hook on click</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/react_tuts" partition>dynamic import as Class on click</a><span class="tooltiptext">dynamic import as Class on click</span>
                         
                     </ul>
                 
@@ -263,6 +279,77 @@ ReactDOM.render(&lt;FunctionalComponent name=&quot;Greg&quot; /&gt;,document.get
               <div class="band-container partition " part="part-2">
                 <div class="band-inner">
 
+                  <p>In order to have Predifined Select option when you load or
+                update the Select component you need to have selected prop present 
+                with the values below:
+
+               &lt;option selected={defaultV === option}&gt;{option}&lt;/option&gt;</p>
+                  <div class="codeWraper">
+                    <code>//---------------
+
+interface IProps {
+  options: (number | string)[];
+  eventHandler: (e: React.ChangeEvent) =&gt; void;
+  defaultV?: number | string;
+}
+
+const SelectOptions = ({ options, eventHandler, defaultV }: IProps) =&gt; {
+
+  console.log(&#39;defaultV&#39;, defaultV)
+
+  return (
+    &lt;select onChange={eventHandler}&gt;
+      { options.map((option, i) =&gt; &lt;option key={`option${i}`} value={option} selected={defaultV === option}&gt;{option}&lt;/option&gt;)}
+    &lt;/select&gt;
+  );
+}
+
+export default SelectOptions;
+
+//---------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>In order to have only DefaultValue option when you load or
+                update the Select component you need to have defaultValue prop present in 
+                Select with the values below. React calls this uncontrolled-component with 
+                that behaviour With an uncontrolled component, you often want React to specify the initial value, but leave subsequent updates uncontrolled.To handle this case, you can specify a defaultValue attribute instead of value. Changing the value of defaultValue attribute after a component has mounted will not cause any update of the value in the DOM. defaultValue will not change.
+
+               &lt;select defaultValue={defaultValue}&lt;/select&gt;</p>
+                  <div class="codeWraper">
+                    <code>//---------------
+
+interface IProps {
+  options: (number | string)[];
+  eventHandler: (e: React.ChangeEvent) =&gt; void;
+  defaultV?: number | string;
+}
+
+const SelectOptions = ({ options, eventHandler, defaultV }: IProps) =&gt; {
+
+  console.log(&#39;defaultV&#39;, defaultV)
+
+  return (
+    &lt;select onChange={eventHandler} defaultValue={defaultV}&gt;
+      { options.map((option, i) =&gt; &lt;option key={`option${i}`} value={option}&gt;{option}&lt;/option&gt;)}
+    &lt;/select&gt;
+  );
+}
+
+export default SelectOptions;
+
+//---------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
                   <p>Functional compoent in again Stateless compoents that accepts props as function argument and returns JSX syntax</p>
                   <div class="codeWraper">
                     <code>------------------------- Functional Stateless component-----------
@@ -276,7 +363,7 @@ ReactDOM.render(&lt;FunctionalComponent name=&quot;Greg&quot; /&gt;,document.get
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-3">
+              <div class="band-container partition " part="part-5">
                 <div class="band-inner">
 
                   <p>StateFull Class Component: it creates a component that accpets props and allows you to define &#39;state&#39; and ref. Use only if you need that you need to change the state. You dont need to use JSX but it is preferable.</p>
@@ -295,6 +382,90 @@ ReactDOM.render(
   &lt;Hello toWhat=&quot;World&quot; /&gt;,
   document.getElementById(&#39;root&#39;)
 );</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> dynamic import </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>dynamic import allows you to import component on dymand as 
+               the button click example below:</p>
+                  <div class="codeWraper">
+                    <code>import React, { useState } from &#39;react&#39;;
+
+const Location = () =&gt; {
+  const [DynamicComponentLoaded, setDynamicComponent]
+    = useState&lt;null | (() =&gt; JSX.Element)&gt;(null)
+
+  const loadComponent = async () =&gt; {
+    const module = await import(&#39;../components/functional/DynamicLocationPage&#39;)
+    //this method only works for default exports
+    setDynamicComponent(() =&gt; module.default)
+
+  }
+
+  return (
+    &lt;div&gt;
+      {!!DynamicComponentLoaded ?
+        &lt;DynamicComponentLoaded /&gt;
+        : &lt;button onClick={loadComponent}&gt;Load Location Component dynamically&lt;/button&gt;}
+    &lt;/div&gt;
+  );
+
+}
+
+export default Location;</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>dynamic import allows you to import component on dymand as 
+               the button click example below:</p>
+                  <div class="codeWraper">
+                    <code>import React from &#39;react&#39;;
+
+class Location extends React.Component {
+
+  // :(() =&gt; JSX.Element) this react construction type needed for react jsx component execution
+  //as &lt;DynamicComponentLoaded /&gt; in TS
+  state: { DynamicComponentLoaded: null | (() =&gt; JSX.Element) } = {
+    DynamicComponentLoaded: null
+  }
+
+
+  loadComponent = () =&gt; {
+    import(&#39;../components/functional/DynamicLocationPage&#39;).then((module) =&gt; {
+      //this method only works for default exports
+      this.setState({ DynamicComponentLoaded: module.default })
+    })
+  }
+
+  render() {
+    const { DynamicComponentLoaded } = this.state;
+    return (
+      &lt;div&gt;
+        {!!DynamicComponentLoaded ?
+          &lt;DynamicComponentLoaded /&gt;
+          : &lt;button onClick={this.loadComponent}&gt;Load Location Component dynamically&lt;/button&gt;}
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default Location;</code>
                   </div>
                 </div>
               </div>

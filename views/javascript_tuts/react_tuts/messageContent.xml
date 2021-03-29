@@ -166,6 +166,79 @@ ReactDOM.render(&lt;FunctionalComponent name="Greg" />,document.getElementById('
 
                </example>
            </paragraph>
+           <subtitle>React Select => predifined value</subtitle>
+           <paragraph>
+               <info>In order to have Predifined Select option when you load or
+                update the Select component you need to have selected prop present 
+                with the values below:
+
+               &lt;option selected={defaultV === option}>{option}&lt;/option>
+
+
+               </info>
+               <example>
+//---------------
+
+interface IProps {
+  options: (number | string)[];
+  eventHandler: (e: React.ChangeEvent) => void;
+  defaultV?: number | string;
+}
+
+const SelectOptions = ({ options, eventHandler, defaultV }: IProps) => {
+
+  console.log('defaultV', defaultV)
+
+  return (
+    &lt;select onChange={eventHandler}>
+      { options.map((option, i) => &lt;option key={`option${i}`} value={option} selected={defaultV === option}>{option}&lt;/option>)}
+    &lt;/select>
+  );
+}
+
+export default SelectOptions;
+
+//---------------
+
+               </example>
+           </paragraph>
+           <subtitle>React Select => defualtValue</subtitle>
+           <paragraph>
+               <info>In order to have only DefaultValue option when you load or
+                update the Select component you need to have defaultValue prop present in 
+                Select with the values below. React calls this uncontrolled-component with 
+                that behaviour With an uncontrolled component, you often want React to specify the initial value, but leave subsequent updates uncontrolled.To handle this case, you can specify a defaultValue attribute instead of value. Changing the value of defaultValue attribute after a component has mounted will not cause any update of the value in the DOM. defaultValue will not change.
+
+               &lt;select defaultValue={defaultValue}&lt;/select>
+
+
+               </info>
+               <example>
+//---------------
+
+interface IProps {
+  options: (number | string)[];
+  eventHandler: (e: React.ChangeEvent) => void;
+  defaultV?: number | string;
+}
+
+const SelectOptions = ({ options, eventHandler, defaultV }: IProps) => {
+
+  console.log('defaultV', defaultV)
+
+  return (
+    &lt;select onChange={eventHandler} defaultValue={defaultV}>
+      { options.map((option, i) => &lt;option key={`option${i}`} value={option}>{option}&lt;/option>)}
+    &lt;/select>
+  );
+}
+
+export default SelectOptions;
+
+//---------------
+
+               </example>
+           </paragraph>
            <subtitle>Functional Component with JSX</subtitle>
            <paragraph>
                <info>Functional compoent in again Stateless compoents that accepts props as function argument and returns JSX syntax</info>
@@ -200,8 +273,87 @@ ReactDOM.render(
 );
                       </example>
                   </paragraph>
+
        </content>
    </chapter>
+  <chapter>
+      <subject>dynamic import</subject>
+      <content>
+         <subtitle>dynamic import as hook on click</subtitle>
+         <paragraph>
+             <info>
+               dynamic import allows you to import component on dymand as 
+               the button click example below:
+             </info>
+             <example>
+import React, { useState } from 'react';
+
+const Location = () => {
+  const [DynamicComponentLoaded, setDynamicComponent]
+    = useState&lt;null | (() => JSX.Element)>(null)
+
+  const loadComponent = async () => {
+    const module = await import('../components/functional/DynamicLocationPage')
+    //this method only works for default exports
+    setDynamicComponent(() => module.default)
+
+  }
+
+  return (
+    &lt;div>
+      {!!DynamicComponentLoaded ?
+        &lt;DynamicComponentLoaded />
+        : &lt;button onClick={loadComponent}>Load Location Component dynamically&lt;/button>}
+    &lt;/div>
+  );
+
+}
+
+export default Location;
+             </example>
+         </paragraph>
+          <subtitle>dynamic import as Class on click</subtitle>
+         <paragraph>
+             <info>
+               dynamic import allows you to import component on dymand as 
+               the button click example below:
+             </info>
+             <example>
+import React from 'react';
+
+class Location extends React.Component {
+
+  // :(() => JSX.Element) this react construction type needed for react jsx component execution
+  //as &lt;DynamicComponentLoaded /> in TS
+  state: { DynamicComponentLoaded: null | (() => JSX.Element) } = {
+    DynamicComponentLoaded: null
+  }
+
+
+  loadComponent = () => {
+    import('../components/functional/DynamicLocationPage').then((module) => {
+      //this method only works for default exports
+      this.setState({ DynamicComponentLoaded: module.default })
+    })
+  }
+
+  render() {
+    const { DynamicComponentLoaded } = this.state;
+    return (
+      &lt;div>
+        {!!DynamicComponentLoaded ?
+          &lt;DynamicComponentLoaded />
+          : &lt;button onClick={this.loadComponent}>Load Location Component dynamically&lt;/button>}
+      &lt;/div>
+    );
+  }
+}
+
+export default Location;
+             </example>
+         </paragraph>
+      </content>
+  </chapter>
   <chapter>
       <subject>JSX syntax</subject>
       <content>

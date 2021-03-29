@@ -58,7 +58,8 @@ const addConst_ts: (x: number, y: number) => number = function (
   return x + y;
 };
 //ts type with es6
-const addConst_ts_es6: (x: number, y: number) => number = (
+type functionType= (x: number, y: number) => number;
+const addConst_ts_es6:functionType = (
   x: number,
   y: number
 ) => {

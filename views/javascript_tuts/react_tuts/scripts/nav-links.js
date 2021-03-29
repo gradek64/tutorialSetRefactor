@@ -74,7 +74,7 @@ const callback = i => evt => {
       *@disable  evt.preventDefault(); 
       *@for production;
     */
-  //evt.preventDefault();
+  evt.preventDefault();
 
   //check if link is partition link
   sections.forEach(e => {

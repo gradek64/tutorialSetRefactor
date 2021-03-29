@@ -476,6 +476,95 @@ seter4();
   </content>
   </chapter>
   <chapter>
+      <subject>Promises</subject>
+      <content>
+        <subtitle>regular Promise syntax</subtitle>
+        <paragraph>
+            <info>Typescript by defualt will alwaus return promise as 
+
+
+Promise&lt;unknown>
+
+or for fetch 
+
+Promise&lt;Response>
+
+It is alwasy better to be more presicised what Promise should 
+return as the examples below:
+              
+            </info>
+            <example>
+
+//default Promise return: unknown (even though we contextually provide string)
+
+new Promise((resolve) => {resolve('1')});
+
+
+//promise explicitly returns: string 
+
+new Promise&lt;string>((resolve) => {resolve('1')});
+
+ //promise explicitly returns: object of any properties 
+
+new Promise&lt;Record&lt;string,any>>((resolve) => {resolve({prop:1,prop2:'string'})});
+
+
+            </example>
+        </paragraph>
+        <subtitle>Promise chaining</subtitle>
+        <paragraph>
+            <info>Promise that returns another promise will alwasy return a promise type that is last in the chain:</info>
+            <example>
+          
+//first promise returns string;
+
+const firstPromise = new Promise&lt;string>((resolve) => {resolve('1')});   
+
+//second promise is to be chained to the first 
+
+const secondPromise = firstPromise.then((firstRusult)=[firstResult])
+
+//third Promise will be of type of last one 
+
+const thirdPromise:string[] = firstPromise.then((secondPromise)=secondPromise)
+
+            </example>
+        </paragraph>
+        <subtitle>promise fetch response</subtitle>
+        <paragraph>
+            <info>fetch response is also promise and has the same rules as promise chaining the last promise return in fetch or fetch itselft (if there is only
+              fetch on chaining) will have Return value of Promise&lt;Response> if you want to convert &lt;Response> to the rigid value as string then first you need to converted to unknown</info>
+            <example>
+//converting default Promise&lt;Response> => Promise&lt;unknown> => Promise&lt;string>
+
+const one:Promise&lt;Response> = fetch('url') 
+const three:Promise&lt;unknown>  = one.then((result)=> result as unknown)
+const four:Promise&lt;string>  = three.then((result)=> result as string)
+
+console.log(four.then((result)=>result ))
+
+//the sequence has to be as the one above for TS to be happy about conversion
+              
+            </example>
+        </paragraph>
+        <subtitle>Promise is async function</subtitle>
+        <paragraph>
+            <info>In example when promise is assign to the async funcion as return type then we can cast the type for the Response since the Promise response by defualt will be &lt;Promise&lt;unknown>></info>
+            <example>
+//function has been casted from Promise&lt;unknown> to Promise&lt;string> 
+
+async function asyncCode() {
+  return new Promise(resolve=>resolve('ready'))
+}
+
+const ss:Promise&lt;string> = asyncCode() as Promise&lt;string>
+console.log(ss.then(()=>'greg')) 
+
+            </example>
+        </paragraph>
+      </content>
+  </chapter>
+  <chapter>
       <subject>typescript own types</subject>
       <content>
           <subtitle>tuple</subtitle>
@@ -661,6 +750,45 @@ let Vincent: Readonly&lt;classicMotorbikeCollection> = {
 };
 
 ----------------------------
+              </example>
+          </paragraph>
+          <subtitle>Record same as {[key:string]:any}</subtitle>
+          <paragraph>
+              <info>Record has to define 2 types for the object</info>
+              <example>
+==> Record as any object
+ Record&lt;any,any>
+
+==> Record as string property any any value
+
+ Record&lt;string,any> ===  {[key:string]:any}
+
+==> Record as string proprerty with number values
+
+ Record&lt;string,number> ===  {[key:string]:number}
+
+ ==> Record with specific properties and string values
+
+ Record&lt;'prop1'|'prop2',string> ===  {prop1:string,prop2:string}
+
+ ==> Record with specific properties and specific values typescript
+
+Record&lt;'gg'|'pp',string | number>  === {
+      gg:string|number,
+      pp:string|number
+    }
+
+==> object literals with object literals array
+
+Record&lt;string,Record&lt;string,string | number>[]>
+  === {
+    [key:string]:{[key:string]:string|number}[]
+  }
+
+ ==> Record as string property with number values
+
+ Record&lt;string,Record&lt;any,any>[]> ===  {[key:string]: {[key:string]:any}[]}
+
               </example>
           </paragraph>
           <subtitle>Record&lt;string, customType></subtitle>
@@ -1022,7 +1150,7 @@ getObjectPropertyValue({ name: 'Greg' }, 'name'); //correct
        </content>
    </chapter>
    <chapter>
-       <subject>function overloads</subject>
+       <subject>functions</subject>
        <content>
            <subtitle>function overloads syntax</subtitle>
            <paragraph>
@@ -1054,24 +1182,156 @@ passStringOrNumber({4}); //not included in function overload
 
                </example>
            </paragraph>
-           <subtitle>next to fill</subtitle>
+           <subtitle>function Contextual Typing</subtitle>
            <paragraph>
-               <info>Functional compoent in again Stateless compoents that accepts props as function argument and returns JSX syntax</info>
+               <info>Typescript will assume return type, argument from the values 
+                predifined before</info>
                <example>
-------------------------- Functional Stateless component-----------
 
- const FunctionalComponent = (props) => &lt;p>I am functional component&lt;/p>
+1. function arguments with function signature 
 
-ReactDOM.render(&lt;FunctionalComponent name="Greg" />,document.getElementById('app'));
+-----------------------------------
+==> second argument Contextually assumed from the function signature
+
+const addConst_ts_es6_cont: (xtype: number, ytypo: number) => number = (
+  x,
+  y: number
+) => {
+  return x + y;
+};
+
+-----------------------------------
+==> both arguments types due to contextual function signature
+
+const addConst_ts_es6_cont: (xtype: number, ytypo: number) => number = (x,y) => {
+  return x + y;
+};
+
+
+2. function arguments with interface
+
+-----------------------------------
+==> single argument Contextually assumed from the function interface
+
+
+interface fn { (xtype: number, ytypo: number):number }
+
+const addConst_ts_es6_cont:fn  = (x:number,y) => {
+  return x + y;
+};
 
 -----------------------------------------------------------------
-               </example>
-           </paragraph>                  
+==> both arguments Contextually assumed from the function interface
+
+
+interface fn { (xtype: number, ytypo: number):number }
+
+const addConst_ts_es6_cont:fn  = (x,y) => {
+  return x + y;
+};
+
+</example>
+</paragraph>
+<subtitle>function signature v function interface</subtitle>
+<paragraph>
+    <info>
+        There are 2 ways of defining your function type either by
+        function signature or function interface as below:
+    </info>
+    <example>
+      
+---- 1.function interface ----------
+
+interface fn { (xtype: number, ytypo: number):number }
+
+const addConst_ts_es6_cont:fn  = (x:number,y) => {
+  return x + y;
+};
+
+----- 2. function type  ----------
+
+type functionType= (x: number, y: number) => number;
+
+const addConst_ts_es6:functionType = (
+  x: number,
+  y: number
+) => {
+  return x + y;
+};
+
+
+------- 2a function type inline definition ------------
+
+const addConst_ts: (x: number, y: number) => number = function (
+  x: number,
+  y: number
+) {
+  return x + y;
+};
+
+
+    </example>
+</paragraph>              
        </content>
    </chapter>
   <chapter>
       <subject>Type casting</subject>
       <content>
+          <subtitle>Typecasting v type assertions</subtitle>
+          <paragraph>
+              <info>
+                Sometimes TS assumes type by its contextual typing but we can cast a type 
+                to the Variable, function as below:
+              </info>
+              <example>
+--------
+1 Typecasting helps you to convert types and provide consistent (expected) results
+
+this.createMarkerStyle(&lt;MarkerSymbolInfo>symbolInfo);
+this.createMarkerStyle(symbolInfo as MarkerSymbolInfo);
+
+let element = event as HTMLElement
+let element = &lt;HTMLElement>event
+
+// you can start to cast to any
+let element = event as any
+let element = &lt;any>event
+
+
+2. Type assertions is actully change type to a diffrent TYPE as below
+
+ let length: number = (&lt;string>lengthField);
+ let length: number = (lengthField as string);
+
+2a Cast type for let 
+
+  let whatNum: any = 42;
+  let reallyNum = &lt;number>whatNum;
+  let reallyNum2 = whatNum as number; (JSX syntax)
+  console.log(typeof reallyNum); // number
+  console.log(typeof reallyNum2); // number
+
+3 type casting as type of Type 
+
+var x = 5;  
+var y = typeof x; 
+
+
+                
+              </example>
+          </paragraph>
+          <subtitle>double casting (last force method)</subtitle>
+          <paragraph>
+              <info> you can also double cast type. If you still want that Type, you can use a double assertion, but first asserting to unknown (or any) which is compatible with all types and therefore the compiler no longer complains </info>
+              <example>
+                //double assertion for Event
+                
+                function handler(event: Event) {
+                    let element = event as unknown as HTMLElement; // Okay!
+                }
+
+              </example>
+          </paragraph>
           <subtitle>Type casting with html elements</subtitle>
           <paragraph>
               <info>Type casting is the way to tell typescript that the type needed to be used U will provide better, typescript type assumption it not takken.</info>
