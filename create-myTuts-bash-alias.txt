@@ -1,0 +1,8 @@
+//copy and paste that into .bashrc 
+#myTuts alias
+alias myTuts="cd ~/dev/myTuts && npm start"
+
+//run source ~/.bashrc
+//to reload .bashrc
+
+
