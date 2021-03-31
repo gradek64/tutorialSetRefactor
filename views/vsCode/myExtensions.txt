@@ -1,0 +1,14 @@
+bracketPairColorizer
+CodeSpelligChecker
+CodeTogether
+DraculaOfficial
+GitLens
+JavascriptCommentSnippet
+ReactSnippets 
+SublimeTextKeymap
+vscode-icons
+
+---with config---
+prettier
+eslint
+
