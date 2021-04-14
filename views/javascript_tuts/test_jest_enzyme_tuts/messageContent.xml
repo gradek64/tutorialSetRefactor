@@ -456,6 +456,22 @@ it('initial state should be zero (0)', () => {
   });
                 </example>
             </paragraph>
+            <subtitle>act wrapper error</subtitle>
+            <paragraph>
+                <info>update on tests causes the test engine to block once the render changes therefore most
+                of the updates are already wrapped in act() method but sometimes you need to still wrap them yourselft</info>
+                <example>
+/------  this a great article about it for now----/
+
+
+http://localhost:1000/views/javascript_tuts/test_jest_enzyme_tuts/RTL_not_wrapped_in_act_error_scenrios.htm
+
+
+/-------------------/
+
+
+                </example>
+            </paragraph>
             <subtitle>selecting DOM elements {container}</subtitle>
             <paragraph>
                 <info>

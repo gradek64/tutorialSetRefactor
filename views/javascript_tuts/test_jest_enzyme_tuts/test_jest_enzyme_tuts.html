@@ -66,6 +66,8 @@
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>alternative to snapshot</a><span class="tooltiptext">alternative to snapshot</span>
                            
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>act wrapper error</a><span class="tooltiptext">act wrapper error</span>
+                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>selecting DOM elements {container}</a><span class="tooltiptext">selecting DOM elements {container}</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>events (click,change) and react-dom/test-utils</a><span class="tooltiptext">events (click,change) and react-dom/test-utils</span>
@@ -744,6 +746,23 @@ it(&#39;initial state should be zero (0)&#39;, () =&gt; {
               <div class="band-container partition " part="part-4">
                 <div class="band-inner">
 
+                  <p>update on tests causes the test engine to block once the render changes therefore most
+                of the updates are already wrapped in act() method but sometimes you need to still wrap them yourselft</p>
+                  <div class="codeWraper">
+                    <code>/------  this a great article about it for now----/
+
+
+http://localhost:1000/views/javascript_tuts/test_jest_enzyme_tuts/RTL_not_wrapped_in_act_error_scenrios.htm
+
+
+/-------------------/</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-5">
+                <div class="band-inner">
+
                   <p>React testing libray comes with lots of more or less useufull selectors, personaly I prefer use css selectors. U can use them by using 
 -----Default Conatainer------
 const {container} = render( component {&lt;..props}/&gt;)
@@ -796,7 +815,7 @@ in documenation
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-5">
+              <div class="band-container partition " part="part-6">
                 <div class="band-inner">
 
                   <p>Events have this syntax 
@@ -827,7 +846,7 @@ Simulate.change(maxFilterRadioButton, { target: { value: &#39;max&#39; } } as an
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-6">
+              <div class="band-container partition " part="part-7">
                 <div class="band-inner">
 
                   <p>Once you render a component as 
@@ -854,7 +873,7 @@ describe(&#39;on submit temperature form&#39;, () =&gt; {
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-7">
+              <div class="band-container partition " part="part-8">
                 <div class="band-inner">
 
                   <p>Custom hooks allow you to expose state logic outside to other files. At the moment the only way to test is by @testing-library/react-hooks library which is the  addition to @testing-library/react. Example below</p>
@@ -929,7 +948,7 @@ in 2 ways , described in this document under: MOCK ENTIRE MODULE STORED IN NODE_
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-8">
+              <div class="band-container partition " part="part-9">
                 <div class="band-inner">
 
                   <p>There are 2 stages for testing async cutom hook before and after data
@@ -1020,7 +1039,7 @@ describe(&#39;useFetch() responds with error&#39;, () =&gt; {
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-9">
+              <div class="band-container partition " part="part-10">
                 <div class="band-inner">
 
                   <p>Async react component needs to be tested before and after response is back. To achive that our test has to be set for async fuction and await the response for update. Details below:</p>
@@ -1132,7 +1151,7 @@ function waitForElement&lt;T&gt;(
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-10">
+              <div class="band-container partition " part="part-11">
                 <div class="band-inner">
 
                   <p>in latest versions v10+ most async methods are deprecated and replaced with one waitFor(). Below is example how to use it, the main diffrence is that waitFor() doesnt return result but insted takes async response inside it method as:
@@ -1483,6 +1502,7 @@ export function renderWithRedux(
   const rootReducer = combineReducers({
     cart: cartReducer,
   })
+  
   //create store methot takes reducer and initial store
   const store = createStore(rootReducer, options.state);
   const AllProviders: React.FC&lt;{}&gt; = ({ children }) =&gt;

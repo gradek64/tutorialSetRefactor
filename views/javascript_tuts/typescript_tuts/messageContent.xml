@@ -1048,6 +1048,30 @@ let kv1type: KeyPair1&lt;number, string> = { key:1, value:"Steve" }; // OK
 
               </example>
           </paragraph>
+          <subtitle>type with generics (usefull for tests)</subtitle>
+           <paragraph>
+               <info>generic type assigment can be usefull when need to convert to dynamic 
+               types but with the same logic, e.g when you need HTMLElement but another time 
+               U need more specfict as HTMLLinkElement as below:></info>
+               <example>
+//-------- genric dynamic type
+
+type ElementSelectorProps&lt;T> = Partial&lt;T> &gt; { queryByText: (arg: string) => T }
+
+//-----usage 
+
+//HTMLElement
+(screen as ElementSelectorProps&lt;HTMLElement>).queryByText('Change').tabIndex)
+
+//Element
+fireEvent.click((screen as ElementSelectorProps&lt;Element>).queryByText('PayPal'))
+
+//HTMLLinkElement
+ElementSelectorProps&lt;HTMLLinkElement>).href).toContain('/help/terms-and-conditions')
+
+//-----
+               </example>
+           </paragraph>
             <subtitle>Interface and type with generics and generic constrains</subtitle>
           <paragraph>
               <info>generics gives multiple types options in intrface of types. U can specify diffrent type on declaration. But 

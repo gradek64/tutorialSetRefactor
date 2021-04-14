@@ -12,6 +12,8 @@ Those are the steps for setting up node version control for mac os:
 
 1. create .bashrc or .bash_profile in your home directory 
 
+//update version 10.15.x the defualt bash is .zshrc so all commands apply to .zshrc
+
 (unless you already have one created one of another)
 
   cd ~ 
@@ -31,6 +33,12 @@ Those are the steps for setting up node version control for mac os:
 4. reload the bash script where the nvm is saved 
 
    source ~/.bashrc 
+
+4a. your .zshrc or .bashrc should have this written on 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] &#038;&#038; \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] &#038;&#038; \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 5. verify installation 
 

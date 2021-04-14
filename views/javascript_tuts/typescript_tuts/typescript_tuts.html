@@ -146,6 +146,8 @@
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>Interface and type with generics</a><span class="tooltiptext">Interface and type with generics</span>
                            
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>type with generics (usefull for tests)</a><span class="tooltiptext">type with generics (usefull for tests)</span>
+                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>Interface and type with generics and generic constrains</a><span class="tooltiptext">Interface and type with generics and generic constrains</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>Interface and type with generics and generic constrains (complex)</a><span class="tooltiptext">Interface and type with generics and generic constrains (complex)</span>
@@ -1387,6 +1389,33 @@ let kv1type: KeyPair1&lt;number, string&gt; = { key:1, value:&quot;Steve&quot; }
               <div class="band-container partition " part="part-6">
                 <div class="band-inner">
 
+                  <p>generic type assigment can be usefull when need to convert to dynamic 
+               types but with the same logic, e.g when you need HTMLElement but another time 
+               U need more specfict as HTMLLinkElement as below:&gt;</p>
+                  <div class="codeWraper">
+                    <code>//-------- genric dynamic type
+
+type ElementSelectorProps&lt;T&gt; = Partial&lt;T&gt; &gt; { queryByText: (arg: string) =&gt; T }
+
+//-----usage 
+
+//HTMLElement
+(screen as ElementSelectorProps&lt;HTMLElement&gt;).queryByText(&#39;Change&#39;).tabIndex)
+
+//Element
+fireEvent.click((screen as ElementSelectorProps&lt;Element&gt;).queryByText(&#39;PayPal&#39;))
+
+//HTMLLinkElement
+ElementSelectorProps&lt;HTMLLinkElement&gt;).href).toContain(&#39;/help/terms-and-conditions&#39;)
+
+//-----</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-7">
+                <div class="band-inner">
+
                   <p>generics gives multiple types options in intrface of types. U can specify diffrent type on declaration. But 
                 you can go further and constrain what specific type generic can take. It most cases is a overkill.</p>
                   <div class="codeWraper">
@@ -1418,7 +1447,7 @@ const obj101: someI&lt;number, boolean&gt; = { job: 66, value: true }; //error b
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-7">
+              <div class="band-container partition " part="part-8">
                 <div class="band-inner">
 
                   <p>U can go really creative with generics. As the example below.</p>
@@ -1461,7 +1490,7 @@ let ggset: KeyPairExtended&lt;KeyP&lt;number&gt;, string&gt; = {
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-8">
+              <div class="band-container partition " part="part-9">
                 <div class="band-inner">
 
                   <p>Typescript introduces type guard of object &#39;key of&#39; that allows specify what keys must have in the object structure with generics</p>
