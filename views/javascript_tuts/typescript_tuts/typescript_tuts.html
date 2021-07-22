@@ -23,6 +23,8 @@
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>object interface</a><span class="tooltiptext">object interface</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>Interface intersections (extends keyword)</a><span class="tooltiptext">Interface intersections (extends keyword)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>interface combinations (joining interface)</a><span class="tooltiptext">interface combinations (joining interface)</span>
                         
                     </ul>
                 
@@ -34,7 +36,9 @@
                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>object type</a><span class="tooltiptext">object type</span>
                            
-                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>type aliases</a><span class="tooltiptext">type aliases</span>
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>type aliases (combining/joinng types)</a><span class="tooltiptext">type aliases (combining/joinng types)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/typescript_tuts" partition>join/combining t</a><span class="tooltiptext">join/combining t</span>
                         
                     </ul>
                 
@@ -344,6 +348,48 @@ myEmployee14 = {
                 </div>
               </div>
             
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>2 interface will be join by extendin one of another, 
+              usefull to add extra property to bigger interface ar Router</p>
+                  <div class="codeWraper">
+                    <code>//---- 1a. Interface  combined by extending
+//by adding new props and keeping RouterProps
+
+export interface CreditPlanOptionsProps extends RouterProps {
+  defaultOption: CreditPlan
+  options: CreditPlan[]
+  onChange: (selectedPlan: string) =&gt; void
+  onSubmit: () =&gt; void
+  selectedOption: CreditPlan
+  tabIndex: number
+  totalPrice: number
+  submittingPlan: boolean
+  numOfAddArgosCardAttempts: number
+  handleAbort: () =&gt; void
+}
+
+
+//simple internal interface
+
+interface Greg {
+  greg1:string,
+  greg2:string,
+}
+
+interface Busra extends Greg {
+  busra1:string,
+  busra2:string,
+}
+
+const couple:Busra = {greg1:&#39;&#39;,greg2:&#39;&#39;,busra1:&#39;&#39;,busra2:&#39;&#39;}
+
+------------</code>
+                  </div>
+                </div>
+              </div>
+            
 
             
 
@@ -389,6 +435,60 @@ type = availableColors = &#39;blue&#39; | &#39;green&#39;
               </div>
             
               <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>Types can be combined as I1 and I2 as well as I1 or I2</p>
+                  <div class="codeWraper">
+                    <code>//---- 1a. Interface  combined with &amp; and operator
+
+type Dude = {
+  name: string;
+  age: number;
+}
+
+type Dude2 = {
+  job: string;
+  position: string;
+}
+
+let myEmployee10: Dude &amp; Dude2;
+myEmployee10 = {
+  name: &#39;Darek&#39;,
+  age: 31,
+  job: &#39;contract&#39;,
+  position: &#39;developer&#39;,
+};
+
+
+
+//---- 2. type one of another with or | operator
+
+
+type Dude100 = {
+  name: string;
+  age: number;
+}
+
+type Dude200 = {
+  job: string;
+  position: string;
+}
+
+let myEmployee14: Dude100 | Dude200;
+
+myEmployee14 = {
+  name: &#39;string&#39;,
+  job: &#39;contract&#39;,
+  position: &#39;developer&#39;,
+}; 
+// a bit buggy cause it accepts 3 arguments it should accpet 2 or 4
+
+------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
                 <div class="band-inner">
 
                   <p>Types can be combined as I1 and I2 as well as I1 or I2</p>

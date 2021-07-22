@@ -1,0 +1,500 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">  
+  <title>tutorial === Layout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/tutorial.css">
+  <link rel="stylesheet" href="css/tooltip.css">
+</head>
+<body translate="no">
+<div class="l-site">
+  <div class="l-nav">
+    <nav class="nav">
+      <input type="text" placeholder="Search" id="search">
+      <div style="clear: both;"></div>
+      <!-- nunjucks loop-->
+            
+<ul class="links">
+<!--list-tag-->
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/git_tuts">git submodule add,git fetch single branch</a><span class="tooltiptext">git submodule add,git fetch single branch</span>
+                 
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/git_tuts">merge versus rebase</a><span class="tooltiptext">merge versus rebase</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/git_tuts" partition>merge develop to feature Branch</a><span class="tooltiptext">merge develop to feature Branch</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/git_tuts" partition>rebase (re-writes history)</a><span class="tooltiptext">rebase (re-writes history)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/git_tuts" partition>merge versus rebase (advanteges)</a><span class="tooltiptext">merge versus rebase (advanteges)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/git_tuts" partition>good artesian article about rebase and merge</a><span class="tooltiptext">good artesian article about rebase and merge</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/git_tuts">git reflog</a><span class="tooltiptext">git reflog</span>
+                 
+      </li>
+    
+<!--end-list-tag-->
+</ul>
+
+       <!-- nunjucks loop-->
+    </nav>
+  </div>
+  <div class="l-page">
+    <div class="menu">
+      <div class="menu-hamburger"></div>
+    </div>
+      <!-- nunjucks loop-->
+          
+<div class="sectionWrapper">
+  <div class="sectionContainer">
+   
+      
+      <section  class="band band-b activeSection"  class="band band-b">
+          <h1> git submodule add,git fetch single branch </h1> 
+          
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> merge versus rebase </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>The first thing to understand about git rebase is that it solves the same problem as git merge. 
+            Both of these commands are designed to integrate changes from one branch into another branch.
+
+       
+                  git checkout feature-branch 
+
+                  git merge develop</p>
+                  <div class="codeWraper">
+                    <code>------- commits on develop branch --------
+
+315bffb (HEAD -&gt; develop) m4
+584bf12 m3
+d52b846 develop 2 files
+b709344 (master) master
+
+ ------- commits on feature branch --------
+
+2ef3ddd (HEAD -&gt; feature-branch1) f3
+e76dca9 f2
+d52b846 develop 2 files
+b709344 (master) master
+
+ -------
+FACTS:
+=&gt; last common commit is :  52b846 (HEAD -&gt; develop) develop 2 files
+=&gt; develop has 2 commits ahead: m3 and m4
+=&gt; feature_branch1 has 2 commits ahead: f2 and f3
+
+//------- intruduce changes from develop to feature_branch (by merging) --------
+
+1. make sure you are on feature_branch1
+git checkout feature_branch1
+
+2. merge
+git merge develop
+
+2.a merge (squaushes commits from feature branch)
+git merge --squash feature-branch1
+
+2.b (message) Automatic merge went well; stopped before committing as requested
+//it will prompt with new commit of squash put together 
+git commit -m &#39;featurebranch merged to develop&#39;
+
+//-------------------after merge the commits look like below -----------------------------
+
+
+ ------- commits on develop branch (no changes) --------
+
+315bffb (HEAD -&gt; develop) m4
+584bf12 m3
+d52b846 develop 2 files
+b709344 (master) master
+
+ ------- commits on feature branch --------
+
+48908f1 (HEAD -&gt; feature-branch1) Merge branch &#39;develop&#39; into feature-branch1
+2ef3ddd f3
+e76dca9 f2
+315bffb (develop) m4
+584bf12 m3
+d52b846 develop 2 files
+b709344 (master) master
+
+ -------  -------  -------  -------  -------
+
+FACTS:
+=&gt; Develop is not affected since we merged changes from develop to feature_branch1 (not vice-versa)
+=&gt; feature_branch1 has latest commits from develop placed upwards from the common commit
+
+315bffb (develop) m4      =&gt; commit from develop 
+584bf12 m3                =&gt; commit from develop 
+d52b846 develop 2 files   =&gt; common commit
+
+=&gt; feature_branch1 has new commit informing about the merge  (addtional commit)
+=&gt; commits hashes DID NOT change so it is easier to find relations to other branches
+
+
+//-------------------going back on feature_branch1 (one step before merging) -----------------------------
+
+those are the new commits stage after merging 
+
+ ------- commits on feature branch --------
+
+48908f1 (HEAD -&gt; feature-branch1) Merge branch &#39;develop&#39; into feature-branch1
+2ef3ddd f3
+e76dca9 f2
+315bffb (develop) m4
+584bf12 m3
+d52b846 develop 2 files
+b709344 (master) master
+
+---------- to roll back you need to reset to latest feature_branch1 commit ------
+git reset --hard 2ef3ddd
+
+=&gt; this will produce
+
+
+ ------- commits on feature branch -------- 
+
+2ef3ddd (HEAD -&gt; feature-branch1) f3
+e76dca9 f2
+d52b846 develop 2 files
+b709344 (master) master
+
+-----------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>The first thing to understand about git rebase is that it solves the same problem as git merge. 
+            Both of these commands are designed to integrate changes from one branch into another branch.
+
+       
+                  git checkout feature-branch 
+
+                  git rebase develop
+  
+
+             !! golden rule !! dont rebase on commits that you share with others
+              only rebase feature_branch that commits you only own so 
+              you can change its hash history without affecting anyone cause
+              only you have those commits/changes 
+
+              !!Important!! if git asks you to pull first, simply dont !
+              cause it will mess up your commits still push with -f flag and 
+              --no-verify (be sure that commits matches first though)</p>
+                  <div class="codeWraper">
+                    <code>------- commits on develop branch --------
+
+315bffb (HEAD -&gt; develop) m4
+584bf12 m3
+d52b846 develop 2 files
+b709344 (master) master
+
+ ------- commits on feature branch --------
+
+2ef3ddd (HEAD -&gt; feature-branch1) f3
+e76dca9 f2
+d52b846 develop 2 files
+b709344 (master) maste
+
+FACTS:
+=&gt; last common commit is :  52b846 (HEAD -&gt; develop) develop 2 files
+=&gt; develop has 2 commits ahead: m3 and m4
+=&gt; feature_branch1 has 2 commits ahead: f2 and f3
+
+ ------- intruduce changes from develop to feature_branch1 (by rebasing) --------
+
+//make sure you are on feature_branch1 branch 
+
+git checkout feature_branch1
+
+//rebase with  develop branch
+
+git rebase develop
+
+------------------ after rebase the commits look like-----------------------
+
+
+ ------- commits on develop branch (no change) --------
+
+315bffb (HEAD -&gt; develop) m4
+584bf12 m3
+d52b846 develop 2 files
+b709344 (master) master
+
+ ------- commits on feature branch notice that hash history has changed --------
+
+cb19083 (HEAD -&gt; feature-branch1) f3
+447040d f2
+315bffb (develop) m4
+584bf12 m3
+d52b846 develop 2 files
+b709344 (master) master
+
+ -------  -------  -------  -------  -------
+ 
+FACTS:
+=&gt; Develop is not affected since we merged changes from develop to feature_branch1 (not vice-versa)
+=&gt; feature_branch1 has latest commits from develop placed upwards from the common commit
+
+315bffb (develop) m4      =&gt; commit from develop 
+584bf12 m3                =&gt; commit from develop 
+d52b846 develop 2 files   =&gt; common commit
+
+=&gt; feature_branch1 has NO addtinal  commit informing about the rebase (looks cleaner)
+=&gt; feature_branch1 commits hashes DID change
+
+2ef3ddd f3 =&gt; cb19083
+e76dca9 f2 =&gt; 447040d
+
+d52b846 develop 2 files (same)
+
+----------------------------------------------------
+!! Important !! after rebase you need to reflog to get former history 
+-----------------------------------------------------------
+
+---------- to roll back you need to reset to latest feature_branch1 commit ------
+
+      git reset --hard 2ef3ddd
+
+=&gt; this will produce (unexpected behviour) notice that develop changes are still there
+
+ ------- commits on feature branch -------- 
+
+447040d f2
+315bffb (develop) m4
+584bf12 m3
+d52b846 develop 2 files
+b709344 (master) master
+
+=&gt; to get back to full history you need to 
+
+-------------------------------
+          git reflog 
+-------------------------------
+
+=&gt; produces
+-------------------------------
+315bffb (develop) HEAD@{4}: checkout: moving from feature-branch1 to develop
+cb19083 HEAD@{5}: rebase finished: returning to refs/heads/feature-branch1
+cb19083 HEAD@{6}: rebase: f3
+447040d (HEAD -&gt; feature-branch1) HEAD@{7}: rebase: f2
+315bffb (develop) HEAD@{8}: rebase: checkout develop
+2ef3ddd HEAD@{9}: checkout: moving from develop to feature-branch1
+315bffb (develop) HEAD@{10}: checkout: moving from feature-branch1 to develop
+-------------------------------------------
+
+
+=&gt; now pick the original commit from feature_branch1
+
+  git reset --hard 2ef3ddd 
+
+=&gt; results 
+---------- feature branch commits (with orignal branch history)
+
+2ef3ddd (HEAD -&gt; feature-branch1) f3
+e76dca9 f2
+d52b846 develop 2 files
+b709344 (master) master
+
+-----------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>---------- merging ---------------
+
+=&gt; advisable for merging branches that shared or public
+
+
+  ---------- rebase ---------------
+=&gt; advisable for commits that no one has access to and you havent share your work/commits on common branches 
+=&gt; more flixiblity of organizing your commits with renaming, sqaushing, re-arranging 
+
+  !!Important!! if git asks you to pull first, simply dont !
+  cause it will mess up your commits still push with -f flag and 
+  --no-verify (be sure that commits matches first though)</p>
+                  <div class="codeWraper">
+                    <code>--------------------  merge with the squash ------------------------
+
+----- develop branch commits---------
+
+315bffb (HEAD -&gt; develop) m4
+584bf12 m3
+d52b846 develop 2 files
+b709344 (master) master
+
+-----------------------------
+
+
+----- feauter branch commits---------
+
+2ef3ddd (HEAD -&gt; feature-branch1) f3
+e76dca9 f2
+d52b846 develop 2 files
+b709344 (master) master
+
+-----------------------------
+
+ -------
+FACTS:
+=&gt; last common commit is :  52b846 (HEAD -&gt; develop) develop 2 files
+=&gt; develop has 2 commits ahead: m3 and m4
+=&gt; feature_branch1 has 2 commits ahead: f2 and f3
+
+
+-------------------------
+git merge --squash develop
+---------------------------------
+=&gt; will prompt 
+---------------------------------
+Squash commit -- not updating HEAD
+Automatic merge went well; stopped before committing as requested
+git commit -m &#39;develop commits squashed&#39;
+-------------------------
+
+ ------------ feature branch commits after --------
+86e141f (HEAD -&gt; feature-branch1) develop commits squashed
+2ef3ddd f3
+e76dca9 f2
+d52b846 develop 2 files
+b709344 (master) master
+
+---------------------------------------------------------------
+FACTS:
+=&gt; Develop is not affected since we merged changes from develop to feature_branch1 (not vice-versa)
+=&gt; feature_branch1 has only 1 extra/new commit (develop history is gone)
+
+86e141f  develop commits squashed   =&gt; new Commit with new has 
+315bffb (develop) m4                =&gt; commit from feature_branch  
+e76dca9 f2                          =&gt; commit from feature_branch 
+d52b846 develop 2 files             =&gt; common commit
+
+
+
+2. --------------------  rebase interactive ------------------------
+--------------
+git rebase -i develop  
+--------------
+=&gt; it will rebase with develop branch and allow you to change commits names, sqaush 
+
+--------------
+git rebase -i HEAD~2  
+--------------
+=&gt; it will allow you to organise the tip of your branch by pick, changing, squasing exisiting commits 
+
+--------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
+                  <p>details explanation of advatanges and disadvantages of both</p>
+                  <div class="codeWraper">
+                    <code>//change localhost:1000 if you viewing on heroku
+        http://localhost:1000/views/Merging_Rebasing_Atlassian_Git_Tutorial.html</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> git reflog </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>it will log all commits for the sesion</p>
+                  <div class="codeWraper">
+                    <code>--------------
+git reflog 
+--------------
+=&gt; produces
+
+447040d (HEAD -&gt; feature-branch1) HEAD@{0}: reset: moving to ORIG_HEAD
+447040d (HEAD -&gt; feature-branch1) HEAD@{1}: reset: moving to 447040d
+447040d (HEAD -&gt; feature-branch1) HEAD@{2}: reset: moving to 447040d
+cb19083 HEAD@{3}: checkout: moving from develop to feature-branch1
+315bffb (develop) HEAD@{4}: checkout: moving from feature-branch1 to develop
+cb19083 HEAD@{5}: rebase finished: returning to refs/heads/feature-branch1
+cb19083 HEAD@{6}: rebase: f3
+447040d (HEAD -&gt; feature-branch1) HEAD@{7}: rebase: f2
+315bffb (develop) HEAD@{8}: rebase: checkout develop
+2ef3ddd HEAD@{9}: checkout: moving from develop to feature-branch1
+315bffb (develop) HEAD@{10}: checkout: moving from feature-branch1 to develop
+
+etc....
+
+-----
+
+usefull after rolling back the rebase command
+
+
+=&gt; example roll back to latest commit for feature_branch1 before rebase 
+
+
+git reset --hard 2ef3ddd
+
+2ef3ddd (HEAD -&gt; feature-branch1) f3
+e76dca9 f2
+d52b846 develop 2 files
+b709344 (master) master</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+  
+    <section class="band band-b activeSection">
+      <h1></h1>
+
+      
+
+
+
+        
+
+    </section>
+  
+  </div>
+</div>
+
+       <!-- nunjucks loop-->
+  </div>
+</div>
+<script src="scripts/nav-links.js"></script>
+<script src="scripts/tooltips_links_over.js"></script>
+<script src="scripts/search_nav.js"></script>
+ </body></html>

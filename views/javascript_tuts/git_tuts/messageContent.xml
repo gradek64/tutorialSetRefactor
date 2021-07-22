@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapters>
+<chapter> 
+  <subject>git submodule add</subject>
+   <content>
+    <paragraph>
+        <info>git allow you to clone other subdirectories as subfolder to your existing 
+        git project which is trackable as seperate repository that could be added/updated/removed 
+        from your project but not affecting your curent git flow of your project since is 
+        treated as sepearte repository</info>
+        <example>
+------
+to add sub repository
+
+git submodule add https://github repository
+
+-----
+
+to update sub repository
+
+git submodule update
+
+
+        </example>
+    </paragraph>
+  </content>
+  <subject>git fetch single branch</subject>
+   <content>
+    <paragraph>
+        <info>
+          If you want to fetch all remote branches then 
+
+          git fetch 
+
+        for single branch you need to do below:
+        </info>
+        <example>
+------
+1. check what remote branches are available with setup tracking 
+
+  git remote -r 
+
+2. cmd-F and look for the one U are interested in 
+
+list...
+origin/BOFS-3151-payment-status-disabled
+origin/BOFS-3133-payment-status
+
+3. fetch your branch with its origin name 
+
+  git fetch origin BOFS-3133-payment-status
+
+4 checkout for active branch 
+
+  git checkout BOFS-3133-payment-status
+
+
+
+
+
+        </example>
+    </paragraph>
+  </content>
+  </chapter> 
+  <chapter> 
+    <subject>merge versus rebase</subject>
+    <content>
+        <subtitle>merge develop to feature Branch</subtitle>
+        <paragraph>
+            <info>
+
+            The first thing to understand about git rebase is that it solves the same problem as git merge. 
+            Both of these commands are designed to integrate changes from one branch into another branch.
+
+       
+                  git checkout feature-branch 
+
+                  git merge develop
+
+
+            </info>
+            <example>
+------- commits on develop branch --------
+
+315bffb (HEAD -> develop) m4
+584bf12 m3
+d52b846 develop 2 files
+b709344 (master) master
+
+ ------- commits on feature branch --------
+
+2ef3ddd (HEAD -> feature-branch1) f3
+e76dca9 f2
+d52b846 develop 2 files
+b709344 (master) master
+
+ -------
+FACTS:
+=> last common commit is :  52b846 (HEAD -> develop) develop 2 files
+=> develop has 2 commits ahead: m3 and m4
+=> feature_branch1 has 2 commits ahead: f2 and f3
+
+//------- intruduce changes from develop to feature_branch (by merging) --------
+
+1. make sure you are on feature_branch1
+git checkout feature_branch1
+
+2. merge
+git merge develop
+
+2.a merge (squaushes commits from feature branch)
+git merge --squash feature-branch1
+
+2.b (message) Automatic merge went well; stopped before committing as requested
+//it will prompt with new commit of squash put together 
+git commit -m 'featurebranch merged to develop'
+
+//-------------------after merge the commits look like below -----------------------------
+
+
+ ------- commits on develop branch (no changes) --------
+
+315bffb (HEAD -> develop) m4
+584bf12 m3
+d52b846 develop 2 files
+b709344 (master) master
+
+ ------- commits on feature branch --------
+
+48908f1 (HEAD -> feature-branch1) Merge branch 'develop' into feature-branch1
+2ef3ddd f3
+e76dca9 f2
+315bffb (develop) m4
+584bf12 m3
+d52b846 develop 2 files
+b709344 (master) master
+
+ -------  -------  -------  -------  -------
+
+FACTS:
+=> Develop is not affected since we merged changes from develop to feature_branch1 (not vice-versa)
+=> feature_branch1 has latest commits from develop placed upwards from the common commit
+
+315bffb (develop) m4      => commit from develop 
+584bf12 m3                => commit from develop 
+d52b846 develop 2 files   => common commit
+
+=> feature_branch1 has new commit informing about the merge  (addtional commit)
+=> commits hashes DID NOT change so it is easier to find relations to other branches
+
+
+//-------------------going back on feature_branch1 (one step before merging) -----------------------------
+
+those are the new commits stage after merging 
+
+ ------- commits on feature branch --------
+
+48908f1 (HEAD -> feature-branch1) Merge branch 'develop' into feature-branch1
+2ef3ddd f3
+e76dca9 f2
+315bffb (develop) m4
+584bf12 m3
+d52b846 develop 2 files
+b709344 (master) master
+
+---------- to roll back you need to reset to latest feature_branch1 commit ------
+git reset --hard 2ef3ddd
+
+=> this will produce
+
+
+ ------- commits on feature branch -------- 
+
+2ef3ddd (HEAD -> feature-branch1) f3
+e76dca9 f2
+d52b846 develop 2 files
+b709344 (master) master
+
+-----------------------------
+            </example>
+        </paragraph>
+        <subtitle>rebase (re-writes history)</subtitle>
+        <paragraph>
+            <info>
+
+            The first thing to understand about git rebase is that it solves the same problem as git merge. 
+            Both of these commands are designed to integrate changes from one branch into another branch.
+
+       
+                  git checkout feature-branch 
+
+                  git rebase develop
+  
+
+             !! golden rule !! dont rebase on commits that you share with others
+              only rebase feature_branch that commits you only own so 
+              you can change its hash history without affecting anyone cause
+              only you have those commits/changes 
+
+              !!Important!! if git asks you to pull first, simply dont !
+              cause it will mess up your commits still push with -f flag and 
+              --no-verify (be sure that commits matches first though)
+
+            </info>
+            <example>
+ ------- commits on develop branch --------
+
+315bffb (HEAD -> develop) m4
+584bf12 m3
+d52b846 develop 2 files
+b709344 (master) master
+
+ ------- commits on feature branch --------
+
+2ef3ddd (HEAD -> feature-branch1) f3
+e76dca9 f2
+d52b846 develop 2 files
+b709344 (master) maste
+
+FACTS:
+=> last common commit is :  52b846 (HEAD -> develop) develop 2 files
+=> develop has 2 commits ahead: m3 and m4
+=> feature_branch1 has 2 commits ahead: f2 and f3
+
+ ------- intruduce changes from develop to feature_branch1 (by rebasing) --------
+
+//make sure you are on feature_branch1 branch 
+
+git checkout feature_branch1
+
+//rebase with  develop branch
+
+git rebase develop
+
+------------------ after rebase the commits look like-----------------------
+
+
+ ------- commits on develop branch (no change) --------
+
+315bffb (HEAD -> develop) m4
+584bf12 m3
+d52b846 develop 2 files
+b709344 (master) master
+
+ ------- commits on feature branch notice that hash history has changed --------
+
+cb19083 (HEAD -> feature-branch1) f3
+447040d f2
+315bffb (develop) m4
+584bf12 m3
+d52b846 develop 2 files
+b709344 (master) master
+
+ -------  -------  -------  -------  -------
+ 
+FACTS:
+=> Develop is not affected since we merged changes from develop to feature_branch1 (not vice-versa)
+=> feature_branch1 has latest commits from develop placed upwards from the common commit
+
+315bffb (develop) m4      => commit from develop 
+584bf12 m3                => commit from develop 
+d52b846 develop 2 files   => common commit
+
+=> feature_branch1 has NO addtinal  commit informing about the rebase (looks cleaner)
+=> feature_branch1 commits hashes DID change
+
+2ef3ddd f3 => cb19083
+e76dca9 f2 => 447040d
+
+d52b846 develop 2 files (same)
+
+----------------------------------------------------
+!! Important !! after rebase you need to reflog to get former history 
+-----------------------------------------------------------
+
+---------- to roll back you need to reset to latest feature_branch1 commit ------
+
+      git reset --hard 2ef3ddd
+
+=> this will produce (unexpected behviour) notice that develop changes are still there
+
+ ------- commits on feature branch -------- 
+
+447040d f2
+315bffb (develop) m4
+584bf12 m3
+d52b846 develop 2 files
+b709344 (master) master
+
+=> to get back to full history you need to 
+
+-------------------------------
+          git reflog 
+-------------------------------
+
+=> produces
+-------------------------------
+315bffb (develop) HEAD@{4}: checkout: moving from feature-branch1 to develop
+cb19083 HEAD@{5}: rebase finished: returning to refs/heads/feature-branch1
+cb19083 HEAD@{6}: rebase: f3
+447040d (HEAD -> feature-branch1) HEAD@{7}: rebase: f2
+315bffb (develop) HEAD@{8}: rebase: checkout develop
+2ef3ddd HEAD@{9}: checkout: moving from develop to feature-branch1
+315bffb (develop) HEAD@{10}: checkout: moving from feature-branch1 to develop
+-------------------------------------------
+
+
+=> now pick the original commit from feature_branch1
+
+  git reset --hard 2ef3ddd 
+
+=> results 
+---------- feature branch commits (with orignal branch history)
+
+2ef3ddd (HEAD -> feature-branch1) f3
+e76dca9 f2
+d52b846 develop 2 files
+b709344 (master) master
+
+-----------------------------
+</example>
+        </paragraph>
+        <subtitle>merge versus rebase (advanteges)</subtitle>
+        <paragraph>
+            <info>
+
+---------- merging ---------------
+
+=> advisable for merging branches that shared or public
+
+
+  ---------- rebase ---------------
+=> advisable for commits that no one has access to and you havent share your work/commits on common branches 
+=> more flixiblity of organizing your commits with renaming, sqaushing, re-arranging 
+
+  !!Important!! if git asks you to pull first, simply dont !
+  cause it will mess up your commits still push with -f flag and 
+  --no-verify (be sure that commits matches first though)
+
+            </info>
+            <example>
+ --------------------  merge with the squash ------------------------
+
+----- develop branch commits---------
+
+315bffb (HEAD -> develop) m4
+584bf12 m3
+d52b846 develop 2 files
+b709344 (master) master
+
+-----------------------------
+
+
+----- feauter branch commits---------
+
+2ef3ddd (HEAD -> feature-branch1) f3
+e76dca9 f2
+d52b846 develop 2 files
+b709344 (master) master
+
+-----------------------------
+
+ -------
+FACTS:
+=> last common commit is :  52b846 (HEAD -> develop) develop 2 files
+=> develop has 2 commits ahead: m3 and m4
+=> feature_branch1 has 2 commits ahead: f2 and f3
+
+
+-------------------------
+git merge --squash develop
+---------------------------------
+=> will prompt 
+---------------------------------
+Squash commit -- not updating HEAD
+Automatic merge went well; stopped before committing as requested
+git commit -m 'develop commits squashed'
+-------------------------
+
+ ------------ feature branch commits after --------
+86e141f (HEAD -> feature-branch1) develop commits squashed
+2ef3ddd f3
+e76dca9 f2
+d52b846 develop 2 files
+b709344 (master) master
+
+---------------------------------------------------------------
+FACTS:
+=> Develop is not affected since we merged changes from develop to feature_branch1 (not vice-versa)
+=> feature_branch1 has only 1 extra/new commit (develop history is gone)
+
+86e141f  develop commits squashed   => new Commit with new has 
+315bffb (develop) m4                => commit from feature_branch  
+e76dca9 f2                          => commit from feature_branch 
+d52b846 develop 2 files             => common commit
+
+
+
+2. --------------------  rebase interactive ------------------------
+--------------
+git rebase -i develop  
+--------------
+=> it will rebase with develop branch and allow you to change commits names, sqaush 
+
+--------------
+git rebase -i HEAD~2  
+--------------
+=> it will allow you to organise the tip of your branch by pick, changing, squasing exisiting commits 
+
+--------------------
+</example>
+</paragraph>
+<subtitle>good artesian article about rebase and merge</subtitle>
+    <paragraph>
+     <info>details explanation of advatanges and disadvantages of both</info>
+        <example>   
+        //change localhost:1000 if you viewing on heroku
+        http://localhost:1000/views/Merging_Rebasing_Atlassian_Git_Tutorial.html
+      </example>
+    </paragraph>
+  </content>
+</chapter>  
+
+<chapter>
+<subject>git reflog</subject>
+   <content>
+    <paragraph>
+     <info>it will log all commits for the sesion</info>
+        <example>
+--------------
+git reflog 
+--------------
+=> produces
+
+447040d (HEAD -> feature-branch1) HEAD@{0}: reset: moving to ORIG_HEAD
+447040d (HEAD -> feature-branch1) HEAD@{1}: reset: moving to 447040d
+447040d (HEAD -> feature-branch1) HEAD@{2}: reset: moving to 447040d
+cb19083 HEAD@{3}: checkout: moving from develop to feature-branch1
+315bffb (develop) HEAD@{4}: checkout: moving from feature-branch1 to develop
+cb19083 HEAD@{5}: rebase finished: returning to refs/heads/feature-branch1
+cb19083 HEAD@{6}: rebase: f3
+447040d (HEAD -> feature-branch1) HEAD@{7}: rebase: f2
+315bffb (develop) HEAD@{8}: rebase: checkout develop
+2ef3ddd HEAD@{9}: checkout: moving from develop to feature-branch1
+315bffb (develop) HEAD@{10}: checkout: moving from feature-branch1 to develop
+
+etc....
+
+-----
+
+usefull after rolling back the rebase command
+
+
+=> example roll back to latest commit for feature_branch1 before rebase 
+
+
+git reset --hard 2ef3ddd
+
+2ef3ddd (HEAD -> feature-branch1) f3
+e76dca9 f2
+d52b846 develop 2 files
+b709344 (master) master
+
+
+        </example>
+    </paragraph>
+  </content>
+</chapter>
+</chapters>

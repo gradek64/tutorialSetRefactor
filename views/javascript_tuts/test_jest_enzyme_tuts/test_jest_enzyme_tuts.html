@@ -66,6 +66,8 @@
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>alternative to snapshot</a><span class="tooltiptext">alternative to snapshot</span>
                            
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>common selectors static and promise based</a><span class="tooltiptext">common selectors static and promise based</span>
+                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>act wrapper error</a><span class="tooltiptext">act wrapper error</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>selecting DOM elements {container}</a><span class="tooltiptext">selecting DOM elements {container}</span>
@@ -138,6 +140,8 @@
                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>globally in __mocks__/custom.js</a><span class="tooltiptext">globally in __mocks__/custom.js</span>
                            
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>mock default export custom module</a><span class="tooltiptext">mock default export custom module</span>
+                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>mocking only in testing-file.spec.js</a><span class="tooltiptext">mocking only in testing-file.spec.js</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>mocking fetch()</a><span class="tooltiptext">mocking fetch()</span>
@@ -189,6 +193,8 @@
                     <ul class="linksNested">
                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>spyOn(window, &#39;scrollTo&#39;)</a><span class="tooltiptext">spyOn(window, &#39;scrollTo&#39;)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>add property to Window object (TS friedly)</a><span class="tooltiptext">add property to Window object (TS friedly)</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>mock create react refference</a><span class="tooltiptext">mock create react refference</span>
                         
@@ -746,6 +752,75 @@ it(&#39;initial state should be zero (0)&#39;, () =&gt; {
               <div class="band-container partition " part="part-4">
                 <div class="band-inner">
 
+                  <p>react-testing-library uses selectors that are based on role,text etc
+
+                full list on :
+
+                    https://testing-library.com/docs/queries/byrole/
+
+              however some of them are naugthy and you need to know some tricks to get elements selected:</p>
+                  <div class="codeWraper">
+                    <code>/------  getbyText ----/
+
+ &lt;p&gt;text look up&lt;/p&gt;
+
+const element = screen.getByText(&#39;text look up&#39;)
+const element = screen.getByText(/text look up/i)
+
+
+/------  getbyRole ----/
+
+ &lt;a role=&quot;button&quot; aria-label=&quot;I am cool button&quot; href=&quot;is/cool/button&quot;&gt;button&lt;a/&gt;
+
+const button = scrren.getByRole(&#39;button&#39;, { label: &#39;I am cool button&#39; }) 
+const button = scrren.getByRole(&#39;button&#39;, { name: &#39;I am cool button&#39; }) //more luck with this one
+
+------ the way works from documenation---------
+
+&lt;img aria-label=&quot;fancy image&quot; src=&quot;fancy.jpg&quot; /&gt;
+
+will be returned for both getByAltText(&#39;fancy image&#39;) and getByRole(&#39;image&#39;, { name: &#39;fancy image&#39; })
+//------------------------------
+
+
+/------  getAllbyRole ----/
+
+&lt;a role=&quot;button&quot; aria-label=&quot;I am cool button&quot; href=&quot;is/cool/button&quot;&gt;button&lt;a/&gt;
+&lt;a role=&quot;button&quot; aria-label=&quot;I am cool button&quot; href=&quot;is/cool/button&quot;&gt;button&gt;a/&gt;
+
+
+const buttons = scrren.getAllByRole(&#39;button&#39;, { label: &#39;I am cool button&#39; }) 
+const buttons = scrren.getAllByRole(&#39;button&#39;, { name: &#39;I am cool button&#39; }) //more luck with this one
+
+//------------------------------
+
+------------ promise based selectors ----------
+
+those are based on dynamic change either timer based or API call response based they stat with find...
+
+ test(&#39;Should check field validation&#39;, async () =&gt; {
+
+    const input = await screen.findByLabelText(&#39;Street / road&#39;)
+    const landline = await screen.findByText(&#39;No landline?&#39;)
+    const applePaySection await screen.findByTestId(&#39;apple-pay-section&#39;)
+
+
+    //array 
+    const inputs = await screen.findAllByLabelText(&#39;Street / road&#39;)
+    const landlines = await screen.findAllByText(&#39;No landline?&#39;)
+    const applePaySections await screen.findAllByTestId(&#39;apple-pay-section&#39;)
+
+
+ })
+
+/-------------------/</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-5">
+                <div class="band-inner">
+
                   <p>update on tests causes the test engine to block once the render changes therefore most
                 of the updates are already wrapped in act() method but sometimes you need to still wrap them yourselft</p>
                   <div class="codeWraper">
@@ -760,7 +835,7 @@ http://localhost:1000/views/javascript_tuts/test_jest_enzyme_tuts/RTL_not_wrappe
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-5">
+              <div class="band-container partition " part="part-6">
                 <div class="band-inner">
 
                   <p>React testing libray comes with lots of more or less useufull selectors, personaly I prefer use css selectors. U can use them by using 
@@ -815,7 +890,7 @@ in documenation
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-6">
+              <div class="band-container partition " part="part-7">
                 <div class="band-inner">
 
                   <p>Events have this syntax 
@@ -846,7 +921,7 @@ Simulate.change(maxFilterRadioButton, { target: { value: &#39;max&#39; } } as an
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-7">
+              <div class="band-container partition " part="part-8">
                 <div class="band-inner">
 
                   <p>Once you render a component as 
@@ -873,7 +948,7 @@ describe(&#39;on submit temperature form&#39;, () =&gt; {
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-8">
+              <div class="band-container partition " part="part-9">
                 <div class="band-inner">
 
                   <p>Custom hooks allow you to expose state logic outside to other files. At the moment the only way to test is by @testing-library/react-hooks library which is the  addition to @testing-library/react. Example below</p>
@@ -948,7 +1023,7 @@ in 2 ways , described in this document under: MOCK ENTIRE MODULE STORED IN NODE_
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-9">
+              <div class="band-container partition " part="part-10">
                 <div class="band-inner">
 
                   <p>There are 2 stages for testing async cutom hook before and after data
@@ -1039,7 +1114,7 @@ describe(&#39;useFetch() responds with error&#39;, () =&gt; {
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-10">
+              <div class="band-container partition " part="part-11">
                 <div class="band-inner">
 
                   <p>Async react component needs to be tested before and after response is back. To achive that our test has to be set for async fuction and await the response for update. Details below:</p>
@@ -1151,7 +1226,7 @@ function waitForElement&lt;T&gt;(
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-11">
+              <div class="band-container partition " part="part-12">
                 <div class="band-inner">
 
                   <p>in latest versions v10+ most async methods are deprecated and replaced with one waitFor(). Below is example how to use it, the main diffrence is that waitFor() doesnt return result but insted takes async response inside it method as:
@@ -1727,6 +1802,44 @@ export { showModal }
               <div class="band-container partition " part="part-2">
                 <div class="band-inner">
 
+                  <p>you need to mock origin defualt exported module as below: 
+          the example is with typescript</p>
+                  <div class="codeWraper">
+                    <code>/---------original file---------/
+
+const getCookie = (name: string): string | undefined =&gt; {
+  //some logic
+}
+
+export default getCookie
+
+
+-------------------------------------------------test file----------------------------------------/
+  
+//----import file with the syntax * to give it a name 
+
+import * as getCookie from &#39;./getCookie&#39;
+
+//-----mock default exported module as below
+
+jest.mock(&#39;./getCookie&#39;, () =&gt; ({
+  __esModule: true,
+  default: jest.fn().mockImplementation(() =&gt; &#39;{&quot;season&quot;:&quot;default&quot;}&#39;),
+})
+
+//------to override the above mock you need to apply 
+
+const overrideDefault = getCookie as { default: (name: string) =&gt; string }
+overrideDefault.default = jest.fn().mockImplementation(() =&gt; &#39;{&quot;season&quot;:&quot;pride&quot;}&#39;)
+
+//---------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
                   <p>this method allows you to mack intant mock in the scope of testing file only.</p>
                   <div class="codeWraper">
                     <code>------ specify method to mock in module -------------
@@ -1765,7 +1878,7 @@ all.closeModal() etc .. (all of them will be mocked)
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-3">
+              <div class="band-container partition " part="part-4">
                 <div class="band-inner">
 
                   <p>Custom mock of fetch() native js method for async call</p>
@@ -2423,6 +2536,47 @@ window.scrollTo.mockClear();
               </div>
             
               <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>Sometimes you need to mock a property/method which is not native to the window object. Therefore you need to add to the 
+                existing object so TS wont moand that property doesnt exist on the object. One method is to use 
+                
+                            Object.defineProperty()
+
+                  method as example below</p>
+                  <div class="codeWraper">
+                    <code>//------------------//
+
+    
+//------ add &#39;property1&#39; to the window object------
+
+Object.defineProperty(window, &#39;property1&#39;, {
+  value: 42,
+  writable: false
+});
+
+
+console.log(window.property1); //logs 42
+console.log(window.location); //still works
+
+
+//------ add &#39;customMethod&#39; property as method to the window object------
+
+
+Object.defineProperty(window, &#39;cutomMethod&#39;, {
+  value: ()=&gt;{ return console.log(&#39;custom wndow method executed&#39;)},
+  writable: false
+});
+
+window.cutomMethod();
+console.log(window.location); //still works
+
+//------------------//</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
                 <div class="band-inner">
 
                   <p>sometimes U need to be more creative and instead spying is to create a DOM element and send it to test. The example could be 

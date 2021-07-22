@@ -222,6 +222,130 @@ update otherwise!
     </content>
 </chapter>
 <chapter>
+    <subject>Node Authentication</subject>
+    <content>
+
+        <subtitle>via sessionId and cookie</subtitle>
+        <paragraph>
+            <info>One of the way of Authenticating route is to set a session_Id at the 
+            back-end and send it to front-end as cookie. Then any subsequent call to the server 
+            will need that cookie to be send along for comparison to allow for execution of not.
+     
+
+            Cookie value === session_Id 
+
+            IT MUST match in order to server to server the route
+
+            </info>
+            <example>
+              /-- set session_Id in express---/
+
+          In express the way to set up session id service is by middlware and the most popular 
+          package is
+                   npm i expess-session
+
+  ------ once is intalled setup is set as any express middleware ------------
+
+        app.use(session({
+          secret: 'keyboard cat',
+          resave: false,
+          saveUninitialized: true
+        }))
+
+Above are the minimum basic flags that should be set there:
+
+      secret: String that needs to match string in the cookie
+      resave: 
+      
+      saveUninitialized: true|false 
+      true => will not generate id if user is not authorized and 
+      session object is modified and saved to memory store, file , database
+      false => will generate id if user is not authorized 
+
+
+            </example>
+        </paragraph>
+        <subtitle>how request know about cookie ? </subtitle>
+        <paragraph>
+            <info>this will update all your package in a scope of the folder even if package-lock.json is present. 
+/--/
+
+npm update => updates project local packages
+
+npm update packagename = updates one package 
+
+npm update -g => updates globall installed packages
+
+npm update packagename -g = updates one package installed globally 
+
+there is some usufull npm commands that will tell you if your packages needs update to prevent errors
+/--/
+
+            </info>
+            <example>
+/----/
+
+//list packages needed update locally / -g globally 
+ -- npm outdated 
+
+
+
+/-------- npm list ----------/
+
+//view curent installed version locally / -g globally 
+npm list --depth 0 
+
+---IMPORATANT ---
+
+this command also flags that which packages needs attentsion, update flaged as: UNMET PEER DEPENDENCY
+U need to habe node_modules alredy present so after npm install. npm outdated it wont flag outdated packges
+if they are not installed , so always run FIRST ::  npm list --depth 0 
+
+
+
+//----------- npm update ----------/
+
+this command will FIX all unmet depedencies regardless the package-lock.json versioning 
+IMPORTANT any package needs updating it has to have minor or patch version enables in package.json
+from node-sass:'1.3.4' it has to have node-sass:'^1.3.4' or node-sass:'`1.3.4'. It will not install 
+update otherwise!
+
+------------------------------------
+
+//update all package / -g globally
+-- npm update
+
+//update single package / -g globally
+-- npm update package
+
+------ minor usage npm commands -------
+
+//list all historical version about the package / -g globally
+-- npm view enzyme versions
+
+//clean unused dependencies (it wont fix unmet dependecies errors just will do repository clean up)
+-- npm prune /or npm prun package
+
+//package home page 
+-- npm home package
+
+//package repo page 
+-- npm repo package
+
+//package docs page 
+-- npm docs package
+
+//list curent bugs page 
+ -- npm bugs package
+
+/--/
+
+
+</example>
+        </paragraph>
+    </content>
+</chapter>
+<chapter>
     <subject>importing and exporting in Common.js</subject>
     <content>
       <subtitle>function, string exports/require </subtitle>
@@ -462,19 +586,62 @@ this command does both (doesnt produce link since open debug mode with server st
         <paragraph>
             <info>Dubbing node needs to be done in set up enviroment. Chrome build extension to make one and it could be 
               set up as: 
-                    1. Run node (file/app) in debugg mode 
 
-                        node --inspsect-brk server.js 
+                  1. Run node (file/app) in debugg mode (either type or add to npm scripts)
+ 
+                        node --inspsect-brk path/to/start/server.js  
 
-                    This allows you to run file and server in chrome extension at the same time 
+                        node --inspsect path/to/start/server.js   
+
+                      ----------- note ------------------
+                        --inspsect and --inspsect-brk both => 
+
+                        => Enable inspector agent
+                        => Listen on default address and port (127.0.0.1:9229)
+
+                        -----------
+                        --inspsect-brk addtionally 
+
+                        => Break before user code starts
+
+                        -----------
             </info>
             <example>
               /***** Process of running dubugger for simple file ******/
 
 
-1.  set up your sever site that uses express server 
 
 //-------- example server.js -------------
+
+1.  run your start server script (either by adding to npm scripts or type in console)
+
+  node --inspsect path/to/start/server.js  
+
+  //or 
+
+  scripts:{
+    start-debug:"node --inspsect path/to/start/server.js"
+  }
+
+2. this will prompt a message in console 
+
+  'Debugger listening on ws://127.0.0.1:9....'
+
+3. Open chrome inspect console url 
+
+  chrome://inspect
+
+//notification
+4. U should have notification of 'REMOTE TARGET' being occupied by your running app 
+5. click on link: 
+
+      Open dedicated DevTools for Node
+
+//Debugging
+6. Open sources tab and CMD+P and look for the file to debug 
+7. add your break point to the file and refresh the running app in the browser
+
+------------------------------------------------
 
 var express = require('express');
 var app = express();

@@ -456,6 +456,76 @@ it('initial state should be zero (0)', () => {
   });
                 </example>
             </paragraph>
+             <subtitle>common selectors static and promise based</subtitle>
+            <paragraph>
+                <info>react-testing-library uses selectors that are based on role,text etc
+
+                full list on :
+
+                    https://testing-library.com/docs/queries/byrole/
+
+              however some of them are naugthy and you need to know some tricks to get elements selected:
+                
+                </info>
+                <example>
+/------  getbyText ----/
+
+ &lt;p>text look up&lt;/p>
+
+const element = screen.getByText('text look up')
+const element = screen.getByText(/text look up/i)
+
+
+/------  getbyRole ----/
+
+ &lt;a role="button" aria-label="I am cool button" href="is/cool/button">button&lt;a/>
+
+const button = scrren.getByRole('button', { label: 'I am cool button' }) 
+const button = scrren.getByRole('button', { name: 'I am cool button' }) //more luck with this one
+
+------ the way works from documenation---------
+
+&lt;img aria-label="fancy image" src="fancy.jpg" />
+
+will be returned for both getByAltText('fancy image') and getByRole('image', { name: 'fancy image' })
+//------------------------------
+
+
+/------  getAllbyRole ----/
+
+&lt;a role="button" aria-label="I am cool button" href="is/cool/button">button&lt;a/>
+&lt;a role="button" aria-label="I am cool button" href="is/cool/button">button&gt;a/>
+
+
+const buttons = scrren.getAllByRole('button', { label: 'I am cool button' }) 
+const buttons = scrren.getAllByRole('button', { name: 'I am cool button' }) //more luck with this one
+
+//------------------------------
+
+------------ promise based selectors ----------
+
+those are based on dynamic change either timer based or API call response based they stat with find...
+
+ test('Should check field validation', async () => {
+
+    const input = await screen.findByLabelText('Street / road')
+    const landline = await screen.findByText('No landline?')
+    const applePaySection await screen.findByTestId('apple-pay-section')
+
+
+    //array 
+    const inputs = await screen.findAllByLabelText('Street / road')
+    const landlines = await screen.findAllByText('No landline?')
+    const applePaySections await screen.findAllByTestId('apple-pay-section')
+
+
+ })
+
+/-------------------/
+
+
+                </example>
+            </paragraph>
             <subtitle>act wrapper error</subtitle>
             <paragraph>
                 <info>update on tests causes the test engine to block once the render changes therefore most
@@ -1380,6 +1450,42 @@ export { showModal }
 
           </example>
       </paragraph>
+    <subtitle>mock default export custom module</subtitle>
+      <paragraph>
+          <info>you need to mock origin defualt exported module as below: 
+          the example is with typescript</info>
+          <example>
+/---------original file---------/
+
+const getCookie = (name: string): string | undefined => {
+  //some logic
+}
+
+export default getCookie
+
+
+-------------------------------------------------test file----------------------------------------/
+  
+//----import file with the syntax * to give it a name 
+
+import * as getCookie from './getCookie'
+
+//-----mock default exported module as below
+
+jest.mock('./getCookie', () => ({
+  __esModule: true,
+  default: jest.fn().mockImplementation(() => '{"season":"default"}'),
+})
+
+//------to override the above mock you need to apply 
+
+const overrideDefault = getCookie as { default: (name: string) => string }
+overrideDefault.default = jest.fn().mockImplementation(() => '{"season":"pride"}')
+
+//---------------------
+
+          </example>
+      </paragraph>
       <subtitle>mocking only in testing-file.spec.js</subtitle>
       <paragraph>
           <info>this method allows you to mack intant mock in the scope of testing file only.</info>
@@ -2068,6 +2174,48 @@ window.scrollTo.mockClear();
 
                 </example>
             </paragraph>
+             <subtitle>add property to Window object (TS friedly)</subtitle>
+            <paragraph>
+                <info>Sometimes you need to mock a property/method which is not native to the window object. Therefore you need to add to the 
+                existing object so TS wont moand that property doesnt exist on the object. One method is to use 
+                
+                            Object.defineProperty()
+
+                  method as example below
+                </info>
+                <example>
+
+                //------------------//
+
+    
+//------ add 'property1' to the window object------
+
+Object.defineProperty(window, 'property1', {
+  value: 42,
+  writable: false
+});
+
+
+console.log(window.property1); //logs 42
+console.log(window.location); //still works
+
+
+//------ add 'customMethod' property as method to the window object------
+
+
+Object.defineProperty(window, 'cutomMethod', {
+  value: ()=>{ return console.log('custom wndow method executed')},
+  writable: false
+});
+
+window.cutomMethod();
+console.log(window.location); //still works
+
+//------------------//
+
+                </example>
+            </paragraph>
+            
             <subtitle>mock create react refference</subtitle>
             <paragraph>
                 <info>sometimes U need to be more creative and instead spying is to create a DOM element and send it to test. The example could be 

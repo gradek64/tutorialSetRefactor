@@ -102,6 +102,47 @@ myEmployee14 = {
 ------------
               </example>
           </paragraph>
+   <subtitle>interface combinations (joining interface)</subtitle>
+          <paragraph>
+              <info>2 interface will be join by extendin one of another, 
+              usefull to add extra property to bigger interface ar Router
+              </info>
+              <example>
+//---- 1a. Interface  combined by extending
+//by adding new props and keeping RouterProps
+
+export interface CreditPlanOptionsProps extends RouterProps {
+  defaultOption: CreditPlan
+  options: CreditPlan[]
+  onChange: (selectedPlan: string) => void
+  onSubmit: () => void
+  selectedOption: CreditPlan
+  tabIndex: number
+  totalPrice: number
+  submittingPlan: boolean
+  numOfAddArgosCardAttempts: number
+  handleAbort: () => void
+}
+
+
+//simple internal interface
+
+interface Greg {
+  greg1:string,
+  greg2:string,
+}
+
+interface Busra extends Greg {
+  busra1:string,
+  busra2:string,
+}
+
+const couple:Busra = {greg1:'',greg2:'',busra1:'',busra2:''}
+
+------------
+              </example>
+          </paragraph>
+
       </content>
   </chapter>
   <chapter>
@@ -140,7 +181,7 @@ type = availableColors = 'blue' | 'green'
 -----------------------------------------------------------------------------------
                       </example>
                   </paragraph>
-          <subtitle>type aliases</subtitle>
+          <subtitle>type aliases (combining/joinng types)</subtitle>
           <paragraph>
               <info>Types can be combined as I1 and I2 as well as I1 or I2
               </info>
@@ -192,6 +233,59 @@ myEmployee14 = {
 ------------
               </example>
           </paragraph>
+ <subtitle>join/combining t</subtitle>
+          <paragraph>
+              <info>Types can be combined as I1 and I2 as well as I1 or I2
+              </info>
+              <example>
+//---- 1a. Interface  combined with &amp; and operator
+
+type Dude = {
+  name: string;
+  age: number;
+}
+
+type Dude2 = {
+  job: string;
+  position: string;
+}
+
+let myEmployee10: Dude &amp; Dude2;
+myEmployee10 = {
+  name: 'Darek',
+  age: 31,
+  job: 'contract',
+  position: 'developer',
+};
+
+
+
+//---- 2. type one of another with or | operator
+
+
+type Dude100 = {
+  name: string;
+  age: number;
+}
+
+type Dude200 = {
+  job: string;
+  position: string;
+}
+
+let myEmployee14: Dude100 | Dude200;
+
+myEmployee14 = {
+  name: 'string',
+  job: 'contract',
+  position: 'developer',
+}; 
+// a bit buggy cause it accepts 3 arguments it should accpet 2 or 4
+
+------------
+              </example>
+          </paragraph>
+
       </content>
   </chapter>
   <chapter>
