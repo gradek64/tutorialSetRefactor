@@ -1,0 +1,219 @@
+ 160x600 - wsky */
+
+/* 300x250 - mpu */
+	.mpu.hyperfair #logo {
+		width:60px;
+		left:228px;
+	}
+	.mpu.hyperfair .txt{
+		text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+		-webkit-transform:translateX(-50%) translateY(0%) translateZ(0);
+			-moz-transform:translateX(-50%) translateY(0%) translateZ(0);
+				  transform:translateX(-50%) translateY(0%) translateZ(0);
+		top:40px;
+		margin-top:0px;
+	}
+	.mpu.hyperfair #f1_txt,
+	.mpu.hyperfair #f2_txt {
+		font-size:35px;
+		line-height:38px;
+	} 
+	.mpu.hyperfair #f1_txt span,
+	.mpu.hyperfair #f2_txt span,
+	.mpu.hyperfair #f3_txt span {
+		font-weight:300;
+		font-size:24px;
+		line-height:27px;
+		margin-bottom:25px;
+	} 
+
+	.mpu.hyperfair #f3_txt {
+		font-size:18px;
+		line-height:23px;
+	}
+	.mpu.hyperfair #f3_txt span#prc {
+		font-weight:300;
+		font-size:52px;
+		line-height:52px;
+		margin-bottom:0px;
+		font-weight: normal;
+	} 
+
+	.mpu.hyperfair #end_txt {
+		top:50px;
+		font-size:22px;
+		line-height:31px;
+		text-shadow: none;
+	} 
+	.mpu.hyperfair #end_txt #remove {
+		display:inline-block;
+		visibility: hidden;
+	} 
+	.mpu.hyperfair #end_txt #strpl {
+		font-weight:300;
+	} 
+
+	.mpu.hyperfair #fr1_beam{z-index:11;} 
+	.mpu.hyperfair #fr1_glow{z-index:12; mix-blend-mode:screen;} 
+
+	.mpu.hyperfair #fr2_beam{z-index:16;} 
+	.mpu.hyperfair #fr2_glow{z-index:17;	mix-blend-mode:screen;} 
+
+	.mpu.hyperfair #fr3_glow{z-index:21;	mix-blend-mode:screen;} 
+
+	.mpu.hyperfair .tcs {
+		bottom:10px;
+	}
+
+	.mpu.hyperfair #cta, 
+	.mpu.hyperfair #cta_txt {
+		top: 172px;
+		left:50%;-webkit-transform:translateX(-50%);-moz-transform:translateX(-50%);transform:translateX(-50%);
+	} 
+
+/* 300x600 - hlfpg */
+
+/* 320x50 - mob */
+
+/* 336x280 - lmpu */
+
+/* 728x90 - ldrbd */
+
+/* 970x250 - blbrd */
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+/* 160x600 - wsky */
+	.wsky.hyperfairFeb22 #logo {
+		width:115px;
+		top:32px;
+		left:50%;
+		-webkit-transform:translateX(-50%);-moz-transform:translateX(-50%);transform:translateX(-50%);
+	}
+	.wsky.hyperfairFeb22 .tcs {
+		bottom:10px;
+	}
+	.wsky.hyperfairFeb22 #cta,
+	.wsky.hyperfairFeb22 #cta_txt {
+		top:320px;
+	}
+
+/* 300x250 - mpu */
+	.mpu.hyperfairFeb22 #logo {
+		width:100px;
+		left:20px;
+		top:16px;
+	}
+	.mpu.hyperfairFeb22 .txt{
+		left:18px; 
+		padding:0;
+		margin:0;
+		text-align:left;
+		transform:none;
+		-webkit-transform:translateY(-50%);-moz-transform:translateY(-50%);transform:translateY(-50%);
+	}
+	.mpu.hyperfairFeb22 .tcs {
+		bottom:10px;
+		text-align:left;
+		left:18px; 
+		transform:none;
+	}
+	.mpu.hyperfairFeb22 #cta,
+	.mpu.hyperfairFeb22 #cta_txt {
+		top:182px;
+	}
+
+/* 300x600 - hlfpg */
+	.hlfpg.hyperfairFeb22 #logo {
+		width:140px;
+		top:30px;
+		left:50%;
+		-webkit-transform:translateX(-50%);-moz-transform:translateX(-50%);transform:translateX(-50%);
+	}
+	.hlfpg.hyperfairFeb22 .txt {
+		margin-top:-120px;
+	}
+	.hlfpg.hyperfairFeb22 .tcs {
+		bottom:10px;
+	}
+	.hlfpg.hyperfairFeb22 #cta,
+	.hlfpg.hyperfairFeb22 #cta_txt {
+		top:264px;
+	}
+
+/* 320x50 - mob */
+	.mob.hyperfairFeb22 .txt {
+		margin-left:-24px;
+		margin-top:-3px;
+		font-size:12px;
+		line-height:14px;
+	}
+	.mob.hyperfairFeb22 .tcs {
+		margin-left:-24px;
+	}
+	.mob.hyperfairFeb22 #cta,
+	.mob.hyperfairFeb22 #cta_txt {
+		margin-left:105px;
+		width:85px;
+		max-width:85px;
+	}
+
+/* 336x280 - lmpu */
+	.lmpu.hyperfairFeb22 #logo {
+		width:100px;
+		left:20px;
+		top:18px;
+	}
+	.lmpu.hyperfairFeb22 .txt{
+		left:18px; 
+		padding:0;
+		margin:0;
+		text-align:left;
+		transform:none;
+		-webkit-transform:translateY(-50%);-moz-transform:translateY(-50%);transform:translateY(-50%);
+	}
+	.lmpu.hyperfairFeb22 .tcs {
+		bottom:10px;
+		text-align:left;
+		left:18px; 
+		transform:none;
+	}
+	.lmpu.hyperfairFeb22 #cta,
+	.lmpu.hyperfairFeb22 #cta_txt {
+		top:212px;
+	}
+
+/* 728x90 - ldrbd */
+	.ldrbd.hyperfairFeb22 .txt,
+	.ldrbd.hyperfairFeb22 .tcs {
+		margin-left:-120px;
+	}
+	.ldrbd.hyperfairFeb22 #cta,
+	.ldrbd.hyperfairFeb22 #cta_txt {
+		width:110px;
+		margin-left:82px;
+		top:35px;
+	}
+
+/* 970x250 - blbrd */
+	.blbrd.hyperfairFeb22 .txt {
+		margin-top:-16px;
+		font-size:34px;
+		line-height:40px;
+	}
+	.blbrd.hyperfairFeb22 .txt,
+	.blbrd.hyperfairFeb22 .tcs {
+		margin-left:-100px;
+	}
+	.blbrd.hyperfairFeb22 #cta,
+	.blbrd.hyperfairFeb22 #cta_txt {
+		margin-left:-100px;
+		top:178px;
+		width:300px;
+		max-width:400px;
+	}
+	.blbrd.hyperfairFeb22 #logo {
+		width:120px;
+		top:30px;
+		left:30px;
+	}

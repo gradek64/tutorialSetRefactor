@@ -252,28 +252,107 @@ ReactDOM.render(&lt;FunctionalComponent name="Greg" />,document.getElementById('
 -----------------------------------------------------------------
                </example>
            </paragraph>
-                  <subtitle>React Components: Statefull Classes</subtitle>
-                  <paragraph>
-                      <info>StateFull Class Component: it creates a component that accpets props and allows you to define 'state' and ref. Use only if you need that you need to change the state. You dont need to use JSX but it is preferable.</info>
-                      <example>
-                        
-class Hello extends React.Component {
-  constructor(props){
-    super(props);
-    this.state={value:0}
-  }
-  render() {
-    return &lt;div>Hello {this.props.toWhat} &lt;/div>;
-  }
-}
+       </content>
+   </chapter>
+   <chapter>
+<subject>React Types Components</subject>
+       <content>
+           <subtitle>React way of checking the react types elements/nodes</subtitle>
+           <paragraph>
+               <info>React has its own way of clasifing what react element object is being return 
+               some of them are more tight type check other more general , they usefull for typescript checks specifing
+               what type of node should be returned</info>
+               <example>
+------------------ReactElement and JSX.Element -------------------------
 
-ReactDOM.render(
-  &lt;Hello toWhat="World" />,
-  document.getElementById('root')
-);
-                      </example>
-                  </paragraph>
+1. A ReactElement and JSX.Element 
 
+are objects with a type and props which are the result of createElement() method,
+whose props and type have type any, so they are more or less the same.
+
+has to be defined:
+  object
+  number,
+  string 
+  (any value but not falsy)
+
+------------------React.Node -------------------------
+
+2. A ReactNode is 
+
+    ReactElement,
+    ReactFragment,
+    string,
+    number 
+    or an array of ReactNodes,
+    null,
+    undefined,
+    boolean
+    children
+    (takes falsy values is usefull when check if component exists)
+
+  is used as return type for render() in class components. 
+  It also is the default type for children attribute with PropsWithChildren.
+
+  basically is:
+
+        type ReactNode = {} | null | undefined;
+    </example>
+    </paragraph>
+           <subtitle>Ways of render react JSX</subtitle>
+           <paragraph>
+               <info>React Node/Element could be either function or class, bellow are the ways of rendering JSX in 
+               render() or retruning JSX in functional Component</info>
+               <example>
+------------------Functional Component to add------------------------
+
+ GOLDEN RULE =>
+
+  -------- functional component it will be always function------------ 
+
+
+
+       const JsxElement = ({ name }) => (&lt;div>{`${name} has been added`}&lt;/div>)
+      
+
+and JSX execution is always: 
+
+  &lt;JsxElement name={'Greg'} />
+
+
+----- Examples: primitive values as number or string------
+
+  const value = 'value'
+  const nb = 2
+
+
+------ Examples: react components ------
+
+
+  // assign to Constant
+  const MyElement = JsxElement
+  // assign to object
+  const Obj = { setter: &lt;JsxElement name={'obj name'} /> }
+  // extended to the react Component
+  const MyElementExtended = (props) => &lt;JsxElement {...props} />
+
+
+  render(){
+    &lt;>
+      {/* primitive values */}
+      {nb}
+      {value}
+      {/* React elements */}
+      &lt;MyElement name={'Greg'} />
+      {Obj.setter}
+      &lt;MyElementExtended name={'Extended'} />
+    &lt;/>
+  }
+
+
+  ------------------------------------------------------------------
+               </example>
+           </paragraph>
        </content>
    </chapter>
   <chapter>

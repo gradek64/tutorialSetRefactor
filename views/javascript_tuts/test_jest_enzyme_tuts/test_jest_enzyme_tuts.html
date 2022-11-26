@@ -56,6 +56,20 @@
                  
       </li>
     
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">Testing with Router (React componenents)</a><span class="tooltiptext">Testing with Router (React componenents)</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>Memory Router with single route (no path matching)</a><span class="tooltiptext">Memory Router with single route (no path matching)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>Memory Router with single route with path matching</a><span class="tooltiptext">Memory Router with single route with path matching</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>BroswerRouter, Router will write to browser history</a><span class="tooltiptext">BroswerRouter, Router will write to browser history</span>
+                        
+                    </ul>
+                
+      </li>
+    
       <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">Testing hooks with react-testing-library</a><span class="tooltiptext">Testing hooks with react-testing-library</span>
                   
                     <ul class="linksNested">
@@ -100,6 +114,18 @@
                  
       </li>
     
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">JEST timers</a><span class="tooltiptext">JEST timers</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>time based code (setTimeout, intervals, debounce)</a><span class="tooltiptext">time based code (setTimeout, intervals, debounce)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>setTimeout with mocked window method (window.alert)</a><span class="tooltiptext">setTimeout with mocked window method (window.alert)</span>
+                        
+                    </ul>
+                
+      </li>
+    
       <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts">Testing REDUX</a><span class="tooltiptext">Testing REDUX</span>
                   
                     <ul class="linksNested">
@@ -141,6 +167,8 @@
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>globally in __mocks__/custom.js</a><span class="tooltiptext">globally in __mocks__/custom.js</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>mock default export custom module</a><span class="tooltiptext">mock default export custom module</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>mock module/packages stages jest.mock()</a><span class="tooltiptext">mock module/packages stages jest.mock()</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>mocking only in testing-file.spec.js</a><span class="tooltiptext">mocking only in testing-file.spec.js</span>
                            
@@ -209,6 +237,8 @@
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>spyOn(npm_module,method)</a><span class="tooltiptext">spyOn(npm_module,method)</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>spyOn(class,method)</a><span class="tooltiptext">spyOn(class,method)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/test_jest_enzyme_tuts" partition>window.method spyOn window method with execution</a><span class="tooltiptext">window.method spyOn window method with execution</span>
                         
                     </ul>
                 
@@ -663,6 +693,128 @@ https://devhints.io/enzyme</code>
                   </div>
                 </div>
               </div>
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> Testing with Router (React componenents) </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>MemoryRouter is simple router that will no register any route change (since it does not have 
+                history object) and is usefull to test single route because it does not write to browser history or address bar</p>
+                  <div class="codeWraper">
+                    <code>/*--------With single Route and Route that renders on any path--------*/
+
+import { MemoryRouter, Route } from &#39;react-router-dom&#39;
+
+const ReactComp = () =&gt; &#39;React Comp&#39;
+//All below combinations do the same job
+
+
+render(
+  &lt;MemoryRouter initialEntries={[&#39;/&#39;]}&gt;
+    &lt;Route&gt;
+      &lt;ReactComp /&gt;
+    &lt;/Route&gt;
+  &lt;/MemoryRouter&gt;,
+)
+
+render(
+  &lt;MemoryRouter initialEntries={[&#39;/&#39;]}&gt;
+      &lt;ReactComp /&gt;
+  &lt;/MemoryRouter&gt;,
+)
+
+render(
+  &lt;MemoryRouter&gt;
+      &lt;ReactComp /&gt;
+  &lt;/MemoryRouter&gt;,
+)
+
+render(
+  &lt;MemoryRouter&gt;
+    &lt;Route path=&#39;/&#39;&gt;
+      &lt;ReactComp /&gt;
+    &lt;/Route&gt;
+  &lt;/MemoryRouter&gt;,
+)
+
+//test for the componenent being rendered
+expect(screen.getByText(&#39;React Comp&#39;)).toBeInTheDocument()
+
+/*--------*/</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>MemoryRouter is able to understand /:params so it will render Route that matches the route with the path</p>
+                  <div class="codeWraper">
+                    <code>/*--------With single Route and Route that renders on specific path--------*/
+
+import { MemoryRouter, Route } from &#39;react-router-dom&#39;
+
+const ReactComp = () =&gt; &#39;React Comp&#39;
+render(
+  &lt;MemoryRouter initialEntries={[&#39;/greg&#39;]}&gt;
+    &lt;Route path=&#39;/:name&#39;&gt;
+      &lt;ReactComp /&gt;
+    &lt;/Route&gt;
+  &lt;/MemoryRouter&gt;,
+)
+
+expect(screen.getByText(&#39;React Comp&#39;)).toBeInTheDocument()
+
+/*--------*/</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>When One uses the Router or BroswerRouter then is able to track routes changes with browser history and address bar changes</p>
+                  <div class="codeWraper">
+                    <code>-------
+
+import { Router, Route } from &#39;react-router-dom&#39;
+import { createMemoryHistory } from &#39;history&#39;
+
+--- U need create test history called MemoryHistory -----
+const history = createMemoryHistory({ initialEntries: [&#39;/&#39;] })
+
+------------------
+const ReactComp = ({redirectPath}) =&gt; {
+  return redirectPath ?  &lt;Redirect to={redirectPath} /&gt; : &#39;regular Component&#39;
+}
+
+render(
+  &lt;Router history={history}&gt;
+    &lt;Route redirectPath={&#39;/redirect&#39;}&gt;
+      &lt;ReactComp /&gt;
+    &lt;/Route&gt;
+     &lt;Route path=&#39;/redirect&#39; render={() =&gt; &lt;div&gt;&lt;/div&gt;} /&gt;
+  &lt;/Router&gt;,
+)
+
+//test for route change/redirect
+ expect(history.location.pathname).toBe(&#39;/redirect&#39;)
+
+------------------
+The above composition will render /redirect path when prop is provided in ReactComp
+
+------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
             
 
       </section>
@@ -1395,6 +1547,122 @@ test(&#39;have all the same properties&#39;, () =&gt; {
   
       
       <section   class="band band-b" class="band band-b">
+          <h1> JEST timers </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>Any code based on on time and delay should be tested with jest fake timers.
+              
+                  //1. jest.useFakeTimers();
+
+                  //2. ...code execution to be tested
+                      runTestFunction()
+
+                  //3. Fast-forward until all timers have been executed
+                  jest.runAllTimers();
+
+                  //or Fast-forward at specific time delay
+                  jest.advanceTimersByTime(1000);
+
+                  //4. make assertion afer time delayed is done 
+                  expect(callback).toBeCalled();</p>
+                  <div class="codeWraper">
+                    <code>-------------- testing setTimeout() ----------
+
+/ -------method to be tested -------- /
+
+export const testTimeoutWithCallback = (time: number, callback: Function,) =&gt; {
+  setTimeout(() =&gt; callback(time), time)
+}
+
+/ -------/
+
+2. /---- test  ------ /
+all you need to to is to register jest fake timers, run a method and then fast-forward time, and make test assertion
+
+it(&#39;it calls callback after 1s with fake Timers&#39;, () =&gt; {
+    jest.useFakeTimers();
+    const callback = jest.fn((time) =&gt; time)
+    testTimeoutWithCallback(1000, callback)
+
+
+    // At this point in time, the callback should not have been called yet
+    expect(callback).not.toBeCalled();
+
+    // Fast-forward until all timers have been executed
+    jest.runAllTimers();
+    //or Fast-forward at specific time
+    jest.advanceTimersByTime(1000);
+
+    expect(callback).toBeCalled();
+    expect(callback).toHaveBeenCalledTimes(1);
+    expect(callback).toHaveBeenCalledWith(1000)
+    jest.useRealTimers()
+})
+
+/------------------ /</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>In situation that you have time based code that based that executes 
+                window method as alert() you need to use jest fake timers and make asserstion
+                of alert bing called , but it needs be mocked or spyied on first.</p>
+                  <div class="codeWraper">
+                    <code>/ --- code with window.alert in timeout --- /
+
+export const testTimeoutWithWindowAlert = (time: number, callback?: Function,) =&gt; {
+  setTimeout(() =&gt; alert(&#39;Hello!&#39;), time)
+}
+
+/ ------- /
+
+/ --- test for setTimeout with window.alert spied on ---- /
+
+it(&#39;it calls mocked alert after 1s&#39;, () =&gt; {
+  //spy on window.alert
+  const spyAlert = jest.spyOn(window, &#39;alert&#39;).mockImplementation((name) =&gt; name)
+
+  //start jest timers
+  jest.useFakeTimers();
+
+  //execute tested code
+  const callback = jest.fn()
+  testTimeoutWithWindowAlert(1000, callback)
+
+  // At this point in time, the callback should not have been called yet
+  expect(callback).not.toBeCalled();
+
+  // Fast-forward until all timers have been executed
+  jest.runAllTimers();
+  //or Fast-forward at specific time
+  jest.advanceTimersByTime(1000);
+
+  //make asserstion
+  expect(spyAlert).toBeCalledWith(&#39;Hello!&#39;);
+  spyAlert.mockRestore()
+
+  //reset jest timers
+  jest.useRealTimers()
+
+})
+
+//---------------/</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
           <h1> Testing REDUX </h1> 
           
               <div class="band-container partition first" part="part-1">
@@ -1840,6 +2108,67 @@ overrideDefault.default = jest.fn().mockImplementation(() =&gt; &#39;{&quot;seas
               <div class="band-container partition " part="part-3">
                 <div class="band-inner">
 
+                  <p>If you need mock a module, and then change the mock with .mockImplementation or mockImplementationOnce then 
+          you have few options</p>
+                  <div class="codeWraper">
+                    <code>/---------example react componenent---------/
+
+const ReactComp = (props:Props):JSX.Element =&gt; (&#39;I am react componenent&#39;)
+
+export default ReactComp
+
+-------------------------------------------------test file----------------------------------------/
+
+
+
+  
+//----import file 
+
+import ReactComp from &#39;./ReactComp&#39;
+
+
+//1. -----mock entire module with overiding default and module __esModule
+
+jest.mock(&#39;./ReactComp&#39;, ()=&gt; jest.fn( () =&gt; &#39;this will render from ReactComp now&#39;)
+})
+
+
+
+//1.a ----- just beacause we mock entire module that could be easilly changed as below inside a test 
+
+ReactComp.mockImplementation( () =&gt;&#39;this is a new implemanation&#39;)
+
+//or
+
+ReactComp.mockImplementationOnce( () =&gt; &#39;this is a new implemanation&#39;)
+
+
+
+
+
+
+//2.------ Mock module with keeping default export structure
+
+jest.mock(&#39;./ReactComp&#39;, () =&gt; ({
+  __esModule: true,
+  default: () =&gt; (&#39;this is new implemanation&#39;)),
+})
+
+//Notice that nowhere in the structure we use jest.fn() therefore this implemanation can not be changed/overriden
+//it it hoisted on top of the file and not changeable
+
+
+
+
+
+//---------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
                   <p>this method allows you to mack intant mock in the scope of testing file only.</p>
                   <div class="codeWraper">
                     <code>------ specify method to mock in module -------------
@@ -1878,7 +2207,7 @@ all.closeModal() etc .. (all of them will be mocked)
                 </div>
               </div>
             
-              <div class="band-container partition " part="part-4">
+              <div class="band-container partition " part="part-5">
                 <div class="band-inner">
 
                   <p>Custom mock of fetch() native js method for async call</p>
@@ -2721,6 +3050,53 @@ axios.get().then((result) =&gt; {
     expect(wrapper.instance().add(2,3)).toEqual(5)
 
   });</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>When you create spyOn any global method as window.setTimeout() You will test mocked bahavior with
+              original implenation as the example below:</p>
+                  <div class="codeWraper">
+                    <code>------------------------ testing if setTimeout executes after certain time ---------------------
+
+export const testTimeoutWithCallback = (time: number, callback: Function,) =&gt; {
+  setTimeout(() =&gt; callback(time), time)
+}
+
+/-----/
+
+
+  1. /------------------ test with spyOn on setTimeout --------------------------
+
+  //mock functions can not be nested once one is mocked the other nested method is gone !
+  //with mock setTimeout you can only test if setTimeout has been called but not if callback has been called 
+  //cause is gone once setTimout is mocked. You dont need any jest timers to setTimeout either caused it is spiedOn/mocked
+
+  //!IMPORTANT
+  // beacause we mock setTimeout as spy meaning this mehod will be executed as 
+  //it would have been called in regular code (not mocked)
+  //but is just not going to call any other code eihter inside setTimeout or any other
+  //on code related, it will only call setTimeout as below 
+
+it(&#39;it calls callback after 1s spying on setTimeout itself not fake timers cause only checking setTimeout execution&#39;, () =&gt; {
+
+  //spy one setTimeout
+  const mockSetTimeout = jest.spyOn(window, &#39;setTimeout&#39;)
+
+  //code triggering setTimeout
+  testTimeoutWithCallback(1000, () =&gt; { })
+
+  //asserstion to setTimout execution
+  expect(window.setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 1000);
+
+  //same will apply to eventListener and any other window.method
+
+})
+
+/-----------/</code>
                   </div>
                 </div>
               </div>

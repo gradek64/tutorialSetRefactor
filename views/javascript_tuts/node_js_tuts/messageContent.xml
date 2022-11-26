@@ -203,6 +203,32 @@ update otherwise!
 
 </example>
         </paragraph>
+        <subtitle>ENV variables accessed by process.env.VAR via dotenv package</subtitle>
+        <paragraph>
+            <info>global variables are useful for keeping secret data, tokens etc and the easiest to add new/manage them is 
+            via dotenv npm package as below</info>
+            <example>
+                
+1. ----- install dotenv npm package
+
+npm install dotenv / yarn add dotenv
+
+2. ---- create dot env config file in the root of your project --- .env ---
+this file takes key pairs format ENV='value'
+
+TOKEN='mysecret'
+CUSTOM_USER='custom user'
+
+3. -- request file in main node file as app.js when server starts
+
+require('dotenv/config')
+
+4. -----access variable in node process object
+
+console.log(process.env.TOKEN)
+
+            </example>
+        </paragraph>
         <subtitle>finding nearest node executive</subtitle>
         <paragraph>
             <info>node executive for pacakges are kept in /bin directory and can be find by below commands</info>
@@ -1232,6 +1258,107 @@ app.route('/lions')
 .post('/lions'(req,res)=>{})
 
 /-----/
+
+            </example>
+        </paragraph>
+    </content>
+</chapter>
+<chapter>
+    <subject>express routes variables</subject>
+    <content>
+        <subtitle>within single route (read cookie and variables)</subtitle>
+        <paragraph>
+            <info>
+            // available in single route with single response
+
+            app.locals.title = 'My App'
+
+            </info>
+            <example>
+/ ---- regiser routets  ----/
+
+app.use('/greg', (req, res) => {
+  res.cookie('cookie', 'monster')
+  res.append('Set-Cookie', 'foo=bar; Path=/; HttpOnly')
+
+  // The variables set on res.locals are available within a single request-response cycle, and will not be shared between requests.
+  res.locals.custom = 'monster'
+  // to make sharable attach to app.locals this is available as long as the app is running (if it reset is gone)
+  app.locals.title = 'My App'
+
+  res.status(200).send('initial')
+})
+
+app.use('/greg1', (req, res) => {
+  // this reads cookie from browser
+  const { cookies } = req
+  const {
+    locals: { title },
+  } = app
+
+  // all cookie set in the browser
+  const { headers } = req
+
+  res.status(200).send(JSON.stringify({ req: { cookies, headers }, app: { locals: { title } } }))
+})
+
+/-----/
+
+            </example>
+        </paragraph>
+        <subtitle>single route with multiple response in array</subtitle>
+        <paragraph>
+            <info>when you have a single request with multiple responses then you have access to below variables
+            
+            // both accessible with single route with multiple responses
+
+            res.locals.custom = 'monster'
+
+            app.locals.title = 'My App'
+            
+            </info>
+            <example>
+
+/-------/
+
+const req1 = (req, res, next) => {
+  res.cookie('cookie', 'monster')
+  res.append('Set-Cookie', 'foo=bar; Path=/; HttpOnly')
+
+  // The variables set on res.locals are available within a single request-response cycle, and will not be shared between requests.
+  res.locals.custom = 'monster'
+  // to make sharable attach to app.locals this is available as long as the app is running (if it reset is gone)
+  app.locals.title = 'My App'
+
+  next()
+}
+
+const req2 = (req, res) => {
+  // this reads cookie from browser
+  const { cookies, headers } = req
+  const {
+    locals: { title },
+  } = app
+
+  const {
+    locals: { custom },
+  } = res
+
+//this gives all? possible variables and cookies within single request and multiple responses
+
+  res.status(200).send(
+    JSON.stringify({
+      app: { locals: { title } },
+      res: { locals: { custom } },
+      req: { cookies, headers },
+    }),
+  )
+}
+
+// single route multiple requests
+app.use('/multipleResponses', [req1, req2])
+
+ /----/
 
             </example>
         </paragraph>

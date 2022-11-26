@@ -383,6 +383,115 @@ https://devhints.io/enzyme
         </content>
     </chapter>
     <chapter>
+        <subject>Testing with Router (React componenents)</subject>
+          <content>
+            <subtitle>Memory Router with single route (no path matching)</subtitle>
+            <paragraph>
+                <info>MemoryRouter is simple router that will no register any route change (since it does not have 
+                history object) and is usefull to test single route because it does not write to browser history or address bar</info>
+                <example>
+/*--------With single Route and Route that renders on any path--------*/
+
+import { MemoryRouter, Route } from 'react-router-dom'
+
+const ReactComp = () => 'React Comp'
+//All below combinations do the same job
+
+
+render(
+  &lt;MemoryRouter initialEntries={['/']}>
+    &lt;Route>
+      &lt;ReactComp />
+    &lt;/Route>
+  &lt;/MemoryRouter>,
+)
+
+render(
+  &lt;MemoryRouter initialEntries={['/']}>
+      &lt;ReactComp />
+  &lt;/MemoryRouter>,
+)
+
+render(
+  &lt;MemoryRouter>
+      &lt;ReactComp />
+  &lt;/MemoryRouter>,
+)
+
+render(
+  &lt;MemoryRouter>
+    &lt;Route path='/'>
+      &lt;ReactComp />
+    &lt;/Route>
+  &lt;/MemoryRouter>,
+)
+
+//test for the componenent being rendered
+expect(screen.getByText('React Comp')).toBeInTheDocument()
+
+/*--------*/
+                </example>
+            </paragraph>
+ <subtitle>Memory Router with single route with path matching</subtitle>
+            <paragraph>
+                <info>MemoryRouter is able to understand /:params so it will render Route that matches the route with the path</info>
+                <example>
+/*--------With single Route and Route that renders on specific path--------*/
+
+import { MemoryRouter, Route } from 'react-router-dom'
+
+const ReactComp = () => 'React Comp'
+render(
+  &lt;MemoryRouter initialEntries={['/greg']}>
+    &lt;Route path='/:name'>
+      &lt;ReactComp />
+    &lt;/Route>
+  &lt;/MemoryRouter>,
+)
+
+expect(screen.getByText('React Comp')).toBeInTheDocument()
+
+/*--------*/
+                </example>
+            </paragraph>
+             <subtitle>BroswerRouter, Router will write to browser history</subtitle>
+            <paragraph>
+                <info>When One uses the Router or BroswerRouter then is able to track routes changes with browser history and address bar changes</info>
+                <example>
+-------
+
+import { Router, Route } from 'react-router-dom'
+import { createMemoryHistory } from 'history'
+
+--- U need create test history called MemoryHistory -----
+const history = createMemoryHistory({ initialEntries: ['/'] })
+
+------------------
+const ReactComp = ({redirectPath}) => {
+  return redirectPath ?  &lt;Redirect to={redirectPath} /> : 'regular Component'
+}
+
+render(
+  &lt;Router history={history}>
+    &lt;Route redirectPath={'/redirect'}>
+      &lt;ReactComp />
+    &lt;/Route>
+     &lt;Route path='/redirect' render={() => &lt;div>&lt;/div>} />
+  &lt;/Router>,
+)
+
+//test for route change/redirect
+ expect(history.location.pathname).toBe('/redirect')
+
+------------------
+The above composition will render /redirect path when prop is provided in ReactComp
+
+------------------
+                </example>
+            </paragraph>
+        </content>
+    </chapter>
+    <chapter>
         <subject>Testing hooks with react-testing-library</subject>
         <content>
             <subtitle>installation</subtitle>
@@ -1073,6 +1182,118 @@ test('have all the same properties', () => {
             </paragraph>
         </content>
     </chapter>
+
+    <chapter>
+        <subject>JEST timers</subject>
+        <content>
+          <subtitle>time based code (setTimeout, intervals, debounce)</subtitle>
+          <paragraph>
+              <info>Any code based on on time and delay should be tested with jest fake timers.
+              
+                  //1. jest.useFakeTimers();
+
+                  //2. ...code execution to be tested
+                      runTestFunction()
+
+                  //3. Fast-forward until all timers have been executed
+                  jest.runAllTimers();
+
+                  //or Fast-forward at specific time delay
+                  jest.advanceTimersByTime(1000);
+
+                  //4. make assertion afer time delayed is done 
+                  expect(callback).toBeCalled();
+
+              </info>
+              <example>
+-------------- testing setTimeout() ----------
+
+/ -------method to be tested -------- /
+
+export const testTimeoutWithCallback = (time: number, callback: Function,) => {
+  setTimeout(() => callback(time), time)
+}
+
+/ -------/
+
+2. /---- test  ------ /
+all you need to to is to register jest fake timers, run a method and then fast-forward time, and make test assertion
+
+it('it calls callback after 1s with fake Timers', () => {
+    jest.useFakeTimers();
+    const callback = jest.fn((time) => time)
+    testTimeoutWithCallback(1000, callback)
+
+
+    // At this point in time, the callback should not have been called yet
+    expect(callback).not.toBeCalled();
+
+    // Fast-forward until all timers have been executed
+    jest.runAllTimers();
+    //or Fast-forward at specific time
+    jest.advanceTimersByTime(1000);
+
+    expect(callback).toBeCalled();
+    expect(callback).toHaveBeenCalledTimes(1);
+    expect(callback).toHaveBeenCalledWith(1000)
+    jest.useRealTimers()
+})
+
+/------------------ /
+
+              </example>
+          </paragraph>
+           <subtitle>setTimeout with mocked window method (window.alert)</subtitle>
+            <paragraph>
+                <info>In situation that you have time based code that based that executes 
+                window method as alert() you need to use jest fake timers and make asserstion
+                of alert bing called , but it needs be mocked or spyied on first.</info>
+                <example>
+                  
+/ --- code with window.alert in timeout --- /
+
+export const testTimeoutWithWindowAlert = (time: number, callback?: Function,) => {
+  setTimeout(() => alert('Hello!'), time)
+}
+
+/ ------- /
+
+/ --- test for setTimeout with window.alert spied on ---- /
+
+it('it calls mocked alert after 1s', () => {
+  //spy on window.alert
+  const spyAlert = jest.spyOn(window, 'alert').mockImplementation((name) => name)
+
+  //start jest timers
+  jest.useFakeTimers();
+
+  //execute tested code
+  const callback = jest.fn()
+  testTimeoutWithWindowAlert(1000, callback)
+
+  // At this point in time, the callback should not have been called yet
+  expect(callback).not.toBeCalled();
+
+  // Fast-forward until all timers have been executed
+  jest.runAllTimers();
+  //or Fast-forward at specific time
+  jest.advanceTimersByTime(1000);
+
+  //make asserstion
+  expect(spyAlert).toBeCalledWith('Hello!');
+  spyAlert.mockRestore()
+
+  //reset jest timers
+  jest.useRealTimers()
+
+})
+
+//---------------/
+
+                </example>
+            </paragraph>
+        </content>
+    </chapter>
     <chapter>
         <subject>Testing REDUX</subject>
         <content>
@@ -1271,6 +1492,7 @@ export function renderWithRedux(
             </paragraph>
         </content>
     </chapter>
+    
     <chapter>
         <subject>MOCK functions</subject>
         <content> 
@@ -1481,6 +1703,65 @@ jest.mock('./getCookie', () => ({
 
 const overrideDefault = getCookie as { default: (name: string) => string }
 overrideDefault.default = jest.fn().mockImplementation(() => '{"season":"pride"}')
+
+//---------------------
+
+          </example>
+      </paragraph>
+      <subtitle>mock module/packages stages jest.mock()</subtitle>
+      <paragraph>
+          <info>If you need mock a module, and then change the mock with .mockImplementation or mockImplementationOnce then 
+          you have few options</info>
+          <example>
+/---------example react componenent---------/
+
+const ReactComp = (props:Props):JSX.Element => ('I am react componenent')
+
+export default ReactComp
+
+-------------------------------------------------test file----------------------------------------/
+
+
+
+  
+//----import file 
+
+import ReactComp from './ReactComp'
+
+
+//1. -----mock entire module with overiding default and module __esModule
+
+jest.mock('./ReactComp', ()=> jest.fn( () => 'this will render from ReactComp now')
+})
+
+
+
+//1.a ----- just beacause we mock entire module that could be easilly changed as below inside a test 
+
+ReactComp.mockImplementation( () =>'this is a new implemanation')
+
+//or
+
+ReactComp.mockImplementationOnce( () => 'this is a new implemanation')
+
+
+
+
+
+
+//2.------ Mock module with keeping default export structure
+
+jest.mock('./ReactComp', () => ({
+  __esModule: true,
+  default: () => ('this is new implemanation')),
+})
+
+//Notice that nowhere in the structure we use jest.fn() therefore this implemanation can not be changed/overriden
+//it it hoisted on top of the file and not changeable
+
+
+
+
 
 //---------------------
 
@@ -2353,6 +2634,50 @@ axios.get().then((result) => {
 
   });
 
+              </example>
+          </paragraph>
+            <subtitle>window.method spyOn window method with execution</subtitle>
+          <paragraph>
+              <info>When you create spyOn any global method as window.setTimeout() You will test mocked bahavior with
+              original implenation as the example below:</info>
+             <example>
+  ------------------------ testing if setTimeout executes after certain time ---------------------
+
+export const testTimeoutWithCallback = (time: number, callback: Function,) => {
+  setTimeout(() => callback(time), time)
+}
+
+/-----/
+
+
+  1. /------------------ test with spyOn on setTimeout --------------------------
+
+  //mock functions can not be nested once one is mocked the other nested method is gone !
+  //with mock setTimeout you can only test if setTimeout has been called but not if callback has been called 
+  //cause is gone once setTimout is mocked. You dont need any jest timers to setTimeout either caused it is spiedOn/mocked
+
+  //!IMPORTANT
+  // beacause we mock setTimeout as spy meaning this mehod will be executed as 
+  //it would have been called in regular code (not mocked)
+  //but is just not going to call any other code eihter inside setTimeout or any other
+  //on code related, it will only call setTimeout as below 
+
+it('it calls callback after 1s spying on setTimeout itself not fake timers cause only checking setTimeout execution', () => {
+
+  //spy one setTimeout
+  const mockSetTimeout = jest.spyOn(window, 'setTimeout')
+
+  //code triggering setTimeout
+  testTimeoutWithCallback(1000, () => { })
+
+  //asserstion to setTimout execution
+  expect(window.setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 1000);
+
+  //same will apply to eventListener and any other window.method
+
+})
+
+/-----------/
               </example>
           </paragraph>
         </content>

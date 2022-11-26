@@ -352,6 +352,17 @@ const classInstance = new Class();
    <chapter>
        <subject>ES6 class</subject>
        <content>
+                  <subtitle>ES6 class as singleton</subtitle>
+           <paragraph>
+               <info> great explanation in article below
+               </info>
+               <example>
+               copy below:
+               
+                http://localhost:1000/views/javascript_tuts/js_classes_ES6_tuts/_TheSingleton.html
+
+               </example>
+           </paragraph>
            <subtitle>extends and super();</subtitle>
            <paragraph>
                <info>extends and super();

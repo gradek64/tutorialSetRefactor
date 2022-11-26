@@ -28,6 +28,8 @@
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts" partition>npm update, npm</a><span class="tooltiptext">npm update, npm</span>
                            
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts" partition>ENV variables accessed by process.env.VAR via dotenv package</a><span class="tooltiptext">ENV variables accessed by process.env.VAR via dotenv package</span>
+                           
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts" partition>finding nearest node executive</a><span class="tooltiptext">finding nearest node executive</span>
                         
                     </ul>
@@ -127,6 +129,18 @@
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts" partition>sub-routing</a><span class="tooltiptext">sub-routing</span>
                            
                           <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts" partition>combining same route in object with app.route(&#39;/..&#39;)</a><span class="tooltiptext">combining same route in object with app.route(&#39;/..&#39;)</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts">express routes variables</a><span class="tooltiptext">express routes variables</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts" partition>within single route (read cookie and variables)</a><span class="tooltiptext">within single route (read cookie and variables)</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/node_js_tuts" partition>single route with multiple response in array</a><span class="tooltiptext">single route with multiple response in array</span>
                         
                     </ul>
                 
@@ -364,6 +378,33 @@ update otherwise!
               </div>
             
               <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>global variables are useful for keeping secret data, tokens etc and the easiest to add new/manage them is 
+            via dotenv npm package as below</p>
+                  <div class="codeWraper">
+                    <code>1. ----- install dotenv npm package
+
+npm install dotenv / yarn add dotenv
+
+2. ---- create dot env config file in the root of your project --- .env ---
+this file takes key pairs format ENV=&#39;value&#39;
+
+TOKEN=&#39;mysecret&#39;
+CUSTOM_USER=&#39;custom user&#39;
+
+3. -- request file in main node file as app.js when server starts
+
+require(&#39;dotenv/config&#39;)
+
+4. -----access variable in node process object
+
+console.log(process.env.TOKEN)</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
                 <div class="band-inner">
 
                   <p>node executive for pacakges are kept in /bin directory and can be find by below commands</p>
@@ -1425,6 +1466,109 @@ app.route(&#39;/lions&#39;)
 .post(&#39;/lions&#39;(req,res)=&gt;{})
 
 /-----/</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> express routes variables </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>// available in single route with single response
+
+            app.locals.title = &#39;My App&#39;</p>
+                  <div class="codeWraper">
+                    <code>/ ---- regiser routets  ----/
+
+app.use(&#39;/greg&#39;, (req, res) =&gt; {
+  res.cookie(&#39;cookie&#39;, &#39;monster&#39;)
+  res.append(&#39;Set-Cookie&#39;, &#39;foo=bar; Path=/; HttpOnly&#39;)
+
+  // The variables set on res.locals are available within a single request-response cycle, and will not be shared between requests.
+  res.locals.custom = &#39;monster&#39;
+  // to make sharable attach to app.locals this is available as long as the app is running (if it reset is gone)
+  app.locals.title = &#39;My App&#39;
+
+  res.status(200).send(&#39;initial&#39;)
+})
+
+app.use(&#39;/greg1&#39;, (req, res) =&gt; {
+  // this reads cookie from browser
+  const { cookies } = req
+  const {
+    locals: { title },
+  } = app
+
+  // all cookie set in the browser
+  const { headers } = req
+
+  res.status(200).send(JSON.stringify({ req: { cookies, headers }, app: { locals: { title } } }))
+})
+
+/-----/</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>when you have a single request with multiple responses then you have access to below variables
+            
+            // both accessible with single route with multiple responses
+
+            res.locals.custom = &#39;monster&#39;
+
+            app.locals.title = &#39;My App&#39;</p>
+                  <div class="codeWraper">
+                    <code>/-------/
+
+const req1 = (req, res, next) =&gt; {
+  res.cookie(&#39;cookie&#39;, &#39;monster&#39;)
+  res.append(&#39;Set-Cookie&#39;, &#39;foo=bar; Path=/; HttpOnly&#39;)
+
+  // The variables set on res.locals are available within a single request-response cycle, and will not be shared between requests.
+  res.locals.custom = &#39;monster&#39;
+  // to make sharable attach to app.locals this is available as long as the app is running (if it reset is gone)
+  app.locals.title = &#39;My App&#39;
+
+  next()
+}
+
+const req2 = (req, res) =&gt; {
+  // this reads cookie from browser
+  const { cookies, headers } = req
+  const {
+    locals: { title },
+  } = app
+
+  const {
+    locals: { custom },
+  } = res
+
+//this gives all? possible variables and cookies within single request and multiple responses
+
+  res.status(200).send(
+    JSON.stringify({
+      app: { locals: { title } },
+      res: { locals: { custom } },
+      req: { cookies, headers },
+    }),
+  )
+}
+
+// single route multiple requests
+app.use(&#39;/multipleResponses&#39;, [req1, req2])
+
+ /----/</code>
                   </div>
                 </div>
               </div>

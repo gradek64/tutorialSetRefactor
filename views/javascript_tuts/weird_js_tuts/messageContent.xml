@@ -290,6 +290,73 @@ chmod ugo-rwx;
            </paragraph>
        </content>
    </chapter>
+    <chapter>
+       <subject>window.requestanimationframe</subject>
+       <content>
+           <paragraph>
+               <info>window.requestanimationframe comes with callback, which is called whenever you're ready to update your animation onscreen. And it will show 
+               the last update on the screen. it can create animation based on recursion or simply updates screen as the last operation 
+              in event handler most of a time. Examples below:
+               
+        Characteristics:
+
+          1. It has to be defined in the handler method that updates/changes ui as click listener, input etc. It 
+          will be called after last repaint and overrides/could override last paint (examples below)
+
+          2. Could be used in the loop as a regular interval (needs reqursion) to perform some ui changes/animation 
+            animation will be paused when tab is not in focus example: 3
+               
+               </info>
+               <example>
+********USAGE*****
+
+
+    /***  1a. Use when you want to update screen as the last operation that overrites any other operation before as below 
+
+
+  // => this will override style.color to red as last operation inside click handler
+    button.addEventListener('click',()=>{
+      button.style.color = 'green'
+      requestAnimationFrame(()=>{
+        button.style.color = 'red'
+      })
+  })
+  
+
+  /*** 2a. set cursor position at character 2 in input field when user is typing on input ***/
+
+
+  // => when user gets to 2 character the cursor will stay there when typing (overrides the default end cursor position)
+  input.addEventListener('input',(elem)=>{
+    requestAnimationFrame(()=>{
+      elem.target.setSelectionRange(2, 2);
+    })
+  })
+
+
+  /*** 3. simple animation ***/
+
+  let start = 0
+  const display = document.createElement('div')
+  display.innerHTML= start
+  
+  // => it will display numbers from 0 to 20
+
+  const paint = ()=>{
+    start++
+    display.innerHTML= start
+      //has to run recursilvely for update
+      if(start&lt;20) requestAnimationFrame(paint)
+    }
+
+  requestAnimationFrame(paint)
+
+
+  //------------//
+               </example>
+           </paragraph>
+       </content>
+   </chapter>
    <chapter>
        <subject>find</subject>
        <content>

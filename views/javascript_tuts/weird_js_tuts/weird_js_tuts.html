@@ -70,6 +70,10 @@
                  
       </li>
     
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/weird_js_tuts">window.requestanimationframe</a><span class="tooltiptext">window.requestanimationframe</span>
+                 
+      </li>
+    
       <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/weird_js_tuts">find</a><span class="tooltiptext">find</span>
                   
                     <ul class="linksNested">
@@ -464,6 +468,79 @@ chmod ugo-rwx;
                  ls 
                  //list and sort (it sorts by default anyway) 
                  ls | sort</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> window.requestanimationframe </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>window.requestanimationframe comes with callback, which is called whenever you&#39;re ready to update your animation onscreen. And it will show 
+               the last update on the screen. it can create animation based on recursion or simply updates screen as the last operation 
+              in event handler most of a time. Examples below:
+               
+        Characteristics:
+
+          1. It has to be defined in the handler method that updates/changes ui as click listener, input etc. It 
+          will be called after last repaint and overrides/could override last paint (examples below)
+
+          2. Could be used in the loop as a regular interval (needs reqursion) to perform some ui changes/animation 
+            animation will be paused when tab is not in focus example: 3</p>
+                  <div class="codeWraper">
+                    <code>********USAGE*****
+
+
+    /***  1a. Use when you want to update screen as the last operation that overrites any other operation before as below 
+
+
+  // =&gt; this will override style.color to red as last operation inside click handler
+    button.addEventListener(&#39;click&#39;,()=&gt;{
+      button.style.color = &#39;green&#39;
+      requestAnimationFrame(()=&gt;{
+        button.style.color = &#39;red&#39;
+      })
+  })
+  
+
+  /*** 2a. set cursor position at character 2 in input field when user is typing on input ***/
+
+
+  // =&gt; when user gets to 2 character the cursor will stay there when typing (overrides the default end cursor position)
+  input.addEventListener(&#39;input&#39;,(elem)=&gt;{
+    requestAnimationFrame(()=&gt;{
+      elem.target.setSelectionRange(2, 2);
+    })
+  })
+
+
+  /*** 3. simple animation ***/
+
+  let start = 0
+  const display = document.createElement(&#39;div&#39;)
+  display.innerHTML= start
+  
+  // =&gt; it will display numbers from 0 to 20
+
+  const paint = ()=&gt;{
+    start++
+    display.innerHTML= start
+      //has to run recursilvely for update
+      if(start&lt;20) requestAnimationFrame(paint)
+    }
+
+  requestAnimationFrame(paint)
+
+
+  //------------//</code>
                   </div>
                 </div>
               </div>
