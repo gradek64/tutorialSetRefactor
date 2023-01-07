@@ -21,11 +21,11 @@ gulp.task(
   "sass-to-css",
   shell.task([
     //'node-sass --include-path scss scss/tutorial.scss css/tutorial.css'
-    "node-sass scss -o css"
+    "node-sass scss -o css",
   ])
 );
 
-function generate_nunjucks_config(cb){
+function generate_nunjucks_config(cb) {
   const currentDir = path.basename(__dirname);
   const relativeTutsPath = path.join(
     "./javascript_tuts/tuts_all_scripts_css",
@@ -37,13 +37,13 @@ function generate_nunjucks_config(cb){
   cb();
 }
 
-
 function nunjucks() {
   // Gets .html and .nunjucks files in pages
-  return gulp
+  return (
+    gulp
       .src(srcPages + "/**/*.+(html|nunjucks)")
       .pipe(
-        data(function(file, cb) {
+        data(function (file, cb) {
           fs.readFile(xmlFile, "utf8", (err, data) => {
             cb(undefined, JSON.parse(parser.toJson(data)));
           });
@@ -52,14 +52,15 @@ function nunjucks() {
       // Renders template with nunjucks
       .pipe(
         nunjucksRender({
-          path: [templatePath]
+          path: [templatePath],
         })
       )
       // output files in . current folder
       .pipe(gulp.dest(destFolder))
+  );
 }
 
-const build = gulp.series(generate_nunjucks_config,nunjucks);
+const build = gulp.series(generate_nunjucks_config, nunjucks);
 exports.default = build;
 
 //gulp 3 version : gulp.task("default", ["generate_nunjucks_config", "nunjucks"]);

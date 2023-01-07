@@ -7,7 +7,8 @@
             opacity: 1;
             }
         }  
-    } */ }
+    } */
+}
 
 .tooltiptext {
   visibility: hidden;
@@ -26,14 +27,16 @@
   transition: opacity 0.3s;
   /* top: -10px; */
   white-space: nowrap;
-  font-size: 20px; }
-  .tooltiptext:after {
-    content: "";
-    position: absolute;
-    top: 30%;
-    left: 0;
-    transform: rotate(-44deg);
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent; }
+  font-size: 20px;
+}
+.tooltiptext:after {
+  content: "";
+  position: absolute;
+  top: 30%;
+  left: 0;
+  transform: rotate(-44deg);
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}

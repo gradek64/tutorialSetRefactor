@@ -57,7 +57,7 @@ function screenTest(e) {
 
 document.querySelector('.menu').addEventListener(
   'click',
-  e => {
+  (e) => {
     console.log('list', list);
     list.style.display === 'block'
       ? (list.style.display = 'none')
@@ -66,18 +66,18 @@ document.querySelector('.menu').addEventListener(
   false
 );
 
-const callback = i => evt => {
+const callback = (i) => (evt) => {
   //evt.stopPropagation(); U do want bubtle on this occasion ;)
   //evt.preventDefault();
 
   /*
-      *@disable  evt.preventDefault(); 
-      *@for production;
-    */
+   *@disable  evt.preventDefault();
+   *@for production;
+   */
   evt.preventDefault();
 
   //check if link is partition link
-  sections.forEach(e => {
+  sections.forEach((e) => {
     e.classList.remove('activeSection');
   });
   let currentPartition = evt.target.getAttribute('partition');
@@ -87,7 +87,7 @@ const callback = i => evt => {
     sectionsPObj[currentPartition].classList.add('activeSection');
     //find partion to be active
     let index = currentPartition.match(/[0-9]+/)[0];
-    partitions.forEach(e => {
+    partitions.forEach((e) => {
       e.classList.remove('first');
     });
     partitions[index].classList.add('first');
@@ -102,7 +102,7 @@ const callback = i => evt => {
     //for setting up partition order
     let secPartitions = sections[index].querySelectorAll('.partition');
     if (secPartitions.length !== 0) {
-      secPartitions.forEach(e => {
+      secPartitions.forEach((e) => {
         e.classList.remove('first');
       });
       secPartitions[0].classList.add('first');

@@ -1,23 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
- <chapters>
-  <chapter>
+<?xml version="1.0" encoding="UTF-8" ?>
+<chapters>
+   <chapter>
       <subject>What is Docker? and Docker HUB ?</subject>
       <content>
-          /<paragraph>
-              <info>
-               1. Docker consists of Docker container and docker image which is read-only layered image that allows you to build a container and run it as the isolated appllication.
+         /
+         <paragraph>
+            <info
+        >1. Docker consists of Docker container and docker image which is read-only layered image that allows you to build a container and run it as the isolated appllication.
       Runs on Linux or windows server. 
               
               2. Docker HUB is a repository with docker contaiers that you can pull and they can be run in your docker desktop app 
               as: 
                             docker pull hello-world
               
-            before there was Kinematic app (depricated)
-              </info>
-              <example>
-
-
--------------  pull the hello-word image from the docker hub ------------------
+            before there was Kinematic app (depricated)</info>
+            <example
+        >-------------  pull the hello-word image from the docker hub ------------------
 
 docker pull hello-world
 
@@ -25,21 +23,18 @@ docker pull hello-world
 --- run image in docker desktop -----
 1. from Gui in docker desktop, pick from the list and press button RUN
 
--------------------------------
-
-
-              </example>
-          </paragraph>
+------------------------------</example>
+         </paragraph>
       </content>
-  </chapter>
-  <chapter>
+   </chapter>
+   <chapter>
       <subject>Building image from the DockerFile</subject>
       <content>
-      <subtitle>simple Dockerfile image</subtitle>
-      <paragraph>
-          <info> those are the most common image commands for experss node container</info>
-          <example>
-/*********************************************/
+         <subtitle>simple Dockerfile image</subtitle>
+         <paragraph>
+            <info
+        >those are the most common image commands for experss node container</info>
+            <example>/*********************************************/
 
 
 #ARG can be set default as bellow or be overriden in inline command docker run . --build-arg NODE_VERSION=12-alpine
@@ -71,89 +66,83 @@ COPY . /app/
 #start the app
 CMD npm run start
 
-/*********************************************/
-          </example>
-      </paragraph>
-        <subtitle>docker build [context] [flags]</subtitle>
-      <paragraph>
-          <info>docker build is command line that allows you to build container from the dockerfile image</info>
-          <example>
-/***************** docker build ****************************/
+/*********************************************/</example>
+         </paragraph>
+         <subtitle>docker build [context] [flags]</subtitle>
+         <paragraph>
+            <info
+        >docker build is command line that allows you to build container from the dockerfile image</info>
+            <example
+        >/***************** docker build ****************************/
 
   //--- docker build [context] --- 
-  =>  docker build . /current directory where DockerFile is present
+  =&gt;  docker build . /current directory where DockerFile is present
 
   //dockerfile with specified name
-  =>  docker build -f Dockerfile.debug 
+  =&gt;  docker build -f Dockerfile.debug 
 
   //build from url
-  => docker build github.com/creack/docker-firefox  
+  =&gt; docker build github.com/creack/docker-firefox  
 
   //with the name and tag to name the image 
-   =>  docker build  -t name:tag .
+   =&gt;  docker build  -t name:tag .
 
 
     //with passing the arguments to the image this will override default ARG CUSTOM_USER='Greg'
     //IMPORTANT  you can not override DIRECTLY global env variables in build but you can assign them to ARG = ENV to go around it if you need to
 
-   =>  docker build  --build-arg CUSTOM_USER=custom_user --build-arg  NODE_VERSION=16.13.2-alpine .
+   =&gt;  docker build  --build-arg CUSTOM_USER=custom_user --build-arg  NODE_VERSION=16.13.2-alpine .
 
    Those are the most common build options but there are plenty more !
 
-/*********************************************/
-          </example>
-      </paragraph>
-       <subtitle>Volumes - way to keep containers statefull not stateless</subtitle>
-      <paragraph>
-          <info>volumes allow to keep data persistent and they are seperate from the contaiers, when the container is removed 
+/*********************************************/</example>
+         </paragraph>
+         <subtitle
+      >Volumes - way to keep containers statefull not stateless</subtitle>
+         <paragraph>
+            <info
+        >volumes allow to keep data persistent and they are seperate from the contaiers, when the container is removed 
                but the volume will stay, you can start a new container and it will use data from the volume. Volumes are also means to 
                inject configuration and dependencies into container.</info>
-          <example>
-/***************** docker build ****************************/
+            <example
+        >/***************** docker build ****************************/
 
   /
 
-/*********************************************/
-          </example>
-      </paragraph>
-       <subtitle>Bind Mounts => way to share data between local host and container</subtitle>
-      <paragraph>
-          <info>Bind Mounts allow you to communicate with the host machine by accessing 
+/*********************************************/</example>
+         </paragraph>
+         <subtitle
+      >Bind Mounts =&gt; way to share data between local host and container</subtitle>
+         <paragraph>
+            <info
+        >Bind Mounts allow you to communicate with the host machine by accessing 
           its file system, but they could be problematic due to the file permisions for example
           where 2 diffrent user set in container and on host machine. The common way of using 
           Bind Mounts is runing container with configuration from .env file or yaml or json.</info>
-          <example>
+            <example
+        >/***************** docker run with .env variables used in command line ****************************/
 
 
-
-/***************** docker run with .env variables used in command line ****************************/
-
-
-/*********************************************/
-          </example>
-      </paragraph>
-    </content>
-  </chapter>
+/*********************************************/</example>
+         </paragraph>
+      </content>
+   </chapter>
    <chapter>
-       <subject>Run Container:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]</subject>
-       <content>
-          <subtitle>
-            docker run -p/--publish 5001:5000 [image-name]
-          </subtitle>
-           <paragraph>
-               <info>docker run comand allows you to run a docker image and build container, and view in the browser by
+      <subject
+    >Run Container:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]</subject>
+      <content>
+         <subtitle>docker run -p/--publish 5001:5000 [image-name]</subtitle>
+         <paragraph>
+            <info
+        >docker run comand allows you to run a docker image and build container, and view in the browser by
                exposing port to view on:
 
                 docker run -d -p 5001:5000 simple-express-app
 
-                -d => run in detached mode so you can still use your console app runs in background
-                -p => port to expose to EXPOSE_PORT:APP_ORIGINAL_PORT from dockerfile EXPOSE 5000
-                -it => attach interactive shell to it 
-
-               </info>
-               <example>
-
-   ==> from DockerFile:
+                -d =&gt; run in detached mode so you can still use your console app runs in background
+                -p =&gt; port to expose to EXPOSE_PORT:APP_ORIGINAL_PORT from dockerfile EXPOSE 5000
+                -it =&gt; attach interactive shell to it</info>
+            <example>==&gt; from DockerFile:
             
     EXPOSE 5000
     CMD npm run start
@@ -168,34 +157,28 @@ CMD npm run start
     IMPORTANT : to view your app in browser you always have to redirect the port to viw it on as:  REDIRECT_PORT:APP_PORT
     -p/--publish 4002:5000
 
------------- ------------------------ ------------------------ ------------
-               </example>
-           </paragraph>
-            <subtitle>
-            docker run -e PORT=4000 [image-name]
-          </subtitle>
-           <paragraph>
-               <info>-e flag allows you to run container with changed/overriden global ENV as PORT,USER etc ,
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>docker run -e PORT=4000 [image-name]</subtitle>
+         <paragraph>
+            <info
+        >-e flag allows you to run container with changed/overriden global ENV as PORT,USER etc ,
                
               example change the PORT of the app running (the app has to have functionality for it as:process.env.PORT || '5000' )
        
-                docker run -d  -e PORT=4002
-
-               </info>
-               <example>
-
-   //run the container with changed env PORT=4002 and expose new PORT to 4003 id detached mode -d
+                docker run -d  -e PORT=4002</info>
+            <example
+        >//run the container with changed env PORT=4002 and expose new PORT to 4003 id detached mode -d
 
     docker run -d  -e PORT=4002 -p 4003:4002 simple-express-app
 
------------- ------------------------ ------------------------ ------------
-               </example>
-           </paragraph>
-            <subtitle>
-            applying bind Mounts: docker run -v/ --volume pathToYourFile [image-name]
-          </subtitle>
-           <paragraph>
-               <info>bind Mounts allow you to attach data (as configuration .env) to your container , 
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle
+      >applying bind Mounts: docker run -v/ --volume pathToYourFile [image-name]</subtitle>
+         <paragraph>
+            <info
+        >bind Mounts allow you to attach data (as configuration .env) to your container , 
                
                The file being sent has to be mapped to location in docker directory with the flag read only for docker
 
@@ -203,47 +186,35 @@ CMD npm run start
 
                for .env the -v comamnd would look like:
 
-               -v $PWD/.env:/app/.env:ro 
-
-               </info>
-               <example>
-
-   //run the container with .env file as ready only with maping to /app container directory and published to PORT and to view it in browser on 5001:
+               -v $PWD/.env:/app/.env:ro</info>
+            <example
+        >//run the container with .env file as ready only with maping to /app container directory and published to PORT and to view it in browser on 5001:
 
     docker run -d -v $PWD/.env:/app/.env:ro -p 5001:5000 simple-express-app
 
------------- ------------------------ ------------------------ ------------
-               </example>
-           </paragraph><subtitle>
-            CMD OVERRIDE: docker run [image] [CMD override]
-          </subtitle>
-           <paragraph>
-               <info>docker run allows you to ovveride CMD command (which can only be one in dockerFile, if more only last one is exuecuted)
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>CMD OVERRIDE: docker run [image] [CMD override]</subtitle>
+         <paragraph>
+            <info
+        >docker run allows you to ovveride CMD command (which can only be one in dockerFile, if more only last one is exuecuted)
          
 
                docker run -it my-app:v3 echo hi
 
-               //this way whatever was in CMD ['npm', 'start'] it will be overriden by: echo hi
-
-               </info>
-               <example>
-
-    //dockerfile CMD to be override
+               //this way whatever was in CMD ['npm', 'start'] it will be overriden by: echo hi</info>
+            <example>//dockerfile CMD to be override
     CMD npm run start
 
     //override CMD with echo command
     dodocker run -it my-app:v3 echo hi
 
------------- ------------------------ ------------------------ ------------
-               </example>
-           </paragraph> 
-
-<subtitle>
-            ENTRYPOINT WITH CMD: docker run 
-          </subtitle>
-           <paragraph>
-               <info>
-               ENTRYPOINT acts the same as CMD , the only diffrence is that it will execute before the container starts, it can be overidden in the 
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>ENTRYPOINT WITH CMD: docker run</subtitle>
+         <paragraph>
+            <info
+        >ENTRYPOINT acts the same as CMD , the only diffrence is that it will execute before the container starts, it can be overidden in the 
                docker run only, and can be only one per dockerfile (more last is taken), 
 
                docker run [image]
@@ -253,38 +224,28 @@ CMD npm run start
                 ENTRYPOINT ['executable','paramToEntryPoint1' ]
                 CMD: ['paramToEntryPoint2','paramToEntryPoint3']
 
-                so CMD in only used to pass params to executable from entrypoint
-
-               </info>
-               <example>
-
-   //ENTRYPOINT with CMD 
+                so CMD in only used to pass params to executable from entrypoint</info>
+            <example>//ENTRYPOINT with CMD 
     ENTRYPOINT [ "echo","hi" ]
     CMD [ "there","handsome" ]
 
     prints: hi there handsome
 
------------- ------------------------ ------------------------ ------------
-               </example>
-           </paragraph>    
-    <subtitle>
-            ENTRYPOINT WITH SHELL script: docker run 
-          </subtitle>
-           <paragraph>
-               <info>
-               ENTRYPOINT acts the same as CMD , the only diffrence is that it will execute before the container starts, it can be overidden in the 
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>ENTRYPOINT WITH SHELL script: docker run</subtitle>
+         <paragraph>
+            <info
+        >ENTRYPOINT acts the same as CMD , the only diffrence is that it will execute before the container starts, it can be overidden in the 
                docker run only by --entrypoint flag, and can be only one per dockerfile (more last is taken), 
 
                docker run [image]
 
             //example ENTRYPOINT with params:
 
-            ENTRYPOINT [ "echo","hi","there","handsome" ]
-
-               </info>
-               <example>
-
-    //shell script that allows you to read params: => as sh file.sh npm start 
+            ENTRYPOINT [ "echo","hi","there","handsome" ]</info>
+            <example
+        >//shell script that allows you to read params: =&gt; as sh file.sh npm start 
 
     ------------ file.sh-----------------
     echo 'shell called from EntryPoint in docker file'
@@ -300,39 +261,280 @@ CMD npm run start
     //--outcome
     prints: hi there handsome
 
------------- ------------------------ ------------------------ ------------
-               </example>
-           </paragraph>           
-       </content>
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+      </content>
    </chapter>
-    <chapter>
-       <subject>Run Container WITH VOLUMES and DEBUG</subject>
-       <content>
-          <subtitle>
-            1 type: anonymous volume
-          </subtitle>
-           <paragraph>
-               <info>docker allows you to create volume with a -v flag without the name (it will be random has name instead) and that volume 
+   <chapter>
+      <subject>conatiner comands</subject>
+      <content>
+         <subtitle>list container</subtitle>
+         <paragraph>
+            <info>most popular way of listing containers</info>
+            <example>/*********************************************/
+
+
+#list all container and non-running containers
+=&gt; docker ps 
+=&gt; docker ps -a
+
+#metadata
+LABEL author='me'
+
+#create directory app in container
+WORKDIR /app
+
+#copy package.json package-lock.json /app container ./ = /app
+COPY package.json package-lock.json  ./
+
+#example of usind default ARG value and set ENV based on it, ARG can be overriden in inline command as well
+ARG CUSTOM_USER='Greg'
+ENV NODE_USER=$CUSTOM_USER
+
+#run npm install
+RUN USER=$USER npm install 
+
+#afer npm install copy everything to /app
+COPY . /app/
+
+#start the app
+CMD npm run start
+
+/*********************************************/</example>
+         </paragraph>
+         <subtitle>remove container</subtitle>
+         <paragraph>
+            <info>popular comamnds for removing conatainers</info>
+            <example
+        >/***************** docker build ****************************/
+
+docker rm =&gt;container-id&gt; or =&gt;container-name&gt;
+
+  //--- remove by the tag name or container id  --- 
+  =&gt; docker rm -container-id- or -container-name-
+
+  //remove container older that date/hour/min
+ 
+  =&gt; docker container prune --filter "until=2022-08-30"
+  =&gt;  docker container prune --filter "until=15m"
+  =&gt;  docker container prune --filter "until=2h"
+
+  //remove all stoped containers (very usefull)
+  =&gt; docker container prune
+
+  //dockerfile with specified name
+  =&gt;  docker build -f Dockerfile.debug 
+
+  //build from url
+  =&gt; docker build github.com/creack/docker-firefox  
+
+  //with the name and tag to name the image 
+   =&gt;  docker build  -t name:tag .
+
+
+    //with passing the arguments to the image this will override default ARG CUSTOM_USER='Greg'
+    //IMPORTANT  you can not override DIRECTLY global env variables in build but you can assign them to ARG = ENV to go around it if you need to
+
+   =&gt;  docker build  --build-arg CUSTOM_USER=custom_user --build-arg  NODE_VERSION=16.13.2-alpine .
+
+   Those are the most common build options but there are plenty more !
+
+/*********************************************/</example>
+         </paragraph>
+         <subtitle
+      >Volumes - way to keep containers statefull not stateless</subtitle>
+         <paragraph>
+            <info
+        >volumes allow to keep data persistent and they are seperate from the contaiers, when the container is removed 
+               but the volume will stay, you can start a new container and it will use data from the volume. Volumes are also means to 
+               inject configuration and dependencies into container.</info>
+            <example
+        >/***************** docker build ****************************/
+
+  /
+
+/*********************************************/</example>
+         </paragraph>
+         <subtitle
+      >Bind Mounts =&gt; way to share data between local host and container</subtitle>
+         <paragraph>
+            <info
+        >Bind Mounts allow you to communicate with the host machine by accessing 
+          its file system, but they could be problematic due to the file permisions for example
+          where 2 diffrent user set in container and on host machine. The common way of using 
+          Bind Mounts is runing container with configuration from .env file or yaml or json.</info>
+            <example
+        >/***************** docker run with .env variables used in command line ****************************/
+
+
+/*********************************************/</example>
+         </paragraph>
+      </content>
+   </chapter>
+   <chapter>
+      <subject
+    >Run Container:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]</subject>
+      <content>
+         <subtitle>docker run -p/--publish 5001:5000 [image-name]</subtitle>
+         <paragraph>
+            <info
+        >docker run comand allows you to run a docker image and build container, and view in the browser by
+               exposing port to view on:
+
+                docker run -d -p 5001:5000 simple-express-app
+
+                -d =&gt; run in detached mode so you can still use your console app runs in background
+                -p =&gt; port to expose to EXPOSE_PORT:APP_ORIGINAL_PORT from dockerfile EXPOSE 5000
+                -it =&gt; attach interactive shell to it</info>
+            <example>==&gt; from DockerFile:
+            
+    EXPOSE 5000
+    CMD npm run start
+
+    //run container with port redirect from 5000 to 5001 in detached mode -d
+    docker run -d -p 5001:5000 simple-express-app
+
+    //you can change PORT if you app allows you to change PORT env as process.env.PORT || '5000' and then expose it for localhost
+    docker run  -e PORT=4002 -p 4002:4002 simple-express-app
+
+        
+    IMPORTANT : to view your app in browser you always have to redirect the port to viw it on as:  REDIRECT_PORT:APP_PORT
+    -p/--publish 4002:5000
+
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>docker run -e PORT=4000 [image-name]</subtitle>
+         <paragraph>
+            <info
+        >-e flag allows you to run container with changed/overriden global ENV as PORT,USER etc ,
+               
+              example change the PORT of the app running (the app has to have functionality for it as:process.env.PORT || '5000' )
+       
+                docker run -d  -e PORT=4002</info>
+            <example
+        >//run the container with changed env PORT=4002 and expose new PORT to 4003 id detached mode -d
+
+    docker run -d  -e PORT=4002 -p 4003:4002 simple-express-app
+
+
+//run and remove image after running 
+=&gt; docker run --rm docker_image_name
+
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle
+      >applying bind Mounts: docker run -v/ --volume pathToYourFile [image-name]</subtitle>
+         <paragraph>
+            <info
+        >bind Mounts allow you to attach data (as configuration .env) to your container , 
+               
+               The file being sent has to be mapped to location in docker directory with the flag read only for docker
+
+               -v LOCALPATH/file : /dockerDirectory/file:ro 
+
+               for .env the -v comamnd would look like:
+
+               -v $PWD/.env:/app/.env:ro</info>
+            <example
+        >//run the container with .env file as ready only with maping to /app container directory and published to PORT and to view it in browser on 5001:
+
+    docker run -d -v $PWD/.env:/app/.env:ro -p 5001:5000 simple-express-app
+
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>CMD OVERRIDE: docker run [image] [CMD override]</subtitle>
+         <paragraph>
+            <info
+        >docker run allows you to ovveride CMD command (which can only be one in dockerFile, if more only last one is exuecuted)
+         
+
+               docker run -it my-app:v3 echo hi
+
+               //this way whatever was in CMD ['npm', 'start'] it will be overriden by: echo hi</info>
+            <example>//dockerfile CMD to be override
+    CMD npm run start
+
+    //override CMD with echo command
+    dodocker run -it my-app:v3 echo hi
+
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>ENTRYPOINT WITH CMD: docker run</subtitle>
+         <paragraph>
+            <info
+        >ENTRYPOINT acts the same as CMD , the only diffrence is that it will execute before the container starts, it can be overidden in the 
+               docker run only, and can be only one per dockerfile (more last is taken), 
+
+               docker run [image]
+
+                If the ENTRYPOINT is used togehter with CMD then both command are going to combined as 
+
+                ENTRYPOINT ['executable','paramToEntryPoint1' ]
+                CMD: ['paramToEntryPoint2','paramToEntryPoint3']
+
+                so CMD in only used to pass params to executable from entrypoint</info>
+            <example>//ENTRYPOINT with CMD 
+    ENTRYPOINT [ "echo","hi" ]
+    CMD [ "there","handsome" ]
+
+    prints: hi there handsome
+
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>ENTRYPOINT WITH SHELL script: docker run</subtitle>
+         <paragraph>
+            <info
+        >ENTRYPOINT acts the same as CMD , the only diffrence is that it will execute before the container starts, it can be overidden in the 
+               docker run only by --entrypoint flag, and can be only one per dockerfile (more last is taken), 
+
+               docker run [image]
+
+            //example ENTRYPOINT with params:
+
+            ENTRYPOINT [ "echo","hi","there","handsome" ]</info>
+            <example
+        >//shell script that allows you to read params: =&gt; as sh file.sh npm start 
+
+    ------------ file.sh-----------------
+    echo 'shell called from EntryPoint in docker file'
+    echo "now running: $1 $2"
+    #run npm script from params 
+    $1 $2
+    ------------ file.sh-----------------
+
+   //ENTRYPOINT that exuecutes shell script with params 
+
+    ENTRYPOINT ["sh", "shellScript.sh", "npm","start"]
+  
+    //--outcome
+    prints: hi there handsome
+
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+      </content>
+   </chapter>
+   <chapter>
+      <subject>Run Container WITH VOLUMES and DEBUG</subject>
+      <content>
+         <subtitle>1 type: anonymous volume</subtitle>
+         <paragraph>
+            <info
+        >docker allows you to create volume with a -v flag without the name (it will be random has name instead) and that volume 
                can be access by listing volumes 
 
-               docker volume ls
-
-
-               </info>
-               <example>
-
--------------
+               docker volume ls</info>
+            <example>-------------
 
 1. To share a file/directory you need to use -v flag :
 
     docker run -it --name myContainer -v /Vol alpine bin/bash
 
--i => interactive mode alows to interact with the container repository
--t => attach tty in short means attach terminal 
--v => create anonymous volume in  /containerDirectory/Vol
---name myContainer => name of container for refference to delete/stop etc
-alpine => name of the docker image
-bin/bash => open container in bash terminal
+-i =&gt; interactive mode alows to interact with the container repository
+-t =&gt; attach tty in short means attach terminal 
+-v =&gt; create anonymous volume in  /containerDirectory/Vol
+--name myContainer =&gt; name of container for refference to delete/stop etc
+alpine =&gt; name of the docker image
+bin/bash =&gt; open container in bash terminal
 
 
 2. check if volume is there and create a new file 
@@ -348,40 +550,33 @@ bin/bash => open container in bash terminal
 
 4. got to volme directory 
 
------------- ------------------------ ------------------------ ------------
-               </example>
-           </paragraph>
-            <subtitle>
-            2 type: named volume
-          </subtitle>
-           <paragraph>
-               <info>docker allows you to create volume with a -v flag with a name and that volume. if the volume does not exist with that name
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>2 type: named volume</subtitle>
+         <paragraph>
+            <info
+        >docker allows you to create volume with a -v flag with a name and that volume. if the volume does not exist with that name
                it will be created if it will use that existing volume.
                can be access by listing volumes 
 
                docker volume ls
 
-             => the volume shoud be listed under its name as below:
+             =&gt; the volume shoud be listed under its name as below:
 
                local     fa9f5f4cecd66e115dbdd2e6c7f7887450368641ce2cad8d23657c3384c3814f
-               local     named-volume
-
-
-               </info>
-               <example>
-
--------------
+               local     named-volume</info>
+            <example>-------------
 
 1. To share a file/directory you need to use -v flag :
 
     docker run  -it -v named-volume:/data02 --name volumeCont alpine sh
 
--i => interactive mode alows to interact with the container repository
--t => attach tty in short means attach terminal 
--v  named-volume:/data02 => create named-volume volume in and attaches /data2 folder to it
---name volumeCont=> name of container for refference to delete/stop etc
-alpine => name of the docker image
-sh => open container in sh terminal
+-i =&gt; interactive mode alows to interact with the container repository
+-t =&gt; attach tty in short means attach terminal 
+-v  named-volume:/data02 =&gt; create named-volume volume in and attaches /data2 folder to it
+--name volumeCont=&gt; name of container for refference to delete/stop etc
+alpine =&gt; name of the docker image
+sh =&gt; open container in sh terminal
 
 
 2. check if volume is there and create a new file 
@@ -397,14 +592,12 @@ sh => open container in sh terminal
 
 4. got to volme directory 
 
------------- ------------------------ ------------------------ ------------
-               </example>
-           </paragraph>       
- <subtitle>
-            3 type: create a volume and attach it manually
-          </subtitle>
-           <paragraph>
-               <info>docker allows you to create volume with a -v flag with a name and that volume. if the volume does not exist with that name
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>3 type: create a volume and attach it manually</subtitle>
+         <paragraph>
+            <info
+        >docker allows you to create volume with a -v flag with a name and that volume. if the volume does not exist with that name
                it will be created if it will use that existing volume. In this example the volume first it will be created and then attached
                can be access by listing volumes 
 
@@ -415,13 +608,8 @@ sh => open container in sh terminal
            2. the volume shoud be listed under its name as below:
 
                local     fa9f5f4cecd66e115dbdd2e6c7f7887450368641ce2cad8d23657c3384c3814f
-               local      vol-created-manually
-
-
-               </info>
-               <example>
-
--------------
+               local      vol-created-manually</info>
+            <example>-------------
 
 1. Create a volume 
 
@@ -431,13 +619,12 @@ docker volume create vol-created-manually
 
     docker run  -it -v vol-created-manually:/data03 --name volumeCont alpine sh
 
--i => interactive mode alows to interact with the container repository
--t => attach tty in short means attach terminal 
--v named-volume:/data02 => create named-volume volume in and attaches /data2 folder to it
---name volumeCont => name of container for refference to delete/stop etc
-alpine => name of the docker image stored localy
-sh => open container in sh terminal
-
+-i =&gt; interactive mode alows to interact with the container repository
+-t =&gt; attach tty in short means attach terminal 
+-v named-volume:/data02 =&gt; create named-volume volume in and attaches /data2 folder to it
+--name volumeCont =&gt; name of container for refference to delete/stop etc
+alpine =&gt; name of the docker image stored localy
+sh =&gt; open container in sh terminal
 
 2. check if volume is there and create a new file 
 
@@ -452,36 +639,30 @@ sh => open container in sh terminal
 
 4. got to volme directory 
 
------------- ------------------------ ------------------------ ------------
-               </example>
-           </paragraph>  
-           <subtitle>
-            4 type: host volume or bind mounts
-          </subtitle>
-           <paragraph>
-               <info>docker allows you to use local files/directories and share/map to the container.
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>4 type: host volume or bind mounts</subtitle>
+         <paragraph>
+            <info
+        >docker allows you to use local files/directories and share/map to the container.
            Make sure to add all permistions to your folder you want to share:
 
            mkdir newDir
            touch file.txt
 
-           chmod 777 newFolder
-
-               </info>
-               <example>
-
--------------
+           chmod 777 newFolder</info>
+            <example>-------------
 
 1. Run container and attach local directory to it with the directory that is listed in docker settings
 
     docker run  -it -v $PWD/newDir:/data05 --name volumeCont alpine sh
 
--i => interactive mode alows to interact with the container repository
--t => attach tty in short means attach terminal 
--v $PWD/newDir:/data05 => attach local folder $PWD/newDir to folder /data5 (it should have all content from local)
---name volumeCont => name of container for refference to delete/stop etc
-alpine => name of the docker image stored localy
-sh => open container in sh terminal
+-i =&gt; interactive mode allows to interact with the container repository
+-t =&gt; attach tty in short means attach terminal 
+-v $PWD/newDir:/data05 =&gt; attach local folder $PWD/newDir to folder /data5 (it should have all content from local)
+--name volumeCont =&gt; name of container for refference to delete/stop etc
+alpine =&gt; name of the docker image stored locally
+sh =&gt; open container in sh terminal
 
 2. check if folder is shared is there and create a new file 
 
@@ -498,9 +679,453 @@ sh => open container in sh terminal
 cd newDir
 ls 
 
------------- ------------------------ ------------------------ ------------
-               </example>
-           </paragraph>         
-       </content>
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+      </content>
    </chapter>
- </chapters>
+   <chapter>
+      <subject>image listing and removing</subject>
+      <content>
+         <subtitle>list images</subtitle>
+         <paragraph>
+            <info
+        >those are the most common image commands for express node container</info>
+            <example>/*********************************************/
+
+
+#ARG can be set default as bellow or be overriden in inline command docker run . --build-arg NODE_VERSION=12-alpine
+ARG NODE_VERSION=16.13.2
+FROM node:${NODE_VERSION}
+
+#ENV can not be directly change during runtime but they can be assign to ARG 
+ENV APP_VERSION=$NODE_VERSION
+
+#metadata
+LABEL author='me'
+
+#create directory app in container
+WORKDIR /app
+
+#copy package.json package-lock.json /app container ./ = /app
+COPY package.json package-lock.json  ./
+
+#example of usind default ARG value and set ENV based on it, ARG can be overriden in inline command as well
+ARG CUSTOM_USER='Greg'
+ENV NODE_USER=$CUSTOM_USER
+
+#run npm install
+RUN USER=$USER npm install 
+
+#afer npm install copy everything to /app
+COPY . /app/
+
+#start the app
+CMD npm run start
+
+/*********************************************/</example>
+         </paragraph>
+         <subtitle>remove images</subtitle>
+         <paragraph>
+            <info>popular comamnds for removing images</info>
+            <example
+        >/***************** docker build ****************************/
+
+  //--- remove from the date --- 
+
+  //remove images from 7x24 = 168 hours meaning 7 days old
+  =&gt;  docker image prune -a --force --filter "until=168h"
+
+  //dockerfile with specified name
+  =&gt;  docker build -f Dockerfile.debug 
+
+  //build from url
+  =&gt; docker build github.com/creack/docker-firefox  
+
+  //with the name and tag to name the image 
+   =&gt;  docker build  -t name:tag .
+
+
+    //with passing the arguments to the image this will override default ARG CUSTOM_USER='Greg'
+    //IMPORTANT  you can not override DIRECTLY global env variables in build but you can assign them to ARG = ENV to go around it if you need to
+
+   =&gt;  docker build  --build-arg CUSTOM_USER=custom_user --build-arg  NODE_VERSION=16.13.2-alpine .
+
+   Those are the most common build options but there are plenty more !
+
+/*********************************************/</example>
+         </paragraph>
+         <subtitle
+      >Volumes - way to keep containers statefull not stateless</subtitle>
+         <paragraph>
+            <info
+        >volumes allow to keep data persistent and they are seperate from the contaiers, when the container is removed 
+               but the volume will stay, you can start a new container and it will use data from the volume. Volumes are also means to 
+               inject configuration and dependencies into container.</info>
+            <example
+        >/***************** docker build ****************************/
+
+  /
+
+/*********************************************/</example>
+         </paragraph>
+         <subtitle
+      >Bind Mounts =&gt; way to share data between local host and container</subtitle>
+         <paragraph>
+            <info
+        >Bind Mounts allow you to communicate with the host machine by accessing 
+          its file system, but they could be problematic due to the file permisions for example
+          where 2 diffrent user set in container and on host machine. The common way of using 
+          Bind Mounts is runing container with configuration from .env file or yaml or json.</info>
+            <example
+        >/***************** docker run with .env variables used in command line ****************************/
+
+
+/*********************************************/</example>
+         </paragraph>
+      </content>
+   </chapter>
+   <chapter>
+      <subject
+    >Run Container:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]</subject>
+      <content>
+         <subtitle>docker run -p/--publish 5001:5000 [image-name]</subtitle>
+         <paragraph>
+            <info
+        >docker run comand allows you to run a docker image and build container, and view in the browser by
+               exposing port to view on:
+
+                docker run -d -p 5001:5000 simple-express-app
+
+                -d =&gt; run in detached mode so you can still use your console app runs in background
+                -p =&gt; port to expose to EXPOSE_PORT:APP_ORIGINAL_PORT from dockerfile EXPOSE 5000
+                -it =&gt; attach interactive shell to it</info>
+            <example>==&gt; from DockerFile:
+            
+    EXPOSE 5000
+    CMD npm run start
+
+    //run container with port redirect from 5000 to 5001 in detached mode -d
+    docker run -d -p 5001:5000 simple-express-app
+
+    //you can change PORT if you app allows you to change PORT env as process.env.PORT || '5000' and then expose it for localhost
+    docker run  -e PORT=4002 -p 4002:4002 simple-express-app
+
+        
+    IMPORTANT : to view your app in browser you always have to redirect the port to viw it on as:  REDIRECT_PORT:APP_PORT
+    -p/--publish 4002:5000
+
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>docker run -e PORT=4000 [image-name]</subtitle>
+         <paragraph>
+            <info
+        >-e flag allows you to run container with changed/overriden global ENV as PORT,USER etc ,
+               
+              example change the PORT of the app running (the app has to have functionality for it as:process.env.PORT || '5000' )
+       
+                docker run -d  -e PORT=4002</info>
+            <example
+        >//run the container with changed env PORT=4002 and expose new PORT to 4003 id detached mode -d
+
+    docker run -d  -e PORT=4002 -p 4003:4002 simple-express-app
+
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle
+      >applying bind Mounts: docker run -v/ --volume pathToYourFile [image-name]</subtitle>
+         <paragraph>
+            <info
+        >bind Mounts allow you to attach data (as configuration .env) to your container , 
+               
+               The file being sent has to be mapped to location in docker directory with the flag read only for docker
+
+               -v LOCALPATH/file : /dockerDirectory/file:ro 
+
+               for .env the -v comamnd would look like:
+
+               -v $PWD/.env:/app/.env:ro</info>
+            <example
+        >//run the container with .env file as ready only with maping to /app container directory and published to PORT and to view it in browser on 5001:
+
+    docker run -d -v $PWD/.env:/app/.env:ro -p 5001:5000 simple-express-app
+
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>CMD OVERRIDE: docker run [image] [CMD override]</subtitle>
+         <paragraph>
+            <info
+        >docker run allows you to ovveride CMD command (which can only be one in dockerFile, if more only last one is exuecuted)
+         
+
+               docker run -it my-app:v3 echo hi
+
+               //this way whatever was in CMD ['npm', 'start'] it will be overriden by: echo hi</info>
+            <example>//dockerfile CMD to be override
+    CMD npm run start
+
+    //override CMD with echo command
+    dodocker run -it my-app:v3 echo hi
+
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>ENTRYPOINT WITH CMD: docker run</subtitle>
+         <paragraph>
+            <info
+        >ENTRYPOINT acts the same as CMD , the only diffrence is that it will execute before the container starts, it can be overidden in the 
+               docker run only, and can be only one per dockerfile (more last is taken), 
+
+               docker run [image]
+
+                If the ENTRYPOINT is used togehter with CMD then both command are going to combined as 
+
+                ENTRYPOINT ['executable','paramToEntryPoint1' ]
+                CMD: ['paramToEntryPoint2','paramToEntryPoint3']
+
+                so CMD in only used to pass params to executable from entrypoint</info>
+            <example>//ENTRYPOINT with CMD 
+    ENTRYPOINT [ "echo","hi" ]
+    CMD [ "there","handsome" ]
+
+    prints: hi there handsome
+
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>ENTRYPOINT WITH SHELL script: docker run</subtitle>
+         <paragraph>
+            <info
+        >ENTRYPOINT acts the same as CMD , the only diffrence is that it will execute before the container starts, it can be overidden in the 
+               docker run only by --entrypoint flag, and can be only one per dockerfile (more last is taken), 
+
+               docker run [image]
+
+            //example ENTRYPOINT with params:
+
+            ENTRYPOINT [ "echo","hi","there","handsome" ]</info>
+            <example
+        >//shell script that allows you to read params: =&gt; as sh file.sh npm start 
+
+    ------------ file.sh-----------------
+    echo 'shell called from EntryPoint in docker file'
+    echo "now running: $1 $2"
+    #run npm script from params 
+    $1 $2
+    ------------ file.sh-----------------
+
+   //ENTRYPOINT that exuecutes shell script with params 
+
+    ENTRYPOINT ["sh", "shellScript.sh", "npm","start"]
+  
+    //--outcome
+    prints: hi there handsome
+
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+      </content>
+   </chapter>
+   <chapter>
+      <subject>Run Container WITH VOLUMES and DEBUG</subject>
+      <content>
+         <subtitle>1 type: anonymous volume</subtitle>
+         <paragraph>
+            <info
+        >docker allows you to create volume with a -v flag without the name (it will be random has name instead) and that volume 
+               can be access by listing volumes 
+
+               docker volume ls</info>
+            <example>-------------
+
+1. To share a file/directory you need to use -v flag :
+
+    docker run -it --name myContainer -v /Vol alpine bin/bash
+
+-i =&gt; interactive mode alows to interact with the container repository
+-t =&gt; attach tty in short means attach terminal 
+-v =&gt; create anonymous volume in  /containerDirectory/Vol
+--name myContainer =&gt; name of container for refference to delete/stop etc
+alpine =&gt; name of the docker image
+bin/bash =&gt; open container in bash terminal
+
+
+2. check if volume is there and create a new file 
+
+    cd Vol
+    touch file1
+    exit
+
+3. list your volumes and inspect
+
+    docker volume ls 
+    docker inspect [volumeId]
+
+4. got to volme directory 
+
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>2 type: named volume</subtitle>
+         <paragraph>
+            <info
+        >docker allows you to create volume with a -v flag with a name and that volume. if the volume does not exist with that name
+               it will be created if it will use that existing volume.
+               can be access by listing volumes 
+
+               docker volume ls
+
+             =&gt; the volume shoud be listed under its name as below:
+
+               local     fa9f5f4cecd66e115dbdd2e6c7f7887450368641ce2cad8d23657c3384c3814f
+               local     named-volume</info>
+            <example>-------------
+
+1. To share a file/directory you need to use -v flag :
+
+    docker run  -it -v named-volume:/data02 --name volumeCont alpine sh
+
+-i =&gt; interactive mode alows to interact with the container repository
+-t =&gt; attach tty in short means attach terminal 
+-v  named-volume:/data02 =&gt; create named-volume volume in and attaches /data2 folder to it
+--name volumeCont=&gt; name of container for refference to delete/stop etc
+alpine =&gt; name of the docker image
+sh =&gt; open container in sh terminal
+
+
+2. check if volume is there and create a new file 
+
+    cd Vol
+    touch file1
+    exit
+
+3. list your volumes and inspect
+
+    docker volume ls 
+    docker inspect named-volume
+
+4. got to volme directory 
+
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>3 type: create a volume and attach it manually</subtitle>
+         <paragraph>
+            <info
+        >docker allows you to create volume with a -v flag with a name and that volume. if the volume does not exist with that name
+               it will be created if it will use that existing volume. In this example the volume first it will be created and then attached
+               can be access by listing volumes 
+
+           1. docker volume create vol-created-manually
+
+               docker volume ls
+
+           2. the volume shoud be listed under its name as below:
+
+               local     fa9f5f4cecd66e115dbdd2e6c7f7887450368641ce2cad8d23657c3384c3814f
+               local      vol-created-manually</info>
+            <example>-------------
+
+1. Create a volume 
+
+docker volume create vol-created-manually
+
+1. Run container and attach volume to it:
+
+    docker run  -it -v vol-created-manually:/data03 --name volumeCont alpine sh
+
+-i =&gt; interactive mode alows to interact with the container repository
+-t =&gt; attach tty in short means attach terminal 
+-v named-volume:/data02 =&gt; create named-volume volume in and attaches /data2 folder to it
+--name volumeCont =&gt; name of container for refference to delete/stop etc
+alpine =&gt; name of the docker image stored localy
+sh =&gt; open container in sh terminal
+
+
+2. check if volume is there and create a new file 
+
+    cd Vol
+    touch file1
+    exit
+
+3. list your volumes and inspect
+
+    docker volume ls 
+    docker inspect named-volume
+
+4. got to volme directory 
+
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>4 type: host volume or bind mounts</subtitle>
+         <paragraph>
+            <info
+        >docker allows you to use local files/directories and share/map to the container.
+           Make sure to add all permistions to your folder you want to share:
+
+           mkdir newDir
+           touch file.txt
+
+           chmod 777 newFolder</info>
+            <example>-------------
+
+1. Run container and attach local directory to it with the directory that is listed in docker settings
+
+    docker run  -it -v $PWD/newDir:/data05 --name volumeCont alpine sh
+
+-i =&gt; interactive mode alows to interact with the container repository
+-t =&gt; attach tty in short means attach terminal 
+-v $PWD/newDir:/data05 =&gt; attach local folder $PWD/newDir to folder /data5 (it should have all content from local)
+--name volumeCont =&gt; name of container for refference to delete/stop etc
+alpine =&gt; name of the docker image stored localy
+sh =&gt; open container in sh terminal
+
+2. check if folder is shared is there and create a new file 
+
+    cd data05
+    touch file1
+    exit
+
+3. list your volumes and inspect
+
+    There should be NO NEW volumes cause this time we only share the folder !
+
+4. after exited from sh go to your local directory that have been shared and see if new file is there created in docker repository
+
+cd newDir
+ls 
+
+------------ ------------------------ ------------------------ ------------</example>
+         </paragraph>
+         <subtitle>managing volumes => listing, deleting etc</subtitle>
+         <paragraph>
+         <info>way to manage your volumes in docker</info>
+          <example>
+    ----
+           1. -------- list your volumes ---
+
+            docker volomes ls
+
+            -------- list your volumes with filter---
+
+            docker volume ls -f name=jenkins
+
+             -------- list your volumes with label ---
+
+            docker volume ls -f name=jenkins
+
+             docker volume ls --filter label=is-timelord=yes
+
+        2. inspect volume 
+
+             docker volume inspect volumeName
+
+        3 ---------- delete volume ----------
+
+            docker volume rm jenkins-data
+
+        4---------- delete unused volumes ----------
+
+            docker volume prune
+
+           ----
+          
+          </example>
+         </paragraph>
+      </content>
+   </chapter>
+</chapters>

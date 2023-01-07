@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <chapters>
+  <chapter>
+      <subject>formatting {prettier}</subject>
+      <content>
+      <subtitle>prettier will format your code to the standards that are required for better code readability</subtitle>
+      <paragraph>
+          <info>>prettier will format your code to the standards that are required for better code readability
+          </info>
+          <example>
+
+1. -------------- install exact version of prettier ----
+
+npm i -D --save-exact prettier 
+
+2. prettier comes with commands line to format or check formatting 
+
+npm prettier --write file-name.ext
+
+//or 
+
+npm prettier --check file-name.ext
+
+3. you can format/check all formatting at once but for that case is better to 
+create prettierignore file to exclude what not to format as node_modules 
+
+echo node_modules > prettierignore
+
+4. format/check formatting for entire folder 
+
+npm prettier --write . 
+
+//or 
+
+npm prettier --check . 
+
+/*********************************************/
+          </example>
+      </paragraph>
+       <subtitle>set custom rules for prettier (prettierrc</subtitle>
+      <paragraph>
+          <info>set prettier rules</info>
+          <example>
+1------- create prettierrc  file --------
+
+touch prettierrc 
+
+2. define what rules you want to set as json object 
+
+{
+    "semi":false
+}
+
+//this will set semicolon at in the end of line off, and will override your editor settings 
+//if rules have been set there
+
+//make rules for specific files as typescript files or legacy code
+
+{
+    "overrides":{
+        "files":".ts",
+        "files":"./legacy/*",
+        "options":{
+            "semi":true
+        }
+    }
+}
+
+-------
+          </example>
+      </paragraph>
+</content>
+  </chapter>
+  <chapter>
+      <subject>eslint</subject>
+      <content>
+          /<paragraph>
+              <info>
+               it allows you to set linting/error checking for your code
+              </info>
+              <example>
+
+--- install eslint with exact version ----
+
+                npm i -D --save-exact eslint
+
+                --- create eslintrc and specify rules as object ------
+
+                {
+                    "extends" :{
+                        "whatever-plugin",
+                        "prettier" //this has to be last to make prettier make formatting
+                    },
+                    "rules":{
+                        "indent":"error"
+                    }
+
+                }
+-------------
+              </example>
+          </paragraph>
+      </content>
+  </chapter>
+  <chapter>
+      <subject>eslint wit prettier</subject>
+      <content>
+          /<paragraph>
+              <info>
+               in order to eslint not clash with prettier (cause both have same rules set in both) you need to istall package
+
+               npm i eslint-config-prettier 
+
+               to make sure they dont interfere
+               
+              </info>
+              <example>
+
+--- install  eslint-config-prettier with exact version ----
+
+                npm i -D --save-exact  eslint-config-prettier
+
+ --- check if any of the rules crash------
+
+    npm  eslint-config-prettier name-of-file.ext
+
+=> then  you will  get either no rules are conflicting or name of the conflicting rules
+-------------
+              </example>
+          </paragraph>
+      </content>
+  </chapter>
+ </chapters>

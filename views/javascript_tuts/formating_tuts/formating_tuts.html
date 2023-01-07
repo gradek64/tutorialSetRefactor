@@ -1,0 +1,221 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">  
+  <title>tutorial === Layout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/tutorial.css">
+  <link rel="stylesheet" href="css/tooltip.css">
+</head>
+<body translate="no">
+<div class="l-site">
+  <div class="l-nav">
+    <nav class="nav">
+      <input type="text" placeholder="Search" id="search">
+      <div style="clear: both;"></div>
+      <!-- nunjucks loop-->
+            
+<ul class="links">
+<!--list-tag-->
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/formating_tuts">formatting {prettier}</a><span class="tooltiptext">formatting {prettier}</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/formating_tuts" partition>prettier will format your code to the standards that are required for better code readability</a><span class="tooltiptext">prettier will format your code to the standards that are required for better code readability</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/formating_tuts" partition>set custom rules for prettier (prettierrc</a><span class="tooltiptext">set custom rules for prettier (prettierrc</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/formating_tuts">eslint</a><span class="tooltiptext">eslint</span>
+                 
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/formating_tuts">eslint wit prettier</a><span class="tooltiptext">eslint wit prettier</span>
+                 
+      </li>
+    
+<!--end-list-tag-->
+</ul>
+
+       <!-- nunjucks loop-->
+    </nav>
+  </div>
+  <div class="l-page">
+    <div class="menu">
+      <div class="menu-hamburger"></div>
+    </div>
+      <!-- nunjucks loop-->
+          
+<div class="sectionWrapper">
+  <div class="sectionContainer">
+   
+      
+      <section  class="band band-b activeSection"  class="band band-b">
+          <h1> formatting {prettier} </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>&gt;prettier will format your code to the standards that are required for better code readability</p>
+                  <div class="codeWraper">
+                    <code>1. -------------- install exact version of prettier ----
+
+npm i -D --save-exact prettier 
+
+2. prettier comes with commands line to format or check formatting 
+
+npm prettier --write file-name.ext
+
+//or 
+
+npm prettier --check file-name.ext
+
+3. you can format/check all formatting at once but for that case is better to 
+create prettierignore file to exclude what not to format as node_modules 
+
+echo node_modules &gt; prettierignore
+
+4. format/check formatting for entire folder 
+
+npm prettier --write . 
+
+//or 
+
+npm prettier --check . 
+
+/*********************************************/</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>set prettier rules</p>
+                  <div class="codeWraper">
+                    <code>1------- create prettierrc  file --------
+
+touch prettierrc 
+
+2. define what rules you want to set as json object 
+
+{
+    &quot;semi&quot;:false
+}
+
+//this will set semicolon at in the end of line off, and will override your editor settings 
+//if rules have been set there
+
+//make rules for specific files as typescript files or legacy code
+
+{
+    &quot;overrides&quot;:{
+        &quot;files&quot;:&quot;.ts&quot;,
+        &quot;files&quot;:&quot;./legacy/*&quot;,
+        &quot;options&quot;:{
+            &quot;semi&quot;:true
+        }
+    }
+}
+
+-------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> eslint </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>it allows you to set linting/error checking for your code</p>
+                  <div class="codeWraper">
+                    <code>--- install eslint with exact version ----
+
+                npm i -D --save-exact eslint
+
+                --- create eslintrc and specify rules as object ------
+
+                {
+                    &quot;extends&quot; :{
+                        &quot;whatever-plugin&quot;,
+                        &quot;prettier&quot; //this has to be last to make prettier make formatting
+                    },
+                    &quot;rules&quot;:{
+                        &quot;indent&quot;:&quot;error&quot;
+                    }
+
+                }
+-------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> eslint wit prettier </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>in order to eslint not clash with prettier (cause both have same rules set in both) you need to istall package
+
+               npm i eslint-config-prettier 
+
+               to make sure they dont interfere</p>
+                  <div class="codeWraper">
+                    <code>--- install  eslint-config-prettier with exact version ----
+
+                npm i -D --save-exact  eslint-config-prettier
+
+ --- check if any of the rules crash------
+
+    npm  eslint-config-prettier name-of-file.ext
+
+=&gt; then  you will  get either no rules are conflicting or name of the conflicting rules
+-------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+  
+    <section class="band band-b activeSection">
+      <h1></h1>
+
+      
+
+
+
+        
+
+    </section>
+  
+  </div>
+</div>
+
+       <!-- nunjucks loop-->
+  </div>
+</div>
+<script src="scripts/nav-links.js"></script>
+<script src="scripts/tooltips_links_over.js"></script>
+<script src="scripts/search_nav.js"></script>
+ </body></html>

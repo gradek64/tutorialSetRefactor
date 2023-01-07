@@ -1,0 +1,686 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">  
+  <title>tutorial === Layout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/tutorial.css">
+  <link rel="stylesheet" href="css/tooltip.css">
+</head>
+<body translate="no">
+<div class="l-site">
+  <div class="l-nav">
+    <nav class="nav">
+      <input type="text" placeholder="Search" id="search">
+      <div style="clear: both;"></div>
+      <!-- nunjucks loop-->
+            
+<ul class="links">
+<!--list-tag-->
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/jenkins_tuts">Run jenkins from the docker Container</a><span class="tooltiptext">Run jenkins from the docker Container</span>
+                 
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/jenkins_tuts">jenkins freestyle project</a><span class="tooltiptext">jenkins freestyle project</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/jenkins_tuts" partition>executing npm script in pipeline</a><span class="tooltiptext">executing npm script in pipeline</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/jenkins_tuts" partition>Volumes - way to keep containers statefull not stateless</a><span class="tooltiptext">Volumes - way to keep containers statefull not stateless</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/jenkins_tuts">jenkins pipelines</a><span class="tooltiptext">jenkins pipelines</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/jenkins_tuts" partition>jenkins agent/agents</a><span class="tooltiptext">jenkins agent/agents</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/jenkins_tuts" partition>executing npm script in pipeline</a><span class="tooltiptext">executing npm script in pipeline</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/jenkins_tuts" partition>running docker agent in pipeline</a><span class="tooltiptext">running docker agent in pipeline</span>
+                        
+                    </ul>
+                
+      </li>
+    
+      <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/jenkins_tuts">docker commands in jenkins pipeline</a><span class="tooltiptext">docker commands in jenkins pipeline</span>
+                  
+                    <ul class="linksNested">
+                          
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/jenkins_tuts" partition>1. Setting up the docker provider from docker deamon host</a><span class="tooltiptext">1. Setting up the docker provider from docker deamon host</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/jenkins_tuts" partition>2. create docker image that extends jenkins@v11 image</a><span class="tooltiptext">2. create docker image that extends jenkins@v11 image</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/jenkins_tuts" partition>3. Run jenkins container from previous step</a><span class="tooltiptext">3. Run jenkins container from previous step</span>
+                           
+                          <li class="nav-primary tooltip"><a href="javascript_tuts/tuts_all_scripts_css/jenkins_tuts" partition>4. Setup Docker in web jenkins UI</a><span class="tooltiptext">4. Setup Docker in web jenkins UI</span>
+                        
+                    </ul>
+                
+      </li>
+    
+<!--end-list-tag-->
+</ul>
+
+       <!-- nunjucks loop-->
+    </nav>
+  </div>
+  <div class="l-page">
+    <div class="menu">
+      <div class="menu-hamburger"></div>
+    </div>
+      <!-- nunjucks loop-->
+          
+<div class="sectionWrapper">
+  <div class="sectionContainer">
+   
+      
+      <section  class="band band-b activeSection"  class="band band-b">
+          <h1> Run jenkins from the docker Container </h1> 
+          
+
+            
+              <div class="band-container">
+                <div class="band-inner">
+
+                  <p>jenkins natively runs on java , therefore the native istalation needs specific version and 
+               other addons , therefore the best way of running is via docker. Docker will take care of all
+               dependencies and run if for you and expose port that jenkins pipelines can be viewed.</p>
+                  <div class="codeWraper">
+                    <code>-------  run/dowload jenkins docker image via command below: ------------------
+
+1// visit its github page 
+
+https://github.com/jenkinsci/docker/blob/master/README.md
+
+2. run the command line in jenkins_tuts/docker_jenkins_volume
+
+
+docker run -p 9000:8080 -p 50000:50000 -v $PWD/shared:/var/jenkins_home  jenkins/jenkins:lts-jdk11
+
+
+
+-p 9000:8080 =&gt; the port 9000 is the port exposed to your browser.
+
+-p 50000:50000 =&gt; the port 5000 is the port exposed for the agend (if setup)
+
+-v $PWD/shared:/var/jenkins_home =&gt; is the volume/bindMounts, the folder that is shared from your machine with a docker container.
+
+jenkins/jenkins:lts-jdk11 =&gt; the image that are we going to run that has java11 in it.
+
+-------------------------------</code>
+                  </div>
+                </div>
+              </div>
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> jenkins freestyle project </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>freestyle project is a single jenkins job that will run in jenkins (if you need more than one job to run you should use
+          pipelines)
+
+        This method require istalation of additional jenkins plugins depend on what is going to be run, conditions below:
+
+        1. The ideas is to run comand line in jenkins, therefore you need to provide all
+        permsions, global variables, keys etc to be able the build
+
+        2. To run node you need have it installed as plugin in jenkins:</p>
+                  <div class="codeWraper">
+                    <code>/******* run jenkins image with params to run npm script *************/
+
+
+---- 1. cd to your project directory that has test cd argos/argos-repo -----
+
+Note: when you creating a job in jenkins &#39;freestyle project&#39; then the name of the project it will 
+become a folder when jenkins is located for the job directory as below
+
+=&gt; project name: test 
+=&gt; jenkins directory: var/jenkins_home/workspace/test
+
+this directory needs to be passed to the shared volume: -v $PWD/:/var/jenkins_home/workspace/test
+
+
+
+
+docker run -p 9000:8080 -p 50000:50000 -e GITHUB_PACKAGES_AUTH_TOKEN=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 -v $PWD/:/var/jenkins_home/workspace/test  jenkins/jenkins:lts-jdk11
+
+
+
+-p 9000:8080  =&gt; port exposed for browser
+-p 50000:50000 =&gt; port exposed for agent 
+-e GITHUB_PACKAGES_AUTH_TOKEN=xxxx =&gt; global enviroment GITHUB_PACKAGES_AUTH_TOKEN needed in .nmrc
+-v $PWD/:/var/jenkins_home/workspace/test =&gt; expose/share project directory to /var/jenkins_home in container
+ 
+ --- to see the contaienr content run ---
+ =&gt; docker ps -a (show running containers)
+ =&gt; docker exec -it docker_container_id bash
+
+--- 2. open jenkins on loclahost:9000 ----
+
+--- 3. install plugin for node and configure it ----
+
+Dashboard =&gt; manage jenkins =&gt; manage plugins =&gt; available =&gt; nodejs plugin
+
+then configuration as follows:
+
+Dashboard =&gt; manage jenkins =&gt; manage plugins =&gt; global tool configuration =&gt; 
+=&gt; pick the node version to install , what global packages shold be installed as yarn if needed 
+etc...
+
+----- 4. -----
+=&gt; start freestyle project and name it : test
+------4a------------
+=&gt; in Build Enviroment section select &#39;Provide node and npm bin/folder to path&#39; and when
+you expand the section you should see your node16 name you provide in install plugin section
+--------4b-----------
+=&gt; set your script in jobs as shell script ----
+=&gt; the project repo is shared so it does not need yarn (npm install) it shoud exucute yarn script
+
+
+------------------------|
+echo &#39;where are you ?&#39;  |
+pwd                     |
+yarn test:unit          |
+------------------------|
+
+/*********************************************/</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>volumes allow to keep data persistent and they are seperate from the contaiers, when the container is removed 
+               but the volume will stay, you can start a new container and it will use data from the volume. Volumes are also means to 
+               inject configuration and dependencies into container.</p>
+                  <div class="codeWraper">
+                    <code>/***************** docker build ****************************/
+
+  /
+
+/*********************************************/</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> jenkins pipelines </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>What is jenkins agent ?
+
+            It is a host =&gt; operating system that creates all necessary environment to run jenkins job
+            
+             and it could be based on any popular desktop
+            operating system as linux, widows, mac or could be defined as docker container or set remotely on the server. As long as has all needed
+            executables then it will run your pipelines. It is also possible to define multiple agents. 
+
+            jenkins has build-in agent set on linux , but it should be only used for test purposed, you should always define your agent machine as 
+            jenkins will remind you off in the warning section:
+
+            &#39;Building on the built-in node can be a security issue. You should set up distributed builds. See the documentation.&#39;</p>
+                  <div class="codeWraper">
+                    <code>/********/
+
+=&gt; agent can be specified as &quot;any&quot; meaning the jenkins will pick any node/operating system available to execute this pipeline
+
+
+ ======= pipeline declarative syntax ==============
+
+    pipeline {
+        agent any
+        stages {
+            stage(&#39;Hello&#39;){
+                echo &#39;this pipeline using any available agent&#39;
+            }
+        }
+    }
+
+ =======
+
+=&gt;  it could be also skipped in below syntax 
+
+node {
+    stage(&#39;Hello&#39;) {
+        echo &#39;this pipeline using any available agent&#39;
+    },
+}
+
+ =======
+
+/*********************************************/</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>Just like in freestyle jenkins jobs , the npm script can be executed in pipeline as below:
+          
+          1. Run your jenkins instance from the docker container (like in freestyle job) but there is issue with accessing 
+          volume from the pipeline so you need add user flag to the docker command
+
+          2. Define node plugin (exactly the same as freestyle job)
+
+          3. Set you your steps within pipeline
+
+          Detailed setup below:</p>
+                  <div class="codeWraper">
+                    <code>/******* run jenkins image with params to run npm script *************/
+
+
+---- 1. cd to your project directory that has test cd argos/argos-repo -----
+
+Note: when you creating a job in jenkins &#39;freestyle project&#39; then the name of the project it will 
+become a folder when jenkins is located for the job directory as below
+
+=&gt; project name: test 
+=&gt; jenkins directory: var/jenkins_home/workspace/test
+
+this directory needs to be passed to the shared volume: -v $PWD/:/var/jenkins_home/workspace/test
+
+
+
+docker run -u 0 -p 9000:8080 -p 50000:50000 -e GITHUB_PACKAGES_AUTH_TOKEN=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 -v $PWD/:/var/jenkins_home/workspace/test  jenkins/jenkins:lts-jdk11
+
+
+
+-u 0 =&gt; set user as root to avoid permission issues once accessing volume from the pipeline (should be done only for testing purposed)
+-p 9000:8080  =&gt; port exposed for browser
+-p 50000:50000 =&gt; port exposed for agent 
+-e GITHUB_PACKAGES_AUTH_TOKEN=xxxx =&gt; global environment GITHUB_PACKAGES_AUTH_TOKEN needed in .nmrc
+-v $PWD/:/var/jenkins_home/workspace/test =&gt; expose/share project directory to /var/jenkins_home in container
+ 
+ --- to see the container content run ---
+ =&gt; docker ps -a (show running containers)
+ =&gt; docker exec -it docker_container_id bash
+
+--- 2. open jenkins on localhost:9000 ----
+
+--- 3. install plugin for node and configure it ----
+
+Dashboard =&gt; manage jenkins =&gt; manage plugins =&gt; available =&gt; nodejs plugin
+
+then configuration as follows:
+
+Dashboard =&gt; manage jenkins =&gt; manage plugins =&gt; global tool configuration =&gt; 
+=&gt; pick the node version to install and name it with the version as 16.13.2&#39; , what global packages should be installed as yarn if needed 
+the version then can be reference in groovy pipeline script in tools
+etc...
+
+--- 4. -----
+=&gt; start your pipeline calling  : test 
+=&gt; this will make it default workspace set to jenkins directory: var/jenkins_home/workspace/test
+
+--- 5. ----------
+=&gt; configure pipeline as below
+
+pipeline {
+    agent any
+    tools {
+        nodejs &#39;16.13.2&#39;
+    }
+    stages {
+        stage(&#39;Hello&#39;) {
+            steps {
+                echo &#39;Hello World&#39;
+            }
+        }
+        stage(&#39;run unit test&#39;) {
+            steps {
+                sh &#39;&#39;&#39;
+                    echo where are you ?
+                    pwd 
+                    yarn test:unit:stub
+                &#39;&#39;&#39;
+            }
+        }
+    }
+}
+
+/*********************************************/</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>1.In  jenkins you can set different agent and one of them can be docker. In can be set 
+          as global agent for entire pipeline or for individual stages.
+          
+          stage(&#39;test node version&#39;) {
+                agent {
+                    docker { image &#39;node:16.13.1-alpine&#39; }
+                }
+                steps {
+                    sh &#39;&#39;&#39;
+                        docker --version
+                        node --version
+                    &#39;&#39;&#39;
+                }
+            }
+          
+         To run your pipeline locally you need install docker directly in your container by extending your
+         jenkins base image and changing user to the root to avoid permissions issues.
+
+          --- docker file image to extend base jenkins image---
+
+        FROM jenkins/jenkins:lts-jdk11
+        USER root
+        RUN apt-get update
+        RUN curl -sSL https://get.docker.com/ | sh
+        
+
+        Installation details below:</p>
+                  <div class="codeWraper">
+                    <code>/***************** Steps to install/run docker on jenkins locally ****************************/
+
+1. docker has to be manually install first on docker container , luckily we can extend our jenkins
+base image in docker file and build
+
+--- docker file image to extend base jenkins image---
+
+        FROM jenkins/jenkins:lts-jdk11
+        USER root
+        RUN apt-get update
+        RUN curl -sSL https://get.docker.com/ | sh
+
+2. build =&gt; go to directory where your dockerfile is saved
+
+    docker build -t jenkins-with-docker .
+
+3. run your newly created image with extend docker
+
+    docker run -p 9000:8080 --group-add $(stat -c &#39;%g&#39; /var/run/docker.sock) -v /var/run/docker.sock:/var/run/docker.sock jenkins-with-docker
+
+--group-add =&gt; add group permsions to the docker socket
+-p =&gt; redirect jenkins port to 9000
+-v set volume to pass docker socket to the container 
+
+4. Now you should get a jenkins instance running with the password showed in terminal
+
+5. Install 2 docker plugins Docker and Docker pipeline
+
+=&gt; Dashboard =&gt; manage jenkins
+=&gt; available =&gt; search &#39;Docker&#39;
+=&gt; select Docker
+=&gt; select docker pipelines
+
+=&gt; save without restart
+
+6. configure docker plugin
+
+=&gt; Dashboard =&gt; global tool configuration
+=&gt; add docker section
+=&gt; give a name as &#39;docker&#39;
+=&gt; initial root leave empty to get docker from the $PATH
+=&gt; save
+
+7. set your pipeline with a global docker agent that will work for all stages
+
+
+pipeline {
+    agent {
+        docker { image &#39;node:16.13.1-alpine&#39; }
+    }
+    stages {
+        stage(&#39;test node version&#39;) {
+            steps {
+            sh &#39;&#39;&#39;
+                docker --version
+                sh &#39;node --version&#39;
+            &#39;&#39;&#39;
+            }
+        }
+        stage(&#39;test npm version&#39;) {
+            steps {
+            sh &#39;&#39;&#39;
+                docker --version
+                sh &#39;npm --version&#39;
+            &#39;&#39;&#39;
+            }
+        }
+    }
+}
+
+/*********************************************/</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+      
+      <section   class="band band-b" class="band band-b">
+          <h1> docker commands in jenkins pipeline </h1> 
+          
+              <div class="band-container partition first" part="part-1">
+                <div class="band-inner">
+
+                  <p>Docker works that is uses its host kernel, so it can be used in the container.
+    So as long as the host machine have Docker desktop installed you should be able to use it 
+    via socket in the network attached to the container. 
+    Details below:</p>
+                  <div class="codeWraper">
+                    <code>---------
+     1. Start your local docker desktop 
+
+     2. Create a docker network that is going to be attach to the container 
+
+----------------- copy and paste ----------
+
+     docker network create jenkins
+
+-----------------
+     3.In order to give Jenkins access to the Docker daemon running on the host machine, 
+     we will use a socat container to publish the unix socket /var/run/docker.sock (to the Docker daemon) as port 2375.
+
+----------------- copy and paste ----------
+
+     docker container run --name jenkins-docker \
+        --detach --restart unless-stopped \
+        --network jenkins --network-alias docker \
+        --volume /var/run/docker.sock:/var/run/docker.sock \
+        --publish 2375:2375 \
+        alpine/socat \
+        tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock
+
+-----------------
+
+    --detach =&gt; container run in the background
+     --network jenkins  =&gt; container attached to the jenkins network
+     --network-alias docker =&gt; network accessible via docker instead of localhost
+     --volume /var/run/docker.sock:/var/run/docker.sock =&gt; docker is passed via unix socket /var/run/docker.sock
+     --publish 2375:2375 =&gt; docker will be publish on web  via tcp://docker:2375
+     alpine/socat =&gt; base docker image from docker hub
+
+    IMPORTANT: After running this command, 
+    the socat container will be listening on port 2375 
+    and since we gave it the network alias of docker 
+    then we will be able to reach it from Jenkins on tcp://docker:2375.
+    Now is available on localhost as http://localhost:2375
+    Details below:
+
+    4. test you connection
+
+    4a. list container that are running: 
+
+        docker ps 
+
+    =&gt; you should get the PORT output: 0.0.0.0:2375-&gt;2375/tcp, :::2375-&gt;2375/tcp
+
+    4b.  check your docker api version by:
+
+       docker version 
+
+    =&gt; you should get API as : API version:      1.41 (minimum version 1.12) or similar
+
+    4c.  now test connection
+
+    ----------------- copy and paste ----------
+
+    http://localhost:2375/v1.41/info 
+
+    // or 
+
+    http://0.0.0.0:2375/v1.41/info
+
+    -----------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-2">
+                <div class="band-inner">
+
+                  <p>Since we have network with docker attach, we also need to have docker CLI commands
+    installed on our jenkins container, for that we need to create a docker image and build our 
+    container from it. Details below:
+    in</p>
+                  <div class="codeWraper">
+                    <code>1. Create a docker image  &#39;Dockerfile&#39; with below content
+
+  ----------------- copy and paste ----------
+
+    FROM jenkins/jenkins:2.375.1-jdk11
+    USER root
+    RUN apt-get update &amp;&amp; apt-get install -y lsb-release
+    RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
+    https://download.docker.com/linux/debian/gpg
+    RUN echo &quot;deb [arch=$(dpkg --print-architecture) \
+    signed-by=/usr/share/keyrings/docker-archive-keyring.asc] \
+    https://download.docker.com/linux/debian \
+    $(lsb_release -cs) stable&quot; &gt; /etc/apt/sources.list.d/docker.list
+    RUN apt-get update  &amp;&amp; apt-get install -y docker-ce-cli
+    USER jenkins
+
+  ----------------- 
+
+    FROM jenkins/jenkins:2.375.1-jdk11 =&gt; base image to extend
+    USER root =&gt; change user to root for privileges
+    ....
+    RUN apt-get update &amp;&amp; apt-get install -y docker-ce-cli =&gt; install docker CLI
+    USER jenkins =&gt; change user to Jenkins user
+
+ 2. from the directory of Dockerfile build a docker image based on above Dockerfile with meaningful name 
+ and tag as jenkins-with-docker-cli:v1
+
+ ----------------- copy and paste ----------
+
+    docker build -t jenkins-with-docker-cli:v1 .
+
+ -----------------</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-3">
+                <div class="band-inner">
+
+                  <p>Now what is left is to run our jenkins container with docker CLI installed and open up
+    jenkins in the web. Details below:</p>
+                  <div class="codeWraper">
+                    <code>1. create a named volume that will store /var/jenkins_home 
+
+     ----------------- copy and paste ----------
+
+     docker network create jenkins-data
+
+    -----------------
+     
+     2. run docker container as below 
+
+     ----------------- copy and paste ----------
+
+    docker run --name jenkins-with-docker-cli \
+    --restart=on-failure \
+    --network jenkins \
+    --env DOCKER_HOST=tcp://docker:2375 \
+    --env DOCKER_TLS_VERIFY=&quot;&quot; \
+    --volume jenkins-data:/var/jenkins_home \
+    --publish 9000:8080 --publish 50000:50000 jenkins-with-docker-cli:v1
+
+    -----------------
+
+    --network jenkins =&gt; attach network jenkins to the container
+    --env DOCKER_HOST=tcp://docker:2375 =&gt; pass global env to the container
+    --volume jenkins-data3:/var/jenkins_home =&gt; store jenkins root folder in volume jenkins-data
+    --publish 9000:8080 =&gt; publish jenkins on localhost:9000 from default 8080
+    --publish 50000:50000 =&gt; publish jenkins agent on default 50000
+    jenkins-with-docker-cli:v1 =&gt; image with docker cli installed
+
+    3. open up jenkins on 
+
+    ----------------- copy and paste ----------
+
+    localhost:9000 
+    
+    ----------------- 
+    and go through initial setup, the initial password will be logged in terminal</code>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="band-container partition " part="part-4">
+                <div class="band-inner">
+
+                  <p>Now that you have your jenkins running you need add Docker plugin and configure with
+    network host exposed on : tcp://docker:2375 
+    Details below:</p>
+                  <div class="codeWraper">
+                    <code>[object Object]</code>
+                  </div>
+                </div>
+              </div>
+            
+
+            
+
+      </section>
+  
+  
+    <section class="band band-b activeSection">
+      <h1></h1>
+
+      
+
+
+
+        
+
+    </section>
+  
+  </div>
+</div>
+
+       <!-- nunjucks loop-->
+  </div>
+</div>
+<script src="scripts/nav-links.js"></script>
+<script src="scripts/tooltips_links_over.js"></script>
+<script src="scripts/search_nav.js"></script>
+ </body></html>

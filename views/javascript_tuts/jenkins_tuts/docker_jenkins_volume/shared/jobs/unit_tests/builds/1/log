@@ -1,0 +1,7 @@
+Started by user [8mha:////4GWwRVuw8hD+7XW0OqgnNJ/UExBBqCgXXpIIc6ux1w8hAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/unit_tests
+[unit_tests] $ /bin/sh -xe /tmp/jenkins1423958231737117325.sh
++ pwd
+/var/jenkins_home/workspace/unit_tests
+Finished: SUCCESS
