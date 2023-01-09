@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>playing with eel</title>
+  </head>
+  <body>
+    <h1>this is python eel template</h1>
+    <h5>follow to steps below to start:</h5>
+    <ul>
+      <li>
+        1. check if eel istalled =>
+        <code style="color: green">pip list</code> or for the specific package
+        <code style="color: green">pip list | grep -i eel</code>
+      </li>
+      <li>
+        2. Install ell if not already:
+        <code style="color: green">pip install eel</code>
+      </li>
+      <li>
+        3.check now the package
+        <code style="color: green">pip list | grep -i eel</code>
+      </li>
+      <li>
+        4.run main.py file
+        <code style="color: green">python main.py</code>
+      </li>
+    </ul>
+    <h2>Test data</h2>
+    <p id="displayData"></p>
+    <button id="getDataButton">get data from python</button>
+    <button id="sendDataButton">send data to python and log in shell</button>
+    <!-- the eel.js script has to be embeded that comes from package it does not exist in your local files -->
+    <script type="text/javascript" src="/eel.js"></script>
+    <!--your client scripts below that are set inside your web folder web_client , skip web_client from the path though-->
+    <script src="index.js"></script>
+  </body>
+</html>
