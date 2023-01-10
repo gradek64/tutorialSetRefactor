@@ -19,4 +19,4 @@ def send_data(data):
 
 
 # start the entry file index.html file from web_client directory
-eel.start("index.html")
+eel.start("index.html", size=(800, 480), position=(0, 0))
