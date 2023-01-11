@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>playing with eel</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="buttons">
+        <image src="assets/timer.gif"></image>
+        <p id="getDataButton">set timer</p>
+      </div>
+      <div class="buttons">
+        <image src="assets/heat.gif"></image>
+        <p id="sendDataButton">heat water</p>
+      </div>
+
+      <!-- the eel.js script has to be embeded that comes from package it does not exist in your local files -->
+      <script type="text/javascript" src="/eel.js"></script>
+      <!--your client scripts below that are set inside your web folder web_client , skip web_client from the path though-->
+      <script src="index.js"></script>
+    </div>
+  </body>
+</html>
