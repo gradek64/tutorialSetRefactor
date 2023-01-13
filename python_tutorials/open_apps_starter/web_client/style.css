@@ -23,6 +23,7 @@ div.buttons {
   width: 300px;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 }
 
 div.buttons p {

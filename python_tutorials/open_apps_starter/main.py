@@ -6,16 +6,11 @@ eel.init("web_client")
 
 
 @eel.expose
-def get_data():
-    return "some awesome news returned"
-
-
-@eel.expose
-def send_data(data):
-    # pyton way of calling shell
-    print(data)
+def send_data(app):
     # call shell directly from build-in os package
-    os.system("echo 'hi from shell'")
+    os.system("echo 'start app'")
+    # python way of calling shell
+    print(f"starting {app}")
 
 
 # start the entry file index.html file from web_client directory
