@@ -1,13 +1,60 @@
 <!DOCTYPE html>
+<!-- this project is using html light material-ui host on https://getmdl.io/ -->
+  <!-- material-ui icons name search https://fonts.google.com/icons?selected=Material+Icons -->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>playing with eel</title>
+    <title>start apps</title>
+  <link rel="stylesheet" href="./material-ui/font/icons.css" />
+  <link
+    rel="stylesheet"
+    href="./material-ui/css/material.indigo-pink.min.css"
+  />
+  <link rel="stylesheet" href="./style.css" />
+  <script defer src="./material-ui/js/material.min.js"></script>
   </head>
   <body>
+    <!--close app -->
+    <div class="close_pi_button">
+      <button id="overlayClosePi" class="mdl-button">
+        <i class="material-icons pinkColor">power_settings_new</i>
+        <span>&nbsp;CLOSE PI</span>
+      </button>
+    </div>
+    <!-- end of close app -->
+    <!-- -->
+    <div
+      id="closePie"
+      class="progressBoard overlay-flex-wrapper"
+      style="background-color: rgba(0, 0, 0, 0.5)"
+    >
+      <div class="clock_display in-overlay"></div>
+      <div class="progressBoardContent contentBoard">
+        <div class="closeOverlay">
+          <h5>Are you sure you want close Raspberry PI?</h5>
+          <img src="assets/raspberry.png"/>
+          <div class="buttons">
+            <button
+              id="closePieButton"
+              class="mdl-button mdl-js-button mdl-button--raised"
+            >
+              <i class="material-icons pinkColor">power_settings_new</i>
+              <span>&nbsp;confirm</span>
+            </button>
+            <button
+              id="cancel"
+              class="mdl-button mdl-js-button mdl-button--raised"
+            >
+              <i class="material-icons pinkColor">not_interested</i>
+              <span class="save">&nbsp;cancel</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- -->
     <div class="container">
       <div id="startTimerApp" class="buttons">
         <image src="assets/timer.gif"></image>
